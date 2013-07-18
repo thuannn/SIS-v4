@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<g:HTMLPanel width="100%">
+		<g:VerticalPanel width="100%">
+			<g:Label text="GESTION DE L&apos;ACCES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Grid cellPadding="10">
+				<g:row>
+					<g:customCell>
+						<g:Label text="Bloquer automatiquement l&apos;accès au système le "/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="lstDays"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="tous les mois."/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Bloquer l&apos;accès dès MAINTENANT"/>
+					</g:customCell>
+					<g:customCell>
+						<g:SimpleCheckBox ui:field="blnBlock"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text=""/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label ui:field="lblUpdateStatus"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Enregistrer" ui:field="cmdSave"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

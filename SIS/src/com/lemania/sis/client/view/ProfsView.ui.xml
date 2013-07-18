@@ -1,0 +1,52 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+
+	<g:HTMLPanel width="100%">
+		<g:VerticalPanel width="100%">
+			<g:Label text="LISTE DES PROFESSEURS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:HorizontalPanel width="850px">
+				<g:VerticalPanel width="400px">
+					<p1:DataGrid width="400px" height="550px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
+				</g:VerticalPanel>
+				<g:VerticalPanel width="400px">
+					<g:Label ui:field="lblProfNameAssign" styleName="header"/>
+					<g:Label text="Rajouter un département" width="" styleName="sectionTitle"/>
+					<g:Grid width="100%" styleName="subSection">
+						<g:row>
+							<g:customCell>
+								<g:Label text="Ecole : " width=""/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstAddEcole"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Département :" width=""/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstAddCourse"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label/>
+							</g:customCell>
+							<g:customCell>
+								<g:Button ui:field="cmdAddCourse">Ajouter</g:Button>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					<g:Label text="."/>
+					<g:Label text="Liste des département assignés" styleName="sectionTitle"/>
+					<p1:DataGrid width="400px" height="350PX" ui:field="tblAssignment" styleName="subSection"/>
+				</g:VerticalPanel>
+			</g:HorizontalPanel>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

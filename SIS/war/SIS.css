@@ -1,0 +1,113 @@
+/* Add css rules here for your application. */
+
+body {
+  padding: 10px;
+  bacground-color: blue;
+}
+
+/* stock list header row */
+.pageTitle {
+	padding: 5px;
+  	background-color: #052f6d;
+  	color: #FFB840;
+  	font-style: gros;
+  	font-size: 18px;
+}
+
+.sectionTitle {
+	padding: 5px;
+  	background-color: #052f6d;
+  	color: #FFB840;
+  	font-style: bold;
+  	font-size: 14px;
+}
+
+.header {
+	padding: 5px;  	
+  	color: blue;
+  	font-style: gros;
+  	font-size: 16px;
+}
+
+.sideBar {
+	background-color: #EDF2FA;
+	border-style:solid;
+	border-width:1px;
+	border-color:  #D2C40B;
+}
+
+.subSection {	
+	border-style:solid;
+	border-width:1px;
+	border-color:  #D2C40B;
+}
+
+.btnFocus {
+	background-color: #D2C40B;
+}
+
+.paneMain {
+	border-style:solid;
+	border-width:1px;
+	border-color: #D2C40B;
+}
+
+.FlexTable {
+  border-top: thin solid #444444;
+  border-left: thin solid #444444;
+  border-right: thin solid #111111;
+  border-bottom: thin solid #111111;
+  background-color:  #ffffff;
+}
+
+.FlexTable-Cell {
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: blue;
+  padding: 2px;
+  spacing: 0px;
+  height: 18px;
+}
+
+.FlexTable-Cell-Divider {    
+  height: 5px; 
+  border-width: 5px 0px 0px 0px;
+  border-style: solid;
+  border-color: red;
+  margin-top: 5px; 
+}
+
+.FlexTable-Cell-Total {    
+  height: 10px; 
+  background-color: #f2f2f2;
+  font-weight: bold;
+  font-size: bigger;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: blue;
+  padding: 2px;
+  spacing: 0px;
+  height: 18px;
+}
+
+.northPane {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+.westPane {
+	position: absolute;
+	top: 50px;
+	left: 5px;
+}
+
+.centerPane {
+	position: relative;
+	width: 100%;
+}
+
+.southPane {
+	position: relative;
+	width: 100px;
+}
