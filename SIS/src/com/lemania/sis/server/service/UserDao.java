@@ -3,11 +3,8 @@ package com.lemania.sis.server.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
-import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.User;
 
 public class UserDao extends MyDAOBase {
@@ -34,45 +31,7 @@ public class UserDao extends MyDAOBase {
 		}
 		return returnList;
 	}
-	
-	public List<Cours> addDepartment(User user, String courseId){
-		if (user.getDepartments() != null)
-			user.getDepartments().add( new Key<Cours>(Cours.class, Long.parseLong(courseId)) );
-		else {
-			List<Key<Cours>> depts = new ArrayList<Key<Cours>>();
-			depts.add(new Key<Cours>(Cours.class, Long.parseLong(courseId)));
-			user.setDepartments(depts);
-		}
-		this.ofy().put(user);
-		
-		Map<Key<Cours>, Cours> cours = this.ofy().get( user.getDepartments() );
-		List<Cours> returnList = new ArrayList<Cours>(cours.values());
-		java.util.Collections.sort(returnList);
-		return returnList;
-	}
-	
-	public List<Cours> getDepartments(User user) {
-		List<Cours> returnList = new ArrayList<Cours>();
-			if (user.getDepartments() != null) {
-			Map<Key<Cours>, Cours> cours = this.ofy().get( user.getDepartments() );
-			returnList = new ArrayList<Cours>(cours.values());
-			java.util.Collections.sort(returnList);
-		}
-		return returnList;
-	}
-	
-	public List<Cours> getDepartments(Long userId) {
-		User user = this.ofy().get(new Key<User>(User.class, userId));
-		List<Cours> returnList = new ArrayList<Cours>();
-		if (user.getDepartments() != null) {
-			Map<Key<Cours>, Cours> cours = this.ofy().get( user.getDepartments() );
-			returnList = new ArrayList<Cours>(cours.values());
-			for (int i=0; i<returnList.size(); i++)
-				returnList.get(i).setSchoolName( this.ofy().get( (returnList.get(i).getEcole())).getSchoolName() );
-			java.util.Collections.sort(returnList);
-		}
-		return returnList;
-	}
+
 	
 	public void save(User user){
 		this.ofy().put(user);

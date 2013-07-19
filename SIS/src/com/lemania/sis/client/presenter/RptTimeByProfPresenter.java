@@ -101,34 +101,11 @@ public class RptTimeByProfPresenter
 		// Clear UI
 		getView().clearLogTable();
 		getView().clearProfList();
-		
-		// Thuan
-		loadDepartmentList();
+	
 	}
 	
 	
-	/*
-	 * List of departments belong to this user
-	 * On successful, load the list of professors accordingly
-	 * */
-	public void loadDepartmentList(){
-		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		UserRequestContext rc = rf.userRequest();
-		rc.getDepartments(currentUser.getUserId()).fire( new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error) {
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( List<CoursProxy> response ) {
-				// getView().setDepartmentList(response);				
-				// loadProfessorList(response);
-				courses = response;
-				getEventBus().fireEvent(new CoursesLoadedEvent());
-			}
-		} );
-	}
+
 	
 	
 	public void loadProfessorList(List<CoursProxy> courses){		

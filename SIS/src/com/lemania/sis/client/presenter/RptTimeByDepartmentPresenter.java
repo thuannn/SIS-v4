@@ -79,28 +79,9 @@ public class RptTimeByDepartmentPresenter
 		
 		// Clear UI
 		getView().clearLogTable();
-		
-		// Thuan
-		loadDepartmentList();
-		
-		
+
 	}
-	
-	public void loadDepartmentList(){
-		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		UserRequestContext rc = rf.userRequest();
-		rc.getDepartments(currentUser.getUserId()).fire( new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error) {
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( List<CoursProxy> response ) {
-				getView().setDepartmentList(response);
-			}
-		} );
-	}
+
 
 	@ProxyEvent
 	@Override

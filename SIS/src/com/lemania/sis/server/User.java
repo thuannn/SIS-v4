@@ -1,7 +1,5 @@
 package com.lemania.sis.server;
 
-import java.util.List;
-import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.NotSaved;
 
@@ -13,8 +11,9 @@ public class User extends DatastoreObject {
 	private String password;
 	private String email;
 	private Boolean active = false;
-	private Boolean admin = false;
-	private List<Key<Cours>> departments;
+	private Boolean isAdmin = false;
+	private Boolean isProf = false;
+	private Boolean ifStudent = false;
 	
 	@NotSaved
 	private int currentMonth = 0;
@@ -57,20 +56,12 @@ public class User extends DatastoreObject {
 		this.active = active;
 	}
 	
-	public List<Key<Cours>> getDepartments() {
-		return departments;
-	}
-	
-	public void setDepartments(List<Key<Cours>> departments) {
-		this.departments = departments;
-	}
-	
-	public Boolean getAdmin() {
-		return admin;
+	public Boolean getIsAdmin() {
+		return isAdmin;
 	}
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
+	public void setIsAdmin(Boolean admin) {
+		this.isAdmin = admin;
 	}
 	
 	public String getEmail() {
@@ -103,5 +94,21 @@ public class User extends DatastoreObject {
 
 	public void setCurrentDay(int currentDay) {
 		this.currentDay = currentDay;
+	}
+
+	public Boolean getIsProf() {
+		return isProf;
+	}
+
+	public void setIsProf(Boolean isProf) {
+		this.isProf = isProf;
+	}
+
+	public Boolean getIfStudent() {
+		return ifStudent;
+	}
+
+	public void setIfStudent(Boolean ifStudent) {
+		this.ifStudent = ifStudent;
 	}
 }

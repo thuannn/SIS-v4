@@ -150,16 +150,6 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	    	}	    	
 	    };
 	    tblAssignment.addColumn(colAssignmentActive, "Active");
-	    
-	    colAssignmentActive.setFieldUpdater(new FieldUpdater<AssignmentProxy, Boolean>(){
-	    	@Override
-	    	public void update(int index, AssignmentProxy assignment, Boolean value){
-	    		if (getUiHandlers() != null) {
-	    			selectedIndexAssignment = index;
-	    			getUiHandlers().updateAssignmentStatus(assignment, value);
-	    		}	    		
-	    	}
-	    });
 	}
 
 	@Override

@@ -22,8 +22,8 @@ public interface UserProxy extends EntityProxy {
 	public Boolean getActive();
 	public void setActive(Boolean active);
 	
-	public Boolean getAdmin();
-	public void setAdmin(Boolean admin);
+	public Boolean getIsAdmin();
+	public void setIsAdmin(Boolean admin);
 	
 	public int getCurrentYear();
 	public int getCurrentMonth();

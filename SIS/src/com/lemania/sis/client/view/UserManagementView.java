@@ -56,10 +56,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	@UiField TextBox txtUserName;
 	@UiField TextBox txtPassword;
 	@UiField Button cmdAdd;
-	@UiField ListBox lstAddEcole;
-	@UiField ListBox lstAddCourse;
-	@UiField Button cmdAddCourse;
-	@UiField(provided=true) DataGrid<CoursProxy> tblDepartment = new DataGrid<CoursProxy>();
 	@UiField TextBox txtEmail;
 	
 	@UiHandler("cmdAdd")
@@ -83,17 +79,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		}
 	}
 	
-	@UiHandler("lstAddEcole")
-	public void onLstAddEcoleChanged(ChangeEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().addSchoolSelected( lstAddEcole.getValue(lstAddEcole.getSelectedIndex()) );
-	}
-	
-	@UiHandler("cmdAddCourse")
-	public void onCmdAddCourseClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().addDepartment(lstAddCourse.getValue(lstAddCourse.getSelectedIndex()), selectedUser);
-	}
 
 	@Override
 	public void addNewUser(UserProxy newUser) {
@@ -138,7 +123,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
  	    	public void update(int index, UserProxy user, String value){
  	    		if (getUiHandlers() != null) {	    			
  	    			selectedUserIndex = index;
- 	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), value);
+ 	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getIsAdmin(), value);
  	    		}	    		
  	    	}
  	    });
@@ -157,7 +142,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, value, user.getAdmin(), "");
+	    			getUiHandlers().updateUserStatus(user, value, user.getIsAdmin(), "");
 	    		}	    		
 	    	}
 	    });
@@ -167,7 +152,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    Column<UserProxy, Boolean> colAdmin = new Column<UserProxy, Boolean>(cellAdmin) {
 	    	@Override
 	    	public Boolean getValue(UserProxy user){
-	    		return user.getAdmin();
+	    		return user.getIsAdmin();
 	    	}	    	
 	    };
 	    tblUser.addColumn(colAdmin, "Admin");
@@ -182,20 +167,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    		}	    		
 	    	}
 	    });
-	    
-	    // Add a selection model to handle user selection.
-	    final SingleSelectionModel<UserProxy> selectionModel = new SingleSelectionModel<UserProxy>();
-	    tblUser.setSelectionModel(selectionModel);
-	    selectionModel.addSelectionChangeHandler( new SelectionChangeEvent.Handler() {
-	    	public void onSelectionChange(SelectionChangeEvent event) {
-	    		selectedUser = selectionModel.getSelectedObject();
-	    		getUiHandlers().userSelected(selectedUser);
-	    	}
-	    } );
-	    
-	    // clear the lists
-	    lstAddEcole.clear();
-	    lstAddCourse.clear();
 	}
 
 	@Override
@@ -217,37 +188,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		
 	}
 
-	@Override
-	public void setEcoleAddList(List<EcoleProxy> ecoles) {
-		lstAddEcole.clear();
-		lstAddEcole.addItem("-","");
-		for (int i=0; i<ecoles.size(); i++)
-			lstAddEcole.addItem(ecoles.get(i).getSchoolName(), ecoles.get(i).getId().toString());
-	}
-
-	@Override
-	public void setCourseAddList(List<CoursProxy> cours) {
-		lstAddCourse.clear();
-		lstAddCourse.addItem("-","");
-		for (int i=0; i<cours.size(); i++)
-			lstAddCourse.addItem(cours.get(i).getCoursNom(), cours.get(i).getId().toString());
-	}
-
-	@Override
-	public void initializeDepartmentTable() {
-		TextColumn<CoursProxy> colCourseName = new TextColumn<CoursProxy>() {
-			@Override
-			public String getValue(CoursProxy object) {
-				return object.getCoursNom();
-			}
-	    };
-	    tblDepartment.addColumn(colCourseName, "Département");
-	}
-
-	@Override
-	public void refreshDepartmentTable(List<CoursProxy> depts) {
-		tblDepartment.setRowData(depts);
-	}
 
 	@Override
 	public void populateSelectedUserInfo() {

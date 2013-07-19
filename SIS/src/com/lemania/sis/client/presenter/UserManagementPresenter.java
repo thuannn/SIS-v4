@@ -39,16 +39,10 @@ public class UserManagementPresenter
 		
 		public void initializeTables();
 		public void initializeDepartmentList();
-		public void initializeDepartmentTable();
 		
 		public void populateSelectedUserInfo();
-		
-		public void setEcoleAddList(List<EcoleProxy> ecoles);
-		public void setCourseAddList(List<CoursProxy> courses);
-		
 		public void refreshTable(UserProxy updatedUser);
-		public void refreshDepartmentTable(List<CoursProxy> depts);
-		
+
 		public void addNewUser(UserProxy newUser);
 		public void setUserData(List<UserProxy> list);
 	}
@@ -79,13 +73,11 @@ public class UserManagementPresenter
 		
 		// Thuan
 		getView().initializeTables();
-		getView().initializeDepartmentTable();
 	}
 	
 	@Override
 	protected void onReset() {
 		loadUsers();
-		getEcoleList();
 	}
 
 	private void loadUsers() {
@@ -136,7 +128,7 @@ public class UserManagementPresenter
 		UserRequestContext rc = rf.userRequest();
 		final UserProxy updatedUser = rc.edit(user);
 		updatedUser.setActive(active);
-		updatedUser.setAdmin(admin);
+		updatedUser.setIsAdmin(admin);
 		if (!password.equals(""))
 			updatedUser.setPassword(password);
 		rc.save(updatedUser).fire( new Receiver<Void>(){
@@ -149,79 +141,5 @@ public class UserManagementPresenter
 				getView().refreshTable(updatedUser);
 			}
 		} );	
-	}
-	
-	private void getEcoleList(){
-		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		EcoleRequestContext rc = rf.ecoleRequest();
-		rc.listAllActive().fire(new Receiver<List<EcoleProxy>>(){
-			@Override
-			public void onSuccess(List<EcoleProxy> response){
-				getView().setEcoleAddList(response);
-			}
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-		});
-	}
-
-	@Override
-	public void addSchoolSelected(String ecoleId) {
-		if (ecoleId.equals("")){
-			Window.alert("Veuillez choisir l'école.");
-		}
-		
-		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<CoursProxy> response) {
-				getView().setCourseAddList(response);
-			}
-		});
-	}
-
-	@Override
-	public void addDepartment(String courseId, UserProxy user) {
-		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		UserRequestContext rc = rf.userRequest();
-		final UserProxy updatedUser = rc.edit(user);
-		rc.addDepartment(updatedUser, courseId).fire( new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error) {
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( List<CoursProxy> response ) {
-				getView().refreshDepartmentTable( response );
-			}
-		} );
-	}
-
-	@Override
-	public void userSelected(UserProxy user) {
-		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		UserRequestContext rc = rf.userRequest();
-		final UserProxy updatedUser = rc.edit(user);
-		rc.getDepartments(updatedUser).fire( new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error) {
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( List<CoursProxy> response ) {
-				getView().refreshDepartmentTable( response );
-				getView().populateSelectedUserInfo();
-			}
-		} );
 	}
 }

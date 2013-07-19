@@ -100,27 +100,9 @@ public class TimeInputPresenter
 		// Initialize values
 		getView().initializeValues(currentUser.getCurrentMonth(), currentUser.getCurrentYear(), currentUser.isAdmin());
 		
-		// Initialize active school list
-		loadDepartmentList();
-		
-//		loadLogTypeList();
 	}
 	
-	private void loadDepartmentList() {
-		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		UserRequestContext rc = rf.userRequest();
-		rc.getDepartments(currentUser.getUserId()).fire( new Receiver<List<CoursProxy>>() {
-			@Override
-			public void onFailure(ServerFailure error) {
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( List<CoursProxy> response ) {
-				getView().setCourseList(response);
-			}
-		} );		
-	}
+
 
 	public void loadProfessorsByCourse(String courseId, String year, String month) {
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);

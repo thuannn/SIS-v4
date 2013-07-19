@@ -22,8 +22,6 @@ public interface AssignmentRequestFactory extends RequestFactory {
 		Request<AssignmentProxy> saveAndReturn(AssignmentProxy a);
 		Request<AssignmentProxy> saveAndReturn(String courseId, String profId);
 		
-		Request<AssignmentProxy> updateAssignmentStatus(Long userId, AssignmentProxy assignment, Boolean status);
-		
 		Request<Void> removeAssignment(AssignmentProxy a);
 		Request<Void> initialize();
 	}

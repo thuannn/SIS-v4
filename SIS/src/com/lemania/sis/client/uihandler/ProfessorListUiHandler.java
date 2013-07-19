@@ -9,8 +9,6 @@ public interface ProfessorListUiHandler extends UiHandlers {
 	void updateProfessorStatus(ProfessorProxy prof, Boolean status);
 	void updateProfessorName(ProfessorProxy prof, String name);
 	
-	void updateAssignmentStatus(AssignmentProxy assignment, Boolean status);	
-	
 	void professorSelected(ProfessorProxy prof);
 	
 	void addCourse(String courseId, ProfessorProxy prof);

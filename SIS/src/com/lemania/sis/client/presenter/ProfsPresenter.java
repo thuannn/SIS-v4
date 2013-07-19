@@ -265,24 +265,4 @@ public class ProfsPresenter
 			}
 		});
 	}
-	
-
-	@Override
-	public void updateAssignmentStatus(AssignmentProxy assignment, Boolean status) {
-		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.updateAssignmentStatus(currentUser.getUserId(), assignment, status).fire(new Receiver<AssignmentProxy>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(AssignmentProxy response) {
-				if (response == null)
-					Window.alert("ERREUR : Le statut n'a pas été modifié pour ce professeur.");
-				//TODO : add some notification here
-			}
-		});
-	}
 }

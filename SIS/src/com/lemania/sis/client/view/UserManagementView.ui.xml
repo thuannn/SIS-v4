@@ -9,7 +9,6 @@
 	<g:HTMLPanel width="100%">
 		<g:Label text="GESTION DES UTILISATEURS" styleName="pageTitle" width="900" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%">
-			<g:HorizontalPanel width="100%" height="" verticalAlignment="ALIGN_BOTTOM">
 			<g:Grid width="600px">
 					<g:row>
 						<g:customCell>
@@ -53,37 +52,7 @@
 					</g:row>
 					<g:row/>
 				</g:Grid>
-			<g:Grid width="300px">
-				<g:row>
-					<g:customCell>
-						<g:Label text="Ecoles :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="lstAddEcole"/>
-					</g:customCell>
-				</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label text="Départements :"/>
-						</g:customCell>
-						<g:customCell>
-							<g:ListBox ui:field="lstAddCourse"/>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label/>
-						</g:customCell>
-						<g:customCell>
-							<g:Button text="Assigner" ui:field="cmdAddCourse"/>
-						</g:customCell>
-					</g:row>
-				</g:Grid>
-		</g:HorizontalPanel>
-			<g:HorizontalPanel width="100%">
-				<p1:DataGrid width="600px" height="450px" ui:field="tblUser"/>
-				<p1:DataGrid width="300px" height="450px" ui:field="tblDepartment"/>
-			</g:HorizontalPanel>
+			<p1:DataGrid width="600px" height="450px" ui:field="tblUser"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

@@ -88,33 +88,6 @@ public class AssignmentDao extends MyDAOBase {
 	}
 	
 	
-	public Assignment updateAssignmentStatus(Long userId, Assignment assignment, Boolean status){
-		Boolean found = false;
-		User user = this.ofy().get(new Key<User>(User.class, userId));
-		List<Cours> returnList = new ArrayList<Cours>();
-			if (user.getDepartments() != null) {
-			Map<Key<Cours>, Cours> cours = this.ofy().get( user.getDepartments() );
-			returnList = new ArrayList<Cours>(cours.values());
-			for (Cours c : returnList){
-				if (assignment.getCours().equals(new Key<Cours>(Cours.class, c.getId()))){
-					found = true;
-					break;
-				}
-			}
-		}		
-		if (found) {
-			assignment.setActive(status);
-			Key<Assignment> key = this.ofy().put(assignment);
-			try {
-				return this.ofy().get(key);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		} else
-			return null;
-	}
-	
-	
 	public void removeAssignment(Assignment a){
 		this.ofy().delete(a);
 	}

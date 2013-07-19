@@ -8,6 +8,7 @@ import com.googlecode.objectify.annotation.NotSaved;
 @Entity
 public class Cours extends DatastoreObject implements Comparable<Cours>{
 	private String coursNom;
+	private Double defaultCoef;
 	private Boolean coursActif;
 	
 	@Indexed
@@ -52,5 +53,13 @@ public class Cours extends DatastoreObject implements Comparable<Cours>{
 	public int compareTo(Cours cours) {
 		int lastCourseName = coursNom.compareTo( cours.getCoursNom() );
 		return lastCourseName;
+	}
+
+	public Double getDefaultCoef() {
+		return defaultCoef;
+	}
+
+	public void setDefaultCoef(Double defaultCoef) {
+		this.defaultCoef = defaultCoef;
 	}
 }
