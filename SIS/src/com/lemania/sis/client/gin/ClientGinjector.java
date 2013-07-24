@@ -15,19 +15,16 @@ import com.lemania.sis.client.presenter.LogTypesPresenter;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
-import com.lemania.sis.client.presenter.RptTimeByDepartmentPresenter;
-import com.lemania.sis.client.presenter.RptTimeByProfPresenter;
-import com.lemania.sis.client.presenter.TimeInputPresenter;
-import com.lemania.sis.client.presenter.CoursPresenter;
-import com.lemania.sis.client.presenter.CoursAddPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.presenter.ProfsAddPresenter;
 import com.lemania.sis.client.presenter.ContactPresenter;
 import com.lemania.sis.client.presenter.UserManagementPresenter;
-import com.lemania.sis.client.presenter.RptTimeBySchoolPresenter;
-import com.lemania.sis.client.presenter.RptTimeByMonthPresenter;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.presenter.FrmPasswordPresenter;
+import com.lemania.sis.client.presenter.StudentPresenter;
+import com.lemania.sis.client.presenter.StudentAddPresenter;
+import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
+import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
 
 @GinModules({ ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -44,12 +41,6 @@ public interface ClientGinjector extends Ginjector {
 
 	AsyncProvider<EcoleAddPresenter> getEcoleAddPresenter();
 
-	AsyncProvider<TimeInputPresenter> getTimeInputPresenter();
-
-	AsyncProvider<CoursPresenter> getCoursPresenter();
-
-	AsyncProvider<CoursAddPresenter> getCoursAddPresenter();
-
 	AsyncProvider<LogTypesPresenter> getTypesPresenter();
 
 	AsyncProvider<LogTypesAddPresenter> getTypesAddPresenter();
@@ -64,17 +55,17 @@ public interface ClientGinjector extends Ginjector {
 	LoggedInGatekeeper getLoggedInGatekeeper();
 	AdminGateKeeper getAdminGateKeeper();
 
-	AsyncProvider<RptTimeByProfPresenter> getExtractDataPresenter();
-
 	AsyncProvider<UserManagementPresenter> getUserManagementPresenter();
-
-	AsyncProvider<RptTimeByDepartmentPresenter> getRptTimeByDepartmentPresenter();
-
-	AsyncProvider<RptTimeBySchoolPresenter> getRptTimeBySchoolPresenter();
-
-	AsyncProvider<RptTimeByMonthPresenter> getRptTimeByMonthPresenter();
 
 	AsyncProvider<SettingsPresenter> getSettingsPresenter();
 
 	AsyncProvider<FrmPasswordPresenter> getFrmPasswordPresenter();
+
+	AsyncProvider<StudentPresenter> getStudentPresenter();
+
+	AsyncProvider<StudentAddPresenter> getStudentAddPresenter();
+
+	AsyncProvider<FrmBrancheListPresenter> getFrmBrancheListPresenter();
+
+	AsyncProvider<FrmBrancheAddPresenter> getFrmBrancheAddPresenter();
 }

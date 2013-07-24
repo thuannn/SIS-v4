@@ -24,18 +24,9 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.ProfessorListUiHandler;
-import com.lemania.sis.shared.AssignmentProxy;
-import com.lemania.sis.shared.CoursProxy;
-import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfessorProxy;
-import com.lemania.sis.shared.service.AssignmentRequestFactory;
-import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
-import com.lemania.sis.shared.service.CoursRequestFactory;
-import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfessorRequestFactory;
-import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
-import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestContext;
 
 public class ProfsPresenter 
@@ -53,12 +44,6 @@ public class ProfsPresenter
 		void setData(List<ProfessorProxy> profs);
 		
 		void refreshTable(ProfessorProxy prof);
-		
-		void setAssignmentList(List<AssignmentProxy> courses);
-		void addToAssignmentList(AssignmentProxy a);
-		
-		void setEcoleAddList(List<EcoleProxy> ecoles);
-		void setCourseAddList(List<CoursProxy> cours);
 	}
 
 	
@@ -94,7 +79,6 @@ public class ProfsPresenter
 	@Override
 	protected void onReset(){
 		getProfessorsList();
-		getEcoleList();
 	}
 	
 	
@@ -111,25 +95,6 @@ public class ProfsPresenter
 			@Override
 			public void onSuccess(List<ProfessorProxy> response) {
 				getView().setData(response);
-			}
-		});
-	}
-	
-	
-	/*
-	 * Populate list of ecoles in drop-down list */
-	private void getEcoleList(){
-		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		EcoleRequestContext rc = rf.ecoleRequest();
-		rc.listAllActive().fire(new Receiver<List<EcoleProxy>>(){
-			@Override
-			public void onSuccess(List<EcoleProxy> response){
-				getView().setEcoleAddList(response);
-			}
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
 			}
 		});
 	}
@@ -158,79 +123,6 @@ public class ProfsPresenter
 				getView().refreshTable(response);
 			}
 		});	
-	}
-
-	
-	@Override
-	public void professorSelected(ProfessorProxy prof) {
-		
-		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.listAll(prof.getId().toString()).fire(new Receiver<List<AssignmentProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<AssignmentProxy> response) {
-				getView().setAssignmentList(response);
-			}
-		});
-	}
-
-	
-	@Override
-	public void addCourse(String courseId, final ProfessorProxy prof) {
-		if (courseId.isEmpty()) {
-			Window.alert("Veuillez choisir un département à rajouter.");
-			return;
-		}
-		
-//		if (!currentUser.isAdmin()) {
-//			Window.alert("Veuillez vous connecter avec le code d'accès de l'administrateur. La modification n'a pas été effectuée.");
-//			return;
-//		}
-		
-		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.saveAndReturn(courseId, prof.getId().toString()).fire(new Receiver<AssignmentProxy>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(AssignmentProxy response) {				
-				if (response == null)
-					Window.alert("Départment déjà existe dans la liste.");
-				professorSelected(prof);
-			}
-		});
-	}
-
-	
-	/*
-	 * When school name is selected, poupulate the list of courses to add */
-	@Override
-	public void addSchoolSelected(String ecoleId) {
-		if (ecoleId.equals("")){
-			Window.alert("Veuillez choisir l'école.");
-		}
-		
-		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<CoursProxy> response) {
-				getView().setCourseAddList(response);
-			}
-		});
 	}
 
 	
@@ -264,5 +156,12 @@ public class ProfsPresenter
 				getView().refreshTable(response);
 			}
 		});
+	}
+
+
+	@Override
+	public void professorSelected(ProfessorProxy prof) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -44,17 +44,18 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdContact;
 	@UiField Hyperlink cmdLogout;
 	@UiField Label txtWelcome;
-	@UiField Button cmdExtractData;
 	@UiField Button cmdUserMgt;
 	@UiField Label lblCurrentMonth;
-	@UiField Button cmdRptByDept;
-	@UiField Button cmdRptByMonth;
 	@UiField Button button;
 	@UiField Tree treeMenu;
 	@UiField Image imgProgressBar;
 	@UiField Button cmdSettings;
 	@UiField DockPanel dockPanel;
 	@UiField Button cmdPassword;
+	@UiField Button cmdStudents;
+	@UiField Button cmdCreateStudent;
+	@UiField Button cmdBrancheList;
+	@UiField Button cmdBrancheAdd;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -145,12 +146,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			getUiHandlers().showProfessorAdd();
 	}
 	
-	@UiHandler("cmdExtractData")
-	void onCmdExtractDataClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showExtractDataForm();
-	}
-	
 	@UiHandler("cmdContact")
 	void onCmdContactClicked(ClickEvent event){
 		if (getUiHandlers() != null)
@@ -168,20 +163,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdUserMgtClicked(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showUserManagement();
-		}
-	}
-	
-	@UiHandler("cmdRptByDept")
-	void onCmdRptByDeptClicked(ClickEvent event){
-		if (getUiHandlers() != null) {
-			getUiHandlers().showRptByDept();
-		}
-	}
-	
-	@UiHandler("cmdRptByMonth")
-	void onCmdRptBySchoolClicked(ClickEvent event){
-		if (getUiHandlers() != null) {
-			getUiHandlers().showRptByMonth();
 		}
 	}
 	
@@ -263,6 +244,34 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdPasswordClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showFrmPassword();
+		}
+	}
+	
+	@UiHandler("cmdStudents")
+	void onCmdStudentsClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmStudents();
+		}
+	}
+	
+	@UiHandler("cmdCreateStudent")
+	void onCmdCreateStudentClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmCreateStudents();
+		}
+	}
+	
+	@UiHandler("cmdBrancheList")
+	void onCmdBrancheListClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showBrancheList();
+		}
+	}
+	
+	@UiHandler("cmdBrancheAdd")
+	void onCmdBrancheAddClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showBrancheAdd();
 		}
 	}
 }

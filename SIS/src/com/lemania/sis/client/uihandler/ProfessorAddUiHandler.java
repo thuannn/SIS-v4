@@ -5,5 +5,5 @@ import com.gwtplatform.mvp.client.UiHandlers;
 public interface ProfessorAddUiHandler extends UiHandlers {
 	
 	void professorAddCancelled();
-	void professorAdd(String profName, Boolean profStatus);
+	void professorAdd(String profName, String profEmail, Boolean profStatus);
 }

@@ -8,10 +8,10 @@ import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.view.ContactView;
-import com.lemania.sis.client.view.CoursAddView;
-import com.lemania.sis.client.view.CoursView;
 import com.lemania.sis.client.view.EcoleAddView;
 import com.lemania.sis.client.view.EcoleView;
+import com.lemania.sis.client.view.FrmBrancheAddView;
+import com.lemania.sis.client.view.FrmBrancheListView;
 import com.lemania.sis.client.view.FrmPasswordView;
 import com.lemania.sis.client.view.HomeView;
 import com.lemania.sis.client.view.LogTypesAddView;
@@ -19,30 +19,24 @@ import com.lemania.sis.client.view.LogTypesView;
 import com.lemania.sis.client.view.MainPageView;
 import com.lemania.sis.client.view.ProfsAddView;
 import com.lemania.sis.client.view.ProfsView;
-import com.lemania.sis.client.view.RptTimeByDepartmentView;
-import com.lemania.sis.client.view.RptTimeByMonthView;
-import com.lemania.sis.client.view.RptTimeByProfView;
-import com.lemania.sis.client.view.RptTimeBySchoolView;
 import com.lemania.sis.client.view.SettingsView;
-import com.lemania.sis.client.view.TimeInputView;
+import com.lemania.sis.client.view.StudentAddView;
+import com.lemania.sis.client.view.StudentView;
 import com.lemania.sis.client.view.UserManagementView;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
 import com.lemania.sis.client.presenter.LogTypesAddPresenter;
 import com.lemania.sis.client.presenter.LogTypesPresenter;
-import com.lemania.sis.client.presenter.RptTimeByDepartmentPresenter;
-import com.lemania.sis.client.presenter.RptTimeByProfPresenter;
-import com.lemania.sis.client.presenter.TimeInputPresenter;
-import com.lemania.sis.client.presenter.CoursPresenter;
-import com.lemania.sis.client.presenter.CoursAddPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.presenter.ProfsAddPresenter;
 import com.lemania.sis.client.presenter.ContactPresenter;
 import com.lemania.sis.client.presenter.UserManagementPresenter;
-import com.lemania.sis.client.presenter.RptTimeBySchoolPresenter;
-import com.lemania.sis.client.presenter.RptTimeByMonthPresenter;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.presenter.FrmPasswordPresenter;
 import com.lemania.sis.client.place.SISPlaceManager;
+import com.lemania.sis.client.presenter.StudentPresenter;
+import com.lemania.sis.client.presenter.StudentAddPresenter;
+import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
+import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -67,16 +61,6 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(EcoleAddPresenter.class, EcoleAddPresenter.MyView.class,
 				EcoleAddView.class, EcoleAddPresenter.MyProxy.class);
 
-		bindPresenter(TimeInputPresenter.class,
-				TimeInputPresenter.MyView.class, TimeInputView.class,
-				TimeInputPresenter.MyProxy.class);
-
-		bindPresenter(CoursPresenter.class, CoursPresenter.MyView.class,
-				CoursView.class, CoursPresenter.MyProxy.class);
-
-		bindPresenter(CoursAddPresenter.class, CoursAddPresenter.MyView.class,
-				CoursAddView.class, CoursAddPresenter.MyProxy.class);
-
 		bindPresenter(LogTypesPresenter.class, LogTypesPresenter.MyView.class,
 				LogTypesView.class, LogTypesPresenter.MyProxy.class);
 
@@ -92,27 +76,9 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(ContactPresenter.class, ContactPresenter.MyView.class,
 				ContactView.class, ContactPresenter.MyProxy.class);
 
-		bindPresenter(RptTimeByProfPresenter.class,
-				RptTimeByProfPresenter.MyView.class, RptTimeByProfView.class,
-				RptTimeByProfPresenter.MyProxy.class);
-
 		bindPresenter(UserManagementPresenter.class,
 				UserManagementPresenter.MyView.class, UserManagementView.class,
 				UserManagementPresenter.MyProxy.class);
-
-		bindPresenter(RptTimeByDepartmentPresenter.class,
-				RptTimeByDepartmentPresenter.MyView.class,
-				RptTimeByDepartmentView.class,
-				RptTimeByDepartmentPresenter.MyProxy.class);
-
-		bindPresenter(RptTimeBySchoolPresenter.class,
-				RptTimeBySchoolPresenter.MyView.class,
-				RptTimeBySchoolView.class,
-				RptTimeBySchoolPresenter.MyProxy.class);
-
-		bindPresenter(RptTimeByMonthPresenter.class,
-				RptTimeByMonthPresenter.MyView.class, RptTimeByMonthView.class,
-				RptTimeByMonthPresenter.MyProxy.class);
 
 		bindPresenter(SettingsPresenter.class, SettingsPresenter.MyView.class,
 				SettingsView.class, SettingsPresenter.MyProxy.class);
@@ -120,5 +86,20 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(FrmPasswordPresenter.class,
 				FrmPasswordPresenter.MyView.class, FrmPasswordView.class,
 				FrmPasswordPresenter.MyProxy.class);
+
+		bindPresenter(StudentPresenter.class, StudentPresenter.MyView.class,
+				StudentView.class, StudentPresenter.MyProxy.class);
+
+		bindPresenter(StudentAddPresenter.class,
+				StudentAddPresenter.MyView.class, StudentAddView.class,
+				StudentAddPresenter.MyProxy.class);
+
+		bindPresenter(FrmBrancheListPresenter.class,
+				FrmBrancheListPresenter.MyView.class, FrmBrancheListView.class,
+				FrmBrancheListPresenter.MyProxy.class);
+
+		bindPresenter(FrmBrancheAddPresenter.class,
+				FrmBrancheAddPresenter.MyView.class, FrmBrancheAddView.class,
+				FrmBrancheAddPresenter.MyProxy.class);
 	}
 }

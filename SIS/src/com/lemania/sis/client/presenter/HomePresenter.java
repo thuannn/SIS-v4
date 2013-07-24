@@ -143,7 +143,7 @@ public class HomePresenter
 		CurrentUser currentUser = new CurrentUser();
 		currentUser.setFullName(response.getFullName());
 		currentUser.setLoggedIn(true);
-		currentUser.setAdmin(response.getIsAdmin());
+		currentUser.setAdmin(response.getAdmin());
 		currentUser.setUserId(response.getId());
 		currentUser.setCurrentMonth(response.getCurrentMonth());
 		currentUser.setCurrentYear(response.getCurrentYear());

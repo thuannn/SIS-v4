@@ -8,7 +8,6 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.server.service.ProfessorDao;
-import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 
 public interface ProfessorRequestFactory extends RequestFactory {
@@ -17,12 +16,6 @@ public interface ProfessorRequestFactory extends RequestFactory {
 	interface ProfessorRequestContext extends RequestContext {
 		
 		Request<List<ProfessorProxy>> listAll();
-		
-		Request<List<ProfessorProxy>> listAllByCourse(String courseId);
-		Request<List<ProfessorProxy>> listAllActiveByCourse(String courseId, String year, String month);
-		
-		Request<List<ProfessorProxy>> listAllByCourseList(List<CoursProxy> courses);
-		Request<List<ProfessorProxy>> listAllByCourseWithTime(String deptId, int year);
 		
 		Request<Void> save(ProfessorProxy prof);
 		

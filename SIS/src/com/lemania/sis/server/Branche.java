@@ -6,7 +6,7 @@ import com.googlecode.objectify.annotation.Entity;
 public class Branche extends DatastoreObject {
 	private String brancheName;
 	private Double defaultCoef;
-	private Boolean isAdmin;
+	private Boolean isActive;
 	
 	public String getBrancheName() {
 		return brancheName;
@@ -24,11 +24,11 @@ public class Branche extends DatastoreObject {
 		this.defaultCoef = defaultCoef;
 	}
 	
-	public Boolean getIsAdmin() {
-		return isAdmin;
+	public Boolean getIsActive() {
+		return isActive;
 	}
 	
-	public void setIsAdmin(Boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 }

@@ -7,6 +7,8 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -71,27 +73,36 @@ public class ProfsAddPresenter
 		History.newItem(NameTokens.profs);
 	}
 
+	/*
+	 * Create a new professor, fire the ProfessorAfterAddEvent to create a new access code.
+	 * */
 	@Override
-	public void professorAdd(String profName, Boolean profStatus) {
+	public void professorAdd(String profName, String profEmail, Boolean profStatus) {
 		
 		if (profName.isEmpty()){
 			Window.alert("Veuillez saissir le nom du professeur !");
 			return;
 		}
 		
+		if ( ! FieldValidation.isValidEmailAddress( profEmail ) ){
+			Window.alert("Adresse email invalid !");
+			return;
+		}
+		
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		
 		ProfessorRequestContext rc = rf.professorRequest();
 		prof = rc.create(ProfessorProxy.class);
 		prof.setProfName(profName);
 		prof.setProfActive(profStatus);
+		prof.setProfEmail( profEmail );
+		
 		rc.save(prof).fire(new Receiver<Void>(){
 			@Override
 			public void onSuccess(Void response){
-				// Disable button Add so that user cannot add a duplication
+				getEventBus().fireEvent( new ProfessorAfterAddEvent(prof) );
 				getView().disableUiAfterAdd();
-				
-				// Let user choose the courses that the professor is in charge
 			}
 			@Override
 			public void onFailure(ServerFailure error){

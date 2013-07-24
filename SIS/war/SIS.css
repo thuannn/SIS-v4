@@ -111,3 +111,9 @@ body {
 	position: relative;
 	width: 100px;
 }
+.sis_textbox {
+	width: 300px;
+}
+.hiddenText {
+	color: white;
+}

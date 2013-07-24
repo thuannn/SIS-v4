@@ -11,7 +11,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.FieldVerifier;
+import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.presenter.HomePresenter;
 import com.lemania.sis.client.uihandler.HomeUiHandler;
 import com.google.gwt.uibinder.client.UiField;
@@ -57,11 +57,11 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandler> implements HomeP
 	}
 	
 	private void authenticateUser() {
-		if ( !FieldVerifier.isValidUserName(txtUserName.getText()) ){
+		if ( !FieldValidation.isValidUserName(txtUserName.getText()) ){
 			Window.alert("Le nom d'utilisateur n'est pas valable.");
 			return;
 		}
-		if ( !FieldVerifier.isValidUserName(txtPassword.getText()) ){
+		if ( !FieldValidation.isValidUserName(txtPassword.getText()) ){
 			Window.alert("Le mot de passe n'est pas valable.");
 			return;
 		}		

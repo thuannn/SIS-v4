@@ -8,7 +8,6 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.server.service.UserDao;
-import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.UserProxy;
 
 public interface UserRequestFactory extends RequestFactory {

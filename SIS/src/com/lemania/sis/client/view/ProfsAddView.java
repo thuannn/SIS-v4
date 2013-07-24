@@ -33,6 +33,7 @@ public class ProfsAddView extends ViewWithUiHandlers<ProfessorAddUiHandler> impl
 	@UiField Button cmdAdd;
 	@UiField TextBox txtProfName;
 	@UiField CheckBox chkProfStatus;
+	@UiField TextBox txtProfEmail;
 	
 	@UiHandler("cmdCancel")
 	public void onCmdCancelClicked(ClickEvent event){
@@ -43,7 +44,7 @@ public class ProfsAddView extends ViewWithUiHandlers<ProfessorAddUiHandler> impl
 	@UiHandler("cmdAdd")
 	public void onCmdAddClicked(ClickEvent event){
 		if (getUiHandlers() != null)
-			getUiHandlers().professorAdd(txtProfName.getText().trim(), chkProfStatus.getValue());
+			getUiHandlers().professorAdd(txtProfName.getText().trim(), txtProfEmail.getText().trim(), chkProfStatus.getValue());
 	}
 
 	@Override
@@ -55,6 +56,7 @@ public class ProfsAddView extends ViewWithUiHandlers<ProfessorAddUiHandler> impl
 	public void initializeUi() {
 		// TODO Clear prof name and enable Add button
 		txtProfName.setText("");
+		txtProfEmail.setText("");
 		cmdAdd.setEnabled(true);
 	}
 }

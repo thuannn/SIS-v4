@@ -7,5 +7,5 @@ public interface UserManagementUiHandler extends UiHandlers {
 	
 	public void addNewUser(String fullName, String userName, String password, String email);
 	
-	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, String password);
+	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, String password);
 }

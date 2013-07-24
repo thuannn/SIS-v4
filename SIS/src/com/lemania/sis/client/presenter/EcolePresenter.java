@@ -102,7 +102,6 @@ public class EcolePresenter extends
 
 	@Override
 	public void updateEcoleStatus(EcoleProxy ecole, Boolean value) {
-		// TODO Auto-generated method stub
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();

@@ -31,7 +31,6 @@ public class UserDao extends MyDAOBase {
 		}
 		return returnList;
 	}
-
 	
 	public void save(User user){
 		this.ofy().put(user);

@@ -7,16 +7,24 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%">
+		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="AJOUTER UN NOUVEAU PROFESSEUR" styleName="pageTitle" width="" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="800px">
-				<g:Grid width="320px">
+				<g:Grid width="80%" cellPadding="5" cellSpacing="5">
 					<g:row>
 						<g:customCell>
 							<g:Label text="Nom : "/>
 						</g:customCell>
 						<g:customCell>
-							<g:TextBox width="270px" ui:field="txtProfName"/>
+							<g:TextBox width="" ui:field="txtProfName" styleName="sis_textbox"/>
+						</g:customCell>
+					</g:row>
+					<g:row>
+						<g:customCell>
+							<g:Label text="Email :"/>
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox styleName="sis_textbox" ui:field="txtProfEmail"/>
 						</g:customCell>
 					</g:row>
 					<g:row>
@@ -32,9 +40,9 @@
 							<g:Label/>
 						</g:customCell>
 						<g:customCell>
-							<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+							<g:HorizontalPanel width="60%" horizontalAlignment="ALIGN_LEFT">
 								<g:Button ui:field="cmdCancel">Annuler</g:Button>
-								<g:Button ui:field="cmdAdd">Ajouter</g:Button>
+								<g:Button ui:field="cmdAdd" text="Enregistrer">Ajouter</g:Button>
 							</g:HorizontalPanel>
 						</g:customCell>
 					</g:row>

@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%">
+		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="CONTACT" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HTML wordWrap="true" styleName="header">Pour toutes questions, veuillez contacter Monsieur Carlo CAVADINI. 
 <p>Email : Carlo.CAVADINI@lemania.ch </p>

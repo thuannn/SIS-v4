@@ -11,9 +11,10 @@ public class User extends DatastoreObject {
 	private String password;
 	private String email;
 	private Boolean active = false;
-	private Boolean isAdmin = false;
+	private Boolean admin = false;
+	
 	private Boolean isProf = false;
-	private Boolean ifStudent = false;
+	private Boolean isStudent = false;
 	
 	@NotSaved
 	private int currentMonth = 0;
@@ -56,12 +57,12 @@ public class User extends DatastoreObject {
 		this.active = active;
 	}
 	
-	public Boolean getIsAdmin() {
-		return isAdmin;
+	public Boolean getAdmin() {
+		return admin;
 	}
 
-	public void setIsAdmin(Boolean admin) {
-		this.isAdmin = admin;
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 	
 	public String getEmail() {
@@ -95,7 +96,7 @@ public class User extends DatastoreObject {
 	public void setCurrentDay(int currentDay) {
 		this.currentDay = currentDay;
 	}
-
+	
 	public Boolean getIsProf() {
 		return isProf;
 	}
@@ -104,11 +105,11 @@ public class User extends DatastoreObject {
 		this.isProf = isProf;
 	}
 
-	public Boolean getIfStudent() {
-		return ifStudent;
+	public Boolean getIsStudent() {
+		return isStudent;
 	}
 
-	public void setIfStudent(Boolean ifStudent) {
-		this.ifStudent = ifStudent;
+	public void setIsStudent(Boolean isStudent) {
+		this.isStudent = isStudent;
 	}
 }

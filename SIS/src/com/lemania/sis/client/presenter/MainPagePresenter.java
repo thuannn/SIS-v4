@@ -207,4 +207,24 @@ public class MainPagePresenter extends
 	public void showFrmPassword() {
 		History.newItem(NameTokens.password);		
 	}
+
+	@Override
+	public void showFrmStudents() {
+		History.newItem(NameTokens.students);		
+	}
+
+	@Override
+	public void showFrmCreateStudents() {
+		History.newItem(NameTokens.studentadd);
+	}
+
+	@Override
+	public void showBrancheList() {
+		History.newItem(NameTokens.branchelist);
+	}
+
+	@Override
+	public void showBrancheAdd() {
+		History.newItem(NameTokens.brancheadd);		
+	}
 }

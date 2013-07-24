@@ -7,22 +7,15 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.uihandler.ProfessorListUiHandler;
-import com.lemania.sis.shared.AssignmentProxy;
-import com.lemania.sis.shared.CoursProxy;
-import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -50,23 +43,10 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	}
 	
 	@UiField(provided=true) DataGrid<ProfessorProxy> tblProfessors = new DataGrid<ProfessorProxy>();
-	@UiField(provided=true) DataGrid<AssignmentProxy> tblAssignment = new DataGrid<AssignmentProxy>();
 	@UiField Label lblProfNameAssign;
 	@UiField Button cmdAddCourse;
 	@UiField ListBox lstAddEcole;
 	@UiField ListBox lstAddCourse;
-	
-	@UiHandler("cmdAddCourse")
-	public void onCmdAddCourseClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().addCourse(lstAddCourse.getValue(lstAddCourse.getSelectedIndex()), selectedProfessor);
-	}
-	
-	@UiHandler("lstAddEcole")
-	public void onLstAddEcoleChanged(ChangeEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().addSchoolSelected(lstAddEcole.getValue(lstAddEcole.getSelectedIndex()));
-	}
 
 	@Override
 	public void initializeTable() {
@@ -123,33 +103,6 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	        }
 	      }
 	    });
-	    
-	    
-	    // Assignment table	    
-	    TextColumn<AssignmentProxy> colSchoolName = new TextColumn<AssignmentProxy>() {
-		      @Override
-		      public String getValue(AssignmentProxy object) {
-		        return object.getSchoolName();
-		      }
-		    };
-		tblAssignment.addColumn(colSchoolName, "Ecole");
-		    
-	    TextColumn<AssignmentProxy> colCourseName = new TextColumn<AssignmentProxy>() {
-	      @Override
-	      public String getValue(AssignmentProxy object) {
-	        return object.getCourseName();
-	      }
-	    };
-	    tblAssignment.addColumn(colCourseName, "Cours");
-	    
-	    CheckboxCell cellAssignmentActive = new CheckboxCell();
-	    Column<AssignmentProxy, Boolean> colAssignmentActive = new Column<AssignmentProxy, Boolean>(cellAssignmentActive) {
-	    	@Override
-	    	public Boolean getValue(AssignmentProxy object){
-	    		return object.getActive();
-	    	}	    	
-	    };
-	    tblAssignment.addColumn(colAssignmentActive, "Active");
 	}
 
 	@Override
@@ -164,32 +117,5 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 		profs.add(prof);
         tblProfessors.setRowData(selectedProf, profs);
 		tblProfessors.redraw();
-	}
-
-	@Override
-	public void setEcoleAddList(List<EcoleProxy> ecoles) {
-		lstAddEcole.clear();
-		lstAddEcole.addItem("-","");
-		for (int i=0; i<ecoles.size(); i++)
-			lstAddEcole.addItem(ecoles.get(i).getSchoolName(), ecoles.get(i).getId().toString());		
-	}
-
-	@Override
-	public void setCourseAddList(List<CoursProxy> cours) {
-		lstAddCourse.clear();
-		lstAddCourse.addItem("-","");
-		for (int i=0; i<cours.size(); i++)
-			lstAddCourse.addItem(cours.get(i).getCoursNom(), cours.get(i).getId().toString());
-	}
-
-	@Override
-	public void addToAssignmentList(AssignmentProxy a) {				
-		// Not using for the moment
-	}
-
-	@Override
-	public void setAssignmentList(List<AssignmentProxy> assignments) {		
-		tblAssignment.setRowData(assignments);
-		tblAssignment.setRowCount(assignments.size());
 	}
 }

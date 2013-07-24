@@ -7,6 +7,7 @@ import com.googlecode.objectify.annotation.NotSaved;
 public class Professor extends DatastoreObject implements Comparable<Professor> {
 
 	private String profName;
+	private String profEmail;
 	private Boolean profActive;
 	private String logModifyDate = "";
 	
@@ -280,5 +281,13 @@ public class Professor extends DatastoreObject implements Comparable<Professor> 
 
 	public void setLogModifyDate(String logModifyDate) {
 		this.logModifyDate = logModifyDate;
+	}
+
+	public String getProfEmail() {
+		return profEmail;
+	}
+
+	public void setProfEmail(String profEmail) {
+		this.profEmail = profEmail;
 	}	
 }

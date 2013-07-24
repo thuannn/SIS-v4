@@ -19,6 +19,10 @@ public class NameTokens {
 	public static final String rpttimebymonth = "rpttimebymonth";
 	public static final String settings = "settings";
 	public static final String password = "password";
+	public static final String students = "students";
+	public static final String studentadd = "studentadd";
+	public static final String branchelist = "branchelist";
+	public static final String brancheadd = "brancheadd";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -90,5 +94,21 @@ public class NameTokens {
 
 	public static String getPassword() {
 		return password;
+	}
+
+	public static String getStudents() {
+		return students;
+	}
+
+	public static String getStudentadd() {
+		return studentadd;
+	}
+
+	public static String getBranchelist() {
+		return branchelist;
+	}
+
+	public static String getBrancheadd() {
+		return brancheadd;
 	}
 }

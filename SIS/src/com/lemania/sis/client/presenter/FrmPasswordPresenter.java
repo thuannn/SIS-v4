@@ -12,7 +12,7 @@ import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHa
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.FieldVerifier;
+import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -96,7 +96,7 @@ public class FrmPasswordPresenter
 			return;
 		}
 		
-		if ( !FieldVerifier.isValidUserName(new1) || !FieldVerifier.isValidUserName(new2) ){
+		if ( !FieldValidation.isValidUserName(new1) || !FieldValidation.isValidUserName(new2) ){
 			Window.alert("Le nouveau mot de passe n'est pas valable (minimum 6 caractères).");
 			return;
 		}

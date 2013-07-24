@@ -5,21 +5,16 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.FieldVerifier;
+import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.presenter.UserManagementPresenter;
 import com.lemania.sis.client.uihandler.UserManagementUiHandler;
-import com.lemania.sis.shared.CoursProxy;
-import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.UserProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -27,9 +22,6 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 
 public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandler> implements
 		UserManagementPresenter.MyView {
@@ -60,12 +52,12 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	
 	@UiHandler("cmdAdd")
 	public void onCmdAddClicked(ClickEvent event) {
-		if ( !FieldVerifier.isValidUserName(txtUserName.getText()) ){
+		if ( !FieldValidation.isValidUserName(txtUserName.getText()) ){
 			Window.alert("Le nom d'utilisateur n'est pas valable.");
 			return;
 		}
 		
-		if ( !FieldVerifier.isValidUserName(txtPassword.getText()) ){
+		if ( !FieldValidation.isValidUserName(txtPassword.getText()) ){
 			Window.alert("Le mot de passe n'est pas valable.");
 			return;
 		}		
@@ -78,7 +70,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 					txtEmail.getText());
 		}
 	}
-	
 
 	@Override
 	public void addNewUser(UserProxy newUser) {
@@ -90,6 +81,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 
 	@Override
 	public void initializeTables() {
+		//
 		TextColumn<UserProxy> colFullName = new TextColumn<UserProxy>() {
 			@Override
 			public String getValue(UserProxy object) {
@@ -97,8 +89,8 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 			}
 	    };
 	    tblUser.addColumn(colFullName, "Nom & Prénom");
-	    tblUser.setColumnWidth(colFullName, 40, Unit.PCT);
 	    
+	    //
 	    TextColumn<UserProxy> colUserName = new TextColumn<UserProxy>() {
 			@Override
 			public String getValue(UserProxy object) {
@@ -106,28 +98,17 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 			}
 	    };
 	    tblUser.addColumn(colUserName, "Nom d'utilisateur");
-	    tblUser.setColumnWidth(colUserName, 20, Unit.PCT);
 	    
-	 	// Add a text column to show the name.
- 		EditTextCell passCell = new EditTextCell();
- 		Column<UserProxy, String> passCol = new Column<UserProxy, String>(passCell) {
+	 	// Password
+ 		TextColumn<UserProxy> passCol = new TextColumn<UserProxy>() {
  	      @Override
  	      public String getValue(UserProxy object) {
  	        return object.getPassword();
  	      }
  	    };
  	    tblUser.addColumn(passCol, "Password");
- 	    tblUser.setColumnWidth(passCol, 20, Unit.PCT);
-     	passCol.setFieldUpdater(new FieldUpdater<UserProxy, String>(){
- 	    	@Override
- 	    	public void update(int index, UserProxy user, String value){
- 	    		if (getUiHandlers() != null) {	    			
- 	    			selectedUserIndex = index;
- 	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getIsAdmin(), value);
- 	    		}	    		
- 	    	}
- 	    });
 	    
+     	// Active
 	    CheckboxCell cellActive = new CheckboxCell();
 	    Column<UserProxy, Boolean> colActive = new Column<UserProxy, Boolean>(cellActive) {
 	    	@Override
@@ -136,13 +117,13 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colActive, "Actif");
-	    tblUser.setColumnWidth(colActive, 10, Unit.PCT);
+	    
 	    colActive.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, value, user.getIsAdmin(), "");
+	    			getUiHandlers().updateUserStatus(user, value, user.getAdmin(), user.getIsProf(), user.getIsStudent(), "");
 	    		}	    		
 	    	}
 	    });
@@ -152,19 +133,58 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    Column<UserProxy, Boolean> colAdmin = new Column<UserProxy, Boolean>(cellAdmin) {
 	    	@Override
 	    	public Boolean getValue(UserProxy user){
-	    		return user.getIsAdmin();
+	    		return user.getAdmin();
 	    	}	    	
 	    };
-	    tblUser.addColumn(colAdmin, "Admin");
-	    tblUser.setColumnWidth(colAdmin, 10, Unit.PCT);	
+	    tblUser.addColumn(colAdmin, "Admin");	
 	    
 	    colAdmin.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, user.getActive(), value, "");
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), value, user.getIsProf(), user.getIsStudent(), "");
 	    		}	    		
+	    	}
+	    });
+	    
+	    // Prof
+	    CheckboxCell cellProf = new CheckboxCell();
+	    Column<UserProxy, Boolean> colProf = new Column<UserProxy, Boolean>(cellProf) {
+	    	@Override
+	    	public Boolean getValue(UserProxy user){
+	    		return user.getIsProf();
+	    	}
+	    };
+	    tblUser.addColumn(colProf, "Professeur");
+	    
+	    colProf.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
+	    	@Override
+	    	public void update(int index, UserProxy user, Boolean value){
+	    		if (getUiHandlers() != null) {	    			
+	    			selectedUserIndex = index;
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), value, user.getIsStudent(), "");
+	    		}
+	    	}
+	    });
+	    
+	    // Student
+	    CheckboxCell cellStudent = new CheckboxCell();
+	    Column<UserProxy, Boolean> colStudent = new Column<UserProxy, Boolean>(cellStudent) {
+	    	@Override
+	    	public Boolean getValue(UserProxy user){
+	    		return user.getIsStudent();
+	    	}
+	    };
+	    tblUser.addColumn(colStudent, "Eleve");
+	    
+	    colStudent.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
+	    	@Override
+	    	public void update(int index, UserProxy user, Boolean value){
+	    		if (getUiHandlers() != null) {
+	    			selectedUserIndex = index;
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), user.getIsProf(), value, "");
+	    		}
 	    	}
 	    });
 	}
@@ -180,12 +200,6 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		users.add(updatedUser);
         tblUser.setRowData(selectedUserIndex, users);
 		tblUser.redraw();
-	}
-
-	@Override
-	public void initializeDepartmentList() {
-		// TODO Auto-generated method stub
-		
 	}
 
 
