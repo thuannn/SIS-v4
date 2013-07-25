@@ -2,6 +2,7 @@ package com.lemania.sis.client.view;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
@@ -48,6 +49,14 @@ public class FrmBrancheAddView extends ViewWithUiHandlers<FrmBrancheAddUiHandler
 	public void showStatus(String msg) {
 		// 
 		lblStatus.setText( msg );
+		
+		Timer t = new Timer(){
+			@Override
+			public void run(){
+				lblStatus.setText("");
+			}
+		};
+		t.schedule(3000);
 	}
 
 	@Override

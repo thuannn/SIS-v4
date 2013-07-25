@@ -9,7 +9,7 @@
 	<g:HTMLPanel width="100%" height="100%">
 		<g:VerticalPanel width="100%" height="">
 			<g:Label text="AJOUTER UNE ECOLE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<g:Grid width="253px">
+			<g:Grid width="80%" cellPadding="5" cellSpacing="5">
 			<g:row>
 				<g:customCell>
 					<g:Label text="Nom :"/>
@@ -39,9 +39,11 @@
 					<g:Label/>
 				</g:customCell>
 				<g:customCell>
-					<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
-						<g:Button text="Annuler" ui:field="cmdCancel"/>
-						<g:Button text="Ajouter" ui:field="cmdAddEcole"/>
+					<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+						<g:HorizontalPanel width="80%">
+							<g:Button text="Annuler" ui:field="cmdCancel"/>
+							<g:Button text="Enregistrer" ui:field="cmdAddEcole"/>
+						</g:HorizontalPanel>
 					</g:HorizontalPanel>
 				</g:customCell>
 			</g:row>

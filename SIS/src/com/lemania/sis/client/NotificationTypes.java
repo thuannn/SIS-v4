@@ -11,4 +11,8 @@ public class NotificationTypes {
 	public static String invalid_input = "Donnée Invalide";
 	
 	public static String branche_create_good = "La nouvelle branche a été créée avec succès.";
+	
+	public static String subject_create_good = "La nouvelle matière a été créée avec succès.";
+	
+	public static String classe_create_good = "La nouvelle classe a été créée avec succès.";
 }

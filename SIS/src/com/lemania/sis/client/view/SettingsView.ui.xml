@@ -9,7 +9,7 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%">
 			<g:Label text="GESTION DE L&apos;ACCES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<g:Grid cellPadding="10">
+			<g:Grid cellPadding="5" cellSpacing="5">
 				<g:row>
 					<g:customCell>
 						<g:Label text="Bloquer automatiquement l&apos;accès au système le "/>

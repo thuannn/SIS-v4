@@ -9,9 +9,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
-import com.lemania.sis.client.presenter.LogTypesAddPresenter;
-import com.lemania.sis.client.presenter.LogTypesPresenter;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
@@ -25,6 +24,11 @@ import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.presenter.StudentAddPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
+import com.lemania.sis.client.presenter.FrmSubjectAddPresenter;
+import com.lemania.sis.client.presenter.CoursAddPresenter;
+import com.lemania.sis.client.presenter.CoursPresenter;
+import com.lemania.sis.client.presenter.FrmClasseListPresenter;
+import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 
 @GinModules({ ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -40,10 +44,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<EcolePresenter> getEcolePresenter();
 
 	AsyncProvider<EcoleAddPresenter> getEcoleAddPresenter();
-
-	AsyncProvider<LogTypesPresenter> getTypesPresenter();
-
-	AsyncProvider<LogTypesAddPresenter> getTypesAddPresenter();
 
 	AsyncProvider<ProfsPresenter> getProfsPresenter();
 
@@ -68,4 +68,16 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<FrmBrancheListPresenter> getFrmBrancheListPresenter();
 
 	AsyncProvider<FrmBrancheAddPresenter> getFrmBrancheAddPresenter();
+
+	AsyncProvider<FrmSubjectListPresenter> getSubjectListPresenter();
+
+	AsyncProvider<FrmSubjectAddPresenter> getFrmSubjectAddPresenter();
+
+	AsyncProvider<CoursAddPresenter> getCoursAddPresenter();
+
+	AsyncProvider<CoursPresenter> getCoursPresenter();
+
+	AsyncProvider<FrmClasseListPresenter> getFrmClasseListPresenter();
+
+	AsyncProvider<FrmClasseAddPresenter> getFrmClasseAddPresenter();
 }

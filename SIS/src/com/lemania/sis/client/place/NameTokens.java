@@ -5,8 +5,6 @@ public class NameTokens {
 	public static final String ecolepage = "!ecolepage";
 	public static final String addecole = "!addecole";
 	public static final String timeinput = "!timeinput";
-	public static final String cours = "!cours";
-	public static final String coursadd = "coursadd";
 	public static final String types = "types";
 	public static final String typesadd = "!typesadd";
 	public static final String profs = "!profs";
@@ -23,6 +21,12 @@ public class NameTokens {
 	public static final String studentadd = "studentadd";
 	public static final String branchelist = "branchelist";
 	public static final String brancheadd = "brancheadd";
+	public static final String subjectlist = "subjectlist";
+	public static final String subjectadd = "subjectadd";
+	public static final String coursadd = "coursadd";
+	public static final String cours = "!cours";
+	public static final String classlist = "classlist";
+	public static final String classeadd = "classeadd";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -38,14 +42,6 @@ public class NameTokens {
 
 	public static String getTimeinput() {
 		return timeinput;
-	}
-
-	public static String getCours() {
-		return cours;
-	}
-
-	public static String getCoursadd() {
-		return coursadd;
 	}
 
 	public static String getTypes() {
@@ -110,5 +106,29 @@ public class NameTokens {
 
 	public static String getBrancheadd() {
 		return brancheadd;
+	}
+
+	public static String getSubjectlist() {
+		return subjectlist;
+	}
+
+	public static String getSubjectadd() {
+		return subjectadd;
+	}
+
+	public static String getCoursadd() {
+		return coursadd;
+	}
+
+	public static String getCours() {
+		return cours;
+	}
+
+	public static String getClasslist() {
+		return classlist;
+	}
+
+	public static String getClasseadd() {
+		return classeadd;
 	}
 }

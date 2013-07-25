@@ -8,14 +8,18 @@ import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.view.ContactView;
+import com.lemania.sis.client.view.CoursAddView;
+import com.lemania.sis.client.view.CoursView;
 import com.lemania.sis.client.view.EcoleAddView;
 import com.lemania.sis.client.view.EcoleView;
 import com.lemania.sis.client.view.FrmBrancheAddView;
 import com.lemania.sis.client.view.FrmBrancheListView;
+import com.lemania.sis.client.view.FrmClasseAddView;
+import com.lemania.sis.client.view.FrmClasseListView;
 import com.lemania.sis.client.view.FrmPasswordView;
+import com.lemania.sis.client.view.FrmSubjectAddView;
+import com.lemania.sis.client.view.FrmSubjectListView;
 import com.lemania.sis.client.view.HomeView;
-import com.lemania.sis.client.view.LogTypesAddView;
-import com.lemania.sis.client.view.LogTypesView;
 import com.lemania.sis.client.view.MainPageView;
 import com.lemania.sis.client.view.ProfsAddView;
 import com.lemania.sis.client.view.ProfsView;
@@ -24,8 +28,7 @@ import com.lemania.sis.client.view.StudentAddView;
 import com.lemania.sis.client.view.StudentView;
 import com.lemania.sis.client.view.UserManagementView;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
-import com.lemania.sis.client.presenter.LogTypesAddPresenter;
-import com.lemania.sis.client.presenter.LogTypesPresenter;
+import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.presenter.ProfsAddPresenter;
 import com.lemania.sis.client.presenter.ContactPresenter;
@@ -37,6 +40,11 @@ import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.presenter.StudentAddPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
+import com.lemania.sis.client.presenter.FrmSubjectAddPresenter;
+import com.lemania.sis.client.presenter.CoursAddPresenter;
+import com.lemania.sis.client.presenter.CoursPresenter;
+import com.lemania.sis.client.presenter.FrmClasseListPresenter;
+import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -60,12 +68,6 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenter(EcoleAddPresenter.class, EcoleAddPresenter.MyView.class,
 				EcoleAddView.class, EcoleAddPresenter.MyProxy.class);
-
-		bindPresenter(LogTypesPresenter.class, LogTypesPresenter.MyView.class,
-				LogTypesView.class, LogTypesPresenter.MyProxy.class);
-
-		bindPresenter(LogTypesAddPresenter.class, LogTypesAddPresenter.MyView.class,
-				LogTypesAddView.class, LogTypesAddPresenter.MyProxy.class);
 
 		bindPresenter(ProfsPresenter.class, ProfsPresenter.MyView.class,
 				ProfsView.class, ProfsPresenter.MyProxy.class);
@@ -101,5 +103,27 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(FrmBrancheAddPresenter.class,
 				FrmBrancheAddPresenter.MyView.class, FrmBrancheAddView.class,
 				FrmBrancheAddPresenter.MyProxy.class);
+
+		bindPresenter(FrmSubjectListPresenter.class,
+				FrmSubjectListPresenter.MyView.class, FrmSubjectListView.class,
+				FrmSubjectListPresenter.MyProxy.class);
+
+		bindPresenter(FrmSubjectAddPresenter.class,
+				FrmSubjectAddPresenter.MyView.class, FrmSubjectAddView.class,
+				FrmSubjectAddPresenter.MyProxy.class);
+
+		bindPresenter(CoursAddPresenter.class, CoursAddPresenter.MyView.class,
+				CoursAddView.class, CoursAddPresenter.MyProxy.class);
+
+		bindPresenter(CoursPresenter.class, CoursPresenter.MyView.class,
+				CoursView.class, CoursPresenter.MyProxy.class);
+
+		bindPresenter(FrmClasseListPresenter.class,
+				FrmClasseListPresenter.MyView.class, FrmClasseListView.class,
+				FrmClasseListPresenter.MyProxy.class);
+
+		bindPresenter(FrmClasseAddPresenter.class,
+				FrmClasseAddPresenter.MyView.class, FrmClasseAddView.class,
+				FrmClasseAddPresenter.MyProxy.class);
 	}
 }

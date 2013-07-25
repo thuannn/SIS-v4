@@ -35,10 +35,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdEcoleAdd;
 	@UiField Button cmdHomepage;
 	@UiField Button cmdTimeInput;
-	@UiField Button cmdCours;
-	@UiField Button cmdCoursAdd;
-	@UiField Button cmdTypes;
-	@UiField Button cmdTypesAdd;
+	@UiField Button cmdClasseList;
+	@UiField Button cmdClasseAdd;
+	@UiField Button cmdSubjectList;
+	@UiField Button cmdSubjectAdd;
 	@UiField Button cmdProfs;
 	@UiField Button cmdProfsAdd;
 	@UiField Button cmdContact;
@@ -56,6 +56,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdCreateStudent;
 	@UiField Button cmdBrancheList;
 	@UiField Button cmdBrancheAdd;
+	@UiField Button cmdProgramList;
+	@UiField Button cmdProgramAdd;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -110,28 +112,28 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			getUiHandlers().showTimeInput();
 	}
 	
-	@UiHandler("cmdCours")
-	void onCmdCoursClicked(ClickEvent event){
+	@UiHandler("cmdClasseList")
+	void onCmdClasseListClicked(ClickEvent event){
 		if (getUiHandlers() != null)
-			getUiHandlers().showCoursList();
+			getUiHandlers().showClasseList();
 	}
 	
-	@UiHandler("cmdCoursAdd")
-	void onCmdCoursAddClicked(ClickEvent event){
+	@UiHandler("cmdClasseAdd")
+	void onCmdClasseAddClicked(ClickEvent event){
 		if (getUiHandlers() != null)
-			getUiHandlers().showCoursAdd();
+			getUiHandlers().showClasseAdd();
 	}
 	
-	@UiHandler("cmdTypes")
-	void onCmdTypesClicked(ClickEvent event){
+	@UiHandler("cmdSubjectList")
+	void onCmdSubjectListClicked(ClickEvent event){
 		if (getUiHandlers() != null)
-			getUiHandlers().showTypeList();
+			getUiHandlers().showFrmSubjectList();
 	}
 	
-	@UiHandler("cmdTypesAdd")
-	void onCmdTypesAddClicked(ClickEvent event){
+	@UiHandler("cmdSubjectAdd")
+	void onCmdSubjectAddClicked(ClickEvent event){
 		if (getUiHandlers() != null)
-			getUiHandlers().showTypeAdd();
+			getUiHandlers().showFrmSubjectAdd();
 	}
 	
 	@UiHandler("cmdProfs")
@@ -272,6 +274,20 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdBrancheAddClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showBrancheAdd();
+		}
+	}
+	
+	@UiHandler("cmdProgramList")
+	void onCmdProgramListClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showCoursList();
+		}
+	}
+	
+	@UiHandler("cmdProgramAdd")
+	void onCmdProgramAddClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showCoursAdd();
 		}
 	}
 }

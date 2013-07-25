@@ -28,17 +28,21 @@ public class FrmBrancheListView extends ViewWithUiHandlers<FrmBrancheListUiHandl
 
 	public interface Binder extends UiBinder<Widget, FrmBrancheListView> {
 	}
+	
 
 	@Inject
 	public FrmBrancheListView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
 	}
 
+	
 	@Override
 	public Widget asWidget() {
 		return widget;
 	}
+	
 	@UiField(provided=true) DataGrid<BrancheProxy> tblBranche = new DataGrid<BrancheProxy>();
+	
 	
 	@Override
 	public void initializeBrancheTable() {
@@ -104,12 +108,14 @@ public class FrmBrancheListView extends ViewWithUiHandlers<FrmBrancheListUiHandl
 	    dataProvider.addDataDisplay(tblBranche);
 	}
 
+	
 	@Override
 	public void setBrancheTableData(List<BrancheProxy> branches) {
 		//
 		dataProvider.setList(branches);
 	}
 
+	
 	@Override
 	public void refreshUpdatedBranche(BrancheProxy branche) {
 		//

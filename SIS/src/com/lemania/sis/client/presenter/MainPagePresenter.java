@@ -227,4 +227,24 @@ public class MainPagePresenter extends
 	public void showBrancheAdd() {
 		History.newItem(NameTokens.brancheadd);		
 	}
+
+	@Override
+	public void showFrmSubjectList() {
+		History.newItem(NameTokens.subjectlist);		
+	}
+
+	@Override
+	public void showFrmSubjectAdd() {
+		History.newItem(NameTokens.subjectadd);		
+	}
+
+	@Override
+	public void showClasseList() {
+		History.newItem(NameTokens.classlist);	
+	}
+
+	@Override
+	public void showClasseAdd() {
+		History.newItem(NameTokens.classeadd);	
+	}
 }

@@ -36,6 +36,12 @@ public interface MainPageUiHandler extends UiHandlers {
 	void showBrancheList();
 	void showBrancheAdd();
 	
+	void showFrmSubjectList();
+	void showFrmSubjectAdd();
+	
+	void showClasseList();
+	void showClasseAdd();
+	
 	void showExtractDataForm();
 	
 	void showUserManagement();
