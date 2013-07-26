@@ -2,6 +2,7 @@ package com.lemania.sis.server.service;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
+import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
@@ -65,6 +66,12 @@ public class MyDAOBase extends DAOBase {
 		
 		try {
         	ObjectifyService.register(Subject.class);
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register(Assignment.class);
         } catch (Exception e) {
         	// do nothing
         }

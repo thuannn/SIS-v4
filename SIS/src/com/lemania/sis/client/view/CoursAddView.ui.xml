@@ -8,22 +8,22 @@
 
 	<g:HTMLPanel>
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="AJOUTER UN NOUVEAU DEPARTEMENT" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Label text="AJOUTER UN NOUVEAU PROGRAMME" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:Grid cellPadding="5" cellSpacing="5" width="80%">
-				<g:row>
-					<g:customCell>
-						<g:Label text="Nom du Département :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:TextBox width="" ui:field="txtCoursNom" styleName="sis_textbox"/>
-					</g:customCell>
-				</g:row>
 				<g:row>
 					<g:customCell>
 						<g:Label text="Nom de l&apos;école :"/>
 					</g:customCell>
 					<g:customCell>
 						<g:ListBox ui:field="lstEcoles" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Nom du programme :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox width="" ui:field="txtCoursNom" styleName="sis_textbox"/>
 					</g:customCell>
 				</g:row>
 				<g:row>
@@ -40,9 +40,9 @@
 					</g:customCell>
 					<g:customCell>
 						<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
-							<g:HorizontalPanel width="80%">
-								<g:Button ui:field="cmdAnnuler">Annuler</g:Button>
+							<g:HorizontalPanel width="70%">
 								<g:Button ui:field="cmdAjouter" text="Enregistrer">Ajouter</g:Button>
+								<g:Button ui:field="cmdAnnuler">Annuler</g:Button>
 							</g:HorizontalPanel>
 						</g:HorizontalPanel>
 					</g:customCell>

@@ -9,6 +9,24 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="LISTE DES CLASSES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Grid cellPadding="5" cellSpacing="5" width="80%">
+				<g:row>
+					<g:customCell>
+						<g:Label text="Ecole :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="lstEcoles" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Programme :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="lstCours" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
 			<p1:DataGrid width="80%" height="200px" ui:field="tblClasseList"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>

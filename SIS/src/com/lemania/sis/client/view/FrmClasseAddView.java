@@ -53,7 +53,10 @@ public class FrmClasseAddView extends ViewWithUiHandlers<FrmClasseAddUiHandler> 
 
 	@Override
 	public void setEcoleList(List<EcoleProxy> ecoleList) {
-		// 
+		// First clear existing data
+		lstEcoles.clear(); 
+		
+		//
 		lstEcoles.addItem("-", "");
 		for ( EcoleProxy ecole : ecoleList )
 			lstEcoles.addItem(ecole.getSchoolName(), ecole.getId().toString());
@@ -61,15 +64,24 @@ public class FrmClasseAddView extends ViewWithUiHandlers<FrmClasseAddUiHandler> 
 	
 	@UiHandler("lstEcoles")
 	void onLstEcolesChange(ChangeEvent event) {
-		//
+		// If user select the first item, which is null, clear the program list
+		if (lstEcoles.getValue(lstEcoles.getSelectedIndex()).isEmpty()) {
+			lstCoursList.clear();
+			return;
+		}
+		
+		// Otherwise, load the program list
 		if (getUiHandlers() != null)
 			getUiHandlers().onEcoleSelected( lstEcoles.getValue( lstEcoles.getSelectedIndex() ));
 	}
 
 	@Override
 	public void setCoursList(List<CoursProxy> coursList) {
-		//
-		lstEcoles.addItem("-", "");
+		// First clear existing data
+		lstCoursList.clear();
+		
+		// 
+		lstCoursList.addItem("-", "");
 		for ( CoursProxy cours : coursList )
 			lstCoursList.addItem( cours.getCoursNom(), cours.getId().toString() );
 	}

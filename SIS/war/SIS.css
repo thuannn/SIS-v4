@@ -23,10 +23,12 @@ body {
 }
 
 .header {
-	padding: 5px;  	
-  	color: blue;
-  	font-style: gros;
-  	font-size: 16px;
+	color: blue;
+	padding: 10px;
+	font-size: 18px;
+	font-style: gros;
+	font-weight: bold;
+	letter-spacing: 1px;
 }
 
 .sideBar {
@@ -116,4 +118,12 @@ body {
 }
 .hiddenText {
 	color: white;
+}
+.left_header {
+	color: #cc9900;
+	margin-left: -20px;
+	padding: 5px 0px;
+	font-size: 18px;
+	font-style: gros;
+	background-color: #cc9900;
 }

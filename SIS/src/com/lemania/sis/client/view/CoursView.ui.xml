@@ -8,7 +8,7 @@
 
 	<g:HTMLPanel>
 		<g:VerticalPanel width="100%">
-			<g:Label text="LISTE DES DEPARTMENTS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Label text="LISTE DES PROGRAMMES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_CENTER" height="40px" verticalAlignment="ALIGN_MIDDLE">
 				<g:Label text="Choisir le nom de l&apos;école :" width=""/>
 				<g:ListBox ui:field="lstEcoles"/>

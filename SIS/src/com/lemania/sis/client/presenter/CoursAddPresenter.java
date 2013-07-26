@@ -51,8 +51,6 @@ public class CoursAddPresenter
 	public CoursAddPresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy) {
 		super(eventBus, view, proxy);
-		
-		getView().setUiHandlers(this);
 	}
 
 	@Override
@@ -63,6 +61,14 @@ public class CoursAddPresenter
 	@Override
 	protected void onBind() {
 		super.onBind();
+		
+		// Thuan
+		getView().setUiHandlers(this);
+	}
+	
+	@Override
+	protected void onReset() {
+		super.onReset();
 		
 		// Thuan
 		initialData();

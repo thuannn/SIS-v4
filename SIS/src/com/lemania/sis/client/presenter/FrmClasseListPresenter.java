@@ -21,8 +21,14 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.FrmClasseListUiHandler;
 import com.lemania.sis.shared.ClasseProxy;
+import com.lemania.sis.shared.CoursProxy;
+import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
+import com.lemania.sis.shared.service.CoursRequestFactory;
+import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
+import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
+import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 
 public class FrmClasseListPresenter
@@ -32,6 +38,11 @@ public class FrmClasseListPresenter
 	public interface MyView extends View, HasUiHandlers<FrmClasseListUiHandler> {
 		//
 		void initializeTable();
+		void resetForm();
+		
+		void setEcoleList(List<EcoleProxy> ecoleList);
+		void setCoursList(List<CoursProxy> subjectList);
+		
 		void setClasseListData(List<ClasseProxy> classeList);
 		void refreshUpdatedClasse(ClasseProxy classe);
 	}
@@ -42,16 +53,19 @@ public class FrmClasseListPresenter
 	public interface MyProxy extends ProxyPlace<FrmClasseListPresenter> {
 	}
 
+	
 	@Inject
 	public FrmClasseListPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
 	}
 
+	
 	@Override
 	protected void revealInParent() {
 		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
 	}
 
+	
 	@Override
 	protected void onBind() {
 		super.onBind();
@@ -61,34 +75,39 @@ public class FrmClasseListPresenter
 		getView().initializeTable();
 	}
 	
+	
 	@Override
 	protected void onReset(){
 		super.onReset();
 		
 		// Thuan
-		loadClasseList();
+		loadActiveEcoleList();
+		
+		// Clear all the rest of the form
+		getView().resetForm();
 	}
 
 	/*
-	 * Load classe list when the form is opened.
+	 * 
 	 * */
-	private void loadClasseList() {
-		// TODO
-		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+	private void loadActiveEcoleList() {
+		//
+		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		ClasseRequestContext rc = rf.classeRequest();
-		rc.listAll().fire(new Receiver<List<ClasseProxy>>(){
+		EcoleRequestContext rc = rf.ecoleRequest();
+		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
 			@Override
-			public void onSuccess(List<ClasseProxy> response) {
-				getView().setClasseListData(response);
+			public void onSuccess(List<EcoleProxy> response) {
+				getView().setEcoleList(response);
 			}
 		});
 	}
 
+	
 	@Override
 	public void updateClasse(ClasseProxy classe, String classeName, Boolean isActive) {
 		//
@@ -108,6 +127,51 @@ public class FrmClasseListPresenter
 			@Override
 			public void onSuccess(ClasseProxy response) {
 				getView().refreshUpdatedClasse(response);
+			}
+		});
+	}
+
+
+	@Override
+	public void onEcoleSelected(String ecoleId) {
+		//
+		if (ecoleId.isEmpty()){
+			return;
+		}
+		
+		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		CoursRequestContext rc = rf.coursRequest();
+		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<CoursProxy> response) {
+				getView().setCoursList(response);
+			}
+		});
+	}
+
+
+	/*
+	 * Load class list when a program is selected
+	 * */
+	@Override
+	public void onSubjectSelected(String subjectId) {
+		//
+		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ClasseRequestContext rc = rf.classeRequest();
+		rc.listAll(subjectId).fire(new Receiver<List<ClasseProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ClasseProxy> response) {
+				getView().setClasseListData(response);
 			}
 		});
 	}

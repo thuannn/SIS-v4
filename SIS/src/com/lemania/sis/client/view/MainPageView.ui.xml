@@ -43,6 +43,7 @@
 			</g:Dock>
 			<g:Dock direction="WEST" width="10%" height="100%">
 				<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenu">
+					<g:Label text="." width="" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
 					<g:TreeItem text="MON COMPTE" state="true">
 						<g:Button ui:field="cmdTimeInput" text="SAISIR DES NOTES" width="200px">Mettre des heures</g:Button>
@@ -68,7 +69,7 @@
 							<g:Button ui:field="cmdProgramList" width="180px">Liste des programmes</g:Button>
 							<g:Button ui:field="cmdProgramAdd" width="180px">Ajouter un programme</g:Button>
 						</g:TreeItem>
-						<g:TreeItem text="Classes" state="true">
+						<g:TreeItem text="Classes">
 							<g:Button ui:field="cmdClasseList" text="Liste des classes" width="180px">Liste de cours</g:Button>
 							<g:Button ui:field="cmdClasseAdd" text="Ajouter un nom de classe" width="180px">Ajouter un cours</g:Button>
 						</g:TreeItem>

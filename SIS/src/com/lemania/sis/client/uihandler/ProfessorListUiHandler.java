@@ -1,6 +1,7 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 
 public interface ProfessorListUiHandler extends UiHandlers {
@@ -9,4 +10,11 @@ public interface ProfessorListUiHandler extends UiHandlers {
 	void updateProfessorName(ProfessorProxy prof, String name);
 	
 	void professorSelected(ProfessorProxy prof);
+	
+	void onEcoleSelected(String ecoleId);
+	void onProgrammeSelected(String coursId);
+	void onClassSelected();
+	
+	void saveAssignment(String professorId, String classId, String subjectId, Boolean isActive);
+	void updateAssignmentStatus(AssignmentProxy assignment, Boolean value);
 }

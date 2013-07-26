@@ -10,7 +10,7 @@
 		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
 			<g:Label text="SIS - Student information system" styleName="pageTitle" width=""/>
 			<g:Label text="." styleName="hiddenText"/>
-			<g:Grid width="" ui:field="panelLogin" styleName="sideBar">
+			<g:Grid width="" ui:field="panelLogin" styleName="sideBar" cellPadding="5" cellSpacing="5">
 				<g:row>
 					<g:customCell>
 						<g:Label text="Nom d&apos;utilisateur :" horizontalAlignment="ALIGN_LEFT"/>

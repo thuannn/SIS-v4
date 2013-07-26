@@ -13,6 +13,10 @@ public class SubjectDao extends MyDAOBase {
 		return;
 	}
 	
+	
+	/*
+	 * 
+	 * */
 	public List<Subject> listAll(){
 		Query<Subject> q = this.ofy().query(Subject.class).order("subjectName");
 		List<Subject> returnList = new ArrayList<Subject>();
@@ -22,10 +26,32 @@ public class SubjectDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/*
+	 * 
+	 * */
+	public List<Subject> listAllActive(){
+		Query<Subject> q = this.ofy().query(Subject.class).order("subjectName");
+		List<Subject> returnList = new ArrayList<Subject>();
+		for (Subject subject : q){
+			if (subject.getIsActive())
+				returnList.add(subject);
+		}
+		return returnList;
+	}
+	
+	
+	/*
+	 * 
+	 * */
 	public void save(Subject subject){
 		this.ofy().put(subject);
 	}
 	
+	
+	/*
+	 * 
+	 * */
 	public Subject saveAndReturn(Subject subject){
 		Key<Subject> key = this.ofy().put(subject);
 		try {
@@ -35,6 +61,10 @@ public class SubjectDao extends MyDAOBase {
 		}
 	}
 	
+	
+	/*
+	 * 
+	 * */
 	public void removeSubject(Subject subject){
 		this.ofy().delete(subject);
 	}

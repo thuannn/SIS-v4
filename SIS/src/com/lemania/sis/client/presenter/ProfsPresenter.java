@@ -24,10 +24,25 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.ProfessorListUiHandler;
+import com.lemania.sis.shared.AssignmentProxy;
+import com.lemania.sis.shared.ClasseProxy;
+import com.lemania.sis.shared.CoursProxy;
+import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.service.AssignmentRequestFactory;
+import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
+import com.lemania.sis.shared.service.ClasseRequestFactory;
+import com.lemania.sis.shared.service.CoursRequestFactory;
+import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfessorRequestFactory;
+import com.lemania.sis.shared.service.SubjectRequestFactory;
+import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
+import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
+import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestContext;
+import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
 public class ProfsPresenter 
 	extends Presenter<ProfsPresenter.MyView, ProfsPresenter.MyProxy> 
@@ -39,11 +54,24 @@ public class ProfsPresenter
 
 	
 	public interface MyView extends View, HasUiHandlers<ProfessorListUiHandler> {
+		//
 		void initializeTable();
+		void initializeAssignmentTable();
+		
+		void setEcoleList(List<EcoleProxy> ecoleList);
+		void setCoursList(List<CoursProxy> coursList);
+		void setClasseList(List<ClasseProxy> classeList);
+		void setSubjectList(List<SubjectProxy> subjectList);
 		
 		void setData(List<ProfessorProxy> profs);
+		void setAssignmentTableData(List<AssignmentProxy> assignments);
 		
 		void refreshTable(ProfessorProxy prof);
+		
+		void resetForm();
+		
+		void showAddedAssignment(AssignmentProxy assignment);
+		void showUpdatedAssignment(AssignmentProxy assignment);
 	}
 
 	
@@ -73,15 +101,43 @@ public class ProfsPresenter
 		// Thuan
 		getView().setUiHandlers(this);
 		getView().initializeTable();
+		getView().initializeAssignmentTable();
 	}
 	
 	
 	@Override
 	protected void onReset(){
+		super.onReset();
+		
+		// Thuan
+		getView().resetForm();
+		
 		getProfessorsList();
+		loadEcoleList();
 	}
 	
 	
+	/*
+	 * Load list of schools when the form is opened
+	 * */
+	private void loadEcoleList() {
+		// 
+		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EcoleRequestContext rc = rf.ecoleRequest();
+		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<EcoleProxy> response) {
+				getView().setEcoleList(response);
+			}
+		});
+	}
+
+
 	private void getProfessorsList() {
 		
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
@@ -135,9 +191,13 @@ public class ProfsPresenter
 	
 	@Override
 	public void updateProfessorName(ProfessorProxy prof, String name) {
+		//
+		if (prof.getProfName().equals(name))
+			return;
 		
 		if (!currentUser.isAdmin()) {
 			Window.alert("Veuillez vous connecter avec le code d'accès de l'administrateur. La modification n'a pas été effectuée.");
+			getView().refreshTable(prof);
 			return;
 		}
 		
@@ -161,7 +221,142 @@ public class ProfsPresenter
 
 	@Override
 	public void professorSelected(ProfessorProxy prof) {
-		// TODO Auto-generated method stub
+		//
+		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AssignmentRequestContext rc = rf.assignmentRequest();
+		rc.listAll( prof.getId().toString() ).fire(new Receiver<List<AssignmentProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<AssignmentProxy> response) {
+				getView().setAssignmentTableData(response);
+			}
+		});
+	}
+
+
+	@Override
+	public void onEcoleSelected(String ecoleId) {
+		//
+		if (ecoleId.isEmpty()){
+			return;
+		}
 		
+		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		CoursRequestContext rc = rf.coursRequest();
+		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<CoursProxy> response) {
+				getView().setCoursList(response);
+			}
+		});
+	}
+
+
+	/*
+	 * Load class list when a program is selected
+	 * */
+	@Override
+	public void onProgrammeSelected(String coursId) {
+		//
+		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ClasseRequestContext rc = rf.classeRequest();
+		rc.listAll(coursId).fire(new Receiver<List<ClasseProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ClasseProxy> response) {
+				getView().setClasseList(response);
+			}
+		});
+	}
+	
+
+	/*
+	 * Save assignment
+	 * */
+	@Override
+	public void saveAssignment(String professorId, String classId, String subjectId, Boolean isActive) {
+		//
+		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AssignmentRequestContext rc = rf.assignmentRequest();
+		rc.saveAndReturn( professorId.toString(), classId.toString(), subjectId.toString(), isActive ).fire(new Receiver<AssignmentProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(AssignmentProxy response) {
+				getView().showAddedAssignment(response);
+			}
+		});
+	}
+
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void updateAssignmentStatus(AssignmentProxy assignment, Boolean value) {
+		// 
+		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AssignmentRequestContext rc = rf.assignmentRequest();
+		
+		AssignmentProxy a4update = rc.edit( assignment );
+		a4update.setActive(value);
+		rc.saveAndReturn( a4update ).fire(new Receiver<AssignmentProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(AssignmentProxy response) {
+				getView().showUpdatedAssignment(response);
+			}
+		});
+	}
+
+
+	/*
+	 * Load active subject list when a class is selected 
+	 * */
+	@Override
+	public void onClassSelected() {
+		//
+		loadActiveSubjectList();
+	}
+
+
+	/*
+	 * 
+	 * */
+	private void loadActiveSubjectList() {
+		//
+		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SubjectRequestContext rc = rf.subjectRequest();
+		rc.listAllActive().fire(new Receiver<List<SubjectProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<SubjectProxy> response) {
+				getView().setSubjectList(response);
+			}
+		});
 	}
 }

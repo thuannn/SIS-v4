@@ -9,28 +9,44 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%">
 			<g:Label text="LISTE DES PROFESSEURS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<g:HorizontalPanel width="850px">
-				<g:VerticalPanel width="400px">
-					<p1:DataGrid width="400px" height="550px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
+			<g:HorizontalPanel width="850px" spacing="5">
+				<g:VerticalPanel width="" spacing="2">
+					<p1:DataGrid width="500px" height="550px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
 				</g:VerticalPanel>
-				<g:VerticalPanel width="400px">
+				<g:VerticalPanel width="" spacing="2">
 					<g:Label ui:field="lblProfNameAssign" styleName="header"/>
-					<g:Label text="Rajouter un département" width="" styleName="sectionTitle"/>
-					<g:Grid width="100%" styleName="subSection">
+					<g:Label text="Assigner une classe" width="" styleName="sectionTitle"/>
+					<g:Grid width="100%" styleName="subSection" cellPadding="2" cellSpacing="2">
 						<g:row>
 							<g:customCell>
 								<g:Label text="Ecole : " width=""/>
 							</g:customCell>
 							<g:customCell>
-								<g:ListBox ui:field="lstAddEcole"/>
+								<g:ListBox ui:field="lstEcoles" styleName="sis_textbox"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
 							<g:customCell>
-								<g:Label text="Département :" width=""/>
+								<g:Label text="Programme :" width=""/>
 							</g:customCell>
 							<g:customCell>
-								<g:ListBox ui:field="lstAddCourse"/>
+								<g:ListBox ui:field="lstCours" styleName="sis_textbox"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Classe :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstClasses" styleName="sis_textbox"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Matière :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox styleName="sis_textbox" ui:field="lstSubjects"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
@@ -38,13 +54,13 @@
 								<g:Label/>
 							</g:customCell>
 							<g:customCell>
-								<g:Button ui:field="cmdAddCourse">Ajouter</g:Button>
+								<g:Button ui:field="cmdAssigner" width="100px">Ajouter</g:Button>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					<g:Label text="."/>
-					<g:Label text="Liste des département assignés" styleName="sectionTitle"/>
-					<p1:DataGrid width="400px" height="350PX" ui:field="tblAssignment" styleName="subSection"/>
+					<g:Label text="." styleName="hiddenText"/>
+					<g:Label text="Liste des classes assignés" styleName="sectionTitle"/>
+					<p1:DataGrid width="400px" height="350PX" ui:field="tblAssignments" styleName="subSection"/>
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:VerticalPanel>
