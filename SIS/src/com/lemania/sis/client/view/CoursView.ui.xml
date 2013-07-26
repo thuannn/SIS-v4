@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel>
-		<g:VerticalPanel width="100%">
+		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="LISTE DES PROGRAMMES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_CENTER" height="40px" verticalAlignment="ALIGN_MIDDLE">
 				<g:Label text="Choisir le nom de l&apos;école :" width=""/>

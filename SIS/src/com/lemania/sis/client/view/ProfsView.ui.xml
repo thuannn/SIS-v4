@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%">
+		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="LISTE DES PROFESSEURS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="850px" spacing="5">
 				<g:VerticalPanel width="" spacing="2">

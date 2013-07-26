@@ -48,11 +48,11 @@
 					<g:TreeItem text="MON COMPTE" state="true">
 						<g:Button ui:field="cmdTimeInput" text="SAISIR DES NOTES" width="200px">Mettre des heures</g:Button>
 						<g:Button text="Changer le MDP" ui:field="cmdPassword" width="200px"/></g:TreeItem>
-					<g:TreeItem text="GESTION" state="true">
+					<g:TreeItem text="GESTION DES BULLETINS">
+						<g:Button width="200px" text="Bulletins"></g:Button>
 						<g:Button text="Profile des études" width="200px"/>
-						<g:Button text="Professeurs - Matières" width="200px"/>
 					</g:TreeItem>
-					<g:TreeItem text="INFORMATIONS DE BASE" state="true">
+					<g:TreeItem text="INFORMATIONS DE BASE">
 						<g:TreeItem text="Elèves">
 							<g:Button text="Liste des élèves" width="180px" ui:field="cmdStudents"/>
 							<g:Button text="Ajouter un élève" width="180px" ui:field="cmdCreateStudent"/>
@@ -86,7 +86,7 @@
 							<g:Button ui:field="cmdSettings" text="Bloquer l&apos;accès" width="180px"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:Button ui:field="cmdContact">Contact</g:Button>
+					<g:Button ui:field="cmdContact" width="220PX">Contact</g:Button>
 					<g:Image url="images/appengine-silver-120x30.gif"/>
 				</g:Tree>
 			</g:Dock>
@@ -95,7 +95,7 @@
 			</g:Dock>
 			<g:Dock direction="SOUTH">
 				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
-					<g:Label text="Copyright Ecole Lémania"/>
+					<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_RIGHT"/>
 				</g:HorizontalPanel>
 			</g:Dock>
 		</g:DockPanel>
