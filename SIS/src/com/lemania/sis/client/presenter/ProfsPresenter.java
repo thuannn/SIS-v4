@@ -139,7 +139,7 @@ public class ProfsPresenter
 
 
 	private void getProfessorsList() {
-		
+		//
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfessorRequestContext rc = rf.professorRequest();

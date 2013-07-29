@@ -21,6 +21,7 @@ import com.lemania.sis.client.view.FrmSubjectAddView;
 import com.lemania.sis.client.view.FrmSubjectListView;
 import com.lemania.sis.client.view.HomeView;
 import com.lemania.sis.client.view.MainPageView;
+import com.lemania.sis.client.view.ProfileManagementView;
 import com.lemania.sis.client.view.ProfsAddView;
 import com.lemania.sis.client.view.ProfsView;
 import com.lemania.sis.client.view.SettingsView;
@@ -45,6 +46,7 @@ import com.lemania.sis.client.presenter.CoursAddPresenter;
 import com.lemania.sis.client.presenter.CoursPresenter;
 import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
+import com.lemania.sis.client.presenter.ProfileManagementPresenter;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -125,5 +127,10 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(FrmClasseAddPresenter.class,
 				FrmClasseAddPresenter.MyView.class, FrmClasseAddView.class,
 				FrmClasseAddPresenter.MyProxy.class);
+
+		bindPresenter(ProfileManagementPresenter.class,
+				ProfileManagementPresenter.MyView.class,
+				ProfileManagementView.class,
+				ProfileManagementPresenter.MyProxy.class);
 	}
 }

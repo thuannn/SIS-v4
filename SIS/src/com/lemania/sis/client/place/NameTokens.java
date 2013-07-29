@@ -27,6 +27,7 @@ public class NameTokens {
 	public static final String cours = "!cours";
 	public static final String classlist = "classlist";
 	public static final String classeadd = "classeadd";
+	public static final String profilemgt = "profilemgt";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -130,5 +131,9 @@ public class NameTokens {
 
 	public static String getClasseadd() {
 		return classeadd;
+	}
+
+	public static String getProfilemgt() {
+		return profilemgt;
 	}
 }

@@ -247,4 +247,9 @@ public class MainPagePresenter extends
 	public void showClasseAdd() {
 		History.newItem(NameTokens.classeadd);	
 	}
+
+	@Override
+	public void showProfileManagement() {
+		History.newItem(NameTokens.profilemgt);		
+	}
 }

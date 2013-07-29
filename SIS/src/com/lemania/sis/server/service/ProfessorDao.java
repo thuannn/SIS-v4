@@ -8,10 +8,16 @@ import com.lemania.sis.server.Professor;
 
 public class ProfessorDao extends MyDAOBase {
 	
+	/*
+	 * 
+	 * */
 	public void initialize(){
 		return;
 	}
 	
+	/*
+	 * 
+	 * */
 	public List<Professor> listAll(){
 		Query<Professor> q = this.ofy().query(Professor.class).order("profName");
 		List<Professor> returnList = new ArrayList<Professor>();
@@ -21,10 +27,16 @@ public class ProfessorDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	/*
+	 * 
+	 * */
 	public void save(Professor prof){
 		this.ofy().put(prof);
 	}
 	
+	/*
+	 * 
+	 * */
 	public Professor saveAndReturn(Professor prof){
 		Key<Professor> key = this.ofy().put(prof);
 		try {
@@ -34,6 +46,9 @@ public class ProfessorDao extends MyDAOBase {
 		}
 	}
 	
+	/*
+	 * 
+	 * */
 	public void removeProfessor(Professor prof) {
 		this.ofy().delete(prof);
 	}

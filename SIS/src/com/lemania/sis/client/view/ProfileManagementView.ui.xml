@@ -1,0 +1,111 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+
+	<g:HTMLPanel width="100%">
+		<g:VerticalPanel width="100%" spacing="2">
+			<g:Label text="GESTION DES PROFILS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:VerticalPanel width="100%" spacing="2">
+				<g:Grid cellPadding="5" cellSpacing="5">
+					<g:row>
+						<g:customCell>
+							<g:Label text="List des profils :"/>
+						</g:customCell>
+						<g:customCell>
+							<g:ListBox ui:field="lstProfiles" styleName="sis_textbox" />
+						</g:customCell>
+						<g:customCell>
+							<g:Button text="Créer un nouveau profil" ui:field="cmdCreateNewProfile"/>
+						</g:customCell>
+						<g:customCell>
+							<g:FlowPanel ui:field="pnlAddNewProfile" visible="false">
+								<g:TextBox ui:field="txtNewProfileName" />
+								<g:Button text="Enregistrer" ui:field="cmdSaveNewProfile"/>
+							</g:FlowPanel>
+						</g:customCell>
+					</g:row>
+				</g:Grid>
+				<g:Grid width="" cellPadding="5" cellSpacing="5">
+					<g:row>
+						<g:customCell>
+							<g:VerticalPanel width="" spacing="2">
+					<g:Label text="Matières" styleName="sectionTitle"/>
+					<g:Label text="Rajouter une matière au profil"/>
+					<g:Grid width="" cellPadding="5" cellSpacing="5">
+						<g:row>
+							<g:customCell>
+								<g:Label text="Matière :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstSubjects" width="" styleName="sis_textbox" />
+							</g:customCell>
+							<g:customCell>
+								<g:DoubleBox ui:field="txtSubjectCoef" width="50px"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Professeur :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstProfessors" width="" styleName="sis_textbox"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Button ui:field="cmdAddSubject" text="Ajouter la matière"></g:Button>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					<p1:DataGrid width="250px" height="200px" ui:field="tblSubjects"/>
+				</g:VerticalPanel>
+						</g:customCell>
+						<g:customCell>
+							<g:VerticalPanel width="" spacing="2">
+					<g:Label text="Branches" styleName="sectionTitle" width=""/>
+					<g:Label text="Rajouter une branche pour la matière sélectionée"/>
+					<g:Grid cellPadding="5" cellSpacing="5">
+						<g:row>
+							<g:customCell>
+								<g:Label text="Branche :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstBranches" width="" styleName="sis_textbox" />
+							</g:customCell>
+							<g:customCell>
+								<g:DoubleBox ui:field="txtBrancheCoef" width="50px"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Button text="Ajouter la branche" ui:field="cmdAddBranche"/>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					<p1:DataGrid width="250px" height="200px" ui:field="tblBranches"/>
+				</g:VerticalPanel>
+						</g:customCell>
+					</g:row>
+				</g:Grid>
+			</g:VerticalPanel>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

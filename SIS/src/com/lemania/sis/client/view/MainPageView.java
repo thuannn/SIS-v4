@@ -58,6 +58,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdBrancheAdd;
 	@UiField Button cmdProgramList;
 	@UiField Button cmdProgramAdd;
+	@UiField Button cmdProfileManagement;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -288,6 +289,12 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdProgramAddClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showCoursAdd();
+		}
+	}
+	@UiHandler("cmdProfileManagement")
+	void onCmdProfileManagementClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showProfileManagement();
 		}
 	}
 }
