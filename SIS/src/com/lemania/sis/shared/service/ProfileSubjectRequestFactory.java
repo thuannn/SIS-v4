@@ -11,7 +11,6 @@ import com.lemania.sis.server.service.ProfileSubjectDao;
 import com.lemania.sis.shared.ProfileSubjectProxy;
 
 public interface ProfileSubjectRequestFactory extends RequestFactory {
-	
 	//
 	@Service(value=ProfileSubjectDao.class, locator=DaoServiceLocator.class)
 	interface ProfileSubjectRequestContext extends RequestContext {
@@ -20,14 +19,17 @@ public interface ProfileSubjectRequestFactory extends RequestFactory {
 		Request<List<ProfileSubjectProxy>> listAll( String profileId );	
 		//
 		Request<List<ProfileSubjectProxy>> listAllActive();
-		
+		//
 		Request<Void> save(ProfileSubjectProxy profile);
 		Request<ProfileSubjectProxy> saveAndReturn(ProfileSubjectProxy newProfileSubject);
 		Request<ProfileSubjectProxy> saveAndReturn(String profileId, String subjectId, String subjectCoef );
-		
+		//
 		Request<Void> removeProfileSubject(ProfileSubjectProxy profileSubject);
-		
+		//
 		Request<Void> initialize();
+		//
+		Request<ProfileSubjectProxy> calculateTotalBrancheCoef( String profileSubjectId );
+		//
 	}
 	
 	ProfileSubjectRequestContext profileSubjectRequest();

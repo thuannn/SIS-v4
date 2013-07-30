@@ -6,6 +6,7 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
 import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 
@@ -42,7 +43,7 @@ public class ProfileSubjectDao extends MyDAOBase {
 	/**/
 	public List<ProfileSubject> listAll( String profileId ){
 		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class)
-				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong(profileId)))
+				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong( profileId )))
 				.order("subject");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
@@ -71,6 +72,7 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/**/
 	public ProfileSubject saveAndReturn(String profileId, String subjectId, String subjectCoef ){
+		//
 		ProfileSubject ps = new ProfileSubject();
 		ps.setProfile( new Key<Profile>( Profile.class, Long.parseLong(profileId)));
 		ps.setSubject(new Key<Subject>( Subject.class, Long.parseLong(subjectId)));
@@ -86,7 +88,23 @@ public class ProfileSubjectDao extends MyDAOBase {
 	}
 	
 	/**/
-	public void removeProfileSubject(ProfileSubject profileSubject){
+	public void removeProfileSubject(ProfileSubject profileSubject) {
+		//
 		this.ofy().delete(profileSubject);
+	}
+	
+	/**/
+	public ProfileSubject calculateTotalBrancheCoef(String profileSubjectId) {
+		//
+		ProfileSubject ps = this.ofy().get( new Key<ProfileSubject>(ProfileSubject.class, Long.parseLong(profileSubjectId)) );
+		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
+				.filter("profileSubject", new Key<ProfileSubject>( ProfileSubject.class, Long.parseLong(profileSubjectId)) )
+				.order("profileBranche");
+		ps.setTotalBrancheCoef(0.0);
+		for ( ProfileBranche profileBranche : q ){
+			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
+		}
+		this.ofy().put( ps );
+		return ps;
 	}
 }

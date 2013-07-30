@@ -1,11 +1,17 @@
-<!-- Indices written at Tue, 30 Jul 2013 11:51:49 CEST -->
+<!-- Indices written at Tue, 30 Jul 2013 21:58:25 CEST -->
 
 <datastore-indexes>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 3 times in query history -->
     <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
         <property name="profile" direction="asc"/>
         <property name="subject" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 36 times in query history -->
+    <datastore-index kind="ProfileBranche" ancestor="false" source="auto">
+        <property name="profileSubject" direction="asc"/>
+        <property name="profileBranche" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

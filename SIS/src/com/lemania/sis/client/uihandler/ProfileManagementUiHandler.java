@@ -15,4 +15,6 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	void onProfileChanged( String profileId );
 	//
 	void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive);
+	//
+	void onSubjectSelected( String profileSubjectId );
 }

@@ -16,6 +16,9 @@ public interface ProfileSubjectProxy extends EntityProxy {
 	public Double getSubjectCoef();
 	public void setSubjectCoef(Double subjectCoef);
 	
+	public Double getTotalBrancheCoef();
+	public void setTotalBrancheCoef(Double totalBrancheCoef);
+	
 	public Boolean getIsActive();
 	public void setIsActive(Boolean isActive);
 }

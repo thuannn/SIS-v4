@@ -7,6 +7,9 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.ProfileBrancheAfterAddEvent;
+import com.lemania.sis.client.event.ProfileBrancheAfterAddEvent.ProfileBrancheAfterAddHandler;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -24,6 +27,7 @@ import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.ProfileBrancheProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
@@ -31,6 +35,8 @@ import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.ProfileBrancheRequestFactory;
+import com.lemania.sis.shared.service.ProfileBrancheRequestFactory.ProfileBrancheRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
 import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
 import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
@@ -43,7 +49,7 @@ public class ProfileManagementPresenter
 		extends
 		Presenter<ProfileManagementPresenter.MyView, ProfileManagementPresenter.MyProxy>
 		implements
-		ProfileManagementUiHandler {
+		ProfileManagementUiHandler, ProfileBrancheAfterAddHandler {
 
 	public interface MyView extends View, HasUiHandlers<ProfileManagementUiHandler> {
 		//
@@ -60,6 +66,9 @@ public class ProfileManagementPresenter
 		void addNewProfileSubjectToTable( ProfileSubjectProxy profileSubject );
 		void setSubjectTableData( List<ProfileSubjectProxy> subjects );
 		void showUpdatedProfileSubject( ProfileSubjectProxy ps );
+		//
+		void setBrancheTableData( List<ProfileBrancheProxy> branches);
+		void addNewProfileBrancheToTable( ProfileBrancheProxy branche );
 	}
 
 	@ProxyCodeSplit
@@ -195,6 +204,9 @@ public class ProfileManagementPresenter
 		//
 	}
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void loadProfessorList(String subjectId) {
 		//
@@ -213,6 +225,9 @@ public class ProfileManagementPresenter
 		});		
 	}
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void addSubjectToProfile(String profileId, String subjectId,
 			String subjectCoef) {
@@ -247,7 +262,7 @@ public class ProfileManagementPresenter
 	}
 
 	@Override
-	public void addBrancheToProfile(String profileSubjectId, String brancheId,
+	public void addBrancheToProfile(final String profileSubjectId, String brancheId,
 			String brancheCoef) {
 		//
 		if (profileSubjectId.isEmpty()) {
@@ -263,9 +278,27 @@ public class ProfileManagementPresenter
 			return;
 		}
 		
-		// TODO
+		//
+		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();		
+		rc.saveAndReturn(profileSubjectId, brancheId, brancheCoef).fire(new Receiver<ProfileBrancheProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileBrancheProxy response) {
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getView().addNewProfileBrancheToTable( response );
+			}
+		});		
 	}
 
+	
+	/*
+	 * 
+	 * */
 	@Override
 	public void onProfileChanged(String profileId) {
 		//
@@ -289,6 +322,10 @@ public class ProfileManagementPresenter
 		});			
 	}
 
+	
+	/*
+	 * 
+	 * */
 	@Override
 	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive) {
 		//
@@ -304,6 +341,57 @@ public class ProfileManagementPresenter
 		ps.setSubjectCoef( Double.parseDouble(coef) );
 		ps.setIsActive( isActive );
 		rc.saveAndReturn( ps ).fire(new Receiver<ProfileSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileSubjectProxy response) {
+				getView().showUpdatedProfileSubject(response);
+			}
+		});	
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void onSubjectSelected(final String profileSubjectId) {
+		//
+		if (profileSubjectId.isEmpty()) {
+			Window.alert( NotificationTypes.subject_not_selected );
+			return;
+		}
+		//
+		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();		
+		rc.listAll( profileSubjectId ).fire(new Receiver<List<ProfileBrancheProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ProfileBrancheProxy> response) {
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent(profileSubjectId) );
+				getView().setBrancheTableData( response );
+			}
+		});
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@ProxyEvent
+	@Override
+	public void onProfileBrancheAfterAdd(ProfileBrancheAfterAddEvent event) {
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
+		rc.calculateTotalBrancheCoef( event.getProfileSubjectId() ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

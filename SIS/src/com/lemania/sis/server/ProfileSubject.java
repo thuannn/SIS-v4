@@ -13,6 +13,9 @@ public class ProfileSubject extends DatastoreObject {
 	private String subjectName;
 	private Double subjectCoef;
 	
+	// This number should always be 1
+	private Double totalBrancheCoef = 0.0;
+	
 	public Key<Profile> getProfile() {
 		return profile;
 	}
@@ -51,5 +54,16 @@ public class ProfileSubject extends DatastoreObject {
 
 	public void setSubjectCoef(Double subjectCoef) {
 		this.subjectCoef = subjectCoef;
+	}
+
+	public Double getTotalBrancheCoef() {
+		if (totalBrancheCoef == null)
+			return 0.0;
+		else
+			return totalBrancheCoef;
+	}
+
+	public void setTotalBrancheCoef(Double totalBrancheCoef) {
+		this.totalBrancheCoef = totalBrancheCoef;
 	}
 }

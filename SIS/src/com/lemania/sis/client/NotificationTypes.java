@@ -15,4 +15,6 @@ public class NotificationTypes {
 	public static String subject_create_good = "La nouvelle matière a été créée avec succès.";
 	
 	public static String classe_create_good = "La nouvelle classe a été créée avec succès.";
+	
+	public static String subject_not_selected = "Merci de choisir une matière.";
 }
