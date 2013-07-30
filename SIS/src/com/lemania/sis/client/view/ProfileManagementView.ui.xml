@@ -64,7 +64,7 @@
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					<p1:DataGrid width="250px" height="200px" ui:field="tblSubjects"/>
+					<p1:DataGrid width="100%" height="200px" ui:field="tblSubjects"/>
 				</g:VerticalPanel>
 						</g:customCell>
 						<g:customCell>
@@ -100,7 +100,7 @@
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					<p1:DataGrid width="250px" height="200px" ui:field="tblBranches"/>
+					<p1:DataGrid width="100%" height="200px" ui:field="tblBranches"/>
 				</g:VerticalPanel>
 						</g:customCell>
 					</g:row>

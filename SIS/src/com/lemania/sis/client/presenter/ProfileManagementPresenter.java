@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -24,16 +25,17 @@ import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
+import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.ProfessorRequestFactory;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
-import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
@@ -45,6 +47,7 @@ public class ProfileManagementPresenter
 
 	public interface MyView extends View, HasUiHandlers<ProfileManagementUiHandler> {
 		//
+		void initializeTables();
 		void resetForm();
 		//
 		void addNewProfileToList(ProfileProxy newProfile);
@@ -53,6 +56,10 @@ public class ProfileManagementPresenter
 		//
 		void setSubjectListData(List<SubjectProxy> subjectList);
 		void setBrancheListData(List<BrancheProxy> brancheList);
+		//
+		void addNewProfileSubjectToTable( ProfileSubjectProxy profileSubject );
+		void setSubjectTableData( List<ProfileSubjectProxy> subjects );
+		void showUpdatedProfileSubject( ProfileSubjectProxy ps );
 	}
 
 	@ProxyCodeSplit
@@ -78,6 +85,7 @@ public class ProfileManagementPresenter
 		
 		// Thuan
 		getView().setUiHandlers( this );
+		getView().initializeTables();
 	}
 	
 	@Override
@@ -217,12 +225,25 @@ public class ProfileManagementPresenter
 			Window.alert( NotificationTypes.invalid_input + " - Matière");
 			return;
 		}
-		if (subjectCoef.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Matière");
+		if ( !FieldValidation.isNumeric( subjectCoef ) ) {
+			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
 			return;
 		}
 		
-		// TODO		
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
+		rc.saveAndReturn( profileId, subjectId, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileSubjectProxy response) {
+				getView().addNewProfileSubjectToTable(response);
+			}
+		});	
 	}
 
 	@Override
@@ -237,11 +258,60 @@ public class ProfileManagementPresenter
 			Window.alert( NotificationTypes.invalid_input + " - Matière");
 			return;
 		}
-		if (brancheCoef.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Matière");
+		if ( !FieldValidation.isNumeric(brancheCoef) ) {
+			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la branche");
 			return;
 		}
 		
-		// TODO		
+		// TODO
+	}
+
+	@Override
+	public void onProfileChanged(String profileId) {
+		//
+		if (profileId.isEmpty()) {
+			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			return;
+		}
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
+		rc.listAll( profileId ).fire(new Receiver<List<ProfileSubjectProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ProfileSubjectProxy> response) {
+				getView().setSubjectTableData( response );
+			}
+		});			
+	}
+
+	@Override
+	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive) {
+		//
+		if ( !FieldValidation.isNumeric(coef)){
+			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
+			return;
+		}
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
+		ps = rc.edit( ps );
+		ps.setSubjectCoef( Double.parseDouble(coef) );
+		ps.setIsActive( isActive );
+		rc.saveAndReturn( ps ).fire(new Receiver<ProfileSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileSubjectProxy response) {
+				getView().showUpdatedProfileSubject(response);
+			}
+		});	
 	}
 }

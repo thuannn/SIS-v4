@@ -9,6 +9,7 @@ import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.SettingOption;
 import com.lemania.sis.server.Student;
 import com.lemania.sis.server.Subject;
@@ -79,6 +80,12 @@ public class MyDAOBase extends DAOBase {
 		
 		try {
         	ObjectifyService.register(Profile.class);
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register(ProfileSubject.class);
         } catch (Exception e) {
         	// do nothing
         }
