@@ -21,7 +21,7 @@ public class ProfileBrancheDao extends MyDAOBase {
 	 * 
 	 * */
 	public List<ProfileBranche> listAll(){
-		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class).order("profileBrache");
+		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class).order("profileBrancheName");
 		List<ProfileBranche> returnList = new ArrayList<ProfileBranche>();
 		for (ProfileBranche profileBranche : q){
 			profileBranche.setProfileBrancheName( this.ofy().get( profileBranche.getProfileBranche()).getBrancheName() );
@@ -36,7 +36,7 @@ public class ProfileBrancheDao extends MyDAOBase {
 	public List<ProfileBranche> listAllActive(){
 		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
 				.filter("isActive", true)
-				.order("profileBranche");
+				.order("profileBrancheName");
 		List<ProfileBranche> returnList = new ArrayList<ProfileBranche>();
 		for ( ProfileBranche profileBranche : q ){
 			profileBranche.setProfileBrancheName( this.ofy().get( profileBranche.getProfileBranche()).getBrancheName() );
@@ -51,7 +51,7 @@ public class ProfileBrancheDao extends MyDAOBase {
 	public List<ProfileBranche> listAll( String profileSubjectId ){
 		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
 				.filter("profileSubject", new Key<ProfileSubject>(ProfileSubject.class, Long.parseLong(profileSubjectId)))
-				.order("profileBranche");
+				.order("profileBrancheName");
 		List<ProfileBranche> returnList = new ArrayList<ProfileBranche>();
 		for ( ProfileBranche profileBranche : q ){
 			profileBranche.setProfileBrancheName( this.ofy().get( profileBranche.getProfileBranche()).getBrancheName() );
@@ -103,7 +103,7 @@ public class ProfileBrancheDao extends MyDAOBase {
 	/*
 	 * 
 	 * */
-	public void removeProfileSubject(ProfileBranche profileBranche){
+	public void removeProfileBranche(ProfileBranche profileBranche){
 		this.ofy().delete( profileBranche );
 	}
 }

@@ -33,7 +33,7 @@
 								<g:Label/>
 							</g:customCell>
 							<g:customCell>
-								<g:Button text="Afficher/ Cacher le menu" ui:field="button"/>
+								<g:Button text="Afficher/ Cacher le menu" ui:field="cmdMenuToggle"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
@@ -41,17 +41,23 @@
 					</g:Cell>
 				</g:HorizontalPanel>
 			</g:Dock>
-			<g:Dock direction="WEST" width="10%" height="100%">
-				<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenu">
-					<g:Label text="." width="" styleName="left_header"/>
+			<g:Dock direction="CENTER" width="">
+				<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
+			</g:Dock>
+			<g:Dock direction="SOUTH">
+				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+					<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
+				</g:HorizontalPanel>
+			</g:Dock>
+			<g:Dock direction="WEST">
+				<g:VerticalPanel ui:field="leftPanel">
+					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
+					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
-					<g:TreeItem text="MON COMPTE" state="true">
-						<g:Button ui:field="cmdTimeInput" text="SAISIR DES NOTES" width="200px">Mettre des heures</g:Button>
+					<g:TreeItem text="ADMINISTRATION" state="true">
+						<g:Button width="200px" text="Bulletins des élèves"></g:Button>
+						<g:Button text="Profils des études" width="200px" ui:field="cmdProfileManagement"/>
 						<g:Button text="Changer le MDP" ui:field="cmdPassword" width="200px"/></g:TreeItem>
-					<g:TreeItem text="GESTION DES BULLETINS" state="true">
-						<g:Button width="200px" text="Bulletins"></g:Button>
-						<g:Button text="Profile des études" width="200px" ui:field="cmdProfileManagement"/>
-					</g:TreeItem>
 					<g:TreeItem text="INFORMATIONS DE BASE" state="true">
 						<g:TreeItem text="Elèves">
 							<g:Button text="Liste des élèves" width="180px" ui:field="cmdStudents"/>
@@ -61,26 +67,26 @@
 							<g:Button text="Liste des professeurs" ui:field="cmdProfs" width="180px"/>
 							<g:Button text="Ajouter un professeur" ui:field="cmdProfsAdd" width="180px"/>
 						</g:TreeItem>
-						<g:TreeItem text="Ecoles">
-						<g:Button ui:field="cmdEcolePage" text="Liste des écoles" width="180px">Liste d'écoles</g:Button>
-						<g:Button text="Ajouter un nom d&apos;école" ui:field="cmdEcoleAdd" width="180px"/>
-						</g:TreeItem>
-						<g:TreeItem text="Programmes">
-							<g:Button ui:field="cmdProgramList" width="180px">Liste des programmes</g:Button>
-							<g:Button ui:field="cmdProgramAdd" width="180px">Ajouter un programme</g:Button>
+						<g:TreeItem text="Branches">
+						<g:Button text="Liste des branches" width="180px" ui:field="cmdBrancheList"/>
+						<g:Button text="Ajouter une branche" width="180px" ui:field="cmdBrancheAdd"/>
+					</g:TreeItem>
+						<g:TreeItem text="Matières">
+							<g:Button text="Liste des matières" ui:field="cmdSubjectList" width="180px"/>
+							<g:Button ui:field="cmdSubjectAdd" width="180px" text="Ajouter un matière">Ajouter un type</g:Button>
 						</g:TreeItem>
 						<g:TreeItem text="Classes">
 							<g:Button ui:field="cmdClasseList" text="Liste des classes" width="180px">Liste de cours</g:Button>
 							<g:Button ui:field="cmdClasseAdd" text="Ajouter un nom de classe" width="180px">Ajouter un cours</g:Button>
 						</g:TreeItem>
-						<g:TreeItem text="Matières">
-							<g:Button text="Liste des matières" ui:field="cmdSubjectList" width="180px"/>
-							<g:Button ui:field="cmdSubjectAdd" width="180px" text="Ajouter un matière">Ajouter un type</g:Button>
+						<g:TreeItem text="Programmes">
+							<g:Button ui:field="cmdProgramList" width="180px">Liste des programmes</g:Button>
+							<g:Button ui:field="cmdProgramAdd" width="180px">Ajouter un programme</g:Button>
 						</g:TreeItem>
-						<g:TreeItem text="Branches">
-						<g:Button text="Liste des branches" width="180px" ui:field="cmdBrancheList"/>
-						<g:Button text="Ajouter une branche" width="180px" ui:field="cmdBrancheAdd"/>
-					</g:TreeItem>
+						<g:TreeItem text="Ecoles">
+						<g:Button ui:field="cmdEcolePage" text="Liste des écoles" width="180px">Liste d'écoles</g:Button>
+						<g:Button text="Ajouter un nom d&apos;école" ui:field="cmdEcoleAdd" width="180px"/>
+						</g:TreeItem>
 						<g:TreeItem text="Gestion d&apos;accès">
 							<g:Button text="Gestion des utilisateurs" ui:field="cmdUserMgt" width="180px"/>
 							<g:Button ui:field="cmdSettings" text="Bloquer l&apos;accès" width="180px"/>
@@ -89,14 +95,21 @@
 					<g:Button ui:field="cmdContact" width="220PX">Contact</g:Button>
 					<g:Image url="images/appengine-silver-120x30.gif"/>
 				</g:Tree>
-			</g:Dock>
-			<g:Dock direction="CENTER" width="">
-				<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-			</g:Dock>
-			<g:Dock direction="SOUTH">
-				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
-					<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
-				</g:HorizontalPanel>
+					<g:Tree ui:field="treeMenuProf" styleName="sideBar">
+						<g:Label styleName="left_header" text="." width=""/>
+						<g:TreeItem text="ESPACE PROFESSEUR" state="true">
+							<g:Button text="Saisir des notes" width="200px">Mettre des heures</g:Button>
+							<g:Button text="Changer le MDP" width="200px"/>
+						</g:TreeItem>
+					</g:Tree>
+					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
+						<g:Label styleName="left_header" text="." width=""/>
+						<g:TreeItem state="true" text="ESPACE ELEVE">
+							<g:Button text="Bulletins" width="200px">Mettre des heures</g:Button>
+							<g:Button text="Changer le MDP" width="200px"/>
+						</g:TreeItem>
+					</g:Tree>
+				</g:VerticalPanel>
 			</g:Dock>
 		</g:DockPanel>
 	</g:FlowPanel>

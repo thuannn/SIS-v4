@@ -66,27 +66,33 @@ public class ProfileManagementPresenter
 		void addNewProfileSubjectToTable( ProfileSubjectProxy profileSubject );
 		void setSubjectTableData( List<ProfileSubjectProxy> subjects );
 		void showUpdatedProfileSubject( ProfileSubjectProxy ps );
+		void removeProfileSubjectFromTable();
 		//
 		void setBrancheTableData( List<ProfileBrancheProxy> branches);
 		void addNewProfileBrancheToTable( ProfileBrancheProxy branche );
+		void removeProfileBrancheFromTable();
 	}
+	
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.profilemgt)
 	@UseGatekeeper(AdminGateKeeper.class)
 	public interface MyProxy extends ProxyPlace<ProfileManagementPresenter> {
 	}
+	
 
 	@Inject
 	public ProfileManagementPresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy) {
 		super(eventBus, view, proxy);
 	}
+	
 
 	@Override
 	protected void revealInParent() {
 		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
 	}
+	
 
 	@Override
 	protected void onBind() {
@@ -96,6 +102,7 @@ public class ProfileManagementPresenter
 		getView().setUiHandlers( this );
 		getView().initializeTables();
 	}
+	
 	
 	@Override
 	protected void onReset(){
@@ -108,6 +115,7 @@ public class ProfileManagementPresenter
 		loadActiveSubjectList();
 		loadActiveBrancheList();
 	}
+	
 
 	/*
 	 * Load active branch list when the form is opened
@@ -128,6 +136,7 @@ public class ProfileManagementPresenter
 			}
 		});
 	}
+	
 
 	/*
 	 * Load active subject list when the form is opened
@@ -148,6 +157,7 @@ public class ProfileManagementPresenter
 			}
 		});
 	}
+	
 
 	/*
 	 * Load profile list when form is opened
@@ -170,6 +180,7 @@ public class ProfileManagementPresenter
 		});
 		//		
 	}
+	
 
 	/*
 	 * 
@@ -203,6 +214,7 @@ public class ProfileManagementPresenter
 		});
 		//
 	}
+	
 
 	/*
 	 * 
@@ -224,6 +236,7 @@ public class ProfileManagementPresenter
 			}
 		});		
 	}
+	
 
 	/*
 	 * 
@@ -260,7 +273,11 @@ public class ProfileManagementPresenter
 			}
 		});	
 	}
+	
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void addBrancheToProfile(final String profileSubjectId, String brancheId,
 			String brancheCoef) {
@@ -401,5 +418,49 @@ public class ProfileManagementPresenter
 				getView().showUpdatedProfileSubject(response);
 			}
 		});	
+	}
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void removeBranche( ProfileBrancheProxy bp, final String profileSubjectId ) {
+		//
+		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();
+		rc.removeProfileBranche(bp).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getView().removeProfileBrancheFromTable();
+			}
+		});
+	}
+
+
+	@Override
+	public void removeSubject(ProfileSubjectProxy ps) {
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
+		rc.removeProfileSubject(ps).fire(new Receiver<Boolean>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Boolean deleted) {
+				if (deleted)
+					getView().removeProfileSubjectFromTable();
+				else
+					Window.alert( NotificationTypes.branche_list_not_empty );
+			}
+		});
 	}
 }

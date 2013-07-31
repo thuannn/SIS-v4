@@ -25,7 +25,7 @@ public interface ProfileBrancheRequestFactory extends RequestFactory {
 		Request<ProfileBrancheProxy> saveAndReturn(ProfileBrancheProxy newProfileSubject);
 		Request<ProfileBrancheProxy> saveAndReturn(String profileSubjectId, String brancheId, String brancheCoef );
 		
-		Request<Void> removeProfileSubject(ProfileBrancheProxy profileSubject);
+		Request<Void> removeProfileBranche(ProfileBrancheProxy profileBranche);
 		
 		Request<Void> initialize();
 	}

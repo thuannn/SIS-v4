@@ -28,6 +28,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -313,6 +314,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    	}
 	    });
 	    
+	    
 	    //
 	    TextColumn<ProfileSubjectProxy> colTotalBrancheCoef = new TextColumn<ProfileSubjectProxy>() {
 	      @Override
@@ -320,10 +322,29 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getTotalBrancheCoef().toString();
 	      } 
 	    };
-	    tblSubjects.addColumn( colTotalBrancheCoef, "Total coef des branches" );
+	    tblSubjects.addColumn( colTotalBrancheCoef, "Branche Coefs" );
+	    
+	    
+	    //
+	    Column<ProfileSubjectProxy, String> colDelete = new Column<ProfileSubjectProxy, String> (new ButtonCell()){
+	    	@Override
+	    	public String getValue(ProfileSubjectProxy bp){
+	    		return "Suprimmer";
+	    	}
+	    };
+	    tblSubjects.addColumn(colDelete, "");
+	    colDelete.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
+	    	@Override
+	    	public void update(int index, ProfileSubjectProxy ps, String value){
+	    		selectedSubjectIndex = index;
+	    		getUiHandlers().removeSubject( ps );
+	    	}
+	    });
+	    
 	    
 	    //
 	    subjectDataProvider.addDataDisplay(tblSubjects);
+	    
 	    
 	    // Selection model
 	    // Add a selection model to handle user selection.
@@ -375,6 +396,22 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    });
 	    
 	    //
+	    Column<ProfileBrancheProxy, String> colDelete = new Column<ProfileBrancheProxy, String> (new ButtonCell()){
+	    	@Override
+	    	public String getValue(ProfileBrancheProxy bp){
+	    		return "Suprimmer";
+	    	}
+	    };
+	    tblBranches.addColumn(colDelete, "");
+	    colDelete.setFieldUpdater(new FieldUpdater<ProfileBrancheProxy, String>(){
+	    	@Override
+	    	public void update(int index, ProfileBrancheProxy bp, String value){
+	    		selectedBrancheIndex = index;
+	    		getUiHandlers().removeBranche(bp, selectedSubject.getId().toString());
+	    	}
+	    });
+	    
+	    //
 	    brancheDataProvider.addDataDisplay(tblBranches);
 	}
 	
@@ -384,9 +421,14 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	 * */
 	@UiHandler("lstProfiles")
 	void onLstProfilesChange(ChangeEvent event) {
+		//
+		subjectDataProvider.getList().clear();
+		brancheDataProvider.getList().clear();
+		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onProfileChanged( lstProfiles.getValue( lstProfiles.getSelectedIndex()) );
 	}
+	
 
 	/*
 	 * 
@@ -397,6 +439,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.getList().clear();
 		subjectDataProvider.setList(subjects);
 	}
+	
 
 	/*
 	 * Show the updated data after successfully saved
@@ -408,6 +451,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.getList().add( selectedSubjectIndex, ps );
 		subjectDataProvider.refresh();
 	}
+	
 
 	/*
 	 * 
@@ -418,11 +462,37 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		brancheDataProvider.getList().clear();
 		brancheDataProvider.setList(branches);
 	}
+	
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void addNewProfileBrancheToTable( ProfileBrancheProxy branche ) {
 		//
 		brancheDataProvider.getList().add(branche);
 		brancheDataProvider.refresh();
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void removeProfileBrancheFromTable() {
+		//
+		brancheDataProvider.getList().remove(selectedBrancheIndex);
+		brancheDataProvider.refresh();
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void removeProfileSubjectFromTable() {
+		//
+		subjectDataProvider.getList().remove(selectedSubjectIndex);
+		subjectDataProvider.refresh();
 	}
 }

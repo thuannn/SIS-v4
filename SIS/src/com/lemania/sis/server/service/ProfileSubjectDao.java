@@ -16,9 +16,10 @@ public class ProfileSubjectDao extends MyDAOBase {
 		return;
 	}
 	
+	
 	/**/
 	public List<ProfileSubject> listAll(){
-		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class).order("subject");
+		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class).order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for (ProfileSubject profileSubject : q){
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
@@ -27,11 +28,12 @@ public class ProfileSubjectDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
 	/**/
 	public List<ProfileSubject> listAllActive(){
 		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class)
 				.filter("isActive", true)
-				.order("subject");
+				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
@@ -39,12 +41,13 @@ public class ProfileSubjectDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
 	
 	/**/
 	public List<ProfileSubject> listAll( String profileId ){
 		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class)
 				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong( profileId )))
-				.order("subject");
+				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
@@ -53,10 +56,12 @@ public class ProfileSubjectDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
 	/**/
 	public void save(ProfileSubject profileSubject){
 		this.ofy().put( profileSubject );
 	}
+	
 	
 	/**/
 	public ProfileSubject saveAndReturn(ProfileSubject profile){
@@ -69,6 +74,7 @@ public class ProfileSubjectDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	/**/
 	public ProfileSubject saveAndReturn(String profileId, String subjectId, String subjectCoef ){
@@ -87,11 +93,20 @@ public class ProfileSubjectDao extends MyDAOBase {
 		}
 	}
 	
+	
 	/**/
-	public void removeProfileSubject(ProfileSubject profileSubject) {
+	public Boolean removeProfileSubject(ProfileSubject profileSubject) {
 		//
-		this.ofy().delete(profileSubject);
+		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
+				.filter("profileSubject", new Key<ProfileSubject>(ProfileSubject.class, profileSubject.getId()));
+		if (q.count() > 0)
+			return false;
+		else {
+			this.ofy().delete(profileSubject);
+			return true;
+		}
 	}
+	
 	
 	/**/
 	public ProfileSubject calculateTotalBrancheCoef(String profileSubjectId) {

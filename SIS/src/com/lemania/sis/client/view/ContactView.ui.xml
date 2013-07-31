@@ -8,7 +8,7 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="CONTACT" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Label text="CONTACT" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

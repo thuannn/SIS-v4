@@ -24,7 +24,7 @@ public interface ProfileSubjectRequestFactory extends RequestFactory {
 		Request<ProfileSubjectProxy> saveAndReturn(ProfileSubjectProxy newProfileSubject);
 		Request<ProfileSubjectProxy> saveAndReturn(String profileId, String subjectId, String subjectCoef );
 		//
-		Request<Void> removeProfileSubject(ProfileSubjectProxy profileSubject);
+		Request<Boolean> removeProfileSubject(ProfileSubjectProxy profileSubject);
 		//
 		Request<Void> initialize();
 		//

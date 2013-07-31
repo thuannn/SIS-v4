@@ -22,6 +22,7 @@ import com.lemania.sis.client.CurrentUser;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -34,7 +35,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdEcolePage;
 	@UiField Button cmdEcoleAdd;
 	@UiField Button cmdHomepage;
-	@UiField Button cmdTimeInput;
 	@UiField Button cmdClasseList;
 	@UiField Button cmdClasseAdd;
 	@UiField Button cmdSubjectList;
@@ -46,8 +46,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Label txtWelcome;
 	@UiField Button cmdUserMgt;
 	@UiField Label lblCurrentMonth;
-	@UiField Button button;
-	@UiField Tree treeMenu;
+	@UiField Button cmdMenuToggle;
+	@UiField Tree treeMenuAdmin;
 	@UiField Image imgProgressBar;
 	@UiField Button cmdSettings;
 	@UiField DockPanel dockPanel;
@@ -59,6 +59,9 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdProgramList;
 	@UiField Button cmdProgramAdd;
 	@UiField Button cmdProfileManagement;
+	@UiField Tree treeMenuProf;
+	@UiField Tree treeMenuEleve;
+	@UiField VerticalPanel leftPanel;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -105,12 +108,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdEcoleAddClicked(ClickEvent event){
 		if (getUiHandlers() != null)
 			getUiHandlers().showEcoleAdd();
-	}
-	
-	@UiHandler("cmdTimeInput")
-	void onCmdTimeInputClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showTimeInput();
 	}
 	
 	@UiHandler("cmdClasseList")
@@ -186,45 +183,68 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 
 	@Override
 	public void initializeUi(CurrentUser currentUser) {
+		//
 		if ( currentUser!=null && currentUser.isLoggedIn() ) {
 			showUserInfo(currentUser);
-			// Set tree menu		
-			dockPanel.add(treeMenu, DockPanel.WEST);
-			dockPanel.setCellWidth(treeMenu, "250px");
+			//		
+			showMenu();
 		}
 		else {
 			txtWelcome.setText("");
 			cmdLogout.setText("");
 			lblCurrentMonth.setText("");
-			dockPanel.remove(treeMenu);
+			//
+			hideMenu();
 		}
 		
 		imgProgressBar.setVisible(false);
 	}
 	
-	@UiHandler("button")
-	void onButtonClick(ClickEvent event) {
-		treeMenu.setVisible(!treeMenu.isVisible());
-		
-		if (!treeMenu.isVisible()) {
-			dockPanel.remove(treeMenu);
-		}
-		else {
-			dockPanel.add(treeMenu, DockPanel.WEST);
-			dockPanel.setCellWidth(treeMenu, "250px");
-		}
+	/**/
+	void showMenu(){
+		//
+		dockPanel.add( leftPanel, DockPanel.WEST );
+		dockPanel.setCellWidth( leftPanel, "250px" );
+		//
+		leftPanel.setVisible(true);
+		treeMenuProf.setVisible( true );
+		treeMenuEleve.setVisible( true );
+		treeMenuAdmin.setVisible( true );
+	}
+	
+	/**/
+	void hideMenu(){
+		//
+		dockPanel.remove( leftPanel );
+		//
+		leftPanel.setVisible(false);
+		treeMenuProf.setVisible( false );
+		treeMenuEleve.setVisible( false );
+		treeMenuAdmin.setVisible( false );
+	}
+	
+	/**/
+	@UiHandler("cmdMenuToggle")
+	void onCmdMenuToggleClick(ClickEvent event) {
+		if (leftPanel.isVisible())
+			hideMenu();
+		else
+			showMenu();
 	}
 
+	/**/
 	@Override
 	public void showProgressBar(boolean visible) {
 		imgProgressBar.setVisible(visible);
 	}
 
+	/**/
 	@Override
 	public void enableMainPanel(Boolean enabled) {
 		enableAllChildren(enabled, mainContentPanel);
 	}
 	
+	/**/
 	private void enableAllChildren(boolean enable, Widget widget)
 	{
 	    if (widget instanceof HasWidgets)
@@ -242,7 +262,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	    }
 	}
 	
-	
+	/**/
 	@UiHandler("cmdPassword")
 	void onCmdPasswordClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -250,6 +270,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdStudents")
 	void onCmdStudentsClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -257,6 +278,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdCreateStudent")
 	void onCmdCreateStudentClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -264,6 +286,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdBrancheList")
 	void onCmdBrancheListClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -271,6 +294,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdBrancheAdd")
 	void onCmdBrancheAddClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -278,6 +302,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdProgramList")
 	void onCmdProgramListClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
@@ -285,12 +310,15 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	/**/
 	@UiHandler("cmdProgramAdd")
 	void onCmdProgramAddClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showCoursAdd();
 		}
 	}
+	
+	/**/
 	@UiHandler("cmdProfileManagement")
 	void onCmdProfileManagementClick(ClickEvent event) {
 		if (getUiHandlers() != null) {

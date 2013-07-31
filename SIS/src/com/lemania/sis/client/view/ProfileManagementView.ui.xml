@@ -71,7 +71,6 @@
 							<g:VerticalPanel width="" spacing="2">
 					<g:Label text="Branches" styleName="sectionTitle" width=""/>
 					<g:Label text="Rajouter une branche pour la matière sélectionée"/>
-					<g:Label ui:field="lblSelectedSubject"/>
 					<g:Grid cellPadding="5" cellSpacing="5">
 						<g:row>
 							<g:customCell>
@@ -98,6 +97,9 @@
 						<g:row>
 							<g:customCell>
 								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label ui:field="lblSelectedSubject" text="."/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
