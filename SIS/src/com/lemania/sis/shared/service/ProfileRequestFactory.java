@@ -19,7 +19,7 @@ public interface ProfileRequestFactory extends RequestFactory {
 		Request<List<ProfileProxy>> listAllActive();
 		
 		Request<Void> save(ProfileProxy profile);
-		Request<ProfileProxy> saveAndReturn(ProfileProxy newEcole);
+		Request<ProfileProxy> saveAndReturn(ProfileProxy newProfile);
 		
 		Request<Void> removeProfile(ProfileProxy profile);
 		

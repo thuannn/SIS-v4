@@ -24,7 +24,7 @@ public class ProfileDao extends MyDAOBase {
 	
 	public List<Profile> listAllActive(){
 		Query<Profile> q = this.ofy().query(Profile.class)
-				.filter("schoolActive", true)
+				.filter("isActive", true)
 				.order("profileName");
 		List<Profile> returnList = new ArrayList<Profile>();
 		for (Profile profile : q){

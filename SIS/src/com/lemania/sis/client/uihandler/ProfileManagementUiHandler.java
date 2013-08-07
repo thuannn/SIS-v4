@@ -10,7 +10,7 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	//
 	void loadProfessorList( String subjectId );
 	//
-	void addSubjectToProfile( String profileId, String subjectId, String subjectCoef );
+	void addSubjectToProfile( String profileId, String subjectId, String professorId, String subjectCoef );
 	void removeSubject( ProfileSubjectProxy ps );
 	//
 	void addBrancheToProfile( String profileSubjectId, String brancheId, String brancheCoef );

@@ -32,6 +32,7 @@ import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.DoubleBox;
@@ -217,7 +218,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	void onCmdAddSubjectClick(ClickEvent event) {
 		if (getUiHandlers() != null)
 			getUiHandlers().addSubjectToProfile( lstProfiles.getValue( lstProfiles.getSelectedIndex()), 
-					lstSubjects.getValue( lstSubjects.getSelectedIndex()), 
+					lstSubjects.getValue(lstSubjects.getSelectedIndex()), 
+					lstProfessors.getValue(lstProfessors.getSelectedIndex()),
 					txtSubjectCoef.getText());
 	}
 	
@@ -273,7 +275,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getSubjectName();
 	      }
 	    };
+	    tblSubjects.setColumnWidth(colSubjectName, 30.0, Unit.PCT);
 	    tblSubjects.addColumn(colSubjectName, "Matière");
+	    
 	    
 	    //
 	    Column<ProfileSubjectProxy, String> colCoef = new Column<ProfileSubjectProxy, String>(new EditTextCell()) {
@@ -282,7 +286,6 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getSubjectCoef().toString();
 	      } 
 	    };
-	    tblSubjects.addColumn( colCoef, "Coefficient" );
 	    // Field updater
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
 	    	@Override
@@ -293,6 +296,18 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		}	    		
 	    	}
 	    });
+	    tblSubjects.setColumnWidth(colCoef, 10.0, Unit.PCT);
+	    tblSubjects.addColumn( colCoef, "Coefficient" );
+	    
+	    
+	    // Professor
+	    TextColumn<ProfileSubjectProxy> colProf = new TextColumn<ProfileSubjectProxy>() {
+	      @Override
+	      public String getValue(ProfileSubjectProxy object) {
+	        return object.getProfName();
+	      }
+	    };
+	    tblSubjects.addColumn(colProf, "Professeur");
 	    
 	    //
 	    CheckboxCell cellActive = new CheckboxCell();
@@ -302,7 +317,6 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		return subject.getIsActive();
 	    	}	    	
 	    };
-	    tblSubjects.addColumn(colActive, "Active");
 	    // Field updater
 	    colActive.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, Boolean>(){
 	    	@Override
@@ -313,6 +327,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		}	    		
 	    	}
 	    });
+	    tblSubjects.setColumnWidth(colActive, 10.0, Unit.PCT);
+	    tblSubjects.addColumn(colActive, "Active");
 	    
 	    
 	    //
@@ -322,6 +338,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getTotalBrancheCoef().toString();
 	      } 
 	    };
+	    tblSubjects.setColumnWidth(colTotalBrancheCoef, 10.0, Unit.PCT);
 	    tblSubjects.addColumn( colTotalBrancheCoef, "Branche Coefs" );
 	    
 	    
@@ -329,10 +346,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    Column<ProfileSubjectProxy, String> colDelete = new Column<ProfileSubjectProxy, String> (new ButtonCell()){
 	    	@Override
 	    	public String getValue(ProfileSubjectProxy bp){
-	    		return "Suprimmer";
+	    		return "X";
 	    	}
 	    };
-	    tblSubjects.addColumn(colDelete, "");
 	    colDelete.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
 	    	@Override
 	    	public void update(int index, ProfileSubjectProxy ps, String value){
@@ -340,6 +356,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		getUiHandlers().removeSubject( ps );
 	    	}
 	    });
+	    tblSubjects.setColumnWidth(colDelete, 10.0, Unit.PCT);
+	    tblSubjects.addColumn(colDelete, "");
 	    
 	    
 	    //
@@ -374,6 +392,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getProfileBrancheName();
 	      }
 	    };
+	    tblBranches.setColumnWidth(colBrancheName, 60.0, Unit.PCT);
 	    tblBranches.addColumn(colBrancheName, "Branche");
 	    
 	    //
@@ -383,7 +402,6 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getBrancheCoef().toString();
 	      } 
 	    };
-	    tblBranches.addColumn( colCoef, "Coefficient" );
 	    // Field updater
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileBrancheProxy, String>(){
 	    	@Override
@@ -394,15 +412,16 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		}	    		
 	    	}
 	    });
+	    tblBranches.setColumnWidth(colCoef, 20.0, Unit.PCT);
+	    tblBranches.addColumn( colCoef, "Coefficient" );
 	    
 	    //
 	    Column<ProfileBrancheProxy, String> colDelete = new Column<ProfileBrancheProxy, String> (new ButtonCell()){
 	    	@Override
 	    	public String getValue(ProfileBrancheProxy bp){
-	    		return "Suprimmer";
+	    		return "X";
 	    	}
 	    };
-	    tblBranches.addColumn(colDelete, "");
 	    colDelete.setFieldUpdater(new FieldUpdater<ProfileBrancheProxy, String>(){
 	    	@Override
 	    	public void update(int index, ProfileBrancheProxy bp, String value){
@@ -410,6 +429,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		getUiHandlers().removeBranche(bp, selectedSubject.getId().toString());
 	    	}
 	    });
+	    tblBranches.setColumnWidth(colDelete, 20.0, Unit.PCT);
+	    tblBranches.addColumn(colDelete, "");
 	    
 	    //
 	    brancheDataProvider.addDataDisplay(tblBranches);
@@ -421,6 +442,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	 * */
 	@UiHandler("lstProfiles")
 	void onLstProfilesChange(ChangeEvent event) {
+		//
+		tblSubjects.getSelectionModel().setSelected(selectedSubject, false);
 		//
 		subjectDataProvider.getList().clear();
 		brancheDataProvider.getList().clear();

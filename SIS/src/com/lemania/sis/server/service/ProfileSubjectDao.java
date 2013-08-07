@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
+import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
@@ -22,6 +23,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class).order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for (ProfileSubject profileSubject : q){
+			if (profileSubject.getProfessor() != null)
+				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
 			returnList.add(profileSubject);
 		}
@@ -36,6 +39,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
+			if (profileSubject.getProfessor() != null)
+				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
 			returnList.add( profileSubject );
 		}
@@ -50,6 +55,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
+			if (profileSubject.getProfessor() != null)
+				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
 			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
 			returnList.add( profileSubject );
 		}
@@ -68,6 +75,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 		Key<ProfileSubject> key = this.ofy().put(profile);
 		try {
 			ProfileSubject ps = this.ofy().get(key);
+			if (ps.getProfessor() != null)
+				ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName() );
 			ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
 			return ps;
 		} catch (Exception e) {
@@ -77,12 +86,15 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	
 	/**/
-	public ProfileSubject saveAndReturn(String profileId, String subjectId, String subjectCoef ){
+	public ProfileSubject saveAndReturn(String profileId, String subjectId, String professorId, String subjectCoef ){
 		//
 		ProfileSubject ps = new ProfileSubject();
 		ps.setProfile( new Key<Profile>( Profile.class, Long.parseLong(profileId)));
 		ps.setSubject(new Key<Subject>( Subject.class, Long.parseLong(subjectId)));
+		ps.setProfessor( new Key<Professor>(Professor.class, Long.parseLong(professorId)));
+		
 		ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
+		ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName());
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
 		
 		Key<ProfileSubject> key = this.ofy().put( ps );

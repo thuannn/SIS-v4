@@ -28,6 +28,7 @@ public class NameTokens {
 	public static final String classlist = "classlist";
 	public static final String classeadd = "classeadd";
 	public static final String profilemgt = "profilemgt";
+	public static final String bulletincreation = "bulletincreation";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -135,5 +136,9 @@ public class NameTokens {
 
 	public static String getProfilemgt() {
 		return profilemgt;
+	}
+
+	public static String getBulletincreation() {
+		return bulletincreation;
 	}
 }

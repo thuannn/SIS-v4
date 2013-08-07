@@ -2,11 +2,11 @@ package com.lemania.sis.shared;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.ProfileSubject;
 
-@ProxyFor(value=ProfileSubject.class, locator=ObjectifyLocator.class)
-public interface ProfileSubjectProxy extends EntityProxy {
+@ProxyFor(value=BulletinSubject.class, locator=ObjectifyLocator.class)
+public interface BulletinSubjectProxy extends EntityProxy {
 	//
 	Long getId();
 

@@ -22,7 +22,7 @@ public interface ProfileSubjectRequestFactory extends RequestFactory {
 		//
 		Request<Void> save(ProfileSubjectProxy profile);
 		Request<ProfileSubjectProxy> saveAndReturn(ProfileSubjectProxy newProfileSubject);
-		Request<ProfileSubjectProxy> saveAndReturn(String profileId, String subjectId, String subjectCoef );
+		Request<ProfileSubjectProxy> saveAndReturn(String profileId, String subjectId, String professorId, String subjectCoef );
 		//
 		Request<Boolean> removeProfileSubject(ProfileSubjectProxy profileSubject);
 		//

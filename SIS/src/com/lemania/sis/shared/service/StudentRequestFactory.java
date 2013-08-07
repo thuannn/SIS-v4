@@ -23,6 +23,7 @@ public interface StudentRequestFactory extends RequestFactory {
 		Request<Void> removeStudent( StudentProxy student );
 		
 		Request<List<StudentProxy>> listAll();
+		Request<List<StudentProxy>> listAllActive();
 	}
 	
 	StudentRequestContext studentRequest();

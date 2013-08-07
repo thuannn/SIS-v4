@@ -48,6 +48,8 @@ public interface MainPageUiHandler extends UiHandlers {
 	
 	void showProfileManagement();
 	
+	void showCreateBulletins();
+	
 	void showRptByDept();
 	void showRptBySchool();
 	void showRptByMonth();

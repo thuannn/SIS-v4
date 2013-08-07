@@ -54,4 +54,14 @@ public class StudentDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
+	/* List all the active students */
+	public List<Student> listAllActive(){
+		Query<Student> q = this.ofy().query(Student.class).filter("isActive", true);
+		List<Student> returnList = new ArrayList<Student>();
+		for (Student student : q){
+			returnList.add(student);
+		}
+		return returnList;
+	}
 }

@@ -242,8 +242,7 @@ public class ProfileManagementPresenter
 	 * 
 	 * */
 	@Override
-	public void addSubjectToProfile(String profileId, String subjectId,
-			String subjectCoef) {
+	public void addSubjectToProfile(String profileId, String subjectId, String professorId,	String subjectCoef) {
 		//
 		if (profileId.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Profil");
@@ -262,7 +261,7 @@ public class ProfileManagementPresenter
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
-		rc.saveAndReturn( profileId, subjectId, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
+		rc.saveAndReturn( profileId, subjectId, professorId, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

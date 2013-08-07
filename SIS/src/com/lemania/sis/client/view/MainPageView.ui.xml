@@ -55,9 +55,13 @@
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
 					<g:TreeItem text="ADMINISTRATION" state="true">
-						<g:Button width="200px" text="Bulletins des élèves"></g:Button>
-						<g:Button text="Profils des études" width="200px" ui:field="cmdProfileManagement"/>
-						<g:Button text="Changer le MDP" ui:field="cmdPassword" width="200px"/></g:TreeItem>
+						<g:TreeItem text="Bulletins" state="true">
+							<g:Button width="180px" text="Gestion des bulletins"></g:Button>
+							<g:Button text="Creation des bulletins" width="180px" ui:field="cmdCreateBulletins"/>
+						</g:TreeItem>
+						<g:TreeItem text="Profils" state="true">
+							<g:Button text="Profils des études" width="180px" ui:field="cmdProfileManagement"/>
+						</g:TreeItem></g:TreeItem>
 					<g:TreeItem text="INFORMATIONS DE BASE" state="true">
 						<g:TreeItem text="Elèves">
 							<g:Button text="Liste des élèves" width="180px" ui:field="cmdStudents"/>
@@ -92,6 +96,7 @@
 							<g:Button ui:field="cmdSettings" text="Bloquer l&apos;accès" width="180px"/>
 						</g:TreeItem>
 					</g:TreeItem>
+					<g:Button text="Changer le MDP" ui:field="cmdPassword" width="220px"/>
 					<g:Button ui:field="cmdContact" width="220PX">Contact</g:Button>
 					<g:Image url="images/appengine-silver-120x30.gif"/>
 				</g:Tree>

@@ -62,6 +62,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Tree treeMenuProf;
 	@UiField Tree treeMenuEleve;
 	@UiField VerticalPanel leftPanel;
+	@UiField Button cmdCreateBulletins;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -323,6 +324,13 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdProfileManagementClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showProfileManagement();
+		}
+	}
+	
+	@UiHandler("cmdCreateBulletins")
+	void onCmdCreateBulletinsClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showCreateBulletins();
 		}
 	}
 }

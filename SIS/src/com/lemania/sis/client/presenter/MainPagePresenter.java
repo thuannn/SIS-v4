@@ -252,4 +252,9 @@ public class MainPagePresenter extends
 	public void showProfileManagement() {
 		History.newItem(NameTokens.profilemgt);		
 	}
+
+	@Override
+	public void showCreateBulletins() {
+		History.newItem(NameTokens.bulletincreation);
+	}
 }
