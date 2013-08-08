@@ -61,6 +61,7 @@ public class CoursPresenter extends
 		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
 	}
 
+	
 	@Override
 	protected void onBind() {
 		super.onBind();
@@ -72,11 +73,13 @@ public class CoursPresenter extends
 		getView().initializeTable();
 	}
 	
+	
 	@Override
 	protected void onReset(){
 		// Thuan
 		initialData();
 	}
+	
 	
 	// Thuan: Populate the list of school names
 	private void initialData(){
@@ -95,6 +98,7 @@ public class CoursPresenter extends
 		});
 	}
 
+	
 	@ProxyEvent
 	@Override
 	public void onCoursAdded(CoursAddedEvent event) {
@@ -102,6 +106,7 @@ public class CoursPresenter extends
 		History.newItem(NameTokens.cours, true);
 	}
 
+	
 	@Override
 	public void updateCoursStatus(CoursProxy cours, Boolean value) {
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);

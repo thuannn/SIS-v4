@@ -20,11 +20,20 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinCreationUiHandler;
+import com.lemania.sis.shared.ClasseProxy;
+import com.lemania.sis.shared.CoursProxy;
+import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
+import com.lemania.sis.shared.service.ClasseRequestFactory;
+import com.lemania.sis.shared.service.CoursRequestFactory;
+import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
 import com.lemania.sis.shared.service.StudentRequestFactory;
+import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
+import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
+import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
 import com.lemania.sis.shared.service.StudentRequestFactory.StudentRequestContext;
 
@@ -43,6 +52,9 @@ public class FrmBulletinCreationPresenter
 		void setStudentTableData(List<StudentProxy> students);
 		//
 		void setProfileListData(List<ProfileProxy> profiles);
+		void setEcoleList(List<EcoleProxy> ecoles);
+		void setCoursList(List<CoursProxy> programmes);
+		void setClasseList(List<ClasseProxy> classes);
 	}
 
 	@ProxyCodeSplit
@@ -80,12 +92,29 @@ public class FrmBulletinCreationPresenter
 		//
 		loadActiveStudentList();
 		//
-		loadActiveClassList();
+		loadEcoleList();
 		//
 		loadActiveProfileList();
 	}
 	
 	
+	private void loadEcoleList() {
+		// 
+		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EcoleRequestContext rc = rf.ecoleRequest();
+		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<EcoleProxy> response) {
+				getView().setEcoleList(response);
+			}
+		});
+	}
+
 	/**/
 	private void loadActiveProfileList() {
 		//
@@ -104,13 +133,6 @@ public class FrmBulletinCreationPresenter
 			}
 		});
 		//		
-	}
-
-	
-	/**/
-	private void loadActiveClassList() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 
@@ -137,5 +159,49 @@ public class FrmBulletinCreationPresenter
 		StudentRequestFactory rf = GWT.create(StudentRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		return rf.studentRequest();
+	}
+	
+
+	/**/
+	@Override
+	public void onEcoleSelected(String ecoleId) {
+		//
+		if (ecoleId.isEmpty()){
+			return;
+		}
+		
+		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		CoursRequestContext rc = rf.coursRequest();
+		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<CoursProxy> response) {
+				getView().setCoursList(response);
+			}
+		});
+	}
+
+	
+	/**/
+	@Override
+	public void onProgrammeSelected(String coursId) {
+		//
+		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ClasseRequestContext rc = rf.classeRequest();
+		rc.listAll(coursId).fire(new Receiver<List<ClasseProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ClasseProxy> response) {
+				getView().setClasseList(response);
+			}
+		});
 	}
 }
