@@ -7,7 +7,7 @@ import com.googlecode.objectify.annotation.Entity;
 public class Bulletin extends DatastoreObject {
 	//
 	private String bulletinName;
-	private Boolean isActive;
+	private Boolean isActive = true;
 	private String classeName;
 	private String studentName;
 	private String year;

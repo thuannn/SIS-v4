@@ -24,6 +24,7 @@ public interface StudentRequestFactory extends RequestFactory {
 		
 		Request<List<StudentProxy>> listAll();
 		Request<List<StudentProxy>> listAllActive();
+		Request<List<StudentProxy>> listAllActiveWithoutBulletin();
 	}
 	
 	StudentRequestContext studentRequest();

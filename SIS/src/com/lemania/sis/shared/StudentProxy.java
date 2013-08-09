@@ -6,6 +6,8 @@ import com.lemania.sis.server.ObjectifyLocator;
 
 @ProxyFor(value=com.lemania.sis.server.Student.class, locator=ObjectifyLocator.class)
 public interface StudentProxy extends EntityProxy {
+	//
+	public Long getId();
 	
 	public String getFirstName();
 	public void setFirstName(String firstName);	

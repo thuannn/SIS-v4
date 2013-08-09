@@ -17,15 +17,17 @@ public interface BulletinRequestFactory extends RequestFactory {
 		//
 		Request<List<BulletinProxy>> listAll();			
 		Request<List<BulletinProxy>> listAllActive();
-		
+		Request<List<BulletinProxy>> listAllByClass(String classId);
+		//
 		Request<Void> save(BulletinProxy bulletin);
 		Request<BulletinProxy> saveAndReturn(BulletinProxy newBulletin);
-		
+		//
 		Request<Void> removeProfile(BulletinProxy bulletin);
-		
+		//
+		Request<BulletinProxy> createBulletin(String studentId, String classId, String year, String profileId);
+		//
 		Request<Void> initialize();
 	}
 	
-	BulletinRequestContext profileRequest();
-
+	BulletinRequestContext bulletinRequest();
 }

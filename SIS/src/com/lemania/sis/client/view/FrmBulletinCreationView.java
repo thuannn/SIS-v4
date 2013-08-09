@@ -8,9 +8,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmBulletinCreationPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinCreationUiHandler;
+import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
@@ -18,10 +20,14 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.Label;
 
 public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreationUiHandler> implements
 		FrmBulletinCreationPresenter.MyView {
@@ -30,6 +36,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	
 	// Thuan
 	private ListDataProvider<StudentProxy> studentDataProvider = new ListDataProvider<StudentProxy>();
+	private ListDataProvider<BulletinProxy> bulletinDataProvider = new ListDataProvider<BulletinProxy>();
 	//
 	private StudentProxy selectedStudent;
 	private int selectedStudentIndex;
@@ -47,13 +54,14 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		return widget;
 	}
 	@UiField(provided=true) DataGrid<StudentProxy> tblStudents = new DataGrid<StudentProxy>();
-	@UiField(provided=true) DataGrid<Object> tblBulletins = new DataGrid<Object>();
+	@UiField(provided=true) DataGrid<BulletinProxy> tblBulletins = new DataGrid<BulletinProxy>();
 	@UiField ListBox lstClasses;
 	@UiField ListBox lstYear;
 	@UiField ListBox lstProfiles;
 	@UiField ListBox lstEcoles;
 	@UiField ListBox lstProgrammes;
 	@UiField Button cmdCreateBulletin;
+	@UiField Label lblSelectedStudentName;
 	
 	
 	/**/
@@ -80,8 +88,33 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	
 	/**/
 	private void initializeBulletinTable() {
-		// TODO Auto-generated method stub
-		
+		//
+	    TextColumn<BulletinProxy> colFirstName = new TextColumn<BulletinProxy>() {
+	      @Override
+	      public String getValue(BulletinProxy object) {
+	        return object.getStudentName();
+	      }
+	    };
+	    tblBulletins.setColumnWidth(colFirstName, 60, Unit.PCT);
+	    tblBulletins.addColumn(colFirstName, "Eleve");
+	    //
+	    TextColumn<BulletinProxy> colLastName = new TextColumn<BulletinProxy>() {
+	      @Override
+	      public String getValue(BulletinProxy object) {
+	        return object.getClasseName();
+	      } 
+	    };
+	    tblBulletins.addColumn(colLastName, "Classe");
+	    //
+	    TextColumn<BulletinProxy> colYear = new TextColumn<BulletinProxy>() {
+	      @Override
+	      public String getValue(BulletinProxy object) {
+	        return object.getYear();
+	      } 
+	    };
+	    tblBulletins.addColumn(colYear, "Year");
+	    //
+	    bulletinDataProvider.addDataDisplay(tblBulletins);
 	}
 
 	
@@ -103,6 +136,18 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	      } 
 	    };
 	    tblStudents.addColumn(colLastName, "Prénom");
+	    // Selection model
+	    final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
+	    tblStudents.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	        selectedStudent = selectionModel.getSelectedObject();
+	        if ( selectedStudent != null ) {
+	        	selectedStudentIndex = studentDataProvider.getList().indexOf(selectedStudent);
+	        	lblSelectedStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+	        }
+	      }
+	    });
 	    //
 	    studentDataProvider.addDataDisplay(tblStudents);
 	}
@@ -202,5 +247,47 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	/**/
 	@UiHandler("cmdCreateBulletin")
 	void onCmdCreateBulletinClick(ClickEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().createBulletin( 
+					selectedStudent.getId().toString(),
+					lstClasses.getValue(lstClasses.getSelectedIndex()), 
+					lstYear.getValue(lstYear.getSelectedIndex()), 
+					lstProfiles.getValue(lstProfiles.getSelectedIndex()));
+	}
+
+	
+	/**/
+	@Override
+	public void addNewBulletinToTable(BulletinProxy bulletin) {
+		// 
+		bulletinDataProvider.getList().add(bulletin);
+		bulletinDataProvider.refresh();
+	}
+	
+	
+	/**/
+	@UiHandler("lstClasses")
+	void onLstClassesChange(ChangeEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().onClassChanged(lstClasses.getValue(lstClasses.getSelectedIndex()));
+	}
+
+	
+	/**/
+	@Override
+	public void setBulletinTableData(List<BulletinProxy> bulletins) {
+		//
+		bulletinDataProvider.getList().clear();
+		bulletinDataProvider.setList(bulletins);
+	}
+
+	@Override
+	public void removeStudentWithBulletin() {
+		//
+		tblStudents.getSelectionModel().setSelected( selectedStudent, false);
+		studentDataProvider.getList().remove(selectedStudentIndex);
+		studentDataProvider.refresh();
 	}
 }

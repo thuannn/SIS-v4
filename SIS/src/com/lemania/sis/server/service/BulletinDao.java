@@ -6,6 +6,13 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
 import com.lemania.sis.server.Bulletin;
+import com.lemania.sis.server.BulletinBranche;
+import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Classe;
+import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileBranche;
+import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.Student;
 
 public class BulletinDao extends MyDAOBase {
 	//
@@ -36,6 +43,20 @@ public class BulletinDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/* List all bulletin by class */
+	public List<Bulletin> listAllByClass(String classId){
+		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
+				.order("classeName")
+				.order("studentName");
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		for (Bulletin bulletin : q){
+			returnList.add(bulletin);
+		}
+		return returnList;
+	}
+	
 	public void save(Bulletin bulletin){
 		this.ofy().put(bulletin);
 	}
@@ -48,6 +69,75 @@ public class BulletinDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	/**/
+	public Bulletin createBulletin(String studentId, String classId, String year, String profileId){
+		//
+		Bulletin bulletin = new Bulletin();
+		BulletinSubject curBulletinSubject;
+		BulletinBranche curBulletinBranche;
+		//
+		List<Key<BulletinSubject>> keyListSubject = new ArrayList<Key<BulletinSubject>>();
+		List<Key<BulletinBranche>> keyListBranche = new ArrayList<Key<BulletinBranche>>();
+		Key<Bulletin> keyBulletin = null;
+		//
+		Student student = this.ofy().get(new Key<Student>(Student.class, Long.parseLong(studentId)));
+		Classe classe = this.ofy().get(new Key<Classe>(Classe.class, Long.parseLong(classId)));
+		//
+		bulletin.setYear(year);
+		bulletin.setClasse(new Key<Classe>(Classe.class, classe.getId()));
+		bulletin.setStudent(new Key<Student>(Student.class, student.getId()));
+		bulletin.setClasseName(classe.getClassName());
+		bulletin.setStudentName(student.getFirstName() + " " + student.getLastName());
+		//
+		try {
+			//
+			keyBulletin = this.ofy().put(bulletin);
+			//
+			Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+					.filter("profile", new Key<Profile>(Profile.class, Long.parseLong(profileId)));
+			
+			for (ProfileSubject profileSubject : profileSubjects){
+				//
+				Query<ProfileBranche> profileBranches = this.ofy().query(ProfileBranche.class)
+						.filter("profileSubject", new Key<ProfileSubject>(ProfileSubject.class, profileSubject.getId()));
+				
+				for (ProfileBranche profileBranche : profileBranches) {
+					curBulletinBranche = new BulletinBranche();
+					curBulletinBranche.setBulletinBranche( profileBranche.getProfileBranche() );
+					curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
+					curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
+					keyListBranche.add( this.ofy().put(curBulletinBranche));
+				}
+				//			
+				curBulletinSubject = new BulletinSubject();
+				curBulletinSubject.setSubject( profileSubject.getSubject() );
+				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
+				curBulletinSubject.setBulletin( new Key<Bulletin>(Bulletin.class, bulletin.getId()) );
+				curBulletinSubject.setProfessor( profileSubject.getProfessor() );
+				curBulletinSubject.setProfName( profileSubject.getProfName() );
+				curBulletinSubject.setSubjectName( profileSubject.getSubjectName() );
+				keyListSubject.add(this.ofy().put(curBulletinSubject));
+			}
+			//
+			return bulletin;
+			//
+		} catch (Exception e) {
+			//
+			if (keyBulletin != null)
+				this.ofy().delete(keyBulletin);
+			if (keyListSubject.size() >0)
+				this.ofy().delete(keyListSubject);
+			if (keyListBranche.size()>0)
+				this.ofy().delete(keyListBranche);
+			
+			throw new RuntimeException(e);
+		} finally {
+			//
+		}
+	}
+	
 	
 	public void removeProfile(Bulletin bulletin){
 		this.ofy().delete(bulletin);

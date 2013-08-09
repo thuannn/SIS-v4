@@ -4,6 +4,9 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Branche;
+import com.lemania.sis.server.Bulletin;
+import com.lemania.sis.server.BulletinBranche;
+import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
@@ -93,6 +96,24 @@ public class MyDAOBase extends DAOBase {
 		
 		try {
         	ObjectifyService.register(ProfileBranche.class);
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register(Bulletin.class);
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register(BulletinSubject.class);
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register(BulletinBranche.class);
         } catch (Exception e) {
         	// do nothing
         }

@@ -20,6 +20,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/requestfactory-apt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-all-1.0.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (2)"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (3)"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
