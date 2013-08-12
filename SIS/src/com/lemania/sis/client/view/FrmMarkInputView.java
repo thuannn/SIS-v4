@@ -25,6 +25,8 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> implements
 		FrmMarkInputPresenter.MyView {
@@ -78,6 +80,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField DoubleBox txt_t_3_3;
 	@UiField DoubleBox txt_t_3_4;
 	@UiField DoubleBox txt_t_3_5;
+	@UiField Button cmdSave;
 	
 	
 	@Override
@@ -216,7 +219,8 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedBulletinBranche = selectionModel.getSelectedObject();
 	        if (selectedBulletinBranche != null) {
-	        	// TODO
+	        	selectedBulletinBrancheIndex = bulletinBrancheDataProvider.getList().indexOf(selectedBulletinBranche);
+	        	getUiHandlers().onBulletinBrancheSelected(selectedBulletinBranche);
 	        }
 	      }
 	    });
@@ -296,6 +300,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedBulletinSubject = selectionModel.getSelectedObject();
 	        if (selectedBulletinSubject != null) {
+	        	selectedBulletinSubjectIndex = bulletinSubjectDataProvider.getList().indexOf(selectedBulletinSubject);
 	        	getUiHandlers().onBulletinSubjectSelected(selectedBulletinSubject);
 	        }
 	      }
@@ -355,5 +360,29 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtRemarque1.setText( selectedBulletinSubject.getRemarqueT1() );
 		txtRemarque2.setText( selectedBulletinSubject.getRemarqueT2() );
 		txtRemarque3.setText( selectedBulletinSubject.getRemarqueT3() );
+	}
+	
+	@UiHandler("cmdSave")
+	void onCmdSaveClick(ClickEvent event) {
+		if (getUiHandlers() != null)
+			getUiHandlers().saveNotes(selectedBulletinBranche, selectedBulletinSubject, 
+					txt_t_1_1.getText(), txt_t_1_2.getText(), txt_t_1_3.getText(), txt_t_1_4.getText(), txt_t_1_5.getText(), 
+					txt_t_2_1.getText(), txt_t_2_2.getText(), txt_t_2_3.getText(), txt_t_2_4.getText(), txt_t_2_5.getText(), 
+					txt_t_3_1.getText(), txt_t_3_2.getText(), txt_t_3_3.getText(), txt_t_3_4.getText(), txt_t_3_5.getText(), 
+					txtRemarque1.getText(), txtRemarque2.getText(), txtRemarque3.getText());
+	}
+
+	@Override
+	public void showUpdatedBulletinDetails(
+			BulletinBrancheProxy bulletinBranche,
+			BulletinSubjectProxy bulletinSubject) {
+		//
+		bulletinSubjectDataProvider.getList().remove(selectedBulletinSubjectIndex);
+		bulletinSubjectDataProvider.getList().add(selectedBulletinSubjectIndex, bulletinSubject);
+		bulletinSubjectDataProvider.refresh();
+		//
+		bulletinBrancheDataProvider.getList().remove(selectedBulletinBrancheIndex);
+		bulletinBrancheDataProvider.getList().add(selectedBulletinBrancheIndex, bulletinBranche);
+		bulletinBrancheDataProvider.refresh();
 	}
 }

@@ -61,6 +61,8 @@ public class FrmMarkInputPresenter extends
 		void setBulletinBrancheTableData(List<BulletinBrancheProxy> bulletinBranches);
 		//
 		void showCurrentNotes();
+		//
+		void showUpdatedBulletinDetails(BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject);
 	}
 
 	@ProxyCodeSplit
@@ -219,5 +221,72 @@ public class FrmMarkInputPresenter extends
 		//
 		if (bulletinBranche != null)
 			getView().showCurrentNotes();
+	}
+
+
+	@Override
+	public void saveNotes(BulletinBrancheProxy bulletinBranche,
+			final BulletinSubjectProxy bulletinSubject, String t_1_1, String t_1_2,
+			String t_1_3, String t_1_4, String t_1_5, String t_2_1,
+			String t_2_2, String t_2_3, String t_2_4, String t_2_5,
+			String t_3_1, String t_3_2, String t_3_3, String t_3_4,
+			String t_3_5, final String remarque1, final String remarque2, final String remarque3) {
+		// 
+		BulletinBrancheRequestFactory rfBranche = GWT.create(BulletinBrancheRequestFactory.class);
+		rfBranche.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinBrancheRequestContext rcBranche = rfBranche.bulletinBrancheRequest();
+		//
+		bulletinBranche = rcBranche.edit(bulletinBranche);
+		bulletinBranche.setT1_1(t_1_1);
+		bulletinBranche.setT1_2(t_1_2);
+		bulletinBranche.setT1_3(t_1_3);
+		bulletinBranche.setT1_4(t_1_4);
+		bulletinBranche.setT1_5(t_1_5);
+		//
+		bulletinBranche.setT2_1(t_2_1);
+		bulletinBranche.setT2_2(t_2_2);
+		bulletinBranche.setT2_3(t_2_3);
+		bulletinBranche.setT2_4(t_2_4);
+		bulletinBranche.setT2_5(t_2_5);
+		//
+		bulletinBranche.setT3_1(t_3_1);
+		bulletinBranche.setT3_2(t_3_2);
+		bulletinBranche.setT3_3(t_3_3);
+		bulletinBranche.setT3_4(t_3_4);
+		bulletinBranche.setT3_5(t_3_5);
+		//
+		rcBranche.saveAndReturn(bulletinBranche).fire(new Receiver<BulletinBrancheProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinBrancheProxy response) {
+				saveBulletinSubject(response, bulletinSubject, remarque1, remarque2, remarque3);
+			}
+		});
+	}
+	
+	public void saveBulletinSubject(final BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject, String remarque1, String remarque2, String remarque3){
+		//
+		BulletinSubjectRequestFactory rfSubject = GWT.create(BulletinSubjectRequestFactory.class);
+		rfSubject.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinSubjectRequestContext rcSubject = rfSubject.bulletinSubjectRequest();
+		//
+		bulletinSubject = rcSubject.edit(bulletinSubject);
+		bulletinSubject.setRemarqueT1(remarque1);
+		bulletinSubject.setRemarqueT2(remarque2);
+		bulletinSubject.setRemarqueT3(remarque3);
+		//
+		rcSubject.saveAndReturn(bulletinSubject).fire(new Receiver<BulletinSubjectProxy>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinSubjectProxy response) {
+				getView().showUpdatedBulletinDetails(bulletinBranche, response);
+			}
+		});
 	}
 }

@@ -130,7 +130,7 @@
 					</g:VerticalPanel>
 					<g:HorizontalPanel width="100%">
 						<g:Label text="." width="200px" styleName="hiddenText"/>
-						<g:Button text="Enregistrer" width="150px"/>
+						<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
 					</g:HorizontalPanel>
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
