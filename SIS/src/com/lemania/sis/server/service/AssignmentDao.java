@@ -78,6 +78,28 @@ public class AssignmentDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	
+	/**/
+	public List<Assignment> listAllActive(String profId){
+		Query<Assignment> q = this.ofy().query(Assignment.class)
+				.filter("active", true)
+				.filter("prof", new Key<Professor>(Professor.class, Long.parseLong(profId)))
+				.order("classe");
+		List<Assignment> returnList = new ArrayList<Assignment>();
+		for (Assignment a : q){
+			if (a.getClass() != null) {
+				a.setProgrammeName( this.ofy().get(this.ofy().get(a.getClasse()).getProgramme()).getCoursNom());
+				a.setClasseName(this.ofy().get(a.getClasse()).getClassName());
+			}
+			if (a.getSubject() != null)
+				a.setSubjectName(this.ofy().get(a.getSubject()).getSubjectName());
+			returnList.add(a);
+		}
+		return returnList;
+	}
+	
+	
 	/**/
 	public void save(Assignment a){
 		this.ofy().put(a);

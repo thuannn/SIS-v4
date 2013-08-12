@@ -27,6 +27,20 @@ public class ProfessorDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/**/
+	public List<Professor> getByEmail(String email){
+		//
+		Query<Professor> q = this.ofy().query(Professor.class).filter("profEmail", email);
+		List<Professor> returnList = new ArrayList<Professor>();
+		for (Professor prof : q){
+			returnList.add(prof);
+		}
+		return returnList;
+	}
+	
+	
+	
 	/*
 	 * 
 	 * */

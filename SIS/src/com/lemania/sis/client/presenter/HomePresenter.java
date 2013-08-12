@@ -142,14 +142,18 @@ public class HomePresenter
 	private void checkAccessBlock(UserProxy response){		
 		CurrentUser currentUser = new CurrentUser();
 		currentUser.setFullName(response.getFullName());
-		currentUser.setLoggedIn(true);
-		currentUser.setAdmin(response.getAdmin());
+		currentUser.setUserEmail(response.getEmail());
 		currentUser.setUserId(response.getId());
 		currentUser.setCurrentMonth(response.getCurrentMonth());
 		currentUser.setCurrentYear(response.getCurrentYear());
 		currentUser.setCurrentDay(response.getCurrentDay());
 		currentUser.setUserName(response.getUserName());
 		currentUser.setUserPassword(response.getPassword());
+		//
+		currentUser.setLoggedIn(true);
+		currentUser.setAdmin(response.getAdmin());
+		currentUser.setProf(response.getIsProf());
+		currentUser.setStudent(response.getIsStudent());
 		
 		if (!currentUser.isAdmin()){		
 			if (systemBlocked) {

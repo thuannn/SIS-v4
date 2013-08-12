@@ -70,9 +70,6 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		// Initialize years list
 		lstYear.addItem("-","");
 		lstYear.addItem("2013 - 2014","2013");
-		lstYear.addItem("2014 - 2015","2014");
-		lstYear.addItem("2015 - 2016","2015");
-		lstYear.addItem("2016 - 2017","2016");
 	}
 	
 

@@ -24,4 +24,28 @@ public interface BulletinSubjectProxy extends EntityProxy {
 	
 	public Boolean getIsActive();
 	public void setIsActive(Boolean isActive);
+	
+	public String getT1();
+	public void setT1(String t1);
+
+	public String getT2();
+	public void setT2(String t2);
+
+	public String getT3();
+	public void setT3(String t3);
+
+	public String getAn();
+	public void setAn(String an);
+
+	public String getRemarqueT1();
+	public void setRemarqueT1(String remarqueT1);
+
+	public String getRemarqueT2();
+	public void setRemarqueT2(String remarqueT2);
+
+	public String getRemarqueT3();
+	public void setRemarqueT3(String remarqueT3);
+
+	public String getStudentName();
+	public void setStudentName(String studentName);
 }

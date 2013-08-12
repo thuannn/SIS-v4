@@ -11,8 +11,8 @@ public class User extends DatastoreObject {
 	private String password;
 	private String email;
 	private Boolean active = false;
+	//
 	private Boolean admin = false;
-	
 	private Boolean isProf = false;
 	private Boolean isStudent = false;
 	

@@ -257,4 +257,9 @@ public class MainPagePresenter extends
 	public void showCreateBulletins() {
 		History.newItem(NameTokens.bulletincreation);
 	}
+
+	@Override
+	public void showFrmMarkInput() {
+		History.newItem(NameTokens.markinput);
+	}
 }

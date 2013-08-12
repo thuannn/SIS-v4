@@ -99,6 +99,16 @@ public class BulletinDao extends MyDAOBase {
 					.filter("profile", new Key<Profile>(Profile.class, Long.parseLong(profileId)));
 			
 			for (ProfileSubject profileSubject : profileSubjects){
+				//				
+				curBulletinSubject = new BulletinSubject();
+				curBulletinSubject.setSubject( profileSubject.getSubject() );
+				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
+				curBulletinSubject.setBulletin( new Key<Bulletin>(Bulletin.class, bulletin.getId()) );
+				curBulletinSubject.setProfessor( profileSubject.getProfessor() );
+				curBulletinSubject.setProfName( profileSubject.getProfName() );
+				curBulletinSubject.setSubjectName( profileSubject.getSubjectName() );
+				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
+				keyListSubject.add(this.ofy().put(curBulletinSubject));
 				//
 				Query<ProfileBranche> profileBranches = this.ofy().query(ProfileBranche.class)
 						.filter("profileSubject", new Key<ProfileSubject>(ProfileSubject.class, profileSubject.getId()));
@@ -108,17 +118,9 @@ public class BulletinDao extends MyDAOBase {
 					curBulletinBranche.setBulletinBranche( profileBranche.getProfileBranche() );
 					curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
 					curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
+					curBulletinBranche.setBulletinSubject( new Key<BulletinSubject>(BulletinSubject.class, curBulletinSubject.getId()));
 					keyListBranche.add( this.ofy().put(curBulletinBranche));
 				}
-				//			
-				curBulletinSubject = new BulletinSubject();
-				curBulletinSubject.setSubject( profileSubject.getSubject() );
-				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
-				curBulletinSubject.setBulletin( new Key<Bulletin>(Bulletin.class, bulletin.getId()) );
-				curBulletinSubject.setProfessor( profileSubject.getProfessor() );
-				curBulletinSubject.setProfName( profileSubject.getProfName() );
-				curBulletinSubject.setSubjectName( profileSubject.getSubjectName() );
-				keyListSubject.add(this.ofy().put(curBulletinSubject));
 			}
 			//
 			return bulletin;

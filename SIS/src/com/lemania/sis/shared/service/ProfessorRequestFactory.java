@@ -17,6 +17,8 @@ public interface ProfessorRequestFactory extends RequestFactory {
 		
 		Request<List<ProfessorProxy>> listAll();
 		
+		Request<List<ProfessorProxy>> getByEmail(String email);
+		
 		Request<Void> save(ProfessorProxy prof);
 		
 		Request<ProfessorProxy> saveAndReturn(ProfessorProxy newProf);

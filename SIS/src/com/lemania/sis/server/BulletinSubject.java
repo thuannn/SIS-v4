@@ -2,6 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
 public class BulletinSubject extends DatastoreObject {
@@ -15,9 +16,21 @@ public class BulletinSubject extends DatastoreObject {
 	//
 	private String subjectName;
 	private String profName;
-
+	//
+	private String T1 = "";
+	private String T2 = "";
+	private String T3 = "";
+	private String An = "";
+	//
+	private String remarqueT1 = "";
+	private String remarqueT2 = "";
+	private String remarqueT3 = "";
 	// This number should always be 1
 	private Double totalBrancheCoef = 0.0;
+	//
+	@NotSaved
+	private String studentName;
+	
 	
 	public Key<Subject> getSubject() {
 		return subject;
@@ -81,5 +94,69 @@ public class BulletinSubject extends DatastoreObject {
 
 	public void setTotalBrancheCoef(Double totalBrancheCoef) {
 		this.totalBrancheCoef = totalBrancheCoef;
+	}
+
+	public String getT1() {
+		return T1;
+	}
+
+	public void setT1(String t1) {
+		T1 = t1;
+	}
+
+	public String getT2() {
+		return T2;
+	}
+
+	public void setT2(String t2) {
+		T2 = t2;
+	}
+
+	public String getT3() {
+		return T3;
+	}
+
+	public void setT3(String t3) {
+		T3 = t3;
+	}
+
+	public String getAn() {
+		return An;
+	}
+
+	public void setAn(String an) {
+		An = an;
+	}
+
+	public String getRemarqueT1() {
+		return remarqueT1;
+	}
+
+	public void setRemarqueT1(String remarqueT1) {
+		this.remarqueT1 = remarqueT1;
+	}
+
+	public String getRemarqueT2() {
+		return remarqueT2;
+	}
+
+	public void setRemarqueT2(String remarqueT2) {
+		this.remarqueT2 = remarqueT2;
+	}
+
+	public String getRemarqueT3() {
+		return remarqueT3;
+	}
+
+	public void setRemarqueT3(String remarqueT3) {
+		this.remarqueT3 = remarqueT3;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 }

@@ -54,5 +54,7 @@ public interface MainPageUiHandler extends UiHandlers {
 	void showRptBySchool();
 	void showRptByMonth();
 	
+	void showFrmMarkInput();
+	
 	void logOut();
 }

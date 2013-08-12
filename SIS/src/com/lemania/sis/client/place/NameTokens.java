@@ -29,6 +29,7 @@ public class NameTokens {
 	public static final String classeadd = "classeadd";
 	public static final String profilemgt = "profilemgt";
 	public static final String bulletincreation = "bulletincreation";
+	public static final String markinput = "markinput";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -140,5 +141,9 @@ public class NameTokens {
 
 	public static String getBulletincreation() {
 		return bulletincreation;
+	}
+
+	public static String getMarkinput() {
+		return markinput;
 	}
 }

@@ -103,15 +103,15 @@
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="ESPACE PROFESSEUR" state="true">
-							<g:Button text="Saisir des notes" width="200px">Mettre des heures</g:Button>
-							<g:Button text="Changer le MDP" width="200px"/>
+							<g:Button text="Saisir des notes" width="200px" ui:field="cmdMarkInput">Mettre des heures</g:Button>
+							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordProf"/>
 						</g:TreeItem>
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="ESPACE ELEVE">
 							<g:Button text="Bulletins" width="200px">Mettre des heures</g:Button>
-							<g:Button text="Changer le MDP" width="200px"/>
+							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordStudent"/>
 						</g:TreeItem>
 					</g:Tree>
 				</g:VerticalPanel>

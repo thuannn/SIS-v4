@@ -63,6 +63,9 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Tree treeMenuEleve;
 	@UiField VerticalPanel leftPanel;
 	@UiField Button cmdCreateBulletins;
+	@UiField Button cmdMarkInput;
+	@UiField Button cmdPasswordProf;
+	@UiField Button cmdPasswordStudent;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -188,7 +191,12 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if ( currentUser!=null && currentUser.isLoggedIn() ) {
 			showUserInfo(currentUser);
 			//		
-			showMenu();
+			if (currentUser.isAdmin())
+				showMenu();
+			if (currentUser.isProf())
+				showProfMenu();
+			if (currentUser.isStudent())
+				showStudentMenu();
 		}
 		else {
 			txtWelcome.setText("");
@@ -208,10 +216,32 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		dockPanel.setCellWidth( leftPanel, "250px" );
 		//
 		leftPanel.setVisible(true);
-		treeMenuProf.setVisible( true );
-		treeMenuEleve.setVisible( true );
 		treeMenuAdmin.setVisible( true );
+		treeMenuEleve.setVisible( true );
+		treeMenuProf.setVisible( true );
 	}
+	
+	/**/
+	void showProfMenu(){
+		//
+		dockPanel.add( leftPanel, DockPanel.WEST );
+		dockPanel.setCellWidth( leftPanel, "250px" );
+		//
+		leftPanel.setVisible(true);
+		treeMenuProf.setVisible( true );
+	}
+	
+	
+	/**/
+	void showStudentMenu(){
+		//
+		dockPanel.add( leftPanel, DockPanel.WEST );
+		dockPanel.setCellWidth( leftPanel, "250px" );
+		//
+		leftPanel.setVisible(true);
+		treeMenuEleve.setVisible( true );
+	}
+	
 	
 	/**/
 	void hideMenu(){
@@ -228,9 +258,22 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiHandler("cmdMenuToggle")
 	void onCmdMenuToggleClick(ClickEvent event) {
 		if (leftPanel.isVisible())
-			hideMenu();
+			hidePanel();
 		else
-			showMenu();
+			showPanel();
+	}
+
+	private void showPanel() {
+		//
+		dockPanel.add( leftPanel, DockPanel.WEST );
+		dockPanel.setCellWidth( leftPanel, "250px" );
+		leftPanel.setVisible(true);
+	}
+
+	private void hidePanel() {
+		//
+		leftPanel.setVisible(false);
+		dockPanel.remove( leftPanel );
 	}
 
 	/**/
@@ -331,6 +374,30 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdCreateBulletinsClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showCreateBulletins();
+		}
+	}
+	
+	
+	@UiHandler("cmdMarkInput")
+	void onCmdMarkInputClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmMarkInput();
+		}
+	}
+	
+	
+	@UiHandler("cmdPasswordStudent")
+	void onCmdPasswordStudentClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmPassword();
+		}
+	}
+	
+	
+	@UiHandler("cmdPasswordProf")
+	void onCmdPasswordProfClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmPassword();
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.lemania.sis.server.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lemania.sis.server.Assignment;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
 import com.lemania.sis.server.Professor;
@@ -12,7 +13,6 @@ import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Subject;
 
 public class BulletinSubjectDao extends MyDAOBase {
-	//
 	//
 	public void initialize(){
 		return;
@@ -50,9 +50,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	
 	/**/
-	public List<BulletinSubject> listAll( String profileId ){
+	public List<BulletinSubject> listAll( String bulletinId ){
 		Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
-				.filter("bulletin", new Key<Bulletin>(Bulletin.class, Long.parseLong( profileId )))
+				.filter("bulletin", new Key<Bulletin>(Bulletin.class, Long.parseLong( bulletinId )))
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
@@ -62,6 +62,38 @@ public class BulletinSubjectDao extends MyDAOBase {
 			returnList.add( bulletinSubject );
 		}
 		return returnList;
+	}
+	
+	
+	/**/
+	public List<BulletinSubject> listAllByAssignment(String assignmentId){
+		// Get the assignment object
+		Assignment assignment = this.ofy().get(Assignment.class, Long.parseLong(assignmentId));
+		//
+		if (assignment != null) {
+			// Get the Bulletin list by class
+			Query<Bulletin> qBulletin = this.ofy().query(Bulletin.class)
+					.filter("classe", assignment.getClasse());
+			
+			// Get the Bulletin Subject list
+			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
+					.filter("subject", assignment.getSubject())
+					.filter("professor", assignment.getProf())
+					.order("subjectName");
+			List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
+			for ( BulletinSubject bulletinSubject : q ){
+				// Check if this Bulletin Subject belongs to Bulletin list of the class
+				for (Bulletin bulletin : qBulletin){
+					if (bulletinSubject.getBulletin().getId() == bulletin.getId()) {
+						bulletinSubject.setStudentName(bulletin.getStudentName());
+						returnList.add( bulletinSubject );
+						break;
+					}
+				}
+			}
+			return returnList;
+		}
+		return null;
 	}
 	
 	

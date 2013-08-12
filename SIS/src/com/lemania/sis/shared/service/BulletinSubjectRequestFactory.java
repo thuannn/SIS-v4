@@ -20,6 +20,8 @@ public interface BulletinSubjectRequestFactory extends RequestFactory {
 		//
 		Request<List<BulletinSubjectProxy>> listAllActive();
 		//
+		Request<List<BulletinSubjectProxy>> listAllByAssignment(String assignmentId);
+		//
 		Request<Void> save(BulletinSubjectProxy profile);
 		Request<BulletinSubjectProxy> saveAndReturn(BulletinSubjectProxy newBulletinSubject);
 		Request<BulletinSubjectProxy> saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef );
@@ -32,5 +34,5 @@ public interface BulletinSubjectRequestFactory extends RequestFactory {
 		//
 	}
 	
-	BulletinSubjectRequestContext profileSubjectRequest();
+	BulletinSubjectRequestContext bulletinSubjectRequest();
 }

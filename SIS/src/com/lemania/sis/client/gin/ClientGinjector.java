@@ -31,6 +31,7 @@ import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 import com.lemania.sis.client.presenter.ProfileManagementPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinCreationPresenter;
+import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 
 @GinModules({ ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -86,4 +87,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<ProfileManagementPresenter> getProfileManagementPresenter();
 
 	AsyncProvider<FrmBulletinCreationPresenter> getFrmBulletinCreationPresenter();
+
+	AsyncProvider<FrmMarkInputPresenter> getFrmMarkInputPresenter();
 }
