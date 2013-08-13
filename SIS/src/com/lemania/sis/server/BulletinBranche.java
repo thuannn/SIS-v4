@@ -4,7 +4,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
-public class BulletinBranche extends DatastoreObject {
+public class BulletinBranche extends DatastoreObject implements Comparable<BulletinBranche> {
 	//
 	private Key<BulletinSubject> bulletinSubject;
 	private Key<Branche> bulletinBranche;
@@ -191,7 +191,7 @@ public class BulletinBranche extends DatastoreObject {
 		return T2;
 	}
 
-	public void set21(String t2) {
+	public void setT2(String t2) {
 		T2 = t2;
 	}
 
@@ -217,5 +217,11 @@ public class BulletinBranche extends DatastoreObject {
 
 	public void setAn(String an) {
 		An = an;
+	}
+
+	@Override
+	public int compareTo(BulletinBranche bb) {
+		int brancheName = bulletinBrancheName.compareTo(bb.getBulletinBrancheName());
+		return brancheName;
 	}
 }

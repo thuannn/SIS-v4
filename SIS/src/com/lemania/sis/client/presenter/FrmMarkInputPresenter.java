@@ -14,6 +14,7 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -61,6 +62,7 @@ public class FrmMarkInputPresenter extends
 		void setBulletinBrancheTableData(List<BulletinBrancheProxy> bulletinBranches);
 		//
 		void showCurrentNotes();
+		void showCurrentRemarques();
 		//
 		void showUpdatedBulletinDetails(BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject);
 	}
@@ -104,6 +106,7 @@ public class FrmMarkInputPresenter extends
 		super.onReset();
 		
 		// Thuan
+		getView().resetForm();
 		loadProfessorList();
 	}
 
@@ -211,6 +214,7 @@ public class FrmMarkInputPresenter extends
 			@Override
 			public void onSuccess(List<BulletinBrancheProxy> response) {
 				getView().setBulletinBrancheTableData(response);
+				getView().showCurrentRemarques();
 			}
 		});
 	}
@@ -231,6 +235,16 @@ public class FrmMarkInputPresenter extends
 			String t_2_2, String t_2_3, String t_2_4, String t_2_5,
 			String t_3_1, String t_3_2, String t_3_3, String t_3_4,
 			String t_3_5, final String remarque1, final String remarque2, final String remarque3) {
+		//
+		if (bulletinSubject == null){
+			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir une matière.");
+			return;
+		}
+		//
+		if (bulletinBranche == null){
+			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir une branche.");
+			return;
+		}
 		// 
 		BulletinBrancheRequestFactory rfBranche = GWT.create(BulletinBrancheRequestFactory.class);
 		rfBranche.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -242,18 +256,21 @@ public class FrmMarkInputPresenter extends
 		bulletinBranche.setT1_3(t_1_3);
 		bulletinBranche.setT1_4(t_1_4);
 		bulletinBranche.setT1_5(t_1_5);
+		bulletinBranche.setT1( calculateAverage(t_1_1, t_1_2, t_1_3, t_1_4, t_1_5));
 		//
 		bulletinBranche.setT2_1(t_2_1);
 		bulletinBranche.setT2_2(t_2_2);
 		bulletinBranche.setT2_3(t_2_3);
 		bulletinBranche.setT2_4(t_2_4);
 		bulletinBranche.setT2_5(t_2_5);
+		bulletinBranche.setT2( calculateAverage(t_2_1, t_2_2, t_2_3, t_2_4, t_2_5));
 		//
 		bulletinBranche.setT3_1(t_3_1);
 		bulletinBranche.setT3_2(t_3_2);
 		bulletinBranche.setT3_3(t_3_3);
 		bulletinBranche.setT3_4(t_3_4);
 		bulletinBranche.setT3_5(t_3_5);
+		bulletinBranche.setT3( calculateAverage(t_3_1, t_3_2, t_3_3, t_3_4, t_3_5));
 		//
 		rcBranche.saveAndReturn(bulletinBranche).fire(new Receiver<BulletinBrancheProxy>(){
 			@Override
@@ -266,7 +283,26 @@ public class FrmMarkInputPresenter extends
 			}
 		});
 	}
-	
+
+
+	private String calculateAverage(String t1, String t2, String t3, String t4, String t5) {
+		//
+		Double average = 0.0;
+		Double total = 0.0;
+		Integer count = 0;
+		if (!t1.isEmpty()) { total = total + Double.parseDouble(t1); count++; }
+		if (!t2.isEmpty()) { total = total + Double.parseDouble(t2); count++; }
+		if (!t3.isEmpty()) { total = total + Double.parseDouble(t3); count++; }
+		if (!t4.isEmpty()) { total = total + Double.parseDouble(t4); count++; }
+		if (!t5.isEmpty()) { total = total + Double.parseDouble(t5); count++; }
+		if (count>0) {
+			average = ((double)Math.round(total / count * 10)) / 10;
+			return Double.toString(average);
+		}
+		return "";
+	}
+
+
 	public void saveBulletinSubject(final BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject, String remarque1, String remarque2, String remarque3){
 		//
 		BulletinSubjectRequestFactory rfSubject = GWT.create(BulletinSubjectRequestFactory.class);

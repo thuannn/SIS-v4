@@ -20,6 +20,11 @@ public class BulletinSubject extends DatastoreObject {
 	private String T1 = "";
 	private String T2 = "";
 	private String T3 = "";
+	//
+	private String examT1 = "";
+	private String examT2 = "";
+	private String examT3 = "";
+	//
 	private String An = "";
 	//
 	private String remarqueT1 = "";
@@ -158,5 +163,29 @@ public class BulletinSubject extends DatastoreObject {
 
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
+	}
+
+	public String getExamT1() {
+		return examT1;
+	}
+
+	public void setExamT1(String examT1) {
+		this.examT1 = examT1;
+	}
+
+	public String getExamT2() {
+		return examT2;
+	}
+
+	public void setExamT2(String examT2) {
+		this.examT2 = examT2;
+	}
+
+	public String getExamT3() {
+		return examT3;
+	}
+
+	public void setExamT3(String examT3) {
+		this.examT3 = examT3;
 	}
 }

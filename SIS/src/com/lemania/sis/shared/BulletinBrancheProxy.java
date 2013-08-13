@@ -63,7 +63,7 @@ public interface BulletinBrancheProxy extends EntityProxy {
 	public void setT3_5(String t3_5);
 
 	public String getT2();
-	public void set21(String t2);
+	public void setT2(String t2);
 
 	public String getT3();
 	public void setT3(String t3);

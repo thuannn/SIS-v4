@@ -1,6 +1,7 @@
 package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -37,13 +38,13 @@ public class BulletinBrancheDao extends MyDAOBase {
 	public List<BulletinBranche> listAllActive(){
 		//
 		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
-				.filter("isActive", true)
-				.order("bulletinBrancheName");
+				.filter("isActive", true);
 		List<BulletinBranche> returnList = new ArrayList<BulletinBranche>();
 		for ( BulletinBranche bulletinBranche : q ){
 			bulletinBranche.setBulletinBrancheName( this.ofy().get( bulletinBranche.getBulletinBranche()).getBrancheName() );
 			returnList.add( bulletinBranche );
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -53,13 +54,13 @@ public class BulletinBrancheDao extends MyDAOBase {
 	public List<BulletinBranche> listAll( String bulletinSubjectId ){
 		//
 		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
-				.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(bulletinSubjectId)))
-				.order("bulletinBrancheName");
+				.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(bulletinSubjectId)));
 		List<BulletinBranche> returnList = new ArrayList<BulletinBranche>();
 		for ( BulletinBranche bulletinBranche : q ){
 			bulletinBranche.setBulletinBrancheName( this.ofy().get( bulletinBranche.getBulletinBranche()).getBrancheName() );
 			returnList.add( bulletinBranche );
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	

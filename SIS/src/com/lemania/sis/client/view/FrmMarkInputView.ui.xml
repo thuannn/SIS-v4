@@ -19,7 +19,7 @@
 					<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 						<g:Label text="3" styleName="step"/>
 						<g:Label text="Elèves" styleName="sectionTitle" width=""/>
-						<p1:DataGrid width="400px" height="450px" ui:field="tblBulletinSubjects"/>
+						<p1:DataGrid width="500px" height="500px" ui:field="tblBulletinSubjects"/>
 					</g:VerticalPanel>
 			</g:VerticalPanel>
 				<g:VerticalPanel spacing="5" width="100%">
@@ -33,7 +33,7 @@
 						<g:Label text="Branches - Notes" styleName="sectionTitle"/>
 						<p1:DataGrid width="100%" height="150px" ui:field="tblBranches"/>
 					</g:VerticalPanel>
-					<g:VerticalPanel width="100%" spacing="3">
+					<g:VerticalPanel width="100%" spacing="3" styleName="subSection">
 						<g:Label text="5" styleName="step"/>
 						<g:Label text="Saisir les notes" styleName="sectionTitle"/>
 						<g:Grid cellPadding="2" cellSpacing="2" width="100%" ui:field="tblNotesInput">
@@ -42,19 +42,19 @@
 								<g:Label text="Trimestre 1 :" width=""/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_1_1"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_1_1"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_1_2"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_1_2"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_1_3"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_1_3"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_1_4"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_1_4"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_1_5"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_1_5"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
@@ -62,19 +62,19 @@
 								<g:Label text="Trimestre 2 :" width=""/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_2_1"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_2_1"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_2_2"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_2_2"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_2_3"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_2_3"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_2_4"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_2_4"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_2_5"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_2_5"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
@@ -82,24 +82,24 @@
 								<g:Label text="Trimestre 3 :"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_3_1"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_3_1"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_3_2"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_3_2"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_3_3"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_3_3"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_3_4"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_3_4"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="50px" ui:field="txt_t_3_5"/>
+								<g:DoubleBox width="30px" ui:field="txt_t_3_5"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
 					</g:VerticalPanel>
-					<g:VerticalPanel width="100%" spacing="3">
+					<g:VerticalPanel width="100%" spacing="3" styleName="subSection">
 						<g:Label text="Saisir les remarques" styleName="sectionTitle"/>
 						<g:Grid cellPadding="2" cellSpacing="2" width="100%" ui:field="tblRemarksInput">
 							<g:row>
@@ -107,7 +107,7 @@
 									<g:Label text="Trimestre 1 :" width=""/>
 								</g:customCell>
 								<g:customCell>
-									<g:TextBox width="450px" ui:field="txtRemarque1"/>
+									<g:TextArea ui:field="txtRemarque1" width="" styleName="sis-TextArea" characterWidth="60"/>
 								</g:customCell>
 							</g:row>
 							<g:row>
@@ -115,7 +115,7 @@
 									<g:Label text="Trimestre 2:"/>
 								</g:customCell>
 								<g:customCell>
-									<g:TextBox width="450px" ui:field="txtRemarque2"/>
+									<g:TextArea width="" ui:field="txtRemarque2" styleName="sis-TextArea" characterWidth="60"/>
 								</g:customCell>
 							</g:row>
 							<g:row>
@@ -123,7 +123,7 @@
 									<g:Label text="Trimestre 3 :"/>
 								</g:customCell>
 								<g:customCell>
-									<g:TextBox width="450px" ui:field="txtRemarque3"/>
+									<g:TextArea ui:field="txtRemarque3" width="" styleName="sis-TextArea" characterWidth="60"/>
 								</g:customCell>
 							</g:row>
 						</g:Grid>

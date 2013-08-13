@@ -48,4 +48,13 @@ public interface BulletinSubjectProxy extends EntityProxy {
 
 	public String getStudentName();
 	public void setStudentName(String studentName);
+	
+	public String getExamT1();
+	public void setExamT1(String examT1);
+
+	public String getExamT2();
+	public void setExamT2(String examT2);
+
+	public String getExamT3();
+	public void setExamT3(String examT3);
 }

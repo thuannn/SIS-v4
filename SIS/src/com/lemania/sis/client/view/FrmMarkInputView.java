@@ -23,10 +23,10 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.TextArea;
 
 public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> implements
 		FrmMarkInputPresenter.MyView {
@@ -62,9 +62,6 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField ListBox lstAssignments;
 	@UiField Grid tblNotesInput;
 	@UiField Grid tblRemarksInput;
-	@UiField TextBox txtRemarque1;
-	@UiField TextBox txtRemarque2;
-	@UiField TextBox txtRemarque3;
 	@UiField DoubleBox txt_t_1_1;
 	@UiField DoubleBox txt_t_1_2;
 	@UiField DoubleBox txt_t_1_3;
@@ -81,6 +78,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField DoubleBox txt_t_3_4;
 	@UiField DoubleBox txt_t_3_5;
 	@UiField Button cmdSave;
+	@UiField TextArea txtRemarque1;
+	@UiField TextArea txtRemarque2;
+	@UiField TextArea txtRemarque3;
 	
 	
 	@Override
@@ -96,6 +96,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	/**/
 	@UiHandler("lstProfs")
 	void onLstProfsChange(ChangeEvent event) {
+		//
+		resetForm();
+		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onProfessorSelected(lstProfs.getValue(lstProfs.getSelectedIndex()));
 	}
@@ -104,6 +107,10 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	/**/
 	@Override
 	public void resetForm() {
+		//
+		lstAssignments.clear();
+		bulletinSubjectDataProvider.getList().clear();
+		bulletinBrancheDataProvider.getList().clear();
 		//
 		clearInputFields();
 	}
@@ -132,7 +139,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtRemarque1.setText("");
 		txtRemarque2.setText("");
 		txtRemarque3.setText("");
+		//
 	}
+	
 
 	/**/
 	@Override
@@ -249,7 +258,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colCoef, "Coef");
- 	    tblBulletinSubjects.setColumnWidth( colCoef, 10, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colCoef, 8, Unit.PCT);
  	   
  	    
     	// Add a text column to show the name.	
@@ -260,7 +269,17 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colT1, "T1");
- 	    tblBulletinSubjects.setColumnWidth( colT1, 10, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colT1, 8, Unit.PCT);
+ 	    
+ 	    // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT1 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT1();
+ 	      }
+ 	    };
+ 	    tblBulletinSubjects.addColumn(colExamT1, "E1");
+ 	    tblBulletinSubjects.setColumnWidth( colExamT1, 8, Unit.PCT);
  	    
  	    // Add a text column to show the name.	
  		TextColumn<BulletinSubjectProxy> colT2 = new TextColumn<BulletinSubjectProxy>() {
@@ -270,7 +289,17 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colT2, "T2");
- 	    tblBulletinSubjects.setColumnWidth( colT2, 10, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colT2, 8, Unit.PCT);
+ 	    
+ 	    // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT2 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT2();
+ 	      }
+ 	    };
+ 	    tblBulletinSubjects.addColumn(colExamT2, "E2");
+ 	    tblBulletinSubjects.setColumnWidth( colExamT2, 8, Unit.PCT);
  	    
  	 	// Add a text column to show the name.	
  		TextColumn<BulletinSubjectProxy> colT3 = new TextColumn<BulletinSubjectProxy>() {
@@ -280,7 +309,17 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colT3, "T3");
- 	    tblBulletinSubjects.setColumnWidth( colT3, 10, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colT3, 8, Unit.PCT);
+ 	    
+ 	   // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT3 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT3();
+ 	      }
+ 	    };
+ 	    tblBulletinSubjects.addColumn(colExamT3, "E3");
+ 	    tblBulletinSubjects.setColumnWidth( colExamT3, 8, Unit.PCT);
  	    
     	// Add a text column to show the name.	
  		TextColumn<BulletinSubjectProxy> colAn = new TextColumn<BulletinSubjectProxy>() {
@@ -290,7 +329,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colAn, "An");
- 	    tblBulletinSubjects.setColumnWidth( colAn, 10, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colAn, 8, Unit.PCT);
    
  	    
  	    // Add a selection model to handle user selection.
@@ -300,6 +339,12 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedBulletinSubject = selectionModel.getSelectedObject();
 	        if (selectedBulletinSubject != null) {
+	        	//
+	        	selectedBulletinBrancheIndex = -1;
+	        	tblBranches.getSelectionModel().setSelected(selectedBulletinBranche, false);
+	        	selectedBulletinBranche = null;
+	        	clearInputFields();
+	        	//
 	        	selectedBulletinSubjectIndex = bulletinSubjectDataProvider.getList().indexOf(selectedBulletinSubject);
 	        	getUiHandlers().onBulletinSubjectSelected(selectedBulletinSubject);
 	        }
@@ -332,6 +377,20 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	/**/
 	@UiHandler("lstAssignments")
 	void onLstAssignmentsChange(ChangeEvent event) {
+		//
+		bulletinSubjectDataProvider.getList().clear();
+		bulletinBrancheDataProvider.getList().clear();
+		//
+		selectedBulletinBrancheIndex = -1;
+    	tblBranches.getSelectionModel().setSelected(selectedBulletinBranche, false);
+    	selectedBulletinBranche = null;
+    	//
+		selectedBulletinSubjectIndex = -1;
+    	tblBulletinSubjects.getSelectionModel().setSelected(selectedBulletinSubject, false);
+    	selectedBulletinSubject = null;
+		//
+		clearInputFields();
+		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onAssignmentSelected( lstAssignments.getValue(lstAssignments.getSelectedIndex()));
 	}
@@ -356,11 +415,16 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_3.setText( selectedBulletinBranche.getT3_3() );
 		txt_t_3_4.setText( selectedBulletinBranche.getT3_4() );
 		txt_t_3_5.setText( selectedBulletinBranche.getT3_5() );
+	}
+	
+	@Override
+	public void showCurrentRemarques(){
 		//
 		txtRemarque1.setText( selectedBulletinSubject.getRemarqueT1() );
 		txtRemarque2.setText( selectedBulletinSubject.getRemarqueT2() );
 		txtRemarque3.setText( selectedBulletinSubject.getRemarqueT3() );
 	}
+	
 	
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
