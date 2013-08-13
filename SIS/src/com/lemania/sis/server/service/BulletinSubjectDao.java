@@ -119,6 +119,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 		Double examT3 = -0.001;
 		Double coefExam = -0.001;
 		Double totalAn = -0.001;
+		Double avantExam = -0.001;
 		Integer countAn = 0;
 		//
 		try {
@@ -171,31 +172,34 @@ public class BulletinSubjectDao extends MyDAOBase {
 				if (totalT1<0 && examT1<0)
 					ps.setT1("");
 				
-				if (totalT2>0 && examT2>0)
-					ps.setT2( Double.toString(((double)Math.round((totalT2+(examT2*coefExam))/(totalCoefT2+coefExam)*10))/10) );
-				if (totalT2>0 && examT2<0)
+				if (totalT2>0 && totalT1>0) {
+					ps.setT2( Double.toString( ((double)Math.round((totalT2/totalCoefT2)*10))/10) );
+					avantExam = ((double)Math.round(((totalT2/totalCoefT2)+(totalT1/totalCoefT1))/2*10))/10;
+				}
+				if (totalT2>0 && totalT1<0) {
 					ps.setT2( Double.toString(((double)Math.round(totalT2/totalCoefT2*10))/10 ));
-				if (totalT2<0 && examT1>0)
-					ps.setT2( Double.toString(((double)Math.round(examT2*10))/10 ));
-				if (totalT2<0 && examT2<0)
+					avantExam = ((double)Math.round(totalT2/totalCoefT2*10))/10;
+				}
+				if (totalT2<0 && totalT1>0) {
+					ps.setT2( Double.toString(((double)Math.round((totalT1/totalCoefT1)*10))/10 ));
+					avantExam = ((double)Math.round((totalT1/totalCoefT1)*10))/10;
+				}
+				if (totalT2<0 && totalT1<0) {
 					ps.setT2("");
+					avantExam = -0.001;
+				}
 				
-				if (totalT3>0 && examT3>0)
-					ps.setT3( Double.toString(((double)Math.round((totalT3+(examT3*coefExam))/(totalCoefT3+coefExam)*10))/10) );
-				if (totalT3>0 && examT3<0)
-					ps.setT3( Double.toString(((double)Math.round(totalT3/totalCoefT3*10))/10 ));
-				if (totalT3<0 && examT3>0)
-					ps.setT3( Double.toString(((double)Math.round(examT3*10))/10 ));
-				if (totalT3<0 && examT3<0)
-					ps.setT3("");
-				
-				if (!ps.getT1().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT1()); countAn++; }
-				if (!ps.getT2().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT2());  countAn++; }
-				if (!ps.getT3().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT3()); countAn++; }
-				if (countAn>0)
-					ps.setAn( Double.toString(((double)Math.round(totalAn/countAn*10))/10) );
-				else
+				if (avantExam>0 && examT2>0)
+					ps.setAn( Double.toString(((double)Math.round((avantExam+examT2)/2*10))/10) );
+				if (avantExam>0 && examT2<0)
+					ps.setAn( Double.toString(avantExam) );
+				if (avantExam<0 && examT2>0)
+					ps.setAn( Double.toString(((double)Math.round(examT2*10))/10 ));
+				if (avantExam<0 && examT2<0)
 					ps.setAn("");
+				
+				ps.setT3("");
+				ps.setExamT3("");
 			}
 			//
 			if (programmeName.contains("bacc")){

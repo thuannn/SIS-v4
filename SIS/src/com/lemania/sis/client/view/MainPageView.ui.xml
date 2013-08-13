@@ -41,28 +41,20 @@
 					</g:Cell>
 				</g:HorizontalPanel>
 			</g:Dock>
-			<g:Dock direction="CENTER" width="">
-				<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-			</g:Dock>
-			<g:Dock direction="SOUTH">
-				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
-					<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
-				</g:HorizontalPanel>
-			</g:Dock>
 			<g:Dock direction="WEST">
 				<g:VerticalPanel ui:field="leftPanel">
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
 					<g:TreeItem text="ADMINISTRATION" state="true">
-						<g:TreeItem text="Bulletins" state="true">
+						<g:TreeItem text="Bulletins">
 							<g:Button width="180px" text="Gestion des bulletins"></g:Button>
 							<g:Button text="Creation des bulletins" width="180px" ui:field="cmdCreateBulletins"/>
 						</g:TreeItem>
-						<g:TreeItem text="Profils" state="true">
+						<g:TreeItem text="Profils">
 							<g:Button text="Profils des études" width="180px" ui:field="cmdProfileManagement"/>
 						</g:TreeItem></g:TreeItem>
-					<g:TreeItem text="INFORMATIONS DE BASE" state="true">
+					<g:TreeItem text="INFORMATIONS DE BASE">
 						<g:TreeItem text="Elèves">
 							<g:Button text="Liste des élèves" width="180px" ui:field="cmdStudents"/>
 							<g:Button text="Ajouter un élève" width="180px" ui:field="cmdCreateStudent"/>
@@ -98,13 +90,13 @@
 					</g:TreeItem>
 					<g:Button text="Changer le MDP" ui:field="cmdPassword" width="220px"/>
 					<g:Button ui:field="cmdContact" width="220PX">Contact</g:Button>
-					<g:Image url="images/appengine-silver-120x30.gif"/>
 				</g:Tree>
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="ESPACE PROFESSEUR" state="true">
 							<g:Button text="Saisir des notes" width="200px" ui:field="cmdMarkInput">Mettre des heures</g:Button>
 							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordProf"/>
+							<g:Button width="200px">Contact</g:Button>
 						</g:TreeItem>
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
@@ -112,8 +104,18 @@
 						<g:TreeItem state="true" text="ESPACE ELEVE">
 							<g:Button text="Bulletins" width="200px">Mettre des heures</g:Button>
 							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordStudent"/>
+							<g:Button width="200px">Contact</g:Button>
 						</g:TreeItem>
 					</g:Tree>
+				</g:VerticalPanel>
+			</g:Dock>
+			<g:Dock direction="CENTER">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT" height="">
+					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
+					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="300px" horizontalAlignment="ALIGN_LEFT" spacing="5">
+						<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
+						<g:Image url="images/appengine-silver-120x30.gif"/>
+					</g:HorizontalPanel>
 				</g:VerticalPanel>
 			</g:Dock>
 		</g:DockPanel>

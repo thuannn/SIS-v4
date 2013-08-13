@@ -12,7 +12,6 @@ import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
-import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;

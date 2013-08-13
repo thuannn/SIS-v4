@@ -187,7 +187,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBranches.addColumn(colCoef, "Coef");
- 	   	tblBranches.setColumnWidth( colCoef, 10, Unit.PCT);
+ 	   	tblBranches.setColumnWidth( colCoef, 12, Unit.PCT);
  	   
  	   
  	   	// Add a text column to show the name.	
@@ -258,7 +258,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colCoef, "Coef");
- 	    tblBulletinSubjects.setColumnWidth( colCoef, 8, Unit.PCT);
+ 	    tblBulletinSubjects.setColumnWidth( colCoef, 10, Unit.PCT);
  	   
  	    
     	// Add a text column to show the name.	
