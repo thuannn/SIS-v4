@@ -50,6 +50,8 @@ public interface MainPageUiHandler extends UiHandlers {
 	
 	void showCreateBulletins();
 	
+	void showFrmBulletinViewDetail();
+	
 	void showRptByDept();
 	void showRptBySchool();
 	void showRptByMonth();

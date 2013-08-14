@@ -7,22 +7,25 @@
 	ui:generateLocales='default'>
 
 	<g:FlowPanel width="100%" height="100%">
-		<g:DockPanel width="100%" height="100%" spacing="5" ui:field="dockPanel">
+		<g:DockPanel width="100%" height="100%" ui:field="dockPanel" spacing="5">
 			<g:Dock direction="NORTH">
-				<g:HorizontalPanel verticalAlignment="ALIGN_BOTTOM" width="100%" height="54px" spacing="5">
+				<g:HorizontalPanel verticalAlignment="ALIGN_BOTTOM" width="100%" height="54px" borderWidth="0">
 					<g:Image url="images/logo.png" width=""/>
 					<g:Cell horizontalAlignment="ALIGN_RIGHT">
 						<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
-						<g:Grid height="" width="600px" cellPadding="3" cellSpacing="2" borderWidth="0">
+						<g:Grid height="" width="100%" borderWidth="0">
 						<g:row>
 							<g:customCell>
 								<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
 							</g:customCell>
 							<g:customCell>
+								<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
+							</g:customCell>
+							<g:customCell>
 								<g:Label ui:field="lblCurrentMonth"/>
 							</g:customCell>
 							<g:customCell>
-								<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
+								<g:Button text="Cacher/ Afficher le menu" ui:field="cmdMenuToggle" width=""/>
 							</g:customCell>
 						</g:row>
 						<g:row>
@@ -30,10 +33,7 @@
 								<g:Image url="images/13.gif" ui:field="imgProgressBar" width=""/>
 							</g:customCell>
 							<g:customCell>
-								<g:Label/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button text="Afficher/ Cacher le menu" ui:field="cmdMenuToggle"/>
+								<g:Label text="." styleName="hiddenText"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
@@ -47,7 +47,7 @@
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
 					<g:TreeItem text="ADMINISTRATION" state="true">
-						<g:TreeItem text="Bulletins">
+						<g:TreeItem text="Bulletins" state="true">
 							<g:Button width="180px" text="Gestion des bulletins"></g:Button>
 							<g:Button text="Creation des bulletins" width="180px" ui:field="cmdCreateBulletins"/>
 						</g:TreeItem>
@@ -102,7 +102,7 @@
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="ESPACE ELEVE">
-							<g:Button text="Bulletins" width="200px">Mettre des heures</g:Button>
+							<g:Button text="Bulletins" width="200px" ui:field="cmdBulletinViewDetail">Mettre des heures</g:Button>
 							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordStudent"/>
 							<g:Button width="200px">Contact</g:Button>
 						</g:TreeItem>
@@ -110,10 +110,10 @@
 				</g:VerticalPanel>
 			</g:Dock>
 			<g:Dock direction="CENTER">
-				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT" height="">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="300px" horizontalAlignment="ALIGN_LEFT" spacing="5">
-						<g:Label text="Copyright Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
+					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
+						<g:Label text="Copyright © Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
 						<g:Image url="images/appengine-silver-120x30.gif"/>
 					</g:HorizontalPanel>
 				</g:VerticalPanel>

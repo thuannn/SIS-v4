@@ -66,6 +66,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Button cmdMarkInput;
 	@UiField Button cmdPasswordProf;
 	@UiField Button cmdPasswordStudent;
+	@UiField Button cmdBulletinViewDetail;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -398,6 +399,14 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	void onCmdPasswordProfClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().showFrmPassword();
+		}
+	}
+	
+	
+	@UiHandler("cmdBulletinViewDetail")
+	void onCmdBulletinViewDetailClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().showFrmBulletinViewDetail();
 		}
 	}
 }

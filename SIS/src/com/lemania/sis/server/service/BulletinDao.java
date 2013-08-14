@@ -57,6 +57,29 @@ public class BulletinDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/* List all bulletin by class */
+	public List<Bulletin> listAllByEmail(String email){
+		Student student = null;
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		//
+		Query<Student> qStudent = this.ofy().query(Student.class).filter("Email", email);
+		if (qStudent.count()>0) 
+			student = qStudent.list().get(0);
+		else
+			return returnList;
+		//
+		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+				.filter("student", new Key<Student>(Student.class, student.getId()))
+				.order("classeName")
+				.order("year");
+		for (Bulletin bulletin : q){
+			returnList.add(bulletin);
+		}
+		return returnList;
+	}
+	
+	
 	public void save(Bulletin bulletin){
 		this.ofy().put(bulletin);
 	}

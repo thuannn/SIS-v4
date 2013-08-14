@@ -73,6 +73,17 @@ public class StudentDao extends MyDAOBase {
 	}
 	
 	
+	/* List all the active students */
+	public List<Student> listByEmail(String email){
+		Query<Student> q = this.ofy().query(Student.class).filter("Email", email);
+		List<Student> returnList = new ArrayList<Student>();
+		for (Student student : q){
+			returnList.add(student);
+		}
+		return returnList;
+	}
+	
+	
 	/**/
 	public List<Student> listAllActiveWithoutBulletin(){
 		//
