@@ -7,4 +7,6 @@ public interface FrmBulletinViewDetailUiHandler extends UiHandlers {
 	void onStudentSelected();
 	//
 	void onClassChange(String classId);
+	//
+	void onBulletinChange(String bulletinId);
 }

@@ -1,5 +1,6 @@
 package com.lemania.sis.client.presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -24,16 +25,19 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinViewDetailUiHandler;
+import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinProxy;
+import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
-import com.lemania.sis.shared.StudentProxy;
+import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
+import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.StudentRequestFactory;
+import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
+import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
-import com.lemania.sis.shared.service.StudentRequestFactory.StudentRequestContext;
 
 public class FrmBulletinViewDetailPresenter
 		extends
@@ -43,6 +47,8 @@ public class FrmBulletinViewDetailPresenter
 	
 	// Thuan
 	private CurrentUser currentUser;
+	private List<BulletinSubjectProxy> subjects = new ArrayList<BulletinSubjectProxy>();
+	
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinViewDetailUiHandler> {
 		//
@@ -52,6 +58,9 @@ public class FrmBulletinViewDetailPresenter
 		void setStudentListData(List<BulletinProxy> students);
 		//
 		void setClasseList(List<ClasseProxy> classes);
+		//
+		void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches);
+		void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches);
 	}
 
 	@ProxyCodeSplit
@@ -162,6 +171,81 @@ public class FrmBulletinViewDetailPresenter
 	/**/
 	@Override
 	public void onClassChange(String classId) {
-		// TODO
+		// 
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.listAllByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BulletinProxy> response) {
+				getView().setStudentListData(response);
+			}
+		});
+	}
+
+	/**/
+	@Override
+	public void onBulletinChange(final String bulletinId) {
+		//
+		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
+		rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BulletinSubjectProxy> response) {
+				subjects.clear();
+				subjects.addAll(response);
+				getBranches(bulletinId);
+			}
+		});
+	}
+
+	
+	/**/
+	protected void getBranches(final String bulletinId) {
+		//
+		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
+		rc.listAllByBulletin( bulletinId ).fire(new Receiver<List<BulletinBrancheProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BulletinBrancheProxy> response) {
+				drawBulletin(bulletinId, subjects, response);
+			}
+		});
+	}
+	
+	
+	/**/
+	protected void drawBulletin(String bulletinId, final List<BulletinSubjectProxy> subjects, final List<BulletinBrancheProxy> branches){
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.getBulletin( bulletinId ).fire(new Receiver<BulletinProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinProxy response) {
+				if (response.getClasseName().toLowerCase().contains("matu"))
+					getView().drawGradeTableMatu(subjects, branches);
+				else
+					getView().drawGradeTableNormal(subjects, branches);
+			}
+		});
 	}
 }

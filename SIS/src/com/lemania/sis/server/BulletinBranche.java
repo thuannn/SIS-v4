@@ -2,6 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
 public class BulletinBranche extends DatastoreObject implements Comparable<BulletinBranche> {
@@ -34,6 +35,9 @@ public class BulletinBranche extends DatastoreObject implements Comparable<Bulle
 	private String T2 = "";
 	private String T3 = "";
 	private String An = "";
+	
+	@NotSaved
+	Long bulletinSubjectId = Long.MIN_VALUE;
 		
 	public Double getBrancheCoef() {
 		return brancheCoef;
@@ -223,5 +227,13 @@ public class BulletinBranche extends DatastoreObject implements Comparable<Bulle
 	public int compareTo(BulletinBranche bb) {
 		int brancheName = bulletinBrancheName.compareTo(bb.getBulletinBrancheName());
 		return brancheName;
+	}
+
+	public Long getBulletinSubjectId() {
+		return bulletinSubjectId;
+	}
+
+	public void setBulletinSubjectId(Long bulletinSubjectId) {
+		this.bulletinSubjectId = bulletinSubjectId;
 	}
 }

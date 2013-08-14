@@ -19,6 +19,7 @@ public interface BulletinBrancheRequestFactory extends RequestFactory {
 		Request<List<BulletinBrancheProxy>> listAllActive();
 		
 		Request<List<BulletinBrancheProxy>> listAll( String bulletinSubjectId );
+		Request<List<BulletinBrancheProxy>> listAllByBulletin( String bulletinId );
 		Request<Void> save(BulletinBrancheProxy bulletinBranche);
 		
 		Request<BulletinBrancheProxy> saveAndReturn(BulletinBrancheProxy branche);		

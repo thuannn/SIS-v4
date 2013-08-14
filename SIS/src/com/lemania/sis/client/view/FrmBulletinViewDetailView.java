@@ -8,9 +8,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinViewDetailUiHandler;
+import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinProxy;
+import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
-import com.lemania.sis.shared.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.ListBox;
@@ -41,13 +42,17 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	@UiField ListBox lstClasses;
 	@UiField HorizontalPanel pnlAdmin;
 	
+	
+	/**/
 	@Override
 	public void resetForm() {
 		//
 		lstBulletins.setSelectedIndex(0);
-		tblBulletin.clear();
+		tblBulletin.removeAllRows();
 	}
 
+	
+	/**/
 	@Override
 	public void setStudentListData(List<BulletinProxy> bulletins) {
 		//
@@ -59,6 +64,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		}
 	}
 
+	
+	/**/
 	@Override
 	public void setClasseList(List<ClasseProxy> classes) {
 		//
@@ -69,15 +76,177 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		}
 	}
 	
+	
+	/**/
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
 		if (getUiHandlers() != null)
 			getUiHandlers().onClassChange(lstClasses.getValue(lstClasses.getSelectedIndex()));
 	}
 
+	
+	/**/
 	@Override
 	public void showAdminPanel(Boolean show) {
 		//
 		pnlAdmin.setVisible(show);
+	}
+	
+	
+	/**/
+	@UiHandler("lstBulletins")
+	void onLstBulletinsChange(ChangeEvent event) {
+		if (getUiHandlers() != null)
+			getUiHandlers().onBulletinChange( lstBulletins.getValue(lstBulletins.getSelectedIndex()));
+	}
+
+	@Override
+	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches) {
+		//
+		tblBulletin.removeAllRows();
+		//
+		Integer rowCount = -1;
+		Integer brancheCount = 0;
+		//
+		rowCount++;
+		tblBulletin.setText(rowCount, 0, "Matière");
+		tblBulletin.setText(rowCount, 1, "Coef");
+		tblBulletin.setText(rowCount, 7, "T1");
+		tblBulletin.setText(rowCount, 13, "T2");
+		tblBulletin.setText(rowCount, 14, "Moyenne Semestrielle");
+		tblBulletin.setText(rowCount, 15, "Remarque");
+		tblBulletin.getRowFormatter().setStyleName(rowCount, "bulletinHeader");
+		//
+		for (BulletinSubjectProxy subject : subjects){
+			rowCount++;
+			tblBulletin.setText(rowCount, 0, subject.getSubjectName());
+			tblBulletin.setText(rowCount, 1, subject.getSubjectCoef().toString());
+			tblBulletin.setText(rowCount, 7, subject.getT1());
+			tblBulletin.setText(rowCount, 13, subject.getT2());
+			tblBulletin.setText(rowCount, 14, subject.getAn());
+			tblBulletin.setText(rowCount, 15, "");
+			tblBulletin.setText(rowCount+1, 15, 
+				!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
+					: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
+						: subject.getRemarqueT1());
+			tblBulletin.getRowFormatter().addStyleName(rowCount, "subjectLine");
+			//
+			brancheCount = 0;
+			for (BulletinBrancheProxy branche : branches){
+				if (branche.getBulletinSubjectId().equals(subject.getId())){
+					//
+					rowCount++;
+					brancheCount++;
+					//
+					tblBulletin.setText(rowCount, 0, branche.getBulletinBrancheName());
+					tblBulletin.setText(rowCount, 1, branche.getBrancheCoef().toString());
+					//
+					tblBulletin.setText(rowCount, 2, branche.getT1_1());
+					tblBulletin.setText(rowCount, 3, branche.getT1_2());
+					tblBulletin.setText(rowCount, 4, branche.getT1_3());
+					tblBulletin.setText(rowCount, 5, branche.getT1_4());
+					tblBulletin.setText(rowCount, 6, branche.getT1_5());
+					tblBulletin.setText(rowCount, 7, branche.getT1());
+					//
+					tblBulletin.setText(rowCount, 8, branche.getT2_1());
+					tblBulletin.setText(rowCount, 9, branche.getT2_2());
+					tblBulletin.setText(rowCount, 10, branche.getT2_3());
+					tblBulletin.setText(rowCount, 11, branche.getT2_4());
+					tblBulletin.setText(rowCount, 12, branche.getT2_5());
+					tblBulletin.setText(rowCount, 13, branche.getT2());
+				}
+			}
+			tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 15, brancheCount);
+		}
+		//
+		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");
+		tblBulletin.getColumnFormatter().addStyleName(13, "gradeColumn");
+		//
+		styleTable();
+	}
+
+	
+	/**/
+	private void styleTable() {
+		//
+		tblBulletin.setCellPadding(5);
+		tblBulletin.setStyleName("subSection");
+	}
+
+	@Override
+	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects,
+			List<BulletinBrancheProxy> branches) {
+		//
+		//
+		tblBulletin.removeAllRows();
+		//
+		Integer rowCount = -1;
+		Integer brancheCount = 0;
+		//
+		rowCount++;
+		tblBulletin.setText(rowCount, 0, "Matière");
+		tblBulletin.setText(rowCount, 1, "Coef");
+		tblBulletin.setText(rowCount, 7, "T1");
+		tblBulletin.setText(rowCount, 13, "T2");
+		tblBulletin.setText(rowCount, 19, "T2");
+		tblBulletin.setText(rowCount, 20, "Moyenne Annuelle");
+		tblBulletin.setText(rowCount, 21, "Remarque");
+		tblBulletin.getRowFormatter().setStyleName(rowCount, "bulletinHeader");
+		//
+		for (BulletinSubjectProxy subject : subjects){
+			rowCount++;
+			tblBulletin.setText(rowCount, 0, subject.getSubjectName());
+			tblBulletin.setText(rowCount, 1, subject.getSubjectCoef().toString());
+			tblBulletin.setText(rowCount, 7, subject.getT1());
+			tblBulletin.setText(rowCount, 13, subject.getT2());
+			tblBulletin.setText(rowCount, 19, subject.getT3());
+			tblBulletin.setText(rowCount, 20, subject.getAn());
+			tblBulletin.setText(rowCount, 21, "");
+			tblBulletin.setText(rowCount+1, 21, 
+				!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
+					: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
+						: subject.getRemarqueT1());
+			tblBulletin.getRowFormatter().addStyleName(rowCount, "subjectLine");
+			//
+			brancheCount = 0;
+			for (BulletinBrancheProxy branche : branches){
+				if (branche.getBulletinSubjectId().equals(subject.getId())){
+					//
+					rowCount++;
+					brancheCount++;
+					//
+					tblBulletin.setText(rowCount, 0, branche.getBulletinBrancheName());
+					tblBulletin.setText(rowCount, 1, branche.getBrancheCoef().toString());
+					//
+					tblBulletin.setText(rowCount, 2, branche.getT1_1());
+					tblBulletin.setText(rowCount, 3, branche.getT1_2());
+					tblBulletin.setText(rowCount, 4, branche.getT1_3());
+					tblBulletin.setText(rowCount, 5, branche.getT1_4());
+					tblBulletin.setText(rowCount, 6, branche.getT1_5());
+					tblBulletin.setText(rowCount, 7, branche.getT1());
+					//
+					tblBulletin.setText(rowCount, 8, branche.getT2_1());
+					tblBulletin.setText(rowCount, 9, branche.getT2_2());
+					tblBulletin.setText(rowCount, 10, branche.getT2_3());
+					tblBulletin.setText(rowCount, 11, branche.getT2_4());
+					tblBulletin.setText(rowCount, 12, branche.getT2_5());
+					tblBulletin.setText(rowCount, 13, branche.getT2());
+					//
+					tblBulletin.setText(rowCount, 14, branche.getT3_1());
+					tblBulletin.setText(rowCount, 15, branche.getT3_2());
+					tblBulletin.setText(rowCount, 16, branche.getT3_3());
+					tblBulletin.setText(rowCount, 17, branche.getT3_4());
+					tblBulletin.setText(rowCount, 18, branche.getT3_5());
+					tblBulletin.setText(rowCount, 19, branche.getT3());
+				}
+			}
+			tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 22, brancheCount);
+		}
+		//
+		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");
+		tblBulletin.getColumnFormatter().addStyleName(13, "gradeColumn");
+		tblBulletin.getColumnFormatter().addStyleName(19, "gradeColumn");
+		//
+		styleTable();
 	}
 }

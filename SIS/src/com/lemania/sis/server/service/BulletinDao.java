@@ -80,6 +80,11 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
+	public Bulletin getBulletin(String bulletinId){
+		return this.ofy().get(Bulletin.class, Long.parseLong(bulletinId));
+	}
+	
+	
 	public void save(Bulletin bulletin){
 		this.ofy().put(bulletin);
 	}

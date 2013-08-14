@@ -132,7 +132,8 @@ public class BulletinSubjectDao extends MyDAOBase {
 			Query<BulletinBranche> qBranche = this.ofy().query(BulletinBranche.class)
 					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, ps.getId()));
 			for (BulletinBranche branche : qBranche){
-				if (branche.getBulletinBrancheName().toLowerCase().contains("examen")){
+				if (branche.getBulletinBrancheName().toLowerCase().contains("examen") 
+						|| branche.getBulletinBrancheName().toLowerCase().contains("bac blanc")){
 					if (!branche.getT1().isEmpty())
 						examT1 = Double.parseDouble(branche.getT1());
 					if (!branche.getT2().isEmpty())

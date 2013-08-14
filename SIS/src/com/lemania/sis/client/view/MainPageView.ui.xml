@@ -47,12 +47,12 @@
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
 					<g:TreeItem text="ADMINISTRATION" state="true">
-						<g:TreeItem text="Bulletins" state="true">
+						<g:TreeItem text="Bulletins">
 							<g:Button width="180px" text="Gestion des bulletins"></g:Button>
 							<g:Button text="Creation des bulletins" width="180px" ui:field="cmdCreateBulletins"/>
 						</g:TreeItem>
-						<g:TreeItem text="Profils">
-							<g:Button text="Profils des études" width="180px" ui:field="cmdProfileManagement"/>
+						<g:TreeItem text="Modèles de bulletin">
+							<g:Button text="Modèles de bulletin" width="180px" ui:field="cmdProfileManagement"/>
 						</g:TreeItem></g:TreeItem>
 					<g:TreeItem text="INFORMATIONS DE BASE">
 						<g:TreeItem text="Elèves">
@@ -88,23 +88,32 @@
 							<g:Button ui:field="cmdSettings" text="Bloquer l&apos;accès" width="180px"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:Button text="Changer le MDP" ui:field="cmdPassword" width="220px"/>
-					<g:Button ui:field="cmdContact" width="220PX">Contact</g:Button>
+					<g:TreeItem text="Autres">
+						<g:Button text="Changer le MDP" ui:field="cmdPassword" width="200px"/>
+						<g:Button ui:field="cmdContact" width="200px" text="Aide">Contact</g:Button>
+					</g:TreeItem>
 				</g:Tree>
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="ESPACE PROFESSEUR" state="true">
 							<g:Button text="Saisir des notes" width="200px" ui:field="cmdMarkInput">Mettre des heures</g:Button>
+						</g:TreeItem>
+						<g:TreeItem text="Bulletins" state="true">
+							<g:Button text="Bulletins" width="200px" ui:field="cmdBulletinView">Mettre des heures</g:Button>
+						</g:TreeItem>
+						<g:TreeItem text="Autres" state="true">
 							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordProf"/>
-							<g:Button width="200px">Contact</g:Button>
+							<g:Button width="200px" text="Aide">Contact</g:Button>
 						</g:TreeItem>
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="ESPACE ELEVE">
 							<g:Button text="Bulletins" width="200px" ui:field="cmdBulletinViewDetail">Mettre des heures</g:Button>
+						</g:TreeItem>
+						<g:TreeItem text="Autres" state="true">
 							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordStudent"/>
-							<g:Button width="200px">Contact</g:Button>
+							<g:Button width="200px" text="Aide">Contact</g:Button>
 						</g:TreeItem>
 					</g:Tree>
 				</g:VerticalPanel>

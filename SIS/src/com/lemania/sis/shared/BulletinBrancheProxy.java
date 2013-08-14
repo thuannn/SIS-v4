@@ -73,4 +73,7 @@ public interface BulletinBrancheProxy extends EntityProxy {
 
 	public String getAn();
 	public void setAn(String an);
+	
+	public Long getBulletinSubjectId();
+	public void setBulletinSubjectId(Long bulletinSubjectId);
 }

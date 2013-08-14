@@ -7,6 +7,7 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
 import com.lemania.sis.server.Branche;
+import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.BulletinSubject;
 
@@ -63,6 +64,30 @@ public class BulletinBrancheDao extends MyDAOBase {
 		Collections.sort(returnList);
 		return returnList;
 	}
+	
+	
+	/*
+	 * 
+	 * */
+	public List<BulletinBranche> listAllByBulletin( String bulletinId ){
+		//
+		List<BulletinBranche> returnList = new ArrayList<BulletinBranche>();
+		Query<BulletinBranche> q;
+		//
+		Query<BulletinSubject> qSubject = this.ofy().query(BulletinSubject.class)
+				.filter("bulletin", new Key<Bulletin>(Bulletin.class, Long.parseLong(bulletinId)));
+		for (BulletinSubject subject : qSubject ){
+			//
+			q = this.ofy().query(BulletinBranche.class)
+					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, subject.getId()));
+			for ( BulletinBranche bulletinBranche : q ){
+				bulletinBranche.setBulletinSubjectId( subject.getId() );
+				returnList.add( bulletinBranche );
+			}
+		}
+		return returnList;
+	}
+	
 	
 	/*
 	 * 

@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%" height="100%">
-		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
+		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2" height="600px">
 			<g:Label text="Lemania eProfil" styleName="pageTitle" width=""/>
 			<g:Label text="." styleName="hiddenText"/>
 			<g:Grid width="" ui:field="panelLogin" styleName="subSection" cellPadding="5" cellSpacing="5">
