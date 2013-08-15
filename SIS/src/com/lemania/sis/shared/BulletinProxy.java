@@ -24,4 +24,7 @@ public interface BulletinProxy extends EntityProxy {
 	
 	public String getYear();
 	public void setYear(String year);
+	
+	public String getProgrammeName();
+	public void setProgrammeName(String programmeName);
 }

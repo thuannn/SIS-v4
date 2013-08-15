@@ -21,8 +21,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.lemania.sis.client.CurrentUser;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HTML;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -32,42 +32,18 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	private final Widget widget;
 
 	@UiField FlowPanel mainContentPanel;
-	@UiField Button cmdEcolePage;
-	@UiField Button cmdEcoleAdd;
 	@UiField Button cmdHomepage;
-	@UiField Button cmdClasseList;
-	@UiField Button cmdClasseAdd;
-	@UiField Button cmdSubjectList;
-	@UiField Button cmdSubjectAdd;
-	@UiField Button cmdProfs;
-	@UiField Button cmdProfsAdd;
-	@UiField Button cmdContact;
 	@UiField Hyperlink cmdLogout;
 	@UiField Label txtWelcome;
-	@UiField Button cmdUserMgt;
 	@UiField Label lblCurrentMonth;
 	@UiField Button cmdMenuToggle;
 	@UiField Tree treeMenuAdmin;
-	@UiField Image imgProgressBar;
-	@UiField Button cmdSettings;
 	@UiField DockPanel dockPanel;
-	@UiField Button cmdPassword;
-	@UiField Button cmdStudents;
-	@UiField Button cmdCreateStudent;
-	@UiField Button cmdBrancheList;
-	@UiField Button cmdBrancheAdd;
-	@UiField Button cmdProgramList;
-	@UiField Button cmdProgramAdd;
-	@UiField Button cmdProfileManagement;
 	@UiField Tree treeMenuProf;
 	@UiField Tree treeMenuEleve;
 	@UiField VerticalPanel leftPanel;
-	@UiField Button cmdCreateBulletins;
-	@UiField Button cmdMarkInput;
-	@UiField Button cmdPasswordProf;
-	@UiField Button cmdPasswordStudent;
-	@UiField Button cmdBulletinViewDetail;
-	@UiField Button cmdBulletinView;
+	@UiField HTML htmlProgressBar;
+	@UiField Hyperlink cmdProfileManagement;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -104,78 +80,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			getUiHandlers().showHomepage();
 	}
 	
-	@UiHandler("cmdEcolePage")
-	void onCmdEcolePageClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showEcoleList();
-	}
-	
-	@UiHandler("cmdEcoleAdd")
-	void onCmdEcoleAddClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showEcoleAdd();
-	}
-	
-	@UiHandler("cmdClasseList")
-	void onCmdClasseListClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showClasseList();
-	}
-	
-	@UiHandler("cmdClasseAdd")
-	void onCmdClasseAddClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showClasseAdd();
-	}
-	
-	@UiHandler("cmdSubjectList")
-	void onCmdSubjectListClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showFrmSubjectList();
-	}
-	
-	@UiHandler("cmdSubjectAdd")
-	void onCmdSubjectAddClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showFrmSubjectAdd();
-	}
-	
-	@UiHandler("cmdProfs")
-	void onCmdProfsClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showProfessorList();
-	}
-	
-	@UiHandler("cmdProfsAdd")
-	void onCmdProfsAddClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showProfessorAdd();
-	}
-	
-	@UiHandler("cmdContact")
-	void onCmdContactClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showContact();
-	}
-	
 	@UiHandler("cmdLogout")
 	void onCmdLogoutClicked(ClickEvent event){
 		if (getUiHandlers() != null) {			
 			getUiHandlers().logOut();
-		}
-	}
-	
-	@UiHandler("cmdUserMgt")
-	void onCmdUserMgtClicked(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showUserManagement();
-		}
-	}
-	
-	@UiHandler("cmdSettings")
-	void onCmdSettingsClicked(ClickEvent event){
-		if (getUiHandlers() != null) {
-			getUiHandlers().showSettingsScreen();
 		}
 	}
 
@@ -207,8 +115,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			//
 			hideMenu();
 		}
-		
-		imgProgressBar.setVisible(false);
 	}
 	
 	/**/
@@ -219,8 +125,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		leftPanel.setVisible(true);
 		treeMenuAdmin.setVisible( true );
-		treeMenuEleve.setVisible( true );
-		treeMenuProf.setVisible( true );
+		treeMenuEleve.setVisible( false );
+		treeMenuProf.setVisible( false );
 	}
 	
 	/**/
@@ -281,7 +187,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	/**/
 	@Override
 	public void showProgressBar(boolean visible) {
-		imgProgressBar.setVisible(visible);
+		htmlProgressBar.setVisible(visible);
 	}
 
 	/**/
@@ -306,115 +212,5 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	            }
 	        }
 	    }
-	}
-	
-	/**/
-	@UiHandler("cmdPassword")
-	void onCmdPasswordClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmPassword();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdStudents")
-	void onCmdStudentsClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmStudents();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdCreateStudent")
-	void onCmdCreateStudentClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmCreateStudents();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdBrancheList")
-	void onCmdBrancheListClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showBrancheList();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdBrancheAdd")
-	void onCmdBrancheAddClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showBrancheAdd();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdProgramList")
-	void onCmdProgramListClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showCoursList();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdProgramAdd")
-	void onCmdProgramAddClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showCoursAdd();
-		}
-	}
-	
-	/**/
-	@UiHandler("cmdProfileManagement")
-	void onCmdProfileManagementClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showProfileManagement();
-		}
-	}
-	
-	@UiHandler("cmdCreateBulletins")
-	void onCmdCreateBulletinsClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showCreateBulletins();
-		}
-	}
-	
-	
-	@UiHandler("cmdMarkInput")
-	void onCmdMarkInputClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmMarkInput();
-		}
-	}
-	
-	
-	@UiHandler("cmdPasswordStudent")
-	void onCmdPasswordStudentClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmPassword();
-		}
-	}
-	
-	
-	@UiHandler("cmdPasswordProf")
-	void onCmdPasswordProfClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmPassword();
-		}
-	}
-	
-	
-	@UiHandler("cmdBulletinViewDetail")
-	void onCmdBulletinViewDetailClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmBulletinViewDetail();
-		}
-	}
-	
-	@UiHandler("cmdBulletinView")
-	void onCmdBulletinViewClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().showFrmBulletinViewDetail();
-		}
 	}
 }

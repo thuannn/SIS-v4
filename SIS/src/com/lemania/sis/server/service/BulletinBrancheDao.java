@@ -133,7 +133,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 	/*
 	 * 
 	 * */
-	public void removeProfileBranche(BulletinBranche bulletinBranche){
+	public void removeBulletinBranche(BulletinBranche bulletinBranche){
 		//
 		this.ofy().delete( bulletinBranche );
 	}

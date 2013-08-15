@@ -11,9 +11,7 @@
 			<g:Dock direction="NORTH">
 				<g:HorizontalPanel verticalAlignment="ALIGN_BOTTOM" width="100%" height="54px" borderWidth="0">
 					<g:Image url="images/logo.png" width=""/>
-					<g:Cell horizontalAlignment="ALIGN_RIGHT">
-						<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
-						<g:Grid height="" width="100%" borderWidth="0">
+					<g:Grid height="" width="100%" borderWidth="0">
 						<g:row>
 							<g:customCell>
 								<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
@@ -28,17 +26,7 @@
 								<g:Button text="Cacher/ Afficher le menu" ui:field="cmdMenuToggle" width=""/>
 							</g:customCell>
 						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Image url="images/13.gif" ui:field="imgProgressBar" width=""/>
-							</g:customCell>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-						</g:row>
 					</g:Grid>
-					</g:HorizontalPanel>
-					</g:Cell>
 				</g:HorizontalPanel>
 			</g:Dock>
 			<g:Dock direction="WEST">
@@ -46,80 +34,76 @@
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
 					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
-					<g:TreeItem text="ADMINISTRATION" state="true">
-						<g:TreeItem text="Bulletins">
-							<g:Button width="180px" text="Gestion des bulletins"></g:Button>
-							<g:Button text="Creation des bulletins" width="180px" ui:field="cmdCreateBulletins"/>
+					<g:TreeItem text="Gestion générale des bulletins" state="true">
+							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
+							<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation"/>
+							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement"/>
 						</g:TreeItem>
-						<g:TreeItem text="Modèles de bulletin">
-							<g:Button text="Modèles de bulletin" width="180px" ui:field="cmdProfileManagement"/>
-						</g:TreeItem></g:TreeItem>
-					<g:TreeItem text="INFORMATIONS DE BASE">
+					<g:TreeItem text="Notes" state="true">
+						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail"/>
+						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput"/>
+					</g:TreeItem>
+					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">
-							<g:Button text="Liste des élèves" width="180px" ui:field="cmdStudents"/>
-							<g:Button text="Ajouter un élève" width="180px" ui:field="cmdCreateStudent"/>
+							<g:Hyperlink targetHistoryToken="students" text="Liste des élèves"/>
+							<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève"/>
 						</g:TreeItem>
 						<g:TreeItem text="Professeurs">
-							<g:Button text="Liste des professeurs" ui:field="cmdProfs" width="180px"/>
-							<g:Button text="Ajouter un professeur" ui:field="cmdProfsAdd" width="180px"/>
+							<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs"/>
+							<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur"/>
 						</g:TreeItem>
 						<g:TreeItem text="Branches">
-						<g:Button text="Liste des branches" width="180px" ui:field="cmdBrancheList"/>
-						<g:Button text="Ajouter une branche" width="180px" ui:field="cmdBrancheAdd"/>
+						<g:Hyperlink targetHistoryToken="branchelist" text="Liste des branches"/>
+						<g:Hyperlink targetHistoryToken="brancheadd" text="Rajouter une branche"/>
 					</g:TreeItem>
 						<g:TreeItem text="Matières">
-							<g:Button text="Liste des matières" ui:field="cmdSubjectList" width="180px"/>
-							<g:Button ui:field="cmdSubjectAdd" width="180px" text="Ajouter un matière">Ajouter un type</g:Button>
+							<g:Hyperlink targetHistoryToken="subjectlist" text="Liste des matières"/>
+							<g:Hyperlink targetHistoryToken="subjectadd" text="Rajouter une matière"/>
 						</g:TreeItem>
 						<g:TreeItem text="Classes">
-							<g:Button ui:field="cmdClasseList" text="Liste des classes" width="180px">Liste de cours</g:Button>
-							<g:Button ui:field="cmdClasseAdd" text="Ajouter un nom de classe" width="180px">Ajouter un cours</g:Button>
+							<g:Hyperlink text="Liste des classes" targetHistoryToken="classlist"/>
+							<g:Hyperlink targetHistoryToken="classeadd" text="Rajouter une classe"/>
 						</g:TreeItem>
 						<g:TreeItem text="Programmes">
-							<g:Button ui:field="cmdProgramList" width="180px">Liste des programmes</g:Button>
-							<g:Button ui:field="cmdProgramAdd" width="180px">Ajouter un programme</g:Button>
+							<g:Hyperlink targetHistoryToken="!cours" text="Liste des programmes"/>
+							<g:Hyperlink text="Rajouter un programme" targetHistoryToken="coursadd"/>
 						</g:TreeItem>
 						<g:TreeItem text="Ecoles">
-						<g:Button ui:field="cmdEcolePage" text="Liste des écoles" width="180px">Liste d'écoles</g:Button>
-						<g:Button text="Ajouter un nom d&apos;école" ui:field="cmdEcoleAdd" width="180px"/>
+						<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage"/>
+						<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école"/>
 						</g:TreeItem>
-						<g:TreeItem text="Gestion d&apos;accès">
-							<g:Button text="Gestion des utilisateurs" ui:field="cmdUserMgt" width="180px"/>
-							<g:Button ui:field="cmdSettings" text="Bloquer l&apos;accès" width="180px"/>
+						<g:TreeItem text="Gestion de l&apos;accès">
+							<g:Hyperlink text="Gestion des codes d&apos;accès" targetHistoryToken="usermanagement"/>
+							<g:Hyperlink targetHistoryToken="settings" text="Bloquer l&apos;accès au système"/>
 						</g:TreeItem>
 					</g:TreeItem>
 					<g:TreeItem text="Autres">
-						<g:Button text="Changer le MDP" ui:field="cmdPassword" width="200px"/>
-						<g:Button ui:field="cmdContact" width="200px" text="Aide">Contact</g:Button>
+						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe"/>
+						<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
 					</g:TreeItem>
 				</g:Tree>
-					<g:Tree ui:field="treeMenuProf" styleName="sideBar">
+					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
-						<g:TreeItem text="ESPACE PROFESSEUR" state="true">
-							<g:Button text="Saisir des notes" width="200px" ui:field="cmdMarkInput">Mettre des heures</g:Button>
-						</g:TreeItem>
-						<g:TreeItem text="Bulletins" state="true">
-							<g:Button text="Bulletins" width="200px" ui:field="cmdBulletinView">Mettre des heures</g:Button>
-						</g:TreeItem>
-						<g:TreeItem text="Autres" state="true">
-							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordProf"/>
-							<g:Button width="200px" text="Aide">Contact</g:Button>
+						<g:TreeItem text="Espace professeur" state="true">
+							<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput"/>
+							<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail"/>
+							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password"/>
+							<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
 						</g:TreeItem>
 					</g:Tree>
-					<g:Tree styleName="sideBar" ui:field="treeMenuEleve">
+					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
-						<g:TreeItem state="true" text="ESPACE ELEVE">
-							<g:Button text="Bulletins" width="200px" ui:field="cmdBulletinViewDetail">Mettre des heures</g:Button>
-						</g:TreeItem>
-						<g:TreeItem text="Autres" state="true">
-							<g:Button text="Changer le MDP" width="200px" ui:field="cmdPasswordStudent"/>
-							<g:Button width="200px" text="Aide">Contact</g:Button>
+						<g:TreeItem state="true" text="Espace élève">
+							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes"/>
+							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe"/>
+							<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
 						</g:TreeItem>
 					</g:Tree>
 				</g:VerticalPanel>
 			</g:Dock>
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
+					<g:HTML wordWrap="true" visible="false" ui:field="htmlProgressBar"><div id="fountainG"> <div class="fountainG" id="fountainG_1"> </div> <div class="fountainG" id="fountainG_2"> </div> <div class="fountainG" id="fountainG_3"> </div> <div class="fountainG" id="fountainG_4"> </div> <div class="fountainG" id="fountainG_5"> </div> <div class="fountainG" id="fountainG_6"> </div> <div class="fountainG" id="fountainG_7"> </div> <div class="fountainG" id="fountainG_8"> </div> </div></g:HTML>
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
 					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
 						<g:Label text="Copyright © Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>

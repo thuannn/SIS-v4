@@ -282,11 +282,11 @@ public class ProfileManagementPresenter
 			String brancheCoef) {
 		//
 		if (profileSubjectId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			Window.alert( NotificationTypes.invalid_input + " - Matière");
 			return;
 		}
 		if (brancheId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Matière");
+			Window.alert( NotificationTypes.invalid_input + " - Branche");
 			return;
 		}
 		if ( !FieldValidation.isNumeric(brancheCoef) ) {

@@ -267,4 +267,9 @@ public class MainPagePresenter extends
 	public void showFrmBulletinViewDetail() {
 		History.newItem(NameTokens.bulletindetail);
 	}
+
+	@Override
+	public void showFrmBulletinManagement() {
+		History.newItem(NameTokens.bulletinmanagement);
+	}
 }

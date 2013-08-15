@@ -8,7 +8,7 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="Notes du bulletin" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
+			<g:Label text="CONSULTER LES NOTES" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:VerticalPanel width="100%">
 				<g:HorizontalPanel width="400px" spacing="5" styleName="subSection" horizontalAlignment="ALIGN_RIGHT" ui:field="pnlAdmin" visible="false">
 					<g:Label text="Classe :"/>

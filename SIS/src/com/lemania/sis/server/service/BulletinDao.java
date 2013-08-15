@@ -9,6 +9,7 @@ import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
+import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
@@ -81,7 +82,10 @@ public class BulletinDao extends MyDAOBase {
 	
 	
 	public Bulletin getBulletin(String bulletinId){
-		return this.ofy().get(Bulletin.class, Long.parseLong(bulletinId));
+		Bulletin bulletin = this.ofy().get(Bulletin.class, Long.parseLong(bulletinId));
+		bulletin.setProgrammeName( this.ofy().get(
+				this.ofy().get(Classe.class, bulletin.getClasse().getId()).getProgramme()).getCoursNom() );
+		return bulletin;
 	}
 	
 	

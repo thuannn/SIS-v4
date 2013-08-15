@@ -59,8 +59,8 @@ public class FrmBulletinViewDetailPresenter
 		//
 		void setClasseList(List<ClasseProxy> classes);
 		//
-		void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches);
-		void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches);
+		void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent);
+		void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent);
 	}
 
 	@ProxyCodeSplit
@@ -241,10 +241,10 @@ public class FrmBulletinViewDetailPresenter
 			}
 			@Override
 			public void onSuccess(BulletinProxy response) {
-				if (response.getClasseName().toLowerCase().contains("matu"))
-					getView().drawGradeTableMatu(subjects, branches);
+				if (response.getProgrammeName().toLowerCase().contains("matu"))
+					getView().drawGradeTableMatu(subjects, branches, currentUser.isStudent());
 				else
-					getView().drawGradeTableNormal(subjects, branches);
+					getView().drawGradeTableNormal(subjects, branches, currentUser.isStudent());
 			}
 		});
 	}

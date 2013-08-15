@@ -101,7 +101,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	@Override
-	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches) {
+	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent) {
 		//
 		tblBulletin.removeAllRows();
 		//
@@ -113,8 +113,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		tblBulletin.setText(rowCount, 1, "Coef");
 		tblBulletin.setText(rowCount, 7, "T1");
 		tblBulletin.setText(rowCount, 13, "T2");
-		tblBulletin.setText(rowCount, 14, "Moyenne Semestrielle");
-		tblBulletin.setText(rowCount, 15, "Remarque");
+		tblBulletin.setText(rowCount, 14, "Moyenne Semestrielle");		
 		tblBulletin.getRowFormatter().setStyleName(rowCount, "bulletinHeader");
 		//
 		for (BulletinSubjectProxy subject : subjects){
@@ -123,13 +122,17 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			tblBulletin.setText(rowCount, 1, subject.getSubjectCoef().toString());
 			tblBulletin.setText(rowCount, 7, subject.getT1());
 			tblBulletin.setText(rowCount, 13, subject.getT2());
-			tblBulletin.setText(rowCount, 14, subject.getAn());
-			tblBulletin.setText(rowCount, 15, "");
-			tblBulletin.setText(rowCount+1, 15, 
-				!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
-					: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
-						: subject.getRemarqueT1());
-			tblBulletin.getRowFormatter().addStyleName(rowCount, "subjectLine");
+			tblBulletin.setText(rowCount, 14, subject.getAn());			
+			if (isStudent)
+				tblBulletin.setText(rowCount+1, 14, "");
+			else
+				tblBulletin.setText(rowCount+1, 14, 
+					!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
+						: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
+							: subject.getRemarqueT1());
+			//
+			for (int i=0; i<15; i++)
+				tblBulletin.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 			//
 			brancheCount = 0;
 			for (BulletinBrancheProxy branche : branches){
@@ -153,30 +156,48 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 					tblBulletin.setText(rowCount, 10, branche.getT2_3());
 					tblBulletin.setText(rowCount, 11, branche.getT2_4());
 					tblBulletin.setText(rowCount, 12, branche.getT2_5());
-					tblBulletin.setText(rowCount, 13, branche.getT2());
+					tblBulletin.setText(rowCount, 13, branche.getT2());					
 				}
 			}
-			tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 15, brancheCount);
+			if (brancheCount>0)
+				tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 14, brancheCount);
 		}
 		//
 		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");
 		tblBulletin.getColumnFormatter().addStyleName(13, "gradeColumn");
 		//
-		styleTable();
+		styleTableMatu();
 	}
 
 	
 	/**/
-	private void styleTable() {
-		//
-		tblBulletin.setCellPadding(5);
+	private void styleTableMatu() {
+		//		
+		tblBulletin.setCellSpacing(0);
 		tblBulletin.setStyleName("subSection");
+		//
+		for (int i=1; i<14; i++)
+			for (int j=0; j<tblBulletin.getRowCount(); j++) {
+				if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
+					tblBulletin.getCellFormatter().setStyleName(j, i, "brancheLine");
+			}
+	}
+	
+	/**/
+	private void styleTableNormal() {
+		//		
+		tblBulletin.setCellSpacing(0);
+		tblBulletin.setStyleName("subSection");
+		//
+		for (int i=1; i<19; i++)
+			for (int j=0; j<tblBulletin.getRowCount(); j++) {
+				if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
+					tblBulletin.getCellFormatter().setStyleName(tblBulletin.getRowCount(), i, "brancheLine");
+			}
 	}
 
 	@Override
-	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects,
-			List<BulletinBrancheProxy> branches) {
-		//
+	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent) {
 		//
 		tblBulletin.removeAllRows();
 		//
@@ -189,8 +210,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		tblBulletin.setText(rowCount, 7, "T1");
 		tblBulletin.setText(rowCount, 13, "T2");
 		tblBulletin.setText(rowCount, 19, "T2");
-		tblBulletin.setText(rowCount, 20, "Moyenne Annuelle");
-		tblBulletin.setText(rowCount, 21, "Remarque");
+		tblBulletin.setText(rowCount, 20, "Moyenne Annuelle");		
 		tblBulletin.getRowFormatter().setStyleName(rowCount, "bulletinHeader");
 		//
 		for (BulletinSubjectProxy subject : subjects){
@@ -200,13 +220,17 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			tblBulletin.setText(rowCount, 7, subject.getT1());
 			tblBulletin.setText(rowCount, 13, subject.getT2());
 			tblBulletin.setText(rowCount, 19, subject.getT3());
-			tblBulletin.setText(rowCount, 20, subject.getAn());
-			tblBulletin.setText(rowCount, 21, "");
-			tblBulletin.setText(rowCount+1, 21, 
-				!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
-					: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
-						: subject.getRemarqueT1());
-			tblBulletin.getRowFormatter().addStyleName(rowCount, "subjectLine");
+			tblBulletin.setText(rowCount, 20, subject.getAn());			
+			if (isStudent)
+				tblBulletin.setText(rowCount+1, 20, "");
+			else
+				tblBulletin.setText(rowCount+1, 20, 
+					!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
+						: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
+							: subject.getRemarqueT1());
+			//
+			for (int i=0; i<21; i++)
+				tblBulletin.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 			//
 			brancheCount = 0;
 			for (BulletinBrancheProxy branche : branches){
@@ -240,13 +264,14 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 					tblBulletin.setText(rowCount, 19, branche.getT3());
 				}
 			}
-			tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 22, brancheCount);
+			if (brancheCount>0)
+				tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 20, brancheCount);
 		}
 		//
 		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");
 		tblBulletin.getColumnFormatter().addStyleName(13, "gradeColumn");
 		tblBulletin.getColumnFormatter().addStyleName(19, "gradeColumn");
 		//
-		styleTable();
+		styleTableNormal();
 	}
 }

@@ -8,7 +8,7 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="CREATION DES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
+			<g:Label text="ATTRIBUTION PROGRAMME / ELEVE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel width="100%" spacing="5">
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 					<g:Label text="Liste des élèves actives" styleName="sectionTitle"/>

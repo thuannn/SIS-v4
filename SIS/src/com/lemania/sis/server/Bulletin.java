@@ -2,6 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
 public class Bulletin extends DatastoreObject {
@@ -11,6 +12,9 @@ public class Bulletin extends DatastoreObject {
 	private String classeName;
 	private String studentName;
 	private String year;
+	
+	@NotSaved
+	private String programmeName;
 	
 	private Key<Classe> classe;
 	private Key<Student> student;
@@ -69,5 +73,13 @@ public class Bulletin extends DatastoreObject {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public String getProgrammeName() {
+		return programmeName;
+	}
+
+	public void setProgrammeName(String programmeName) {
+		this.programmeName = programmeName;
 	}
 }

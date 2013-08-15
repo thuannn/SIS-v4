@@ -73,6 +73,14 @@
 					<g:Grid cellPadding="5" cellSpacing="5">
 						<g:row>
 							<g:customCell>
+								<g:Label text="." styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label ui:field="lblSelectedSubject" text="." styleName="header"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
 								<g:Label text="Branche :"/>
 							</g:customCell>
 							<g:customCell>
@@ -91,14 +99,6 @@
 							</g:customCell>
 							<g:customCell>
 								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Label ui:field="lblSelectedSubject" text="."/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>

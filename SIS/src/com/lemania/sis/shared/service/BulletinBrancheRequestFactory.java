@@ -25,7 +25,7 @@ public interface BulletinBrancheRequestFactory extends RequestFactory {
 		Request<BulletinBrancheProxy> saveAndReturn(BulletinBrancheProxy branche);		
 		Request<BulletinBrancheProxy> saveAndReturn(String bulletinSubjectId, String brancheId, String brancheCoef );
 		
-		Request<Void> removeProfileBranche(BulletinBrancheProxy bulletinBranche);
+		Request<Void> removeBulletinBranche(BulletinBrancheProxy bulletinBranche);
 	}
 	
 	BulletinBrancheRequestContext bulletinBrancheRequest();

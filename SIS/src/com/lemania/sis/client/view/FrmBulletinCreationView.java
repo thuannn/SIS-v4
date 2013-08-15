@@ -67,6 +67,18 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	@Override
 	public void resetForm() {
 		// Initialize years list
+		initializeYearList();
+		//
+		lstEcoles.setSelectedIndex(0);
+		lstProgrammes.clear();
+		lstClasses.clear();
+		//
+		bulletinDataProvider.getList().clear();
+	}
+	
+	
+	public void initializeYearList(){
+		lstYear.clear();
 		lstYear.addItem("-","");
 		lstYear.addItem("2013 - 2014","2013");
 	}
