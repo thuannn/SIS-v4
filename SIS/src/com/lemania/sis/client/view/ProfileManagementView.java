@@ -11,6 +11,7 @@ import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.ProfileManagementPresenter;
 import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
+import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileBrancheProxy;
 import com.lemania.sis.shared.ProfileProxy;
@@ -36,7 +37,6 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.DoubleBox;
-import com.google.gwt.user.client.ui.Label;
 
 public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementUiHandler> implements
 		ProfileManagementPresenter.MyView {
@@ -81,7 +81,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	
 	@UiField(provided=true) DataGrid<ProfileSubjectProxy> tblSubjects = new DataGrid<ProfileSubjectProxy>();
 	@UiField(provided=true) DataGrid<ProfileBrancheProxy> tblBranches = new DataGrid<ProfileBrancheProxy>();
-	@UiField Label lblSelectedSubject;
+	@UiField ListBox lstClasses;
 	
 	/*
 	 * 
@@ -101,7 +101,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	void onCmdSaveNewProfileClick(ClickEvent event) {
 		//
 		if (getUiHandlers() != null)
-			getUiHandlers().createNewProfile( txtNewProfileName.getText() );
+			getUiHandlers().createNewProfile( txtNewProfileName.getText(), lstClasses.getValue(lstClasses.getSelectedIndex()) );
 	}
 	
 
@@ -145,7 +145,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		lstProfiles.clear();
 		lstProfiles.addItem("-","");
-		
+		//
 		for (ProfileProxy profile : profiles){
 			lstProfiles.addItem( profile.getProfileName(), profile.getId().toString() );
 		}
@@ -191,7 +191,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@UiHandler("lstSubjects")
 	void onLstSubjectsChange(ChangeEvent event) {
 		if (getUiHandlers() != null)
-			getUiHandlers().loadProfessorList( lstSubjects.getValue( lstSubjects.getSelectedIndex() ));
+			getUiHandlers().loadProfessorList( lstSubjects.getValue( lstSubjects.getSelectedIndex()), lstClasses.getValue(lstClasses.getSelectedIndex()));
 	}
 	
 
@@ -372,8 +372,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedSubject = selectionModel.getSelectedObject();
 	        if (selectedSubject != null) {
-	        	selectedSubjectIndex = subjectDataProvider.getList().indexOf( selectedSubject );
-	        	lblSelectedSubject.setText( selectedSubject.getSubjectName() );
+	        	selectedSubjectIndex = subjectDataProvider.getList().indexOf( selectedSubject );	        	
 	        	getUiHandlers().onSubjectSelected( selectedSubject.getId().toString() );
 	        }
 	      }
@@ -517,5 +516,24 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		subjectDataProvider.getList().remove(selectedSubjectIndex);
 		subjectDataProvider.refresh();
+	}
+
+	@Override
+	public void setClassList(List<ClasseProxy> classes) {
+		//
+		lstClasses.clear();
+		lstClasses.addItem("-","");
+		
+		for (ClasseProxy classe : classes){
+			lstClasses.addItem( classe.getClassName(), classe.getId().toString() );
+		}
+		lstClasses.setSelectedIndex(0);
+	}
+	
+	/**/
+	@UiHandler("lstClasses")
+	void onLstClassesChange(ChangeEvent event) {
+		if (getUiHandlers() != null)
+			getUiHandlers().onClassChanged( lstClasses.getValue(lstClasses.getSelectedIndex()) );
 	}
 }

@@ -26,6 +26,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
+import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileBrancheProxy;
 import com.lemania.sis.shared.ProfileProxy;
@@ -34,6 +35,8 @@ import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
+import com.lemania.sis.shared.service.ClasseRequestFactory;
+import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileBrancheRequestFactory;
 import com.lemania.sis.shared.service.ProfileBrancheRequestFactory.ProfileBrancheRequestContext;
@@ -62,6 +65,7 @@ public class ProfileManagementPresenter
 		//
 		void setSubjectListData(List<SubjectProxy> subjectList);
 		void setBrancheListData(List<BrancheProxy> brancheList);
+		void setClassList(List<ClasseProxy> classes);
 		//
 		void addNewProfileSubjectToTable( ProfileSubjectProxy profileSubject );
 		void setSubjectTableData( List<ProfileSubjectProxy> subjects );
@@ -111,11 +115,29 @@ public class ProfileManagementPresenter
 		// Thuan
 		getView().resetForm();
 		//
-		loadProfileList();
+		loadClassList();
 		loadActiveSubjectList();
 		loadActiveBrancheList();
 	}
 	
+
+	private void loadClassList() {
+		//
+		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ClasseRequestContext rc = rf.classeRequest();
+		rc.listAll().fire(new Receiver<List<ClasseProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ClasseProxy> response) {
+				getView().setClassList(response);
+			}
+		});
+	}
+
 
 	/*
 	 * Load active branch list when the form is opened
@@ -162,13 +184,13 @@ public class ProfileManagementPresenter
 	/*
 	 * Load profile list when form is opened
 	 * */
-	private void loadProfileList() {
+	private void loadProfileList(String classId) {
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		
 		ProfileRequestContext rc = rf.profileRequest();
-		rc.listAll().fire(new Receiver<List<ProfileProxy>>(){
+		rc.listAllActiveByClass( classId ).fire(new Receiver<List<ProfileProxy>>(){
 			@Override
 			public void onSuccess(List<ProfileProxy> response){
 				getView().setProfileListData( response );
@@ -178,7 +200,7 @@ public class ProfileManagementPresenter
 				Window.alert(error.getMessage());
 			}
 		});
-		//		
+		//
 	}
 	
 
@@ -186,26 +208,25 @@ public class ProfileManagementPresenter
 	 * 
 	 * */
 	@Override
-	public void createNewProfile(String profileName) {
+	public void createNewProfile(String profileName, final String classId) {
 		//
 		if (profileName.isEmpty()){
 			Window.alert( NotificationTypes.invalid_input + " - Nom du profil");
 			return;
 		}
+		if (classId.isEmpty()){
+			Window.alert( NotificationTypes.invalid_input + " - Classe");
+			return;
+		}
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		
-		ProfileRequestContext rc = rf.profileRequest();
-		ProfileProxy profile = rc.create(ProfileProxy.class);
-		profile.setProfileName(profileName);
-		profile.setIsActive(true);
-		
-		rc.save(profile).fire(new Receiver<Void>(){
+		ProfileRequestContext rc = rf.profileRequest();	
+		rc.saveAndReturn(profileName, classId).fire(new Receiver<ProfileProxy>(){
 			@Override
-			public void onSuccess(Void response){
+			public void onSuccess(ProfileProxy response){
 				getView().resetForm();
-				loadProfileList();
+				loadProfileList(classId);
 			}
 			@Override
 			public void onFailure(ServerFailure error){
@@ -220,12 +241,12 @@ public class ProfileManagementPresenter
 	 * 
 	 * */
 	@Override
-	public void loadProfessorList(String subjectId) {
+	public void loadProfessorList(String subjectId, String classId) {
 		//
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.listAllProfessorBySubject(subjectId).fire(new Receiver<List<ProfessorProxy>>(){
+		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -461,5 +482,16 @@ public class ProfileManagementPresenter
 					Window.alert( NotificationTypes.branche_list_not_empty );
 			}
 		});
+	}
+
+
+	@Override
+	public void onClassChanged(String classId) {
+		//
+		if (classId.isEmpty())			
+			return;
+		//
+		loadProfileList(classId);
+		//
 	}
 }

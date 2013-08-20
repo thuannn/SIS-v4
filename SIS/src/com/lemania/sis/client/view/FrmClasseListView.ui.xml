@@ -27,7 +27,7 @@
 					</g:customCell>
 				</g:row>
 			</g:Grid>
-			<p1:DataGrid width="80%" height="200px" ui:field="tblClasseList"/>
+			<p1:DataGrid width="80%" height="500px" ui:field="tblClasseList"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

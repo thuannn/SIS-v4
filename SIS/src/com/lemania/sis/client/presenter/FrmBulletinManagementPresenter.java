@@ -22,12 +22,15 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
+import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
 import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
@@ -35,12 +38,15 @@ import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.SubjectRequestFactory;
+import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
 import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
 import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
+import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
 public class FrmBulletinManagementPresenter
 		extends
@@ -64,8 +70,14 @@ public class FrmBulletinManagementPresenter
 		void showUpdatedBranche( BulletinBrancheProxy branche );
 		void showUpdatedSubject( BulletinSubjectProxy subject );
 		//
+		void showAddedSubject( BulletinSubjectProxy subject);
+		void showAddedBranche( BulletinBrancheProxy branche);
+		//
 		void removeDeletedBrancheFromTable();
 		void removeDeletedSubjectFromTable();
+		//
+		void setBrancheListData( List<BrancheProxy> branches);
+		void setSubjectListData( List<SubjectProxy> subjects);
 	}
 
 	@ProxyCodeSplit
@@ -103,9 +115,46 @@ public class FrmBulletinManagementPresenter
 		getView().resetForm();
 		//
 		loadEcoleList();
+		loadSubjectList();
+		loadBrancheList();
 	}
 	
-	
+	/**/
+	private void loadBrancheList() {
+		//
+		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BrancheRequestContext rc = rf.brancheRequest();
+		rc.listAll().fire(new Receiver<List<BrancheProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BrancheProxy> response) {
+				getView().setBrancheListData(response);
+			}
+		});
+	}
+
+	/**/
+	private void loadSubjectList() {
+		//
+		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SubjectRequestContext rc = rf.subjectRequest();
+		rc.listAllActive().fire(new Receiver<List<SubjectProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<SubjectProxy> response) {
+				getView().setSubjectListData(response);
+			}
+		});
+	}
+
 	/**/
 	private void loadEcoleList() {
 		// 
@@ -221,6 +270,8 @@ public class FrmBulletinManagementPresenter
 			public void onSuccess(Boolean response) {
 				if (response)
 					getView().removeDeletedSubjectFromTable();
+				else
+					Window.alert( NotificationTypes.branche_list_not_empty );
 			}
 		});	
 	}
@@ -304,5 +355,43 @@ public class FrmBulletinManagementPresenter
 				getView().showUpdatedSubject(response);
 			}
 		});		
+	}
+
+	@Override
+	public void addSubject(String bulletinId, String subjectId, String profId,
+			String coef) {
+		//
+		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
+		rc.saveAndReturn( bulletinId, subjectId, profId, coef ).fire(new Receiver<BulletinSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinSubjectProxy response) {
+				getView().showAddedSubject(response);
+			}
+		});		
+	}
+
+	@Override
+	public void addBranche(String bulletinSubjectId, String brancheId,
+			String coef) {
+		//
+		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
+		rc.saveAndReturn(bulletinSubjectId, brancheId, coef).fire(new Receiver<BulletinBrancheProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinBrancheProxy response) {
+				getView().showAddedBranche(response);
+			}
+		});
 	}
 }

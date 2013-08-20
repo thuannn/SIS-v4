@@ -33,15 +33,15 @@
 				<g:VerticalPanel ui:field="leftPanel">
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
 					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
-					<g:Button ui:field="cmdHomepage" width="220px" height="">ACCUEIL</g:Button>
+					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage"/>
 					<g:TreeItem text="Gestion générale des bulletins" state="true">
 							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
 							<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation"/>
 							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement"/>
 						</g:TreeItem>
 					<g:TreeItem text="Notes" state="true">
-						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail"/>
 						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput"/>
+						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">

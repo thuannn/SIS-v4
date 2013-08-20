@@ -52,6 +52,7 @@ public class FrmMarkInputPresenter extends
 		//
 		void resetForm();
 		void initializeUi();
+		void modifyUiByProgramme();
 		//
 		void setProfListData(List<ProfessorProxy> profs);
 		//
@@ -195,6 +196,7 @@ public class FrmMarkInputPresenter extends
 			@Override
 			public void onSuccess(List<BulletinSubjectProxy> response) {
 				getView().setBulletinSubjectTableData(response);
+				getView().modifyUiByProgramme();
 			}
 		});
 	}
@@ -237,12 +239,12 @@ public class FrmMarkInputPresenter extends
 			String t_3_5, final String remarque1, final String remarque2, final String remarque3) {
 		//
 		if (bulletinSubject == null){
-			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir une matière.");
+			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir l'élève à saisir les notes.");
 			return;
 		}
 		//
 		if (bulletinBranche == null){
-			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir une branche.");
+			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir une branche à choisir les notes.");
 			return;
 		}
 		// 

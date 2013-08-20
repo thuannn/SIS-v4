@@ -22,6 +22,7 @@ public interface AssignmentRequestFactory extends RequestFactory {
 		Request<List<AssignmentProxy>> listAllActive(String profId);
 		
 		Request<List<ProfessorProxy>> listAllProfessorBySubject(String subjectId);
+		Request<List<ProfessorProxy>> listAllProfessorBySubject(String subjectId, String classId);
 		
 		Request<Void> save(AssignmentProxy a);
 		Request<AssignmentProxy> saveAndReturn(AssignmentProxy a);

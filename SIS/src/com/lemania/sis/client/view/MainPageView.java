@@ -32,7 +32,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	private final Widget widget;
 
 	@UiField FlowPanel mainContentPanel;
-	@UiField Button cmdHomepage;
 	@UiField Hyperlink cmdLogout;
 	@UiField Label txtWelcome;
 	@UiField Label lblCurrentMonth;
@@ -72,12 +71,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	    if (content != null) {
 	      mainContentPanel.add(content);
 	    }
-	}
-	
-	@UiHandler("cmdHomepage")
-	void onCmdHomepageClicked(ClickEvent event){
-		if (getUiHandlers() != null)
-			getUiHandlers().showHomepage();
 	}
 	
 	@UiHandler("cmdLogout")

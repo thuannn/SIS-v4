@@ -4,17 +4,18 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
+import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.SubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
@@ -25,15 +26,13 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NativeEvent;
 
 public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinManagementUiHandler> implements
 		FrmBulletinManagementPresenter.MyView {
@@ -74,8 +73,12 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiField ListBox lstEcoles;
 	@UiField ListBox lstProgrammes;
 	@UiField ListBox lstClasses;
-	@UiField Label lblSelectedStudentName;
-	@UiField Label lblSelectedSubject;
+	@UiField ListBox lstSubjects;
+	@UiField ListBox lstProfessors;
+	@UiField DoubleBox txtSubjectCoef;
+	@UiField ListBox lstBranches;
+	@UiField DoubleBox txtBrancheCoef;
+	@UiField Label lblStudentName;
 	
 	
 	/**/
@@ -99,7 +102,6 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 			tblBulletins.getSelectionModel().setSelected(selectedBulletin, false);
 		selectedBulletinIndex = -1;
 		bulletinDataProvider.getList().clear();
-		lblSelectedStudentName.setText("-");
 	}
 	
 	
@@ -111,7 +113,6 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
     		selectedSubjectIndex = -1;
     	}
 		subjectDataProvider.getList().clear();
-		lblSelectedSubject.setText("-");
 	}
 	
 
@@ -337,7 +338,6 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	        if ( selectedSubject != null ) {
 	        	//
 	        	selectedSubjectIndex = subjectDataProvider.getList().indexOf(selectedSubject);
-	        	lblSelectedSubject.setText( selectedSubject.getSubjectName() );
 	        	getUiHandlers().onSubjectSelected(selectedSubject);
 	        }
 	      }
@@ -370,8 +370,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	        	clearBrancheUi();
 	        	//
 	        	selectedBulletinIndex = bulletinDataProvider.getList().indexOf(selectedBulletin);
-	        	lblSelectedStudentName.setText( selectedBulletin.getStudentName() );
 	        	getUiHandlers().onBulletinSelected(selectedBulletin);
+	        	lblStudentName.setText( selectedBulletin.getStudentName() );
 	        }
 	      }
 	    });
@@ -429,5 +429,76 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		subjectDataProvider.refresh();
 		selectedSubjectIndex = -1;
 		selectedSubject = null;
+	}
+	
+	
+	/**/
+	@UiHandler("cmdAddSubject")
+	void onCmdAddSubjectClick(ClickEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().addSubject(
+					selectedBulletin.getId().toString(), 
+					lstSubjects.getValue(lstSubjects.getSelectedIndex()), 
+					lstProfessors.getValue(lstProfessors.getSelectedIndex()), 
+					txtSubjectCoef.getText());
+	}
+	
+	
+	/**/
+	@UiHandler("cmdAddBranche")
+	void onCmdAddBrancheClick(ClickEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().addBranche(
+					selectedSubject.getId().toString(), 
+					lstBranches.getValue(lstBranches.getSelectedIndex()), 
+					txtBrancheCoef.getText());
+	}
+
+	
+	/**/
+	@Override
+	public void showAddedSubject(BulletinSubjectProxy subject) {
+		//
+		subjectDataProvider.getList().add(subject);
+		subjectDataProvider.flush();
+	}
+
+	
+	/**/
+	@Override
+	public void showAddedBranche(BulletinBrancheProxy branche) {
+		//
+		brancheDataProvider.getList().add(branche);
+		brancheDataProvider.flush();
+	}
+
+	
+	/**/
+	@Override
+	public void setBrancheListData(List<BrancheProxy> branches) {
+		//
+		lstBranches.clear();
+		lstBranches.addItem("-","");
+		
+		for (BrancheProxy branche : branches){
+			lstBranches.addItem( branche.getBrancheName(), branche.getId().toString() );
+		}
+		lstBranches.setSelectedIndex(0);
+	}
+
+	
+	/**/
+	@Override
+	public void setSubjectListData(List<SubjectProxy> subjects) {
+		//
+		lstSubjects.clear();
+		lstSubjects.addItem("-","");
+		
+		for (SubjectProxy subject : subjects){
+			lstSubjects.addItem( subject.getSubjectName(), subject.getId().toString() );
+		}
+		lstSubjects.setSelectedIndex(0);
 	}
 }

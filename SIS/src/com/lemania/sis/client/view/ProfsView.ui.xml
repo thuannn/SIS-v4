@@ -11,7 +11,7 @@
 			<g:Label text="LISTE DES PROFESSEURS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="850px" spacing="5">
 				<g:VerticalPanel width="" spacing="2">
-					<p1:DataGrid width="500px" height="550px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
+					<p1:DataGrid width="500px" height="700px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="" spacing="2">
 					<g:Label ui:field="lblProfNameAssign" styleName="header"/>

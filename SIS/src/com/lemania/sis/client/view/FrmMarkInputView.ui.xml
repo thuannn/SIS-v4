@@ -9,130 +9,97 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="SAISIR LES NOTES" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:HorizontalPanel width="100%">
-				<g:VerticalPanel spacing="5" width="100%">
-					<g:HorizontalPanel width="100%" spacing="2">
-					<g:Label text="1" horizontalAlignment="ALIGN_LEFT" styleName="step"/>
-					<g:Label text="Professeur" styleName="fieldTitle"/>
-					<g:ListBox ui:field="lstProfs" width="300px"/>
-				</g:HorizontalPanel>
-					<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-						<g:Label text="3" styleName="step"/>
-						<g:Label text="Elèves" styleName="sectionTitle" width=""/>
-						<p1:DataGrid width="500px" height="500px" ui:field="tblBulletinSubjects"/>
-					</g:VerticalPanel>
-			</g:VerticalPanel>
-				<g:VerticalPanel spacing="5" width="100%">
-					<g:HorizontalPanel width="100%" spacing="2">
-						<g:Label text="2" styleName="step"/>
-						<g:Label text="Classe &amp; Matière" styleName="fieldTitle"/>
-						<g:ListBox width="300px" ui:field="lstAssignments"/>
-					</g:HorizontalPanel>
-					<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-						<g:Label text="4" styleName="step"/>
-						<g:Label text="Branches - Notes" styleName="sectionTitle"/>
-						<p1:DataGrid width="100%" height="150px" ui:field="tblBranches"/>
-					</g:VerticalPanel>
-					<g:VerticalPanel width="100%" spacing="3" styleName="subSection">
-						<g:Label text="5" styleName="step"/>
-						<g:Label text="Saisir les notes" styleName="sectionTitle"/>
-						<g:Grid cellPadding="2" cellSpacing="2" width="100%" ui:field="tblNotesInput">
+			<g:Grid width="80%">
 						<g:row>
 							<g:customCell>
-								<g:Label text="Trimestre 1 :" width=""/>
+								<g:Label text="1" horizontalAlignment="ALIGN_LEFT" styleName="step"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_1_1"/>
+								<g:Label text="Choisir le nom du professeur :" styleName="fieldTitle"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_1_2"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_1_3"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_1_4"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_1_5"/>
+								<g:ListBox ui:field="lstProfs" width="300px"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
 							<g:customCell>
-								<g:Label text="Trimestre 2 :" width=""/>
+								<g:Label text="2" styleName="step"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_2_1"/>
+								<g:Label text="Choisir la classe &amp; matière à saisir les notes :" styleName="fieldTitle"/>
 							</g:customCell>
 							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_2_2"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_2_3"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_2_4"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_2_5"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Trimestre 3 :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_3_1"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_3_2"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_3_3"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_3_4"/>
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox width="30px" ui:field="txt_t_3_5"/>
+								<g:ListBox width="300px" ui:field="lstAssignments"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					</g:VerticalPanel>
-					<g:VerticalPanel width="100%" spacing="3" styleName="subSection">
-						<g:Label text="Saisir les remarques" styleName="sectionTitle"/>
-						<g:Grid cellPadding="2" cellSpacing="2" width="100%" ui:field="tblRemarksInput">
-							<g:row>
-								<g:customCell>
-									<g:Label text="Trimestre 1 :" width=""/>
-								</g:customCell>
-								<g:customCell>
-									<g:TextArea ui:field="txtRemarque1" width="" styleName="sis-TextArea" characterWidth="60"/>
-								</g:customCell>
-							</g:row>
-							<g:row>
-								<g:customCell>
-									<g:Label text="Trimestre 2:"/>
-								</g:customCell>
-								<g:customCell>
-									<g:TextArea width="" ui:field="txtRemarque2" styleName="sis-TextArea" characterWidth="60"/>
-								</g:customCell>
-							</g:row>
-							<g:row>
-								<g:customCell>
-									<g:Label text="Trimestre 3 :"/>
-								</g:customCell>
-								<g:customCell>
-									<g:TextArea ui:field="txtRemarque3" width="" styleName="sis-TextArea" characterWidth="60"/>
-								</g:customCell>
-							</g:row>
-						</g:Grid>
-					</g:VerticalPanel>
+			<g:HorizontalPanel width="100%" spacing="5">
+				<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
 					<g:HorizontalPanel width="100%">
-						<g:Label text="." width="200px" styleName="hiddenText"/>
-						<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
+						<g:Label text="3" styleName="step"/>
+						<g:Label text="Choisir un élève à saisir les notes :" styleName="fieldTitle" height="40px" width=""/>
 					</g:HorizontalPanel>
+						<p1:DataGrid width="100%" height="460px" ui:field="tblBulletinSubjects"/>
+					</g:VerticalPanel>
+				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
+							<g:HorizontalPanel width="100%">
+								<g:Label text="4" styleName="step"/>
+								<g:Label text="Chosir une branche à saisir les notes :" styleName="fieldTitle" height="40px" width="200px"/>
+							</g:HorizontalPanel>
+						<p1:DataGrid width="100%" height="250px" ui:field="tblBranches"/>
+						<g:Label text="Moyenne annuelle / semestrielle de l&apos;élève choisit" styleName="fieldTitle"/>
+						<p1:DataGrid width="100%" height="150px" ui:field="tblAverageGrade"/>
+					</g:VerticalPanel>
+				<g:VerticalPanel width="100%" spacing="2">
+						<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlNoteInput">
+							<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
+								<g:Label text="5" styleName="step"/>
+								<g:Label text="Saisir les notes et les remarques pour :" styleName="fieldTitle"/>
+							</g:HorizontalPanel>
+							<g:Label text="-" ui:field="lblStudentName" styleName="header"/>
+							<g:Label styleName="hiddenText" text="."/>
+							<g:VerticalPanel width="100%" ui:field="pnlT1" spacing="5">
+								<g:HorizontalPanel width="100%">
+						<g:Label text="Trimestre 1 :" width=""/>
+						<g:DoubleBox width="25px" ui:field="txt_t_1_1" styleName="markInputText"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_1_2"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_1_3"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_1_4"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_1_5"/>
+						<g:Label text="-" ui:field="txtT1" styleName="averageGrade" width="25px"/>
+					</g:HorizontalPanel>
+								<g:TextArea ui:field="txtRemarque1" width="95%" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+							</g:VerticalPanel>
+					<g:Label text="." styleName="hiddenText"/>
+					<g:VerticalPanel width="100%" ui:field="pnlT2" spacing="5">
+						<g:HorizontalPanel width="100%">
+						<g:Label text="Trimestre 2 :" width=""/>
+						<g:DoubleBox width="25px" ui:field="txt_t_2_1" styleName="markInputText"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_2_2"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_2_3"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_2_4"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_2_5"/>
+						<g:Label text="-" ui:field="txtT2" styleName="averageGrade" width="25px"/>
+					</g:HorizontalPanel>
+						<g:TextArea width="95%" ui:field="txtRemarque2" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+					</g:VerticalPanel>
+					<g:Label text="." styleName="hiddenText"/>
+					<g:VerticalPanel ui:field="pnlT3" spacing="5" width="100%">
+						<g:HorizontalPanel width="100%">
+						<g:Label text="Trimestre 3 :"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_3_1"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_3_2"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_3_3"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_3_4"/>
+						<g:DoubleBox width="25px" ui:field="txt_t_3_5"/>
+						<g:Label text="-" styleName="averageGrade" ui:field="txtT3" width="25px"/>
+					</g:HorizontalPanel>
+						<g:TextArea ui:field="txtRemarque3" width="95%" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+					</g:VerticalPanel>
+					<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
+					<g:Label text="." styleName="hiddenText"/>
 				</g:VerticalPanel>
+					</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:VerticalPanel>
 	</g:HTMLPanel>

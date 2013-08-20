@@ -9,7 +9,6 @@ import com.googlecode.objectify.Query;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Bulletin;
-import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Subject;
 
@@ -316,7 +315,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 	/**/
 	public Boolean removeProfileSubject(BulletinSubject bulletinSubject) {
 		//
-		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
+		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
 				.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, bulletinSubject.getId()));
 		if (q.count() > 0)
 			return false;
@@ -331,11 +330,11 @@ public class BulletinSubjectDao extends MyDAOBase {
 	public BulletinSubject calculateTotalBrancheCoef(String profileSubjectId) {
 		//
 		BulletinSubject ps = this.ofy().get( new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(profileSubjectId)) );
-		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
+		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
 				.filter("bulletinSubject", new Key<BulletinSubject>( BulletinSubject.class, Long.parseLong(profileSubjectId)) )
-				.order("profileBranche");
+				.order("bulletinBrancheName");
 		ps.setTotalBrancheCoef(0.0);
-		for ( ProfileBranche profileBranche : q ){
+		for ( BulletinBranche profileBranche : q ){
 			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}
 		this.ofy().put( ps );

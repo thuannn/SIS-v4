@@ -102,8 +102,6 @@ public class FrmBulletinCreationPresenter
 		loadActiveStudentList();
 		//
 		loadEcoleList();
-		//
-		loadActiveProfileList();
 	}
 	
 	
@@ -125,13 +123,13 @@ public class FrmBulletinCreationPresenter
 	}
 
 	/**/
-	private void loadActiveProfileList() {
+	private void loadActiveProfileList(String classId) {
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		
 		ProfileRequestContext rc = rf.profileRequest();
-		rc.listAllActive().fire(new Receiver<List<ProfileProxy>>(){
+		rc.listAllActiveByClass(classId).fire(new Receiver<List<ProfileProxy>>(){
 			@Override
 			public void onSuccess(List<ProfileProxy> response){
 				getView().setProfileListData( response );
@@ -256,7 +254,7 @@ public class FrmBulletinCreationPresenter
 	
 	/**/
 	@Override
-	public void onClassChanged(String classId) {
+	public void onClassChanged(final String classId) {
 		//
 		if (classId.isEmpty()){
 			Window.alert(NotificationTypes.invalid_input + " - Classe");
@@ -274,6 +272,7 @@ public class FrmBulletinCreationPresenter
 			@Override
 			public void onSuccess(List<BulletinProxy> response) {
 				getView().setBulletinTableData(response);
+				loadActiveProfileList(classId);
 			}
 		});
 	}

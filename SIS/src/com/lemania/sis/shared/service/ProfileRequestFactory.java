@@ -17,9 +17,11 @@ public interface ProfileRequestFactory extends RequestFactory {
 		//
 		Request<List<ProfileProxy>> listAll();			
 		Request<List<ProfileProxy>> listAllActive();
+		Request<List<ProfileProxy>> listAllActiveByClass(String classId);
 		
 		Request<Void> save(ProfileProxy profile);
 		Request<ProfileProxy> saveAndReturn(ProfileProxy newProfile);
+		Request<ProfileProxy> saveAndReturn(String profileName, String classId);
 		
 		Request<Void> removeProfile(ProfileProxy profile);
 		

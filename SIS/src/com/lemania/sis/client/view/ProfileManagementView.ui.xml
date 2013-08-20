@@ -8,18 +8,26 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="GESTION DES PROFILS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Label text="GESTION DES PROGRAMMES / CLASSES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:VerticalPanel width="100%" spacing="2">
-				<g:Grid cellPadding="5" cellSpacing="5">
+				<g:Grid cellPadding="3" cellSpacing="2">
 					<g:row>
 						<g:customCell>
-							<g:Label text="List des profils :"/>
+							<g:Label text="Chosir une classe :"/>
+						</g:customCell>
+						<g:customCell>
+							<g:ListBox ui:field="lstClasses" styleName="sis_textbox"/>
+						</g:customCell>
+					</g:row>
+					<g:row>
+						<g:customCell>
+							<g:Label text="Liste des programmes de la classe choisie :"/>
 						</g:customCell>
 						<g:customCell>
 							<g:ListBox ui:field="lstProfiles" styleName="sis_textbox" />
 						</g:customCell>
 						<g:customCell>
-							<g:Button text="Créer un nouveau profil" ui:field="cmdCreateNewProfile"/>
+							<g:Button text="Créer un nouveau programme" ui:field="cmdCreateNewProfile"/>
 						</g:customCell>
 						<g:customCell>
 							<g:FlowPanel ui:field="pnlAddNewProfile" visible="false">
@@ -29,88 +37,84 @@
 						</g:customCell>
 					</g:row>
 				</g:Grid>
-				<g:Grid width="100%" cellPadding="5" cellSpacing="5">
+				<g:Grid width="100%" cellPadding="3" cellSpacing="2">
 					<g:row>
 						<g:customCell>
-							<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-					<g:Label text="Matières" styleName="sectionTitle"/>
-					<g:Label text="Rajouter une matière au profil"/>
-					<g:Grid width="100%" cellPadding="5" cellSpacing="5">
-						<g:row>
-							<g:customCell>
-								<g:Label text="Matière :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox ui:field="lstSubjects" width="" styleName="sis_textbox" />
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox ui:field="txtSubjectCoef" width="50px"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Professeur :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox ui:field="lstProfessors" width="" styleName="sis_textbox"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button ui:field="cmdAddSubject" text="Ajouter la matière"></g:Button>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:VerticalPanel>
+							<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
+								<g:Label text="Liste des matière du programme choisi" styleName="sectionTitle"/>
+								<p1:DataGrid width="100%" height="350px" ui:field="tblSubjects"/>
+								<g:VerticalPanel width="100%" spacing="2">
+								<g:Label text="Rajouter une matière" styleName="sectionTitle"/>
+								<g:Grid width="" cellPadding="5" cellSpacing="5">
+									<g:row>
+										<g:customCell>
+											<g:Label text="Matière :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox ui:field="lstSubjects" width="" styleName="sis_textbox" />
+										</g:customCell>
+										<g:customCell>
+											<g:Label text="Coefficient :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:DoubleBox ui:field="txtSubjectCoef" width="50px"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Label text="Professeur :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox ui:field="lstProfessors" width="" styleName="sis_textbox"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Label text="." styleName="hiddenText"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button ui:field="cmdAddSubject" text="Ajouter la matière"></g:Button>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:VerticalPanel>
+							</g:VerticalPanel>
 						</g:customCell>
 						<g:customCell>
-							<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-					<g:Label text="Branches" styleName="sectionTitle" width=""/>
-					<g:Label text="Rajouter une branche pour la matière sélectionée"/>
-					<g:Grid cellPadding="5" cellSpacing="5">
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Label ui:field="lblSelectedSubject" text="." styleName="header"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Branche :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox ui:field="lstBranches" width="200px" styleName="sis_textbox" />
-							</g:customCell>
-							<g:customCell>
-								<g:DoubleBox ui:field="txtBrancheCoef" width="50px"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button text="Ajouter la branche" ui:field="cmdAddBranche"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:VerticalPanel>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<p1:DataGrid width="100%" height="350px" ui:field="tblSubjects"/>
-						</g:customCell>
-						<g:customCell>
-							<p1:DataGrid width="100%" height="355px" ui:field="tblBranches"/>
+							<g:VerticalPanel width="100%" styleName="subSection" height="300px" spacing="2">
+									<g:Label text="Liste des branches de la matière choisie" styleName="sectionTitle"/>
+									<p1:DataGrid width="100%" height="250px" ui:field="tblBranches"/>
+									<g:VerticalPanel width="100%" spacing="2">
+								<g:Label text="Rajouter une branche" styleName="sectionTitle" width=""/>
+								<g:Grid cellPadding="5" cellSpacing="5">
+									<g:row>
+										<g:customCell>
+											<g:Label text="Branche :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox ui:field="lstBranches" width="200px" styleName="sis_textbox" />
+										</g:customCell>
+										<g:customCell>
+											<g:Label text="Coefficient :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:DoubleBox ui:field="txtBrancheCoef" width="50px"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Label text="." styleName="hiddenText"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button text="Ajouter la branche" ui:field="cmdAddBranche"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Label text="." styleName="hiddenText"/>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:VerticalPanel>
+								</g:VerticalPanel>
 						</g:customCell>
 					</g:row>
 				</g:Grid>

@@ -6,9 +6,9 @@ import com.lemania.sis.shared.ProfileSubjectProxy;
 
 public interface ProfileManagementUiHandler extends UiHandlers {
 	//
-	void createNewProfile( String profileName );
+	void createNewProfile( String profileName, String classId );
 	//
-	void loadProfessorList( String subjectId );
+	void loadProfessorList( String subjectId, String classId );
 	//
 	void addSubjectToProfile( String profileId, String subjectId, String professorId, String subjectCoef );
 	void removeSubject( ProfileSubjectProxy ps );
@@ -17,6 +17,7 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	void removeBranche( ProfileBrancheProxy bp, String profileSubjectId );
 	//
 	void onProfileChanged( String profileId );
+	void onClassChanged( String classId );
 	//
 	void updateProfileSubject( ProfileSubjectProxy ps, String coef, Boolean isActive );
 	//

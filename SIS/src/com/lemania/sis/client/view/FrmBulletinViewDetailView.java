@@ -156,11 +156,16 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 					tblBulletin.setText(rowCount, 10, branche.getT2_3());
 					tblBulletin.setText(rowCount, 11, branche.getT2_4());
 					tblBulletin.setText(rowCount, 12, branche.getT2_5());
-					tblBulletin.setText(rowCount, 13, branche.getT2());					
+					tblBulletin.setText(rowCount, 13, branche.getT2());
 				}
 			}
+			//
 			if (brancheCount>0)
 				tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 14, brancheCount);
+			//
+			rowCount++;
+			tblBulletin.setText(rowCount, 0, "");
+			tblBulletin.getCellFormatter().addStyleName(rowCount, 0, "spaceCell");
 		}
 		//
 		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");
@@ -176,10 +181,12 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		tblBulletin.setCellSpacing(0);
 		tblBulletin.setStyleName("subSection");
 		//
-		for (int i=1; i<14; i++)
-			for (int j=0; j<tblBulletin.getRowCount(); j++) {
-				if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
-					tblBulletin.getCellFormatter().setStyleName(j, i, "brancheLine");
+		for (int i=0; i<15; i++)
+			for (int j=1; j<tblBulletin.getRowCount(); j++) {
+				if (tblBulletin.isCellPresent(j, i)) {
+					if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
+						tblBulletin.getCellFormatter().setStyleName(j, i, "brancheLine");
+				}
 			}
 	}
 	
@@ -189,8 +196,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		tblBulletin.setCellSpacing(0);
 		tblBulletin.setStyleName("subSection");
 		//
-		for (int i=1; i<19; i++)
-			for (int j=0; j<tblBulletin.getRowCount(); j++) {
+		for (int i=0; i<20; i++)
+			for (int j=1; j<tblBulletin.getRowCount(); j++) {
 				if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
 					tblBulletin.getCellFormatter().setStyleName(tblBulletin.getRowCount(), i, "brancheLine");
 			}

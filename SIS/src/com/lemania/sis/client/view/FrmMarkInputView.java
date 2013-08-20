@@ -22,11 +22,12 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> implements
 		FrmMarkInputPresenter.MyView {
@@ -35,6 +36,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	
 	// Thuan
 	private ListDataProvider<BulletinSubjectProxy> bulletinSubjectDataProvider = new ListDataProvider<BulletinSubjectProxy>();
+	private ListDataProvider<BulletinSubjectProxy> bulletinSubjectAverageDataProvider = new ListDataProvider<BulletinSubjectProxy>();
 	private ListDataProvider<BulletinBrancheProxy> bulletinBrancheDataProvider = new ListDataProvider<BulletinBrancheProxy>();
 	//
 	private int selectedBulletinSubjectIndex = -1;
@@ -60,8 +62,6 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField(provided=true) DataGrid<BulletinBrancheProxy> tblBranches = new DataGrid<BulletinBrancheProxy>();
 	@UiField ListBox lstProfs;
 	@UiField ListBox lstAssignments;
-	@UiField Grid tblNotesInput;
-	@UiField Grid tblRemarksInput;
 	@UiField DoubleBox txt_t_1_1;
 	@UiField DoubleBox txt_t_1_2;
 	@UiField DoubleBox txt_t_1_3;
@@ -81,6 +81,15 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField TextArea txtRemarque1;
 	@UiField TextArea txtRemarque2;
 	@UiField TextArea txtRemarque3;
+	@UiField Label lblStudentName;
+	@UiField Label txtT1;
+	@UiField Label txtT2;
+	@UiField Label txtT3;
+	@UiField VerticalPanel pnlT1;
+	@UiField VerticalPanel pnlT2;
+	@UiField VerticalPanel pnlT3;
+	@UiField VerticalPanel pnlNoteInput;
+	@UiField(provided=true) DataGrid<BulletinSubjectProxy> tblAverageGrade = new DataGrid<BulletinSubjectProxy>();
 	
 	
 	@Override
@@ -111,6 +120,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		lstAssignments.clear();
 		bulletinSubjectDataProvider.getList().clear();
 		bulletinBrancheDataProvider.getList().clear();
+		lblStudentName.setText("");
 		//
 		clearInputFields();
 	}
@@ -140,6 +150,16 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtRemarque2.setText("");
 		txtRemarque3.setText("");
 		//
+		txtT1.setText("");
+		txtT2.setText("");
+		txtT3.setText("");
+		//
+		lblStudentName.setText("");
+		//
+		pnlT1.setVisible(false);
+		pnlT2.setVisible(false);
+		pnlT3.setVisible(false);
+		cmdSave.setVisible(false);
 	}
 	
 
@@ -151,8 +171,8 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		lstAssignments.addItem("-","");
 		for (AssignmentProxy assignment : assignments){
 			lstAssignments.addItem( 
-							assignment.getClasseName() + " - " 
-							+ assignment.getProgrammeName() + " - " 
+					assignment.getProgrammeName() + " - "
+							+ assignment.getClasseName() + " - "  
 							+ assignment.getSubjectName(), 
 				assignment.getId().toString());
 		}
@@ -165,41 +185,112 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		//
 		initializeBulletinSubjectTable();
 		initializeBulletinBrancheTable();
+		initializeAverageGrade();
 	}
 	
 	
 	/**/
+	private void initializeAverageGrade() {
+		//
+		// Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colT1 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getT1();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colT1, "T1");
+ 	    
+ 	    // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT1 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT1();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colExamT1, "E1");
+ 	    
+ 	    // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colT2 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getT2();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colT2, "T2");
+ 	    
+ 	    // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT2 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT2();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colExamT2, "E2");
+ 	    
+ 	 	// Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colT3 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getT3();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colT3, "T3");
+ 	    
+ 	   // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT3 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT3();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colExamT3, "E3");
+ 	    
+    	// Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colAn = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getAn();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colAn, "Moyenne");
+ 	    
+ 	    //
+ 	    bulletinSubjectAverageDataProvider.addDataDisplay(tblAverageGrade);
+	}
+	
+
+	/**/
 	private void initializeBulletinBrancheTable() {
 		// Add a text column to show the name.
-		TextColumn<BulletinBrancheProxy> colSubjectName = new TextColumn<BulletinBrancheProxy>() {
+		TextColumn<BulletinBrancheProxy> colBrancheName = new TextColumn<BulletinBrancheProxy>() {
  	      @Override
  	      public String getValue(BulletinBrancheProxy object) {
  	        return object.getBulletinBrancheName();
  	      }
  	    };
- 	    tblBranches.addColumn(colSubjectName, "Branches");
-	    
-	    // Add a text column to show the name.
+ 	    tblBranches.addColumn(colBrancheName, "Branches");
+ 	    
+ 	   // Add a text column to show the name.	
  		TextColumn<BulletinBrancheProxy> colCoef = new TextColumn<BulletinBrancheProxy>() {
  	      @Override
  	      public String getValue(BulletinBrancheProxy object) {
  	        return object.getBrancheCoef().toString();
  	      }
  	    };
- 	    tblBranches.addColumn(colCoef, "Coef");
- 	   	tblBranches.setColumnWidth( colCoef, 12, Unit.PCT);
- 	   
- 	   
- 	   	// Add a text column to show the name.	
+ 	   tblBranches.addColumn(colCoef, "Coef");
+ 	   tblBranches.setColumnWidth(colCoef, 15, Unit.PCT);
+ 	    
+ 	    // Add a text column to show the name.	
  		TextColumn<BulletinBrancheProxy> colT1 = new TextColumn<BulletinBrancheProxy>() {
  	      @Override
  	      public String getValue(BulletinBrancheProxy object) {
  	        return object.getT1();
  	      }
  	    };
- 	    tblBranches.addColumn(colT1, "T1");
- 	   	tblBranches.setColumnWidth( colT1, 10, Unit.PCT);
- 	   
+ 	   tblBranches.addColumn(colT1, "T1");
+ 	   tblBranches.setColumnWidth(colT1, 15, Unit.PCT);
+ 	    
  	    // Add a text column to show the name.	
  		TextColumn<BulletinBrancheProxy> colT2 = new TextColumn<BulletinBrancheProxy>() {
  	      @Override
@@ -207,9 +298,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	        return object.getT2();
  	      }
  	    };
- 	    tblBranches.addColumn(colT2, "T2");
- 	   	tblBranches.setColumnWidth( colT2, 10, Unit.PCT);
- 	 	    
+ 	   tblBranches.addColumn(colT2, "T2");
+ 	   tblBranches.setColumnWidth(colT2, 15, Unit.PCT);
+ 	    
  	 	// Add a text column to show the name.	
  		TextColumn<BulletinBrancheProxy> colT3 = new TextColumn<BulletinBrancheProxy>() {
  	      @Override
@@ -217,9 +308,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	        return object.getT3();
  	      }
  	    };
- 	    tblBranches.addColumn(colT3, "T3");
- 	   	tblBranches.setColumnWidth( colT3, 10, Unit.PCT);
- 	  
+ 	   tblBranches.addColumn(colT3, "T3");
+ 	   tblBranches.setColumnWidth(colT3, 15, Unit.PCT);
+ 	 	    
  	   	
  	    // Add a selection model to handle user selection.
 	    final SingleSelectionModel<BulletinBrancheProxy> selectionModel = new SingleSelectionModel<BulletinBrancheProxy>();
@@ -228,6 +319,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedBulletinBranche = selectionModel.getSelectedObject();
 	        if (selectedBulletinBranche != null) {
+	        	//
+	        	lblStudentName.setText( selectedBulletinSubject.getStudentName() + " - " + selectedBulletinBranche.getBulletinBrancheName());
+	        	//
 	        	selectedBulletinBrancheIndex = bulletinBrancheDataProvider.getList().indexOf(selectedBulletinBranche);
 	        	getUiHandlers().onBulletinBrancheSelected(selectedBulletinBranche);
 	        }
@@ -249,87 +343,6 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	      }
  	    };
  	    tblBulletinSubjects.addColumn(colSubjectName, "Elève");
-	    
-	    // Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colCoef = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getSubjectCoef().toString();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colCoef, "Coef");
- 	    tblBulletinSubjects.setColumnWidth( colCoef, 10, Unit.PCT);
- 	   
- 	    
-    	// Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colT1 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getT1();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colT1, "T1");
- 	    tblBulletinSubjects.setColumnWidth( colT1, 8, Unit.PCT);
- 	    
- 	    // Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colExamT1 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getExamT1();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colExamT1, "E1");
- 	    tblBulletinSubjects.setColumnWidth( colExamT1, 8, Unit.PCT);
- 	    
- 	    // Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colT2 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getT2();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colT2, "T2");
- 	    tblBulletinSubjects.setColumnWidth( colT2, 8, Unit.PCT);
- 	    
- 	    // Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colExamT2 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getExamT2();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colExamT2, "E2");
- 	    tblBulletinSubjects.setColumnWidth( colExamT2, 8, Unit.PCT);
- 	    
- 	 	// Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colT3 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getT3();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colT3, "T3");
- 	    tblBulletinSubjects.setColumnWidth( colT3, 8, Unit.PCT);
- 	    
- 	   // Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colExamT3 = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getExamT3();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colExamT3, "E3");
- 	    tblBulletinSubjects.setColumnWidth( colExamT3, 8, Unit.PCT);
- 	    
-    	// Add a text column to show the name.	
- 		TextColumn<BulletinSubjectProxy> colAn = new TextColumn<BulletinSubjectProxy>() {
- 	      @Override
- 	      public String getValue(BulletinSubjectProxy object) {
- 	        return object.getAn();
- 	      }
- 	    };
- 	    tblBulletinSubjects.addColumn(colAn, "An");
- 	    tblBulletinSubjects.setColumnWidth( colAn, 8, Unit.PCT);
    
  	    
  	    // Add a selection model to handle user selection.
@@ -339,6 +352,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedBulletinSubject = selectionModel.getSelectedObject();
 	        if (selectedBulletinSubject != null) {
+	        	//
+	        	bulletinSubjectAverageDataProvider.getList().clear();
+	        	bulletinSubjectAverageDataProvider.getList().add(selectedBulletinSubject);
 	        	//
 	        	selectedBulletinBrancheIndex = -1;
 	        	tblBranches.getSelectionModel().setSelected(selectedBulletinBranche, false);
@@ -415,6 +431,12 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_3.setText( selectedBulletinBranche.getT3_3() );
 		txt_t_3_4.setText( selectedBulletinBranche.getT3_4() );
 		txt_t_3_5.setText( selectedBulletinBranche.getT3_5() );
+		//
+		txtT1.setText( selectedBulletinBranche.getT1() );
+		txtT2.setText( selectedBulletinBranche.getT2() );
+		txtT3.setText( selectedBulletinBranche.getT3() );
+		//
+		modifyUiByProgramme();
 	}
 	
 	@Override
@@ -441,12 +463,37 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 			BulletinBrancheProxy bulletinBranche,
 			BulletinSubjectProxy bulletinSubject) {
 		//
-		bulletinSubjectDataProvider.getList().remove(selectedBulletinSubjectIndex);
-		bulletinSubjectDataProvider.getList().add(selectedBulletinSubjectIndex, bulletinSubject);
-		bulletinSubjectDataProvider.refresh();
+		bulletinSubjectDataProvider.getList().set(selectedBulletinSubjectIndex, bulletinSubject);
 		//
-		bulletinBrancheDataProvider.getList().remove(selectedBulletinBrancheIndex);
-		bulletinBrancheDataProvider.getList().add(selectedBulletinBrancheIndex, bulletinBranche);
-		bulletinBrancheDataProvider.refresh();
+		bulletinBrancheDataProvider.getList().set(selectedBulletinBrancheIndex, bulletinBranche);
+		//
+		bulletinSubjectAverageDataProvider.getList().set(0, bulletinSubject);
+		//
+		txtT1.setText( bulletinBranche.getT1() );
+		txtT2.setText( bulletinBranche.getT2() );
+		txtT3.setText( bulletinBranche.getT3() );
+	}
+
+	@Override
+	public void modifyUiByProgramme() {
+		//
+		if (selectedBulletinBrancheIndex > -1){
+			pnlT1.setVisible(true);
+			pnlT2.setVisible(true);
+			cmdSave.setVisible(true);
+		}
+		//
+		if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){
+			tblAverageGrade.setColumnWidth(4, "0px");
+			tblAverageGrade.setColumnWidth(5, "0px");
+			tblBranches.setColumnWidth(4, "0px");
+			pnlT3.setVisible(false);
+		} else {			
+			tblAverageGrade.setColumnWidth(4, 15, Unit.PCT);
+			tblAverageGrade.setColumnWidth(5, 15, Unit.PCT);
+			tblBranches.setColumnWidth(4, 15, Unit.PCT);
+			if (selectedBulletinBrancheIndex > -1)
+				if ( !pnlT3.isVisible() ) pnlT3.setVisible(true);
+		}
 	}
 }

@@ -11,11 +11,11 @@
 			<g:Label text="ATTRIBUTION PROGRAMME / ELEVE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel width="100%" spacing="5">
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-					<g:Label text="Liste des élèves actives" styleName="sectionTitle"/>
+					<g:Label text="Liste des élèves non-attribués" styleName="sectionTitle"/>
 					<p1:DataGrid width="250px" height="600px" ui:field="tblStudents"/>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-					<g:Label text="Détails du bulletin" styleName="sectionTitle"/>
+					<g:Label text="Choisir un programme à attribuer" styleName="sectionTitle"/>
 					<g:Grid width="100%" cellPadding="5" cellSpacing="5">
 						<g:row>
 							<g:customCell>
@@ -33,25 +33,21 @@
 								<g:ListBox width="200px" ui:field="lstProgrammes"/>
 							</g:customCell>
 						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Classe :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox ui:field="lstClasses" width="200px"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-						</g:row>
+						<g:row/>
 						<g:row>
 							<g:customCell>
 								<g:Label text="Année :"/>
 							</g:customCell>
 							<g:customCell>
 								<g:ListBox width="200px" ui:field="lstYear"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Classe :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstClasses" width="200px"/>
 							</g:customCell>
 						</g:row>
 						<g:row>
@@ -80,13 +76,13 @@
 								<g:Label text="." styleName="hiddenText"/>
 							</g:customCell>
 							<g:customCell>
-								<g:Button text="Créer les bulletins &gt;&gt;" ui:field="cmdCreateBulletin"/>
+								<g:Button text="Attribuer le programme choisi à l&apos;élève" ui:field="cmdCreateBulletin"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
-					<g:Label text="Liste des bulletins" styleName="sectionTitle"/>
+					<g:Label text="Liste des élèves attribués" styleName="sectionTitle"/>
 					<p1:DataGrid width="350px" height="600px" ui:field="tblBulletins"/>
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
