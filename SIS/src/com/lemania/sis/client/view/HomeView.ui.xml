@@ -16,7 +16,7 @@
 						<g:Label text="Nom d&apos;utilisateur :" horizontalAlignment="ALIGN_LEFT"/>
 					</g:customCell>
 					<g:customCell>
-						<g:TextBox ui:field="txtUserName" alignment="LEFT" width="150px"/>
+						<g:TextBox ui:field="txtUserName" alignment="LEFT" width="200px"/>
 					</g:customCell>
 				</g:row>
 				<g:row>
@@ -24,7 +24,7 @@
 						<g:Label text="Mot de passe :" horizontalAlignment="ALIGN_LEFT"/>
 					</g:customCell>
 					<g:customCell>
-						<g:PasswordTextBox ui:field="txtPassword" alignment="LEFT" width="150px"/>
+						<g:PasswordTextBox ui:field="txtPassword" alignment="LEFT" width="200px"/>
 					</g:customCell>
 				</g:row>
 				<g:row>

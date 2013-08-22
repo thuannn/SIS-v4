@@ -77,7 +77,7 @@
 							<g:Hyperlink targetHistoryToken="settings" text="Bloquer l&apos;accès au système"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:TreeItem text="Autres">
+					<g:TreeItem text="Autres" state="true">
 						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe"/>
 						<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
 					</g:TreeItem>
@@ -103,7 +103,9 @@
 			</g:Dock>
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
-					<g:HTML wordWrap="true" visible="false" ui:field="htmlProgressBar"><div id="fountainG"> <div class="fountainG" id="fountainG_1"> </div> <div class="fountainG" id="fountainG_2"> </div> <div class="fountainG" id="fountainG_3"> </div> <div class="fountainG" id="fountainG_4"> </div> <div class="fountainG" id="fountainG_5"> </div> <div class="fountainG" id="fountainG_6"> </div> <div class="fountainG" id="fountainG_7"> </div> <div class="fountainG" id="fountainG_8"> </div> </div></g:HTML>
+					<g:HTML wordWrap="true" visible="false" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
+						<div id="movingBallG"><div class="movingBallLineG"></div><div id="movingBallG_1" class="movingBallG"></div></div>
+					</g:HTML>
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
 					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
 						<g:Label text="Copyright © Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>

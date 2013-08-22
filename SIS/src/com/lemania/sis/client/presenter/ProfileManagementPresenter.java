@@ -75,6 +75,7 @@ public class ProfileManagementPresenter
 		void setBrancheTableData( List<ProfileBrancheProxy> branches);
 		void addNewProfileBrancheToTable( ProfileBrancheProxy branche );
 		void removeProfileBrancheFromTable();
+		void showUpdatedProfileBranche(ProfileBrancheProxy pb);
 	}
 	
 
@@ -410,8 +411,7 @@ public class ProfileManagementPresenter
 				Window.alert(error.getMessage());
 			}
 			@Override
-			public void onSuccess(List<ProfileBrancheProxy> response) {
-				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent(profileSubjectId) );
+			public void onSuccess(List<ProfileBrancheProxy> response) {			
 				getView().setBrancheTableData( response );
 			}
 		});
@@ -493,5 +493,27 @@ public class ProfileManagementPresenter
 		//
 		loadProfileList(classId);
 		//
+	}
+
+
+	@Override
+	public void updateProfileBranche(ProfileBrancheProxy pb, String coef, final String profileSubjectId) {
+		//
+		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();
+		pb = rc.edit(pb);
+		pb.setBrancheCoef( Double.parseDouble(coef) );
+		rc.saveAndReturn( pb ).fire(new Receiver<ProfileBrancheProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileBrancheProxy response) {
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getView().showUpdatedProfileBranche(response);
+			}
+		});
 	}
 }

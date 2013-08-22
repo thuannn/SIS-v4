@@ -66,7 +66,9 @@ public class FrmSubjectAddPresenter
 		// Thuan
 		getView().resetForm();
 	}
-
+	
+	
+	/**/
 	@Override
 	public void addNewSubject(String subjectName, String defaultCoef, Boolean isActive) {
 		// Validate data

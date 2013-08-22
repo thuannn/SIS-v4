@@ -103,7 +103,7 @@ public class FrmClasseAddView extends ViewWithUiHandlers<FrmClasseAddUiHandler> 
 	@Override
 	public void resetForm() {
 		//
-		lstEcoles.clear();
+		lstEcoles.setSelectedIndex(0);
 		lstCoursList.clear();
 		txtClassName.setText("");
 		chkActive.setValue(true);

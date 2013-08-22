@@ -102,7 +102,7 @@ public class ProfsAddPresenter
 			@Override
 			public void onSuccess(Void response){
 				getEventBus().fireEvent( new ProfessorAfterAddEvent(prof) );
-				getView().disableUiAfterAdd();
+				getView().initializeUi();
 			}
 			@Override
 			public void onFailure(ServerFailure error){

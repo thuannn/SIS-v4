@@ -6,6 +6,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -72,24 +73,13 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	public void initializeTable() {
 		
 		// Add a text column to show the name.
-		EditTextCell nomCell = new EditTextCell();
-		Column<ProfessorProxy, String> colName = new Column<ProfessorProxy, String>(nomCell) {
+		TextColumn<ProfessorProxy> colName = new TextColumn<ProfessorProxy>() {
 	      @Override
 	      public String getValue(ProfessorProxy object) {
 	        return object.getProfName();
 	      }
 	    };
 	    tblProfessors.addColumn(colName, "Nom");
-	    // If user is Admin, he can edit the names of the profs
-    	colName.setFieldUpdater(new FieldUpdater<ProfessorProxy, String>(){
-	    	@Override
-	    	public void update(int index, ProfessorProxy prof, String value){
-	    		if (getUiHandlers() != null) {	    			
-	    			selectedProf = index;
-	    			getUiHandlers().updateProfessorName(prof, value);
-	    		}	    		
-	    	}
-	    });
 	    
 	    CheckboxCell cellActive = new CheckboxCell();
 	    Column<ProfessorProxy, Boolean> colActive = new Column<ProfessorProxy, Boolean>(cellActive) {
@@ -99,6 +89,7 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	    	}	    	
 	    };
 	    tblProfessors.addColumn(colActive, "Active");
+	    tblProfessors.setColumnWidth(colActive, 20, Unit.PCT);
 	    
 	    colActive.setFieldUpdater(new FieldUpdater<ProfessorProxy, Boolean>(){
 	    	@Override
@@ -175,6 +166,7 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 		if (lstEcoles.getValue(lstEcoles.getSelectedIndex()).isEmpty()) {
 			lstCours.clear();
 			lstClasses.clear();
+			lstSubjects.setSelectedIndex(0);
 			return;
 		}
 		
@@ -207,6 +199,7 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 		//
 		if (lstCours.getValue(lstCours.getSelectedIndex()).isEmpty()){
 			lstClasses.clear();
+			lstSubjects.setSelectedIndex(0);
 			return;
 		}
 		//
@@ -265,6 +258,17 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	      }
 	    };
 	    tblAssignments.addColumn(colProgrammeName, "Programme");
+	    tblAssignments.setColumnWidth( colProgrammeName, 25, Unit.PCT);
+	    
+	    // Add a text column to show the name.	
+  		TextColumn<AssignmentProxy> colSubjectName = new TextColumn<AssignmentProxy>() {
+  	      @Override
+  	      public String getValue(AssignmentProxy object) {
+  	        return object.getSubjectName();
+  	      }
+  	    };
+  	    tblAssignments.addColumn(colSubjectName, "Matière");
+  	    tblAssignments.setColumnWidth( colSubjectName, 35, Unit.PCT);
 	    
 	    // Add a text column to show the name.	
  		TextColumn<AssignmentProxy> colClasseName = new TextColumn<AssignmentProxy>() {
@@ -274,15 +278,7 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
  	      }
  	    };
  	    tblAssignments.addColumn(colClasseName, "Classe");
- 	    
- 	    // Add a text column to show the name.	
- 		TextColumn<AssignmentProxy> colSubjectName = new TextColumn<AssignmentProxy>() {
- 	      @Override
- 	      public String getValue(AssignmentProxy object) {
- 	        return object.getSubjectName();
- 	      }
- 	    };
- 	    tblAssignments.addColumn(colSubjectName, "Matière");
+ 	    tblAssignments.setColumnWidth( colClasseName, 20, Unit.PCT);
     
 	    // Active
 	    CheckboxCell cellActive = new CheckboxCell();
@@ -293,6 +289,7 @@ public class ProfsView extends ViewWithUiHandlers<ProfessorListUiHandler> implem
 	    	}
 	    };
 	    tblAssignments.addColumn(colActive, "Active");
+	    tblAssignments.setColumnWidth( colActive, 10, Unit.PCT);
 	    
 	    colActive.setFieldUpdater(new FieldUpdater<AssignmentProxy, Boolean>(){
 	    	@Override

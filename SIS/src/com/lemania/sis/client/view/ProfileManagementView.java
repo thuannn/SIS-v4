@@ -249,6 +249,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		subjectDataProvider.getList().add( profileSubject );
 		subjectDataProvider.refresh();
+		//
+		tblSubjects.setHeight( Integer.toString( NotificationTypes.lineHeightShortList * subjectDataProvider.getList().size() 
+				+ NotificationTypes.headerHeight) + "px");
 	}
 	
 
@@ -404,10 +407,11 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    // Field updater
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileBrancheProxy, String>(){
 	    	@Override
-	    	public void update(int index, ProfileBrancheProxy subject, String value){
+	    	public void update(int index, ProfileBrancheProxy branche, String value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedBrancheIndex = index;
-	    			// TODO getUiHandlers().updateProfileSubject( subject, value, subject.getIsActive() );
+	    			selectedBranche = branche;
+	    			getUiHandlers().updateProfileBranche( branche, value, selectedSubject.getId().toString() );
 	    		}	    		
 	    	}
 	    });
@@ -460,6 +464,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		subjectDataProvider.getList().clear();
 		subjectDataProvider.setList(subjects);
+		//
+		tblSubjects.setHeight(Integer.toString(NotificationTypes.lineHeightShortList * subjects.size() + NotificationTypes.headerHeight) + "px");
 	}
 	
 
@@ -469,9 +475,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@Override
 	public void showUpdatedProfileSubject(ProfileSubjectProxy ps) {
 		//
-		subjectDataProvider.getList().remove( selectedSubjectIndex );
-		subjectDataProvider.getList().add( selectedSubjectIndex, ps );
-		subjectDataProvider.refresh();
+		subjectDataProvider.getList().set(selectedSubjectIndex, ps);		
 	}
 	
 
@@ -483,6 +487,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		brancheDataProvider.getList().clear();
 		brancheDataProvider.setList(branches);
+		//
+		tblBranches.setHeight( Integer.toString(NotificationTypes.lineHeightShortList * branches.size() + NotificationTypes.headerHeight) + "px");
 	}
 	
 
@@ -494,6 +500,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		brancheDataProvider.getList().add(branche);
 		brancheDataProvider.refresh();
+		//
+		tblBranches.setHeight( Integer.toString(NotificationTypes.lineHeightShortList * brancheDataProvider.getList().size() + NotificationTypes.headerHeight) + "px");
 	}
 	
 
@@ -533,7 +541,19 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	/**/
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
+		//
+		tblSubjects.getSelectionModel().setSelected(selectedSubject, false);
+		//
+		subjectDataProvider.getList().clear();
+		brancheDataProvider.getList().clear();
+		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onClassChanged( lstClasses.getValue(lstClasses.getSelectedIndex()) );
+	}
+
+	@Override
+	public void showUpdatedProfileBranche(ProfileBrancheProxy pb) {
+		//
+		brancheDataProvider.getList().set(selectedBrancheIndex, pb);
 	}
 }

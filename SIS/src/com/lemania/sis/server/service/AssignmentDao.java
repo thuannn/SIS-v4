@@ -31,10 +31,12 @@ public class AssignmentDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
 	/**/
 	public List<Assignment> listAll(String profId){
 		Query<Assignment> q = this.ofy().query(Assignment.class)
 				.filter("prof", new Key<Professor>(Professor.class, Long.parseLong(profId)))
+				.order("subject")
 				.order("classe");
 		List<Assignment> returnList = new ArrayList<Assignment>();
 		for (Assignment a : q){
@@ -48,6 +50,7 @@ public class AssignmentDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
 	
 	/**/
 	public List<Professor> listAllProfessorBySubject(String subjectId){

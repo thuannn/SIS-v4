@@ -22,6 +22,8 @@ public class UserDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/**/
 	public List<User> listAllActive(){
 		Query<User> q = this.ofy().query(User.class)
 				.filter("active", true);
@@ -32,11 +34,19 @@ public class UserDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/**/
 	public void save(User user){
+		//
+		user.setUserName( user.getUserName().toLowerCase() );
 		this.ofy().put(user);
 	}
 	
+	
+	/**/
 	public User saveAndReturn(User user){
+		//
+		user.setUserName( user.getUserName().toLowerCase() );
 		Key<User> key = this.ofy().put(user);
 		try {
 			return this.ofy().get(key);
@@ -45,10 +55,13 @@ public class UserDao extends MyDAOBase {
 		}
 	}
 	
+	/**/
 	public void removeUser(User user){
 		this.ofy().delete(user);
 	}
 	
+	
+	/**/
 	public User authenticateUser(String userName, String password) {
 		Query<User> q = this.ofy().query(User.class)
 				.filter("active", true)

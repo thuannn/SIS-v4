@@ -114,6 +114,7 @@ public class ProfsPresenter
 		
 		getProfessorsList();
 		loadEcoleList();
+		loadActiveSubjectList();
 	}
 	
 	
@@ -336,7 +337,6 @@ public class ProfsPresenter
 	@Override
 	public void onClassSelected() {
 		//
-		loadActiveSubjectList();
 	}
 
 

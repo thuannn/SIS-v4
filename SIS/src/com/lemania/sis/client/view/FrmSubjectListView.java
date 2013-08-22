@@ -6,9 +6,11 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.uihandler.FrmSubjectListUiHandler;
 import com.lemania.sis.shared.SubjectProxy;
@@ -71,6 +73,7 @@ public class FrmSubjectListView extends ViewWithUiHandlers<FrmSubjectListUiHandl
 	      } 
 	    };
 	    tblSubjectList.addColumn( colCoef, "Coefficient" );
+	    tblSubjectList.setColumnWidth( colCoef, 20, Unit.PCT );
 	    // Field updater
 	    colCoef.setFieldUpdater(new FieldUpdater<SubjectProxy, String>(){
 	    	@Override
@@ -91,6 +94,7 @@ public class FrmSubjectListView extends ViewWithUiHandlers<FrmSubjectListUiHandl
 	    	}	    	
 	    };
 	    tblSubjectList.addColumn(colActive, "Active");
+	    tblSubjectList.setColumnWidth(colActive, 20, Unit.PCT);
 	    // Field updater
 	    colActive.setFieldUpdater(new FieldUpdater<SubjectProxy, Boolean>(){
 	    	@Override
@@ -102,13 +106,18 @@ public class FrmSubjectListView extends ViewWithUiHandlers<FrmSubjectListUiHandl
 	    	}
 	    });
 	    
-	    dataProvider.addDataDisplay(tblSubjectList);		
+	    //
+	    tblSubjectList.setPageSize(1000);
+	    //
+	    dataProvider.addDataDisplay(tblSubjectList);	
 	}
 
 	@Override
 	public void setSubjectListData(List<SubjectProxy> subjectList) {
 		// 
 		dataProvider.setList(subjectList);
+		//
+		tblSubjectList.setHeight( Integer.toString(subjectList.size() * NotificationTypes.lineHeight) + "px" );
 	}
 
 	@Override

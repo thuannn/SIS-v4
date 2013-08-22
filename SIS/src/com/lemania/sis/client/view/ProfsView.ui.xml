@@ -11,10 +11,10 @@
 			<g:Label text="LISTE DES PROFESSEURS" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="850px" spacing="5">
 				<g:VerticalPanel width="" spacing="2">
-					<p1:DataGrid width="500px" height="700px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
+					<p1:DataGrid width="300px" height="700px" ui:field="tblProfessors" keyboardPagingPolicy="INCREASE_RANGE" keyboardSelectionPolicy="DISABLED" pageSize="1000"/>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="" spacing="2">
-					<g:Label ui:field="lblProfNameAssign" styleName="header"/>
+					<g:Label ui:field="lblProfNameAssign" styleName="header" text="-"/>
 					<g:Label text="Assigner une classe" width="" styleName="sectionTitle"/>
 					<g:Grid width="100%" styleName="subSection" cellPadding="2" cellSpacing="2">
 						<g:row>
@@ -60,7 +60,7 @@
 					</g:Grid>
 					<g:Label text="." styleName="hiddenText"/>
 					<g:Label text="Liste des classes assignés" styleName="sectionTitle"/>
-					<p1:DataGrid width="400px" height="350PX" ui:field="tblAssignments" styleName="subSection"/>
+					<p1:DataGrid width="650px" height="425PX" ui:field="tblAssignments" styleName="subSection"/>
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:VerticalPanel>

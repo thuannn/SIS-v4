@@ -9,6 +9,7 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.uihandler.StudentListUiHandler;
 import com.lemania.sis.shared.StudentProxy;
@@ -134,7 +135,11 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 
 	@Override
 	public void setTableData(List<StudentProxy> studentList) {
+		//
 		dataProvider.setList(studentList);
+		//
+		tblStudents.setHeight( Integer.toString( (studentList.size() * NotificationTypes.lineHeight) 
+				+ NotificationTypes.headerHeight ) + "px");
 	}
 
 	@Override

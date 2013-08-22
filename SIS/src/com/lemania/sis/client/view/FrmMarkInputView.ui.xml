@@ -37,14 +37,14 @@
 				<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
 					<g:HorizontalPanel width="100%">
 						<g:Label text="3" styleName="step"/>
-						<g:Label text="Choisir un élève à saisir les notes :" styleName="fieldTitle" height="40px" width=""/>
+						<g:Label text="Choisir un élève à saisir les notes :" styleName="fieldTitle" height="" width=""/>
 					</g:HorizontalPanel>
 						<p1:DataGrid width="100%" height="460px" ui:field="tblBulletinSubjects"/>
 					</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 							<g:HorizontalPanel width="100%">
 								<g:Label text="4" styleName="step"/>
-								<g:Label text="Chosir une branche à saisir les notes :" styleName="fieldTitle" height="40px" width="200px"/>
+								<g:Label text="Chosir une branche à saisir les notes :" styleName="fieldTitle" height="" width=""/>
 							</g:HorizontalPanel>
 						<p1:DataGrid width="100%" height="250px" ui:field="tblBranches"/>
 						<g:Label text="Moyenne annuelle / semestrielle de l&apos;élève choisit" styleName="fieldTitle"/>

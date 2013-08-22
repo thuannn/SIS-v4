@@ -6,6 +6,7 @@ import java.util.List;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.UserManagementPresenter;
 import com.lemania.sis.client.uihandler.UserManagementUiHandler;
 import com.lemania.sis.shared.UserProxy;
@@ -117,6 +119,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colActive, "Actif");
+	    tblUser.setColumnWidth(colActive, 10, Unit.PCT);
 	    
 	    colActive.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -137,6 +140,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colAdmin, "Admin");	
+	    tblUser.setColumnWidth(colAdmin, 10, Unit.PCT);
 	    
 	    colAdmin.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -157,6 +161,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}
 	    };
 	    tblUser.addColumn(colProf, "Professeur");
+	    tblUser.setColumnWidth(colProf, 10, Unit.PCT);
 	    
 	    colProf.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -177,6 +182,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}
 	    };
 	    tblUser.addColumn(colStudent, "Eleve");
+	    tblUser.setColumnWidth(colStudent, 10, Unit.PCT);
 	    
 	    colStudent.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -191,7 +197,10 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 
 	@Override
 	public void setUserData(List<UserProxy> list) {
+		//
 		tblUser.setRowData(list);
+		//
+		tblUser.setHeight( Integer.toString((list.size()+1) * NotificationTypes.lineHeight) + "px");
 	}
 
 	@Override

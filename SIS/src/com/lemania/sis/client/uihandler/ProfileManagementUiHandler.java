@@ -20,6 +20,7 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	void onClassChanged( String classId );
 	//
 	void updateProfileSubject( ProfileSubjectProxy ps, String coef, Boolean isActive );
+	void updateProfileBranche( ProfileBrancheProxy pb, String coef, String profileSubjectId );
 	//
 	void onSubjectSelected( String profileSubjectId );
 }
