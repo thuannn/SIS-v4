@@ -7,9 +7,12 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -70,6 +73,8 @@ public class StudentPresenter
 		
 		// Thuan
 		loadStudentList();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.students));
 	}
 
 	
@@ -116,8 +121,19 @@ public class StudentPresenter
 		return rf.studentRequest();
 	}
 
+	
+	
 	@Override
 	public void updateStudentFirstName(StudentProxy student, String firstName) {
+		//
+		if (student.getFirstName().equals(firstName))
+			return;
+		//
+		if (firstName.equals("")){
+			Window.alert( NotificationTypes.invalid_input + " - Prénom");
+			return;
+		}
+		//
 		StudentRequestContext rc = getStudentRequestContext();
 		StudentProxy studentForUpdate = rc.edit( student );
 		studentForUpdate.setFirstName(firstName);
@@ -134,8 +150,19 @@ public class StudentPresenter
 		
 	}
 
+	
+	
 	@Override
 	public void updateStudentLastName(StudentProxy student, String lastName) {
+		//
+		if (student.getLastName().equals(lastName))
+			return;
+		//
+		if (lastName.equals("")){
+			Window.alert( NotificationTypes.invalid_input + " - Nom");
+			return;
+		}
+		//
 		StudentRequestContext rc = getStudentRequestContext();
 		StudentProxy studentForUpdate = rc.edit( student );
 		studentForUpdate.setLastName(lastName);
@@ -154,6 +181,15 @@ public class StudentPresenter
 
 	@Override
 	public void updateStudentEmail(StudentProxy student, String email) {
+		//
+		if (student.getEmail().equals(email))
+			return;
+		//
+		if (FieldValidation.isValidEmailAddress(email)){
+			Window.alert(NotificationTypes.invalid_input + " - Email");
+			return;
+		}
+		//
 		StudentRequestContext rc = getStudentRequestContext();
 		StudentProxy studentForUpdate = rc.edit( student );
 		studentForUpdate.setEmail(email);

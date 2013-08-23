@@ -12,6 +12,7 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.event.EcoleAddedEvent;
 import com.lemania.sis.client.event.EcoleAddedEvent.EcoleAddedHandler;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -75,6 +76,10 @@ public class EcolePresenter extends
 	
 	@Override
 	protected void onReset(){
+		super.onReset();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.ecolepage));
+		//
 		getEcoleList();
 	}
 

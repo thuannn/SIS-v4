@@ -5,6 +5,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -66,6 +67,17 @@ public class FrmBrancheAddPresenter
 		// Thuan
 		getView().setUiHandlers(this);
 	}
+	
+	@Override
+	protected void onReset() {
+		//
+		super.onReset();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.brancheadd));
+		// Thuan
+		getView().setUiHandlers(this);
+	}
+	
 
 	
 	@Override

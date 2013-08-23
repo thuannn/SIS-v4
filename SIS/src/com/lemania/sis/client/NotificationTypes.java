@@ -20,7 +20,9 @@ public class NotificationTypes {
 	
 	public static String branche_list_not_empty = "Merci de supprimer toutes les branches de cette matière avant la supprimer.";
 	
-	public static Integer lineHeight = 30;
-	public static Integer lineHeightShortList = 32;
-	public static Integer headerHeight = 35;
+	public static Integer lineHeight = 29;
+	public static Integer lineHeightShortList = 34;
+	public static Integer headerHeight = 32;
+	
+	public static Integer pageSize = 1000;
 }

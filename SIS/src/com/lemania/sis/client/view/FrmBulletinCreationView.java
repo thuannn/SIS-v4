@@ -6,6 +6,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmBulletinCreationPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinCreationUiHandler;
 import com.lemania.sis.shared.BulletinProxy;
@@ -158,6 +159,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    });
 	    //
 	    studentDataProvider.addDataDisplay(tblStudents);
+	    //
+	    tblStudents.setPageSize( NotificationTypes.pageSize );
 	}
 	
 

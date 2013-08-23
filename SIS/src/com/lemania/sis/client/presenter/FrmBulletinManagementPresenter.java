@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -68,7 +69,7 @@ public class FrmBulletinManagementPresenter
 		void initializeTables();
 		//
 		void showUpdatedBranche( BulletinBrancheProxy branche );
-		void showUpdatedSubject( BulletinSubjectProxy subject );
+		void showUpdatedSubject( BulletinSubjectProxy subject, Integer lastSubjectIndex );
 		//
 		void showAddedSubject( BulletinSubjectProxy subject);
 		void showAddedBranche( BulletinBrancheProxy branche);
@@ -109,8 +110,10 @@ public class FrmBulletinManagementPresenter
 	
 	@Override
 	protected void onReset(){
+		//
 		super.onReset();
-		
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.bulletinmanagement));
 		// Thuan
 		getView().resetForm();
 		//
@@ -338,7 +341,7 @@ public class FrmBulletinManagementPresenter
 	}
 
 	@Override
-	public void updateSubjectCoef(BulletinSubjectProxy subject, String coef) {
+	public void updateSubjectCoef(BulletinSubjectProxy subject, String coef, final Integer lastSubjectIndex) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -352,7 +355,7 @@ public class FrmBulletinManagementPresenter
 			}
 			@Override
 			public void onSuccess(BulletinSubjectProxy response) {
-				getView().showUpdatedSubject(response);
+				getView().showUpdatedSubject(response, lastSubjectIndex);
 			}
 		});		
 	}

@@ -13,14 +13,14 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	void addSubjectToProfile( String profileId, String subjectId, String professorId, String subjectCoef );
 	void removeSubject( ProfileSubjectProxy ps );
 	//
-	void addBrancheToProfile( String profileSubjectId, String brancheId, String brancheCoef );
-	void removeBranche( ProfileBrancheProxy bp, String profileSubjectId );
+	void addBrancheToProfile( String profileSubjectId, String brancheId, String brancheCoef, Integer subjectLastPosition );
+	void removeBranche( ProfileBrancheProxy bp, String profileSubjectId, Integer subjectLastPosition );
 	//
 	void onProfileChanged( String profileId );
 	void onClassChanged( String classId );
 	//
-	void updateProfileSubject( ProfileSubjectProxy ps, String coef, Boolean isActive );
-	void updateProfileBranche( ProfileBrancheProxy pb, String coef, String profileSubjectId );
+	void updateProfileSubject( ProfileSubjectProxy ps, String coef, Boolean isActive, Integer lastPosition );
+	void updateProfileBranche( ProfileBrancheProxy pb, String coef, String profileSubjectId, Integer lastPosition );
 	//
 	void onSubjectSelected( String profileSubjectId );
 }

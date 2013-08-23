@@ -12,6 +12,7 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.event.CoursAddedEvent;
 import com.lemania.sis.client.event.CoursAddedEvent.CoursAddedHandler;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -76,8 +77,12 @@ public class CoursPresenter extends
 	
 	@Override
 	protected void onReset(){
+		//
+		super.onReset();
 		// Thuan
 		initialData();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.cours));
 	}
 	
 	

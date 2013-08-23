@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
@@ -65,6 +66,19 @@ public class FrmPasswordPresenter
 		// Thuan
 		getView().setUiHandlers(this);
 	}
+	
+	
+	@Override
+	protected void onReset() {
+		//
+		super.onReset();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.password));
+		// Thuan
+		getView().setUiHandlers(this);
+	}
+	
+	
 
 	@ProxyEvent
 	@Override

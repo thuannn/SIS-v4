@@ -13,6 +13,7 @@ import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -107,7 +108,10 @@ public class ProfsPresenter
 	
 	@Override
 	protected void onReset(){
+		//
 		super.onReset();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.profs));
 		
 		// Thuan
 		getView().resetForm();

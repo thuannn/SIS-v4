@@ -10,6 +10,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.MainPageUiHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -43,6 +44,32 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField VerticalPanel leftPanel;
 	@UiField HTML htmlProgressBar;
 	@UiField Hyperlink cmdProfileManagement;
+	@UiField Hyperlink cmdAttribution;
+	@UiField Hyperlink cmdAttributionPerson;
+	@UiField Hyperlink cmdHome;
+	@UiField Hyperlink cmdMarkInput;
+	@UiField Hyperlink cmdMarkView;
+	@UiField Hyperlink cmdStudentList;
+	@UiField Hyperlink cmdStudentAdd;
+	@UiField Hyperlink cmdProfList;
+	@UiField Hyperlink cmdProfAdd;
+	@UiField Hyperlink cmdBrancheList;
+	@UiField Hyperlink cmdBrancheAdd;
+	@UiField Hyperlink cmdSubjectList;
+	@UiField Hyperlink cmdSubjectAdd;
+	@UiField Hyperlink cmdClassList;
+	@UiField Hyperlink cmdClassAdd;
+	@UiField Hyperlink cmdProgrammeList;
+	@UiField Hyperlink cmdProgrammeAdd;
+	@UiField Hyperlink cmdSchoolList;
+	@UiField Hyperlink cmdSchoolAdd;
+	@UiField Hyperlink cmdUserManagement;
+	@UiField Hyperlink cmdSettings;
+	@UiField Hyperlink cmdPassword;
+	@UiField Hyperlink cmdHelp;
+	
+	//
+	private Hyperlink lastPage;
 	
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
@@ -205,5 +232,40 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	            }
 	        }
 	    }
+	}
+
+	@Override
+	public void showCurrentPageOnMenu(String tokenName) {
+		//
+		if (tokenName.equals(NameTokens.homepage)) switchStyle(this.cmdHome);
+		if (tokenName.equals(NameTokens.profilemgt)) switchStyle(this.cmdProfileManagement);
+		if (tokenName.equals(NameTokens.bulletincreation)) switchStyle(this.cmdAttribution);
+		if (tokenName.equals(NameTokens.bulletinmanagement)) switchStyle(this.cmdAttributionPerson);
+		if (tokenName.equals(NameTokens.bulletindetail)) switchStyle(this.cmdMarkView);
+		if (tokenName.equals(NameTokens.markinput)) switchStyle(this.cmdMarkInput);
+		if (tokenName.equals(NameTokens.students)) switchStyle(this.cmdStudentList);
+		if (tokenName.equals(NameTokens.studentadd)) switchStyle(this.cmdStudentAdd);
+		if (tokenName.equals(NameTokens.profs)) switchStyle(this.cmdProfList);
+		if (tokenName.equals(NameTokens.profsadd)) switchStyle(this.cmdProfAdd);
+		if (tokenName.equals(NameTokens.branchelist)) switchStyle(this.cmdBrancheList);
+		if (tokenName.equals(NameTokens.brancheadd)) switchStyle(this.cmdBrancheAdd);
+		if (tokenName.equals(NameTokens.subjectlist)) switchStyle(this.cmdSubjectList);
+		if (tokenName.equals(NameTokens.subjectadd)) switchStyle(this.cmdSubjectAdd);
+		if (tokenName.equals(NameTokens.classlist)) switchStyle(this.cmdClassList);
+		if (tokenName.equals(NameTokens.classeadd)) switchStyle(this.cmdClassAdd);
+		if (tokenName.equals(NameTokens.cours)) switchStyle(this.cmdProgrammeList);
+		if (tokenName.equals(NameTokens.coursadd)) switchStyle(this.cmdProgrammeAdd);
+		if (tokenName.equals(NameTokens.ecolepage)) switchStyle(this.cmdSchoolList);
+		if (tokenName.equals(NameTokens.addecole)) switchStyle(this.cmdSchoolAdd);
+		if (tokenName.equals(NameTokens.usermanagement)) switchStyle(this.cmdUserManagement);
+		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings);
+		if (tokenName.equals(NameTokens.password)) switchStyle(this.cmdPassword);
+		if (tokenName.equals(NameTokens.contact)) switchStyle(this.cmdHelp);
+	}
+	
+	private void switchStyle( Hyperlink link){
+		if (lastPage != null) lastPage.setStyleName("");
+		link.setStyleName("currentPage");
+		lastPage = link;
 	}
 }

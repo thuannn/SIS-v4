@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent.ProfessorAfterAddHandler;
 import com.lemania.sis.client.event.StudentAfterAddEvent;
@@ -80,6 +81,9 @@ public class UserManagementPresenter
 	
 	@Override
 	protected void onReset() {
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));
+		//
 		loadUsers();
 	}
 

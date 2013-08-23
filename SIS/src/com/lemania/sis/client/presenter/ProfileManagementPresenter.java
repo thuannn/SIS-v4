@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ProfileBrancheAfterAddEvent;
 import com.lemania.sis.client.event.ProfileBrancheAfterAddEvent.ProfileBrancheAfterAddHandler;
 import com.lemania.sis.client.place.NameTokens;
@@ -69,7 +70,7 @@ public class ProfileManagementPresenter
 		//
 		void addNewProfileSubjectToTable( ProfileSubjectProxy profileSubject );
 		void setSubjectTableData( List<ProfileSubjectProxy> subjects );
-		void showUpdatedProfileSubject( ProfileSubjectProxy ps );
+		void showUpdatedProfileSubject( ProfileSubjectProxy ps, Integer lastPosition );
 		void removeProfileSubjectFromTable();
 		//
 		void setBrancheTableData( List<ProfileBrancheProxy> branches);
@@ -111,9 +112,12 @@ public class ProfileManagementPresenter
 	
 	@Override
 	protected void onReset(){
+		//
 		super.onReset();
 		
 		// Thuan
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.profilemgt));
+		//
 		getView().resetForm();
 		//
 		loadClassList();
@@ -301,7 +305,7 @@ public class ProfileManagementPresenter
 	 * */
 	@Override
 	public void addBrancheToProfile(final String profileSubjectId, String brancheId,
-			String brancheCoef) {
+			String brancheCoef, final Integer subjectLastPosition ) {
 		//
 		if (profileSubjectId.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Matière");
@@ -327,7 +331,7 @@ public class ProfileManagementPresenter
 			}
 			@Override
 			public void onSuccess(ProfileBrancheProxy response) {
-				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId, subjectLastPosition ) );
 				getView().addNewProfileBrancheToTable( response );
 			}
 		});		
@@ -365,12 +369,16 @@ public class ProfileManagementPresenter
 	 * 
 	 * */
 	@Override
-	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive) {
+	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive, final Integer lastPosition) {
 		//
 		if ( !FieldValidation.isNumeric(coef)){
 			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
 			return;
 		}
+		//
+		if (ps.getSubjectCoef() == Double.parseDouble(coef))
+			if (ps.getIsActive().equals(isActive))
+				return;
 		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -385,7 +393,7 @@ public class ProfileManagementPresenter
 			}
 			@Override
 			public void onSuccess(ProfileSubjectProxy response) {
-				getView().showUpdatedProfileSubject(response);
+				getView().showUpdatedProfileSubject(response, lastPosition);
 			}
 		});	
 	}
@@ -423,7 +431,7 @@ public class ProfileManagementPresenter
 	 * */
 	@ProxyEvent
 	@Override
-	public void onProfileBrancheAfterAdd(ProfileBrancheAfterAddEvent event) {
+	public void onProfileBrancheAfterAdd(final ProfileBrancheAfterAddEvent event) {
 		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -435,7 +443,7 @@ public class ProfileManagementPresenter
 			}
 			@Override
 			public void onSuccess(ProfileSubjectProxy response) {
-				getView().showUpdatedProfileSubject(response);
+				getView().showUpdatedProfileSubject(response, event.getSubjectLastPosition());
 			}
 		});	
 	}
@@ -444,7 +452,7 @@ public class ProfileManagementPresenter
 	 * 
 	 * */
 	@Override
-	public void removeBranche( ProfileBrancheProxy bp, final String profileSubjectId ) {
+	public void removeBranche( ProfileBrancheProxy bp, final String profileSubjectId, final Integer subjectLastPosition ) {
 		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -456,7 +464,7 @@ public class ProfileManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId, subjectLastPosition ) );
 				getView().removeProfileBrancheFromTable();
 			}
 		});
@@ -497,7 +505,15 @@ public class ProfileManagementPresenter
 
 
 	@Override
-	public void updateProfileBranche(ProfileBrancheProxy pb, String coef, final String profileSubjectId) {
+	public void updateProfileBranche(ProfileBrancheProxy pb, String coef, final String profileSubjectId, final Integer lastPosition) {
+		//
+		if (!FieldValidation.isNumeric(coef)){
+			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la branche");
+			return;
+		}
+		//
+		if ( pb.getBrancheCoef() == Double.parseDouble(coef) )
+			return;
 		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -511,7 +527,7 @@ public class ProfileManagementPresenter
 			}
 			@Override
 			public void onSuccess(ProfileBrancheProxy response) {
-				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId ) );
+				getEventBus().fireEvent( new ProfileBrancheAfterAddEvent( profileSubjectId, lastPosition ) );
 				getView().showUpdatedProfileBranche(response);
 			}
 		});

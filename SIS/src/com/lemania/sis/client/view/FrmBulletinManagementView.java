@@ -280,6 +280,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    tblSubjects.setColumnWidth(colSubjectName, 30, Unit.PCT);
 	    tblSubjects.addColumn(colSubjectName, "Matière");
 	    
+	    
 	    // --------------- Coef
 	    Column<BulletinSubjectProxy, String> colSubjectCoef = new Column<BulletinSubjectProxy, String>(new EditTextCell()) {
 	      @Override
@@ -291,16 +292,23 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    colSubjectCoef.setFieldUpdater(new FieldUpdater<BulletinSubjectProxy, String>(){
 	    	@Override
 	    	public void update(int index, BulletinSubjectProxy subject, String value){
-	    		selectedSubjectIndex = index;
-	    		selectedSubject = subject;
-	    		if (getUiHandlers() != null) {
-	    			if ( !subject.getSubjectCoef().toString().equals(value) )
-	    				getUiHandlers().updateSubjectCoef(subject, value);
+	    		//
+	    		if (!selectedSubject.equals(subject))
+	    			return;
+	    		//
+	    		if (subject.getSubjectCoef() != Double.parseDouble(value)){
+		    		selectedSubjectIndex = index;
+		    		selectedSubject = subject;
+		    		if (getUiHandlers() != null) {
+		    			if ( !subject.getSubjectCoef().toString().equals(value) )
+		    				getUiHandlers().updateSubjectCoef(subject, value, selectedSubjectIndex);
+		    		}
 	    		}
 	    	}
 	    });
 	    tblSubjects.setColumnWidth(colSubjectCoef, 15, Unit.PCT);
 	    tblSubjects.addColumn(colSubjectCoef, "Coef");
+	    
 	    
 	    //
 	    TextColumn<BulletinSubjectProxy> colProfName = new TextColumn<BulletinSubjectProxy>() {
@@ -310,6 +318,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	      }
 	    };	    
 	    tblSubjects.addColumn(colProfName, "Prof");
+	    
+	    
 	    //
 	    Column<BulletinSubjectProxy, String> colDelete = new Column<BulletinSubjectProxy, String> (new ButtonCell()){
 	    	@Override
@@ -417,9 +427,9 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	}
 
 	@Override
-	public void showUpdatedSubject(BulletinSubjectProxy subject) {
+	public void showUpdatedSubject(BulletinSubjectProxy subject, Integer lastSubjectIndex) {
 		// 
-		subjectDataProvider.getList().set( selectedSubjectIndex, subject);
+		subjectDataProvider.getList().set( lastSubjectIndex, subject);
 	}
 
 	@Override

@@ -237,7 +237,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 			getUiHandlers().addBrancheToProfile( 
 					selectedSubject.getId().toString(), 
 					lstBranches.getValue(lstBranches.getSelectedIndex()), 
-					txtBrancheCoef.getText());
+					txtBrancheCoef.getText(),
+					selectedSubjectIndex );
 	}
 	
 
@@ -293,9 +294,13 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
 	    	@Override
 	    	public void update(int index, ProfileSubjectProxy subject, String value){
-	    		if (getUiHandlers() != null) {	    			
+	    		//
+	    		if (!subject.equals(selectedSubject))
+	    			return;
+	    		//
+	    		if (getUiHandlers() != null) {
 	    			selectedSubjectIndex = index;
-	    			getUiHandlers().updateProfileSubject( subject, value, subject.getIsActive() );
+	    			getUiHandlers().updateProfileSubject( subject, value, subject.getIsActive(), selectedSubjectIndex );
 	    		}	    		
 	    	}
 	    });
@@ -324,9 +329,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    colActive.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, Boolean>(){
 	    	@Override
 	    	public void update(int index, ProfileSubjectProxy subject, Boolean value){
-	    		if (getUiHandlers() != null) {	    			
+	    		if (getUiHandlers() != null) {
 	    			selectedSubjectIndex = index;
-	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value );
+	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value, selectedSubjectIndex );
 	    		}	    		
 	    	}
 	    });
@@ -373,11 +378,12 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    tblSubjects.setSelectionModel(selectionModel);
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 	      public void onSelectionChange(SelectionChangeEvent event) {
-	        selectedSubject = selectionModel.getSelectedObject();
-	        if (selectedSubject != null) {
-	        	selectedSubjectIndex = subjectDataProvider.getList().indexOf( selectedSubject );	        	
-	        	getUiHandlers().onSubjectSelected( selectedSubject.getId().toString() );
-	        }
+	    	  //
+	    	  selectedSubject = selectionModel.getSelectedObject();
+	    	  if (selectedSubject != null) {
+	    		  selectedSubjectIndex = subjectDataProvider.getList().indexOf(selectedSubject);
+	    		  getUiHandlers().onSubjectSelected( selectedSubject.getId().toString() );
+	    	  }
 	      }
 	    });
 	}
@@ -408,10 +414,11 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileBrancheProxy, String>(){
 	    	@Override
 	    	public void update(int index, ProfileBrancheProxy branche, String value){
+	    		//
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedBrancheIndex = index;
 	    			selectedBranche = branche;
-	    			getUiHandlers().updateProfileBranche( branche, value, selectedSubject.getId().toString() );
+	    			getUiHandlers().updateProfileBranche( branche, value, selectedSubject.getId().toString(), selectedSubjectIndex );
 	    		}	    		
 	    	}
 	    });
@@ -429,7 +436,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    	@Override
 	    	public void update(int index, ProfileBrancheProxy bp, String value){
 	    		selectedBrancheIndex = index;
-	    		getUiHandlers().removeBranche(bp, selectedSubject.getId().toString());
+	    		getUiHandlers().removeBranche(bp, selectedSubject.getId().toString(), selectedSubjectIndex);
 	    	}
 	    });
 	    tblBranches.setColumnWidth(colDelete, 20.0, Unit.PCT);
@@ -473,9 +480,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	 * Show the updated data after successfully saved
 	 * */
 	@Override
-	public void showUpdatedProfileSubject(ProfileSubjectProxy ps) {
+	public void showUpdatedProfileSubject(ProfileSubjectProxy ps, Integer subjectLastIndex) {
 		//
-		subjectDataProvider.getList().set(selectedSubjectIndex, ps);		
+		subjectDataProvider.getList().set( subjectLastIndex, ps );
 	}
 	
 
@@ -552,8 +559,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	}
 
 	@Override
-	public void showUpdatedProfileBranche(ProfileBrancheProxy pb) {
+	public void showUpdatedProfileBranche(ProfileBrancheProxy pb ) {
 		//
-		brancheDataProvider.getList().set(selectedBrancheIndex, pb);
+		brancheDataProvider.getList().set( selectedBrancheIndex, pb );
 	}
 }

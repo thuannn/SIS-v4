@@ -66,7 +66,7 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	    	}
 	    });
 	    
-	    //
+		//
 	    Column<StudentProxy, String> colLastName = new Column<StudentProxy, String>(new EditTextCell()) {
 	      @Override
 	      public String getValue(StudentProxy object) {
@@ -124,7 +124,11 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	    	}
 	    });
 	    
+	    //
 	    dataProvider.addDataDisplay(tblStudents);
+	    
+	    //
+	    tblStudents.setPageSize(1000);
 	}
 
 	@Override

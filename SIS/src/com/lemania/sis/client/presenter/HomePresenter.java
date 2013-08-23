@@ -12,6 +12,7 @@ import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -67,6 +68,18 @@ public class HomePresenter
 		// Thuan
 		getView().setUiHandlers(this);
 	}
+	
+	@Override
+	protected void onReset() {
+		//
+		super.onReset();
+		//
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.homepage));
+		
+		// Thuan
+		getView().setUiHandlers(this);
+	}
+
 	
 
 	/*

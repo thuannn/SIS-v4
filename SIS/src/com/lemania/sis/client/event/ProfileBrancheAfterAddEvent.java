@@ -12,6 +12,7 @@ public class ProfileBrancheAfterAddEvent extends
 	
 	// Thuan
 	private String profileSubjectId = "";
+	private Integer subjectLastPosition = -1;
 
 	public interface ProfileBrancheAfterAddHandler extends EventHandler {
 		void onProfileBrancheAfterAdd(ProfileBrancheAfterAddEvent event);
@@ -25,8 +26,9 @@ public class ProfileBrancheAfterAddEvent extends
 	public ProfileBrancheAfterAddEvent() {
 	}
 	
-	public ProfileBrancheAfterAddEvent( String profileSubjectId ) {
+	public ProfileBrancheAfterAddEvent( String profileSubjectId, Integer lastPosition ) {
 		this.profileSubjectId = profileSubjectId;
+		this.subjectLastPosition = lastPosition;
 	}
 
 	@Override
@@ -53,5 +55,9 @@ public class ProfileBrancheAfterAddEvent extends
 
 	public void setProfileSubjectId(String profileId) {
 		this.profileSubjectId = profileId;
+	}
+	
+	public Integer getSubjectLastPosition(){
+		return this.subjectLastPosition;
 	}
 }

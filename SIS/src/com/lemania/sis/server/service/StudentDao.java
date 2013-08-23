@@ -53,7 +53,9 @@ public class StudentDao extends MyDAOBase {
 	
 	/* List all the student both active and inactive. */
 	public List<Student> listAll(){
-		Query<Student> q = this.ofy().query(Student.class);
+		Query<Student> q = this.ofy().query(Student.class)
+				.order("LastName")
+				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
 		for (Student student : q){
 			returnList.add(student);
@@ -64,7 +66,9 @@ public class StudentDao extends MyDAOBase {
 	
 	/* List all the active students */
 	public List<Student> listAllActive(){
-		Query<Student> q = this.ofy().query(Student.class).filter("isActive", true);
+		Query<Student> q = this.ofy().query(Student.class).filter("isActive", true)
+				.order("LastName")
+				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
 		for (Student student : q){
 			returnList.add(student);
@@ -75,7 +79,9 @@ public class StudentDao extends MyDAOBase {
 	
 	/* List all the active students */
 	public List<Student> listByEmail(String email){
-		Query<Student> q = this.ofy().query(Student.class).filter("Email", email);
+		Query<Student> q = this.ofy().query(Student.class).filter("Email", email)
+				.order("LastName")
+				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
 		for (Student student : q){
 			returnList.add(student);
@@ -87,7 +93,7 @@ public class StudentDao extends MyDAOBase {
 	/**/
 	public List<Student> listAllActiveWithoutBulletin(){
 		//
-		Query<Bulletin> q = this.ofy().query(Bulletin.class).order("student");
+		Query<Bulletin> q = this.ofy().query(Bulletin.class).order("student");				
 		List<Long> studentIds = new ArrayList<Long>();
 		Long prevId = Long.MIN_VALUE;
 		Long curId = Long.MIN_VALUE;
@@ -99,7 +105,9 @@ public class StudentDao extends MyDAOBase {
 			}
 		}
 		//
-		Query<Student> qStudent = this.ofy().query(Student.class).filter("isActive", true);
+		Query<Student> qStudent = this.ofy().query(Student.class).filter("isActive", true)
+				.order("LastName")
+				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
 		Boolean notThisStudent = false;
 		for (Student student : qStudent){
