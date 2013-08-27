@@ -15,6 +15,7 @@ import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -510,5 +511,27 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 			lstSubjects.addItem( subject.getSubjectName(), subject.getId().toString() );
 		}
 		lstSubjects.setSelectedIndex(0);
+	}
+	
+	
+	/**/
+	@UiHandler("lstSubjects")
+	void onLstSubjectsChange(ChangeEvent event) {
+		if (getUiHandlers() != null)
+			getUiHandlers().loadProfessorList( lstSubjects.getValue( lstSubjects.getSelectedIndex()), lstClasses.getValue(lstClasses.getSelectedIndex()));
+	}
+
+	
+	/**/
+	@Override
+	public void setProfessorListData(List<ProfessorProxy> profs) {
+		//
+		lstProfessors.clear();
+		lstProfessors.addItem("-","");
+		
+		for ( ProfessorProxy prof : profs ){
+			lstProfessors.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfessors.setSelectedIndex(0);
 	}
 }

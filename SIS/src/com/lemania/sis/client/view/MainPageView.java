@@ -67,6 +67,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdSettings;
 	@UiField Hyperlink cmdPassword;
 	@UiField Hyperlink cmdHelp;
+	@UiField Hyperlink cmdBulletin;
 	
 	//
 	private Hyperlink lastPage;
@@ -261,6 +262,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings);
 		if (tokenName.equals(NameTokens.password)) switchStyle(this.cmdPassword);
 		if (tokenName.equals(NameTokens.contact)) switchStyle(this.cmdHelp);
+		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin);
 	}
 	
 	private void switchStyle( Hyperlink link){

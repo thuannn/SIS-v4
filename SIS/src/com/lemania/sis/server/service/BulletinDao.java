@@ -9,7 +9,6 @@ import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
@@ -49,6 +48,21 @@ public class BulletinDao extends MyDAOBase {
 	public List<Bulletin> listAllByClass(String classId){
 		Query<Bulletin> q = this.ofy().query(Bulletin.class)
 				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
+				.order("classeName")
+				.order("studentName");
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		for (Bulletin bulletin : q){
+			returnList.add(bulletin);
+		}
+		return returnList;
+	}
+	
+	
+	/* List all bulletin by class */
+	public List<Bulletin> listAllActiveByClass(String classId){
+		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
+				.filter("isActive", true)
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
@@ -173,7 +187,20 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
+	/**/
 	public void removeProfile(Bulletin bulletin){
 		this.ofy().delete(bulletin);
+	}
+	
+	
+	/**/
+	public void updateBulletinStatus( String studentId, Boolean status ){
+		//
+		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+				.filter("student", new Key<Student>(Student.class, Long.parseLong( studentId )));
+		for (Bulletin bulletin : q){
+			bulletin.setIsActive( status );
+			this.ofy().put( bulletin );
+		}
 	}
 }

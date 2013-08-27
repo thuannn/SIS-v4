@@ -56,7 +56,7 @@ public class FrmBulletinViewDetailPresenter
 		void resetForm();
 		void showAdminPanel(Boolean show);
 		//
-		void setStudentListData(List<BulletinProxy> students);
+		void setStudentListData(List<BulletinProxy> bulletins);
 		//
 		void setClasseList(List<ClasseProxy> classes);
 		//
@@ -178,7 +178,7 @@ public class FrmBulletinViewDetailPresenter
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinRequestContext rc = rf.bulletinRequest();
-		rc.listAllByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
+		rc.listAllActiveByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

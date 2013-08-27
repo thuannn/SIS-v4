@@ -42,6 +42,7 @@
 					<g:TreeItem text="Notes" state="true">
 						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
 						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
+						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">
@@ -79,7 +80,7 @@
 					</g:TreeItem>
 					<g:TreeItem text="Autres" state="true">
 						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPassword"/>
-						<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact" ui:field="cmdHelp"/>
+						<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelp"/>
 					</g:TreeItem>
 				</g:Tree>
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
@@ -88,7 +89,7 @@
 							<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput"/>
 							<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail"/>
 							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password"/>
-							<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact"/>
 						</g:TreeItem>
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
@@ -96,7 +97,7 @@
 						<g:TreeItem state="true" text="Espace élève">
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe"/>
-							<g:Hyperlink targetHistoryToken="contact" text="Aide / Contact"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact"/>
 						</g:TreeItem>
 					</g:Tree>
 				</g:VerticalPanel>
@@ -108,7 +109,7 @@
 					</g:HTML>
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
 					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
-						<g:Label text="Copyright © Ecole Lémania" horizontalAlignment="ALIGN_LEFT"/>
+						<g:Label text="Copyright © Ecole Lémania - IT Services" horizontalAlignment="ALIGN_LEFT"/>
 						<g:Image url="images/appengine-silver-120x30.gif"/>
 					</g:HorizontalPanel>
 				</g:VerticalPanel>

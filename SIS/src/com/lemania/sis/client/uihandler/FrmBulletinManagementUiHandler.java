@@ -25,4 +25,6 @@ public interface FrmBulletinManagementUiHandler extends UiHandlers {
 	//
 	void addSubject(String bulletinId, String subjectId, String profId, String coef);
 	void addBranche(String bulletinSubjectId, String brancheId, String coef);
+	//
+	void loadProfessorList( String subjectId, String classId );
 }

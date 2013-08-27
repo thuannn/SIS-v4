@@ -73,7 +73,8 @@ public class BulletinSubjectDao extends MyDAOBase {
 		if (assignment != null) {
 			// Get the Bulletin list by class
 			Query<Bulletin> qBulletin = this.ofy().query(Bulletin.class)
-					.filter("classe", assignment.getClasse());
+					.filter("classe", assignment.getClasse())
+					.filter("isActive", true);
 			
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)

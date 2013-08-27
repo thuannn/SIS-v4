@@ -179,6 +179,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	private void styleTableMatu() {
 		//		
 		tblBulletin.setCellSpacing(0);
+		tblBulletin.setCellPadding(3);
 		tblBulletin.setStyleName("subSection");
 		//
 		for (int i=0; i<15; i++)
@@ -194,12 +195,15 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	private void styleTableNormal() {
 		//		
 		tblBulletin.setCellSpacing(0);
+		tblBulletin.setCellPadding(3);
 		tblBulletin.setStyleName("subSection");
 		//
 		for (int i=0; i<20; i++)
 			for (int j=1; j<tblBulletin.getRowCount(); j++) {
-				if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
-					tblBulletin.getCellFormatter().setStyleName(tblBulletin.getRowCount(), i, "brancheLine");
+				if (tblBulletin.isCellPresent(j, i)) { 
+					if (tblBulletin.getCellFormatter().getStyleName(j, i).equals(""))
+						tblBulletin.getCellFormatter().setStyleName(j, i, "brancheLine");
+				}
 			}
 	}
 
@@ -271,8 +275,13 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 					tblBulletin.setText(rowCount, 19, branche.getT3());
 				}
 			}
+			//
 			if (brancheCount>0)
 				tblBulletin.getFlexCellFormatter().setRowSpan((rowCount-brancheCount+1), 20, brancheCount);
+			//
+			rowCount++;
+			tblBulletin.setText(rowCount, 0, "");
+			tblBulletin.getCellFormatter().addStyleName(rowCount, 0, "spaceCell");
 		}
 		//
 		tblBulletin.getColumnFormatter().setStylePrimaryName(7, "gradeColumn");

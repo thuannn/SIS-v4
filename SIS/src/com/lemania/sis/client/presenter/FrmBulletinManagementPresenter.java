@@ -7,7 +7,10 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
+import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
+import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -30,7 +33,9 @@ import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
@@ -40,6 +45,7 @@ import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
+import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
@@ -52,7 +58,7 @@ import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContex
 public class FrmBulletinManagementPresenter
 		extends
 		Presenter<FrmBulletinManagementPresenter.MyView, FrmBulletinManagementPresenter.MyProxy> 
-		implements FrmBulletinManagementUiHandler {
+		implements FrmBulletinManagementUiHandler, StudentAfterStatusChangeHandler {
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinManagementUiHandler> {
 		//
@@ -79,6 +85,8 @@ public class FrmBulletinManagementPresenter
 		//
 		void setBrancheListData( List<BrancheProxy> branches);
 		void setSubjectListData( List<SubjectProxy> subjects);
+		//
+		void setProfessorListData( List<ProfessorProxy> profs);
 	}
 
 	@ProxyCodeSplit
@@ -228,7 +236,7 @@ public class FrmBulletinManagementPresenter
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinRequestContext rc = rf.bulletinRequest();
-		rc.listAllByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
+		rc.listAllActiveByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -396,5 +404,44 @@ public class FrmBulletinManagementPresenter
 				getView().showAddedBranche(response);
 			}
 		});
+	}
+
+	@ProxyEvent
+	@Override
+	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.updateBulletinStatus( event.getStudentId(), event.getStudentStatus() ).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( Void response ) {
+				//
+			}
+		});
+	}
+
+	
+	/**/
+	@Override
+	public void loadProfessorList(String subjectId, String classId) {
+		//
+		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AssignmentRequestContext rc = rf.assignmentRequest();
+		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ProfessorProxy> response) {
+				getView().setProfessorListData(response);
+			}
+		});		
 	}
 }

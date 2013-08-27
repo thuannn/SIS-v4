@@ -18,6 +18,7 @@ public interface BulletinRequestFactory extends RequestFactory {
 		Request<List<BulletinProxy>> listAll();			
 		Request<List<BulletinProxy>> listAllActive();
 		Request<List<BulletinProxy>> listAllByClass(String classId);
+		Request<List<BulletinProxy>> listAllActiveByClass(String classId);
 		Request<List<BulletinProxy>> listAllByEmail(String email);
 		//
 		Request<BulletinProxy> getBulletin(String bulletinId);
@@ -30,6 +31,8 @@ public interface BulletinRequestFactory extends RequestFactory {
 		Request<BulletinProxy> createBulletin(String studentId, String classId, String year, String profileId);
 		//
 		Request<Void> initialize();
+		//
+		Request<Void> updateBulletinStatus( String studentId, Boolean status );
 	}
 	
 	BulletinRequestContext bulletinRequest();

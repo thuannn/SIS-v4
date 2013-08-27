@@ -17,6 +17,7 @@ import com.lemania.sis.client.view.FrmBrancheListView;
 import com.lemania.sis.client.view.FrmBulletinCreationView;
 import com.lemania.sis.client.view.FrmBulletinManagementView;
 import com.lemania.sis.client.view.FrmBulletinViewDetailView;
+import com.lemania.sis.client.view.FrmBulletinViewSummaryView;
 import com.lemania.sis.client.view.FrmClasseAddView;
 import com.lemania.sis.client.view.FrmClasseListView;
 import com.lemania.sis.client.view.FrmMarkInputView;
@@ -55,6 +56,7 @@ import com.lemania.sis.client.presenter.FrmBulletinCreationPresenter;
 import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
+import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -159,5 +161,10 @@ public class ClientModule extends AbstractPresenterModule {
 				FrmBulletinManagementPresenter.MyView.class,
 				FrmBulletinManagementView.class,
 				FrmBulletinManagementPresenter.MyProxy.class);
+
+		bindPresenter(FrmBulletinViewSummaryPresenter.class,
+				FrmBulletinViewSummaryPresenter.MyView.class,
+				FrmBulletinViewSummaryView.class,
+				FrmBulletinViewSummaryPresenter.MyProxy.class);
 	}
 }

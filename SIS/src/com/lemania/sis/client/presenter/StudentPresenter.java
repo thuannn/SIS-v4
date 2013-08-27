@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
+import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -96,7 +97,7 @@ public class StudentPresenter
 	
 	/* Change a student status to be active or inactive */
 	@Override
-	public void updateStudentStatus(StudentProxy student, Boolean value) {
+	public void updateStudentStatus( final StudentProxy student, final Boolean value ) {
 		StudentRequestContext rc = getStudentRequestContext();
 		StudentProxy studentForUpdate = rc.edit( student );
 		studentForUpdate.setIsActive(value);
@@ -108,6 +109,7 @@ public class StudentPresenter
 			@Override
 			public void onSuccess(StudentProxy response) {
 				getView().updateEditedStudent(response);
+				getEventBus().fireEvent( new StudentAfterStatusChangeEvent(student.getId().toString(), value));
 			}
 		});
 	}
