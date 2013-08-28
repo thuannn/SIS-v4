@@ -104,14 +104,16 @@
 			</g:Dock>
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
-					<g:HTML wordWrap="true" visible="false" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
-						<div id="movingBallG"><div class="movingBallLineG"></div><div id="movingBallG_1" class="movingBallG"></div></div>
-					</g:HTML>
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
 					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
 						<g:Label text="Copyright © Ecole Lémania - IT Services" horizontalAlignment="ALIGN_LEFT"/>
 						<g:Image url="images/appengine-silver-120x30.gif"/>
 					</g:HorizontalPanel>
+					<g:VerticalPanel ui:field="pnlProgressBar" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel" visible="false">
+						<g:HTML wordWrap="true" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
+						<div id="movingBallG"><div class="movingBallLineG"></div><div id="movingBallG_1" class="movingBallG"></div></div>
+					</g:HTML>
+					</g:VerticalPanel>
 				</g:VerticalPanel>
 			</g:Dock>
 		</g:DockPanel>

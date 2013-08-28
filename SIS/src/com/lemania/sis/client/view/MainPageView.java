@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.lemania.sis.client.CurrentUser;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -68,6 +69,12 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdPassword;
 	@UiField Hyperlink cmdHelp;
 	@UiField Hyperlink cmdBulletin;
+	@UiField VerticalPanel pnlProgressBar;
+	
+	
+	// Thuan
+	PopupPanel popup = new PopupPanel(false);
+	
 	
 	//
 	private Hyperlink lastPage;
@@ -208,7 +215,17 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	/**/
 	@Override
 	public void showProgressBar(boolean visible) {
-		htmlProgressBar.setVisible(visible);
+		//
+		if (!pnlProgressBar.getParent().equals(popup))
+			popup.add(pnlProgressBar);
+		//
+		pnlProgressBar.setVisible(visible);
+		popup.setSize("300px", "150px");
+		popup.setStyleName("progressBarPopup");
+		if (visible)
+			popup.center();
+		else
+			popup.hide();
 	}
 
 	/**/

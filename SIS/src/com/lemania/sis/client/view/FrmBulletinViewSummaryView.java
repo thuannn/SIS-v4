@@ -21,6 +21,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
@@ -196,6 +198,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		PopupPanel popup = new PopupPanel(true);
 		popup.setStyleName("bulletin");
 		popup.add(pnlBulletin);
+		popup.addCloseHandler(new CloseHandler<PopupPanel>(){
+			public void onClose(CloseEvent<PopupPanel> event){
+				pnlMain.add(pnlBulletin);
+			}
+		});
+		//
 		popup.show();
 	}
 }

@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="5" ui:field="pnlMain">
+		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain">
 			<g:Label text="IMPRIMER LES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:VerticalPanel styleName="subSection" spacing="5">
 					<g:HorizontalPanel width="400px" spacing="2" horizontalAlignment="ALIGN_RIGHT" ui:field="pnlAdmin">
@@ -38,7 +38,7 @@
 							</g:VerticalPanel>
 						</g:customCell>
 						<g:customCell>
-							<g:HTML wordWrap="true" styleName="subSection">Critère de réussite :
+							<g:HTML wordWrap="true" styleName="bulletinNote">Critère de réussite :
 <ul>
 <li>Meilleure note :  6</li>
 <li>Moyenne : 4</li>
@@ -52,8 +52,10 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 					<g:Label text="Direction :" width=""/>
 					<g:TextArea width="" characterWidth="90" visibleLines="5" styleName="sis-TextArea"/>
 				</g:HorizontalPanel>
-				<g:HTML wordWrap="true"><p>Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 </p>Email: info@lemania.ch - Site internet : www.lemania.ch</g:HTML>
-				
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
+					<g:Label text="Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 "/>
+					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch "/>
+				</g:VerticalPanel>
 			</g:VerticalPanel>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
