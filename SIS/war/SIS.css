@@ -6,15 +6,14 @@ body {
 
 /* stock list header row */
 .pageTitle {
-	-moz-border-radius: 5px;	
-	-webkit-border-radius: 5px;
 	color: #FFFFFF;
 	padding: 3px;
-	font-size: 16px;
+	font-size: 14px;
 	font-style: gros;
-	font-weight: bold;
+	font-family: sans-serif;
+	font-weight: normal;
 	letter-spacing: 1px;
-	background-color: darkkhaki;
+	background-color: cornflowerblue;
 }
 
 .sectionTitle {
@@ -27,31 +26,29 @@ body {
 }
 
 .header {
-	color: blue;
-	padding: 10px;
-	font-size: 18px;
+	color: Maroon;
+	margin: 3px;
+	font-size: 14px;
 	font-style: gros;
+	font-family: sans-serif;
 	font-weight: bold;
 	letter-spacing: 1px;
+	text-align: center;
 }
 
 .sideBar {
-	margin: 2px 2px 10px;
-	padding-bottom: 5px;
-	border: 1px solid #D2C40B;
-	background-color: #F9F9F9;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
 	-webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow:    0px 0px 5px rgba(50, 50, 50, 0.75);
 	box-shadow:         0px 0px 5px rgba(50, 50, 50, 0.75);
+	margin: 2px 2px 10px;
+	padding-bottom: 5px;
+	border: 1px solid royalblue;
+	background-color: #F9F9F9;
 }
 
-.subSection {	
-	border: 1px solid InactiveBorder;
-	background-color: #FFFFFF;
+.subSection {
+	border: 1px solid lightskyblue;
+	background-color: White;	
 }
 
 .btnFocus {
@@ -59,16 +56,12 @@ body {
 }
 
 .paneMain {
+	-webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 5px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 5px rgba(50, 50, 50, 0.75);
 	margin: 2px;
-	border: 1px solid #D2C40B;
-	background-color: #F9F9F9;
-	-moz-border-radius: 5px;
--webkit-border-radius: 5px;
-border-radius: 5px;
-/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
--webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.75);
--moz-box-shadow:    0px 0px 5px rgba(50, 50, 50, 0.75);
-box-shadow:         0px 0px 5px rgba(50, 50, 50, 0.75);
+	border: 1px solid royalblue;
+	background-color: whitesmoke;
 }
 
 .FlexTable {
@@ -137,38 +130,235 @@ box-shadow:         0px 0px 5px rgba(50, 50, 50, 0.75);
 	color: white;
 }
 .left_header {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	color: darkkhaki;
+	color: cornflowerblue;
 	margin-left: -20px;
 	padding: 3px 0px;
-	font-size: 16px;
-	font-style: gros;
-	background-color: darkkhaki;	
+	font-size: 14px;
+	font-family: sans-serif;
+	background-color: cornflowerblue;	
 }
 .step {
-	color: firebrick;
+	color: blue;
 	padding: 2px;
 	font-size: 14px;
 	font-family: Verdana;
 	font-weight: bold;
 }
 .fieldTitle {
-	padding: 2px 3px 3px;
-	background-color: gainsboro;
+	color: navy;
+	padding: 1px;
 }
 .sis-TextArea {
+	border: 0px;
 	font-size: 12px;
 	font-family: Tahoma;
 }
 .subjectLine {
-	background-color: whitesmoke;
+	border-top: 1px solid silver;
 	font-weight: bold;
+	background-color: whitesmoke;
+	margin-top: 10px;
+}
+.brancheLine {	
+	padding: 2px;
+	width: 30px;
+	border-top: 1px solid silver;
+}
+.spaceCell{
+	height: 10px;
 }
 .gradeColumn {
 	background-color: ivory;
 }
 .bulletinHeader{
-	font-weight: bold;
+	font-size: 14px;
+	font-family: sans-serif;
 	background-color: palegoldenrod;
+}
+
+.averageGrade {
+	height:20px;
+	color: mediumblue;
+	font-size: 14px;
+	font-family: sans-serif;
+	vertical-align: middle;
+	text-align: center;
+	background-color: azure;
+}
+
+.progressBar {
+	
+}
+
+.currentPage {
+	padding: 5px;
+	background-color: palegoldenrod;
+}
+
+.bulletinTitle {
+	font-size: 18px;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.bulletin {
+	background-color: white;
+	width: 748px;
+	font-size: 12px;
+	font-family: sans-serif;
+}
+
+.bulletinNote {
+	padding: 5px;
+	border: 1px solid lightskyblue;
+	font-size: 12px;
+	font-family: sans-serif;
+}
+
+.progressBarPanel {
+	background-color: cornflowerblue;
+	border: 5px solid white;
+    position:relative;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.80);
+    -moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.80);
+    -webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.80);
+}
+
+.progressBarPopup{
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+	background-color: black; 
+	border: 0px solid white;
+}
+
+.workInProgress {
+	color: White;
+	text-align: center;
+	background-color: firebrick;
+}
+
+
+/* Progress bar */
+
+#movingBallG{
+position:relative;
+width:179px;
+height:14px;
+}
+
+.movingBallLineG{
+position:absolute;
+left:0px;
+top:6px;
+height:3px;
+width:179px;
+background-color:#ABCDEB;
+}
+
+.movingBallG{
+background-color:#FFFFFF;
+position:absolute;
+top:0;
+left:0;
+width:14px;
+height:14px;
+-moz-border-radius:7px;
+-moz-animation-name:bounce_movingBallG;
+-moz-animation-duration:1.9s;
+-moz-animation-iteration-count:infinite;
+-moz-animation-direction:linear;
+-webkit-border-radius:7px;
+-webkit-animation-name:bounce_movingBallG;
+-webkit-animation-duration:1.9s;
+-webkit-animation-iteration-count:infinite;
+-webkit-animation-direction:linear;
+-ms-border-radius:7px;
+-ms-animation-name:bounce_movingBallG;
+-ms-animation-duration:1.9s;
+-ms-animation-iteration-count:infinite;
+-ms-animation-direction:linear;
+-o-border-radius:7px;
+-o-animation-name:bounce_movingBallG;
+-o-animation-duration:1.9s;
+-o-animation-iteration-count:infinite;
+-o-animation-direction:linear;
+border-radius:7px;
+animation-name:bounce_movingBallG;
+animation-duration:1.9s;
+animation-iteration-count:infinite;
+animation-direction:linear;
+}
+
+@-moz-keyframes bounce_movingBallG{
+0%{
+left:0px;
+}
+
+50%{
+left:165px;
+}
+
+100%{
+left:0px;
+}
+
+}
+
+@-webkit-keyframes bounce_movingBallG{
+0%{
+left:0px;
+}
+
+50%{
+left:165px;
+}
+
+100%{
+left:0px;
+}
+
+}
+
+@-ms-keyframes bounce_movingBallG{
+0%{
+left:0px;
+}
+
+50%{
+left:165px;
+}
+
+100%{
+left:0px;
+}
+
+}
+
+@-o-keyframes bounce_movingBallG{
+0%{
+left:0px;
+}
+
+50%{
+left:165px;
+}
+
+100%{
+left:0px;
+}
+
+}
+
+@keyframes bounce_movingBallG{
+0%{
+left:0px;
+}
+
+50%{
+left:165px;
+}
+
+100%{
+left:0px;
+}
 }
