@@ -11,11 +11,11 @@ import javax.mail.internet.MimeMessage;
 
 public class ContactDao extends MyDAOBase {
 	
-	public void sendEmail (String firstName, String lastName, String message ){
+	public void sendEmail (String firstName, String lastName, String email, String message ){
 		Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
 
-        String msgBody = message;
+        String msgBody = "Email : " + email + "\n\nMessage : " + message;
 
         try {
 	        Message msg = new MimeMessage(session);

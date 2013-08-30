@@ -43,14 +43,14 @@
 				</g:VerticalPanel>
 				<g:VerticalPanel spacing="2" styleName="subSection" width="100%">
 					<g:Label text="Attribution personnalisée pour l&apos;élève choisi(e)" styleName="sectionTitle"/>
-					<g:Label text="Elève choisis :"/>
-					<g:Label text="-" ui:field="lblStudentName" styleName="header"/>
 					<g:VerticalPanel width="100%">
+						<g:Label text="Elève choisis :"/>
+						<g:Label text="-" ui:field="lblStudentName" styleName="header" width="450px"/>
 						<g:HorizontalPanel spacing="10" width="100%" verticalAlignment="ALIGN_MIDDLE">
 					<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
 					<g:Label text="Liste des matières" styleName="sectionTitle" width=""/>
-					<p1:DataGrid width="100%" height="350px" ui:field="tblSubjects"/>
-					<g:Label text="." width="450px"/>
+					<p1:DataGrid width="100%" height="300px" ui:field="tblSubjects"/>
+					<g:Label text="." width="450px" styleName="hiddenText" height="1px"/>
 					<g:VerticalPanel width="100%" spacing="2">
 								<g:Label text="Rajouter une matière" styleName="sectionTitle"/>
 								<g:Grid width="" cellPadding="5" cellSpacing="5">

@@ -89,6 +89,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		lstEcoles.setSelectedIndex(0);
 		lstProgrammes.clear();
 		lstClasses.clear();
+		lblStudentName.setText("");
 		//
 		clearSubjectUi();
 		clearBrancheUi();
@@ -202,6 +203,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		bulletinDataProvider.getList().clear();
 		bulletinDataProvider.setList(bulletins);
+		bulletinDataProvider.flush();
 	}
 
 	@Override
@@ -403,6 +405,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		subjectDataProvider.getList().clear();
 		subjectDataProvider.setList(subjects);
+		subjectDataProvider.flush();
 	}
 
 	@Override
@@ -410,6 +413,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		brancheDataProvider.getList().clear();
 		brancheDataProvider.setList(branches);
+		brancheDataProvider.flush();
 	}
 
 	@Override

@@ -64,12 +64,12 @@ public class ContactPresenter extends
 	}
 
 	@Override
-	public void sendMessage(String lastName, String firstName, String message) {
+	public void sendMessage(String lastName, String firstName, String email, String message) {
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ContactRequestContext rc = rf.contactRequest();
-		rc.sendEmail(lastName, firstName, message).fire(new Receiver<Void>(){
+		rc.sendEmail(lastName, firstName, email, message).fire(new Receiver<Void>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

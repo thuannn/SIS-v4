@@ -9,9 +9,9 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="CONTACT" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:VerticalPanel width="100%" spacing="5">
+			<g:VerticalPanel width="100%" spacing="20">
 				<g:Label text="Nous sommes à votre disposition pour toutes vos questions ou conseils. Merci de nous contacter en utilisant le formulaire ci-dessous."/>
-				<g:Grid width="600px" cellPadding="3" cellSpacing="2" styleName="subSection">
+				<g:Grid width="600px" cellPadding="5" styleName="subSection">
 					<g:row>
 						<g:customCell>
 							<g:Label text="Nom :"/>
@@ -26,6 +26,14 @@
 						</g:customCell>
 						<g:customCell>
 							<g:TextBox styleName="sis_textbox" ui:field="txtFirstName"/>
+						</g:customCell>
+					</g:row>
+					<g:row>
+						<g:customCell>
+							<g:Label text="Email :"/>
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox styleName="sis_textbox" ui:field="txtEmail"/>
 						</g:customCell>
 					</g:row>
 					<g:row>

@@ -232,6 +232,11 @@ public class FrmBulletinManagementPresenter
 	/**/
 	@Override
 	public void onClassChange(String classId) {
+		//
+		if (classId.isEmpty()){
+			Window.alert(NotificationTypes.invalid_input + " - Classe choisie");
+			return;
+		}
 		// 
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));

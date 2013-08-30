@@ -1,6 +1,7 @@
 package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -25,9 +26,13 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		Student student;
 		for (Bulletin bulletin : q){
+			student = this.ofy().get( bulletin.getStudent() );
+			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
 			returnList.add(bulletin);
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -37,9 +42,13 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		Student student;
 		for (Bulletin bulletin : q){
+			student = this.ofy().get( bulletin.getStudent() );
+			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
 			returnList.add(bulletin);
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -51,9 +60,13 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		Student student;
 		for (Bulletin bulletin : q){
+			student = this.ofy().get( bulletin.getStudent() );
+			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
 			returnList.add(bulletin);
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -66,9 +79,13 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		Student student;
 		for (Bulletin bulletin : q){
-			returnList.add(bulletin);
+			student = this.ofy().get( bulletin.getStudent() );
+			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
+			returnList.add( bulletin );
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -135,7 +152,7 @@ public class BulletinDao extends MyDAOBase {
 		bulletin.setClasse(new Key<Classe>(Classe.class, classe.getId()));
 		bulletin.setStudent(new Key<Student>(Student.class, student.getId()));
 		bulletin.setClasseName(classe.getClassName());
-		bulletin.setStudentName(student.getFirstName() + " " + student.getLastName());
+		bulletin.setStudentName(student.getLastName() + " " + student.getFirstName());
 		//
 		try {
 			//

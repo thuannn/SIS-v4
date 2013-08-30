@@ -9,17 +9,19 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain">
 			<g:Label text="IMPRIMER LES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:VerticalPanel styleName="subSection" spacing="5">
-					<g:HorizontalPanel width="400px" spacing="2" horizontalAlignment="ALIGN_RIGHT" ui:field="pnlAdmin">
+			<g:Label text="En développement, la fonction n'est pas encore prête à utiliser." styleName="workInProgress" height="50px"/>
+			<g:HorizontalPanel spacing="5" styleName="subSection" verticalAlignment="ALIGN_MIDDLE">
+				<g:HorizontalPanel width="400px" spacing="2" horizontalAlignment="ALIGN_RIGHT" ui:field="pnlAdmin" verticalAlignment="ALIGN_MIDDLE">
 					<g:Label text="Classe :"/>
 					<g:ListBox ui:field="lstClasses" width="300px"/>
 				</g:HorizontalPanel>
-					<g:HorizontalPanel spacing="2" width="400px" horizontalAlignment="ALIGN_RIGHT">
+				<g:HorizontalPanel spacing="2" width="400px" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE">
 					<g:Label text="Bulletin(s) :"/>
 					<g:ListBox width="300px" ui:field="lstBulletins"/>
 				</g:HorizontalPanel>
-					<g:Button ui:field="cmdPrint">Imprimer</g:Button>
-				</g:VerticalPanel>
+				<g:Button ui:field="cmdPrint">Imprimer</g:Button>
+			</g:HorizontalPanel>
+			<g:Label text="." styleName="hiddenText"/>
 			<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin">
 				<g:Grid width="100%">
 					<g:row>
@@ -52,6 +54,7 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 					<g:Label text="Direction :" width=""/>
 					<g:TextArea width="" characterWidth="90" visibleLines="5" styleName="sis-TextArea"/>
 				</g:HorizontalPanel>
+				<g:Label text="." ui:field="lblSpace" stylePrimaryName="hiddenText"/>
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
 					<g:Label text="Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 "/>
 					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch "/>

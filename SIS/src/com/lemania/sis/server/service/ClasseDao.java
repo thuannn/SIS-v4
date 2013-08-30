@@ -18,6 +18,7 @@ public class ClasseDao extends MyDAOBase {
 		Query<Classe> q = this.ofy().query(Classe.class).order("className");
 		List<Classe> returnList = new ArrayList<Classe>();
 		for (Classe classe : q){
+			classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
 			returnList.add(classe);
 		}
 		return returnList;
@@ -35,6 +36,7 @@ public class ClasseDao extends MyDAOBase {
 				.order("className");
 		
 		for (Classe classe : q){
+			classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
 			returnList.add( classe );
 		}
 		
@@ -56,6 +58,7 @@ public class ClasseDao extends MyDAOBase {
 		
 		for (Classe classe : q){
 			if (classe.getIsActive().equals(true))
+				classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
 				returnList.add( classe );
 		}
 		

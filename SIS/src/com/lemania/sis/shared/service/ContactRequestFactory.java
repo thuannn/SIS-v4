@@ -10,7 +10,7 @@ import com.lemania.sis.server.service.DaoServiceLocator;
 public interface ContactRequestFactory extends RequestFactory {
 	@Service(value=ContactDao.class, locator=DaoServiceLocator.class)
 	interface ContactRequestContext extends RequestContext {
-		Request<Void> sendEmail( String lastName, String firstName, String message );
+		Request<Void> sendEmail( String lastName, String firstName, String email, String message );
 	}
 	
 	ContactRequestContext contactRequest();

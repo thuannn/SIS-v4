@@ -182,14 +182,14 @@ public class MainPagePresenter extends
 
 	@Override
 	public void showRptByMonth() {
-		// TODO Auto-generated method stub
+		// 
 		History.newItem(NameTokens.rpttimebymonth);
 	}
 
 	@ProxyEvent
 	@Override
 	public void onActionInProgress(ActionInProgressEvent event) {
-		// TODO Auto-generated method stub
+		// 
 		getView().showProgressBar(true);
 		getView().enableMainPanel(false);
 	}
@@ -197,7 +197,7 @@ public class MainPagePresenter extends
 	@ProxyEvent
 	@Override
 	public void onActionCompleted(ActionCompletedEvent event) {
-		// TODO Auto-generated method stub
+		// 
 		getView().showProgressBar(false);
 		getView().enableMainPanel(true);
 	}

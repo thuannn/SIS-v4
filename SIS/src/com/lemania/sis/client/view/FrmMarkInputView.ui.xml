@@ -68,7 +68,7 @@
 						<g:DoubleBox width="25px" ui:field="txt_t_1_5"/>
 						<g:Label text="-" ui:field="txtT1" styleName="averageGrade" width="25px"/>
 					</g:HorizontalPanel>
-								<g:TextArea ui:field="txtRemarque1" width="95%" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+								<g:TextArea ui:field="txtRemarque1" width="95%" characterWidth="50" height="40px"/>
 							</g:VerticalPanel>
 					<g:Label text="." styleName="hiddenText"/>
 					<g:VerticalPanel width="100%" ui:field="pnlT2" spacing="5">
@@ -81,7 +81,7 @@
 						<g:DoubleBox width="25px" ui:field="txt_t_2_5"/>
 						<g:Label text="-" ui:field="txtT2" styleName="averageGrade" width="25px"/>
 					</g:HorizontalPanel>
-						<g:TextArea width="95%" ui:field="txtRemarque2" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+						<g:TextArea width="95%" ui:field="txtRemarque2" characterWidth="50" height="40px"/>
 					</g:VerticalPanel>
 					<g:Label text="." styleName="hiddenText"/>
 					<g:VerticalPanel ui:field="pnlT3" spacing="5" width="100%">
@@ -94,7 +94,7 @@
 						<g:DoubleBox width="25px" ui:field="txt_t_3_5"/>
 						<g:Label text="-" styleName="averageGrade" ui:field="txtT3" width="25px"/>
 					</g:HorizontalPanel>
-						<g:TextArea ui:field="txtRemarque3" width="95%" styleName="sis-TextArea" characterWidth="60" height="40px"/>
+						<g:TextArea ui:field="txtRemarque3" width="95%" characterWidth="50" height="40px"/>
 					</g:VerticalPanel>
 					<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
 					<g:Label text="." styleName="hiddenText"/>

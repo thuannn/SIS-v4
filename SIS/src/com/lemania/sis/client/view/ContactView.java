@@ -34,11 +34,12 @@ public class ContactView extends ViewWithUiHandlers<ContactUiHandler> implements
 	@UiField TextBox txtFirstName;
 	@UiField TextArea txtMessage;
 	@UiField Button cmdSend;
+	@UiField TextBox txtEmail;
 	
 	@UiHandler("cmdSend")
 	void onCmdSendClick(ClickEvent event) {
 		if (getUiHandlers() != null)
-			getUiHandlers().sendMessage( txtLastName.getText(), txtFirstName.getText(), txtMessage.getText());
+			getUiHandlers().sendMessage( txtLastName.getText(), txtFirstName.getText(), txtEmail.getText(), txtMessage.getText());
 	}
 
 	@Override
@@ -47,5 +48,6 @@ public class ContactView extends ViewWithUiHandlers<ContactUiHandler> implements
 		txtLastName.setText("");
 		txtFirstName.setText("");
 		txtMessage.setText("");
+		txtEmail.setText("");
 	}
 }

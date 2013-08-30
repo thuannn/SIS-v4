@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
-public class Assignment extends DatastoreObject {
+public class Assignment extends DatastoreObject implements Comparable<Assignment> {
 	//
 	private Key<Professor> prof;
 	private Key<Classe> classe;
@@ -113,5 +113,22 @@ public class Assignment extends DatastoreObject {
 
 	public void setSubject(Key<Subject> subject) {
 		this.subject = subject;
+	}
+
+
+	@Override
+	public int compareTo(Assignment a) {
+		int result1;
+		int result = this.programmeName.compareTo(a.getProgrammeName());
+		if (result != 0)
+			return result;
+		else {
+			result1 = this.classeName.compareTo(a.getClasseName());
+			if (result1 != 0)
+				return result1;
+			else
+				return this.subjectName.compareTo(a.getSubjectName());
+		}
+			
 	}
 }

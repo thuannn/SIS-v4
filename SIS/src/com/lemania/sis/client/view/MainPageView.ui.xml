@@ -14,25 +14,30 @@
 					<g:Grid height="" width="100%" borderWidth="0">
 						<g:row>
 							<g:customCell>
-								<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
+								<g:HorizontalPanel>
+									<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
+									<g:Label text="." width="30px" styleName="hiddenText"/>
+									<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
+								</g:HorizontalPanel>
 							</g:customCell>
 							<g:customCell>
 								<g:Label ui:field="lblCurrentMonth"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button text="Cacher/ Afficher le menu" ui:field="cmdMenuToggle" width=""/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
 				</g:HorizontalPanel>
 			</g:Dock>
+			<g:Dock direction="NORTH">
+				<g:VerticalPanel>
+					<g:HorizontalPanel width="250px" horizontalAlignment="ALIGN_RIGHT">
+						<g:Button text="Masquer/ Afficher le menu" ui:field="cmdMenuToggle" width="" styleName="btnHideMenu" visible="false"/>
+					</g:HorizontalPanel>
+				</g:VerticalPanel>
+			</g:Dock>
 			<g:Dock direction="WEST">
-				<g:VerticalPanel ui:field="leftPanel">
+				<g:VerticalPanel ui:field="leftPanel" horizontalAlignment="ALIGN_LEFT">
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
-					<g:Label text="." width="" horizontalAlignment="ALIGN_LEFT" styleName="left_header"/>
+						<g:Label text="-" width="" horizontalAlignment="ALIGN_RIGHT" styleName="left_header"/>
 					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage" ui:field="cmdHome"/>
 					<g:TreeItem text="Gestion générale des bulletins" state="true">
 							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
@@ -105,14 +110,27 @@
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
-						<g:Label text="Copyright © Ecole Lémania - IT Services" horizontalAlignment="ALIGN_LEFT"/>
-						<g:Image url="images/appengine-silver-120x30.gif"/>
+					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5">
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Copyright © Ecole Lémania - IT Services - " horizontalAlignment="ALIGN_LEFT" width=""/>
+								</g:customCell>
+								<g:customCell>
+									<g:Hyperlink text="Envoyez-nous vos avis" targetHistoryToken="!contact"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+						<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" width="100%">
+							<g:Image url="images/appengine-silver-120x30.gif"/>
+						</g:HorizontalPanel>
 					</g:HorizontalPanel>
-					<g:VerticalPanel ui:field="pnlProgressBar" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel" visible="false">
+					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">
 						<g:HTML wordWrap="true" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
 						<div id="movingBallG"><div class="movingBallLineG"></div><div id="movingBallG_1" class="movingBallG"></div></div>
 					</g:HTML>
+					</g:VerticalPanel>
 					</g:VerticalPanel>
 				</g:VerticalPanel>
 			</g:Dock>

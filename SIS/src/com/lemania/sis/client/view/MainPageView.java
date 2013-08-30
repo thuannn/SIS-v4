@@ -8,6 +8,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.lemania.sis.client.place.NameTokens;
@@ -69,6 +71,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdPassword;
 	@UiField Hyperlink cmdHelp;
 	@UiField Hyperlink cmdBulletin;
+	@UiField VerticalPanel pnlProgressBarIn;
 	@UiField VerticalPanel pnlProgressBar;
 	
 	
@@ -119,8 +122,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	public void showUserInfo(CurrentUser currentUser) {
 		txtWelcome.setText("Vous êtes connecté(e), " + currentUser.getFullName() + " !");
 		cmdLogout.setText("Déconnexion");
-		lblCurrentMonth.setText( "Le mois actuel: " + " " + Integer.toString(currentUser.getCurrentMonth()) + "/" + 
-									Integer.toString(currentUser.getCurrentYear()) );
+		lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()) + " - " + Integer.toString(currentUser.getCurrentYear()+1));
 	}
 
 	@Override
@@ -155,6 +157,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		treeMenuAdmin.setVisible( true );
 		treeMenuEleve.setVisible( false );
 		treeMenuProf.setVisible( false );
+		//
+		cmdMenuToggle.setVisible(true);
 	}
 	
 	/**/
@@ -165,6 +169,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		leftPanel.setVisible(true);
 		treeMenuProf.setVisible( true );
+		//
+		cmdMenuToggle.setVisible(true);
 	}
 	
 	
@@ -176,6 +182,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		leftPanel.setVisible(true);
 		treeMenuEleve.setVisible( true );
+		//
+		cmdMenuToggle.setVisible(true);
 	}
 	
 	
@@ -188,6 +196,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		treeMenuProf.setVisible( false );
 		treeMenuEleve.setVisible( false );
 		treeMenuAdmin.setVisible( false );
+		//
+		cmdMenuToggle.setVisible(false);
 	}
 	
 	/**/
@@ -212,6 +222,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		dockPanel.remove( leftPanel );
 	}
 
+	
 	/**/
 	@Override
 	public void showProgressBar(boolean visible) {
@@ -220,19 +231,28 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			popup.add(pnlProgressBar);
 		//
 		pnlProgressBar.setVisible(visible);
-		popup.setSize("300px", "150px");
+		popup.setSize( Integer.toString(Window.getClientWidth()) + "px", Integer.toString(Window.getClientHeight()) + "px" );
 		popup.setStyleName("progressBarPopup");
 		if (visible)
 			popup.center();
-		else
-			popup.hide();
+		else {
+			Timer t = new Timer(){
+				@Override
+				public void run(){
+					popup.hide();
+				}
+			};
+			t.schedule(3000);
+		}
 	}
 
+	
 	/**/
 	@Override
 	public void enableMainPanel(Boolean enabled) {
 		enableAllChildren(enabled, mainContentPanel);
 	}
+	
 	
 	/**/
 	private void enableAllChildren(boolean enable, Widget widget)

@@ -47,6 +47,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	@Override
 	public void resetForm() {
 		//
+		lstClasses.setSelectedIndex(0);
 		lstBulletins.setSelectedIndex(0);
 		tblBulletin.removeAllRows();
 	}
@@ -220,7 +221,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 		tblBulletin.setText(rowCount, 1, "Coef");
 		tblBulletin.setText(rowCount, 7, "T1");
 		tblBulletin.setText(rowCount, 13, "T2");
-		tblBulletin.setText(rowCount, 19, "T2");
+		tblBulletin.setText(rowCount, 19, "T3");
 		tblBulletin.setText(rowCount, 20, "Moyenne Annuelle");		
 		tblBulletin.getRowFormatter().setStyleName(rowCount, "bulletinHeader");
 		//

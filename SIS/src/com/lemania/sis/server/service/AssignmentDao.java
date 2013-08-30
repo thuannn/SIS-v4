@@ -1,6 +1,7 @@
 package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
@@ -119,6 +120,7 @@ public class AssignmentDao extends MyDAOBase {
 				a.setSubjectName(this.ofy().get(a.getSubject()).getSubjectName());
 			returnList.add(a);
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	

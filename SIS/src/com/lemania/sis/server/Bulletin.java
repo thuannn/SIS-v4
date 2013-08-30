@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
-public class Bulletin extends DatastoreObject {
+public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	//
 	private String bulletinName;
 	private Boolean isActive = true;
@@ -81,5 +81,11 @@ public class Bulletin extends DatastoreObject {
 
 	public void setProgrammeName(String programmeName) {
 		this.programmeName = programmeName;
+	}
+
+	@Override
+	public int compareTo(Bulletin bulletin) {
+		int result = studentName.compareTo( bulletin.getStudentName() );
+		return result;
 	}
 }
