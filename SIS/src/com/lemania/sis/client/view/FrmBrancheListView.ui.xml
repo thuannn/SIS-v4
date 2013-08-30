@@ -9,7 +9,7 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="LISTE DES BRANCHES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<p1:DataGrid width="80%" ui:field="tblBranche" height="700px"/>
+			<p1:DataGrid width="100%" ui:field="tblBranche" height="500px"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

@@ -10,7 +10,7 @@
 		<g:FlowPanel width="100%" height="100%">
 			<g:VerticalPanel width="100%" height="100%" spacing="2">
 				<g:Label text="LISTE DES ECOLES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-				<p1:DataGrid width="800px" height="600px" ui:field="tblEcoles"/>
+				<p1:DataGrid width="100%" height="500px" ui:field="tblEcoles"/>
 			</g:VerticalPanel>
 		</g:FlowPanel>
 	</g:HTMLPanel>

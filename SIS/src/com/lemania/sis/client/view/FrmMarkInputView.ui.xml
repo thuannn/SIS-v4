@@ -59,7 +59,7 @@
 							<g:Label text="-" ui:field="lblStudentName" styleName="header"/>
 							<g:Label styleName="hiddenText" text="."/>
 							<g:VerticalPanel width="100%" ui:field="pnlT1" spacing="5">
-								<g:HorizontalPanel width="100%">
+								<g:HorizontalPanel width="400px">
 						<g:Label text="Trimestre 1 :" width=""/>
 						<g:DoubleBox width="25px" ui:field="txt_t_1_1" styleName="markInputText"/>
 						<g:DoubleBox width="25px" ui:field="txt_t_1_2"/>
@@ -72,7 +72,7 @@
 							</g:VerticalPanel>
 					<g:Label text="." styleName="hiddenText"/>
 					<g:VerticalPanel width="100%" ui:field="pnlT2" spacing="5">
-						<g:HorizontalPanel width="100%">
+						<g:HorizontalPanel width="400px">
 						<g:Label text="Trimestre 2 :" width=""/>
 						<g:DoubleBox width="25px" ui:field="txt_t_2_1" styleName="markInputText"/>
 						<g:DoubleBox width="25px" ui:field="txt_t_2_2"/>
@@ -85,7 +85,7 @@
 					</g:VerticalPanel>
 					<g:Label text="." styleName="hiddenText"/>
 					<g:VerticalPanel ui:field="pnlT3" spacing="5" width="100%">
-						<g:HorizontalPanel width="100%">
+						<g:HorizontalPanel width="400px">
 						<g:Label text="Trimestre 3 :"/>
 						<g:DoubleBox width="25px" ui:field="txt_t_3_1"/>
 						<g:DoubleBox width="25px" ui:field="txt_t_3_2"/>
