@@ -10,6 +10,9 @@ import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileBranche;
+import com.lemania.sis.server.ProfileSubject;
 
 public class BulletinBrancheDao extends MyDAOBase {
 	/*
@@ -18,6 +21,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 	public void initialize(){
 		return;
 	}
+	
 	
 	/*
 	 * 
@@ -32,6 +36,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
 	
 	/*
 	 * 
@@ -48,6 +53,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 		Collections.sort(returnList);
 		return returnList;
 	}
+	
 	
 	/*
 	 * 
@@ -96,6 +102,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 		this.ofy().put( bulletinBranche );
 	}
 	
+	
 	/*
 	 * 
 	 * */
@@ -110,6 +117,7 @@ public class BulletinBrancheDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	/*
 	 * 
@@ -130,11 +138,56 @@ public class BulletinBrancheDao extends MyDAOBase {
 		}
 	}
 	
+	
 	/*
 	 * 
 	 * */
 	public void removeBulletinBranche(BulletinBranche bulletinBranche){
 		//
 		this.ofy().delete( bulletinBranche );
+	}
+	
+	
+	/*
+	 *
+	 * */
+	public List<BulletinBranche> addRelatedBranches( BulletinSubject bulletinSubject ) {
+		//
+		BulletinBranche curBulletinBranche;
+		List<BulletinBranche> returnList = new ArrayList<BulletinBranche>();
+		//
+		Profile profile;
+		Bulletin bulletin = this.ofy().get(bulletinSubject.getBulletin());
+		if ( bulletin.getProfile() != null ){
+			profile = this.ofy().get( bulletin.getProfile() );
+		} else {
+			Query<Profile> profiles = this.ofy().query(Profile.class)
+					.filter("classe", bulletin.getClasse());
+			profile = profiles.list().get(0);
+		}
+		//
+		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+				.filter("profile", profile)
+				.filter("subject", bulletinSubject.getSubject())
+				.filter("professor", bulletinSubject.getProfessor());		
+		//
+		Query<ProfileBranche> profileBranches = this.ofy().query(ProfileBranche.class)
+				.filter("profileSubject", profileSubjects.listKeys().get(0));
+		//
+		for (ProfileBranche profileBranche : profileBranches) {
+			curBulletinBranche = new BulletinBranche();
+			curBulletinBranche.setBulletinBranche( profileBranche.getProfileBranche() );
+			curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
+			curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
+			curBulletinBranche.setBulletinSubject( new Key<BulletinSubject>(BulletinSubject.class, bulletinSubject.getId()));
+			this.ofy().put(curBulletinBranche);
+			returnList.add(curBulletinBranche);
+			//
+			bulletinSubject.setTotalBrancheCoef( bulletinSubject.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
+		}
+		//
+		this.ofy().put( bulletinSubject );
+		//
+		return returnList;
 	}
 }

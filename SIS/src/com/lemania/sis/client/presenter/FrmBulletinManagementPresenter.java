@@ -125,8 +125,7 @@ public class FrmBulletinManagementPresenter
 		// Thuan
 		getView().resetForm();
 		//
-		loadEcoleList();
-		loadSubjectList();
+		loadEcoleList();		
 		loadBrancheList();
 	}
 	
@@ -147,14 +146,16 @@ public class FrmBulletinManagementPresenter
 			}
 		});
 	}
+	
 
-	/**/
-	private void loadSubjectList() {
+	/*
+	 * */
+	private void loadSubjectListByProfile(BulletinProxy bulletin) {
 		//
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SubjectRequestContext rc = rf.subjectRequest();
-		rc.listAllActive().fire(new Receiver<List<SubjectProxy>>(){
+		rc.listAllActiveByProfile(bulletin).fire(new Receiver<List<SubjectProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -165,6 +166,7 @@ public class FrmBulletinManagementPresenter
 			}
 		});
 	}
+	
 
 	/**/
 	private void loadEcoleList() {
@@ -196,7 +198,7 @@ public class FrmBulletinManagementPresenter
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -254,7 +256,7 @@ public class FrmBulletinManagementPresenter
 	}
 
 	@Override
-	public void onBulletinSelected(BulletinProxy bulletin) {
+	public void onBulletinSelected(final BulletinProxy bulletin) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -267,6 +269,7 @@ public class FrmBulletinManagementPresenter
 			@Override
 			public void onSuccess(List<BulletinSubjectProxy> response) {
 				getView().setBulletinSubjectTableData(response);
+				loadSubjectListByProfile( bulletin );
 			}
 		});		
 	}
@@ -310,6 +313,9 @@ public class FrmBulletinManagementPresenter
 		});
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void updateBrancheCoef(BulletinBrancheProxy branche, String coef) {
 		//
@@ -335,6 +341,9 @@ public class FrmBulletinManagementPresenter
 		});
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void removeBranche(BulletinBrancheProxy branche) {
 		//
@@ -353,6 +362,9 @@ public class FrmBulletinManagementPresenter
 		});
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void updateSubjectCoef(BulletinSubjectProxy subject, String coef, final Integer lastSubjectIndex) {
 		//
@@ -373,9 +385,11 @@ public class FrmBulletinManagementPresenter
 		});		
 	}
 
+	
+	/*
+	 * */
 	@Override
-	public void addSubject(String bulletinId, String subjectId, String profId,
-			String coef) {
+	public void addSubject(String bulletinId, String subjectId, String profId, String coef) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -388,10 +402,13 @@ public class FrmBulletinManagementPresenter
 			@Override
 			public void onSuccess(BulletinSubjectProxy response) {
 				getView().showAddedSubject(response);
-			}
+			}			
 		});		
 	}
+	
 
+	/*
+	 * */
 	@Override
 	public void addBranche(String bulletinSubjectId, String brancheId,
 			String coef) {
@@ -410,7 +427,10 @@ public class FrmBulletinManagementPresenter
 			}
 		});
 	}
+	
 
+	/*
+	 * */
 	@ProxyEvent
 	@Override
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
@@ -431,7 +451,8 @@ public class FrmBulletinManagementPresenter
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void loadProfessorList(String subjectId, String classId) {
 		//

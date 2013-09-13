@@ -30,6 +30,8 @@ import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
+import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
+import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
@@ -65,6 +67,8 @@ public class FrmBulletinCreationPresenter
 		void addNewBulletinToTable(BulletinProxy bulletin);
 		//
 		void removeStudentWithBulletin();
+		//
+		void removeDeletedBulletinFromTable();
 	}
 
 	@ProxyCodeSplit
@@ -183,7 +187,7 @@ public class FrmBulletinCreationPresenter
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -278,5 +282,28 @@ public class FrmBulletinCreationPresenter
 				loadActiveProfileList(classId);
 			}
 		});
+	}
+
+	//
+	@Override
+	public void removeBulletin(BulletinProxy bp) {		
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.removeBulletin(bp).fire(new Receiver<Boolean>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Boolean response) {
+				if (response) {
+					getView().removeDeletedBulletinFromTable();
+					loadActiveStudentList();
+				} else
+					Window.alert("Une erreur s'est produite.");
+			}
+		});	
 	}
 }

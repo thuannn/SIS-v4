@@ -18,6 +18,8 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	
 	private Key<Classe> classe;
 	private Key<Student> student;
+	//
+	private Key<Profile> profile;
 	
 	public String getBulletinName() {
 		return bulletinName;
@@ -81,6 +83,14 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 
 	public void setProgrammeName(String programmeName) {
 		this.programmeName = programmeName;
+	}
+
+	public Key<Profile> getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Key<Profile> profile) {
+		this.profile = profile;
 	}
 
 	@Override

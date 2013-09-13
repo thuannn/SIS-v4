@@ -6,6 +6,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
@@ -164,10 +165,15 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiHandler("lstProgrammes")
 	void onLstProgrammesChange(ChangeEvent event) {
 		//
-		if (lstProgrammes.getValue(lstProgrammes.getSelectedIndex()).isEmpty()){
-			lstClasses.clear();
+		lstClasses.clear();
+		lblStudentName.setText("");
+		//
+		clearSubjectUi();
+		clearBrancheUi();
+		clearBulletinUi();
+		//
+		if (lstProgrammes.getValue(lstProgrammes.getSelectedIndex()).isEmpty())			
 			return;
-		}
 		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onProgrammeSelected( lstProgrammes.getValue( lstProgrammes.getSelectedIndex() ));
@@ -191,7 +197,11 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
 		//
+		lblStudentName.setText("");
+		//
 		clearBulletinUi();
+		clearSubjectUi();
+		clearBrancheUi();
 		//
 		if (getUiHandlers() != null)
 			getUiHandlers().onClassChange(lstClasses.getValue(lstClasses.getSelectedIndex()));
@@ -322,6 +332,15 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    };	    
 	    tblSubjects.addColumn(colProfName, "Prof");
 	    
+	    //
+	    TextColumn<BulletinSubjectProxy> colTotalBrancheCoef = new TextColumn<BulletinSubjectProxy>() {
+	      @Override
+	      public String getValue(BulletinSubjectProxy object) {
+	        return object.getTotalBrancheCoef().toString();	        		
+	      }
+	    };	    
+	    tblSubjects.addColumn(colTotalBrancheCoef, "Total Branche Coef");
+	    
 	    
 	    //
 	    Column<BulletinSubjectProxy, String> colDelete = new Column<BulletinSubjectProxy, String> (new ButtonCell()){
@@ -405,7 +424,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		subjectDataProvider.getList().clear();
 		subjectDataProvider.setList(subjects);
-		subjectDataProvider.flush();
+		subjectDataProvider.flush();		
 	}
 
 	@Override
@@ -413,7 +432,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		brancheDataProvider.getList().clear();
 		brancheDataProvider.setList(branches);
-		brancheDataProvider.flush();
+		brancheDataProvider.flush();		
 	}
 
 	@Override

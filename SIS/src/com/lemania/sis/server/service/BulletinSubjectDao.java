@@ -10,6 +10,9 @@ import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileBranche;
+import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 
 public class BulletinSubjectDao extends MyDAOBase {
@@ -56,10 +59,13 @@ public class BulletinSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
+			//
 			if (bulletinSubject.getProfessor() != null)
 				bulletinSubject.setProfName( this.ofy().get(bulletinSubject.getProfessor()).getProfName() );
-			bulletinSubject.setSubjectName( this.ofy().get( bulletinSubject.getSubject()).getSubjectName() );
-			returnList.add( bulletinSubject );
+			//
+			bulletinSubject.setSubjectName( this.ofy().get( bulletinSubject.getSubject()).getSubjectName() );						
+			//
+			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
 		}
 		return returnList;
 	}
@@ -292,8 +298,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
-	public BulletinSubject saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef ){
+	/*
+	 * */
+	public BulletinSubject saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef ) {
 		//
 		BulletinSubject ps = new BulletinSubject();
 		ps.setBulletin( new Key<Bulletin>( Bulletin.class, Long.parseLong(bulletinId)));
@@ -305,15 +312,51 @@ public class BulletinSubjectDao extends MyDAOBase {
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
 		
 		Key<BulletinSubject> key = this.ofy().put( ps );
+		
+		// Save the related branches
+		BulletinBranche curBulletinBranche;		
+		//
+		Profile profile;
+		Bulletin bulletin = this.ofy().get(ps.getBulletin());
+		if ( bulletin.getProfile() != null ) {
+			profile = this.ofy().get( bulletin.getProfile() );
+		} else {
+			Query<Profile> profiles = this.ofy().query(Profile.class)
+					.filter("classe", bulletin.getClasse());
+			profile = profiles.list().get(0);
+		}
+		//
+		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+				.filter("profile", profile)
+				.filter("subject", ps.getSubject())
+				.filter("professor", ps.getProfessor());
+		//
+		Query<ProfileBranche> profileBranches = this.ofy().query(ProfileBranche.class)
+				.filter("profileSubject", profileSubjects.listKeys().get(0));
+		//
+		for (ProfileBranche profileBranche : profileBranches) {
+			curBulletinBranche = new BulletinBranche();
+			curBulletinBranche.setBulletinBranche( profileBranche.getProfileBranche() );
+			curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
+			curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
+			curBulletinBranche.setBulletinSubject( key );
+			this.ofy().put(curBulletinBranche);
+			//
+			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
+		}		
+		//
+		this.ofy().put( ps );
+		//
 		try {
 			return this.ofy().get(key);
-		} catch (Exception e) {
+		} catch ( Exception e ) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public Boolean removeProfileSubject(BulletinSubject bulletinSubject) {
 		//
 		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
@@ -327,12 +370,13 @@ public class BulletinSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
-	public BulletinSubject calculateTotalBrancheCoef(String profileSubjectId) {
+	/*
+	 * */
+	public BulletinSubject calculateTotalBrancheCoef(String bulletinSubjectId) {
 		//
-		BulletinSubject ps = this.ofy().get( new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(profileSubjectId)) );
+		BulletinSubject ps = this.ofy().get( new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(bulletinSubjectId)) );
 		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
-				.filter("bulletinSubject", new Key<BulletinSubject>( BulletinSubject.class, Long.parseLong(profileSubjectId)) )
+				.filter("bulletinSubject", new Key<BulletinSubject>( BulletinSubject.class, Long.parseLong(bulletinSubjectId)) )
 				.order("bulletinBrancheName");
 		ps.setTotalBrancheCoef(0.0);
 		for ( BulletinBranche profileBranche : q ){

@@ -9,6 +9,7 @@ import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.BulletinBrancheDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.shared.BulletinBrancheProxy;
+import com.lemania.sis.shared.BulletinSubjectProxy;
 
 public interface BulletinBrancheRequestFactory extends RequestFactory {
 	//
@@ -24,6 +25,8 @@ public interface BulletinBrancheRequestFactory extends RequestFactory {
 		
 		Request<BulletinBrancheProxy> saveAndReturn(BulletinBrancheProxy branche);		
 		Request<BulletinBrancheProxy> saveAndReturn(String bulletinSubjectId, String brancheId, String brancheCoef );
+		
+		Request<List<BulletinBrancheProxy>> addRelatedBranches( BulletinSubjectProxy bulletinSubject );
 		
 		Request<Void> removeBulletinBranche(BulletinBrancheProxy bulletinBranche);
 	}

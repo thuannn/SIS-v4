@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
+import com.lemania.sis.server.Bulletin;
+import com.lemania.sis.server.Profile;
+import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 
 public class SubjectDao extends MyDAOBase {
@@ -36,6 +39,31 @@ public class SubjectDao extends MyDAOBase {
 		for (Subject subject : q){
 			if (subject.getIsActive())
 				returnList.add(subject);
+		}
+		return returnList;
+	}
+	
+	/*
+	 * 
+	 * */
+	public List<Subject> listAllActiveByProfile(Bulletin bulletin){
+		//
+		Profile profile;		
+		if ( bulletin.getProfile() != null ) {
+			profile = this.ofy().get( bulletin.getProfile() );
+		} else {
+			Query<Profile> profiles = this.ofy().query(Profile.class)
+					.filter("classe", bulletin.getClasse());
+			profile = profiles.list().get(0);
+		}
+		//
+		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+				.filter("profile", profile)
+				.order("subjectName");				
+		//
+		List<Subject> returnList = new ArrayList<Subject>();
+		for (ProfileSubject ps : profileSubjects){
+			returnList.add( this.ofy().get( ps.getSubject() ));
 		}
 		return returnList;
 	}

@@ -16,6 +16,7 @@ import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
@@ -23,6 +24,8 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.Button;
@@ -40,6 +43,10 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	//
 	private StudentProxy selectedStudent;
 	private int selectedStudentIndex;
+	//
+	private int selectedBulletinIndex;
+	private BulletinProxy selectedBulletin;
+	
 
 	public interface Binder extends UiBinder<Widget, FrmBulletinCreationView> {
 	}
@@ -104,7 +111,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	        return object.getStudentName();
 	      }
 	    };
-	    tblBulletins.setColumnWidth(colFirstName, 60, Unit.PCT);
+	    tblBulletins.setColumnWidth(colFirstName, 50, Unit.PCT);
 	    tblBulletins.addColumn(colFirstName, "Eleve");
 	    //
 	    TextColumn<BulletinProxy> colLastName = new TextColumn<BulletinProxy>() {
@@ -113,6 +120,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	        return object.getClasseName();
 	      } 
 	    };
+	    tblBulletins.setColumnWidth(colLastName, 30, Unit.PCT);
 	    tblBulletins.addColumn(colLastName, "Classe");
 	    //
 	    TextColumn<BulletinProxy> colYear = new TextColumn<BulletinProxy>() {
@@ -122,6 +130,26 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	      } 
 	    };
 	    tblBulletins.addColumn(colYear, "Year");
+	    tblBulletins.setColumnWidth(colYear, 10, Unit.PCT);
+	    
+	    //
+	    Column<BulletinProxy, String> colDelete = new Column<BulletinProxy, String> (new ButtonCell()){
+	    	@Override
+	    	public String getValue(BulletinProxy bp){
+	    		return "X";
+	    	}
+	    };
+	    colDelete.setFieldUpdater(new FieldUpdater<BulletinProxy, String>(){
+	    	@Override
+	    	public void update(int index, BulletinProxy bp, String value){
+	    		selectedBulletinIndex = index;
+	    		selectedBulletin = bp;
+	    		getUiHandlers().removeBulletin( bp );
+	    	}
+	    });
+	    tblBulletins.setColumnWidth(colDelete, 10, Unit.PCT);
+	    tblBulletins.addColumn(colDelete, "");
+	    
 	    //
 	    bulletinDataProvider.addDataDisplay(tblBulletins);
 	}
@@ -300,5 +328,13 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		tblStudents.getSelectionModel().setSelected( selectedStudent, false);
 		studentDataProvider.getList().remove(selectedStudentIndex);
 		studentDataProvider.refresh();
+	}
+
+	/**/
+	@Override
+	public void removeDeletedBulletinFromTable() {
+		// Remove from bulletin table
+		bulletinDataProvider.getList().remove(selectedBulletinIndex);
+		bulletinDataProvider.flush();
 	}
 }

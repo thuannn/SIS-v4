@@ -1,6 +1,7 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.BulletinProxy;
 
 public interface FrmBulletinCreationUiHandler extends UiHandlers {
 	//
@@ -10,4 +11,6 @@ public interface FrmBulletinCreationUiHandler extends UiHandlers {
 	void onClassChanged(String classId);
 	//
 	void createBulletin(String studentId, String classId, String year, String profileId);
+	//
+	void removeBulletin( BulletinProxy bp );
 }

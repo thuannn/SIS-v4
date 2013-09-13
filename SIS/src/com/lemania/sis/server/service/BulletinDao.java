@@ -153,6 +153,7 @@ public class BulletinDao extends MyDAOBase {
 		bulletin.setStudent(new Key<Student>(Student.class, student.getId()));
 		bulletin.setClasseName(classe.getClassName());
 		bulletin.setStudentName(student.getLastName() + " " + student.getFirstName());
+		bulletin.setProfile( new Key<Profile>(Profile.class, profileId));
 		//
 		try {
 			//
@@ -205,8 +206,28 @@ public class BulletinDao extends MyDAOBase {
 	
 	
 	/**/
-	public void removeProfile(Bulletin bulletin){
+	public Boolean removeBulletin(Bulletin bulletin){
+		//
+		Key<Bulletin> keyBulletin = new Key<Bulletin>(Bulletin.class, bulletin.getId());
+		//
+		Query<BulletinSubject> bulletinSubjects = this.ofy().query(BulletinSubject.class)
+				.filter("bulletin", keyBulletin);
+		
+		for (BulletinSubject bulletinSubject : bulletinSubjects){				
+			//
+			Query<BulletinBranche> bulletinBranches = this.ofy().query(BulletinBranche.class)
+					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, bulletinSubject.getId()));
+			
+			for (BulletinBranche bulletinBranche : bulletinBranches) {
+				this.ofy().delete( bulletinBranche );
+			}
+			
+			this.ofy().delete( bulletinSubject );
+		}			
+		//
 		this.ofy().delete(bulletin);
+		return true;
+		//		
 	}
 	
 	

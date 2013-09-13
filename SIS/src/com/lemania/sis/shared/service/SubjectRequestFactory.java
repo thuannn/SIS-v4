@@ -8,6 +8,7 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.server.service.SubjectDao;
+import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.SubjectProxy;
 
 public interface SubjectRequestFactory extends RequestFactory {
@@ -17,6 +18,7 @@ public interface SubjectRequestFactory extends RequestFactory {
 		//
 		Request<List<SubjectProxy>> listAll();
 		Request<List<SubjectProxy>> listAllActive();
+		Request<List<SubjectProxy>> listAllActiveByProfile(BulletinProxy bulletin);
 		
 		Request<Void> save( SubjectProxy subject );
 		Request<SubjectProxy> saveAndReturn( SubjectProxy subject );

@@ -145,7 +145,7 @@ public class FrmClasseListPresenter
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

@@ -253,7 +253,7 @@ public class ProfsPresenter
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
-		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
+		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -275,7 +275,7 @@ public class ProfsPresenter
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
-		rc.listAll(coursId).fire(new Receiver<List<ClasseProxy>>(){
+		rc.listAllActive(coursId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
