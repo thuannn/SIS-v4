@@ -153,7 +153,7 @@ public class BulletinDao extends MyDAOBase {
 		bulletin.setStudent(new Key<Student>(Student.class, student.getId()));
 		bulletin.setClasseName(classe.getClassName());
 		bulletin.setStudentName(student.getLastName() + " " + student.getFirstName());
-		bulletin.setProfile( new Key<Profile>(Profile.class, profileId));
+		bulletin.setProfile( new Key<Profile>(Profile.class, Long.parseLong(profileId)));
 		//
 		try {
 			//

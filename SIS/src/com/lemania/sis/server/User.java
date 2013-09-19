@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.NotSaved;
 
 
 @Entity
-public class User extends DatastoreObject {
+public class User extends DatastoreObject implements Comparable<User> {
 	private String fullName;
 	private String userName;
 	private String password;
@@ -111,5 +111,10 @@ public class User extends DatastoreObject {
 
 	public void setIsStudent(Boolean isStudent) {
 		this.isStudent = isStudent;
+	}
+
+	@Override
+	public int compareTo(User u) {		
+		return this.fullName.compareTo( u.getFullName() );
 	}
 }

@@ -13,9 +13,12 @@
 					<g:at left="0" top="0">
 						<g:Image url="images/logo.png" width=""/>
 					</g:at>
-					<g:at left="455" top="0">
-						<g:Grid height="24px" width="557px" borderWidth="0">
+					<g:at left="552" top="0">
+						<g:Grid height="24px" width="60%" borderWidth="0">
 						<g:row>
+							<g:customCell>
+								<g:Label ui:field="lblCurrentMonth"/>
+							</g:customCell>
 							<g:customCell>
 								<g:HorizontalPanel>
 									<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
@@ -23,14 +26,11 @@
 									<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
 								</g:HorizontalPanel>
 							</g:customCell>
-							<g:customCell>
-								<g:Label ui:field="lblCurrentMonth"/>
-							</g:customCell>
 						</g:row>
 					</g:Grid>
 					</g:at>
 					<g:at left="268" top="30">
-						<g:Button text="Masquer/ Afficher le menu" ui:field="cmdMenuToggle" width="150px" styleName="btnHideMenu" height="20px"/>
+						<g:Button text="&lt;&lt; Masquer/ Afficher le menu" ui:field="cmdMenuToggle" width="190px" styleName="btnHideMenu" height="20px"/>
 					</g:at>
 				</g:AbsolutePanel>
 			</g:Dock>
@@ -91,18 +91,18 @@
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="Espace professeur" state="true">
-							<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput"/>
-							<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail"/>
-							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password"/>
-							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact"/>
+							<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>
+							<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail" ui:field="cmdMarkViewProf"/>
+							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password" ui:field="cmdPasswordProf"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpProf"/>
 						</g:TreeItem>
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="Espace élève">
-							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes"/>
-							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe"/>
-							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact"/>
+							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewStudent"/>
+							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordStudent"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpStudent"/>
 						</g:TreeItem>
 					</g:Tree>
 				</g:VerticalPanel>

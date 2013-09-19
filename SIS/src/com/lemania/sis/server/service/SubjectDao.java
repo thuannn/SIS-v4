@@ -48,10 +48,10 @@ public class SubjectDao extends MyDAOBase {
 	 * */
 	public List<Subject> listAllActiveByProfile(Bulletin bulletin){
 		//
-		Profile profile;		
-		if ( bulletin.getProfile() != null ) {
-			profile = this.ofy().get( bulletin.getProfile() );
-		} else {
+		Profile profile;
+		try { 
+			profile = this.ofy().get( bulletin.getProfile() ); 
+		} catch (RuntimeException exception) {
 			Query<Profile> profiles = this.ofy().query(Profile.class)
 					.filter("classe", bulletin.getClasse());
 			profile = profiles.list().get(0);

@@ -30,8 +30,6 @@ import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.StudentProxy;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;

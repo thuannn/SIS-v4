@@ -73,27 +73,43 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdBulletin;
 	@UiField VerticalPanel pnlProgressBarIn;
 	@UiField VerticalPanel pnlProgressBar;
+	@UiField Hyperlink cmdMarkInputProf;
+	@UiField Hyperlink cmdMarkViewProf;
+	@UiField Hyperlink cmdPasswordProf;
+	@UiField Hyperlink cmdHelpProf;
+	@UiField Hyperlink cmdMarkViewStudent;
+	@UiField Hyperlink cmdPasswordStudent;
+	@UiField Hyperlink cmdHelpStudent;
 	
 	
 	// Thuan
-	PopupPanel popup = new PopupPanel(false);
-	
+	PopupPanel popup = new PopupPanel(false);	
 	
 	//
 	private Hyperlink lastPage;
+	private Hyperlink lastPageProf;
+	private Hyperlink lastPageStudent;
 	
+	/*
+	 * */
 	public MainPageView() {		
 		widget = uiBinder.createAndBindUi(this);
 	}
 	
+	/*
+	 * */
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
 
+	/*
+	 * */
 	@Override
 	public Widget asWidget() {
 		return widget;
 	}
 	
+	/*
+	 * */
 	@Override
 	public void setInSlot(Object slot, IsWidget content){
 		if (slot == MainPagePresenter.TYPE_SetMainContent) {
@@ -236,13 +252,13 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (visible)
 			popup.center();
 		else {
-			Timer t = new Timer(){
-				@Override
-				public void run(){
+//			Timer t = new Timer(){
+//				@Override
+//				public void run(){
 					popup.hide();
-				}
-			};
-			t.schedule(3000);
+//				}
+//			};
+//			t.schedule(3000);
 		}
 	}
 
@@ -272,39 +288,68 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	    }
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void showCurrentPageOnMenu(String tokenName) {
 		//
-		if (tokenName.equals(NameTokens.homepage)) switchStyle(this.cmdHome);
-		if (tokenName.equals(NameTokens.profilemgt)) switchStyle(this.cmdProfileManagement);
-		if (tokenName.equals(NameTokens.bulletincreation)) switchStyle(this.cmdAttribution);
-		if (tokenName.equals(NameTokens.bulletinmanagement)) switchStyle(this.cmdAttributionPerson);
-		if (tokenName.equals(NameTokens.bulletindetail)) switchStyle(this.cmdMarkView);
-		if (tokenName.equals(NameTokens.markinput)) switchStyle(this.cmdMarkInput);
-		if (tokenName.equals(NameTokens.students)) switchStyle(this.cmdStudentList);
-		if (tokenName.equals(NameTokens.studentadd)) switchStyle(this.cmdStudentAdd);
-		if (tokenName.equals(NameTokens.profs)) switchStyle(this.cmdProfList);
-		if (tokenName.equals(NameTokens.profsadd)) switchStyle(this.cmdProfAdd);
-		if (tokenName.equals(NameTokens.branchelist)) switchStyle(this.cmdBrancheList);
-		if (tokenName.equals(NameTokens.brancheadd)) switchStyle(this.cmdBrancheAdd);
-		if (tokenName.equals(NameTokens.subjectlist)) switchStyle(this.cmdSubjectList);
-		if (tokenName.equals(NameTokens.subjectadd)) switchStyle(this.cmdSubjectAdd);
-		if (tokenName.equals(NameTokens.classlist)) switchStyle(this.cmdClassList);
-		if (tokenName.equals(NameTokens.classeadd)) switchStyle(this.cmdClassAdd);
-		if (tokenName.equals(NameTokens.cours)) switchStyle(this.cmdProgrammeList);
-		if (tokenName.equals(NameTokens.coursadd)) switchStyle(this.cmdProgrammeAdd);
-		if (tokenName.equals(NameTokens.ecolepage)) switchStyle(this.cmdSchoolList);
-		if (tokenName.equals(NameTokens.addecole)) switchStyle(this.cmdSchoolAdd);
-		if (tokenName.equals(NameTokens.usermanagement)) switchStyle(this.cmdUserManagement);
-		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings);
-		if (tokenName.equals(NameTokens.password)) switchStyle(this.cmdPassword);
-		if (tokenName.equals(NameTokens.contact)) switchStyle(this.cmdHelp);
-		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin);
+		if (tokenName.equals(NameTokens.homepage)) switchStyle(this.cmdHome, false, false);
+		if (tokenName.equals(NameTokens.profilemgt)) switchStyle(this.cmdProfileManagement, false, false);
+		if (tokenName.equals(NameTokens.bulletincreation)) switchStyle(this.cmdAttribution, false, false);
+		if (tokenName.equals(NameTokens.bulletinmanagement)) switchStyle(this.cmdAttributionPerson, false, false);
+		if (tokenName.equals(NameTokens.bulletindetail)) {
+			switchStyle(this.cmdMarkView, false, false);
+			switchStyle(this.cmdMarkViewProf, true, false);
+			switchStyle(this.cmdMarkViewStudent, false, true);
+		}
+		if (tokenName.equals(NameTokens.markinput)) {
+			switchStyle(this.cmdMarkInput, false, false);
+			switchStyle(this.cmdMarkInputProf, true, false);			
+		}
+		if (tokenName.equals(NameTokens.students)) switchStyle(this.cmdStudentList, false, false);
+		if (tokenName.equals(NameTokens.studentadd)) switchStyle(this.cmdStudentAdd, false, false);
+		if (tokenName.equals(NameTokens.profs)) switchStyle(this.cmdProfList, false, false);
+		if (tokenName.equals(NameTokens.profsadd)) switchStyle(this.cmdProfAdd, false, false);
+		if (tokenName.equals(NameTokens.branchelist)) switchStyle(this.cmdBrancheList, false, false);
+		if (tokenName.equals(NameTokens.brancheadd)) switchStyle(this.cmdBrancheAdd, false, false);
+		if (tokenName.equals(NameTokens.subjectlist)) switchStyle(this.cmdSubjectList, false, false);
+		if (tokenName.equals(NameTokens.subjectadd)) switchStyle(this.cmdSubjectAdd, false, false);
+		if (tokenName.equals(NameTokens.classlist)) switchStyle(this.cmdClassList, false, false);
+		if (tokenName.equals(NameTokens.classeadd)) switchStyle(this.cmdClassAdd, false, false);
+		if (tokenName.equals(NameTokens.cours)) switchStyle(this.cmdProgrammeList, false, false);
+		if (tokenName.equals(NameTokens.coursadd)) switchStyle(this.cmdProgrammeAdd, false, false);
+		if (tokenName.equals(NameTokens.ecolepage)) switchStyle(this.cmdSchoolList, false, false);
+		if (tokenName.equals(NameTokens.addecole)) switchStyle(this.cmdSchoolAdd, false, false);
+		if (tokenName.equals(NameTokens.usermanagement)) switchStyle(this.cmdUserManagement, false, false);
+		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings, false, false);
+		if (tokenName.equals(NameTokens.password)) {
+			switchStyle(this.cmdPassword, false, false);
+			switchStyle(this.cmdPasswordProf, true, false);
+			switchStyle(this.cmdPasswordStudent, false, true);
+		}
+		if (tokenName.equals(NameTokens.contact)) {
+			switchStyle(this.cmdHelp, false, false);
+			switchStyle(this.cmdHelpProf, true, false);
+			switchStyle(this.cmdHelpStudent, false, true);
+		}
+		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin, false, false);
 	}
 	
-	private void switchStyle( Hyperlink link){
-		if (lastPage != null) lastPage.setStyleName("");
+	
+	/*
+	 * */
+	private void switchStyle( Hyperlink link, Boolean prof, Boolean student ){		
+		if (!prof && !student) {
+			if (lastPage != null) lastPage.setStyleName("");
+			if (lastPageProf != null) lastPageProf.setStyleName("");
+			if (lastPageStudent != null) lastPageStudent.setStyleName("");
+		}
+		
 		link.setStyleName("currentPage");
-		lastPage = link;
+		
+		if (prof) lastPageProf = link;
+		if (student) lastPageStudent = link;
+		if (!prof && !student) lastPage = link;
 	}
 }

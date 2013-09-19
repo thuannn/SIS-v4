@@ -1,6 +1,7 @@
 package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.lemania.sis.server.Assignment;
@@ -98,6 +99,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 					}
 				}
 			}
+			Collections.sort(returnList);
 			return returnList;
 		}
 		return null;
@@ -114,18 +116,18 @@ public class BulletinSubjectDao extends MyDAOBase {
 	public BulletinSubject saveAndReturn(BulletinSubject bulletin){
 		//
 		Key<BulletinSubject> key = this.ofy().put(bulletin);
-		Double totalT1 = -0.001;
-		Double totalT2 = -0.001;
-		Double totalT3 = -0.001;
-		Double totalCoefT1 = -0.001;
-		Double totalCoefT2 = -0.001;
-		Double totalCoefT3 = -0.001;
-		Double examT1 = -0.001;
-		Double examT2 = -0.001;
-		Double examT3 = -0.001;
-		Double coefExam = -0.001;
-		Double totalAn = -0.001;
-		Double avantExam = -0.001;
+		Double totalT1 = -0.000001;
+		Double totalT2 = -0.000001;
+		Double totalT3 = -0.000001;
+		Double totalCoefT1 = -0.000001;
+		Double totalCoefT2 = -0.000001;
+		Double totalCoefT3 = -0.000001;
+		Double examT1 = -0.000001;
+		Double examT2 = -0.000001;
+		Double examT3 = -0.000001;
+		Double coefExam = -0.000001;
+		Double totalAn = -0.000001;
+		Double avantExam = -0.000001;
 		Integer countAn = 0;
 		//
 		try {
@@ -169,9 +171,17 @@ public class BulletinSubjectDao extends MyDAOBase {
 					this.ofy().get(
 							this.ofy().get(ps.getBulletin()).getClasse()).getProgramme()).getCoursNom().toLowerCase();
 			//
+			if (totalCoefT1 > 0) totalCoefT1 = totalCoefT1 + 0.000001;
+			if (totalCoefT2 > 0) totalCoefT2 = totalCoefT2 + 0.000001;
+			if (totalCoefT3 > 0) totalCoefT3 = totalCoefT3 + 0.000001;
+			if (coefExam > 0) coefExam = coefExam + 0.000001;
+			//
 			if (programmeName.contains("matu")){
-				if (totalT1>0 && examT1>0)
-					ps.setT1( Double.toString(((double)Math.round((totalT1+(examT1*coefExam))/(totalCoefT1+coefExam)*10))/10) );
+				if (totalT1>0 && examT1>0) {
+					totalT1 = totalT1 + (examT1 * coefExam);
+					totalCoefT1 = totalCoefT1 + coefExam;
+					ps.setT1( Double.toString( ((double)Math.round(totalT1/totalCoefT1*10))/10 ) );
+				}
 				if (totalT1>0 && examT1<0)
 					ps.setT1( Double.toString(((double)Math.round(totalT1/totalCoefT1*10))/10 ));
 				if (totalT1<0 && examT1>0)
@@ -188,7 +198,8 @@ public class BulletinSubjectDao extends MyDAOBase {
 					avantExam = ((double)Math.round(totalT2/totalCoefT2*10))/10;
 				}
 				if (totalT2<0 && totalT1>0) {
-					ps.setT2( Double.toString(((double)Math.round((totalT1/totalCoefT1)*10))/10 ));
+					// Wrong - if no average grade, do not show // ps.setT2( Double.toString(((double)Math.round((totalT1/totalCoefT1)*10))/10 ));
+					ps.setT2("");
 					avantExam = ((double)Math.round((totalT1/totalCoefT1)*10))/10;
 				}
 				if (totalT2<0 && totalT1<0) {
@@ -282,13 +293,23 @@ public class BulletinSubjectDao extends MyDAOBase {
 				else
 					ps.setAn("");
 			}
+			
 			//
 			if (examT1>0)
-				ps.setExamT1( Double.toString(examT1));
+				ps.setExamT1(Double.toString(examT1));
+			else
+				ps.setExamT1("");
+			//
 			if (examT2>0)
-				ps.setExamT2( Double.toString(examT2));
+				ps.setExamT2(Double.toString(examT2));
+			else
+				ps.setExamT2("");
+			//
 			if (examT3>0)
-				ps.setExamT3( Double.toString(examT3));
+				ps.setExamT3(Double.toString(examT3));
+			else
+				ps.setExamT3("");
+			
 			//
 			this.ofy().put(ps);
 			return ps;

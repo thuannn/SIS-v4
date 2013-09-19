@@ -24,6 +24,8 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandler> implements
 		UserManagementPresenter.MyView {
@@ -51,6 +53,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	@UiField TextBox txtPassword;
 	@UiField Button cmdAdd;
 	@UiField TextBox txtEmail;
+	@UiField ListBox lstUserTypes;
 	
 	@UiHandler("cmdAdd")
 	public void onCmdAddClicked(ClickEvent event) {
@@ -193,8 +196,24 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    		}
 	    	}
 	    });
+	    
+	    //
+	    initializeUserTypeList();
 	}
 
+	
+	/*
+	 * */
+	private void initializeUserTypeList() {
+		//
+		lstUserTypes.addItem("-", "");
+		lstUserTypes.addItem("Professeurs", "professeures");
+		lstUserTypes.addItem("Elèves", "eleves");
+		lstUserTypes.addItem("Tout", "tout");
+	}
+
+	/*
+	 * */
 	@Override
 	public void setUserData(List<UserProxy> list) {
 		//
@@ -203,6 +222,8 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		tblUser.setHeight( Integer.toString((list.size()+1) * NotificationTypes.lineHeight) + "px");
 	}
 
+	/*
+	 * */
 	@Override
 	public void refreshTable(UserProxy updatedUser) {
 		List<UserProxy> users = new ArrayList<UserProxy>();
@@ -219,5 +240,14 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 			txtUserName.setText( selectedUser.getUserName() );
 			txtEmail.setText( selectedUser.getEmail() );
 		}		
+	}
+	
+	/* 
+	 * */
+	@UiHandler("lstUserTypes")
+	void onLstUserTypesChange(ChangeEvent event) {
+		if (getUiHandlers() != null) {			
+			getUiHandlers().loadUsersByType( lstUserTypes.getValue( lstUserTypes.getSelectedIndex() ));
+		}
 	}
 }

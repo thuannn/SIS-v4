@@ -39,17 +39,17 @@ public class UserManagementPresenter
 		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler {
 
 	public interface MyView extends View, HasUiHandlers<UserManagementUiHandler> {
-		
+		//
 		public void initializeTables();
-		
+		//
 		public void populateSelectedUserInfo();
-		
-		
+		//		
 		public void refreshTable(UserProxy updatedUser);
-		
+		//
 		public void addNewUser(UserProxy newUser);
 		public void setUserData(List<UserProxy> list);
 	}
+	
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.usermanagement)
@@ -60,10 +60,7 @@ public class UserManagementPresenter
 	@Inject
 	public UserManagementPresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy) {
-		super(eventBus, view, proxy);
-		
-		// Thuan
-		getView().setUiHandlers(this);
+		super(eventBus, view, proxy);	
 	}
 
 	@Override
@@ -76,15 +73,14 @@ public class UserManagementPresenter
 		super.onBind();
 		
 		// Thuan
+		getView().setUiHandlers(this);
 		getView().initializeTables();
 	}
 	
 	@Override
 	protected void onReset() {
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));
-		//
-		loadUsers();
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));		
 	}
 
 	private void loadUsers() {
@@ -215,5 +211,31 @@ public class UserManagementPresenter
 				Window.alert( NotificationTypes.prof_code_access_created );
 			}
 		} );		
+	}
+
+	@Override
+	public void loadUsersByType(String type) {
+		//
+		if (type.equals(""))
+			return;
+		//
+		if (type.equals("tout")) {
+			loadUsers();
+			return;
+		}
+		//
+		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		UserRequestContext rc = rf.userRequest();
+		rc.listAllByType(type).fire(new Receiver<List<UserProxy>>() {
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<UserProxy> response) {
+				getView().setUserData(response);
+			}
+		});
 	}
 }

@@ -16,6 +16,7 @@ public interface UserRequestFactory extends RequestFactory {
 	interface UserRequestContext extends RequestContext {
 		
 		Request<List<UserProxy>> listAll();
+		Request<List<UserProxy>> listAllByType(String type);
 		Request<List<UserProxy>> listAllActive();
 		
 		Request<Void> save(UserProxy user);

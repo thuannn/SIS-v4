@@ -19,7 +19,7 @@
 					<g:Label text="Bulletin(s) :"/>
 					<g:ListBox width="300px" ui:field="lstBulletins"/>
 				</g:HorizontalPanel>
-				<g:Button ui:field="cmdPrint">Imprimer</g:Button>
+				<g:Button ui:field="cmdPrint" text="Afficher le bulletin">Imprimer</g:Button>
 			</g:HorizontalPanel>
 			<g:Label text="." styleName="hiddenText"/>
 			<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin">

@@ -319,7 +319,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    		}
 	    	}
 	    });
-	    tblSubjects.setColumnWidth(colSubjectCoef, 15, Unit.PCT);
+	    tblSubjects.setColumnWidth(colSubjectCoef, 10, Unit.PCT);
 	    tblSubjects.addColumn(colSubjectCoef, "Coef");
 	    
 	    
@@ -339,7 +339,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	        return object.getTotalBrancheCoef().toString();	        		
 	      }
 	    };	    
-	    tblSubjects.addColumn(colTotalBrancheCoef, "Total Branche Coef");
+	    tblSubjects.addColumn(colTotalBrancheCoef, "Br.Coef");
+	    tblSubjects.setColumnWidth(colTotalBrancheCoef, 10, Unit.PCT);
 	    
 	    
 	    //
@@ -357,7 +358,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    		getUiHandlers().removeSubject( subject );
 	    	}
 	    });
-	    tblSubjects.setColumnWidth(colDelete, 15.0, Unit.PCT);
+	    tblSubjects.setColumnWidth(colDelete, 10, Unit.PCT);
 	    tblSubjects.addColumn(colDelete, "");
 	    
 		

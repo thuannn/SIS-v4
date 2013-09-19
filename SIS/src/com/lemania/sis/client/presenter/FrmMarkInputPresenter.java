@@ -234,12 +234,11 @@ public class FrmMarkInputPresenter extends
 
 
 	@Override
-	public void saveNotes(BulletinBrancheProxy bulletinBranche,
-			final BulletinSubjectProxy bulletinSubject, String t_1_1, String t_1_2,
-			String t_1_3, String t_1_4, String t_1_5, String t_2_1,
-			String t_2_2, String t_2_3, String t_2_4, String t_2_5,
-			String t_3_1, String t_3_2, String t_3_3, String t_3_4,
-			String t_3_5, final String remarque1, final String remarque2, final String remarque3) {
+	public void saveNotes( BulletinBrancheProxy bulletinBranche, final BulletinSubjectProxy bulletinSubject, 
+			String t_1_1, String t_1_2,	String t_1_3, String t_1_4, String t_1_5, 
+			String t_2_1, String t_2_2, String t_2_3, String t_2_4, String t_2_5,
+			String t_3_1, String t_3_2, String t_3_3, String t_3_4,	String t_3_5, 
+			final String remarque1, final String remarque2, final String remarque3 ) {
 		//
 		if (bulletinSubject == null){
 			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir l'élève à saisir les notes.");

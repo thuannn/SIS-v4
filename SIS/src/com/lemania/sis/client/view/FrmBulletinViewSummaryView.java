@@ -4,8 +4,13 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
 import com.lemania.sis.shared.BulletinProxy;
@@ -15,6 +20,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
@@ -343,17 +349,35 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 		
 	
+	/*
+	 * */
 	@UiHandler("cmdPrint")
 	void onCmdPrintClick(ClickEvent event) {
-		//
+		// 		
 		pnlBulletin.setVisible(true);
-		lblSpace.setHeight("500px");
 		//
-		PopupPanel popup = new PopupPanel(true);
+		if (Navigator.getUserAgent().toLowerCase().contains("chrome"))
+			lblSpace.setHeight( Integer.toString( NotificationTypes.bulletinPageHeightChrome - tblNotes.getOffsetHeight() ) + "px");
+		else
+			lblSpace.setHeight( Integer.toString( NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() ) + "px");
+		//
+		PopupPanel popup = new PopupPanel(true) {
+			@Override
+			  protected void onPreviewNativeEvent(final NativePreviewEvent event) {
+			    super.onPreviewNativeEvent(event);
+			    switch (event.getTypeInt()) {
+			        case Event.ONKEYDOWN:
+			            if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+			                hide();
+			            }
+			            break;
+			    }
+			}
+		};
 		popup.setStyleName("bulletin");
 		popup.add(pnlBulletin);
-		popup.addCloseHandler(new CloseHandler<PopupPanel>(){
-			public void onClose(CloseEvent<PopupPanel> event){
+		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
+			public void onClose(CloseEvent<PopupPanel> event) {
 				pnlMain.add(pnlBulletin);
 			}
 		});

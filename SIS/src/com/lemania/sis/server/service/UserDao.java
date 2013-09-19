@@ -2,6 +2,7 @@ package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
@@ -19,6 +20,22 @@ public class UserDao extends MyDAOBase {
 		for (User user : q){
 			returnList.add(user);
 		}
+		Collections.sort(returnList);
+		return returnList;
+	}
+	
+	/*
+	 * */
+	public List<User> listAllByType(String type) {
+		Query<User> q = this.ofy().query(User.class);
+		List<User> returnList = new ArrayList<User>();
+		for (User user : q){
+			if (type.contains("prof") && user.getIsProf())
+				returnList.add(user);
+			if (type.contains("eleve") && user.getIsStudent())
+				returnList.add(user);
+		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
@@ -31,6 +48,7 @@ public class UserDao extends MyDAOBase {
 		for (User user : q){
 			returnList.add(user);
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	
