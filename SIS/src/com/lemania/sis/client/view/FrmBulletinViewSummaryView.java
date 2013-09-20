@@ -6,7 +6,6 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -29,6 +28,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
 		FrmBulletinViewSummaryPresenter.MyView {
@@ -62,6 +62,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField Button cmdPrint;
 	@UiField VerticalPanel pnlMain;
 	@UiField Label lblSpace;
+	@UiField VerticalPanel pnlMainBulletin;
 	
 	
 	/**/
@@ -378,7 +379,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		popup.add(pnlBulletin);
 		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
 			public void onClose(CloseEvent<PopupPanel> event) {
-				pnlMain.add(pnlBulletin);
+				pnlMainBulletin.add(pnlBulletin);
+				lblSpace.setHeight("10px");
 			}
 		});
 		//

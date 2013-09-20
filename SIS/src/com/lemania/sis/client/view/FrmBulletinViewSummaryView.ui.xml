@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain">
+		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain" horizontalAlignment="ALIGN_CENTER">
 			<g:Label text="IMPRIMER LES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:Label text="En développement, la fonction n'est pas encore prête à utiliser." styleName="workInProgress" height="50px"/>
 			<g:HorizontalPanel spacing="5" styleName="subSection" verticalAlignment="ALIGN_MIDDLE">
@@ -22,7 +22,8 @@
 				<g:Button ui:field="cmdPrint" text="Afficher le bulletin">Imprimer</g:Button>
 			</g:HorizontalPanel>
 			<g:Label text="." styleName="hiddenText"/>
-			<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin">
+			<g:VerticalPanel ui:field="pnlMainBulletin" width="80%" horizontalAlignment="ALIGN_CENTER">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin">
 				<g:Grid width="100%">
 					<g:row>
 						<g:customCell>
@@ -60,6 +61,8 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch "/>
 				</g:VerticalPanel>
 			</g:VerticalPanel>
+			</g:VerticalPanel>
+			<g:Label styleName="hiddenText" text="."/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

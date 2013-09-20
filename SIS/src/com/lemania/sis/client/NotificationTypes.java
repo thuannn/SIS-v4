@@ -27,6 +27,6 @@ public class NotificationTypes {
 	public static Integer pageSize = 1000;
 	
 	public static Integer bulletinLineHeight = 40;
-	public static Integer bulletinPageHeight = 650;
+	public static Integer bulletinPageHeight = 600;
 	public static Integer bulletinPageHeightChrome = 1150;
 }
