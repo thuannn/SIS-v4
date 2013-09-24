@@ -94,6 +94,17 @@ public class UserDao extends MyDAOBase {
 			user.setCurrentMonth(cal.get(Calendar.MONTH) +1);
 			user.setCurrentYear(cal.get(Calendar.YEAR));
 			user.setCurrentDay(cal.get(Calendar.DAY_OF_MONTH));
+			
+			user.setLastLoggedInTime( user.getCurrentLoggedInTime() );
+			user.setCurrentLoggedInTime( 
+					cal.get(Calendar.DAY_OF_MONTH) + "." 
+					+ (cal.get(Calendar.MONTH) +1) + "." 
+					+ cal.get(Calendar.YEAR) + " " 
+					+ cal.get(Calendar.HOUR) + ":"
+					+ cal.get(Calendar.MINUTE) );
+			//
+			this.ofy().put(user);
+			
 			returnList.add(user);
 		}
 		
@@ -103,6 +114,8 @@ public class UserDao extends MyDAOBase {
 			return null;
 	}
 	
+	/*
+	 * */
 	public User changePassword(String userName, String password, String newPassword) {
 		Query<User> q = this.ofy().query(User.class)
 				.filter("active", true)
@@ -120,5 +133,16 @@ public class UserDao extends MyDAOBase {
 		}
 		else
 			return null;
+	}
+	
+	/*
+	 * */
+	public void updateUserActiveStatus(String userEmail, Boolean userStatus) {
+		Query<User> q = this.ofy().query(User.class)
+				.filter("email", userEmail);						
+		for (User user : q){		
+			user.setActive(userStatus);
+			this.ofy().put(user);
+		}	
 	}
 }

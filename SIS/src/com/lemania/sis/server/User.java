@@ -15,6 +15,9 @@ public class User extends DatastoreObject implements Comparable<User> {
 	private Boolean admin = false;
 	private Boolean isProf = false;
 	private Boolean isStudent = false;
+	//
+	private String lastLoggedInTime;
+	private String currentLoggedInTime;
 	
 	@NotSaved
 	private int currentMonth = 0;
@@ -116,5 +119,21 @@ public class User extends DatastoreObject implements Comparable<User> {
 	@Override
 	public int compareTo(User u) {		
 		return this.fullName.compareTo( u.getFullName() );
+	}
+
+	public String getLastLoggedInTime() {
+		return (this.lastLoggedInTime == null)? "" : this.lastLoggedInTime;
+	}
+
+	public void setLastLoggedInTime(String lastLoggedInTime) {
+		this.lastLoggedInTime = lastLoggedInTime;
+	}
+
+	public String getCurrentLoggedInTime() {
+		return (this.currentLoggedInTime == null)? "" : this.currentLoggedInTime;
+	}
+
+	public void setCurrentLoggedInTime(String currentLoggedInTime) {
+		this.currentLoggedInTime = currentLoggedInTime;
 	}
 }

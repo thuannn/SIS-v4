@@ -27,4 +27,7 @@ public interface BulletinProxy extends EntityProxy {
 	
 	public String getProgrammeName();
 	public void setProgrammeName(String programmeName);
+	
+	public String getRemarqueDirection();
+	public void setRemarqueDirection(String remarqueDirection);
 }

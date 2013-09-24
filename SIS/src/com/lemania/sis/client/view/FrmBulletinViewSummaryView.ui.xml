@@ -9,7 +9,6 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain" horizontalAlignment="ALIGN_CENTER">
 			<g:Label text="IMPRIMER LES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:Label text="En développement, la fonction n'est pas encore prête à utiliser." styleName="workInProgress" height="50px"/>
 			<g:HorizontalPanel spacing="5" styleName="subSection" verticalAlignment="ALIGN_MIDDLE">
 				<g:HorizontalPanel width="400px" spacing="2" horizontalAlignment="ALIGN_RIGHT" ui:field="pnlAdmin" verticalAlignment="ALIGN_MIDDLE">
 					<g:Label text="Classe :"/>
@@ -19,10 +18,10 @@
 					<g:Label text="Bulletin(s) :"/>
 					<g:ListBox width="300px" ui:field="lstBulletins"/>
 				</g:HorizontalPanel>
-				<g:Button ui:field="cmdPrint" text="Afficher le bulletin">Imprimer</g:Button>
 			</g:HorizontalPanel>
 			<g:Label text="." styleName="hiddenText"/>
-			<g:VerticalPanel ui:field="pnlMainBulletin" width="80%" horizontalAlignment="ALIGN_CENTER">
+			<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+				<g:VerticalPanel ui:field="pnlMainBulletin" width="80%" horizontalAlignment="ALIGN_CENTER">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin">
 				<g:Grid width="100%">
 					<g:row>
@@ -53,7 +52,7 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 				<g:FlexTable width="100%" cellPadding="3" ui:field="tblNotes"/>
 				<g:HorizontalPanel width="100%" styleName="subSection">
 					<g:Label text="Direction :" width=""/>
-					<g:TextArea width="" characterWidth="90" visibleLines="5" styleName="sis-TextArea"/>
+					<g:TextArea width="" characterWidth="90" visibleLines="5" styleName="sis-TextArea" ui:field="txtDirectionRemarque"/>
 				</g:HorizontalPanel>
 				<g:Label text="." ui:field="lblSpace" stylePrimaryName="hiddenText"/>
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
@@ -61,6 +60,13 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch "/>
 				</g:VerticalPanel>
 			</g:VerticalPanel>
+			</g:VerticalPanel>
+				<g:VerticalPanel horizontalAlignment="ALIGN_RIGHT" width="80%" spacing="5">
+					<g:HorizontalPanel width="400px">
+						<g:Button text="Enregistrer les remarques" ui:field="cmdSaveRemarques"/>
+						<g:Button ui:field="cmdPrint" text="Afficher la version à imprimer">Imprimer</g:Button>
+					</g:HorizontalPanel>
+				</g:VerticalPanel>
 			</g:VerticalPanel>
 			<g:Label styleName="hiddenText" text="."/>
 		</g:VerticalPanel>

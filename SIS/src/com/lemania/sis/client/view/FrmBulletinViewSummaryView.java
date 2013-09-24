@@ -1,5 +1,6 @@
 package com.lemania.sis.client.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -28,7 +29,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.TextArea;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
 		FrmBulletinViewSummaryPresenter.MyView {
@@ -37,7 +38,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	
 	
 	// Thuan
-	List<BulletinProxy> bulletins;
+	List<BulletinProxy> bulletins = new ArrayList<BulletinProxy>();
 	List<ClasseProxy> classes;
 	
 
@@ -63,6 +64,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField VerticalPanel pnlMain;
 	@UiField Label lblSpace;
 	@UiField VerticalPanel pnlMainBulletin;
+	@UiField TextArea txtDirectionRemarque;
+	@UiField Button cmdSaveRemarques;
 	
 	
 	/**/
@@ -99,7 +102,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@Override
 	public void setStudentListData(List<BulletinProxy> bulletins) {
 		//
-		this.bulletins = bulletins;
+		if (this.bulletins != null)
+			this.bulletins.clear();
+		this.bulletins.addAll(bulletins);
 		//
 		lstBulletins.clear();
 		lstBulletins.addItem("-","");
@@ -224,6 +229,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(rowCount, 9, "");
 		
 		//
+		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
+		
+		//
 		styleBacTable();		
 	}
 	
@@ -254,6 +262,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
 		tblNotes.setText(rowCount, 5, "");
+		
+		//
+		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
 		
 		//
 		styleESTable();		
@@ -293,6 +304,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(rowCount, 5, "");
 		tblNotes.setText(rowCount, 6, "");
 		tblNotes.setText(rowCount, 7, "");
+		
+		//
+		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
 		
 		//
 		styleTableMatu();
@@ -385,5 +399,23 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		});
 		//
 		popup.show();
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSaveRemarques")
+	void onCmdSaveRemarquesClick(ClickEvent event) {
+		if (this.getUiHandlers() != null)
+			this.getUiHandlers().saveBulletinRemarques( lstBulletins.getValue(lstBulletins.getSelectedIndex()), txtDirectionRemarque.getText() );
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void saveRemarqueDirection(BulletinProxy bp) {
+		//
+		bulletins.set( (lstBulletins.getSelectedIndex()-1), bp);
 	}
 }

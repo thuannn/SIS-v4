@@ -7,4 +7,6 @@ public interface FrmBulletinViewSummaryUiHandler extends UiHandlers {
 	void onClassChange(String classId);
 	//
 	void onBulletinChange( String bulletinId );
+	//
+	void saveBulletinRemarques( String bulletinId, String remarqueDirection );
 }

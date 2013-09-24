@@ -241,4 +241,15 @@ public class BulletinDao extends MyDAOBase {
 			this.ofy().put( bulletin );
 		}
 	}
+	
+	
+	/*
+	 * */
+	public Bulletin saveBulletinRemarqueDirection( String bulletinId, String remarqueDirection ) {
+		//
+		Bulletin bulletin = this.ofy().get( new Key<Bulletin>(Bulletin.class, Long.parseLong(bulletinId)));
+		bulletin.setRemarqueDirection(remarqueDirection);
+		this.ofy().put(bulletin);
+		return bulletin;
+	}
 }

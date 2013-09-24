@@ -109,7 +109,7 @@ public class StudentPresenter
 			@Override
 			public void onSuccess(StudentProxy response) {
 				getView().updateEditedStudent(response);
-				getEventBus().fireEvent( new StudentAfterStatusChangeEvent(student.getId().toString(), value));
+				getEventBus().fireEvent( new StudentAfterStatusChangeEvent(student.getId().toString(), student.getEmail(), value));
 			}
 		});
 	}

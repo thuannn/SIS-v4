@@ -27,6 +27,8 @@ public interface UserRequestFactory extends RequestFactory {
 		Request<UserProxy> authenticateUser(String userName, String password);
 		Request<UserProxy> changePassword(String userName, String password, String newPassword);
 		
+		Request<Void> updateUserActiveStatus(String userEmail, Boolean userStatus);
+		
 		Request<Void> initialize();
 	}
 	

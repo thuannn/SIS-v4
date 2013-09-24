@@ -12,6 +12,7 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	private String classeName;
 	private String studentName;
 	private String year;
+	private String remarqueDirection;
 	
 	@NotSaved
 	private String programmeName;
@@ -97,5 +98,13 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	public int compareTo(Bulletin bulletin) {
 		int result = studentName.compareTo( bulletin.getStudentName() );
 		return result;
+	}
+
+	public String getRemarqueDirection() {
+		return (this.remarqueDirection == null)? "" : this.remarqueDirection;
+	}
+
+	public void setRemarqueDirection(String remarqueDirection) {
+		this.remarqueDirection = remarqueDirection;
 	}
 }

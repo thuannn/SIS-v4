@@ -33,6 +33,8 @@ public interface BulletinRequestFactory extends RequestFactory {
 		Request<Void> initialize();
 		//
 		Request<Void> updateBulletinStatus( String studentId, Boolean status );
+		//
+		Request<BulletinProxy> saveBulletinRemarqueDirection( String bulletinId, String remarqueDirection );
 	}
 	
 	BulletinRequestContext bulletinRequest();

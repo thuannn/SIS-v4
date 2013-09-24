@@ -9,6 +9,7 @@ public class StudentAfterStatusChangeEvent extends
 		GwtEvent<StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler> {
 	// Thuan
 	private String studentId = "";
+	private String studentEmail = "";
 	private Boolean status; 
 
 	public static Type<StudentAfterStatusChangeHandler> TYPE = new Type<StudentAfterStatusChangeHandler>();
@@ -25,8 +26,9 @@ public class StudentAfterStatusChangeEvent extends
 	public StudentAfterStatusChangeEvent() {		
 	}
 	
-	public StudentAfterStatusChangeEvent( String studentId, Boolean status ) {
+	public StudentAfterStatusChangeEvent( String studentId, String studentEmail, Boolean status ) {
 		this.studentId = studentId;
+		this.studentEmail = studentEmail;
 		this.status = status;
 	}
 
@@ -54,5 +56,13 @@ public class StudentAfterStatusChangeEvent extends
 	
 	public Boolean getStudentStatus(){
 		return this.status;
+	}
+
+	public String getStudentEmail() {
+		return this.studentEmail;
+	}
+
+	public void setStudentEmail(String studentEmail) {
+		this.studentEmail = studentEmail;
 	}
 }

@@ -169,7 +169,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			//
 			rowCount++;
 			tblBulletin.setText(rowCount, 0, "");
-			tblBulletin.getCellFormatter().addStyleName(rowCount, 0, "spaceCell");
+			tblBulletin.getCellFormatter().addStyleName(rowCount, 0, "spaceCell");			
 		}
 		//
 		tblBulletin.getColumnFormatter().setWidth(0, "30%");

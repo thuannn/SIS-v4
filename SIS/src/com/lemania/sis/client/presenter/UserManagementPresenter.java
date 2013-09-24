@@ -13,6 +13,8 @@ import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent.ProfessorAfterAddHandler;
 import com.lemania.sis.client.event.StudentAfterAddEvent;
 import com.lemania.sis.client.event.StudentAfterAddEvent.StudentAfterAddHandler;
+import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
+import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -36,7 +38,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class UserManagementPresenter
 		extends Presenter<UserManagementPresenter.MyView, UserManagementPresenter.MyProxy> 
-		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler {
+		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler, StudentAfterStatusChangeHandler {
 
 	public interface MyView extends View, HasUiHandlers<UserManagementUiHandler> {
 		//
@@ -237,5 +239,24 @@ public class UserManagementPresenter
 				getView().setUserData(response);
 			}
 		});
+	}
+
+	@ProxyEvent
+	@Override
+	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
+		//		
+		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		UserRequestContext rc = rf.userRequest();		
+		rc.updateUserActiveStatus(event.getStudentEmail(), event.getStudentStatus()).fire( new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				//
+			}
+		} );	
 	}
 }

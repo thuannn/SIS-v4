@@ -46,6 +46,8 @@ public class FrmBulletinViewSummaryPresenter
 		void setStudentListData(List<BulletinProxy> bulletins);
 		//
 		void drawBulletinSubjectList( List<BulletinSubjectProxy> subjects );
+		//
+		void saveRemarqueDirection( BulletinProxy bp );
 	}
 
 	@ProxyCodeSplit
@@ -138,6 +140,27 @@ public class FrmBulletinViewSummaryPresenter
 			@Override
 			public void onSuccess(List<BulletinSubjectProxy> response) {
 				getView().drawBulletinSubjectList(response);
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void saveBulletinRemarques(String bulletinId, final String remarqueDirection) {
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.saveBulletinRemarqueDirection( bulletinId, remarqueDirection ).fire(new Receiver<BulletinProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinProxy response) {
+				getView().saveRemarqueDirection( response );
 			}
 		});
 	}
