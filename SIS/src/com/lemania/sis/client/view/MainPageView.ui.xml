@@ -11,7 +11,7 @@
 			<g:Dock direction="NORTH">
 				<g:AbsolutePanel height="50px" width="100%">
 					<g:at left="0" top="0">
-						<g:Image url="images/logo.png" width=""/>
+						<g:Image url="images/logo.png" width="" ui:field="imgLogo"/>
 					</g:at>
 					<g:at left="552" top="0">
 						<g:Grid height="24px" width="60%" borderWidth="0">
@@ -114,7 +114,7 @@
 						<g:Grid>
 							<g:row>
 								<g:customCell>
-									<g:Label text="Copyright © Ecole Lémania - IT Services - " horizontalAlignment="ALIGN_LEFT" width=""/>
+									<g:Label text="Copyright © Ecole Lémania - IT Services - " horizontalAlignment="ALIGN_LEFT" width="" ui:field="txtCopyright"/>
 								</g:customCell>
 								<g:customCell>
 									<g:Hyperlink text="Envoyez-nous vos avis" targetHistoryToken="!contact"/>

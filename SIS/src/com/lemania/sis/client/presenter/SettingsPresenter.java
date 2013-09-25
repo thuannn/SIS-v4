@@ -106,6 +106,9 @@ public class SettingsPresenter
 		});
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void updateSettingOptionManualBlock(Boolean blnBlock) {
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
@@ -123,7 +126,31 @@ public class SettingsPresenter
 		});
 	}
 
+	
+	/*
+	 * */
 	protected void updateSuccessNotice() {
 		getView().setUpdateStatus("Setting saved.");
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateCurrentEcole(String ecoleCode) {
+		//
+		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SettingOptionRequestContext rc = rf.settingOptionRequest();
+		rc.save("ECOLE", ecoleCode ).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				updateSuccessNotice();
+			}
+		});
 	}
 }

@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
+import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
@@ -45,22 +46,37 @@ public class HomePresenter
 	private Boolean systemBlocked = false;
 	private int deadLine = 32;
 
+	
+	/*
+	 * */
 	@ProxyCodeSplit
 	@NameToken(NameTokens.homepage)
 	public interface MyProxy extends ProxyPlace<HomePresenter> {
 	}
 
+	
+	/*
+	 * */
 	@Inject
 	public HomePresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy) {
 		super(eventBus, view, proxy);
+
+		//
+		drawEcoleInterface();
 	}
 
+	
+	/*
+	 * */
 	@Override
 	protected void revealInParent() {
 		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
 	}
 
+	
+	/*
+	 * */
 	@Override
 	protected void onBind() {
 		super.onBind();
@@ -69,6 +85,9 @@ public class HomePresenter
 		getView().setUiHandlers(this);
 	}
 	
+	
+	/*
+	 * */
 	@Override
 	protected void onReset() {
 		//
@@ -80,7 +99,6 @@ public class HomePresenter
 		getView().setUiHandlers(this);
 	}
 
-	
 
 	/*
 	 * Get the current system settings */
@@ -110,6 +128,8 @@ public class HomePresenter
 	}
 	
 
+	/*
+	 * */
 	@Override
 	public void authenticateUser(String userName, String password) {
 		if (userName.equals("") || password.equals("")) {
@@ -128,6 +148,9 @@ public class HomePresenter
 			getCurrentSettings(userName, password);
 	}
 	
+	
+	/*
+	 * */
 	private void authenticateUserWithSettings(String userName, String password) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -148,6 +171,7 @@ public class HomePresenter
 			}
 		} );
 	}
+	
 	
 	/*
 	 * If user pass authentication, check if he's Admin. 
@@ -184,9 +208,37 @@ public class HomePresenter
 		getView().toggleLoginPanel(false);
 	}
 
+	
+	/*
+	 * */
 	@ProxyEvent
 	@Override
 	public void onAfterUserLogOut(AfterUserLogOutEvent event) {
 		getView().toggleLoginPanel(true);		
+	}
+	
+	
+	/*
+	 * */
+	private void drawEcoleInterface() {
+		//
+		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SettingOptionRequestContext rc = rf.settingOptionRequest();
+		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<SettingOptionProxy> response) {
+				for (SettingOptionProxy setting : response){
+					if (setting.getOptionName().equals("ECOLE")) {
+						if (setting.getOptionValue().equals("PV"))
+							getEventBus().fireEvent(new DrawPierreViretInterfaceEvent());
+					}
+				}
+			}
+		});
 	}
 }

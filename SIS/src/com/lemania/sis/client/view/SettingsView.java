@@ -6,6 +6,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.uihandler.SettingOptionsUiHandler;
 import com.lemania.sis.shared.SettingOptionProxy;
@@ -39,12 +40,14 @@ public class SettingsView
 	@UiField SimpleCheckBox blnBlock;
 	@UiField ListBox lstDays;
 	@UiField Label lblUpdateStatus;
+	@UiField ListBox lstEcoles;
 	
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
 		if (getUiHandlers() != null) {
 			getUiHandlers().updateSettingOptionDeadline(lstDays.getItemText(lstDays.getSelectedIndex()));
 			getUiHandlers().updateSettingOptionManualBlock(blnBlock.getValue());
+			getUiHandlers().updateCurrentEcole( lstEcoles.getValue( lstEcoles.getSelectedIndex() ) );
 		}
 	}
 
@@ -55,9 +58,16 @@ public class SettingsView
 
 	@Override
 	public void initializeInterface() {
+		// Days
 		for (int i=0; i<31; i++)
 			lstDays.addItem(Integer.toString(i+1), Integer.toString(i));
 		lblUpdateStatus.setText("");
+		
+		// Ecoles
+		lstEcoles.clear();
+		lstEcoles.addItem("-", "");
+		lstEcoles.addItem("Ecole Lemania", NotificationTypes.ecoleLemania);
+		lstEcoles.addItem("Pierre Viret", NotificationTypes.pierreViret);
 	}
 
 	@Override
@@ -68,6 +78,11 @@ public class SettingsView
 			}
 			if (setting.getOptionName().equals("BLOCK")) {
 				blnBlock.setValue(Boolean.parseBoolean(setting.getOptionValue()));
+			}
+			if (setting.getOptionName().equals("ECOLE")) {
+				for (int i=0; i<lstEcoles.getItemCount(); i++)
+					if (lstEcoles.getValue(i).equals(setting.getOptionValue()))
+						lstEcoles.setSelectedIndex(i);
 			}
 		}
 	}

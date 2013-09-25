@@ -31,6 +31,12 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
+						<g:Label text="Ecole :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="lstEcoles"/>
+					</g:customCell>
+					<g:customCell>
 						<g:Label text=""/>
 					</g:customCell>
 					<g:customCell>

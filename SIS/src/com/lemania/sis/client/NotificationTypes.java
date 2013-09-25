@@ -29,4 +29,7 @@ public class NotificationTypes {
 	public static Integer bulletinLineHeight = 40;
 	public static Integer bulletinPageHeight = 600;
 	public static Integer bulletinPageHeightChrome = 1150;
+	
+	public static String ecoleLemania = "LM";
+	public static String pierreViret = "PV";
 }

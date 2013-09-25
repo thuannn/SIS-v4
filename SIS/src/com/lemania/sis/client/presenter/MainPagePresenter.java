@@ -20,6 +20,8 @@ import com.lemania.sis.client.event.ActionCompletedEvent.ActionCompletedHandler;
 import com.lemania.sis.client.event.ActionInProgressEvent;
 import com.lemania.sis.client.event.ActionInProgressEvent.ActionInProgressHandler;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
+import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent;
+import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent.DrawPierreViretInterfaceHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
@@ -30,7 +32,8 @@ import com.lemania.sis.client.uihandler.MainPageUiHandler;
 public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy>
 		implements 	MainPageUiHandler, LoginAuthenticatedHandler, 
-					ActionInProgressHandler, ActionCompletedHandler, PageAfterSelectHandler {
+					ActionInProgressHandler, ActionCompletedHandler, PageAfterSelectHandler,
+					DrawPierreViretInterfaceHandler {
 	/**
 	   * Child presenters can fire a RevealContentEvent with TYPE_SetMainContent to set themselves
 	   * as children of this presenter.
@@ -46,6 +49,8 @@ public class MainPagePresenter extends
 		void showProgressBar(boolean visible);
 		void enableMainPanel(Boolean disabled);
 		void showCurrentPageOnMenu( String tokenName );
+		//
+		void drawPierreViretInterface();
 	}
 	
 	@ProxyStandard
@@ -55,7 +60,7 @@ public class MainPagePresenter extends
 	@Inject
 	public MainPagePresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy) {
-		super(eventBus, view, proxy);		
+		super(eventBus, view, proxy);	
 	}
 
 	@Override
@@ -69,21 +74,31 @@ public class MainPagePresenter extends
 		
 		// Thuan: attach Ui handler
 		getView().setUiHandlers(this);
+		//
 		getView().initializeUi(currentUser);
 	}
+
 	
+	/*
+	 * */
 	@Override
 	protected void onReset() {
 		//
 		getView().initializeUi(currentUser);
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void showHomepage() {
 		// TODO Auto-generated method stub
 		History.newItem(NameTokens.homepage, true);
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void showEcoleList() {
 		// TODO Auto-generated method stub
@@ -282,5 +297,14 @@ public class MainPagePresenter extends
 	public void onPageAfterSelect(PageAfterSelectEvent event) {
 		//
 		getView().showCurrentPageOnMenu( event.getTokenName() );
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onDrawPierreViretInterface(DrawPierreViretInterfaceEvent event) {
+		//
+		getView().drawPierreViretInterface();
 	}
 }

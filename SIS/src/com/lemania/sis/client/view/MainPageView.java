@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -27,6 +26,7 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -80,6 +80,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdMarkViewStudent;
 	@UiField Hyperlink cmdPasswordStudent;
 	@UiField Hyperlink cmdHelpStudent;
+	@UiField Image imgLogo;
+	@UiField Label txtCopyright;
 	
 	
 	// Thuan
@@ -351,5 +353,15 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (prof) lastPageProf = link;
 		if (student) lastPageStudent = link;
 		if (!prof && !student) lastPage = link;
+	}
+	
+
+	/*
+	 * */
+	@Override
+	public void drawPierreViretInterface() {
+		//
+		imgLogo.setUrl("images/logo-pv.png");
+		txtCopyright.setText("Copyright © Pierre Viret - IT Services -");
 	}
 }
