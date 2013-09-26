@@ -41,6 +41,7 @@ public class SettingsView
 	@UiField ListBox lstDays;
 	@UiField Label lblUpdateStatus;
 	@UiField ListBox lstEcoles;
+	@UiField Button cmdFixStudentName;
 	
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
@@ -85,5 +86,13 @@ public class SettingsView
 						lstEcoles.setSelectedIndex(i);
 			}
 		}
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdFixStudentName")
+	void onCmdFixStudentNameClick(ClickEvent event) {
+		//
+		getUiHandlers().fixStudentName();
 	}
 }

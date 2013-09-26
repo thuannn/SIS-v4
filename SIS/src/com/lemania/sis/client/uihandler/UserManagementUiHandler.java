@@ -9,5 +9,5 @@ public interface UserManagementUiHandler extends UiHandlers {
 	//
 	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, String password);
 	//
-	public void loadUsersByType(String type);
+	public void loadUsersByType(String type);	
 }

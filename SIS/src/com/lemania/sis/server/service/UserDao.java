@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
+import com.lemania.sis.server.Student;
 import com.lemania.sis.server.User;
 
 public class UserDao extends MyDAOBase {
@@ -144,5 +145,19 @@ public class UserDao extends MyDAOBase {
 			user.setActive(userStatus);
 			this.ofy().put(user);
 		}	
+	}
+	
+	/*
+	 * */
+	public void fixStudentName() {
+		//
+		Query<User> q = this.ofy().query(User.class);		
+		for (User user : q){
+			Query<Student> qStudent = this.ofy().query(Student.class).filter("Email", user.getEmail());					
+			for (Student student : qStudent){
+				user.setFullName( student.getLastName() + " " + student.getFirstName() );
+				this.ofy().put(user);
+			}						
+		}		
 	}
 }

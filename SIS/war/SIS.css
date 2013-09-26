@@ -26,14 +26,16 @@ body {
 }
 
 .header {
-	color: Maroon;
-	margin: 3px;
+	color: Blue;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	font-size: 14px;
 	font-style: gros;
 	font-family: sans-serif;
 	font-weight: bold;
 	letter-spacing: 1px;
 	text-align: center;
+	background-color: linen;
 }
 
 .sideBar {
@@ -51,8 +53,14 @@ body {
 	background-color: White;	
 }
 
-.btnFocus {
-	background-color: #D2C40B;
+.btnHideMenu {
+	color: darkblue;
+	padding: 1px;
+	border-bottom: 1px ridge Silver;
+	font-size: 11px;
+	font-family: Tahoma;
+	letter-spacing: 1px;
+	background-color: lightcyan;
 }
 
 .paneMain {
@@ -131,8 +139,8 @@ body {
 }
 .left_header {
 	color: cornflowerblue;
-	margin-left: -20px;
 	padding: 3px 0px;
+	margin-left:-20px;
 	font-size: 14px;
 	font-family: sans-serif;
 	background-color: cornflowerblue;	
@@ -202,10 +210,10 @@ body {
 }
 
 .bulletin {
-	background-color: white;
-	width: 748px;
+	background-color: white;	
 	font-size: 12px;
 	font-family: sans-serif;
+	width:100%;
 }
 
 .bulletinNote {
@@ -233,6 +241,7 @@ body {
 
 .workInProgress {
 	color: White;
+	letter-spacing: 1px;
 	text-align: center;
 	background-color: firebrick;
 }

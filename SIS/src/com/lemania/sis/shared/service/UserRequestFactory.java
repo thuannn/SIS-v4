@@ -30,6 +30,8 @@ public interface UserRequestFactory extends RequestFactory {
 		Request<Void> updateUserActiveStatus(String userEmail, Boolean userStatus);
 		
 		Request<Void> initialize();
+		
+		Request<Void> fixStudentName();
 	}
 	
 	UserRequestContext userRequest();

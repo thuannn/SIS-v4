@@ -24,7 +24,9 @@ import com.lemania.sis.client.uihandler.SettingOptionsUiHandler;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory;
+import com.lemania.sis.shared.service.UserRequestFactory;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory.SettingOptionRequestContext;
+import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
 
 public class SettingsPresenter 
 	extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> 
@@ -152,5 +154,25 @@ public class SettingsPresenter
 				updateSuccessNotice();
 			}
 		});
+	}
+
+	/*
+	 * */
+	@Override
+	public void fixStudentName() {
+		//
+		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		UserRequestContext rc = rf.userRequest();		
+		rc.fixStudentName().fire( new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				//
+			}
+		} );	
 	}
 }

@@ -52,6 +52,17 @@
 					</g:customCell>
 				</g:row>
 			</g:Grid>
+			<g:Label text="." styleName="hiddenText"/>
+			<g:Grid cellPadding="5" cellSpacing="5">
+				<g:row>
+					<g:customCell>
+						<g:Label text="Fixer le format des noms des élèves dans Users"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Fixer" ui:field="cmdFixStudentName"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

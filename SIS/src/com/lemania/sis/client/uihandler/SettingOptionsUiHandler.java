@@ -9,4 +9,6 @@ public interface SettingOptionsUiHandler extends UiHandlers{
 	void updateSettingOptionManualBlock(Boolean blnBlock);
 	//
 	void updateCurrentEcole( String ecoleCode );
+	//
+	public void fixStudentName();
 }
