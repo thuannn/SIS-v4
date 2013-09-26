@@ -11,7 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
-import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent;
+import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
@@ -234,8 +234,7 @@ public class HomePresenter
 			public void onSuccess(List<SettingOptionProxy> response) {
 				for (SettingOptionProxy setting : response){
 					if (setting.getOptionName().equals("ECOLE")) {
-						if (setting.getOptionValue().equals("PV"))
-							getEventBus().fireEvent(new DrawPierreViretInterfaceEvent());
+						getEventBus().fireEvent(new DrawSchoolInterfaceEvent(setting.getOptionValue()));
 					}
 				}
 			}

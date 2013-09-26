@@ -14,8 +14,9 @@ public interface ClasseRequestFactory extends RequestFactory {
 	@Service(value=ClasseDao.class, locator=DaoServiceLocator.class)
 	interface ClasseRequestContext extends RequestContext {
 		Request<List<ClasseProxy>> listAll();
+		Request<List<ClasseProxy>> listAllActive();
 		
-		Request<List<ClasseProxy>> listAll(String coursId);
+		Request<List<ClasseProxy>> listAll(String coursId);		
 		Request<List<ClasseProxy>> listAllActive(String coursId);
 		
 		Request<Void> save(ClasseProxy cours);

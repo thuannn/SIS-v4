@@ -20,8 +20,8 @@ import com.lemania.sis.client.event.ActionCompletedEvent.ActionCompletedHandler;
 import com.lemania.sis.client.event.ActionInProgressEvent;
 import com.lemania.sis.client.event.ActionInProgressEvent.ActionInProgressHandler;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
-import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent;
-import com.lemania.sis.client.event.DrawPierreViretInterfaceEvent.DrawPierreViretInterfaceHandler;
+import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
+import com.lemania.sis.client.event.DrawSchoolInterfaceEvent.DrawSchoolInterfaceHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
@@ -33,7 +33,7 @@ public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy>
 		implements 	MainPageUiHandler, LoginAuthenticatedHandler, 
 					ActionInProgressHandler, ActionCompletedHandler, PageAfterSelectHandler,
-					DrawPierreViretInterfaceHandler {
+					DrawSchoolInterfaceHandler {
 	/**
 	   * Child presenters can fire a RevealContentEvent with TYPE_SetMainContent to set themselves
 	   * as children of this presenter.
@@ -50,7 +50,7 @@ public class MainPagePresenter extends
 		void enableMainPanel(Boolean disabled);
 		void showCurrentPageOnMenu( String tokenName );
 		//
-		void drawPierreViretInterface();
+		void drawSchoolInterface(String schoolCode);
 	}
 	
 	@ProxyStandard
@@ -305,8 +305,8 @@ public class MainPagePresenter extends
 	 * */
 	@ProxyEvent
 	@Override
-	public void onDrawPierreViretInterface(DrawPierreViretInterfaceEvent event) {
+	public void onDrawSchoolInterface(DrawSchoolInterfaceEvent event) {
 		//
-		getView().drawPierreViretInterface();
+		getView().drawSchoolInterface(event.getSchoolCode());
 	}
 }

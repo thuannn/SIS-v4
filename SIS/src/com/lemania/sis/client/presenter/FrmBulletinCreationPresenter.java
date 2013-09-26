@@ -205,7 +205,7 @@ public class FrmBulletinCreationPresenter
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
-		rc.listAll(coursId).fire(new Receiver<List<ClasseProxy>>(){
+		rc.listAllActive(coursId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

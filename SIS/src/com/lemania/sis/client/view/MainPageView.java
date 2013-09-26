@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -359,9 +360,15 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	/*
 	 * */
 	@Override
-	public void drawPierreViretInterface() {
+	public void drawSchoolInterface(String schoolCode) {
 		//
-		imgLogo.setUrl("images/logo-pv.png");
-		txtCopyright.setText("Copyright © Pierre Viret - IT Services -");
+		if (schoolCode.equals(NotificationTypes.pierreViret)) {
+			imgLogo.setUrl("images/logo-pv.png");
+			txtCopyright.setText("Copyright © Pierre Viret - IT Services -");
+		}
+		if (schoolCode.equals(NotificationTypes.ecoleLemania)) {
+			imgLogo.setUrl("images/logo.png");
+			txtCopyright.setText("Copyright © Ecole Lémania - IT Services -");
+		}
 	}
 }

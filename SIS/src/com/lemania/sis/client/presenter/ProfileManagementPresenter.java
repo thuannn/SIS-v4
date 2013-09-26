@@ -131,7 +131,7 @@ public class ProfileManagementPresenter
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
-		rc.listAll().fire(new Receiver<List<ClasseProxy>>(){
+		rc.listAllActive().fire(new Receiver<List<ClasseProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

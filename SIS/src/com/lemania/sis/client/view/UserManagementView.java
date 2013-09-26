@@ -198,6 +198,15 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    });
 	    
 	    //
+		TextColumn<UserProxy> colLastLogin = new TextColumn<UserProxy>() {
+			@Override
+			public String getValue(UserProxy object) {
+				return object.getCurrentLoggedInTime();
+			}
+	    };
+	    tblUser.addColumn(colLastLogin, "Dernière login");
+	    
+	    //
 	    initializeUserTypeList();
 	}
 

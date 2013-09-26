@@ -36,4 +36,10 @@ public interface UserProxy extends EntityProxy {
 	public int getCurrentDay();
 	
 	public Long getId();
+	
+	public String getLastLoggedInTime();
+	public void setLastLoggedInTime(String lastLoggedInTime);
+	
+	public String getCurrentLoggedInTime();
+	public void setCurrentLoggedInTime(String currentLoggedInTime);
 }

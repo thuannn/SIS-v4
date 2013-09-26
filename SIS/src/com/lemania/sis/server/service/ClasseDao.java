@@ -57,14 +57,32 @@ public class ClasseDao extends MyDAOBase {
 				.order("className");
 		
 		for (Classe classe : q){
-			if (classe.getIsActive().equals(true))
+			if (classe.getIsActive().equals(true)) {
 				classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
 				returnList.add( classe );
+			}
 		}
 		
 		return returnList;
 	}
 	
+	/*
+	 * */
+	public List<Classe> listAllActive(){
+		//
+		List<Classe> returnList = new ArrayList<Classe>();
+		Query<Classe> q = this.ofy().query(Classe.class)				
+				.order("className");
+		
+		for (Classe classe : q){
+			if (classe.getIsActive().equals(true)) {
+				classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
+				returnList.add( classe );
+			}
+		}
+		
+		return returnList;
+	}
 	
 	public void save(Classe classe){
 		this.ofy().put( classe );
