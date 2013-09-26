@@ -246,6 +246,11 @@ body {
 	background-color: firebrick;
 }
 
+.sis_textbox_readonly {
+	width: 300px;
+	background-color: whitesmoke;
+}
+
 
 /* Progress bar */
 

@@ -291,7 +291,9 @@ public class MainPagePresenter extends
 	public void showFrmBulletinManagement() {
 		History.newItem(NameTokens.bulletinmanagement);
 	}
-	
+		
+	/*
+	 * */
 	@ProxyEvent
 	@Override
 	public void onPageAfterSelect(PageAfterSelectEvent event) {

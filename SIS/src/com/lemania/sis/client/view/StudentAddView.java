@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 
 public class StudentAddView extends ViewWithUiHandlers<StudentAddUiHandler> implements
 		StudentAddPresenter.MyView {
@@ -57,5 +58,32 @@ public class StudentAddView extends ViewWithUiHandlers<StudentAddUiHandler> impl
 		txtFirstName.setText("");
 		txtEmail.setText("");
 		blnActive.setValue(true);
+	}
+	
+	/*
+	 * */
+	private void updateEmail() {
+		//
+		if (txtFirstName.getText().equals(""))
+			txtEmail.setText( txtLastName.getText().trim().toLowerCase() + "@eprofil.ch");
+		else
+			if (txtLastName.getText().equals(""))
+				txtEmail.setText( txtFirstName.getText().substring(0, 1).toLowerCase() + "@eprofil.ch");
+			else
+				txtEmail.setText( txtFirstName.getText().substring(0, 1).toLowerCase() + "." + txtLastName.getText().trim().toLowerCase() + "@eprofil.ch");
+	}
+	
+	/*
+	 * */
+	@UiHandler("txtLastName")
+	void onTxtLastNameKeyUp(KeyUpEvent event) {
+		updateEmail();
+	}
+	
+	/*
+	 * */
+	@UiHandler("txtFirstName")
+	void onTxtFirstNameKeyUp(KeyUpEvent event) {
+		updateEmail();
 	}
 }

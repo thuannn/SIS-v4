@@ -13,7 +13,7 @@
 			<g:Grid cellPadding="5" cellSpacing="5">
 				<g:row>
 					<g:customCell>
-						<g:Label text="Nom"/>
+						<g:Label text="Nom :"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="txtLastName" width="" styleName="sis_textbox"/>
@@ -21,7 +21,7 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Prénom"/>
+						<g:Label text="Prénom :"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="txtFirstName" width="" styleName="sis_textbox"/>
@@ -29,7 +29,7 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="E-mail"/>
+						<g:Label text="E-mail (nom d&apos;utilisateur) :"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="txtEmail" width="" styleName="sis_textbox"/>

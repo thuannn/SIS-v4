@@ -21,10 +21,18 @@
 					</g:row>
 					<g:row>
 						<g:customCell>
-							<g:Label text="Email :"/>
+							<g:Label text="Prénom :"/>
 						</g:customCell>
 						<g:customCell>
-							<g:TextBox styleName="sis_textbox" ui:field="txtProfEmail"/>
+							<g:TextBox ui:field="txtProfFirstName" styleName="sis_textbox"/>
+						</g:customCell>
+					</g:row>
+					<g:row>
+						<g:customCell>
+							<g:Label text="Email (nom d&apos;utilisateur) :"/>
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox ui:field="txtProfEmail" width="300px" styleName="sis_textbox"/>
 						</g:customCell>
 					</g:row>
 					<g:row>
