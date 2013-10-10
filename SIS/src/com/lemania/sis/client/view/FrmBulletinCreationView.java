@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.NotificationTypes;
@@ -78,6 +79,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		initializeYearList();
 		//
 		lstEcoles.setSelectedIndex(0);
+		lstProfiles.clear();
 		lstProgrammes.clear();
 		lstClasses.clear();
 		//
@@ -142,9 +144,11 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    colDelete.setFieldUpdater(new FieldUpdater<BulletinProxy, String>(){
 	    	@Override
 	    	public void update(int index, BulletinProxy bp, String value){
+	    		Boolean confirm = Window.confirm("Etes-vous sur de vouloir enlever "+ bp.getStudentName() +" de la classe " + bp.getClasseName() + " ? TOUTES LES NOTES ACTUELLES SERONT SUPPRIMEES");
 	    		selectedBulletinIndex = index;
 	    		selectedBulletin = bp;
-	    		getUiHandlers().removeBulletin( bp );
+	    		if (confirm)	    		
+	    			getUiHandlers().removeBulletin( bp );
 	    	}
 	    });
 	    tblBulletins.setColumnWidth(colDelete, 10, Unit.PCT);

@@ -20,8 +20,9 @@ public class ContactDao extends MyDAOBase {
         try {
 	        Message msg = new MimeMessage(session);
 	        msg.setFrom(new InternetAddress("thuannn@gmail.com", "Lemania eProfil"));
-	        msg.addRecipient(Message.RecipientType.TO,
-	                         new InternetAddress("thuannn@gmail.com", "Thuan Nguyen"));
+	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Thuan.Nguyen@lemania.ch", "Thuan NGUYEN"));
+	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Cindy.Clemence@lemania.ch", "Cindy CLEMENCE"));
+	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Olga.Theofanidis@lemania.ch", "Olga THEOFANIDIS"));
 	        msg.setSubject("Nouveau message de "+ firstName + " " + lastName +" depuis eProfil");
 	        msg.setText(msgBody);
 	        Transport.send(msg);
