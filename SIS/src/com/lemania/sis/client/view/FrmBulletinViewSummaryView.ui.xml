@@ -26,7 +26,7 @@
 				<g:Grid width="100%">
 					<g:row>
 						<g:customCell>
-							<g:Image url="images/logo_lemania.png" width="292" height="100"/>
+							<g:Image url="images/logo_lemania.png" width="292" height="100" ui:field="imgLogo"/>
 						</g:customCell>
 						<g:customCell>
 							<g:Label text="BULLETIN DE NOTES" styleName="bulletinTitle"/>
@@ -56,8 +56,8 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 				</g:HorizontalPanel>
 				<g:Label text="." ui:field="lblSpace" stylePrimaryName="hiddenText"/>
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
-					<g:Label text="Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 "/>
-					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch "/>
+					<g:Label text="Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 " styleName="bulletinFooter" ui:field="txtAddress1"/>
+					<g:Label text="Email: info@lemania.ch - Site internet : www.lemania.ch " styleName="bulletinFooter" ui:field="txtAddress2"/>
 				</g:VerticalPanel>
 			</g:VerticalPanel>
 			</g:VerticalPanel>

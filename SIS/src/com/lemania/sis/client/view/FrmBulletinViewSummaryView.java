@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -30,6 +31,7 @@ import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.Image;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
 		FrmBulletinViewSummaryPresenter.MyView {
@@ -66,6 +68,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField VerticalPanel pnlMainBulletin;
 	@UiField TextArea txtDirectionRemarque;
 	@UiField Button cmdSaveRemarques;
+	@UiField Image imgLogo;
+	@UiField Label txtAddress1;
+	@UiField Label txtAddress2;
 	
 	
 	/**/
@@ -196,11 +201,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		initializeBacTable();
 		//
 		Integer rowStart = 1;
-		Integer rowCount = 0;
-		Double totalMoyenne = 0.0;
-		Double totalCoef = 0.0;
+		Integer rowCount = 0;		
 		//
-		for (int i = rowStart; i<subjects.size(); i++) {
+		for (int i = rowStart; i<subjects.size() + rowStart; i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
@@ -213,27 +216,22 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 9, (
 					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
 					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
-							: subjects.get(rowCount).getRemarqueT1() ) ) );
-			//
-			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
-				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
-				totalCoef = subjects.get( rowCount ).getSubjectCoef();
-			}
+							: subjects.get(rowCount).getRemarqueT1() ) ) );			
 			//
 			rowCount++;
 		}
-		
+				
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, totalCoef.toString());
+		tblNotes.setText(rowCount, 1, "");
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
 		tblNotes.setText(rowCount, 5, "");
 		tblNotes.setText(rowCount, 6, "");
 		tblNotes.setText(rowCount, 7, "");
-		tblNotes.setText(rowCount, 8, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
+		tblNotes.setText(rowCount, 8, "");
 		tblNotes.setText(rowCount, 9, "");
 		
 		//
@@ -286,6 +284,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;
+		Double totalMoyenne = 0.0;
+		Double totalCoef = 0.0;
 		//
 		for (int i = rowStart; i<subjects.size(); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
@@ -299,20 +299,27 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
 					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
 							: subjects.get(rowCount).getRemarqueT1() ) ) );
+			//
+			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
 			rowCount++;
 		}
 		
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, "");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
 		tblNotes.setText(rowCount, 5, "");
-		tblNotes.setText(rowCount, 6, "");
+		tblNotes.setText(rowCount, 6, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
 		tblNotes.setText(rowCount, 7, "");
-		
+		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
+			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 		//
 		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
 		
@@ -425,5 +432,14 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	public void saveRemarqueDirection(BulletinProxy bp) {
 		//
 		bulletins.set( (lstBulletins.getSelectedIndex()-1), bp);
+	}
+
+	/**/
+	@Override
+	public void drawPierreViretInterface() {
+		// 
+		imgLogo.setUrl("images/logo-pv.png");
+		txtAddress1.setText("College Pierre Viret - Chemin des Cèdres 3, 1004 Lausanne");
+		txtAddress2.setText("Tél.: + 41 21 643 77 07 - Fax: + 41 21 643 77 08 - E-mail: info@pierreviret.ch");
 	}
 }

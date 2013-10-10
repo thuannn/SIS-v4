@@ -160,6 +160,7 @@ body {
 	border: 0px;
 	font-size: 12px;
 	font-family: Tahoma;
+	width: 99%;
 }
 .subjectLine {
 	border-top: 1px solid silver;
@@ -204,7 +205,8 @@ body {
 }
 
 .bulletinTitle {
-	font-size: 18px;
+	color: darkblue;
+	font-size: 24px;
 	font-family: sans-serif;
 	text-align: center;
 }
@@ -220,7 +222,7 @@ body {
 	padding: 5px;
 	border: 1px solid lightskyblue;
 	font-size: 12px;
-	font-family: sans-serif;
+	font-style: italic;
 }
 
 .progressBarPanel {
@@ -250,6 +252,13 @@ body {
 	width: 300px;
 	background-color: whitesmoke;
 }
+
+
+/* Bulletins */
+.bulletinFooter {
+	font-size: 14px;
+}
+/**/
 
 
 /* Progress bar */

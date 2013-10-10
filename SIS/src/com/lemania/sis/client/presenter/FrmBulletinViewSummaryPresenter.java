@@ -7,10 +7,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
+import com.lemania.sis.client.event.DrawSchoolInterfaceEvent.DrawSchoolInterfaceHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -35,7 +39,7 @@ import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 public class FrmBulletinViewSummaryPresenter
 		extends
 		Presenter<FrmBulletinViewSummaryPresenter.MyView, FrmBulletinViewSummaryPresenter.MyProxy>
-		implements FrmBulletinViewSummaryUiHandler {
+		implements FrmBulletinViewSummaryUiHandler, DrawSchoolInterfaceHandler {
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinViewSummaryUiHandler> {
 		//
@@ -48,6 +52,8 @@ public class FrmBulletinViewSummaryPresenter
 		void drawBulletinSubjectList( List<BulletinSubjectProxy> subjects );
 		//
 		void saveRemarqueDirection( BulletinProxy bp );
+		//
+		void drawPierreViretInterface();
 	}
 
 	@ProxyCodeSplit
@@ -92,7 +98,7 @@ public class FrmBulletinViewSummaryPresenter
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
-		rc.listAll().fire(new Receiver<List<ClasseProxy>>(){
+		rc.listAllActive().fire(new Receiver<List<ClasseProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -163,5 +169,13 @@ public class FrmBulletinViewSummaryPresenter
 				getView().saveRemarqueDirection( response );
 			}
 		});
+	}
+
+	@ProxyEvent
+	@Override
+	public void onDrawSchoolInterface(DrawSchoolInterfaceEvent event) {
+		//
+		if (event.getSchoolCode() == NotificationTypes.pierreViret)
+			getView().drawPierreViretInterface();
 	}
 }
