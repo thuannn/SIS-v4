@@ -197,6 +197,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;
+		Double totalMoyenne = 0.0;
+		Double totalCoef = 0.0;
 		//
 		for (int i = rowStart; i<subjects.size(); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
@@ -212,20 +214,26 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
 					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
 							: subjects.get(rowCount).getRemarqueT1() ) ) );
+			//
+			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoef = subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
 			rowCount++;
 		}
 		
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, "");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
 		tblNotes.setText(rowCount, 5, "");
 		tblNotes.setText(rowCount, 6, "");
 		tblNotes.setText(rowCount, 7, "");
-		tblNotes.setText(rowCount, 8, "");
+		tblNotes.setText(rowCount, 8, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
 		tblNotes.setText(rowCount, 9, "");
 		
 		//
