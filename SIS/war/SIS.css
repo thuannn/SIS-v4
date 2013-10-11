@@ -1,7 +1,6 @@
 /* Add css rules here for your application. */
 
 body {
-  bacground-color: blue;
 }
 
 /* stock list header row */
@@ -161,17 +160,26 @@ body {
 	font-size: 12px;
 	font-family: Tahoma;
 	width: 99%;
+	over-flow: auto;
 }
 .subjectLine {
 	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
 	font-weight: bold;
 	background-color: whitesmoke;
 	margin-top: 10px;
 }
-.brancheLine {	
+.brancheLine {
 	padding: 2px;
 	width: 30px;
 	border-top: 1px solid silver;
+	border-right: 1px solid silver;
+}
+.bulletinBrancheLine {
+	font-size: 12px;
+	padding: 5px;
+	border-top: 1px solid silver;
+	border-right: 1px solid silver;
 }
 .spaceCell{
 	height: 10px;
@@ -179,8 +187,14 @@ body {
 .gradeColumn {
 	background-color: ivory;
 }
-.bulletinHeader{
-	font-size: 14px;
+.bulletinHeader {
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color: palegoldenrod;
+}
+.bulletinHeaderNote {
+	width: 50px;
+	font-size: 12px;
 	font-family: sans-serif;
 	background-color: palegoldenrod;
 }
@@ -212,10 +226,11 @@ body {
 }
 
 .bulletin {
-	background-color: white;	
+	width: 740px;
 	font-size: 12px;
 	font-family: sans-serif;
-	width:100%;
+	vertical-align: top;
+	background-color: white;
 }
 
 .bulletinNote {
@@ -223,6 +238,8 @@ body {
 	border: 1px solid lightskyblue;
 	font-size: 12px;
 	font-style: italic;
+	width: 95%;
+	z-index: 9999;
 }
 
 .progressBarPanel {

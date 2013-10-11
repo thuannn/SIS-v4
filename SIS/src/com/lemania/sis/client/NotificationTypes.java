@@ -24,12 +24,15 @@ public class NotificationTypes {
 	public static Integer lineHeightShortList = 34;
 	public static Integer headerHeight = 32;
 	
-	public static Integer pageSize = 1000;
+	public static Integer pageSize = 820;
 	
+	// For bulletins
 	public static Integer bulletinLineHeight = 40;
-	public static Integer bulletinPageHeight = 600;
+	public static Integer bulletinPageHeight = 680;
 	public static Integer bulletinPageHeightChrome = 1150;
+	public static Integer bulletinDirectionRemarque = 100;
 	
+	// For UI of each school
 	public static String ecoleLemania = "LM";
 	public static String pierreViret = "PV";
 }

@@ -7,7 +7,6 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -71,6 +70,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField Image imgLogo;
 	@UiField Label txtAddress1;
 	@UiField Label txtAddress2;
+	@UiField Label lblYear;
+	@UiField Label lblDate;
+	@UiField VerticalPanel pnlBulletinNotes;
 	
 	
 	/**/
@@ -124,8 +126,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiHandler("lstBulletins")
 	void onLstBulletinsChange(ChangeEvent event) {
 		if (getUiHandlers() != null) {
-			lblStudentName.setText( lstBulletins.getItemText(lstBulletins.getSelectedIndex()));
+			lblStudentName.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getStudentName());
 			lblClassName.setText( lstClasses.getItemText(lstClasses.getSelectedIndex()));
+			lblYear.setText("Année scolaire : " 
+						+ bulletins.get(lstBulletins.getSelectedIndex()-1).getYear() + "-" 
+						+ (Integer.parseInt(bulletins.get(lstBulletins.getSelectedIndex()-1).getYear())+1));
+			//
 			getUiHandlers().onBulletinChange( lstBulletins.getValue(lstBulletins.getSelectedIndex()));
 		}
 	}
@@ -144,7 +150,6 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 5, "Exa. Semes.");
 		tblNotes.setText(0, 6, "Moyenne Semes.");
 		tblNotes.setText(0, 7, "Remarques relatives à la période d'évaluation");
-		tblNotes.getRowFormatter().setStyleName(0, "bulletinHeader");
 	}
 	
 	
@@ -203,7 +208,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		Integer rowStart = 1;
 		Integer rowCount = 0;		
 		//
-		for (int i = rowStart; i<subjects.size() + rowStart; i++) {
+		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
@@ -250,7 +255,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		Integer rowStart = 1;
 		Integer rowCount = 0;
 		//
-		for (int i = rowStart; i<subjects.size(); i++) {
+		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
@@ -287,7 +292,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		Double totalMoyenne = 0.0;
 		Double totalCoef = 0.0;
 		//
-		for (int i = rowStart; i<subjects.size(); i++) {
+		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
@@ -333,13 +338,17 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//		
 		tblNotes.setCellSpacing(0);
 		tblNotes.setCellPadding(3);
-		tblNotes.setStyleName("subSection");
 		//
-		for (int i=0; i<8; i++)
+		for (int i=1; i<tblNotes.getCellCount(0)-1; i++)
+			tblNotes.getCellFormatter().setStyleName(0, i, "bulletinHeaderNote");
+		tblNotes.getCellFormatter().setStyleName(0, 0, "bulletinHeader");
+		tblNotes.getCellFormatter().setStyleName(0, tblNotes.getCellCount(0)-1, "bulletinHeader");		
+		//
+		for (int i=0; i<tblNotes.getCellCount(0); i++)
 			for (int j=1; j<tblNotes.getRowCount(); j++) {
 				if (tblNotes.isCellPresent(j, i)) {
 					if (tblNotes.getCellFormatter().getStyleName(j, i).equals(""))
-						tblNotes.getCellFormatter().setStyleName(j, i, "brancheLine");
+						tblNotes.getCellFormatter().setStyleName(j, i, "bulletinBrancheLine");
 				}
 			}
 	}
@@ -388,8 +397,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		if (Navigator.getUserAgent().toLowerCase().contains("chrome"))
 			lblSpace.setHeight( Integer.toString( NotificationTypes.bulletinPageHeightChrome - tblNotes.getOffsetHeight() ) + "px");
-		else
-			lblSpace.setHeight( Integer.toString( NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() ) + "px");
+		else {
+			pnlBulletinNotes.setHeight(NotificationTypes.bulletinPageHeight.toString() + "px");
+			lblSpace.setHeight( NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationTypes.bulletinDirectionRemarque + "px");
+		}
 		//
 		PopupPanel popup = new PopupPanel(true) {
 			@Override
@@ -409,7 +420,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
 			public void onClose(CloseEvent<PopupPanel> event) {
 				pnlMainBulletin.add(pnlBulletin);
-				lblSpace.setHeight("10px");
+				pnlBulletinNotes.setHeight("100%");
+				lblSpace.setHeight("1px");
 			}
 		});
 		//
@@ -434,12 +446,23 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		bulletins.set( (lstBulletins.getSelectedIndex()-1), bp);
 	}
 
-	/**/
+	
+	/*
+	 * */
 	@Override
 	public void drawPierreViretInterface() {
 		// 
 		imgLogo.setUrl("images/logo-pv.png");
 		txtAddress1.setText("College Pierre Viret - Chemin des Cèdres 3, 1004 Lausanne");
 		txtAddress2.setText("Tél.: + 41 21 643 77 07 - Fax: + 41 21 643 77 08 - E-mail: info@pierreviret.ch");
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void drawDate(String date) {
+		//
+		lblDate.setText(date);
 	}
 }

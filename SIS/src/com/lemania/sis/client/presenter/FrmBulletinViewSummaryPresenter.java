@@ -10,10 +10,13 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent.DrawSchoolInterfaceHandler;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -39,7 +42,7 @@ import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 public class FrmBulletinViewSummaryPresenter
 		extends
 		Presenter<FrmBulletinViewSummaryPresenter.MyView, FrmBulletinViewSummaryPresenter.MyProxy>
-		implements FrmBulletinViewSummaryUiHandler, DrawSchoolInterfaceHandler {
+		implements FrmBulletinViewSummaryUiHandler, DrawSchoolInterfaceHandler, LoginAuthenticatedHandler {
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinViewSummaryUiHandler> {
 		//
@@ -54,7 +57,14 @@ public class FrmBulletinViewSummaryPresenter
 		void saveRemarqueDirection( BulletinProxy bp );
 		//
 		void drawPierreViretInterface();
+		//
+		void drawDate(String date);
 	}
+	
+	
+	// Thuan
+	CurrentUser currentUser;
+		
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.bulletin)
@@ -177,5 +187,15 @@ public class FrmBulletinViewSummaryPresenter
 		//
 		if (event.getSchoolCode() == NotificationTypes.pierreViret)
 			getView().drawPierreViretInterface();
+	}
+
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
+		getView().drawDate(this.currentUser.getCurrentDay()+ "." 
+					+ this.currentUser.getCurrentMonth() + "." 
+					+ this.currentUser.getCurrentYear());
 	}
 }
