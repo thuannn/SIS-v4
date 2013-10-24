@@ -7,10 +7,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -46,7 +50,11 @@ public class FrmBulletinCreationPresenter
 		extends
 		Presenter<FrmBulletinCreationPresenter.MyView, FrmBulletinCreationPresenter.MyProxy> 
 		implements 
-		FrmBulletinCreationUiHandler {
+		FrmBulletinCreationUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinCreationUiHandler> {
 		//
@@ -113,7 +121,7 @@ public class FrmBulletinCreationPresenter
 	private void loadEcoleList() {
 		// 
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -131,7 +139,7 @@ public class FrmBulletinCreationPresenter
 	private void loadActiveProfileList(String classId) {
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		
 		ProfileRequestContext rc = rf.profileRequest();
 		rc.listAllActiveByClass(classId).fire(new Receiver<List<ProfileProxy>>(){
@@ -169,7 +177,7 @@ public class FrmBulletinCreationPresenter
 	 * Used in every function which call to Request Factory */
 	public StudentRequestContext getStudentRequestContext() {
 		StudentRequestFactory rf = GWT.create(StudentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		return rf.studentRequest();
 	}
 	
@@ -183,7 +191,7 @@ public class FrmBulletinCreationPresenter
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
@@ -203,7 +211,7 @@ public class FrmBulletinCreationPresenter
 	public void onProgrammeSelected(String coursId) {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAllActive(coursId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override
@@ -241,7 +249,7 @@ public class FrmBulletinCreationPresenter
 		}
 		//
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.createBulletin(studentId, classId, year, profileId).fire(new Receiver<BulletinProxy>(){
 			@Override
@@ -267,7 +275,7 @@ public class FrmBulletinCreationPresenter
 		}
 		// 
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.listAllByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
 			@Override
@@ -287,7 +295,7 @@ public class FrmBulletinCreationPresenter
 	public void removeBulletin(BulletinProxy bp) {		
 		//
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.removeBulletin(bp).fire(new Receiver<Boolean>() {
 			@Override
@@ -303,5 +311,13 @@ public class FrmBulletinCreationPresenter
 					Window.alert("Une erreur s'est produite.");
 			}
 		});	
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

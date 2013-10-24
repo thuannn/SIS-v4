@@ -5,9 +5,13 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.place.NameTokens;
@@ -29,8 +33,10 @@ import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestCo
 
 public class ProfsAddPresenter 
 	extends Presenter<ProfsAddPresenter.MyView, ProfsAddPresenter.MyProxy> 
-	implements ProfessorAddUiHandler {
+	implements ProfessorAddUiHandler, LoginAuthenticatedHandler {
 	
+	//
+	private CurrentUser currentUser;
 	private ProfessorProxy prof;
 
 	public interface MyView extends View, HasUiHandlers<ProfessorAddUiHandler> {
@@ -94,7 +100,7 @@ public class ProfsAddPresenter
 		}
 		
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		
 		ProfessorRequestContext rc = rf.professorRequest();
 		prof = rc.create(ProfessorProxy.class);
@@ -113,5 +119,13 @@ public class ProfsAddPresenter
 				Window.alert(error.getMessage());
 			}
 		});
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

@@ -7,10 +7,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -30,7 +34,10 @@ import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
 
 public class SettingsPresenter 
 	extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> 
-	implements SettingOptionsUiHandler {
+	implements SettingOptionsUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
 
 	public interface MyView extends View, HasUiHandlers<SettingOptionsUiHandler>{
 		void setUpdateStatus(String text);
@@ -78,7 +85,7 @@ public class SettingsPresenter
 	@Override
 	public void updateSettingOptionDeadline(String dayNumber) {
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("DEADLINE", dayNumber).fire(new Receiver<Void>(){
 			@Override
@@ -94,7 +101,7 @@ public class SettingsPresenter
 	
 	private void retrieveCurrentSettings(){
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
@@ -114,7 +121,7 @@ public class SettingsPresenter
 	@Override
 	public void updateSettingOptionManualBlock(Boolean blnBlock) {
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("BLOCK", blnBlock.toString()).fire(new Receiver<Void>(){
 			@Override
@@ -142,7 +149,7 @@ public class SettingsPresenter
 	public void updateCurrentEcole(String ecoleCode) {
 		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("ECOLE", ecoleCode ).fire(new Receiver<Void>(){
 			@Override
@@ -162,7 +169,7 @@ public class SettingsPresenter
 	public void fixStudentName() {
 		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();		
 		rc.fixStudentName().fire( new Receiver<Void>(){
 			@Override
@@ -174,5 +181,13 @@ public class SettingsPresenter
 				//
 			}
 		} );	
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

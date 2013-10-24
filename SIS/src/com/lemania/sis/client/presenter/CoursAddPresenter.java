@@ -7,9 +7,13 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.CoursAddedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -33,7 +37,7 @@ import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 
 public class CoursAddPresenter 
 		extends Presenter<CoursAddPresenter.MyView, CoursAddPresenter.MyProxy>
-		implements CoursAddUiHandler {
+		implements CoursAddUiHandler, LoginAuthenticatedHandler {
 
 	public interface MyView extends View, HasUiHandlers<CoursAddUiHandler> {
 		void populateEcoleList(List<EcoleProxy> ecoles);
@@ -41,6 +45,7 @@ public class CoursAddPresenter
 	
 	// Thuan
 	private CoursProxy cours;
+	private CurrentUser currentUser;
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.coursadd)
@@ -78,7 +83,7 @@ public class CoursAddPresenter
 	
 	private void initialData(){
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -106,7 +111,7 @@ public class CoursAddPresenter
 		
 		// Save data
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		CoursRequestContext rc = rf.coursRequest();
 		cours = rc.create(CoursProxy.class);
 		cours.setCoursNom(coursNom);
@@ -132,5 +137,13 @@ public class CoursAddPresenter
 	private void returnToCoursListSuccess() {
 		// TODO Auto-generated method stub
 		getEventBus().fireEvent(new CoursAddedEvent(cours));
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

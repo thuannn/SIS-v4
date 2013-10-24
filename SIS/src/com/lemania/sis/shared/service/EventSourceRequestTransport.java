@@ -1,18 +1,22 @@
 package com.lemania.sis.shared.service;
 
+import com.google.gwt.user.client.Window;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.gwt.client.DefaultRequestTransport;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.ActionCompletedEvent;
 import com.lemania.sis.client.event.ActionInProgressEvent;
 
 public class EventSourceRequestTransport implements RequestTransport {
     private final EventBus eventBus;
     private final RequestTransport wrapped;
+    private CurrentUser currentUser;
 
-    public EventSourceRequestTransport(EventBus eventBus) {
+    public EventSourceRequestTransport(EventBus eventBus, CurrentUser currentUser) {
         this(eventBus, new DefaultRequestTransport());
+        this.currentUser = currentUser;
     }
 
     public EventSourceRequestTransport(EventBus eventBus, RequestTransport wrapped) {
@@ -21,6 +25,7 @@ public class EventSourceRequestTransport implements RequestTransport {
     }
 
     public void send(String payload, final TransportReceiver receiver) {
+    	//
         TransportReceiver myReceiver = new TransportReceiver() {
             @Override
             public void onTransportSuccess(String payload) {
@@ -42,8 +47,13 @@ public class EventSourceRequestTransport implements RequestTransport {
         };
 
         try {
-            wrapped.send(payload, myReceiver);
+        	//
+        	if (currentUser.isReadOnly())
+        		Window.alert("Read only");
+        	else
+        		wrapped.send(payload, myReceiver);
         } finally {
+        	//
             eventBus.fireEvent(new ActionInProgressEvent());
         }
     }

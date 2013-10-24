@@ -13,6 +13,7 @@ import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -35,7 +36,7 @@ import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
 
 public class HomePresenter 
 		extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> 
-		implements HomeUiHandler, AfterUserLogOutHandler {
+		implements HomeUiHandler, AfterUserLogOutHandler, LoginAuthenticatedHandler {
 
 	public interface MyView extends View, HasUiHandlers<HomeUiHandler> {
 		
@@ -45,6 +46,7 @@ public class HomePresenter
 	
 	private Boolean systemBlocked = false;
 	private int deadLine = 32;
+	private CurrentUser currentUser;
 
 	
 	/*
@@ -104,7 +106,7 @@ public class HomePresenter
 	 * Get the current system settings */
 	private void getCurrentSettings(final String userName, final String password) {
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
@@ -153,7 +155,7 @@ public class HomePresenter
 	 * */
 	private void authenticateUserWithSettings(String userName, String password) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		
 		rc.authenticateUser(userName, password).fire( new Receiver<UserProxy>(){
@@ -223,7 +225,7 @@ public class HomePresenter
 	private void drawEcoleInterface() {
 		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
@@ -239,5 +241,13 @@ public class HomePresenter
 				}
 			}
 		});
+	}
+
+
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

@@ -12,6 +12,7 @@ public class CurrentUser {
 	private boolean isProf = false;
 	private boolean isStudent = false;
 	private boolean isLoggedIn = false;
+	private boolean isReadOnly = false;
 	
 	private int currentMonth;
 	private int currentYear;
@@ -111,5 +112,13 @@ public class CurrentUser {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+
+	public boolean isReadOnly() {
+		return isReadOnly;
+	}
+
+	public void setReadOnly(boolean isReadOnly) {
+		this.isReadOnly = isReadOnly;
 	}
 }

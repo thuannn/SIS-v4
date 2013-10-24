@@ -106,7 +106,7 @@ public class FrmBulletinViewSummaryPresenter
 	private void loadClassList() {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAllActive().fire(new Receiver<List<ClasseProxy>>(){
 			@Override
@@ -126,7 +126,7 @@ public class FrmBulletinViewSummaryPresenter
 	public void onClassChange(String classId) {
 		// 
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.listAllActiveByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
 			@Override
@@ -146,7 +146,7 @@ public class FrmBulletinViewSummaryPresenter
 	public void onBulletinChange(String bulletinId) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 			@Override
@@ -167,7 +167,7 @@ public class FrmBulletinViewSummaryPresenter
 	public void saveBulletinRemarques(String bulletinId, final String remarqueDirection) {
 		//
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.saveBulletinRemarqueDirection( bulletinId, remarqueDirection ).fire(new Receiver<BulletinProxy>(){
 			@Override

@@ -5,6 +5,10 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -24,8 +28,11 @@ import com.lemania.sis.shared.service.ContactRequestFactory.ContactRequestContex
 
 public class ContactPresenter extends
 		Presenter<ContactPresenter.MyView, ContactPresenter.MyProxy> 
-		implements ContactUiHandler {
+		implements ContactUiHandler, LoginAuthenticatedHandler {
 
+	//
+	private CurrentUser currentUser;
+	
 	public interface MyView extends View, HasUiHandlers<ContactUiHandler> {
 		//
 		void resetForm();
@@ -67,7 +74,7 @@ public class ContactPresenter extends
 	public void sendMessage(String lastName, String firstName, String email, String message) {
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		ContactRequestContext rc = rf.contactRequest();
 		rc.sendEmail(lastName, firstName, email, message).fire(new Receiver<Void>(){
 			@Override
@@ -79,5 +86,13 @@ public class ContactPresenter extends
 				getView().resetForm();
 			}
 		});
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

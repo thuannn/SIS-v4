@@ -7,10 +7,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -30,7 +34,11 @@ import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContex
 
 public class FrmBrancheListPresenter
 		extends Presenter<FrmBrancheListPresenter.MyView, FrmBrancheListPresenter.MyProxy>
-		implements FrmBrancheListUiHandler {
+		implements FrmBrancheListUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<FrmBrancheListUiHandler> {
 		//
@@ -103,7 +111,7 @@ public class FrmBrancheListPresenter
 	 * Used in every function which call to Request Factory */
 	public BrancheRequestContext getBrancheRequestContext() {
 		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		return rf.brancheRequest();
 	}
 
@@ -143,5 +151,13 @@ public class FrmBrancheListPresenter
 			}
 		});
 		//
+	}
+
+
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

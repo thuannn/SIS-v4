@@ -7,11 +7,15 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -31,7 +35,11 @@ import com.lemania.sis.shared.service.StudentRequestFactory.StudentRequestContex
 
 public class StudentPresenter 
 	extends Presenter<StudentPresenter.MyView, StudentPresenter.MyProxy>
-	implements StudentListUiHandler {
+	implements StudentListUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<StudentListUiHandler> {
 		public void refreshTable();
@@ -119,7 +127,7 @@ public class StudentPresenter
 	 * Used in every function which call to Request Factory */
 	public StudentRequestContext getStudentRequestContext() {
 		StudentRequestFactory rf = GWT.create(StudentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		return rf.studentRequest();
 	}
 
@@ -206,5 +214,13 @@ public class StudentPresenter
 			}
 		});
 		
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

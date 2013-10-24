@@ -10,8 +10,11 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.event.EcoleAddedEvent;
 import com.lemania.sis.client.event.EcoleAddedEvent.EcoleAddedHandler;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -32,8 +35,12 @@ import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 
 public class EcolePresenter extends
 		Presenter<EcolePresenter.MyView, EcolePresenter.MyProxy> 
-		implements EcoleListUiHandler, EcoleAddedHandler {
+		implements EcoleListUiHandler, EcoleAddedHandler, LoginAuthenticatedHandler {
 
+	//
+	private CurrentUser currentUser;
+	
+	
 	public interface MyView extends View, HasUiHandlers<EcoleListUiHandler> {
 		void initializeTable();
 		void setData(List<EcoleProxy> ecoleList);
@@ -85,7 +92,7 @@ public class EcolePresenter extends
 
 	private void getEcoleList() {
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -108,7 +115,7 @@ public class EcolePresenter extends
 	@Override
 	public void updateEcoleStatus(EcoleProxy ecole, Boolean value) {
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		EcoleProxy ecoleForUpdate = rc.edit(ecole);
 		ecoleForUpdate.setSchoolStatus(value);
@@ -122,5 +129,13 @@ public class EcolePresenter extends
 				getView().refreshTable(response);
 			}
 		});
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

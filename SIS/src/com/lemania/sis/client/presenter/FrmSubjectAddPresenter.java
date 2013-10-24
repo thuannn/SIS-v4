@@ -5,10 +5,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -28,7 +32,11 @@ import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContex
 
 public class FrmSubjectAddPresenter
 		extends Presenter<FrmSubjectAddPresenter.MyView, FrmSubjectAddPresenter.MyProxy> 
-		implements FrmSubjectAddUiHandler {
+		implements FrmSubjectAddUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<FrmSubjectAddUiHandler> {
 		void resetForm();
@@ -90,7 +98,7 @@ public class FrmSubjectAddPresenter
 		}
 		// Save
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SubjectRequestContext rc = rf.subjectRequest();
 		
 		SubjectProxy ep = rc.create(SubjectProxy.class);
@@ -109,5 +117,13 @@ public class FrmSubjectAddPresenter
 			}
 		} );
 		//
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }

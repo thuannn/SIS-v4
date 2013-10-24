@@ -8,6 +8,8 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent.ProfessorAfterAddHandler;
@@ -18,6 +20,7 @@ import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterSt
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
@@ -38,7 +41,12 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class UserManagementPresenter
 		extends Presenter<UserManagementPresenter.MyView, UserManagementPresenter.MyProxy> 
-		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler, StudentAfterStatusChangeHandler {
+		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler, StudentAfterStatusChangeHandler, LoginAuthenticatedHandler {
+	
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<UserManagementUiHandler> {
 		//
@@ -87,7 +95,7 @@ public class UserManagementPresenter
 
 	private void loadUsers() {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		rc.listAll().fire(new Receiver<List<UserProxy>>() {
 			@Override
@@ -104,7 +112,7 @@ public class UserManagementPresenter
 	@Override
 	public void addNewUser(String fullName, String userName, String password, String email) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		
 		final UserProxy newUser = rc.create(UserProxy.class);
@@ -129,7 +137,7 @@ public class UserManagementPresenter
 	@Override
 	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, String password) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		final UserProxy updatedUser = rc.edit(user);
 		updatedUser.setActive(active);
@@ -156,7 +164,7 @@ public class UserManagementPresenter
 	@Override
 	public void onStudentAfterAdd(StudentAfterAddEvent event) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		
 		StudentProxy student = event.getStudent();
@@ -189,7 +197,7 @@ public class UserManagementPresenter
 	@Override
 	public void onProfessorAfterAdd(ProfessorAfterAddEvent event) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		
 		ProfessorProxy prof = event.getProf();
@@ -227,7 +235,7 @@ public class UserManagementPresenter
 		}
 		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();
 		rc.listAllByType(type).fire(new Receiver<List<UserProxy>>() {
 			@Override
@@ -246,7 +254,7 @@ public class UserManagementPresenter
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
 		//		
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		UserRequestContext rc = rf.userRequest();		
 		rc.updateUserActiveStatus(event.getStudentEmail(), event.getStudentStatus()).fire( new Receiver<Void>(){
 			@Override
@@ -258,5 +266,13 @@ public class UserManagementPresenter
 				//
 			}
 		} );	
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}	
 }

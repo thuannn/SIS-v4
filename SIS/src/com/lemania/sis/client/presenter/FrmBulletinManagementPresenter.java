@@ -8,12 +8,15 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -58,7 +61,11 @@ import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContex
 public class FrmBulletinManagementPresenter
 		extends
 		Presenter<FrmBulletinManagementPresenter.MyView, FrmBulletinManagementPresenter.MyProxy> 
-		implements FrmBulletinManagementUiHandler, StudentAfterStatusChangeHandler {
+		implements FrmBulletinManagementUiHandler, StudentAfterStatusChangeHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
+	
 
 	public interface MyView extends View, HasUiHandlers<FrmBulletinManagementUiHandler> {
 		//
@@ -133,7 +140,7 @@ public class FrmBulletinManagementPresenter
 	private void loadBrancheList() {
 		//
 		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BrancheRequestContext rc = rf.brancheRequest();
 		rc.listAll().fire(new Receiver<List<BrancheProxy>>(){
 			@Override
@@ -153,7 +160,7 @@ public class FrmBulletinManagementPresenter
 	private void loadSubjectListByProfile(BulletinProxy bulletin) {
 		//
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		SubjectRequestContext rc = rf.subjectRequest();
 		rc.listAllActiveByProfile(bulletin).fire(new Receiver<List<SubjectProxy>>(){
 			@Override
@@ -172,7 +179,7 @@ public class FrmBulletinManagementPresenter
 	private void loadEcoleList() {
 		// 
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -196,7 +203,7 @@ public class FrmBulletinManagementPresenter
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
@@ -216,7 +223,7 @@ public class FrmBulletinManagementPresenter
 	public void onProgrammeSelected(String coursId) {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAllActive(coursId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override
@@ -241,7 +248,7 @@ public class FrmBulletinManagementPresenter
 		}
 		// 
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.listAllActiveByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
 			@Override
@@ -259,7 +266,7 @@ public class FrmBulletinManagementPresenter
 	public void onBulletinSelected(final BulletinProxy bulletin) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		rc.listAll( bulletin.getId().toString() ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 			@Override
@@ -278,7 +285,7 @@ public class FrmBulletinManagementPresenter
 	public void removeSubject(BulletinSubjectProxy subject) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		rc.removeProfileSubject(subject).fire(new Receiver<Boolean>(){
 			@Override
@@ -299,7 +306,7 @@ public class FrmBulletinManagementPresenter
 	public void onSubjectSelected(BulletinSubjectProxy subject) {
 		//
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
 		rc.listAll( subject.getId().toString() ).fire(new Receiver<List<BulletinBrancheProxy>>(){
 			@Override
@@ -325,7 +332,7 @@ public class FrmBulletinManagementPresenter
 		}
 		//
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
 		branche = rc.edit(branche);
 		branche.setBrancheCoef( Double.parseDouble(coef) );
@@ -348,7 +355,7 @@ public class FrmBulletinManagementPresenter
 	public void removeBranche(BulletinBrancheProxy branche) {
 		//
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
 		rc.removeBulletinBranche( branche ).fire(new Receiver<Void>(){
 			@Override
@@ -369,7 +376,7 @@ public class FrmBulletinManagementPresenter
 	public void updateSubjectCoef(BulletinSubjectProxy subject, String coef, final Integer lastSubjectIndex) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		subject = rc.edit( subject );
 		subject.setSubjectCoef( Double.parseDouble(coef) );
@@ -392,7 +399,7 @@ public class FrmBulletinManagementPresenter
 	public void addSubject(String bulletinId, String subjectId, String profId, String coef) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		rc.saveAndReturn( bulletinId, subjectId, profId, coef ).fire(new Receiver<BulletinSubjectProxy>(){
 			@Override
@@ -414,7 +421,7 @@ public class FrmBulletinManagementPresenter
 			String coef) {
 		//
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
 		rc.saveAndReturn(bulletinSubjectId, brancheId, coef).fire(new Receiver<BulletinBrancheProxy>(){
 			@Override
@@ -436,7 +443,7 @@ public class FrmBulletinManagementPresenter
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
 		//
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		BulletinRequestContext rc = rf.bulletinRequest();
 		rc.updateBulletinStatus( event.getStudentId(), event.getStudentStatus() ).fire(new Receiver<Void>(){
 			@Override
@@ -457,7 +464,7 @@ public class FrmBulletinManagementPresenter
 	public void loadProfessorList(String subjectId, String classId) {
 		//
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
 		AssignmentRequestContext rc = rf.assignmentRequest();
 		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
 			@Override
@@ -469,5 +476,13 @@ public class FrmBulletinManagementPresenter
 				getView().setProfessorListData(response);
 			}
 		});		
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
 	}
 }
