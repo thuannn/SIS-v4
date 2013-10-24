@@ -15,6 +15,7 @@ public class User extends DatastoreObject implements Comparable<User> {
 	private Boolean admin = false;
 	private Boolean isProf = false;
 	private Boolean isStudent = false;
+	private Boolean isReadOnly = false;
 	//
 	private String lastLoggedInTime;
 	private String currentLoggedInTime;
@@ -135,5 +136,13 @@ public class User extends DatastoreObject implements Comparable<User> {
 
 	public void setCurrentLoggedInTime(String currentLoggedInTime) {
 		this.currentLoggedInTime = currentLoggedInTime;
+	}
+
+	public Boolean getIsReadOnly() {
+		return isReadOnly;
+	}
+
+	public void setIsReadOnly(Boolean isReadOnly) {
+		this.isReadOnly = isReadOnly;
 	}
 }

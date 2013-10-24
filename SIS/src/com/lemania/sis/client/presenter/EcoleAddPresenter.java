@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.EcoleAddedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
@@ -79,13 +80,21 @@ public class EcoleAddPresenter extends
 
 	@Override
 	public void ecoleAdd(String ecoleNom, String ecoleAdresse, Boolean ecoleActive) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (ecoleNom.isEmpty() || ecoleAdresse.isEmpty()){
 			Window.alert("Veuillez saissir le nom et l'addresse de l'�cole !");
 			return;
 		}
 		
+		//
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		ep = rc.create(EcoleProxy.class);
 		ep.setSchoolName(ecoleNom);

@@ -35,4 +35,7 @@ public class NotificationTypes {
 	// For UI of each school
 	public static String ecoleLemania = "LM";
 	public static String pierreViret = "PV";
+	
+	// Read only
+	public static String readOnly = "Vous avez l'accès en lecture seule.";
 }

@@ -15,6 +15,7 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -103,7 +104,7 @@ public class FrmClasseListPresenter
 	private void loadActiveEcoleList() {
 		//
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -118,11 +119,18 @@ public class FrmClasseListPresenter
 	}
 
 	
+	/**/
 	@Override
 	public void updateClasse(ClasseProxy classe, String classeName, Boolean isActive) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
 		
 		ClasseProxy classeForUpdate = rc.edit(classe);
@@ -142,6 +150,7 @@ public class FrmClasseListPresenter
 	}
 
 
+	/**/
 	@Override
 	public void onEcoleSelected(String ecoleId) {
 		//
@@ -150,7 +159,7 @@ public class FrmClasseListPresenter
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
@@ -172,7 +181,7 @@ public class FrmClasseListPresenter
 	public void onSubjectSelected(String subjectId) {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAll(subjectId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override

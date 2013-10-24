@@ -70,11 +70,14 @@ public class ContactPresenter extends
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.contact));
 	}
 
+	/*
+	 * No need to check Read-only status of the user 
+	 * */
 	@Override
-	public void sendMessage(String lastName, String firstName, String email, String message) {
+	public void sendMessage(String lastName, String firstName, String email, String message) {		
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ContactRequestContext rc = rf.contactRequest();
 		rc.sendEmail(lastName, firstName, email, message).fire(new Receiver<Void>(){
 			@Override

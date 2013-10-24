@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.CoursAddedEvent;
 import com.lemania.sis.client.event.CoursAddedEvent.CoursAddedHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
@@ -95,7 +96,7 @@ public class CoursPresenter extends
 	// Thuan: Populate the list of school names
 	private void initialData(){
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -120,8 +121,15 @@ public class CoursPresenter extends
 	
 	@Override
 	public void updateCoursStatus(CoursProxy cours, Boolean value) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		CoursProxy coursForUpdate = rc.edit(cours);
 		coursForUpdate.setCoursActif(value);
@@ -144,7 +152,7 @@ public class CoursPresenter extends
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
@@ -158,13 +166,23 @@ public class CoursPresenter extends
 		});
 	}
 
+	
+	/**/
 	@Override
 	public void updateCoursName(CoursProxy cours, String name) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (name.equals(""))
 			return;
 		
+		//
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		CoursProxy coursForUpdate = rc.edit(cours);
 		coursForUpdate.setCoursNom(name);

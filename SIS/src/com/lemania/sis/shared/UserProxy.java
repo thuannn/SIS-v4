@@ -31,6 +31,9 @@ public interface UserProxy extends EntityProxy {
 	public Boolean getIsStudent();
 	public void setIsStudent(Boolean isStudent);
 	
+	public Boolean getIsReadOnly();
+	public void setIsReadOnly(Boolean isReadOnly);
+	
 	public int getCurrentYear();
 	public int getCurrentMonth();
 	public int getCurrentDay();

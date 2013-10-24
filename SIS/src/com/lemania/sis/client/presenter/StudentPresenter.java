@@ -106,6 +106,13 @@ public class StudentPresenter
 	/* Change a student status to be active or inactive */
 	@Override
 	public void updateStudentStatus( final StudentProxy student, final Boolean value ) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		StudentRequestContext rc = getStudentRequestContext();
 		StudentProxy studentForUpdate = rc.edit( student );
 		studentForUpdate.setIsActive(value);
@@ -127,7 +134,7 @@ public class StudentPresenter
 	 * Used in every function which call to Request Factory */
 	public StudentRequestContext getStudentRequestContext() {
 		StudentRequestFactory rf = GWT.create(StudentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		return rf.studentRequest();
 	}
 
@@ -135,6 +142,12 @@ public class StudentPresenter
 	
 	@Override
 	public void updateStudentFirstName(StudentProxy student, String firstName) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		//
 		if (student.getFirstName().equals(firstName))
 			return;
@@ -165,6 +178,12 @@ public class StudentPresenter
 	@Override
 	public void updateStudentLastName(StudentProxy student, String lastName) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (student.getLastName().equals(lastName))
 			return;
 		//
@@ -191,6 +210,12 @@ public class StudentPresenter
 
 	@Override
 	public void updateStudentEmail(StudentProxy student, String email) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		//
 		if (student.getEmail().equals(email))
 			return;

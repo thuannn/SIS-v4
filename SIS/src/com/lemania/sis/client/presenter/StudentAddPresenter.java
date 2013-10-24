@@ -5,6 +5,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -78,7 +79,13 @@ public class StudentAddPresenter
 
 	@Override
 	public void createStudent(String firstName, String lastName, String email, Boolean active) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
 		
+		//
 		if (firstName.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Prénom" );
 			return;
@@ -92,6 +99,7 @@ public class StudentAddPresenter
 			return;
 		}
 		
+		//
 		StudentRequestContext rc = getStudentRequestContext();
 		rc.saveAndReturn(firstName, lastName, email, active).fire(new Receiver<StudentProxy>(){
 			@Override
@@ -110,10 +118,15 @@ public class StudentAddPresenter
 	 * Used in every function which call to Request Factory */
 	public StudentRequestContext getStudentRequestContext() {
 		StudentRequestFactory rf = GWT.create(StudentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		return rf.studentRequest();
 	}
+	
 
+	/*
+	 * 
+	 * */
+	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
 		//

@@ -82,6 +82,12 @@ public class FrmSubjectAddPresenter
 	/**/
 	@Override
 	public void addNewSubject(String subjectName, String defaultCoef, Boolean isActive) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// Validate data
 		if ( subjectName.isEmpty() ){
 			Window.alert( NotificationTypes.invalid_input + " - Nom de la matière.");
@@ -98,7 +104,7 @@ public class FrmSubjectAddPresenter
 		}
 		// Save
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SubjectRequestContext rc = rf.subjectRequest();
 		
 		SubjectProxy ep = rc.create(SubjectProxy.class);

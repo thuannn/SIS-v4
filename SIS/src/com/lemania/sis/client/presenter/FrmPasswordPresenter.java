@@ -116,7 +116,7 @@ public class FrmPasswordPresenter
 		}
 		
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		
 		rc.changePassword(currentUser.getUserName(), current, new1).fire( new Receiver<UserProxy>(){

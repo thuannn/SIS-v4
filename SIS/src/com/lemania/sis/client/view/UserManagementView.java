@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandler> implements
 		UserManagementPresenter.MyView {
@@ -54,6 +55,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	@UiField Button cmdAdd;
 	@UiField TextBox txtEmail;
 	@UiField ListBox lstUserTypes;
+	@UiField HorizontalPanel pnlAdd;
 	
 	@UiHandler("cmdAdd")
 	public void onCmdAddClicked(ClickEvent event) {
@@ -84,6 +86,8 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		tblUser.setRowCount(tblUser.getRowCount() + list.size());
 	}
 
+	/*
+	 * */
 	@Override
 	public void initializeTables() {
 		//
@@ -154,6 +158,18 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    		}	    		
 	    	}
 	    });
+	    
+	    // Read only
+	    CheckboxCell cellReadOnly = new CheckboxCell();
+	    Column<UserProxy, Boolean> colReadOnly = new Column<UserProxy, Boolean>(cellReadOnly) {
+	    	@Override
+	    	public Boolean getValue(UserProxy user){
+	    		return user.getIsReadOnly();
+	    	}	    	
+	    };
+	    tblUser.addColumn(colReadOnly, "Lecture seule");	
+	    tblUser.setColumnWidth(colReadOnly, 10, Unit.PCT);
+	    
 	    
 	    // Prof
 	    CheckboxCell cellProf = new CheckboxCell();
@@ -241,7 +257,8 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		tblUser.redraw();
 	}
 
-
+	/*
+	 * */
 	@Override
 	public void populateSelectedUserInfo() {
 		if (selectedUser != null) {
@@ -258,5 +275,11 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		if (getUiHandlers() != null) {			
 			getUiHandlers().loadUsersByType( lstUserTypes.getValue( lstUserTypes.getSelectedIndex() ));
 		}
+	}
+
+	@Override
+	public void showAddPanel() {
+		//
+		pnlAdd.setVisible(true);
 	}
 }

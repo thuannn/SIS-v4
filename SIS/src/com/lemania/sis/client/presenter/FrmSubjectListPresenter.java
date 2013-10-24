@@ -82,6 +82,10 @@ public class FrmSubjectListPresenter
 		loadSubjectList();
 	}
 
+	
+	/*
+	 * 
+	 * */
 	@Override
 	public void updateSubject(SubjectProxy subject, String subjectName, String subjectCoef, Boolean isActive) {
 		// Validate data
@@ -118,6 +122,9 @@ public class FrmSubjectListPresenter
 		//
 	}
 	
+	/*
+	 * 
+	 * */
 	public void loadSubjectList(){
 		SubjectRequestContext rc = getSubjectRequestContext();
 		rc.listAll().fire(new Receiver<List<SubjectProxy>>(){
@@ -132,11 +139,12 @@ public class FrmSubjectListPresenter
 		});
 	}
 	
+	
 	/* Get the request context for SubjectRequestFactory
 	 * Used in every function which call to Request Factory */
 	public SubjectRequestContext getSubjectRequestContext() {
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		return rf.subjectRequest();
 	}
 

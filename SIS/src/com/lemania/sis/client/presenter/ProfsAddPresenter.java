@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -88,7 +89,13 @@ public class ProfsAddPresenter
 	 * */
 	@Override
 	public void professorAdd(String profName, String profEmail, Boolean profStatus) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
 		
+		//
 		if (profName.isEmpty()){
 			Window.alert("Veuillez saissir le nom du professeur !");
 			return;
@@ -99,8 +106,9 @@ public class ProfsAddPresenter
 			return;
 		}
 		
+		//
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		
 		ProfessorRequestContext rc = rf.professorRequest();
 		prof = rc.create(ProfessorProxy.class);

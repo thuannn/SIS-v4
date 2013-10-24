@@ -100,7 +100,7 @@ public class FrmClasseAddPresenter
 	private void loadActiveEcoleList() {
 		// 
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -114,8 +114,18 @@ public class FrmClasseAddPresenter
 		});
 	}
 
+	
+	/*
+	 * 
+	 * */
 	@Override
 	public void addNewClasse(String className, String coursId, Boolean isActif) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// 
 		if (className.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Nom de la classe");
@@ -129,7 +139,7 @@ public class FrmClasseAddPresenter
 		
 		// Save data
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
 		
 		ClasseProxy classe = rc.create(ClasseProxy.class);
@@ -157,7 +167,7 @@ public class FrmClasseAddPresenter
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAll(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override

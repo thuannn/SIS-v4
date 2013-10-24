@@ -15,6 +15,7 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -84,8 +85,15 @@ public class SettingsPresenter
 
 	@Override
 	public void updateSettingOptionDeadline(String dayNumber) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("DEADLINE", dayNumber).fire(new Receiver<Void>(){
 			@Override
@@ -99,9 +107,13 @@ public class SettingsPresenter
 		});
 	}
 	
+	
+	/*
+	 * 
+	 * */
 	private void retrieveCurrentSettings(){
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
@@ -120,8 +132,15 @@ public class SettingsPresenter
 	 * */
 	@Override
 	public void updateSettingOptionManualBlock(Boolean blnBlock) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("BLOCK", blnBlock.toString()).fire(new Receiver<Void>(){
 			@Override
@@ -148,8 +167,14 @@ public class SettingsPresenter
 	@Override
 	public void updateCurrentEcole(String ecoleCode) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.save("ECOLE", ecoleCode ).fire(new Receiver<Void>(){
 			@Override
@@ -168,8 +193,14 @@ public class SettingsPresenter
 	@Override
 	public void fixStudentName() {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();		
 		rc.fixStudentName().fire( new Receiver<Void>(){
 			@Override

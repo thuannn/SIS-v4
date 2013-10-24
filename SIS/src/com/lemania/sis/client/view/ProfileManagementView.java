@@ -290,6 +290,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	        return object.getSubjectCoef().toString();
 	      } 
 	    };
+	    
 	    // Field updater
 	    colCoef.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
 	    	@Override
@@ -306,8 +307,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    });
 	    tblSubjects.setColumnWidth(colCoef, 10.0, Unit.PCT);
 	    tblSubjects.addColumn( colCoef, "Coefficient" );
-	    
-	    
+	    	    
 	    // Professor
 	    TextColumn<ProfileSubjectProxy> colProf = new TextColumn<ProfileSubjectProxy>() {
 	      @Override
@@ -325,19 +325,19 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		return subject.getIsActive();
 	    	}	    	
 	    };
+	    
 	    // Field updater
 	    colActive.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, Boolean>(){
 	    	@Override
 	    	public void update(int index, ProfileSubjectProxy subject, Boolean value){
 	    		if (getUiHandlers() != null) {
 	    			selectedSubjectIndex = index;
-	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value, selectedSubjectIndex );
+	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value, selectedSubjectIndex );	    			
 	    		}	    		
 	    	}
 	    });
 	    tblSubjects.setColumnWidth(colActive, 10.0, Unit.PCT);
 	    tblSubjects.addColumn(colActive, "Active");
-	    
 	    
 	    //
 	    TextColumn<ProfileSubjectProxy> colTotalBrancheCoef = new TextColumn<ProfileSubjectProxy>() {
@@ -365,12 +365,10 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    	}
 	    });
 	    tblSubjects.setColumnWidth(colDelete, 10.0, Unit.PCT);
-	    tblSubjects.addColumn(colDelete, "");
-	    
+	    tblSubjects.addColumn(colDelete, "");	    
 	    
 	    //
-	    subjectDataProvider.addDataDisplay(tblSubjects);
-	    
+	    subjectDataProvider.addDataDisplay(tblSubjects);	    
 	    
 	    // Selection model
 	    // Add a selection model to handle user selection.
@@ -382,7 +380,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    	  selectedSubject = selectionModel.getSelectedObject();
 	    	  if (selectedSubject != null) {
 	    		  selectedSubjectIndex = subjectDataProvider.getList().indexOf(selectedSubject);
-	    		  getUiHandlers().onSubjectSelected( selectedSubject.getId().toString() );
+	    		  getUiHandlers().onSubjectSelected( selectedSubject.getId().toString() );	    		 
 	    	  }
 	      }
 	    });
@@ -470,7 +468,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	public void setSubjectTableData(List<ProfileSubjectProxy> subjects) {
 		//
 		subjectDataProvider.getList().clear();
-		subjectDataProvider.setList(subjects);
+		subjectDataProvider.setList(subjects);		
 		//
 		tblSubjects.setHeight(Integer.toString(NotificationTypes.lineHeightShortList * subjects.size() + NotificationTypes.headerHeight) + "px");
 	}
@@ -493,7 +491,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	public void setBrancheTableData( List<ProfileBrancheProxy> branches ) {
 		//
 		brancheDataProvider.getList().clear();
-		brancheDataProvider.setList(branches);
+		brancheDataProvider.setList(branches);		
 		//
 		tblBranches.setHeight( Integer.toString(NotificationTypes.lineHeightShortList * branches.size() + NotificationTypes.headerHeight) + "px");
 	}
@@ -533,6 +531,10 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.refresh();
 	}
 
+	
+	/*
+	 * 
+	 * */
 	@Override
 	public void setClassList(List<ClasseProxy> classes) {
 		//
@@ -545,7 +547,10 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		lstClasses.setSelectedIndex(0);
 	}
 	
-	/**/
+	
+	/*
+	 * 
+	 * */
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
 		//

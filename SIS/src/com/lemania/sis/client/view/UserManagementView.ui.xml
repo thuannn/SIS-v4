@@ -9,7 +9,7 @@
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2" horizontalAlignment="ALIGN_LEFT">
 			<g:Label text="GESTION DES UTILISATEURS" styleName="pageTitle" width="900" horizontalAlignment="ALIGN_CENTER"/>
-			<g:HorizontalPanel width="80%" visible="false">
+			<g:HorizontalPanel width="80%" visible="false" ui:field="pnlAdd">
 				<g:Grid width="100%">
 					<g:row>
 						<g:customCell>

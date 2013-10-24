@@ -88,8 +88,13 @@ public class FrmBrancheAddPresenter
 
 	
 	@Override
-	public void addNewBranche(String brancheName, String brancheCoef,
-			Boolean brancheActive) {
+	public void addNewBranche(String brancheName, String brancheCoef, Boolean brancheActive) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// Validate data
 		if ( brancheName.isEmpty() ){
 			Window.alert( NotificationTypes.invalid_input + " - Nom de la branche.");
@@ -106,7 +111,7 @@ public class FrmBrancheAddPresenter
 		}
 		// Save
 		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BrancheRequestContext rc = rf.brancheRequest();
 		
 		BrancheProxy ep = rc.create(BrancheProxy.class);

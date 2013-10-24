@@ -111,7 +111,7 @@ public class FrmBrancheListPresenter
 	 * Used in every function which call to Request Factory */
 	public BrancheRequestContext getBrancheRequestContext() {
 		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		return rf.brancheRequest();
 	}
 
@@ -119,6 +119,12 @@ public class FrmBrancheListPresenter
 	// Update a branche, then update the datagrid
 	@Override
 	public void updateBranche(BrancheProxy branche, String brancheName, String brancheCoef, Boolean isActive) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// Validate data
 		if ( brancheName.isEmpty() ){
 			Window.alert( NotificationTypes.invalid_input + " - Nom de la branche.");
@@ -133,6 +139,7 @@ public class FrmBrancheListPresenter
 			Window.alert( NotificationTypes.invalid_input + " - Coefficient");
 			return;
 		}
+		
 		// Update
 		BrancheRequestContext rc = getBrancheRequestContext();
 		branche = rc.edit(branche);

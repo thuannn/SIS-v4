@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -128,7 +129,7 @@ public class ProfsPresenter
 	private void loadEcoleList() {
 		// 
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -143,10 +144,13 @@ public class ProfsPresenter
 	}
 
 
+	/*
+	 * 
+	 * */
 	private void getProfessorsList() {
 		//
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfessorRequestContext rc = rf.professorRequest();
 		rc.listAll().fire(new Receiver<List<ProfessorProxy>>(){
 			@Override
@@ -161,16 +165,26 @@ public class ProfsPresenter
 	}
 
 	
+	/*
+	 * 
+	 * */
 	@Override
 	public void updateProfessorStatus(ProfessorProxy prof, Boolean status) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
 		
+		//
 		if (!currentUser.isAdmin()) {
 			Window.alert("Veuillez vous connecter avec le code d'accès de l'administrateur. La modification n'a pas été effectuée.");
 			return;
 		}
 		
+		//
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfessorRequestContext rc = rf.professorRequest();
 		ProfessorProxy profForUpdate = rc.edit(prof);
 		profForUpdate.setProfActive(status);
@@ -186,7 +200,10 @@ public class ProfsPresenter
 		});	
 	}
 
-	
+
+	/*
+	 * 
+	 * */
 	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
@@ -194,8 +211,17 @@ public class ProfsPresenter
 	}
 
 	
+	/*
+	 * 
+	 * */
 	@Override
 	public void updateProfessorName(ProfessorProxy prof, String name) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		//
 		if (prof.getProfName().equals(name))
 			return;
@@ -207,7 +233,7 @@ public class ProfsPresenter
 		}
 		
 		ProfessorRequestFactory rf = GWT.create(ProfessorRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfessorRequestContext rc = rf.professorRequest();
 		ProfessorProxy profForUpdate = rc.edit(prof);
 		profForUpdate.setProfName(name);
@@ -228,7 +254,7 @@ public class ProfsPresenter
 	public void professorSelected(ProfessorProxy prof) {
 		//
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AssignmentRequestContext rc = rf.assignmentRequest();
 		rc.listAll( prof.getId().toString() ).fire(new Receiver<List<AssignmentProxy>>(){
 			@Override
@@ -251,7 +277,7 @@ public class ProfsPresenter
 		}
 		
 		CoursRequestFactory rf = GWT.create(CoursRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		CoursRequestContext rc = rf.coursRequest();
 		rc.listAllActive(ecoleId).fire(new Receiver<List<CoursProxy>>(){
 			@Override
@@ -273,7 +299,7 @@ public class ProfsPresenter
 	public void onProgrammeSelected(String coursId) {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAllActive(coursId).fire(new Receiver<List<ClasseProxy>>(){
 			@Override
@@ -294,8 +320,14 @@ public class ProfsPresenter
 	@Override
 	public void saveAssignment(String professorId, String classId, String subjectId, Boolean isActive) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AssignmentRequestContext rc = rf.assignmentRequest();
 		rc.saveAndReturn( professorId.toString(), classId.toString(), subjectId.toString(), isActive ).fire(new Receiver<AssignmentProxy>(){
 			@Override
@@ -315,9 +347,15 @@ public class ProfsPresenter
 	 * */
 	@Override
 	public void updateAssignmentStatus(AssignmentProxy assignment, Boolean value) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// 
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AssignmentRequestContext rc = rf.assignmentRequest();
 		
 		AssignmentProxy a4update = rc.edit( assignment );
@@ -350,7 +388,7 @@ public class ProfsPresenter
 	private void loadActiveSubjectList() {
 		//
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SubjectRequestContext rc = rf.subjectRequest();
 		rc.listAllActive().fire(new Receiver<List<SubjectProxy>>(){
 			@Override

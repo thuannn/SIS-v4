@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.EcoleAddedEvent;
 import com.lemania.sis.client.event.EcoleAddedEvent.EcoleAddedHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
@@ -92,7 +93,7 @@ public class EcolePresenter extends
 
 	private void getEcoleList() {
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		rc.listAll().fire(new Receiver<List<EcoleProxy>>(){
 			@Override
@@ -112,10 +113,19 @@ public class EcolePresenter extends
 		History.newItem(NameTokens.ecolepage, true);	
 	}
 
+	
+	/**/
 	@Override
 	public void updateEcoleStatus(EcoleProxy ecole, Boolean value) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		EcoleRequestFactory rf = GWT.create(EcoleRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EcoleRequestContext rc = rf.ecoleRequest();
 		EcoleProxy ecoleForUpdate = rc.edit(ecole);
 		ecoleForUpdate.setSchoolStatus(value);

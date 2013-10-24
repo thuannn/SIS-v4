@@ -58,6 +58,8 @@ public class UserManagementPresenter
 		//
 		public void addNewUser(UserProxy newUser);
 		public void setUserData(List<UserProxy> list);
+		//
+		public void showAddPanel();
 	}
 	
 
@@ -90,12 +92,16 @@ public class UserManagementPresenter
 	@Override
 	protected void onReset() {
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));		
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));
+		
+		//
+		if (this.currentUser.getUserEmail().equals("thuannn@gmail.com"))
+			getView().showAddPanel();
 	}
 
 	private void loadUsers() {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		rc.listAll().fire(new Receiver<List<UserProxy>>() {
 			@Override
@@ -111,8 +117,15 @@ public class UserManagementPresenter
 
 	@Override
 	public void addNewUser(String fullName, String userName, String password, String email) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		
 		final UserProxy newUser = rc.create(UserProxy.class);
@@ -136,8 +149,15 @@ public class UserManagementPresenter
 
 	@Override
 	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, String password) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		final UserProxy updatedUser = rc.edit(user);
 		updatedUser.setActive(active);
@@ -163,8 +183,15 @@ public class UserManagementPresenter
 	@ProxyEvent
 	@Override
 	public void onStudentAfterAdd(StudentAfterAddEvent event) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		
 		StudentProxy student = event.getStudent();
@@ -196,8 +223,15 @@ public class UserManagementPresenter
 	@ProxyEvent
 	@Override
 	public void onProfessorAfterAdd(ProfessorAfterAddEvent event) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		
 		ProfessorProxy prof = event.getProf();
@@ -235,7 +269,7 @@ public class UserManagementPresenter
 		}
 		//
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		rc.listAllByType(type).fire(new Receiver<List<UserProxy>>() {
 			@Override
@@ -252,9 +286,15 @@ public class UserManagementPresenter
 	@ProxyEvent
 	@Override
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		//		
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();		
 		rc.updateUserActiveStatus(event.getStudentEmail(), event.getStudentStatus()).fire( new Receiver<Void>(){
 			@Override

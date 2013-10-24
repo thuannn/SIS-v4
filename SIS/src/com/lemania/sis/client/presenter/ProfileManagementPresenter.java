@@ -135,7 +135,7 @@ public class ProfileManagementPresenter
 	private void loadClassList() {
 		//
 		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ClasseRequestContext rc = rf.classeRequest();
 		rc.listAllActive().fire(new Receiver<List<ClasseProxy>>(){
 			@Override
@@ -156,7 +156,7 @@ public class ProfileManagementPresenter
 	private void loadActiveBrancheList() {
 		//
 		BrancheRequestFactory rf = GWT.create(BrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BrancheRequestContext rc = rf.brancheRequest();
 		rc.listAll().fire(new Receiver<List<BrancheProxy>>(){
 			@Override
@@ -177,7 +177,7 @@ public class ProfileManagementPresenter
 	private void loadActiveSubjectList() {
 		//
 		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SubjectRequestContext rc = rf.subjectRequest();
 		rc.listAllActive().fire(new Receiver<List<SubjectProxy>>(){
 			@Override
@@ -198,7 +198,7 @@ public class ProfileManagementPresenter
 	private void loadProfileList(String classId) {
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		
 		ProfileRequestContext rc = rf.profileRequest();
 		rc.listAllActiveByClass( classId ).fire(new Receiver<List<ProfileProxy>>(){
@@ -221,6 +221,12 @@ public class ProfileManagementPresenter
 	@Override
 	public void createNewProfile(String profileName, final String classId) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (profileName.isEmpty()){
 			Window.alert( NotificationTypes.invalid_input + " - Nom du profil");
 			return;
@@ -231,7 +237,7 @@ public class ProfileManagementPresenter
 		}
 		//
 		ProfileRequestFactory rf = GWT.create(ProfileRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileRequestContext rc = rf.profileRequest();	
 		rc.saveAndReturn(profileName, classId).fire(new Receiver<ProfileProxy>(){
 			@Override
@@ -255,7 +261,7 @@ public class ProfileManagementPresenter
 	public void loadProfessorList(String subjectId, String classId) {
 		//
 		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AssignmentRequestContext rc = rf.assignmentRequest();
 		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
 			@Override
@@ -276,6 +282,12 @@ public class ProfileManagementPresenter
 	@Override
 	public void addSubjectToProfile(String profileId, String subjectId, String professorId,	String subjectCoef) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (profileId.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Profil");
 			return;
@@ -291,7 +303,7 @@ public class ProfileManagementPresenter
 		
 		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
 		rc.saveAndReturn( profileId, subjectId, professorId, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
@@ -313,6 +325,12 @@ public class ProfileManagementPresenter
 	public void addBrancheToProfile(final String profileSubjectId, String brancheId,
 			String brancheCoef, final Integer subjectLastPosition ) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (profileSubjectId.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Matière");
 			return;
@@ -328,7 +346,7 @@ public class ProfileManagementPresenter
 		
 		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();		
 		rc.saveAndReturn(profileSubjectId, brancheId, brancheCoef).fire(new Receiver<ProfileBrancheProxy>(){
 			@Override
@@ -356,7 +374,7 @@ public class ProfileManagementPresenter
 		}
 		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
 		rc.listAll( profileId ).fire(new Receiver<List<ProfileSubjectProxy>>(){
 			@Override
@@ -377,6 +395,12 @@ public class ProfileManagementPresenter
 	@Override
 	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive, final Integer lastPosition) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if ( !FieldValidation.isNumeric(coef)){
 			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
 			return;
@@ -387,7 +411,7 @@ public class ProfileManagementPresenter
 				return;
 		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
 		ps = rc.edit( ps );
 		ps.setSubjectCoef( Double.parseDouble(coef) );
@@ -415,9 +439,10 @@ public class ProfileManagementPresenter
 			Window.alert( NotificationTypes.subject_not_selected );
 			return;
 		}
+		
 		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();		
 		rc.listAll( profileSubjectId ).fire(new Receiver<List<ProfileBrancheProxy>>(){
 			@Override
@@ -439,8 +464,14 @@ public class ProfileManagementPresenter
 	@Override
 	public void onProfileBrancheAfterAdd(final ProfileBrancheAfterAddEvent event) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
 		rc.calculateTotalBrancheCoef( event.getProfileSubjectId() ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
@@ -460,8 +491,14 @@ public class ProfileManagementPresenter
 	@Override
 	public void removeBranche( ProfileBrancheProxy bp, final String profileSubjectId, final Integer subjectLastPosition ) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();
 		rc.removeProfileBranche(bp).fire(new Receiver<Void>(){
 			@Override
@@ -480,8 +517,14 @@ public class ProfileManagementPresenter
 	@Override
 	public void removeSubject(ProfileSubjectProxy ps) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
 		rc.removeProfileSubject(ps).fire(new Receiver<Boolean>(){
 			@Override
@@ -513,6 +556,12 @@ public class ProfileManagementPresenter
 	@Override
 	public void updateProfileBranche(ProfileBrancheProxy pb, String coef, final String profileSubjectId, final Integer lastPosition) {
 		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
 		if (!FieldValidation.isNumeric(coef)){
 			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la branche");
 			return;
@@ -520,9 +569,10 @@ public class ProfileManagementPresenter
 		//
 		if ( pb.getBrancheCoef() == Double.parseDouble(coef) )
 			return;
+
 		//
 		ProfileBrancheRequestFactory rf = GWT.create(ProfileBrancheRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileBrancheRequestContext rc = rf.profileBrancheRequest();
 		pb = rc.edit(pb);
 		pb.setBrancheCoef( Double.parseDouble(coef) );

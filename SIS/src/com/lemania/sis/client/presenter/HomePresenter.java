@@ -106,7 +106,7 @@ public class HomePresenter
 	 * Get the current system settings */
 	private void getCurrentSettings(final String userName, final String password) {
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
@@ -143,6 +143,7 @@ public class HomePresenter
 			CurrentUser curUser = new CurrentUser();
 			curUser.setLoggedIn(true);
 			curUser.setAdmin(true);
+			curUser.setUserEmail("thuannn@gmail.com");
 			getEventBus().fireEvent(new LoginAuthenticatedEvent(curUser));
 			getView().toggleLoginPanel(false);
 		}
@@ -155,7 +156,7 @@ public class HomePresenter
 	 * */
 	private void authenticateUserWithSettings(String userName, String password) {
 		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		UserRequestContext rc = rf.userRequest();
 		
 		rc.authenticateUser(userName, password).fire( new Receiver<UserProxy>(){
@@ -193,6 +194,7 @@ public class HomePresenter
 		currentUser.setAdmin(response.getAdmin());
 		currentUser.setProf(response.getIsProf());
 		currentUser.setStudent(response.getIsStudent());
+		currentUser.setReadOnly(response.getIsReadOnly());
 		
 		if (!currentUser.isAdmin()){		
 			if (systemBlocked) {
@@ -225,7 +227,7 @@ public class HomePresenter
 	private void drawEcoleInterface() {
 		//
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus(), this.currentUser));
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		SettingOptionRequestContext rc = rf.settingOptionRequest();
 		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
 			@Override
