@@ -1,6 +1,12 @@
-<!-- Indices written at Thu, 24 Oct 2013 17:03:23 CEST -->
+<!-- Indices written at Fri, 25 Oct 2013 14:18:28 CEST -->
 
 <datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Student" ancestor="false" source="auto">
+        <property name="LastName" direction="asc"/>
+        <property name="FirstName" direction="asc"/>
+    </datastore-index>
 
     <!-- Used 2 times in query history -->
     <datastore-index kind="Profile" ancestor="false" source="auto">
@@ -15,10 +21,17 @@
         <property name="subjectName" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="ProfileBranche" ancestor="false" source="auto">
         <property name="profileSubject" direction="asc"/>
         <property name="profileBrancheName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Student" ancestor="false" source="auto">
+        <property name="isActive" direction="asc"/>
+        <property name="LastName" direction="asc"/>
+        <property name="FirstName" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

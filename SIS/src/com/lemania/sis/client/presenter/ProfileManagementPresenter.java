@@ -65,6 +65,7 @@ public class ProfileManagementPresenter
 		//
 		void initializeTables();
 		void resetForm();
+		void setReadOnly(boolean isReadOnly);
 		//
 		void addNewProfileToList(ProfileProxy newProfile);
 		void setProfileListData( List<ProfileProxy> profiles );
@@ -595,5 +596,6 @@ public class ProfileManagementPresenter
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
 		//
 		this.currentUser = event.getCurrentUser();
+		getView().setReadOnly(this.currentUser.isReadOnly());
 	}
 }

@@ -37,5 +37,5 @@ public class NotificationTypes {
 	public static String pierreViret = "PV";
 	
 	// Read only
-	public static String readOnly = "Vous avez l'accès en lecture seule.";
+	public static String readOnly = "Vous avez l'accès en lecture seule - La modification n'a pas été effectuée";
 }

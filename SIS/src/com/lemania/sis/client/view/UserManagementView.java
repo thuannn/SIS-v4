@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandler> implements
 		UserManagementPresenter.MyView {
 
+	//
 	private final Widget widget;
 	private UserProxy selectedUser;
 	private int selectedUserIndex;
