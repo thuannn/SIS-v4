@@ -127,7 +127,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colActive, "Actif");
-	    tblUser.setColumnWidth(colActive, 10, Unit.PCT);
+	    tblUser.setColumnWidth(colActive, 5, Unit.PCT);
 	    
 	    colActive.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -148,7 +148,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colAdmin, "Admin");	
-	    tblUser.setColumnWidth(colAdmin, 10, Unit.PCT);
+	    tblUser.setColumnWidth(colAdmin, 5, Unit.PCT);
 	    
 	    colAdmin.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -169,7 +169,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}	    	
 	    };
 	    tblUser.addColumn(colReadOnly, "Lecture seule");	
-	    tblUser.setColumnWidth(colReadOnly, 10, Unit.PCT);
+	    tblUser.setColumnWidth(colReadOnly, 5, Unit.PCT);
 	    
 	    
 	    // Prof
@@ -181,7 +181,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}
 	    };
 	    tblUser.addColumn(colProf, "Professeur");
-	    tblUser.setColumnWidth(colProf, 10, Unit.PCT);
+	    tblUser.setColumnWidth(colProf, 5, Unit.PCT);
 	    
 	    colProf.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -202,7 +202,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	}
 	    };
 	    tblUser.addColumn(colStudent, "Eleve");
-	    tblUser.setColumnWidth(colStudent, 10, Unit.PCT);
+	    tblUser.setColumnWidth(colStudent, 5, Unit.PCT);
 	    
 	    colStudent.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
 	    	@Override
@@ -257,6 +257,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
         tblUser.setRowData(selectedUserIndex, users);
 		tblUser.redraw();
 	}
+	
 
 	/*
 	 * */
@@ -269,7 +270,9 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		}		
 	}
 	
+	
 	/* 
+	 *
 	 * */
 	@UiHandler("lstUserTypes")
 	void onLstUserTypesChange(ChangeEvent event) {
@@ -277,10 +280,24 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 			getUiHandlers().loadUsersByType( lstUserTypes.getValue( lstUserTypes.getSelectedIndex() ));
 		}
 	}
+	
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void showAddPanel() {
 		//
 		pnlAdd.setVisible(true);
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void hideCodesAcces(boolean hide) {
+		//
+		tblUser.setVisible(!hide);
 	}
 }

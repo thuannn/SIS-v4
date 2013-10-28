@@ -60,6 +60,8 @@ public class UserManagementPresenter
 		public void setUserData(List<UserProxy> list);
 		//
 		public void showAddPanel();
+		//
+		public void hideCodesAcces(boolean hide);
 	}
 	
 
@@ -92,11 +94,15 @@ public class UserManagementPresenter
 	@Override
 	protected void onReset() {
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));
-		
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));		
 		//
 		if (this.currentUser.getUserEmail().equals("thuannn@gmail.com"))
 			getView().showAddPanel();
+		//
+		if (this.currentUser.isReadOnly())
+			getView().hideCodesAcces(true);
+		else
+			getView().hideCodesAcces(false);
 	}
 
 	private void loadUsers() {
