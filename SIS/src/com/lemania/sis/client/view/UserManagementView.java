@@ -245,7 +245,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		//
 		tblUser.setRowData(list);
 		//
-		tblUser.setHeight( Integer.toString((list.size()+1) * NotificationTypes.lineHeight) + "px");
+		tblUser.setHeight( Integer.toString((list.size()+1) * NotificationTypes.lineHeightShortList) + "px");
 	}
 
 	/*

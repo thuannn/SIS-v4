@@ -38,4 +38,12 @@ public class NotificationTypes {
 	
 	// Read only
 	public static String readOnly = "Vous avez l'accès en lecture seule - La modification n'a pas été effectuée";
+	
+	// Setting codes
+	public static String deadline_matu_t1 = "BLOCK_MATU_T1";
+	public static String deadline_matu_t2 = "BLOCK_MATU_T2";	
+	//
+	public static String deadline_es_t1 = "BLOCK_ES_T1";
+	public static String deadline_es_t2 = "BLOCK_ES_T2";
+	public static String deadline_es_t3 = "BLOCK_ES_T3";
 }

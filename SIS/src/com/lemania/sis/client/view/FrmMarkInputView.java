@@ -6,12 +6,15 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 import com.lemania.sis.client.uihandler.FrmMarkInputUiHandler;
 import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.SettingOptionProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -145,6 +148,27 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_3.setText("");
 		txt_t_3_4.setText("");
 		txt_t_3_5.setText("");
+		//
+		txt_t_1_1.setReadOnly(false);
+		txt_t_1_2.setReadOnly(false);
+		txt_t_1_3.setReadOnly(false);
+		txt_t_1_4.setReadOnly(false);
+		txt_t_1_5.setReadOnly(false);
+		txtRemarque1.setEnabled(false);
+		// 
+		txt_t_2_1.setReadOnly(false);
+		txt_t_2_2.setReadOnly(false);
+		txt_t_2_3.setReadOnly(false);
+		txt_t_2_4.setReadOnly(false);
+		txt_t_2_5.setReadOnly(false);
+		txtRemarque2.setEnabled(false);	
+		// 
+		txt_t_3_1.setReadOnly(false);
+		txt_t_3_2.setReadOnly(false);
+		txt_t_3_3.setReadOnly(false);
+		txt_t_3_4.setReadOnly(false);
+		txt_t_3_5.setReadOnly(false);
+		txtRemarque3.setEnabled(false);
 		//
 		txtRemarque1.setText("");
 		txtRemarque2.setText("");
@@ -359,7 +383,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	        	selectedBulletinBrancheIndex = -1;
 	        	tblBranches.getSelectionModel().setSelected(selectedBulletinBranche, false);
 	        	selectedBulletinBranche = null;
-	        	clearInputFields();
+//	        	clearInputFields();
 	        	//
 	        	selectedBulletinSubjectIndex = bulletinSubjectDataProvider.getList().indexOf(selectedBulletinSubject);
 	        	getUiHandlers().onBulletinSubjectSelected(selectedBulletinSubject);
@@ -458,6 +482,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 					txtRemarque1.getText(), txtRemarque2.getText(), txtRemarque3.getText());
 	}
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void showUpdatedBulletinDetails(
 			BulletinBrancheProxy bulletinBranche,
@@ -474,6 +501,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtT3.setText( bulletinBranche.getT3() );
 	}
 
+	/*
+	 * 
+	 * */
 	@Override
 	public void modifyUiByProgramme() {
 		//
@@ -495,5 +525,89 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 			if (selectedBulletinBrancheIndex > -1)
 				if ( !pnlT3.isVisible() ) pnlT3.setVisible(true);
 		}
+	}
+
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void modifyUiByDeadline(List<SettingOptionProxy> settings, CurrentUser currentUser) {
+		// 
+		int currentDate = Integer.parseInt(
+				Integer.toString(currentUser.getCurrentYear()) 
+				+ ((currentUser.getCurrentMonth() < 10) ? ("0" + Integer.toString(currentUser.getCurrentMonth())) : Integer.toString(currentUser.getCurrentMonth()))  
+				+ ((currentUser.getCurrentDay() < 10) ? ("0" + Integer.toString(currentUser.getCurrentDay())) : Integer.toString(currentUser.getCurrentDay())) );
+		int deadLine = 0;
+		for (SettingOptionProxy setting : settings) {			
+			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){
+				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t1)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate)
+						disableT1();
+				}
+				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t2)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate)
+						disableT2();
+				}				
+			}
+			else {
+				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t1)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate)
+						disableT1();
+				}
+				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t2)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate)
+						disableT2();
+				}
+				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t3)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate)
+						disableT3();
+				}
+			}
+		}
+	}
+
+	/*
+	 * 
+	 * */
+	private void disableT1() {
+		// 
+		txt_t_1_1.setReadOnly(true);
+		txt_t_1_2.setReadOnly(true);
+		txt_t_1_3.setReadOnly(true);
+		txt_t_1_4.setReadOnly(true);
+		txt_t_1_5.setReadOnly(true);
+		txtRemarque1.setReadOnly(true);
+	}
+	
+	/*
+	 * 
+	 * */
+	private void disableT2() {
+		// 
+		txt_t_2_1.setReadOnly(true);
+		txt_t_2_2.setReadOnly(true);
+		txt_t_2_3.setReadOnly(true);
+		txt_t_2_4.setReadOnly(true);
+		txt_t_2_5.setReadOnly(true);
+		txtRemarque2.setReadOnly(true);
+	}
+	
+	/*
+	 * 
+	 * */
+	private void disableT3() {
+		// 
+		txt_t_3_1.setReadOnly(true);
+		txt_t_3_2.setReadOnly(true);
+		txt_t_3_3.setReadOnly(true);
+		txt_t_3_4.setReadOnly(true);
+		txt_t_3_5.setReadOnly(true);
+		txtRemarque3.setReadOnly(true);
 	}
 }

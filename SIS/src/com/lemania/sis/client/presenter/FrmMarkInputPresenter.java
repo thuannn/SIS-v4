@@ -30,8 +30,10 @@ import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
+import com.lemania.sis.shared.service.SettingOptionRequestFactory;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
@@ -39,6 +41,7 @@ import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfessorRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestContext;
+import com.lemania.sis.shared.service.SettingOptionRequestFactory.SettingOptionRequestContext;
 
 public class FrmMarkInputPresenter extends
 		Presenter<FrmMarkInputPresenter.MyView, FrmMarkInputPresenter.MyProxy> 
@@ -67,6 +70,8 @@ public class FrmMarkInputPresenter extends
 		void showCurrentRemarques();
 		//
 		void showUpdatedBulletinDetails(BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject);
+		//
+		void modifyUiByDeadline(List<SettingOptionProxy> settings, CurrentUser currentUser);
 	}
 
 	@ProxyCodeSplit
@@ -200,12 +205,36 @@ public class FrmMarkInputPresenter extends
 			public void onSuccess(List<BulletinSubjectProxy> response) {
 				getView().setBulletinSubjectTableData(response);
 				getView().modifyUiByProgramme();
+				checkDeadLine();
 			}
 		});
 	}
 
 	
-	/**/
+	/*
+	 * 
+	 * */
+	protected void checkDeadLine() {
+		//
+		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SettingOptionRequestContext rc = rf.settingOptionRequest();
+		rc.listAll().fire(new Receiver<List<SettingOptionProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<SettingOptionProxy> response) {
+				getView().modifyUiByDeadline(response, currentUser);
+			}
+		});
+	}
+
+
+	/*
+	 * 
+	 * */
 	@Override
 	public void onBulletinSubjectSelected(BulletinSubjectProxy bulletinSubject) {
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);

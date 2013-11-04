@@ -41,8 +41,11 @@ public class SettingsPresenter
 	private CurrentUser currentUser;
 
 	public interface MyView extends View, HasUiHandlers<SettingOptionsUiHandler>{
+		//
 		void setUpdateStatus(String text);
-		void initializeInterface();
+		//
+		void initializeInterface(boolean isAdmin);
+		//
 		void populateCurrentSettings(List<SettingOptionProxy> settingOptions);
 	}
 
@@ -79,7 +82,11 @@ public class SettingsPresenter
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.settings));
 		
 		// Retrieve the current settings
-		getView().initializeInterface();
+		if (currentUser.getUserEmail().equals("thuannn@gmail.com"))
+			getView().initializeInterface(true);
+		else
+			getView().initializeInterface(false);
+		//
 		retrieveCurrentSettings();
 	}
 
@@ -214,11 +221,67 @@ public class SettingsPresenter
 		} );	
 	}
 
-	
+	/*
+	 * 
+	 * */
 	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
 		//
 		this.currentUser = event.getCurrentUser();
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void updateDeadlinesMatu(String deadlineT1, String deadlineT2) {
+		// 
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
+		saveDeadline(NotificationTypes.deadline_matu_t1, deadlineT1);
+		saveDeadline(NotificationTypes.deadline_matu_t2, deadlineT2);		
+	}
+	
+
+	/*
+	 * 
+	 * */
+	private void saveDeadline(String code, String value) {
+		// 
+		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		SettingOptionRequestContext rc = rf.settingOptionRequest();
+		rc.save(code, value ).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				updateSuccessNotice();
+			}
+		});
+	}
+	
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void updateDeadlinesES(String deadlineT1, String deadlineT2, String deadlineT3) {
+		// 
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
+		saveDeadline(NotificationTypes.deadline_es_t1, deadlineT1);
+		saveDeadline(NotificationTypes.deadline_es_t2, deadlineT2);	
+		saveDeadline(NotificationTypes.deadline_es_t3, deadlineT3);
 	}
 }
