@@ -255,13 +255,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (visible)
 			popup.center();
 		else {
-//			Timer t = new Timer(){
-//				@Override
-//				public void run(){
-					popup.hide();
-//				}
-//			};
-//			t.schedule(3000);
+			popup.hide();
 		}
 	}
 

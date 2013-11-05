@@ -36,6 +36,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		FrmMarkInputPresenter.MyView {
 
 	private final Widget widget;
+	private boolean blockT1 = false;
+	private boolean blockT2 = false;
+	private boolean blockT3 = false;
 	
 	// Thuan
 	private ListDataProvider<BulletinSubjectProxy> bulletinSubjectDataProvider = new ListDataProvider<BulletinSubjectProxy>();
@@ -147,28 +150,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_2.setText("");
 		txt_t_3_3.setText("");
 		txt_t_3_4.setText("");
-		txt_t_3_5.setText("");
-		//
-		txt_t_1_1.setReadOnly(false);
-		txt_t_1_2.setReadOnly(false);
-		txt_t_1_3.setReadOnly(false);
-		txt_t_1_4.setReadOnly(false);
-		txt_t_1_5.setReadOnly(false);
-		txtRemarque1.setEnabled(false);
-		// 
-		txt_t_2_1.setReadOnly(false);
-		txt_t_2_2.setReadOnly(false);
-		txt_t_2_3.setReadOnly(false);
-		txt_t_2_4.setReadOnly(false);
-		txt_t_2_5.setReadOnly(false);
-		txtRemarque2.setEnabled(false);	
-		// 
-		txt_t_3_1.setReadOnly(false);
-		txt_t_3_2.setReadOnly(false);
-		txt_t_3_3.setReadOnly(false);
-		txt_t_3_4.setReadOnly(false);
-		txt_t_3_5.setReadOnly(false);
-		txtRemarque3.setEnabled(false);
+		txt_t_3_5.setText("");		
 		//
 		txtRemarque1.setText("");
 		txtRemarque2.setText("");
@@ -178,8 +160,12 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtT2.setText("");
 		txtT3.setText("");
 		//
-		lblStudentName.setText("");
+		lblStudentName.setText("");		
 		//
+		blockT1( blockT1 );
+		blockT2( blockT2 );
+		blockT3( blockT3 );
+		//		
 		pnlT1.setVisible(false);
 		pnlT2.setVisible(false);
 		pnlT3.setVisible(false);
@@ -348,6 +334,10 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	        	//
 	        	selectedBulletinBrancheIndex = bulletinBrancheDataProvider.getList().indexOf(selectedBulletinBranche);
 	        	getUiHandlers().onBulletinBrancheSelected(selectedBulletinBranche);
+	        	//
+	        	blockT1(blockT1);
+	        	blockT2(blockT2);
+	        	blockT3(blockT3);
 	        }
 	      }
 	    });
@@ -383,10 +373,10 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	        	selectedBulletinBrancheIndex = -1;
 	        	tblBranches.getSelectionModel().setSelected(selectedBulletinBranche, false);
 	        	selectedBulletinBranche = null;
-//	        	clearInputFields();
+	        	clearInputFields();
 	        	//
 	        	selectedBulletinSubjectIndex = bulletinSubjectDataProvider.getList().indexOf(selectedBulletinSubject);
-	        	getUiHandlers().onBulletinSubjectSelected(selectedBulletinSubject);
+	        	getUiHandlers().onBulletinSubjectSelected(selectedBulletinSubject);	        	
 	        }
 	      }
 	    });
@@ -535,7 +525,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	public void modifyUiByDeadline(List<SettingOptionProxy> settings, CurrentUser currentUser) {
 		// 
 		int currentDate = Integer.parseInt(
-				Integer.toString(currentUser.getCurrentYear()) 
+				Integer.toString(currentUser.getCurrentYear())
 				+ ((currentUser.getCurrentMonth() < 10) ? ("0" + Integer.toString(currentUser.getCurrentMonth())) : Integer.toString(currentUser.getCurrentMonth()))  
 				+ ((currentUser.getCurrentDay() < 10) ? ("0" + Integer.toString(currentUser.getCurrentDay())) : Integer.toString(currentUser.getCurrentDay())) );
 		int deadLine = 0;
@@ -543,30 +533,30 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){
 				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t1)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate)
-						disableT1();
+					if (deadLine <= currentDate) blockT1 = true;
+					else blockT1 = false;
 				}
 				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t2)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate)
-						disableT2();
-				}				
+					if (deadLine <= currentDate) blockT2 = true;
+					else blockT2 = false;
+				}
 			}
 			else {
 				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t1)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate)
-						disableT1();
+					if (deadLine <= currentDate) blockT1 = true;
+					else blockT1 = false;
 				}
 				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t2)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate)
-						disableT2();
+					if (deadLine <= currentDate) blockT2 = true;
+					else blockT2 = false;
 				}
 				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t3)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate)
-						disableT3();
+					if (deadLine <= currentDate) blockT3 = true;
+					else blockT3 = false;
 				}
 			}
 		}
@@ -575,39 +565,39 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	/*
 	 * 
 	 * */
-	private void disableT1() {
+	private void blockT1(boolean block) {
 		// 
-		txt_t_1_1.setReadOnly(true);
-		txt_t_1_2.setReadOnly(true);
-		txt_t_1_3.setReadOnly(true);
-		txt_t_1_4.setReadOnly(true);
-		txt_t_1_5.setReadOnly(true);
-		txtRemarque1.setReadOnly(true);
+		txt_t_1_1.setEnabled(!block);
+		txt_t_1_2.setEnabled(!block);
+		txt_t_1_3.setEnabled(!block);
+		txt_t_1_4.setEnabled(!block);
+		txt_t_1_5.setEnabled(!block);
+		txtRemarque1.setEnabled(!block);
 	}
 	
 	/*
 	 * 
 	 * */
-	private void disableT2() {
+	private void blockT2(boolean block) {
 		// 
-		txt_t_2_1.setReadOnly(true);
-		txt_t_2_2.setReadOnly(true);
-		txt_t_2_3.setReadOnly(true);
-		txt_t_2_4.setReadOnly(true);
-		txt_t_2_5.setReadOnly(true);
-		txtRemarque2.setReadOnly(true);
+		txt_t_2_1.setEnabled(!block);
+		txt_t_2_2.setEnabled(!block);
+		txt_t_2_3.setEnabled(!block);
+		txt_t_2_4.setEnabled(!block);
+		txt_t_2_5.setEnabled(!block);
+		txtRemarque2.setEnabled(!block);
 	}
 	
 	/*
 	 * 
 	 * */
-	private void disableT3() {
+	private void blockT3(boolean block) {
 		// 
-		txt_t_3_1.setReadOnly(true);
-		txt_t_3_2.setReadOnly(true);
-		txt_t_3_3.setReadOnly(true);
-		txt_t_3_4.setReadOnly(true);
-		txt_t_3_5.setReadOnly(true);
-		txtRemarque3.setReadOnly(true);
+		txt_t_3_1.setEnabled(!block);
+		txt_t_3_2.setEnabled(!block);
+		txt_t_3_3.setEnabled(!block);
+		txt_t_3_4.setEnabled(!block);
+		txt_t_3_5.setEnabled(!block);
+		txtRemarque3.setEnabled(!block);
 	}
 }

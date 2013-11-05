@@ -104,7 +104,7 @@ public class MyDAOBase extends DAOBase {
         	ObjectifyService.register(Bulletin.class);
         } catch (Exception e) {
         	// do nothing
-        }
+        }		
 		
 		try {
         	ObjectifyService.register(BulletinSubject.class);
@@ -116,6 +116,6 @@ public class MyDAOBase extends DAOBase {
         	ObjectifyService.register(BulletinBranche.class);
         } catch (Exception e) {
         	// do nothing
-        }
+        }				
 	}
 }

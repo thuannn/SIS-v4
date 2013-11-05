@@ -8,6 +8,8 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.CheckDeadlineEvent;
+import com.lemania.sis.client.event.CheckDeadlineEvent.CheckDeadlineHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -46,7 +48,7 @@ import com.lemania.sis.shared.service.SettingOptionRequestFactory.SettingOptionR
 public class FrmMarkInputPresenter extends
 		Presenter<FrmMarkInputPresenter.MyView, FrmMarkInputPresenter.MyProxy> 
 		implements 
-		FrmMarkInputUiHandler, LoginAuthenticatedHandler {
+		FrmMarkInputUiHandler, LoginAuthenticatedHandler, CheckDeadlineHandler {
 	
 	// Thuan
 	private CurrentUser currentUser;
@@ -202,10 +204,12 @@ public class FrmMarkInputPresenter extends
 				Window.alert(error.getMessage());
 			}
 			@Override
-			public void onSuccess(List<BulletinSubjectProxy> response) {
+			public void onSuccess(List<BulletinSubjectProxy> response) {				
+				//
 				getView().setBulletinSubjectTableData(response);
-				getView().modifyUiByProgramme();
-				checkDeadLine();
+				getView().modifyUiByProgramme();				
+				//
+				getEventBus().fireEvent(new CheckDeadlineEvent());
 			}
 		});
 	}
@@ -369,5 +373,13 @@ public class FrmMarkInputPresenter extends
 				getView().showUpdatedBulletinDetails(bulletinBranche, response);
 			}
 		});
+	}
+
+	
+	@ProxyEvent
+	@Override
+	public void onCheckDeadline(CheckDeadlineEvent event) {
+		// 
+		checkDeadLine();
 	}
 }

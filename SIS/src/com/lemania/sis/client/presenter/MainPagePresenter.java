@@ -206,7 +206,7 @@ public class MainPagePresenter extends
 	public void onActionInProgress(ActionInProgressEvent event) {
 		// 
 		getView().showProgressBar(true);
-		getView().enableMainPanel(false);
+		// getView().enableMainPanel(false);
 	}
 
 	@ProxyEvent
@@ -214,7 +214,7 @@ public class MainPagePresenter extends
 	public void onActionCompleted(ActionCompletedEvent event) {
 		// 
 		getView().showProgressBar(false);
-		getView().enableMainPanel(true);
+		// getView().enableMainPanel(true);
 	}
 
 	@Override
