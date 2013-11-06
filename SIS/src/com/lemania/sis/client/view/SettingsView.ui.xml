@@ -7,10 +7,123 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2" height="749px">
+		<g:VerticalPanel width="100%" spacing="2" height="">
 			<g:Label text="GESTION DE L&apos;ACCES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<g:FlowPanel ui:field="pnlAdmin">
+			<g:Label text="Choisir la date de blocage pour chaque trimestre de chaque programme."/>
+			<g:VerticalPanel spacing="10">
+				<g:VerticalPanel width="400px" styleName="subSection">
+				<g:Label text="Maturité Suisse" styleName="sectionTitle"/>
 				<g:Grid cellPadding="5" cellSpacing="5">
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="Jour"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="Mois"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="Année"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Trimestre 1 :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="dayMatuT1"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="monthMatuT1"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="yearMatuT1"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Trimestre 2 :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="dayMatuT2"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="monthMatuT2"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="yearMatuT2"/>
+					</g:customCell>
+				</g:row>				
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Enregistrer" ui:field="cmdSaveDateMatu"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+			</g:VerticalPanel>
+				<g:VerticalPanel width="400px" styleName="subSection">
+				<g:Label styleName="sectionTitle" text="Etudes Secondaires"/>
+				<g:Grid cellPadding="5" cellSpacing="5">
+				<g:row>
+					<g:customCell>
+						<g:Label text="Trimestre 1 :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="dayEST1"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="monthEST1"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="yearEST1"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Trimestre 2 :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="dayEST2"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="monthEST2"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="yearEST2"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Trimestre 3 :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="dayEST3"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="monthEST3"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="yearEST3"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Enregistrer" ui:field="cmdSaveDateES"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+			</g:VerticalPanel>
+				<g:FlowPanel ui:field="pnlAdmin" styleName="subSection" width="550px">
+				<g:Label text="Admin" styleName="sectionTitle"/>
+				<g:Grid cellPadding="5" cellSpacing="5" width="">
 				<g:row>
 					<g:customCell>
 						<g:Label text="Bloquer automatiquement l&apos;accès au système le "/>
@@ -66,113 +179,7 @@
 			</g:Grid>
 				<g:Label styleName="hiddenText" text="."/>
 			</g:FlowPanel>
-			<g:Label text="Choisir la date de blocage pour chaque trimestre dans l&apos;année"/>
-			<g:Label text="Maturité Suisse" styleName="sectionTitle"/>
-			<g:Grid cellPadding="5" cellSpacing="5">
-				<g:row>
-					<g:customCell>
-						<g:Label text="."/>
-					</g:customCell>
-					<g:customCell>
-						<g:Label text="Jour"/>
-					</g:customCell>
-					<g:customCell>
-						<g:Label text="Mois"/>
-					</g:customCell>
-					<g:customCell>
-						<g:Label text="Année"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="Trimestre 1 :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="dayMatuT1"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="monthMatuT1"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="yearMatuT1"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="Trimestre 2 :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="dayMatuT2"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="monthMatuT2"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="yearMatuT2"/>
-					</g:customCell>
-				</g:row>				
-				<g:row>
-					<g:customCell>
-						<g:Label text="."/>
-					</g:customCell>
-					<g:customCell>
-						<g:Button text="Enregistrer" ui:field="cmdSaveDateMatu"/>
-					</g:customCell>
-				</g:row>
-			</g:Grid>
-			<g:Label styleName="sectionTitle" text="Etudes Secondaires"/>
-			<g:Grid cellPadding="5" cellSpacing="5">
-				<g:row>
-					<g:customCell>
-						<g:Label text="Trimestre 1 :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="dayEST1"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="monthEST1"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="yearEST1"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="Trimestre 2 :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="dayEST2"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="monthEST2"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="yearEST2"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="Trimestre 3 :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="dayEST3"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="monthEST3"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="yearEST3"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="."/>
-					</g:customCell>
-					<g:customCell>
-						<g:Button text="Enregistrer" ui:field="cmdSaveDateES"/>
-					</g:customCell>
-				</g:row>
-			</g:Grid>
+			</g:VerticalPanel>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

@@ -43,12 +43,18 @@
 							</g:VerticalPanel>
 						</g:customCell>
 						<g:customCell>
-							<g:HTML wordWrap="true" styleName="bulletinNote" width="">Critère de réussite :
+							<g:HTML wordWrap="true" styleName="bulletinNote" width="" ui:field="lblConditionMatu" visible="false">Critère de réussite :
 <ul>
 <li>Meilleure note :  6</li>
 <li>Moyenne : 4</li>
 </ul>
 La note moyenne indiquée est calculée en fonction des critères de réussite du diplôme postulé.</g:HTML>
+						</g:customCell>
+						<g:customCell>
+							<g:HTML styleName="bulletinNote" width="" wordWrap="true" ui:field="lblConditionES" visible="false">Critère de réussite : <ul> <li>Meilleure note : 10</li> <li>Moyenne : 6</li> </ul> La note moyenne indiquée est calculée en fonction des critères de réussite du diplôme postulé.</g:HTML>
+						</g:customCell>
+						<g:customCell>
+							<g:HTML styleName="bulletinNote" width="" wordWrap="true" ui:field="lblConditionBac" visible="false">Critère de réussite : <ul> <li>Meilleure note : 20</li> <li>Moyenne : 10</li> </ul> La note moyenne indiquée est calculée en fonction des critères de réussite du diplôme postulé.</g:HTML>
 						</g:customCell>
 					</g:row>
 				</g:Grid>

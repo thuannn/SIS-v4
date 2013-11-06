@@ -31,6 +31,7 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.HTML;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
 		FrmBulletinViewSummaryPresenter.MyView {
@@ -73,6 +74,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField Label lblYear;
 	@UiField Label lblDate;
 	@UiField VerticalPanel pnlBulletinNotes;
+	@UiField HTML lblConditionMatu;
+	@UiField HTML lblConditionES;
+	@UiField HTML lblConditionBac;
 	
 	
 	/**/
@@ -150,6 +154,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 5, "Exa. Semes.");
 		tblNotes.setText(0, 6, "Moyenne Semes.");
 		tblNotes.setText(0, 7, "Remarques relatives à la période d'évaluation");
+		//
+		lblConditionMatu.setVisible(false);
+		lblConditionES.setVisible(true);
+		lblConditionBac.setVisible(false);
 	}
 	
 	
@@ -169,6 +177,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 8, "Moyenne Annuelle");
 		tblNotes.setText(0, 9, "Remarques relatives à la période d'évaluation");
 		tblNotes.getRowFormatter().setStyleName(0, "bulletinHeader");
+		//
+		lblConditionMatu.setVisible(false);
+		lblConditionES.setVisible(false);
+		lblConditionBac.setVisible(true);
 	}
 	
 	
@@ -184,6 +196,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 4, "T3");
 		tblNotes.setText(0, 5, "Moyenne Annuelle");
 		tblNotes.getRowFormatter().setStyleName(0, "bulletinHeader");
+		//
+		lblConditionMatu.setVisible(false);
+		lblConditionES.setVisible(true);
+		lblConditionBac.setVisible(false);
 	}
 	
 	
