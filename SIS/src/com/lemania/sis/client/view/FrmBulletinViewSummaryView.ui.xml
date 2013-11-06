@@ -24,15 +24,11 @@
 			<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
 				<g:VerticalPanel ui:field="pnlMainBulletin" width="80%" horizontalAlignment="ALIGN_CENTER">
 				<g:VerticalPanel width="" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin" verticalAlignment="ALIGN_TOP">
+					<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
+						<g:Image url="images/logo_lemania.png" width="" height="" ui:field="imgLogo"/>
+						<g:Label text="BULLETIN DE NOTES" styleName="bulletinTitle"/>
+					</g:HorizontalPanel>
 				<g:Grid width="100%">
-					<g:row>
-						<g:customCell>
-							<g:Image url="images/logo_lemania.png" width="" height="" ui:field="imgLogo"/>
-						</g:customCell>
-						<g:customCell>
-							<g:Label text="BULLETIN DE NOTES" styleName="bulletinTitle"/>
-						</g:customCell>
-					</g:row>
 					<g:row>
 						<g:customCell>
 							<g:VerticalPanel spacing="5">

@@ -223,6 +223,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;		
+		Double totalMoyenne = 0.0;
+		Double totalCoef = 0.0;
 		//
 		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
@@ -239,21 +241,28 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
 							: subjects.get(rowCount).getRemarqueT1() ) ) );			
 			//
+			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
 			rowCount++;
 		}
 				
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, "");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
 		tblNotes.setText(rowCount, 5, "");
 		tblNotes.setText(rowCount, 6, "");
 		tblNotes.setText(rowCount, 7, "");
-		tblNotes.setText(rowCount, 8, "");
+		tblNotes.setText(rowCount, 8, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
 		tblNotes.setText(rowCount, 9, "");
+		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
+			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 		
 		//
 		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
@@ -270,6 +279,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;
+		Double totalMoyenne = 0.0;
+		Double totalCoef = 0.0;
 		//
 		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
@@ -278,23 +289,31 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 3, subjects.get( rowCount ).getT2().toString());
 			tblNotes.setText(i, 4, subjects.get( rowCount ).getT3().toString());
 			tblNotes.setText(i, 5, subjects.get( rowCount ).getAn());
+			//
+			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
 			rowCount++;
 		}
 		
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, "");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, "");
 		tblNotes.setText(rowCount, 4, "");
-		tblNotes.setText(rowCount, 5, "");
+		tblNotes.setText(rowCount, 5, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
+		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
+			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 		
 		//
 		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
 		
 		//
-		styleESTable();		
+		styleESTable();
 	}
 	
 
@@ -360,6 +379,28 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.getCellFormatter().setStyleName(0, 0, "bulletinHeader");
 		tblNotes.getCellFormatter().setStyleName(0, tblNotes.getCellCount(0)-1, "bulletinHeader");		
 		//
+		for (int i=0; i<tblNotes.getCellCount(0); i++) {
+			for (int j=1; j<tblNotes.getRowCount(); j++) {
+				if (tblNotes.isCellPresent(j, i)) {
+					if (tblNotes.getCellFormatter().getStyleName(j, i).equals(""))
+						tblNotes.getCellFormatter().setStyleName(j, i, "bulletinBrancheLine");
+				}				
+			}
+		}
+	}
+	
+	
+	/**/
+	private void styleBacTable() {
+		//		
+		tblNotes.setCellSpacing(0);
+		tblNotes.setCellPadding(3);		
+		//
+		for (int i=1; i<tblNotes.getCellCount(0)-1; i++)
+			tblNotes.getCellFormatter().setStyleName(0, i, "bulletinHeaderNote");
+		tblNotes.getCellFormatter().setStyleName(0, 0, "bulletinHeader");
+		tblNotes.getCellFormatter().setStyleName(0, tblNotes.getCellCount(0)-1, "bulletinHeader");		
+		//
 		for (int i=0; i<tblNotes.getCellCount(0); i++)
 			for (int j=1; j<tblNotes.getRowCount(); j++) {
 				if (tblNotes.isCellPresent(j, i)) {
@@ -371,34 +412,21 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	
 	
 	/**/
-	private void styleBacTable() {
-		//		
-		tblNotes.setCellSpacing(0);
-		tblNotes.setCellPadding(3);
-		tblNotes.setStyleName("subSection");
-		//
-		for (int i=0; i<10; i++)
-			for (int j=1; j<tblNotes.getRowCount(); j++) {
-				if (tblNotes.isCellPresent(j, i)) {
-					if (tblNotes.getCellFormatter().getStyleName(j, i).equals(""))
-						tblNotes.getCellFormatter().setStyleName(j, i, "brancheLine");
-				}
-			}
-	}
-	
-	
-	/**/
 	private void styleESTable() {
 		//		
 		tblNotes.setCellSpacing(0);
 		tblNotes.setCellPadding(3);
-		tblNotes.setStyleName("subSection");
+		//
+		for (int i=1; i<tblNotes.getCellCount(0)-1; i++)
+			tblNotes.getCellFormatter().setStyleName(0, i, "bulletinHeaderNote");
+		tblNotes.getCellFormatter().setStyleName(0, 0, "bulletinHeader");
+		tblNotes.getCellFormatter().setStyleName(0, tblNotes.getCellCount(0)-1, "bulletinHeader");
 		//
 		for (int i=0; i<6; i++)
 			for (int j=1; j<tblNotes.getRowCount(); j++) {
 				if (tblNotes.isCellPresent(j, i)) {
 					if (tblNotes.getCellFormatter().getStyleName(j, i).equals(""))
-						tblNotes.getCellFormatter().setStyleName(j, i, "brancheLine");
+						tblNotes.getCellFormatter().setStyleName(j, i, "bulletinBrancheLine");
 				}
 			}
 	}
