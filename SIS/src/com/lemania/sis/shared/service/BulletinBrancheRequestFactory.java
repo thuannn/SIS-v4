@@ -29,6 +29,8 @@ public interface BulletinBrancheRequestFactory extends RequestFactory {
 		Request<List<BulletinBrancheProxy>> addRelatedBranches( BulletinSubjectProxy bulletinSubject );
 		
 		Request<Void> removeBulletinBranche(BulletinBrancheProxy bulletinBranche);
+		
+		Request<Void> refreshBulletinBrancheNames(String oldBrancheName, String newBrancheName);
 	}
 	
 	BulletinBrancheRequestContext bulletinBrancheRequest();

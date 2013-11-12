@@ -10,7 +10,7 @@ public interface SettingOptionsUiHandler extends UiHandlers{
 	//
 	void updateCurrentEcole( String ecoleCode );
 	//
-	public void fixStudentName();
+	public void fixStudentName();	
 	//
 	public void updateDeadlinesMatu(String deadlineT1, String deadlineT2);
 	public void updateDeadlinesES(String deadlineT1, String deadlineT2, String deadlineT3);

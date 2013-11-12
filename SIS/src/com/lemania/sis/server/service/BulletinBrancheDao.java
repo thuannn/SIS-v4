@@ -16,7 +16,6 @@ import com.lemania.sis.server.ProfileSubject;
 
 public class BulletinBrancheDao extends MyDAOBase {
 	/*
-	 * 
 	 * */
 	public void initialize(){
 		return;
@@ -24,7 +23,6 @@ public class BulletinBrancheDao extends MyDAOBase {
 	
 	
 	/*
-	 * 
 	 * */
 	public List<BulletinBranche> listAll(){
 		//
@@ -37,11 +35,22 @@ public class BulletinBrancheDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	/*
+	 * */
+	public void refreshBulletinBrancheNames(String oldBrancheName, String newBrancheName){
+		//
+		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class).filter("bulletinBrancheName", oldBrancheName);
+		List<BulletinBranche> branches = new ArrayList<BulletinBranche>();
+		for (BulletinBranche bulletinBranche : q) {
+			bulletinBranche.setBulletinBrancheName( newBrancheName );
+			branches.add(bulletinBranche);
+		}
+		this.ofy().put(branches);
+	}
 	
 	/*
-	 * 
 	 * */
-	public List<BulletinBranche> listAllActive(){
+	public List<BulletinBranche> listAllActive() {
 		//
 		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
 				.filter("isActive", true);
@@ -56,7 +65,6 @@ public class BulletinBrancheDao extends MyDAOBase {
 	
 	
 	/*
-	 * 
 	 * */
 	public List<BulletinBranche> listAll( String bulletinSubjectId ){
 		//
@@ -73,9 +81,8 @@ public class BulletinBrancheDao extends MyDAOBase {
 	
 	
 	/*
-	 * 
 	 * */
-	public List<BulletinBranche> listAllByBulletin( String bulletinId ){
+	public List<BulletinBranche> listAllByBulletin( String bulletinId ) {
 		//
 		List<BulletinBranche> returnList = new ArrayList<BulletinBranche>();
 		Query<BulletinBranche> q;
@@ -85,7 +92,8 @@ public class BulletinBrancheDao extends MyDAOBase {
 		for (BulletinSubject subject : qSubject ){
 			//
 			q = this.ofy().query(BulletinBranche.class)
-					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, subject.getId()));
+					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, subject.getId()))
+					.order("bulletinBrancheName");
 			for ( BulletinBranche bulletinBranche : q ){
 				bulletinBranche.setBulletinSubjectId( subject.getId() );
 				returnList.add( bulletinBranche );
