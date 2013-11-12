@@ -252,6 +252,12 @@ public class SettingsPresenter
 	 * 
 	 * */
 	private void saveDeadline(String code, String value) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
 		// 
 		SettingOptionRequestFactory rf = GWT.create(SettingOptionRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -283,5 +289,21 @@ public class SettingsPresenter
 		saveDeadline(NotificationTypes.deadline_es_t1, deadlineT1);
 		saveDeadline(NotificationTypes.deadline_es_t2, deadlineT2);	
 		saveDeadline(NotificationTypes.deadline_es_t3, deadlineT3);
+	}
+
+	/*
+	 * */
+	@Override
+	public void updateDeadlinesBAC(String deadlineT1, String deadlineT2,
+			String deadlineT3) {
+		// 
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
+		saveDeadline(NotificationTypes.deadline_bac_t1, deadlineT1);
+		saveDeadline(NotificationTypes.deadline_bac_t2, deadlineT2);	
+		saveDeadline(NotificationTypes.deadline_bac_t3, deadlineT3);
 	}
 }

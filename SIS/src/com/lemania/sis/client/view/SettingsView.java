@@ -25,18 +25,25 @@ public class SettingsView
 
 	private final Widget widget;
 
+	/*
+	 * */
 	public interface Binder extends UiBinder<Widget, SettingsView> {
 	}
 
+	/*
+	 * */
 	@Inject
 	public SettingsView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
 	}
 
+	/*
+	 * */
 	@Override
 	public Widget asWidget() {
 		return widget;
 	}
+	
 	@UiField Button cmdSave;
 	@UiField SimpleCheckBox blnBlock;
 	@UiField ListBox lstDays;
@@ -61,9 +68,18 @@ public class SettingsView
 	@UiField ListBox monthEST2;
 	@UiField ListBox yearEST1;
 	@UiField ListBox yearEST2;
+	@UiField Button cmdSaveDateBac;
+	@UiField ListBox dayBacT1;
+	@UiField ListBox dayBacT2;
+	@UiField ListBox monthBacT1;
+	@UiField ListBox monthBacT2;
+	@UiField ListBox yearBacT1;
+	@UiField ListBox yearBacT2;
+	@UiField ListBox dayBacT3;
+	@UiField ListBox monthBacT3;
+	@UiField ListBox yearBacT3;
 	
 	/*
-	 * 
 	 * */
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
@@ -75,7 +91,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	@Override
 	public void setUpdateStatus(String text) {
@@ -83,7 +98,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	@Override
 	public void initializeInterface(boolean isAdmin) {
@@ -99,12 +113,18 @@ public class SettingsView
 		lstEcoles.addItem("Pierre Viret", NotificationTypes.pierreViret);
 		
 		//
+		clearDateLists();
+		//
 		initializeDayList(dayMatuT1);
 		initializeDayList(dayMatuT2);		
 		
 		initializeDayList(dayEST1);
 		initializeDayList(dayEST2);
 		initializeDayList(dayEST3);
+		
+		initializeDayList(dayBacT1);
+		initializeDayList(dayBacT2);
+		initializeDayList(dayBacT3);
 
 		//
 		initializeMonthList(monthMatuT1);
@@ -114,6 +134,10 @@ public class SettingsView
 		initializeMonthList(monthEST2);
 		initializeMonthList(monthEST3);
 		
+		initializeMonthList(monthBacT1);
+		initializeMonthList(monthBacT2);
+		initializeMonthList(monthBacT3);
+		
 		//
 		initializeYearList(yearMatuT1);
 		initializeYearList(yearMatuT2);		
@@ -121,6 +145,10 @@ public class SettingsView
 		initializeYearList(yearEST1);
 		initializeYearList(yearEST2);
 		initializeYearList(yearEST3);
+		
+		initializeYearList(yearBacT1);
+		initializeYearList(yearBacT2);
+		initializeYearList(yearBacT3);
 
 		// Show admin panel for thuannn@gmail.com
 		if (isAdmin)
@@ -130,7 +158,46 @@ public class SettingsView
 	}
 
 	/*
-	 * 
+	 * */
+	private void clearDateLists() {
+		//
+		dayMatuT1.clear();
+		dayMatuT2.clear();		
+		
+		dayEST1.clear();
+		dayEST2.clear();
+		dayEST3.clear();
+		
+		dayBacT1.clear();
+		dayBacT2.clear();
+		dayBacT3.clear();
+
+		//
+		monthMatuT1.clear();
+		monthMatuT2.clear();		
+		
+		monthEST1.clear();
+		monthEST2.clear();
+		monthEST3.clear();
+		
+		monthBacT1.clear();
+		monthBacT2.clear();
+		monthBacT3.clear();
+		
+		//
+		yearMatuT1.clear();
+		yearMatuT2.clear();		
+		
+		yearEST1.clear();
+		yearEST2.clear();
+		yearEST3.clear();
+		
+		yearBacT1.clear();
+		yearBacT2.clear();
+		yearBacT3.clear();
+	}
+
+	/*
 	 * */
 	private void initializeYearList(ListBox yearList) {
 		// 
@@ -139,7 +206,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	private void initializeMonthList(ListBox monthList) {
 		// 		
@@ -148,7 +214,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	private void initializeDayList(ListBox dayList) {
 		//
@@ -157,7 +222,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	@Override
 	public void populateCurrentSettings(List<SettingOptionProxy> settingOptions) {
@@ -188,11 +252,17 @@ public class SettingsView
 				setSelectedDate(setting.getOptionValue(), dayEST2, monthEST2, yearEST2);
 			if (setting.getOptionName().equals(NotificationTypes.deadline_es_t3))
 				setSelectedDate(setting.getOptionValue(), dayEST3, monthEST3, yearEST3);
+			//
+			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t1))
+				setSelectedDate(setting.getOptionValue(), dayBacT1, monthBacT1, yearBacT1);
+			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t2))
+				setSelectedDate(setting.getOptionValue(), dayBacT2, monthBacT2, yearBacT2);
+			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t3))
+				setSelectedDate(setting.getOptionValue(), dayBacT3, monthBacT3, yearBacT3);
 		}
 	}
 	
 	/*
-	 * 
 	 * */
 	private void setSelectedDate(String optionValue, ListBox dayList, ListBox monthList, ListBox yearList) {
 		//
@@ -204,7 +274,6 @@ public class SettingsView
 	}
 
 	/*
-	 * 
 	 * */
 	@UiHandler("cmdFixStudentName")
 	void onCmdFixStudentNameClick(ClickEvent event) {
@@ -213,7 +282,6 @@ public class SettingsView
 	}
 	
 	/*
-	 * 
 	 * */
 	@UiHandler("cmdSaveDateMatu")
 	void onCmdSaveDateMatuClick(ClickEvent event) {		
@@ -223,7 +291,6 @@ public class SettingsView
 	}
 	
 	/*
-	 * 
 	 * */
 	@UiHandler("cmdSaveDateES")
 	void onCmdSaveDateESClick(ClickEvent event) {
@@ -231,5 +298,16 @@ public class SettingsView
 				yearEST1.getValue(yearEST1.getSelectedIndex()) + monthEST1.getValue(monthEST1.getSelectedIndex()) + dayEST1.getValue(dayEST1.getSelectedIndex()),
 				yearEST2.getValue(yearEST2.getSelectedIndex()) + monthEST2.getValue(monthEST2.getSelectedIndex()) + dayEST2.getValue(dayEST2.getSelectedIndex()),
 				yearEST3.getValue(yearEST3.getSelectedIndex()) + monthEST3.getValue(monthEST3.getSelectedIndex()) + dayEST3.getValue(dayEST3.getSelectedIndex()));
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSaveDateBac")
+	void onCmdSaveDateBacClick(ClickEvent event) {
+		getUiHandlers().updateDeadlinesBAC(
+				yearBacT1.getValue(yearBacT1.getSelectedIndex()) + monthBacT1.getValue(monthBacT1.getSelectedIndex()) + dayBacT1.getValue(dayBacT1.getSelectedIndex()),
+				yearBacT2.getValue(yearBacT2.getSelectedIndex()) + monthBacT2.getValue(monthBacT2.getSelectedIndex()) + dayBacT2.getValue(dayBacT2.getSelectedIndex()),
+				yearBacT3.getValue(yearBacT3.getSelectedIndex()) + monthBacT3.getValue(monthBacT3.getSelectedIndex()) + dayBacT3.getValue(dayBacT3.getSelectedIndex()));
 	}
 }

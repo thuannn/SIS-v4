@@ -41,9 +41,13 @@ public class NotificationTypes {
 	
 	// Setting codes
 	public static String deadline_matu_t1 = "BLOCK_MATU_T1";
-	public static String deadline_matu_t2 = "BLOCK_MATU_T2";	
+	public static String deadline_matu_t2 = "BLOCK_MATU_T2";
 	//
 	public static String deadline_es_t1 = "BLOCK_ES_T1";
 	public static String deadline_es_t2 = "BLOCK_ES_T2";
 	public static String deadline_es_t3 = "BLOCK_ES_T3";
+	//
+	public static String deadline_bac_t1 = "BLOCK_BAC_T1";
+	public static String deadline_bac_t2 = "BLOCK_BAC_T2";
+	public static String deadline_bac_t3 = "BLOCK_BAC_T3";	
 }

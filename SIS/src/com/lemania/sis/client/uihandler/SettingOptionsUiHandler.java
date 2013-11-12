@@ -14,4 +14,5 @@ public interface SettingOptionsUiHandler extends UiHandlers{
 	//
 	public void updateDeadlinesMatu(String deadlineT1, String deadlineT2);
 	public void updateDeadlinesES(String deadlineT1, String deadlineT2, String deadlineT3);
+	public void updateDeadlinesBAC(String deadlineT1, String deadlineT2, String deadlineT3);
 }

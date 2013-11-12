@@ -7,11 +7,12 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2" height="">
+		<g:VerticalPanel width="939px" spacing="2" height="">
 			<g:Label text="GESTION DE L&apos;ACCES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:Label text="Choisir la date de blocage pour chaque trimestre de chaque programme."/>
 			<g:VerticalPanel spacing="10">
-				<g:VerticalPanel width="400px" styleName="subSection">
+				<g:HorizontalPanel spacing="5">
+					<g:VerticalPanel width="" styleName="subSection">
 				<g:Label text="Maturité Suisse" styleName="sectionTitle"/>
 				<g:Grid cellPadding="5" cellSpacing="5">
 				<g:row>
@@ -55,6 +56,11 @@
 					<g:customCell>
 						<g:ListBox ui:field="yearMatuT2"/>
 					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label styleName="hiddenText" text="." height="26px"/>
+					</g:customCell>
 				</g:row>				
 				<g:row>
 					<g:customCell>
@@ -66,7 +72,78 @@
 				</g:row>
 			</g:Grid>
 			</g:VerticalPanel>
-				<g:VerticalPanel width="400px" styleName="subSection">
+					<g:VerticalPanel styleName="subSection">
+						<g:Label styleName="sectionTitle" text="Baccalauréat Français"/>
+						<g:Grid cellPadding="5" cellSpacing="5">
+							<g:row>
+								<g:customCell>
+									<g:Label styleName="hiddenText" text="."/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="Jour"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="Mois"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="Année"/>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Trimestre 1 :"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="dayBacT1"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="monthBacT1"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="yearBacT1"/>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Trimestre 2 :"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="dayBacT2"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="monthBacT2"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="yearBacT2"/>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Trimestre 3 :"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="dayBacT3"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="monthBacT3"/>
+								</g:customCell>
+								<g:customCell>
+									<g:ListBox ui:field="yearBacT3"/>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Label styleName="hiddenText" text="."/>
+								</g:customCell>
+								<g:customCell>
+									<g:Button text="Enregistrer" ui:field="cmdSaveDateBac"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:VerticalPanel>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel spacing="5">
+					<g:VerticalPanel width="" styleName="subSection">
 				<g:Label styleName="sectionTitle" text="Etudes Secondaires"/>
 				<g:Grid cellPadding="5" cellSpacing="5">
 				<g:row>
@@ -121,6 +198,7 @@
 				</g:row>
 			</g:Grid>
 			</g:VerticalPanel>
+				</g:HorizontalPanel>
 				<g:FlowPanel ui:field="pnlAdmin" styleName="subSection" width="550px">
 				<g:Label text="Admin" styleName="sectionTitle"/>
 				<g:Grid cellPadding="5" cellSpacing="5" width="">

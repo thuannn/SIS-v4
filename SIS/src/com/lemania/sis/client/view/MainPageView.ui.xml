@@ -80,7 +80,7 @@
 						</g:TreeItem>
 						<g:TreeItem text="Gestion de l&apos;accès">
 							<g:Hyperlink text="Gestion des codes d&apos;accès" targetHistoryToken="usermanagement" ui:field="cmdUserManagement"/>
-							<g:Hyperlink targetHistoryToken="settings" text="Bloquer l&apos;accès au système" ui:field="cmdSettings"/>
+							<g:Hyperlink targetHistoryToken="settings" text="Gérer les dates limites" ui:field="cmdSettings"/>
 						</g:TreeItem>
 					</g:TreeItem>
 					<g:TreeItem text="Autres" state="true">

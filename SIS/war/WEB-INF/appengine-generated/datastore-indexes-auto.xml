@@ -1,4 +1,90 @@
-<!-- Indices written at Wed, 6 Nov 2013 09:46:38 CET -->
+<!-- Indices written at Fri, 8 Nov 2013 16:24:46 CET -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 4 times in query history -->
+    <datastore-index kind="Cours" ancestor="false" source="auto">
+        <property name="ecole" direction="asc"/>
+        <property name="coursNom" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 3 times in query history -->
+    <datastore-index kind="Student" ancestor="false" source="auto">
+        <property name="isActive" direction="asc"/>
+        <property name="LastName" direction="asc"/>
+        <property name="FirstName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 6 times in query history -->
+    <datastore-index kind="Profile" ancestor="false" source="auto">
+        <property name="classe" direction="asc"/>
+        <property name="isActive" direction="asc"/>
+        <property name="profileName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
+        <property name="profile" direction="asc"/>
+        <property name="subjectName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Assignment" ancestor="false" source="auto">
+        <property name="classe" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="prof" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Assignment" ancestor="false" source="auto">
+        <property name="prof" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="classe" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Classe" ancestor="false" source="auto">
+        <property name="programme" direction="asc"/>
+        <property name="className" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ProfileBranche" ancestor="false" source="auto">
+        <property name="profileSubject" direction="asc"/>
+        <property name="profileBrancheName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ProfileBranche" ancestor="false" source="auto">
+        <property name="profileSubject" direction="asc"/>
+        <property name="profileBranche" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Assignment" ancestor="false" source="auto">
+        <property name="active" direction="asc"/>
+        <property name="prof" direction="asc"/>
+        <property name="classe" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
+        <property name="professor" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="subjectName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Student" ancestor="false" source="auto">
+        <property name="LastName" direction="asc"/>
+        <property name="FirstName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Bulletin" ancestor="false" source="auto">
+        <property name="classe" direction="asc"/>
+        <property name="classeName" direction="asc"/>
+        <property name="studentName" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

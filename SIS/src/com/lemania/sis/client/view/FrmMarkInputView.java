@@ -542,6 +542,24 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 					else blockT2 = false;
 				}
 			}
+			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("bac") 
+					&& lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("fran") ) {
+				if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t1)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate) blockT1 = true;
+					else blockT1 = false;
+				}
+				if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t2)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate) blockT2 = true;
+					else blockT2 = false;
+				}
+				if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t3)) {
+					deadLine = Integer.parseInt( setting.getOptionValue() );
+					if (deadLine <= currentDate) blockT3 = true;
+					else blockT3 = false;
+				}
+			}
 			else {
 				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t1)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
