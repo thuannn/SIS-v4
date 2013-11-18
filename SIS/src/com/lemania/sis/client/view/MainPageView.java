@@ -83,6 +83,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdHelpStudent;
 	@UiField Image imgLogo;
 	@UiField Label txtCopyright;
+	@UiField Hyperlink cmdEvaluationList;
+	@UiField Hyperlink cmdEvaluationInput;
 	
 	
 	// Thuan
@@ -331,6 +333,9 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			switchStyle(this.cmdHelpStudent, false, true);
 		}
 		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin, false, false);
+		//
+		if (tokenName.equals(NameTokens.evaluationlist)) switchStyle(this.cmdEvaluationList, false, false);
+		if (tokenName.equals(NameTokens.evaluationinput)) switchStyle(this.cmdEvaluationInput, false, false);
 	}
 	
 	

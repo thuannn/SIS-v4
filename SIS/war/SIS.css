@@ -269,6 +269,9 @@ body {
 	width: 300px;
 	background-color: whitesmoke;
 }
+.sis-combobox {
+	width: 200px;
+}
 
 
 /* Bulletins */

@@ -42,6 +42,8 @@ import com.lemania.sis.client.presenter.UserManagementPresenter;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.presenter.FrmPasswordPresenter;
 import com.lemania.sis.client.place.SISPlaceManager;
+import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
+import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
 import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.presenter.StudentAddPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
@@ -57,6 +59,8 @@ import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
+import com.lemania.sis.client.view.FrmEvaluationReportListView;
+import com.lemania.sis.client.view.FrmEvaluationInputView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -166,5 +170,15 @@ public class ClientModule extends AbstractPresenterModule {
 				FrmBulletinViewSummaryPresenter.MyView.class,
 				FrmBulletinViewSummaryView.class,
 				FrmBulletinViewSummaryPresenter.MyProxy.class);
+
+		bindPresenter(FrmEvaluationReportListPresenter.class,
+				FrmEvaluationReportListPresenter.MyView.class,
+				FrmEvaluationReportListView.class,
+				FrmEvaluationReportListPresenter.MyProxy.class);
+
+		bindPresenter(FrmEvaluationInputPresenter.class,
+				FrmEvaluationInputPresenter.MyView.class,
+				FrmEvaluationInputView.class,
+				FrmEvaluationInputPresenter.MyProxy.class);
 	}
 }

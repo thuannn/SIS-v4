@@ -33,6 +33,8 @@ public class NameTokens {
 	public static final String bulletindetail = "bulletindetail";
 	public static final String bulletinmanagement = "bulletinmanagement";
 	public static final String bulletin = "bulletin";
+	public static final String evaluationlist = "evaluationlist";
+	public static final String evaluationinput = "evaluationinput";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -160,5 +162,13 @@ public class NameTokens {
 
 	public static String getBulletin() {
 		return bulletin;
+	}
+
+	public static String getEvaluationlist() {
+		return evaluationlist;
+	}
+
+	public static String getEvaluationinput() {
+		return evaluationinput;
 	}
 }

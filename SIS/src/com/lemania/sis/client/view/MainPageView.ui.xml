@@ -39,7 +39,7 @@
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
 						<g:Label text="-" width="" horizontalAlignment="ALIGN_RIGHT" styleName="left_header"/>
 					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage" ui:field="cmdHome"/>
-					<g:TreeItem text="Gestion générale des bulletins" state="true">
+					<g:TreeItem text="Gestion des attributions" state="true">
 							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
 							<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation" ui:field="cmdAttribution"/>
 							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement" ui:field="cmdAttributionPerson"/>
@@ -48,6 +48,12 @@
 						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
 						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
 						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
+					</g:TreeItem>
+					<g:TreeItem text="Evaluation Intermediaire" state="true">
+						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
+						<g:Hyperlink targetHistoryToken="markinput" text="Evaluations par Professeur" ui:field="cmdEvaluationInput"/>
+						<g:Hyperlink targetHistoryToken="evaluationlist" text="Evaluations par Elève"/>
+						<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter Evaluation / Elèves"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">

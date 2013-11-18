@@ -528,22 +528,26 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 				Integer.toString(currentUser.getCurrentYear())
 				+ ((currentUser.getCurrentMonth() < 10) ? ("0" + Integer.toString(currentUser.getCurrentMonth())) : Integer.toString(currentUser.getCurrentMonth()))  
 				+ ((currentUser.getCurrentDay() < 10) ? ("0" + Integer.toString(currentUser.getCurrentDay())) : Integer.toString(currentUser.getCurrentDay())) );
+		//
 		int deadLine = 0;
-		for (SettingOptionProxy setting : settings) {			
-			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){
-				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t1)) {
-					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate) blockT1 = true;
-					else blockT1 = false;
-				}
-				if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t2)) {
-					deadLine = Integer.parseInt( setting.getOptionValue() );
-					if (deadLine <= currentDate) blockT2 = true;
-					else blockT2 = false;
-				}
+		for (SettingOptionProxy setting : settings) {
+			//
+			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("maturité suisse")) {
+					if (!lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("préalable"))	{
+						if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t1)) {
+							deadLine = Integer.parseInt( setting.getOptionValue() );
+							if (deadLine <= currentDate) blockT1 = true;
+							else blockT1 = false;
+						}
+						if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t2)) {
+							deadLine = Integer.parseInt( setting.getOptionValue() );
+							if (deadLine <= currentDate) blockT2 = true;
+							else blockT2 = false;
+						}
+					}
 			}
-			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("bac") 
-					&& lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("fran") ) {
+			//
+			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("baccalauréat français")) {
 				if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t1)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
 					if (deadLine <= currentDate) blockT1 = true;
@@ -560,7 +564,8 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 					else blockT3 = false;
 				}
 			}
-			else {
+			//
+			if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("etudes secondaires")) {
 				if (setting.getOptionName().equals(NotificationTypes.deadline_es_t1)) {
 					deadLine = Integer.parseInt( setting.getOptionValue() );
 					if (deadLine <= currentDate) blockT1 = true;
