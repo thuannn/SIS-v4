@@ -12,13 +12,17 @@ import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationReportListUiHandler;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
+import com.lemania.sis.shared.service.EvaluationHeaderRequestFactory;
+import com.lemania.sis.shared.service.EvaluationHeaderRequestFactory.EvaluationHeaderRequestContext;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfessorRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
@@ -41,6 +45,7 @@ public class FrmEvaluationReportListPresenter
 	public interface MyView extends View, HasUiHandlers<FrmEvaluationReportListUiHandler> {
 		//
 		public void initializeUI();
+		public void resetEditForm();
 		//
 		void setEcoleList(List<EcoleProxy> ecoles);
 		//
@@ -49,6 +54,10 @@ public class FrmEvaluationReportListPresenter
 		void setClasseList(List<ClasseProxy> classes);
 		//
 		void setProfListData(List<ProfessorProxy> profs);
+		//
+		void addNewEvaluationHeaderToList(EvaluationHeaderProxy eh);
+		//
+		void setEvaluationHeaderListData(List<EvaluationHeaderProxy> eHs);
 	}
 
 	@ProxyCodeSplit
@@ -71,6 +80,9 @@ public class FrmEvaluationReportListPresenter
 	@Override
 	protected void onBind() {
 		super.onBind();
+		
+		// UI
+		getView().initializeUI();
 	}
 
 	/*
@@ -85,8 +97,8 @@ public class FrmEvaluationReportListPresenter
 		// Highlight this item
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationlist));
 		
-		// UI
-		getView().initializeUI();
+		//
+		getView().resetEditForm();
 		loadEcoleList();
 	}
 
@@ -169,6 +181,57 @@ public class FrmEvaluationReportListPresenter
 			@Override
 			public void onSuccess(List<ProfessorProxy> response) {
 				getView().setProfListData(response);
+			}
+		});
+	}
+
+	/*
+	 * */
+	@Override
+	public void createNewReport(String fromDate, String toDate,
+			String objective, String schoolYear, String classId,
+			String classMasterId) {
+		//
+		if (classMasterId.isEmpty()){
+			Window.alert(NotificationTypes.invalid_input + " - Maître de la classe");
+			return;
+		}
+		if (fromDate.isEmpty() || toDate.isEmpty()){
+			Window.alert(NotificationTypes.invalid_input + " - Les dates");
+			return;
+		}
+		//
+		EvaluationHeaderRequestFactory rf = GWT.create(EvaluationHeaderRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationHeaderRequestContext rc = rf.evaluationHeaderRequest();				
+		rc.saveAndReturn(fromDate, toDate, objective, schoolYear, classMasterId, classId).fire(new Receiver<EvaluationHeaderProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(EvaluationHeaderProxy response) {
+				getView().addNewEvaluationHeaderToList(response);
+			}
+		});
+	}
+
+	/*
+	 * */
+	@Override
+	public void onClassSelected(String classId) {
+		//
+		EvaluationHeaderRequestFactory rf = GWT.create(EvaluationHeaderRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationHeaderRequestContext rc = rf.evaluationHeaderRequest();				
+		rc.listAllByClass(classId).fire(new Receiver<List<EvaluationHeaderProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<EvaluationHeaderProxy> response) {
+				getView().setEvaluationHeaderListData(response);
 			}
 		});
 	}

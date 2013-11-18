@@ -10,6 +10,7 @@ import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
+import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
@@ -116,6 +117,12 @@ public class MyDAOBase extends DAOBase {
         	ObjectifyService.register(BulletinBranche.class);
         } catch (Exception e) {
         	// do nothing
-        }				
+        }	
+		
+		try {
+        	ObjectifyService.register(EvaluationHeader.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
 	}
 }

@@ -11,21 +11,30 @@ import com.lemania.sis.client.uihandler.FrmEvaluationReportListUiHandler;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
+import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.cellview.client.DataGrid;
-import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluationReportListUiHandler> implements
 		FrmEvaluationReportListPresenter.MyView {
 
 	private final Widget widget;
+	
+	// Thuan
+	private ListDataProvider<EvaluationHeaderProxy> providerEvaluationHeader = new ListDataProvider<EvaluationHeaderProxy>();
+	private EvaluationHeaderProxy selectedEvaluationHeader;
 
 	public interface Binder extends UiBinder<Widget, FrmEvaluationReportListView> {
 	}
@@ -44,13 +53,13 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	@UiField ListBox lstProgrammes;
 	@UiField ListBox lstClasses;
 	@UiField ListBox lstClassMaster;
-	@UiField(provided=true) DataGrid<Object> tblReports = new DataGrid<Object>();
-	@UiField DateBox dateFrom;
-	@UiField DateBox dateTo;
+	@UiField(provided=true) DataGrid<EvaluationHeaderProxy> tblReports = new DataGrid<EvaluationHeaderProxy>();
 	@UiField RichTextArea txtObjective;
 	@UiField Button cmdSave;
 	@UiField ListBox lstEcoles;
 	@UiField Button button;
+	@UiField TextBox dateFrom;
+	@UiField TextBox dateTo;
 		
 	/*
 	 * */
@@ -66,6 +75,66 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	public void initializeUI() {
 		//
 		initializeYearList();
+		initializeEvaluationHeaderTable();
+	}
+
+	/*
+	 * */
+	private void initializeEvaluationHeaderTable() {
+		// From Date
+ 		TextColumn<EvaluationHeaderProxy> colFrom = new TextColumn<EvaluationHeaderProxy>() {
+ 	      @Override
+ 	      public String getValue(EvaluationHeaderProxy object) {
+ 	        return object.getFromDate();
+ 	      }
+ 	    };
+ 	    tblReports.addColumn(colFrom, "Du");
+ 	    
+    	// To Date
+ 		TextColumn<EvaluationHeaderProxy> colTo = new TextColumn<EvaluationHeaderProxy>() {
+ 	      @Override
+ 	      public String getValue(EvaluationHeaderProxy object) {
+ 	        return object.getToDate();
+ 	      }
+ 	    };
+ 	    tblReports.addColumn(colTo, "Au");
+ 	    
+ 	    // Add a selection model to handle user selection.
+	    final SingleSelectionModel<EvaluationHeaderProxy> selectionModel = new SingleSelectionModel<EvaluationHeaderProxy>();
+	    tblReports.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	        selectedEvaluationHeader = selectionModel.getSelectedObject();
+	        if (selectedEvaluationHeader != null) {
+	        	populateEvaluationHeaderData();
+	        }
+	      }
+	    });
+ 	    
+ 	    //
+ 	    providerEvaluationHeader.addDataDisplay(tblReports);
+	}
+	
+	/*
+	 * */
+	public void populateEvaluationHeaderData() {
+		//
+		dateFrom.setText(selectedEvaluationHeader.getFromDate());
+		dateTo.setText(selectedEvaluationHeader.getToDate());
+		txtObjective.setText(selectedEvaluationHeader.getObjective());
+		selectListValue(lstClassMaster, selectedEvaluationHeader.getClassMasterId());
+	}
+
+	/*
+	 * */
+	private void selectListValue(ListBox listBox, String value) {
+		//
+		for (int i=0; i<listBox.getItemCount(); i++) {
+			if (listBox.getValue(i).equals(value)) {
+				listBox.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 	/*
@@ -139,16 +208,16 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	 * */
 	@UiHandler("button")
 	void onButtonClick(ClickEvent event) {
-		//
-		resetEditForm();
+		// TODO
 	}
 
 	/*
 	 * */
-	private void resetEditForm() {
+	@Override
+	public void resetEditForm() {
 		//
-		dateFrom.getTextBox().setText("");
-		dateTo.getTextBox().setText("");
+		dateFrom.setText("");
+		dateTo.setText("");
 		txtObjective.setText("");
 		
 		//
@@ -159,6 +228,11 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	 * */
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
+		//
+		getUiHandlers().createNewReport(dateFrom.getText(), dateTo.getText(), txtObjective.getText(), 
+				lstYears.getValue(lstYears.getSelectedIndex()), 
+				lstClasses.getValue(lstClasses.getSelectedIndex()), 
+				lstClassMaster.getValue(lstClassMaster.getSelectedIndex()));
 	}
 
 	/*
@@ -170,5 +244,30 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 		lstClassMaster.addItem("-","");
 		for (ProfessorProxy prof : profs)
 			lstClassMaster.addItem(prof.getProfName(), prof.getId().toString());
+	}
+
+	/*
+	 * */
+	@Override
+	public void addNewEvaluationHeaderToList(EvaluationHeaderProxy eh) {
+		//
+		providerEvaluationHeader.getList().add(eh);
+	}
+	
+	/*
+	 * */
+	@UiHandler("lstClasses")
+	void onLstClassesChange(ChangeEvent event) {
+		//
+		getUiHandlers().onClassSelected(lstClasses.getValue(lstClasses.getSelectedIndex()));
+	}
+
+	/*
+	 * */
+	@Override
+	public void setEvaluationHeaderListData(List<EvaluationHeaderProxy> eHs) {
+		//
+		providerEvaluationHeader.getList().clear();
+		providerEvaluationHeader.setList(eHs);
 	}
 }

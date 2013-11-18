@@ -60,9 +60,6 @@
 					<g:customCell>
 						<g:Label text="." styleName="hiddenText"/>
 					</g:customCell>
-					<g:customCell>
-						<g:Button ui:field="button">Créer un nouveau rapport</g:Button>
-					</g:customCell>
 				</g:row>
 			</g:Grid>
 				<g:VerticalPanel width="100%">
@@ -72,7 +69,7 @@
 							<g:Label text="Du :"/>
 						</g:customCell>
 						<g:customCell>
-							<p1:DateBox ui:field="dateFrom"/>
+							<g:TextBox ui:field="dateFrom"/>
 						</g:customCell>
 					</g:row>
 					<g:row>
@@ -80,7 +77,7 @@
 							<g:Label text="Au :"/>
 						</g:customCell>
 						<g:customCell>
-							<p1:DateBox ui:field="dateTo"/>
+							<g:TextBox ui:field="dateTo"/>
 						</g:customCell>
 					</g:row>
 					<g:row>
@@ -104,7 +101,10 @@
 							<g:Label text="."/>
 						</g:customCell>
 						<g:customCell>
-							<g:Button ui:field="cmdSave">Enregistrer</g:Button>
+							<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+								<g:Button ui:field="button" text="Enregistrer">Créer un nouveau rapport</g:Button>
+								<g:Button ui:field="cmdSave" text="Créer un nouveau rapport">Enregistrer</g:Button>
+							</g:HorizontalPanel>
 						</g:customCell>
 					</g:row>
 				</g:Grid>

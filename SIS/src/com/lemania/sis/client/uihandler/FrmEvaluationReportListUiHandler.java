@@ -9,4 +9,8 @@ public interface FrmEvaluationReportListUiHandler extends UiHandlers {
 	void onProgrammeSelected(String programmeId);
 	//
 	void loadClassMasterList();
+	//
+	void createNewReport(String fromDate, String toDate, String objective, String schoolYear, String classId, String classMasterId);
+	//
+	void onClassSelected(String classId);
 }
