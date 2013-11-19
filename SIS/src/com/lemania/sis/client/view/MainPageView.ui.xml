@@ -51,9 +51,8 @@
 					</g:TreeItem>
 					<g:TreeItem text="Evaluation Intermediaire" state="true">
 						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
-						<g:Hyperlink targetHistoryToken="markinput" text="Evaluations par Professeur" ui:field="cmdEvaluationInput"/>
-						<g:Hyperlink targetHistoryToken="evaluationlist" text="Evaluations par Elève"/>
-						<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter Evaluation / Elèves"/>
+						<g:Hyperlink targetHistoryToken="evaluationinput" text="Evaluations par Professeur" ui:field="cmdEvaluationInputProf"/>
+						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par Elève" ui:field="cmdEvaluationInputEleve"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">

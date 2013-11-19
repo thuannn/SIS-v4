@@ -4,30 +4,54 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
-	ui:generateLocales='default'>
+	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
 			<g:Label text="EVALUATION INTERMEDIAIRE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:VerticalPanel>
-				<g:Grid>
+			<g:VerticalPanel width="100%" spacing="2">
+				<g:Grid cellPadding="2" cellSpacing="2">
 					<g:row>
 						<g:customCell>
-							<g:Label text="Année :"/>
+							<g:Label text="1" styleName="step"/>
 						</g:customCell>
 						<g:customCell>
-							<g:ListBox/>
+							<g:Label text="Choisir le nom du professeur :" styleName="fieldTitle"/>
+						</g:customCell>
+						<g:customCell>
+							<g:ListBox styleName="sis-combobox" ui:field="lstProfs"/>
 						</g:customCell>
 					</g:row>
 					<g:row>
 						<g:customCell>
-							<g:Label text="Professeur :"/>
+							<g:Label text="2" styleName="step"/>
 						</g:customCell>
 						<g:customCell>
-							<g:ListBox/>
+							<g:Label text="Choisir la classe &amp; matière à saisir les évaluations :" styleName="fieldTitle"/>
+						</g:customCell>
+						<g:customCell>
+							<g:ListBox styleName="sis-combobox" ui:field="lstAssignments"/>
+						</g:customCell>
+					</g:row>
+					<g:row>
+						<g:customCell>
+							<g:Label text="3" styleName="step"/>
+						</g:customCell>
+						<g:customCell>
+							<g:Label text="Choisir la période de l&apos;évaluation :" styleName="fieldTitle"/>
+						</g:customCell>
+						<g:customCell>
+							<g:ListBox styleName="sis-combobox" ui:field="lstEvaluationHeaders"/>
 						</g:customCell>
 					</g:row>
 				</g:Grid>
+				<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
+					<g:HorizontalPanel spacing="2">
+				<g:Label text="4" styleName="step"/>
+				<g:Label text="Objectifs d&apos;apprentissage pour les élèves" styleName="fieldTitle"/>
+			</g:HorizontalPanel>
+					<p1:DataGrid width="100%" height="500px" ui:field="tblEvaluations"/>
+				</g:VerticalPanel>
 			</g:VerticalPanel>			
 		</g:VerticalPanel>
 	</g:HTMLPanel>

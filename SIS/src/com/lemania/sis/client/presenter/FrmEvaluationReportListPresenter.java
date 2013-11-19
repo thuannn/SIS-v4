@@ -46,6 +46,7 @@ public class FrmEvaluationReportListPresenter
 		//
 		public void initializeUI();
 		public void resetEditForm();
+		public void resetForm();
 		//
 		void setEcoleList(List<EcoleProxy> ecoles);
 		//
@@ -58,6 +59,8 @@ public class FrmEvaluationReportListPresenter
 		void addNewEvaluationHeaderToList(EvaluationHeaderProxy eh);
 		//
 		void setEvaluationHeaderListData(List<EvaluationHeaderProxy> eHs);
+		//
+		void updateEvaluationHeader(EvaluationHeaderProxy eh);
 	}
 
 	@ProxyCodeSplit
@@ -98,6 +101,7 @@ public class FrmEvaluationReportListPresenter
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationlist));
 		
 		//
+		getView().resetForm();
 		getView().resetEditForm();
 		loadEcoleList();
 	}
@@ -232,6 +236,30 @@ public class FrmEvaluationReportListPresenter
 			@Override
 			public void onSuccess(List<EvaluationHeaderProxy> response) {
 				getView().setEvaluationHeaderListData(response);
+			}
+		});
+	}
+
+	/*
+	 * */
+	@Override
+	public void updateReport(EvaluationHeaderProxy evaluationHeader,
+			String dateFrom, String dateTo, String classMasterId,
+			String objective) {
+		//
+		EvaluationHeaderRequestFactory rf = GWT.create(EvaluationHeaderRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationHeaderRequestContext rc = rf.evaluationHeaderRequest();
+		EvaluationHeaderProxy ehUpdate = rc.edit(evaluationHeader);
+		rc.updateEvaluationHeader(ehUpdate, dateFrom, dateTo, classMasterId, objective).fire(new Receiver<EvaluationHeaderProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(EvaluationHeaderProxy response) {
+				//
+				getView().updateEvaluationHeader(response);
 			}
 		});
 	}

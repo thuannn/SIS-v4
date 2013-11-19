@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
@@ -35,6 +36,7 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	// Thuan
 	private ListDataProvider<EvaluationHeaderProxy> providerEvaluationHeader = new ListDataProvider<EvaluationHeaderProxy>();
 	private EvaluationHeaderProxy selectedEvaluationHeader;
+	int selectedEvaluationHeaderIndex = -1;
 
 	public interface Binder extends UiBinder<Widget, FrmEvaluationReportListView> {
 	}
@@ -55,9 +57,9 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	@UiField ListBox lstClassMaster;
 	@UiField(provided=true) DataGrid<EvaluationHeaderProxy> tblReports = new DataGrid<EvaluationHeaderProxy>();
 	@UiField RichTextArea txtObjective;
-	@UiField Button cmdSave;
+	@UiField Button cmdCreate;
 	@UiField ListBox lstEcoles;
-	@UiField Button button;
+	@UiField Button cmdSave;
 	@UiField TextBox dateFrom;
 	@UiField TextBox dateTo;
 		
@@ -105,6 +107,7 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        selectedEvaluationHeader = selectionModel.getSelectedObject();
+	        selectedEvaluationHeaderIndex = providerEvaluationHeader.getList().indexOf(selectedEvaluationHeader);
 	        if (selectedEvaluationHeader != null) {
 	        	populateEvaluationHeaderData();
 	        }
@@ -206,9 +209,16 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	
 	/*
 	 * */
-	@UiHandler("button")
-	void onButtonClick(ClickEvent event) {
-		// TODO
+	@UiHandler("cmdSave")
+	void onCmdSaveClick(ClickEvent event) {
+		//
+		if (selectedEvaluationHeader == null){
+			Window.alert("Merci de choisir un rapport à modifier.");
+			return;
+		}
+		//
+		getUiHandlers().updateReport(selectedEvaluationHeader, dateFrom.getText(), dateTo.getText(), 
+				lstClassMaster.getValue(lstClassMaster.getSelectedIndex()), txtObjective.getText());
 	}
 
 	/*
@@ -226,8 +236,8 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	
 	/*
 	 * */
-	@UiHandler("cmdSave")
-	void onCmdSaveClick(ClickEvent event) {
+	@UiHandler("cmdCreate")
+	void onCmdCreateClick(ClickEvent event) {
 		//
 		getUiHandlers().createNewReport(dateFrom.getText(), dateTo.getText(), txtObjective.getText(), 
 				lstYears.getValue(lstYears.getSelectedIndex()), 
@@ -269,5 +279,25 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 		//
 		providerEvaluationHeader.getList().clear();
 		providerEvaluationHeader.setList(eHs);
+	}
+
+	/*
+	 * */
+	@Override
+	public void resetForm() {
+		//
+		lstEcoles.clear();
+		lstProgrammes.clear();
+		lstClasses.clear();
+		providerEvaluationHeader.getList().clear();
+	}
+
+	/*
+	 * */
+	@Override
+	public void updateEvaluationHeader(EvaluationHeaderProxy eh) {
+		//
+		if (selectedEvaluationHeaderIndex != -1)
+			providerEvaluationHeader.getList().set(selectedEvaluationHeaderIndex, eh);
 	}
 }

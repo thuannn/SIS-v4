@@ -1,6 +1,7 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.EvaluationHeaderProxy;
 
 public interface FrmEvaluationReportListUiHandler extends UiHandlers {
 	//
@@ -13,4 +14,8 @@ public interface FrmEvaluationReportListUiHandler extends UiHandlers {
 	void createNewReport(String fromDate, String toDate, String objective, String schoolYear, String classId, String classMasterId);
 	//
 	void onClassSelected(String classId);
+	//
+	void updateReport(EvaluationHeaderProxy evaluationHeader, String dateFrom, String dateTo, 
+			String classMasterId, String objective);
+	//
 }

@@ -101,9 +101,9 @@
 							<g:Label text="."/>
 						</g:customCell>
 						<g:customCell>
-							<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
-								<g:Button ui:field="button" text="Enregistrer">Créer un nouveau rapport</g:Button>
-								<g:Button ui:field="cmdSave" text="Créer un nouveau rapport">Enregistrer</g:Button>
+							<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+								<g:Button ui:field="cmdSave" text="Enregistrer">Créer un nouveau rapport</g:Button>
+								<g:Button ui:field="cmdCreate" text="Créer un nouveau rapport">Enregistrer</g:Button>
 							</g:HorizontalPanel>
 						</g:customCell>
 					</g:row>

@@ -1,4 +1,4 @@
-<!-- Indices written at Mon, 18 Nov 2013 20:28:16 CET -->
+<!-- Indices written at Tue, 19 Nov 2013 18:45:42 CET -->
 
 <datastore-indexes>
 
@@ -8,7 +8,7 @@
         <property name="coursNom" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 1 time in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="Classe" ancestor="false" source="auto">
         <property name="programme" direction="asc"/>
         <property name="className" direction="asc"/>

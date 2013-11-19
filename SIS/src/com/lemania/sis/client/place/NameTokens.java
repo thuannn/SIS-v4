@@ -35,6 +35,7 @@ public class NameTokens {
 	public static final String bulletin = "bulletin";
 	public static final String evaluationlist = "evaluationlist";
 	public static final String evaluationinput = "evaluationinput";
+	public static final String evaluationinputstudent = "evaluationinputstudent";
 
 	public static String getHomePage() {
 	    return homepage;
@@ -170,5 +171,9 @@ public class NameTokens {
 
 	public static String getEvaluationinput() {
 		return evaluationinput;
+	}
+
+	public static String getEvaluationinputstudent() {
+		return evaluationinputstudent;
 	}
 }

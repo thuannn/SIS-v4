@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
+import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.Professor;
@@ -37,6 +38,23 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	
 	/*
 	 * */
+	public List<EvaluationHeader> listAllByAssignment(String assignmentId){
+		// Look for the Class key in the assignment
+		Assignment assingment = this.ofy().get(new Key<Assignment>(Assignment.class, Long.parseLong(assignmentId)));
+		//
+		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
+		if (assingment != null) {
+			Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class)
+					.filter("classe", assingment.getClasse());		
+			for (EvaluationHeader evaluationHeader : q){
+				returnList.add( evaluationHeader );
+			}
+		}
+		return returnList;
+	}
+	
+	/*
+	 * */
 	public void save(EvaluationHeader evaluationHeader){
 		this.ofy().put(evaluationHeader);
 	}
@@ -50,6 +68,19 @@ public class EvaluationHeaderDao extends MyDAOBase {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/*
+	 * */
+	public EvaluationHeader updateEvaluationHeader(EvaluationHeader ehUpdate, String dateFrom, String dateTo, String classMasterId, String objective){
+		//
+		ehUpdate.setFromDate(dateFrom);
+		ehUpdate.setToDate(dateTo);
+		ehUpdate.setObjective(objective);
+		ehUpdate.setClassMaster(new Key<Professor>(Professor.class, Long.parseLong(classMasterId)));
+		this.ofy().put(ehUpdate);
+		//
+		return ehUpdate;
 	}
 	
 	/*

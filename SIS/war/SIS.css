@@ -3,6 +3,10 @@
 body {
 }
 
+th {
+    white-space: normal !important;
+}
+
 /* stock list header row */
 .pageTitle {
 	color: #FFFFFF;
@@ -270,7 +274,7 @@ body {
 	background-color: whitesmoke;
 }
 .sis-combobox {
-	width: 200px;
+	width: 300px;
 }
 
 

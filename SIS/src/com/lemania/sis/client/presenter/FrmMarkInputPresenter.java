@@ -115,7 +115,7 @@ public class FrmMarkInputPresenter extends
 		//
 		super.onReset();
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.markinput));
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.markinput));		
 		// Thuan
 		getView().resetForm();
 		loadProfessorList();

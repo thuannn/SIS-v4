@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
+import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
 import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
@@ -104,4 +105,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<FrmEvaluationReportListPresenter> getFrmEvaluationReportListPresenter();
 
 	AsyncProvider<FrmEvaluationInputPresenter> getFrmEvaluationInputPresenter();
+
+	AsyncProvider<FrmEvaluationInputStudentPresenter> getFrmEvaluationInputStudentPresenter();
 }
