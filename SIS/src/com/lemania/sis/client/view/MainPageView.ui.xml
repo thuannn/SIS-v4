@@ -133,7 +133,7 @@
 							</g:row>
 						</g:Grid>
 						<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" width="100%">
-							<g:Image url="images/appengine-silver-120x30.gif"/>
+							<g:Image url="images/appengine-noborder-120x30.gif"/>
 						</g:HorizontalPanel>
 					</g:HorizontalPanel>
 					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">

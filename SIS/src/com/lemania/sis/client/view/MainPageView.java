@@ -26,6 +26,8 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -361,6 +363,21 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (schoolCode.equals(NotificationTypes.ecoleLemania)) {
 			imgLogo.setUrl("images/logo.png");
 			txtCopyright.setText("Copyright © Ecole Lémania - IT Services -");
+		}
+	}
+	
+	@UiHandler("cmdMenuToggle")
+	void onCmdMenuToggleClick(ClickEvent event) {
+		if (leftPanel.isVisible())
+			hidePanel();
+		else
+			showPanel();
+	}
+	
+	@UiHandler("cmdLogout")
+	void onCmdLogoutClick(ClickEvent event) {
+		if (getUiHandlers() != null) {			
+			getUiHandlers().logOut();
 		}
 	}
 }

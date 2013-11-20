@@ -15,6 +15,7 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.EvaluationHeaderProxy;
+import com.lemania.sis.shared.EvaluationStudentReportProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
@@ -34,6 +35,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	
 	//
 	private List<BulletinProxy> bulletins = new ArrayList<BulletinProxy>();
+	private List<EvaluationHeaderProxy> evaluationHeaders = new ArrayList<EvaluationHeaderProxy>(); 
 	private ListDataProvider<EvaluationSubjectProxy> providerEvaluationSubject = new ListDataProvider<EvaluationSubjectProxy>();
 	
 
@@ -55,7 +57,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	@UiField ListBox lstProgrammes;
 	@UiField ListBox lstClasses;
 	@UiField ListBox lstEvaluationHeaders;
-	@UiField TextArea txtCommentaires;
+	@UiField TextArea txtCommentaire;
 	@UiField Button cmdSave;
 	@UiField ListBox lstBulletins;
 	
@@ -272,6 +274,9 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 		lstEvaluationHeaders.addItem("-","");
 		for (EvaluationHeaderProxy evh : headers)
 			lstEvaluationHeaders.addItem( evh.getFromDate() + " - " + evh.getToDate(), evh.getId().toString() );
+		//
+		evaluationHeaders.clear();
+		evaluationHeaders.addAll(headers);
 	}
 	
 	/*
@@ -279,10 +284,23 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	@UiHandler("lstEvaluationHeaders")
 	void onLstEvaluationHeadersChange(ChangeEvent event) {
 		//
+		clearStudentReportUI();
+		//
+		if (lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()).equals(""))
+			return;
+		//
 		getUiHandlers().onEvaluationHeaderSelected(
 				lstClasses.getValue(lstClasses.getSelectedIndex()), 
 				lstBulletins.getValue(lstBulletins.getSelectedIndex()), 
-				lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()) );
+				lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()),
+				evaluationHeaders.get(lstEvaluationHeaders.getSelectedIndex()-1).getClassMasterId() );
+	}
+
+	/*
+	 * */
+	private void clearStudentReportUI() {
+		//
+		txtCommentaire.setText("");		
 	}
 
 	/*
@@ -299,5 +317,26 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	 * */
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
+		//
+		getUiHandlers().saveEvaluationStudentReport( 
+				lstBulletins.getValue(lstBulletins.getSelectedIndex()), 
+				lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()),
+				txtCommentaire.getText() );
+	}
+
+	/*
+	 * */
+	@Override
+	public void enableCommentEditing(Boolean isClassMaster) {
+		//
+		cmdSave.setEnabled( isClassMaster );
+	}
+
+	/*
+	 * */
+	@Override
+	public void setStudentReportData(EvaluationStudentReportProxy report) {
+		//
+		txtCommentaire.setText( report.getEvaluationNote() );
 	}
 }

@@ -32,6 +32,8 @@ public interface UserRequestFactory extends RequestFactory {
 		Request<Void> initialize();
 		
 		Request<Void> fixStudentName();
+		
+		Request<Boolean> checkClassMasterRole(String userId, String profId);
 	}
 	
 	UserRequestContext userRequest();

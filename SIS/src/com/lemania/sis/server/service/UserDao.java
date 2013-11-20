@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
+import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Student;
 import com.lemania.sis.server.User;
 
@@ -160,4 +161,17 @@ public class UserDao extends MyDAOBase {
 			}						
 		}		
 	}
+	
+	/*
+	 * */
+	public boolean checkClassMasterRole(String userId, String profId) {
+		//
+		User user = this.ofy().get( new Key<User>(User.class, Long.parseLong(userId)));
+		Query<Professor> profs = this.ofy().query(Professor.class).filter("profEmail", user.getEmail());
+		for (Professor prof : profs) {
+			if (prof.getId().toString().equals(profId))
+				return true;
+		} 
+		return false;
+	}	
 }

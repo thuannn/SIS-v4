@@ -7,10 +7,18 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.CheckClassMasterRoleEvent;
+import com.lemania.sis.client.event.CheckClassMasterRoleEvent.CheckClassMasterRoleHandler;
+import com.lemania.sis.client.event.EvaluationStudentReportLoadEvent;
+import com.lemania.sis.client.event.EvaluationStudentReportLoadEvent.EvaluationStudentReportLoadHandler;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputStudentUiHandler;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.BulletinProxy;
@@ -18,20 +26,25 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.EvaluationHeaderProxy;
+import com.lemania.sis.shared.EvaluationStudentReportProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
 import com.lemania.sis.shared.service.BulletinRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EvaluationHeaderRequestFactory;
+import com.lemania.sis.shared.service.EvaluationStudentReportRequestFactory;
+import com.lemania.sis.shared.service.EvaluationStudentReportRequestFactory.EvaluationStudentReportRequestContext;
 import com.lemania.sis.shared.service.EvaluationSubjectRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.UserRequestFactory;
 import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
 import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.EvaluationHeaderRequestFactory.EvaluationHeaderRequestContext;
 import com.lemania.sis.shared.service.EvaluationSubjectRequestFactory.EvaluationSubjectRequestContext;
+import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -44,7 +57,10 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 public class FrmEvaluationInputStudentPresenter
 		extends
 		Presenter<FrmEvaluationInputStudentPresenter.MyView, FrmEvaluationInputStudentPresenter.MyProxy> 
-		implements FrmEvaluationInputStudentUiHandler {
+		implements FrmEvaluationInputStudentUiHandler, CheckClassMasterRoleHandler, LoginAuthenticatedHandler, EvaluationStudentReportLoadHandler {
+	
+	//
+	private CurrentUser currentUser;
 
 	public interface MyView extends View, HasUiHandlers<FrmEvaluationInputStudentUiHandler> {
 		//
@@ -62,6 +78,10 @@ public class FrmEvaluationInputStudentPresenter
 		void setEvaluationHeaderListData(List<EvaluationHeaderProxy> headers);
 		//		
 		void setEvaluationSubjectTableData( List<EvaluationSubjectProxy> evaluationSubject );
+		//
+		void enableCommentEditing(Boolean isClassMaster);
+		//
+		void setStudentReportData(EvaluationStudentReportProxy report);
 	}
 
 	@ProxyCodeSplit
@@ -88,6 +108,7 @@ public class FrmEvaluationInputStudentPresenter
 		getView().setUiHandlers(this);		
 		// UI
 		getView().initializeUI();
+		loadEcoleList();
 	}
 
 	@Override
@@ -96,8 +117,7 @@ public class FrmEvaluationInputStudentPresenter
 		//
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationinputstudent));	
 		// Thuan
-		getView().resetForm();
-		loadEcoleList();
+		getView().resetForm();		
 	}
 
 	/*
@@ -204,8 +224,7 @@ public class FrmEvaluationInputStudentPresenter
 	/*
 	 * */
 	@Override
-	public void onEvaluationHeaderSelected(String classId, String bulletinId,
-			String evaluationHeaderId) {
+	public void onEvaluationHeaderSelected(String classId, final String bulletinId, final String evaluationHeaderId, final String classMasterId) {
 		//
 		if (classId.isEmpty()){
 			Window.alert(NotificationTypes.invalid_input + " - Classe");
@@ -230,7 +249,93 @@ public class FrmEvaluationInputStudentPresenter
 			}
 			@Override
 			public void onSuccess(List<EvaluationSubjectProxy> response) {
+				//
 				getView().setEvaluationSubjectTableData(response);
+				//
+				getEventBus().fireEvent( new CheckClassMasterRoleEvent(classMasterId) );
+				//
+				getEventBus().fireEvent( new EvaluationStudentReportLoadEvent(bulletinId, evaluationHeaderId));
+			}
+		});
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onCheckClassMasterRole(CheckClassMasterRoleEvent event) {
+		//
+		if (currentUser.isAdmin()) {
+			getView().enableCommentEditing(true);
+			return;
+		}
+		//
+		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		UserRequestContext rc = rf.userRequest();
+		rc.checkClassMasterRole( currentUser.getUserId().toString(), event.getProfId() ).fire(new Receiver<Boolean>() {
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Boolean response) {
+				getView().enableCommentEditing(response);
+			}
+		});
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
+		this.currentUser = event.getCurrentUser();
+	}
+	
+	/*
+	 * */
+	@Override
+	public void saveEvaluationStudentReport(String bulletinId,
+			String evaluationHeaderId, String commentaire) {
+		//
+		EvaluationStudentReportRequestFactory rf = GWT.create(EvaluationStudentReportRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationStudentReportRequestContext rc = rf.evaluationStudentReportRequest();
+		rc.save( bulletinId, evaluationHeaderId, commentaire ).fire(new Receiver<Void>() {
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				//
+				Window.alert("Données sauvegardées");
+			}
+		});
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onEvaluationStudentReportLoad(
+			EvaluationStudentReportLoadEvent event) {
+		//
+		EvaluationStudentReportRequestFactory rf = GWT.create(EvaluationStudentReportRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationStudentReportRequestContext rc = rf.evaluationStudentReportRequest();
+		rc.load( event.getBulletinId(), event.getEvaluationHeaderId() ).fire(new Receiver<EvaluationStudentReportProxy>() {
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(EvaluationStudentReportProxy response) {
+				//
+				if (response != null)
+					getView().setStudentReportData(response);
 			}
 		});
 	}

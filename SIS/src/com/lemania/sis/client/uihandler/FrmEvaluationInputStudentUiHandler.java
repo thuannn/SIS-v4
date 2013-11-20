@@ -12,5 +12,7 @@ public interface FrmEvaluationInputStudentUiHandler extends UiHandlers {
 	//
 	void onBulletinSelected(String classId);
 	//
-	void onEvaluationHeaderSelected( String classId, String bulletinId, String evaluationHeaderId );
+	void onEvaluationHeaderSelected( String classId, String bulletinId, String evaluationHeaderId, String classMasterId );
+	//
+	void saveEvaluationStudentReport( String bulletinId, String evaluationHeaderId, String commentaire );			
 }

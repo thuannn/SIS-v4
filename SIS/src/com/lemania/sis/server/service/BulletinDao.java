@@ -29,7 +29,7 @@ public class BulletinDao extends MyDAOBase {
 		Student student;
 		for (Bulletin bulletin : q){
 			student = this.ofy().get( bulletin.getStudent() );
-			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
+			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			returnList.add(bulletin);
 		}
 		Collections.sort(returnList);
@@ -45,7 +45,7 @@ public class BulletinDao extends MyDAOBase {
 		Student student;
 		for (Bulletin bulletin : q){
 			student = this.ofy().get( bulletin.getStudent() );
-			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
+			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			returnList.add(bulletin);
 		}
 		Collections.sort(returnList);
@@ -63,7 +63,7 @@ public class BulletinDao extends MyDAOBase {
 		Student student;
 		for (Bulletin bulletin : q){
 			student = this.ofy().get( bulletin.getStudent() );
-			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
+			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			returnList.add(bulletin);
 		}
 		Collections.sort(returnList);
@@ -82,7 +82,7 @@ public class BulletinDao extends MyDAOBase {
 		Student student;
 		for (Bulletin bulletin : q){
 			student = this.ofy().get( bulletin.getStudent() );
-			bulletin.setStudentName( student.getLastName() + " " + student.getFirstName() );
+			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			returnList.add( bulletin );
 		}
 		Collections.sort(returnList);

@@ -73,7 +73,7 @@
 				</g:row>
 				<g:row/>
 			</g:Grid>
-				<g:VerticalPanel spacing="2" styleName="subSection">
+				<g:VerticalPanel spacing="3" styleName="subSection">
 			<g:Label text="TB = Très Bien"/>
 			<g:Label text="B = Bien"/>
 			<g:Label text="AB = Assez Bien"/>
@@ -81,12 +81,14 @@
 			<g:Label text="NA = Non atteint"/>
 		</g:VerticalPanel>
 			</g:HorizontalPanel>
-			<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="subSection"/>
-			<g:HorizontalPanel width="100%" spacing="5" styleName="subSection">
+			<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
+				<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="subSection"/>
+				<g:HorizontalPanel width="100%" spacing="5">
 				<g:Label text="Commentaire(s) éventuel(s) et pistes d&apos;amélioration :"/>
-				<g:TextArea visibleLines="5" characterWidth="80" ui:field="txtCommentaires"/>
+				<g:TextArea visibleLines="5" characterWidth="80" ui:field="txtCommentaire"/>
 				<g:Button ui:field="cmdSave" enabled="false">Enregister</g:Button>
 			</g:HorizontalPanel>
+			</g:VerticalPanel>
 			
 		</g:VerticalPanel>
 	</g:HTMLPanel>

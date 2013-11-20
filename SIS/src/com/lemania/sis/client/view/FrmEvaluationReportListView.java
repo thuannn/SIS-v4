@@ -269,6 +269,8 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
 		//
+		resetEditForm();
+		//
 		getUiHandlers().onClassSelected(lstClasses.getValue(lstClasses.getSelectedIndex()));
 	}
 
