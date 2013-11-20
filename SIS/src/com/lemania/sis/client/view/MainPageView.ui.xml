@@ -51,8 +51,8 @@
 					</g:TreeItem>
 					<g:TreeItem text="Evaluation Intermediaire" state="true">
 						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
-						<g:Hyperlink targetHistoryToken="evaluationinput" text="Evaluations par Professeur" ui:field="cmdEvaluationInputProf"/>
-						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par Elève" ui:field="cmdEvaluationInputEleve"/>
+						<g:Hyperlink targetHistoryToken="evaluationinput" text="Saisir les évaluations" ui:field="cmdEvaluationInputProf"/>
+						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">
@@ -96,11 +96,17 @@
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="Espace professeur" state="true">
-							<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>
-							<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail" ui:field="cmdMarkViewProf"/>
+							<g:TreeItem text="Notes" state="true">
+								<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>
+								<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail" ui:field="cmdMarkViewProf"/>
+							</g:TreeItem>
+							<g:TreeItem text="Evaluation Intermediaire" state="true">
+								<g:Hyperlink text="Saisir les évaluations" targetHistoryToken="evaluationinput" ui:field="cmdEvaluationInputProfProf"/>
+								<g:Hyperlink text="Evaluations par élève" targetHistoryToken="evaluationinputstudent" ui:field="cmdEvaluationInputEleveProf"/>
+							</g:TreeItem>							
 							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password" ui:field="cmdPasswordProf"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpProf"/>
-						</g:TreeItem>
+						</g:TreeItem>						
 					</g:Tree>
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>

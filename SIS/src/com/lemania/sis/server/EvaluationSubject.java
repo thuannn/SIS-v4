@@ -15,6 +15,7 @@ public class EvaluationSubject extends DatastoreObject{
 	
 	private String studentName = "";
 	private String subjectName = "";
+	private String professorName = "";
 	
 	private Key<Subject> subject;
 	private Key<Classe> classe;
@@ -99,5 +100,11 @@ public class EvaluationSubject extends DatastoreObject{
 	}
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
+	}
+	public String getProfessorName() {
+		return professorName;
+	}
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
 	}
 }

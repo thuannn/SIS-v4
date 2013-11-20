@@ -83,7 +83,8 @@ public class FrmEvaluationReportListPresenter
 	@Override
 	protected void onBind() {
 		super.onBind();
-		
+		//
+		getView().setUiHandlers(this);
 		// UI
 		getView().initializeUI();
 	}
@@ -93,9 +94,6 @@ public class FrmEvaluationReportListPresenter
 	@Override
 	protected void onReset() {
 		super.onReset();
-		
-		//
-		getView().setUiHandlers(this);
 		
 		// Highlight this item
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationlist));

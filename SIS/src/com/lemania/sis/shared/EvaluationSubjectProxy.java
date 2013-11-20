@@ -33,4 +33,7 @@ public interface EvaluationSubjectProxy extends EntityProxy {
 	
 	public String getSubjectName();
 	public void setSubjectName(String subjectName);
+	
+	public String getProfessorName();
+	public void setProfessorName(String professorName);
 }

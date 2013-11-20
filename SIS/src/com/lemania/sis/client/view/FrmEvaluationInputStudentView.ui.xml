@@ -8,54 +8,84 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%" spacing="2">
-			<g:Label text="CONTACT" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
-			<g:Grid cellPadding="2" cellSpacing="3">
+			<g:Label text="EVALUATION INTERMEDIAIRE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
+			<g:HorizontalPanel width="100%">
+				<g:Grid cellPadding="2" cellSpacing="3">
 				<g:row>
+					<g:customCell>
+						<g:Label text="1" styleName="step"/>
+					</g:customCell>
 					<g:customCell>
 						<g:Label text="Année :"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox styleName="sis-combobox"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:Label text="Programmes :"/>
+						<g:ListBox styleName="sis-combobox" ui:field="lstYears"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox styleName="sis-combobox"/>
+						<g:Label text="4" styleName="step"/>
 					</g:customCell>
-				</g:row>
-				<g:row>
 					<g:customCell>
 						<g:Label text="Classes :"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox styleName="sis-combobox"/>
+						<g:ListBox styleName="sis-combobox" ui:field="lstClasses"/>
 					</g:customCell>
 				</g:row>
 				<g:row>
+					<g:customCell>
+						<g:Label text="2" styleName="step"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="Ecole :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox styleName="sis-combobox" ui:field="lstEcoles"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="5" styleName="step"/>
+					</g:customCell>
 					<g:customCell>
 						<g:Label text="Elèves :"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox styleName="sis-combobox"/>
+						<g:ListBox styleName="sis-combobox" ui:field="lstBulletins"/>
 					</g:customCell>
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Evaluations :"/>
+						<g:Label text="3" styleName="step"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox styleName="sis-combobox"/>
+						<g:Label text="Programmes :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox styleName="sis-combobox" ui:field="lstProgrammes"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="6" styleName="step"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label text="Rapport d&apos;Evaluations :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox styleName="sis-combobox" ui:field="lstEvaluationHeaders"/>
 					</g:customCell>
 				</g:row>
+				<g:row/>
 			</g:Grid>
-			<p1:DataGrid width="100%" height="200px" ui:field="dataGrid"/>
-			<g:HorizontalPanel width="100%" spacing="5">
+				<g:VerticalPanel spacing="2" styleName="subSection">
+			<g:Label text="TB = Très Bien"/>
+			<g:Label text="B = Bien"/>
+			<g:Label text="AB = Assez Bien"/>
+			<g:Label text="S = Suffisant"/>
+			<g:Label text="NA = Non atteint"/>
+		</g:VerticalPanel>
+			</g:HorizontalPanel>
+			<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="subSection"/>
+			<g:HorizontalPanel width="100%" spacing="5" styleName="subSection">
 				<g:Label text="Commentaire(s) éventuel(s) et pistes d&apos;amélioration :"/>
-				<g:TextArea visibleLines="5" characterWidth="80"/>
-				<g:Button>Enregister</g:Button>
+				<g:TextArea visibleLines="5" characterWidth="80" ui:field="txtCommentaires"/>
+				<g:Button ui:field="cmdSave" enabled="false">Enregister</g:Button>
 			</g:HorizontalPanel>
 			
 		</g:VerticalPanel>

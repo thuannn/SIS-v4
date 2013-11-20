@@ -4,10 +4,8 @@ import java.util.Iterator;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -35,7 +33,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	private static MainPageViewUiBinder uiBinder = GWT.create(MainPageViewUiBinder.class);
 
 	private final Widget widget;
-
 	@UiField FlowPanel mainContentPanel;
 	@UiField Hyperlink cmdLogout;
 	@UiField Label txtWelcome;
@@ -86,6 +83,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdEvaluationList;
 	@UiField Hyperlink cmdEvaluationInputProf;
 	@UiField Hyperlink cmdEvaluationInputEleve;
+	@UiField Hyperlink cmdEvaluationInputProfProf;
+	@UiField Hyperlink cmdEvaluationInputEleveProf;
 	
 	
 	// Thuan
@@ -131,13 +130,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	    if (content != null) {
 	      mainContentPanel.add(content);
 	    }
-	}
-	
-	@UiHandler("cmdLogout")
-	void onCmdLogoutClicked(ClickEvent event){
-		if (getUiHandlers() != null) {			
-			getUiHandlers().logOut();
-		}
 	}
 
 	@Override
@@ -220,15 +212,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		treeMenuAdmin.setVisible( false );
 		//
 		cmdMenuToggle.setVisible(false);
-	}
-	
-	/**/
-	@UiHandler("cmdMenuToggle")
-	void onCmdMenuToggleClick(ClickEvent event) {
-		if (leftPanel.isVisible())
-			hidePanel();
-		else
-			showPanel();
 	}
 
 	private void showPanel() {
@@ -334,9 +317,18 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			switchStyle(this.cmdHelpStudent, false, true);
 		}
 		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin, false, false);
-		//
+		//		
 		if (tokenName.equals(NameTokens.evaluationlist)) switchStyle(this.cmdEvaluationList, false, false);
-		if (tokenName.equals(NameTokens.evaluationinput)) switchStyle(this.cmdEvaluationInputProf, false, false);
+		//
+		if (tokenName.equals(NameTokens.evaluationinput)) { 
+			switchStyle(this.cmdEvaluationInputProf, false, false);
+			switchStyle(this.cmdEvaluationInputProfProf, true, false);
+		}
+		//
+		if (tokenName.equals(NameTokens.evaluationinputstudent)) {
+			switchStyle(this.cmdEvaluationInputEleve, false, false);
+			switchStyle(this.cmdEvaluationInputEleveProf, true, false);
+		}
 	}
 	
 	

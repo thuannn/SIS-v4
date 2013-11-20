@@ -3,13 +3,16 @@ package com.lemania.sis.server.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.web.bindery.requestfactory.shared.Request;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Query;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.EvaluationSubject;
+import com.lemania.sis.shared.EvaluationSubjectProxy;
 
 public class EvaluationSubjectDao extends MyDAOBase {
 	
@@ -86,7 +89,8 @@ public class EvaluationSubjectDao extends MyDAOBase {
 							curES.setEvaluationHeader( new Key<EvaluationHeader>(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)) );
 							
 							curES.setStudentName( bulletin.getStudentName() );
-							curES.setSubjectName( bulletinSubject.getSubjectName());
+							curES.setSubjectName( bulletinSubject.getSubjectName() );
+							curES.setProfessorName( bulletinSubject.getProfName() );
 						}
 						//
 						returnList.add( curES );						
@@ -106,4 +110,20 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	public void removeEvaluationSubject(EvaluationSubject evaluationSubject){
 		this.ofy().delete(evaluationSubject);
 	}	
+
+	/*
+	 * */
+	public List<EvaluationSubject> listAllByStudent(String classId, String bulletinId, String evaluationHeaderId) {
+		//
+		Query<EvaluationSubject> q = this.ofy().query(EvaluationSubject.class)
+				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
+				.filter("student", this.ofy().get(new Key<Bulletin>(Bulletin.class, Long.parseLong(bulletinId))).getStudent())
+				.filter("evaluationHeader", new Key<EvaluationHeader>(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)))
+				.order("subjectName");
+		List<EvaluationSubject> returnList = new ArrayList<EvaluationSubject>();
+		for (EvaluationSubject evaluationSubject : q){
+			returnList.add( evaluationSubject );
+		}
+		return returnList;		
+	}
 }

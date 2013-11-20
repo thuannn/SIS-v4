@@ -16,6 +16,7 @@ public interface EvaluationSubjectRequestFactory extends RequestFactory {
 	interface EvaluationSubjectRequestContext extends RequestContext {
 		//
 		Request<List<EvaluationSubjectProxy>> listAll();
+		Request<List<EvaluationSubjectProxy>> listAllByStudent(String classId, String bulletinId, String evaluationHeaderId);
 		//
 		Request<Void> save( EvaluationSubjectProxy evaluationSubject );
 		Request<EvaluationSubjectProxy> saveAndReturn( EvaluationSubjectProxy evaluationSubject );	
