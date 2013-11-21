@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.EvaluationValues;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputStudentUiHandler;
 import com.lemania.sis.shared.BulletinProxy;
@@ -311,6 +312,8 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 		//
 		providerEvaluationSubject.getList().clear();
 		providerEvaluationSubject.setList(evaluationSubject);
+		//
+		tblEvaluations.setHeight( (NotificationTypes.lineHeightShortList * (evaluationSubject.size()+1) + 100) + "px");
 	}
 	
 	/*

@@ -286,126 +286,177 @@ th {
 
 
 /* Progress bar */
-
-#movingBallG{
+#spinningSquaresG{
 position:relative;
 width:179px;
-height:14px;
-}
+height:22px}
 
-.movingBallLineG{
-position:absolute;
-left:0px;
-top:6px;
-height:3px;
-width:179px;
-background-color:#ABCDEB;
-}
-
-.movingBallG{
-background-color:#FFFFFF;
+.spinningSquaresG{
 position:absolute;
 top:0;
-left:0;
-width:14px;
-height:14px;
--moz-border-radius:7px;
--moz-animation-name:bounce_movingBallG;
--moz-animation-duration:1.9s;
+background-color:#FFFFFF;
+width:22px;
+height:22px;
+-moz-animation-name:bounce_spinningSquaresG;
+-moz-animation-duration:1.6s;
 -moz-animation-iteration-count:infinite;
 -moz-animation-direction:linear;
--webkit-border-radius:7px;
--webkit-animation-name:bounce_movingBallG;
--webkit-animation-duration:1.9s;
+-moz-transform:scale(.3);
+-webkit-animation-name:bounce_spinningSquaresG;
+-webkit-animation-duration:1.6s;
 -webkit-animation-iteration-count:infinite;
 -webkit-animation-direction:linear;
--ms-border-radius:7px;
--ms-animation-name:bounce_movingBallG;
--ms-animation-duration:1.9s;
--ms-animation-iteration-count:infinite;
--ms-animation-direction:linear;
--o-border-radius:7px;
--o-animation-name:bounce_movingBallG;
--o-animation-duration:1.9s;
+-webkit-transform:scale(.3);
+-o-animation-name:bounce_spinningSquaresG;
+-o-animation-duration:1.6s;
 -o-animation-iteration-count:infinite;
 -o-animation-direction:linear;
-border-radius:7px;
-animation-name:bounce_movingBallG;
-animation-duration:1.9s;
+-o-transform:scale(.3);
+-ms-animation-name:bounce_spinningSquaresG;
+-ms-animation-duration:1.6s;
+-ms-animation-iteration-count:infinite;
+-ms-animation-direction:linear;
+-ms-transform:scale(.3);
+animation-name:bounce_spinningSquaresG;
+animation-duration:1.6s;
 animation-iteration-count:infinite;
 animation-direction:linear;
+transform:scale(.3);
 }
 
-@-moz-keyframes bounce_movingBallG{
+#spinningSquaresG_1{
+left:0;
+-moz-animation-delay:0.64s;
+-webkit-animation-delay:0.64s;
+-o-animation-delay:0.64s;
+-ms-animation-delay:0.64s;
+animation-delay:0.64s;
+}
+
+#spinningSquaresG_2{
+left:22px;
+-moz-animation-delay:0.8s;
+-webkit-animation-delay:0.8s;
+-o-animation-delay:0.8s;
+-ms-animation-delay:0.8s;
+animation-delay:0.8s;
+}
+
+#spinningSquaresG_3{
+left:45px;
+-moz-animation-delay:0.96s;
+-webkit-animation-delay:0.96s;
+-o-animation-delay:0.96s;
+-ms-animation-delay:0.96s;
+animation-delay:0.96s;
+}
+
+#spinningSquaresG_4{
+left:67px;
+-moz-animation-delay:1.12s;
+-webkit-animation-delay:1.12s;
+-o-animation-delay:1.12s;
+-ms-animation-delay:1.12s;
+animation-delay:1.12s;
+}
+
+#spinningSquaresG_5{
+left:90px;
+-moz-animation-delay:1.28s;
+-webkit-animation-delay:1.28s;
+-o-animation-delay:1.28s;
+-ms-animation-delay:1.28s;
+animation-delay:1.28s;
+}
+
+#spinningSquaresG_6{
+left:112px;
+-moz-animation-delay:1.44s;
+-webkit-animation-delay:1.44s;
+-o-animation-delay:1.44s;
+-ms-animation-delay:1.44s;
+animation-delay:1.44s;
+}
+
+#spinningSquaresG_7{
+left:134px;
+-moz-animation-delay:1.6s;
+-webkit-animation-delay:1.6s;
+-o-animation-delay:1.6s;
+-ms-animation-delay:1.6s;
+animation-delay:1.6s;
+}
+
+#spinningSquaresG_8{
+left:157px;
+-moz-animation-delay:1.76s;
+-webkit-animation-delay:1.76s;
+-o-animation-delay:1.76s;
+-ms-animation-delay:1.76s;
+animation-delay:1.76s;
+}
+
+@-moz-keyframes bounce_spinningSquaresG{
 0%{
-left:0px;
-}
-
-50%{
-left:165px;
+-moz-transform:scale(1);
+background-color:#FFFFFF;
 }
 
 100%{
-left:0px;
+-moz-transform:scale(.3) rotate(90deg);
+background-color:#FFFFFF;
 }
 
 }
 
-@-webkit-keyframes bounce_movingBallG{
+@-webkit-keyframes bounce_spinningSquaresG{
 0%{
-left:0px;
-}
-
-50%{
-left:165px;
+-webkit-transform:scale(1);
+background-color:#FFFFFF;
 }
 
 100%{
-left:0px;
+-webkit-transform:scale(.3) rotate(90deg);
+background-color:#FFFFFF;
 }
 
 }
 
-@-ms-keyframes bounce_movingBallG{
+@-o-keyframes bounce_spinningSquaresG{
 0%{
-left:0px;
-}
-
-50%{
-left:165px;
+-o-transform:scale(1);
+background-color:#FFFFFF;
 }
 
 100%{
-left:0px;
+-o-transform:scale(.3) rotate(90deg);
+background-color:#FFFFFF;
 }
 
 }
 
-@-o-keyframes bounce_movingBallG{
+@-ms-keyframes bounce_spinningSquaresG{
 0%{
-left:0px;
-}
-
-50%{
-left:165px;
+-ms-transform:scale(1);
+background-color:#FFFFFF;
 }
 
 100%{
-left:0px;
+-ms-transform:scale(.3) rotate(90deg);
+background-color:#FFFFFF;
 }
 
 }
 
-@keyframes bounce_movingBallG{
+@keyframes bounce_spinningSquaresG{
 0%{
-left:0px;
-}
-
-50%{
-left:165px;
+transform:scale(1);
+background-color:#FFFFFF;
 }
 
 100%{
-left:0px;
+transform:scale(.3) rotate(90deg);
+background-color:#FFFFFF;
 }
+
 }

@@ -139,8 +139,8 @@
 					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">
 						<g:HTML wordWrap="true" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
-						<div id="movingBallG"><div class="movingBallLineG"></div><div id="movingBallG_1" class="movingBallG"></div></div>
-					</g:HTML>
+							<div id="spinningSquaresG"><div id="spinningSquaresG_1" class="spinningSquaresG"></div><div id="spinningSquaresG_2" class="spinningSquaresG"></div><div id="spinningSquaresG_3" class="spinningSquaresG"></div><div id="spinningSquaresG_4" class="spinningSquaresG"></div><div id="spinningSquaresG_5" class="spinningSquaresG"></div><div id="spinningSquaresG_6" class="spinningSquaresG"></div><div id="spinningSquaresG_7" class="spinningSquaresG"></div><div id="spinningSquaresG_8" class="spinningSquaresG"></div></div>
+						</g:HTML>
 					</g:VerticalPanel>
 					</g:VerticalPanel>
 				</g:VerticalPanel>

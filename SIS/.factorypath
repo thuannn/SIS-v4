@@ -1,3 +1,3 @@
 <factorypath>
-    <factorypathentry kind="WKSPJAR" id="/SIS/war/WEB-INF/lib/requestfactory-apt.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\Thuan Nguyen\01. Apps\eclipse\plugins\com.google.gwt.eclipse.sdkbundle_2.5.1\gwt-2.5.1\requestfactory-apt.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

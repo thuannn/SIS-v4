@@ -1,33 +1,12 @@
-<!-- Indices written at Wed, 20 Nov 2013 19:26:16 CET -->
+<!-- Indices written at Thu, 21 Nov 2013 13:09:58 CET -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="Cours" ancestor="false" source="auto">
-        <property name="ecole" direction="asc"/>
-        <property name="coursNom" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Classe" ancestor="false" source="auto">
-        <property name="programme" direction="asc"/>
-        <property name="className" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Bulletin" ancestor="false" source="auto">
-        <property name="classe" direction="asc"/>
+    <datastore-index kind="Student" ancestor="false" source="auto">
         <property name="isActive" direction="asc"/>
-        <property name="classeName" direction="asc"/>
-        <property name="studentName" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 2 times in query history -->
-    <datastore-index kind="EvaluationSubject" ancestor="false" source="auto">
-        <property name="classe" direction="asc"/>
-        <property name="evaluationHeader" direction="asc"/>
-        <property name="student" direction="asc"/>
-        <property name="subjectName" direction="asc"/>
+        <property name="LastName" direction="asc"/>
+        <property name="FirstName" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>
