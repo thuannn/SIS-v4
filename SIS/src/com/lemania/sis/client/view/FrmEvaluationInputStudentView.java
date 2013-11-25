@@ -28,6 +28,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluationInputStudentUiHandler> implements
 		FrmEvaluationInputStudentPresenter.MyView {
@@ -61,6 +62,8 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	@UiField TextArea txtCommentaire;
 	@UiField Button cmdSave;
 	@UiField ListBox lstBulletins;
+	@UiField VerticalPanel pnlEvaluationPrint;
+	@UiField VerticalPanel pnlEvaluationMain;
 	
 	/*
 	 * */

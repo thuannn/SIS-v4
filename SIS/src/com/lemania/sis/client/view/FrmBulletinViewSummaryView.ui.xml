@@ -26,7 +26,6 @@
 				<g:VerticalPanel width="" horizontalAlignment="ALIGN_LEFT" spacing="5" ui:field="pnlBulletin" styleName="bulletin" verticalAlignment="ALIGN_TOP">
 					<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
 						<g:Image url="images/logo_lemania.png" width="" height="" ui:field="imgLogo"/>
-						<g:Label text="BULLETIN DE NOTES" styleName="bulletinTitle"/>
 					</g:HorizontalPanel>
 				<g:Grid width="100%">
 					<g:row>

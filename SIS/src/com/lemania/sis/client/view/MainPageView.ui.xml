@@ -139,7 +139,7 @@
 					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">
 						<g:HTML wordWrap="true" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
-							<div id="spinningSquaresG"><div id="spinningSquaresG_1" class="spinningSquaresG"></div><div id="spinningSquaresG_2" class="spinningSquaresG"></div><div id="spinningSquaresG_3" class="spinningSquaresG"></div><div id="spinningSquaresG_4" class="spinningSquaresG"></div><div id="spinningSquaresG_5" class="spinningSquaresG"></div><div id="spinningSquaresG_6" class="spinningSquaresG"></div><div id="spinningSquaresG_7" class="spinningSquaresG"></div><div id="spinningSquaresG_8" class="spinningSquaresG"></div></div>
+							<div id="floatingBarsG"><div class="blockG" id="rotateG_01"></div><div class="blockG" id="rotateG_02"></div><div class="blockG" id="rotateG_03"></div><div class="blockG" id="rotateG_04"></div><div class="blockG" id="rotateG_05"></div><div class="blockG" id="rotateG_06"></div><div class="blockG" id="rotateG_07"></div><div class="blockG" id="rotateG_08"></div></div>
 						</g:HTML>
 					</g:VerticalPanel>
 					</g:VerticalPanel>

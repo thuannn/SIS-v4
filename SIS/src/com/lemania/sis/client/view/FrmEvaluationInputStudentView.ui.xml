@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2">
+		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlEvaluationMain">
 			<g:Label text="EVALUATION INTERMEDIAIRE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel width="100%">
 				<g:Grid cellPadding="2" cellSpacing="3">
@@ -73,21 +73,76 @@
 				</g:row>
 				<g:row/>
 			</g:Grid>
-				<g:VerticalPanel spacing="3" styleName="subSection">
+			</g:HorizontalPanel>
+			<g:VerticalPanel width="100%" ui:field="pnlEvaluationPrint">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+				<g:HorizontalPanel width="100%">
+					<g:Image height="" url="images/logo_lemania.png" width=""/>
+					<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+						<g:Label text="EVALUATION INTERMEDIAIRE" styleName="bulletinTitle"/>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="DU :"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="New Label"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="AU :"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="New Label"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+						<g:Grid>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Classe :"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="New Label"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="Maître de classe :"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="New Label"/>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+					</g:VerticalPanel>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+					<g:Grid>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Objectif spécifique du semestre :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label text="New Label" width="300px" height="100px"/>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					<g:VerticalPanel spacing="3" styleName="subSection">
 			<g:Label text="TB = Très Bien"/>
 			<g:Label text="B = Bien"/>
 			<g:Label text="AB = Assez Bien"/>
 			<g:Label text="S = Suffisant"/>
 			<g:Label text="NA = Non atteint"/>
 		</g:VerticalPanel>
-			</g:HorizontalPanel>
-			<g:VerticalPanel width="100%" styleName="subSection" spacing="2">
+				</g:HorizontalPanel>
+				<g:Label text="Objectifs d&apos;apprentissage pour l&apos;élève" styleName="bulletinTitle"/>
+			</g:VerticalPanel>
+				<g:VerticalPanel width="100%" spacing="2">
 				<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="subSection"/>
 				<g:HorizontalPanel width="100%" spacing="5">
 				<g:Label text="Commentaire(s) éventuel(s) et pistes d&apos;amélioration :"/>
 				<g:TextArea visibleLines="5" characterWidth="80" ui:field="txtCommentaire"/>
 				<g:Button ui:field="cmdSave" enabled="false">Enregister</g:Button>
 			</g:HorizontalPanel>
+			</g:VerticalPanel>
 			</g:VerticalPanel>
 			
 		</g:VerticalPanel>
