@@ -14,7 +14,7 @@ public class EvaluationValues {
 	public static String S_Long = "Suffisant";
 	public static String NA_Long = "Non Atteint";
 	//
-	public static String Objective1 = "Comprendre le contexte du cours, est capable d'en discuster et d'en appliquer les principes.";
+	public static String Objective1 = "Comprend le contexte du cours, est capable d'en discuster et d'en appliquer les principes.";
 	public static String Objective2 = "Est capable d'identifier des problèmes et de chercher des solutions.";
 	public static String Objective3 = "Est capable de synthétiser et de faire des propositions dans le cadre de contextes similaires.";
 	public static String Objective4 = "Est bien structuré dans son travail et parvient à hiérachiser ses priorités.";

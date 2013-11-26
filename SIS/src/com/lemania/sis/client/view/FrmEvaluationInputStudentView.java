@@ -21,6 +21,7 @@ import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.EvaluationStudentReportProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
@@ -29,6 +30,8 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -47,6 +50,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	private List<BulletinProxy> bulletins = new ArrayList<BulletinProxy>();
 	private List<EvaluationHeaderProxy> evaluationHeaders = new ArrayList<EvaluationHeaderProxy>(); 
 	private ListDataProvider<EvaluationSubjectProxy> providerEvaluationSubject = new ListDataProvider<EvaluationSubjectProxy>();
+	private int selectedEvaluationSubjectIndex = -1;
 	
 
 	public interface Binder extends UiBinder<Widget, FrmEvaluationInputStudentView> {
@@ -164,7 +168,23 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	      }
  	    };
  	    tblEvaluations.setColumnWidth(colObjective6, 10, Unit.PCT);
- 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6); 	    
+ 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6); 	
+ 	    
+ 	    //
+	    Column<EvaluationSubjectProxy, String> colDelete = new Column<EvaluationSubjectProxy, String> (new ButtonCell()){
+	    	@Override
+	    	public String getValue(EvaluationSubjectProxy es){
+	    		return "X";
+	    	}
+	    };
+	    colDelete.setFieldUpdater(new FieldUpdater<EvaluationSubjectProxy, String>(){
+	    	@Override
+	    	public void update(int index, EvaluationSubjectProxy es, String value){
+	    		selectedEvaluationSubjectIndex = index;
+	    		getUiHandlers().removeEvaluationSubject( es );
+	    	}
+	    });	    
+	    tblEvaluations.addColumn(colDelete, "");
  	    
  	    //
  	    providerEvaluationSubject.addDataDisplay(tblEvaluations); 
@@ -404,17 +424,29 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 			    }
 			}
 		};
+		//
 		cmdSave.setVisible(false);
+		tblEvaluations.setColumnWidth(tblEvaluations.getColumn(tblEvaluations.getColumnCount()-1), 0, Unit.PX);
+		//
 		popup.setStyleName("evaluation");
 		popup.add(pnlEvaluationPrint);
 		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
 			public void onClose(CloseEvent<PopupPanel> event) {
 				pnlEvaluationMain.add(pnlEvaluationPrint);
 				pnlEvaluationPrint.setHeight("100%");
+				tblEvaluations.setColumnWidth(tblEvaluations.getColumn(tblEvaluations.getColumnCount()-1), 5, Unit.PCT);
 				cmdSave.setVisible(true);		
 			}
 		});
 		//
 		popup.show();
+	}
+
+	/*
+	 * */
+	@Override
+	public void removeDeletedEvaluationSubject() {
+		//
+		providerEvaluationSubject.getList().remove(selectedEvaluationSubjectIndex);
 	}
 }

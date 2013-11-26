@@ -82,6 +82,8 @@ public class FrmEvaluationInputStudentPresenter
 		void enableCommentEditing(Boolean isClassMaster);
 		//
 		void setStudentReportData(EvaluationStudentReportProxy report);
+		//
+		void removeDeletedEvaluationSubject();
 	}
 
 	@ProxyCodeSplit
@@ -300,6 +302,11 @@ public class FrmEvaluationInputStudentPresenter
 	public void saveEvaluationStudentReport(String bulletinId,
 			String evaluationHeaderId, String commentaire) {
 		//
+		if (currentUser.isReadOnly()) {
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
 		EvaluationStudentReportRequestFactory rf = GWT.create(EvaluationStudentReportRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		EvaluationStudentReportRequestContext rc = rf.evaluationStudentReportRequest();
@@ -336,6 +343,37 @@ public class FrmEvaluationInputStudentPresenter
 				//
 				if (response != null)
 					getView().setStudentReportData(response);
+			}
+		});
+	}
+
+	/*
+	 * */
+	@Override
+	public void removeEvaluationSubject(EvaluationSubjectProxy es) {
+		//
+		if (currentUser.isReadOnly()) {
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
+		if (!currentUser.isAdmin()) {
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		//
+		EvaluationSubjectRequestFactory rf = GWT.create(EvaluationSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		EvaluationSubjectRequestContext rc = rf.evaluationSubjectRequest();				
+		rc.removeEvaluationSubject(es).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				//
+				getView().removeDeletedEvaluationSubject();				
 			}
 		});
 	}

@@ -1,6 +1,7 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.EvaluationSubjectProxy;
 
 public interface FrmEvaluationInputStudentUiHandler extends UiHandlers {
 	//
@@ -14,5 +15,7 @@ public interface FrmEvaluationInputStudentUiHandler extends UiHandlers {
 	//
 	void onEvaluationHeaderSelected( String classId, String bulletinId, String evaluationHeaderId, String classMasterId );
 	//
-	void saveEvaluationStudentReport( String bulletinId, String evaluationHeaderId, String commentaire );			
+	void saveEvaluationStudentReport( String bulletinId, String evaluationHeaderId, String commentaire );	
+	//
+	void removeEvaluationSubject( EvaluationSubjectProxy es );
 }

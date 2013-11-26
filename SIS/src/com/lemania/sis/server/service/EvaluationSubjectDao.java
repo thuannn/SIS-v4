@@ -59,7 +59,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 			
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
-					.filter("subject", assignment.getSubject())
+					.filter("subject", assignment.getSubject())		
 					.filter("professor", assignment.getProf())
 					.order("subjectName");
 			//
@@ -96,10 +96,9 @@ public class EvaluationSubjectDao extends MyDAOBase {
 						returnList.add( curES );						
 					}
 				}				
-			}
-			if (currentES.count() <= 0)
-				this.ofy().put(returnList);
-			
+			}			
+			//
+			this.ofy().put(returnList);			
 			return returnList;
 		}
 		return null;		
