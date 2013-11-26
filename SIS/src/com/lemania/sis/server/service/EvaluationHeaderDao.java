@@ -18,6 +18,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 		Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class);
 		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
 		for (EvaluationHeader evaluationHeader : q){
+			evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
 			returnList.add( evaluationHeader );
 		}
 		return returnList;
@@ -31,6 +32,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)));
 		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
 		for (EvaluationHeader evaluationHeader : q){
+			evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
 			returnList.add( evaluationHeader );
 		}
 		return returnList;
@@ -47,6 +49,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 			Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class)
 					.filter("classe", assingment.getClasse());		
 			for (EvaluationHeader evaluationHeader : q){
+				evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
 				returnList.add( evaluationHeader );
 			}
 		}

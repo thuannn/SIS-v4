@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.EvaluationValues;
@@ -22,13 +24,19 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Label;
 
 public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluationInputStudentUiHandler> implements
 		FrmEvaluationInputStudentPresenter.MyView {
@@ -64,6 +72,13 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	@UiField ListBox lstBulletins;
 	@UiField VerticalPanel pnlEvaluationPrint;
 	@UiField VerticalPanel pnlEvaluationMain;
+	@UiField Label lblObjective;
+	@UiField Label lblStudentName;
+	@UiField Label lblFromDate;
+	@UiField Label lblToDate;
+	@UiField Label lblClass;
+	@UiField Label lblClassMaster;
+	@UiField Button cmdPrint;
 	
 	/*
 	 * */
@@ -97,6 +112,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective1();
  	      }
  	    };
+ 	   tblEvaluations.setColumnWidth(colObjective1, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective1, EvaluationValues.Objective1); 	    
  	     	    
  	    // 	     	    
@@ -106,7 +122,9 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective2();
  	      }
  	    };
+ 	    tblEvaluations.setColumnWidth(colObjective2, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective2, EvaluationValues.Objective2);
+ 	    
  	    
     	// 	    
  	    TextColumn<EvaluationSubjectProxy> colObjective3 = new TextColumn<EvaluationSubjectProxy>() {
@@ -115,6 +133,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective3();
  	      }
  	    };
+ 	    tblEvaluations.setColumnWidth(colObjective3, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective3, EvaluationValues.Objective3);
  	  
     	// 	    
@@ -124,6 +143,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective4();
  	      }
  	    };
+ 	    tblEvaluations.setColumnWidth(colObjective4, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective4, EvaluationValues.Objective4); 	    
  	    
  	    // 	   
@@ -133,6 +153,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective5();
  	      }
  	    };
+ 	    tblEvaluations.setColumnWidth(colObjective5, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective5, EvaluationValues.Objective5); 	   
  	    
  	    // 	    
@@ -142,6 +163,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective6();
  	      }
  	    };
+ 	    tblEvaluations.setColumnWidth(colObjective6, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6); 	    
  	    
  	    //
@@ -266,6 +288,10 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	@UiHandler("lstBulletins")
 	void onLstBulletinsChange(ChangeEvent event) {
 		//
+		clearStudentReportUI();
+		//
+		lblStudentName.setText( lstBulletins.getItemText(lstBulletins.getSelectedIndex()) );
+		//
 		getUiHandlers().onBulletinSelected( lstClasses.getValue(lstClasses.getSelectedIndex()) );
 	}
 	
@@ -286,25 +312,37 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	/*
 	 * */
 	@UiHandler("lstEvaluationHeaders")
-	void onLstEvaluationHeadersChange(ChangeEvent event) {
-		//
-		clearStudentReportUI();
+	void onLstEvaluationHeadersChange(ChangeEvent event) {		
 		//
 		if (lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()).equals(""))
 			return;
+		//	
+		EvaluationHeaderProxy eh = evaluationHeaders.get(lstEvaluationHeaders.getSelectedIndex()-1);
+		lblFromDate.setText( eh.getFromDate() );
+		lblToDate.setText( eh.getToDate() );
+		lblObjective.setText( eh.getObjective() );
+		lblClass.setText( lstClasses.getItemText(lstClasses.getSelectedIndex()) );
+		lblClassMaster.setText( eh.getClassMasterName() );
 		//
 		getUiHandlers().onEvaluationHeaderSelected(
 				lstClasses.getValue(lstClasses.getSelectedIndex()), 
 				lstBulletins.getValue(lstBulletins.getSelectedIndex()), 
 				lstEvaluationHeaders.getValue(lstEvaluationHeaders.getSelectedIndex()),
-				evaluationHeaders.get(lstEvaluationHeaders.getSelectedIndex()-1).getClassMasterId() );
+				eh.getClassMasterId() );
 	}
 
 	/*
 	 * */
 	private void clearStudentReportUI() {
-		//
-		txtCommentaire.setText("");		
+		//				
+		lblFromDate.setText("");
+		lblToDate.setText("");
+		lblClass.setText("");
+		lblClassMaster.setText("");		
+		lblStudentName.setText("");
+		lblObjective.setText("");
+		providerEvaluationSubject.getList().clear();
+		txtCommentaire.setText("");
 	}
 
 	/*
@@ -316,7 +354,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 		providerEvaluationSubject.getList().clear();
 		providerEvaluationSubject.setList(evaluationSubject);
 		//
-		tblEvaluations.setHeight( (NotificationTypes.lineHeightShortList * (evaluationSubject.size()+1) + 100) + "px");
+		tblEvaluations.setHeight( (NotificationTypes.lineHeight * (evaluationSubject.size()+1) + 100) + "px");
 	}
 	
 	/*
@@ -344,5 +382,39 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	public void setStudentReportData(EvaluationStudentReportProxy report) {
 		//
 		txtCommentaire.setText( report.getEvaluationNote() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdPrint")
+	void onCmdPrintClick(ClickEvent event) {
+		//		
+		// pnlEvaluationPrint.setHeight(NotificationTypes.bulletinPageHeight.toString() + "px");
+		//
+		PopupPanel popup = new PopupPanel(true) {
+			@Override
+			  protected void onPreviewNativeEvent(final NativePreviewEvent event) {
+			    super.onPreviewNativeEvent(event);
+			    switch (event.getTypeInt()) {
+			        case Event.ONKEYDOWN:
+			            if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+			                hide();
+			            }
+			            break;
+			    }
+			}
+		};
+		cmdSave.setVisible(false);
+		popup.setStyleName("evaluation");
+		popup.add(pnlEvaluationPrint);
+		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
+			public void onClose(CloseEvent<PopupPanel> event) {
+				pnlEvaluationMain.add(pnlEvaluationPrint);
+				pnlEvaluationPrint.setHeight("100%");
+				cmdSave.setVisible(true);		
+			}
+		});
+		//
+		popup.show();
 	}
 }

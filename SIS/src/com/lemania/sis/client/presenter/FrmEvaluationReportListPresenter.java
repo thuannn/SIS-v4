@@ -102,6 +102,7 @@ public class FrmEvaluationReportListPresenter
 		getView().resetForm();
 		getView().resetEditForm();
 		loadEcoleList();
+		loadClassMasterList();
 	}
 
 	/*

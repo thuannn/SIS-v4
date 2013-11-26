@@ -113,6 +113,10 @@ th {
   height: 18px;
 }
 
+.evaluationTable {
+	border: 1px solid Black;
+}
+
 .northPane {
 	position: absolute;
 	top: 5px;
@@ -237,6 +241,15 @@ th {
 	background-color: white;
 }
 
+.evaluation {
+	width: 1080px;
+	height: 800px;
+	font-size: 12px;
+	font-family: sans-serif;
+	vertical-align: top;
+	background-color: white;
+}
+
 .bulletinNote {
 	padding: 5px;
 	border: 1px solid lightskyblue;
@@ -275,6 +288,18 @@ th {
 }
 .sis-combobox {
 	width: 300px;
+}
+
+.evaluationText {
+	color: darkblue;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	
+}
+
+.evaluationNote{
+	font-size: 10px;
 }
 
 
@@ -491,5 +516,4 @@ background-color:#FFFFFF}
 
 100%{
 background-color:#6F89E8}
-
 }

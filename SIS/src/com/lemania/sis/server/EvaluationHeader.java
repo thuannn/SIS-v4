@@ -2,6 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.NotSaved;
 
 @Entity
 public class EvaluationHeader extends DatastoreObject {
@@ -9,9 +10,13 @@ public class EvaluationHeader extends DatastoreObject {
 	private String fromDate;
 	private String toDate;
 	private String objective;
-	private String schoolYear;
+	private String schoolYear;	
+	
 	Key<Professor> classMaster;
 	Key<Classe> classe;
+	
+	@NotSaved
+	String classMasterName = "";	
 	
 	public String getFromDate() {
 		return fromDate;
@@ -54,5 +59,11 @@ public class EvaluationHeader extends DatastoreObject {
 	}
 	public String getClassMasterId() {
 		return Long.toString(this.classMaster.getId());
+	}
+	public String getClassMasterName() {
+		return classMasterName;
+	}
+	public void setClassMasterName(String classMasterName) {
+		this.classMasterName = classMasterName;
 	}
 }

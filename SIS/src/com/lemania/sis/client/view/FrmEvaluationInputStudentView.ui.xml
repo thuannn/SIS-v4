@@ -73,73 +73,86 @@
 				</g:row>
 				<g:row/>
 			</g:Grid>
+				<g:Button text="Version imprimmée" ui:field="cmdPrint">Version imprimmé</g:Button>
 			</g:HorizontalPanel>
 			<g:VerticalPanel width="100%" ui:field="pnlEvaluationPrint">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
-				<g:HorizontalPanel width="100%">
-					<g:Image height="" url="images/logo_lemania.png" width=""/>
+				<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
+					<g:Image height="80px" url="images/logo_lemania.png" width=""/>
 					<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
 						<g:Label text="EVALUATION INTERMEDIAIRE" styleName="bulletinTitle"/>
-						<g:Grid>
+						<g:Grid borderWidth="0" cellPadding="3" cellSpacing="2">
 							<g:row>
 								<g:customCell>
-									<g:Label text="DU :"/>
+									<g:Label text="DU :" styleName="fieldTitle"/>
 								</g:customCell>
 								<g:customCell>
-									<g:Label text="New Label"/>
+									<g:Label text="." ui:field="lblFromDate" styleName="evaluationText"/>
 								</g:customCell>
 								<g:customCell>
-									<g:Label text="AU :"/>
+									<g:Label text="AU :" styleName="fieldTitle"/>
 								</g:customCell>
 								<g:customCell>
-									<g:Label text="New Label"/>
+									<g:Label text="." ui:field="lblToDate" styleName="evaluationText"/>
 								</g:customCell>
 							</g:row>
 						</g:Grid>
-						<g:Grid>
-										<g:row>
-											<g:customCell>
-												<g:Label text="Classe :"/>
-											</g:customCell>
-											<g:customCell>
-												<g:Label text="New Label"/>
-											</g:customCell>
-											<g:customCell>
-												<g:Label text="Maître de classe :"/>
-											</g:customCell>
-											<g:customCell>
-												<g:Label text="New Label"/>
-											</g:customCell>
-										</g:row>
-									</g:Grid>
 					</g:VerticalPanel>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+					<g:Grid cellPadding="3" cellSpacing="2">
+										<g:row>
+											<g:customCell>
+												<g:Label text="Elève :" styleName="fieldTitle"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="." styleName="evaluationText" ui:field="lblStudentName" width="250px"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Classe :" styleName="fieldTitle"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="." ui:field="lblClass" styleName="evaluationText"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Maître de classe :" styleName="fieldTitle"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Label text="." ui:field="lblClassMaster" styleName="evaluationText"/>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
 					<g:Grid>
 						<g:row>
 							<g:customCell>
-								<g:Label text="Objectif spécifique du semestre :"/>
+								<g:Label text="Objectif spécifique du semestre :" styleName="fieldTitle"/>
 							</g:customCell>
+						</g:row>
+						<g:row>
 							<g:customCell>
-								<g:Label text="New Label" width="300px" height="100px"/>
+								<g:Label text="." width="600px" height="" ui:field="lblObjective" styleName="evaluationNote"/>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					<g:VerticalPanel spacing="3" styleName="subSection">
-			<g:Label text="TB = Très Bien"/>
-			<g:Label text="B = Bien"/>
-			<g:Label text="AB = Assez Bien"/>
-			<g:Label text="S = Suffisant"/>
-			<g:Label text="NA = Non atteint"/>
+					<g:VerticalPanel spacing="3" styleName="subSection" width="90px">
+			<g:Label text="TB = Très Bien" styleName="evaluationNote"/>
+			<g:Label text="B = Bien" styleName="evaluationNote"/>
+			<g:Label text="AB = Assez Bien" styleName="evaluationNote"/>
+			<g:Label text="S = Suffisant" styleName="evaluationNote"/>
+			<g:Label text="NA = Non atteint" styleName="evaluationNote"/>
 		</g:VerticalPanel>
 				</g:HorizontalPanel>
-				<g:Label text="Objectifs d&apos;apprentissage pour l&apos;élève" styleName="bulletinTitle"/>
 			</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2">
-				<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="subSection"/>
+					<g:Label text="Objectifs d&apos;apprentissage pour l&apos;élève" styleName="bulletinTitle"/>
+				<p1:DataGrid width="100%" height="200px" ui:field="tblEvaluations" styleName="evaluationNote"/>
 				<g:HorizontalPanel width="100%" spacing="5">
 				<g:Label text="Commentaire(s) éventuel(s) et pistes d&apos;amélioration :"/>
-				<g:TextArea visibleLines="5" characterWidth="80" ui:field="txtCommentaire"/>
+				<g:TextArea visibleLines="5" characterWidth="100" ui:field="txtCommentaire" styleName="sis-TextArea"/>
 				<g:Button ui:field="cmdSave" enabled="false">Enregister</g:Button>
 			</g:HorizontalPanel>
 			</g:VerticalPanel>

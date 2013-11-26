@@ -231,7 +231,7 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 		txtObjective.setText("");
 		
 		//
-		getUiHandlers().loadClassMasterList();
+		lstClassMaster.setSelectedIndex(0);
 	}
 	
 	/*

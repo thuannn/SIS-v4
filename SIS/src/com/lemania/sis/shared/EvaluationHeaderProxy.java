@@ -24,4 +24,7 @@ public interface EvaluationHeaderProxy extends EntityProxy {
 	
 	public String getClassId();
 	public String getClassMasterId(); 
+	
+	public String getClassMasterName();
+	public void setClassMasterName(String classMasterName);
 }
