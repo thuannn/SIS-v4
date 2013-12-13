@@ -14,7 +14,6 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.ListBox;
 
 public class FrmSubjectAddView extends ViewWithUiHandlers<FrmSubjectAddUiHandler> 
 	implements FrmSubjectAddPresenter.MyView {

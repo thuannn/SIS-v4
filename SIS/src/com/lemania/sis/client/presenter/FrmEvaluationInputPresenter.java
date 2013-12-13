@@ -16,6 +16,7 @@ import com.lemania.sis.client.uihandler.FrmEvaluationInputUiHandler;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
@@ -206,7 +207,12 @@ public class FrmEvaluationInputPresenter
 	 * Populate the list of Evaluation Subject for each student in the assignment list 
 	 * */
 	private void populateEvaluationSubjectList( String profId,
-			String assignmentId, String evaluationHeaderId ) {
+			String assignmentId, String evaluationHeaderId ) {		
+		//
+		if (currentUser.isReadOnly()){
+			Window.alert( NotificationTypes.readOnly );
+			return;
+		}
 		//
 		EvaluationSubjectRequestFactory rf = GWT.create(EvaluationSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -226,6 +232,11 @@ public class FrmEvaluationInputPresenter
 	//
 	@Override
 	public void updateEvaluation(EvaluationSubjectProxy es, String value, int order) {
+		//
+		if (currentUser.isReadOnly()){
+			Window.alert( NotificationTypes.readOnly );
+			return;
+		}
 		//
 		EvaluationSubjectRequestFactory rf = GWT.create(EvaluationSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));

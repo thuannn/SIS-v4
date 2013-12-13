@@ -7,11 +7,15 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent;
+import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationReportListUiHandler;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
+import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
@@ -40,7 +44,10 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 public class FrmEvaluationReportListPresenter
 		extends Presenter<FrmEvaluationReportListPresenter.MyView, FrmEvaluationReportListPresenter.MyProxy>
-		implements FrmEvaluationReportListUiHandler {
+		implements FrmEvaluationReportListUiHandler, LoginAuthenticatedHandler {
+	
+	//
+	private CurrentUser currentUser;
 
 	public interface MyView extends View, HasUiHandlers<FrmEvaluationReportListUiHandler> {
 		//
@@ -195,6 +202,11 @@ public class FrmEvaluationReportListPresenter
 			String objective, String schoolYear, String classId,
 			String classMasterId) {
 		//
+		if (currentUser.isReadOnly()){
+			Window.alert( NotificationTypes.readOnly );
+			return;
+		}
+		//
 		if (classMasterId.isEmpty()){
 			Window.alert(NotificationTypes.invalid_input + " - Maître de la classe");
 			return;
@@ -244,7 +256,12 @@ public class FrmEvaluationReportListPresenter
 	@Override
 	public void updateReport(EvaluationHeaderProxy evaluationHeader,
 			String dateFrom, String dateTo, String classMasterId,
-			String objective) {
+			String objective) {		
+		//
+		if (currentUser.isReadOnly()){
+			Window.alert( NotificationTypes.readOnly );
+			return;
+		}
 		//
 		EvaluationHeaderRequestFactory rf = GWT.create(EvaluationHeaderRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -261,5 +278,14 @@ public class FrmEvaluationReportListPresenter
 				getView().updateEvaluationHeader(response);
 			}
 		});
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		// 
+		this.currentUser = event.getCurrentUser();
 	}
 }

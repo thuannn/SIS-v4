@@ -155,8 +155,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 6, "Moyenne Semes.");
 		tblNotes.setText(0, 7, "Remarques relatives à la période d'évaluation");
 		//
-		lblConditionMatu.setVisible(false);
-		lblConditionES.setVisible(true);
+		lblConditionMatu.setVisible(true);
+		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(false);
 	}
 	

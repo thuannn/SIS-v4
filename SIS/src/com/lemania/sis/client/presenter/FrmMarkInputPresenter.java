@@ -258,6 +258,8 @@ public class FrmMarkInputPresenter extends
 	}
 
 
+	/*
+	 * */
 	@Override
 	public void onBulletinBrancheSelected(BulletinBrancheProxy bulletinBranche) {
 		//
@@ -266,6 +268,8 @@ public class FrmMarkInputPresenter extends
 	}
 
 
+	/*
+	 * */
 	@Override
 	public void saveNotes( BulletinBrancheProxy bulletinBranche, final BulletinSubjectProxy bulletinSubject, 
 			String t_1_1, String t_1_2,	String t_1_3, String t_1_4, String t_1_5, 
@@ -327,7 +331,8 @@ public class FrmMarkInputPresenter extends
 		});
 	}
 
-
+	/*
+	 * */
 	private String calculateAverage(String t1, String t2, String t3, String t4, String t5) {
 		//
 		Double average = 0.0;
@@ -346,6 +351,8 @@ public class FrmMarkInputPresenter extends
 	}
 
 
+	/*
+	 * */
 	public void saveBulletinSubject(final BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject, String remarque1, String remarque2, String remarque3) {
 		//
 		if (this.currentUser.isReadOnly()){
