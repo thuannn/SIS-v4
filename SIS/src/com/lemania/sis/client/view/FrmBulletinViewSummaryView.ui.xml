@@ -55,9 +55,14 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 				</g:Grid>
 				<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlBulletinNotes">
 					<g:FlexTable width="100%" cellPadding="3" ui:field="tblNotes"/>
-					<g:HorizontalPanel width="100%" spacing="5" height="100%">
-					<g:Label text="Direction :" width=""/>
-					<g:TextArea width="" characterWidth="90" visibleLines="5" styleName="sis-TextArea" ui:field="txtDirectionRemarque"/>
+					<g:HorizontalPanel width="100%" height="100%">
+						<g:VerticalPanel width="100%" spacing="2">
+							<g:Label text="Direction :" width="180px" styleName="fieldTitle"/>
+						</g:VerticalPanel>
+					<g:VerticalPanel width="100%" spacing="2">
+						<g:Label text="Remarque :" width="" styleName="fieldTitle"/>
+						<g:TextArea width="" characterWidth="90" visibleLines="6" ui:field="txtDirectionRemarque" styleName="sis-TextArea"/>
+					</g:VerticalPanel>
 				</g:HorizontalPanel>
 					<g:Label ui:field="lblSpace" stylePrimaryName="hiddenText"/>
 				</g:VerticalPanel>

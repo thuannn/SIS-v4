@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
@@ -196,13 +197,13 @@ public class HomePresenter
 		currentUser.setStudent(response.getIsStudent());
 		currentUser.setReadOnly(response.getIsReadOnly());
 		
-		if (!currentUser.isAdmin()){		
+		if ( !currentUser.isAdmin() && !currentUser.isProf() ){		
 			if (systemBlocked) {
-				Window.alert("L'accès au système est bloqué dès à présent.");
+				Window.alert( NotificationTypes.system_student_block );
 				return;
 			}
 			if (currentUser.getCurrentDay() > deadLine) {
-				Window.alert("L'accès au système est bloqué dès à présent.");
+				Window.alert( NotificationTypes.system_student_block );
 				return;
 			}
 		}

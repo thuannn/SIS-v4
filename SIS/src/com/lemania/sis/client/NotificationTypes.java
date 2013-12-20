@@ -20,6 +20,8 @@ public class NotificationTypes {
 	
 	public static String branche_list_not_empty = "Merci de supprimer toutes les branches de cette matière avant la supprimer.";
 	
+	public static String system_student_block = "L'accès au système est bloqué dès à présent pour des raisons de maintenance.";
+	
 	public static Integer lineHeight = 30;
 	public static Integer lineHeightShortList = 40;
 	public static Integer headerHeight = 32;

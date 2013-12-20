@@ -168,7 +168,7 @@ th {
 	font-size: 12px;
 	font-family: Tahoma;
 	width: 99%;
-	over-flow: auto;
+	overflow: auto;
 }
 .subjectLine {
 	border-top: 1px solid silver;
