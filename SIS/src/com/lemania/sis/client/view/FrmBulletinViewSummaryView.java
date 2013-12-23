@@ -77,6 +77,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField HTML lblConditionMatu;
 	@UiField HTML lblConditionES;
 	@UiField HTML lblConditionBac;
+	@UiField ListBox lstModels;
 	
 	
 	/**/
@@ -84,7 +85,18 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	public void resetForm() {
 		//
 		lstClasses.setSelectedIndex(0);
-		lstBulletins.clear();		
+		lstBulletins.clear();
+		//
+		initializeModelList();				
+	}
+
+	/**/
+	private void initializeModelList() {
+		//
+		lstModels.clear();
+		lstModels.addItem("Ecole Lémania", "lemania");
+		lstModels.addItem("Pierre Viret", "pierreviret");
+		lstModels.setSelectedIndex(0);
 	}
 
 	/**/
@@ -282,7 +294,16 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		Double totalMoyenne = 0.0;
 		Double totalCoef = 0.0;
 		//
+		Integer applicationComportementSubject = -1;
+		//
 		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
+			if (subjects.get(rowCount).getSubjectName().toLowerCase().contains("application") &&
+					subjects.get(rowCount).getSubjectName().toLowerCase().contains("comportement") ) {
+				applicationComportementSubject = rowCount;
+				rowCount++;
+				continue;
+			}
+			
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
@@ -293,6 +314,23 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
 				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
 				totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
+			rowCount++;
+		}
+		//
+		if (applicationComportementSubject > -1) {
+			//
+			tblNotes.setText(subjects.size()+rowStart, 0, subjects.get( applicationComportementSubject ).getSubjectName());
+			tblNotes.setText(subjects.size()+rowStart, 1, subjects.get( applicationComportementSubject ).getSubjectCoef().toString());
+			tblNotes.setText(subjects.size()+rowStart, 2, subjects.get( applicationComportementSubject ).getT1().toString());
+			tblNotes.setText(subjects.size()+rowStart, 3, subjects.get( applicationComportementSubject ).getT2().toString());
+			tblNotes.setText(subjects.size()+rowStart, 4, subjects.get( applicationComportementSubject ).getT3().toString());
+			tblNotes.setText(subjects.size()+rowStart, 5, subjects.get( applicationComportementSubject ).getAn());
+			//
+			if ( !subjects.get( applicationComportementSubject ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( applicationComportementSubject ).getAn()) * subjects.get( applicationComportementSubject ).getSubjectCoef();
+				totalCoef = totalCoef + subjects.get( applicationComportementSubject ).getSubjectCoef();
 			}
 			//
 			rowCount++;
@@ -508,5 +546,20 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	public void drawDate(String date) {
 		//
 		lblDate.setText(date);
+	}
+	
+	/**/
+	@UiHandler("lstModels")
+	void onLstModelsChange(ChangeEvent event) {
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("lemania")){
+			imgLogo.setUrl("/images/logo_lemania.png");
+			txtAddress1.setText("Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00");
+			txtAddress2.setText("Email: info@lemania.ch - Site internet : www.lemania.ch");
+		}
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("pierreviret")){
+			imgLogo.setUrl("/images/logo_pv.jpg");
+			txtAddress1.setText("Chemin des Cèdres 3, 1004 Lausanne, Suisse - Tel.: + 41 21 643 77 07 - Fax.: + 41 21 643 77 08");
+			txtAddress2.setText("Email: info@pierreviret.ch - Site internet : www.pierreviret.ch");
+		}
 	}
 }

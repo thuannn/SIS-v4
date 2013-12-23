@@ -18,6 +18,8 @@
 					<g:Label text="Bulletin(s) :"/>
 					<g:ListBox width="300px" ui:field="lstBulletins"/>
 				</g:HorizontalPanel>
+				<g:Label text="Modèle :"/>
+				<g:ListBox ui:field="lstModels"/>
 				<g:Button ui:field="cmdPrint" text="Version imprimée">Imprimer</g:Button>
 			</g:HorizontalPanel>
 			<g:Label text="." styleName="hiddenText"/>
