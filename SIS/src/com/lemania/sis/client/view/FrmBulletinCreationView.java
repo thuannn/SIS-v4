@@ -26,6 +26,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -113,7 +114,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	        return object.getStudentName();
 	      }
 	    };
-	    tblBulletins.setColumnWidth(colFirstName, 50, Unit.PCT);
+	    tblBulletins.setColumnWidth(colFirstName, 45, Unit.PCT);
 	    tblBulletins.addColumn(colFirstName, "Eleve");
 	    //
 	    TextColumn<BulletinProxy> colLastName = new TextColumn<BulletinProxy>() {
@@ -122,7 +123,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	        return object.getClasseName();
 	      } 
 	    };
-	    tblBulletins.setColumnWidth(colLastName, 30, Unit.PCT);
+	    tblBulletins.setColumnWidth(colLastName, 25, Unit.PCT);
 	    tblBulletins.addColumn(colLastName, "Classe");
 	    //
 	    TextColumn<BulletinProxy> colYear = new TextColumn<BulletinProxy>() {
@@ -133,6 +134,28 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    };
 	    tblBulletins.addColumn(colYear, "Year");
 	    tblBulletins.setColumnWidth(colYear, 10, Unit.PCT);
+	    
+	    // Finished bulletin
+	    CheckboxCell cellFinished = new CheckboxCell();
+	    Column<BulletinProxy, Boolean> colFinished = new Column<BulletinProxy, Boolean>(cellFinished) {
+	    	@Override
+	    	public Boolean getValue(BulletinProxy bulletin){
+	    		return bulletin.getIsFinished();
+	    	}	    	
+	    };	    
+	    // Field updater
+	    colFinished.setFieldUpdater(new FieldUpdater<BulletinProxy, Boolean>(){
+	    	@Override
+	    	public void update(int index, BulletinProxy bp, Boolean value){
+	    		if (getUiHandlers() != null) {	    			
+	    			selectedBulletinIndex = index;
+	    			selectedBulletin = bp;
+	    			getUiHandlers().updateBulletinFinishedStatus(bp, value);
+	    		}	    		
+	    	}
+	    });
+	    tblBulletins.setColumnWidth(colFinished, 10, Unit.PCT);
+	    tblBulletins.addColumn(colFinished, "Terminé");
 	    
 	    //
 	    Column<BulletinProxy, String> colDelete = new Column<BulletinProxy, String> (new ButtonCell()){

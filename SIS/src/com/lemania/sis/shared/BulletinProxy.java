@@ -30,4 +30,7 @@ public interface BulletinProxy extends EntityProxy {
 	
 	public String getRemarqueDirection();
 	public void setRemarqueDirection(String remarqueDirection);
+	
+	public Boolean getIsFinished();
+	public void setIsFinished(Boolean isFinished);
 }

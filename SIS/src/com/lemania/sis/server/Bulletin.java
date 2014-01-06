@@ -14,6 +14,9 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	private String year;
 	private String remarqueDirection;
 	
+	// When a bulletin is finished, a student can be assigned to another class, professors will not see him in the student list to input the grades
+	private Boolean isFinished = false;
+	
 	@NotSaved
 	private String programmeName;
 	
@@ -106,5 +109,13 @@ public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 
 	public void setRemarqueDirection(String remarqueDirection) {
 		this.remarqueDirection = remarqueDirection;
+	}
+
+	public Boolean getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(Boolean isFinished) {
+		this.isFinished = isFinished;
 	}
 }

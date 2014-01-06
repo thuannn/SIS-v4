@@ -81,6 +81,8 @@ public class BulletinDao extends MyDAOBase {
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
 		Student student;
 		for (Bulletin bulletin : q){
+			if (bulletin.getIsFinished().equals(true))
+				continue;
 			student = this.ofy().get( bulletin.getStudent() );
 			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			returnList.add( bulletin );

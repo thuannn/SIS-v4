@@ -13,4 +13,6 @@ public interface FrmBulletinCreationUiHandler extends UiHandlers {
 	void createBulletin(String studentId, String classId, String year, String profileId);
 	//
 	void removeBulletin( BulletinProxy bp );
+	//
+	void updateBulletinFinishedStatus( BulletinProxy bp, Boolean isFinished );
 }

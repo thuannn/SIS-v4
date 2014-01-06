@@ -90,14 +90,21 @@ public class StudentDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * 
+	 * */
 	public List<Student> listAllActiveWithoutBulletin(){
-		//
-		Query<Bulletin> q = this.ofy().query(Bulletin.class).order("student");				
+		// Get the list of student IDs in the list of bulletins that are not finished
+		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+				.order("student");				
 		List<Long> studentIds = new ArrayList<Long>();
 		Long prevId = Long.MIN_VALUE;
 		Long curId = Long.MIN_VALUE;
 		for (Bulletin bulletin : q){
+			//
+			if (bulletin.getIsFinished().equals(true))
+				continue;
+			//
 			curId = this.ofy().get(bulletin.getStudent()).getId();
 			if ( prevId != curId ) {
 				prevId = curId;

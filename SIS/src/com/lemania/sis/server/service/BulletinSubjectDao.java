@@ -92,6 +92,10 @@ public class BulletinSubjectDao extends MyDAOBase {
 			for ( BulletinSubject bulletinSubject : q ){
 				// Check if this Bulletin Subject belongs to Bulletin list of the class
 				for (Bulletin bulletin : qBulletin){
+					//
+					if (bulletin.getIsFinished().equals(true))
+						continue;
+					//
 					if (bulletinSubject.getBulletin().getId() == bulletin.getId()) {
 						bulletinSubject.setStudentName(bulletin.getStudentName());
 						returnList.add( bulletinSubject );

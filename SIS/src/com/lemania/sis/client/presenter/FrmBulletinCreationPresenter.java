@@ -331,4 +331,33 @@ public class FrmBulletinCreationPresenter
 		//
 		this.currentUser = event.getCurrentUser();
 	}
+
+	
+	// 
+	@Override
+	public void updateBulletinFinishedStatus(BulletinProxy bp,
+			Boolean isFinished) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationTypes.readOnly);
+			return;
+		}
+		
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		BulletinProxy editBP = rc.edit(bp);
+		editBP.setIsFinished(isFinished);
+		rc.saveAndReturn(editBP).fire(new Receiver<BulletinProxy>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinProxy response) {
+					loadActiveStudentList();
+			}
+		});	
+	}
 }
