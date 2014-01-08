@@ -8,6 +8,8 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.event.LoadNonAttribuedStudentEvent;
+import com.lemania.sis.client.event.LoadNonAttribuedStudentEvent.LoadNonAttribuedStudentHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -50,7 +52,7 @@ public class FrmBulletinCreationPresenter
 		extends
 		Presenter<FrmBulletinCreationPresenter.MyView, FrmBulletinCreationPresenter.MyProxy> 
 		implements 
-		FrmBulletinCreationUiHandler, LoginAuthenticatedHandler {
+		FrmBulletinCreationUiHandler, LoginAuthenticatedHandler, LoadNonAttribuedStudentHandler {
 	
 	//
 	private CurrentUser currentUser;
@@ -75,6 +77,7 @@ public class FrmBulletinCreationPresenter
 		void removeStudentWithBulletin();
 		//
 		void removeDeletedBulletinFromTable();
+		void refreshBulletinTable( BulletinProxy bp );
 	}
 
 	@ProxyCodeSplit
@@ -317,7 +320,7 @@ public class FrmBulletinCreationPresenter
 			public void onSuccess(Boolean response) {
 				if (response) {
 					getView().removeDeletedBulletinFromTable();
-					loadActiveStudentList();
+					getEventBus().fireEvent( new LoadNonAttribuedStudentEvent() );
 				} else
 					Window.alert("Une erreur s'est produite.");
 			}
@@ -356,8 +359,18 @@ public class FrmBulletinCreationPresenter
 			}
 			@Override
 			public void onSuccess(BulletinProxy response) {
-					loadActiveStudentList();
+					getEventBus().fireEvent( new LoadNonAttribuedStudentEvent() );
+					getView().refreshBulletinTable(response);
 			}
 		});	
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onLoadNonAttribuedStudent(LoadNonAttribuedStudentEvent event) {
+		//
+		loadActiveStudentList();
 	}
 }

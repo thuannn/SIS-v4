@@ -83,6 +83,10 @@
 				</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 					<g:Label text="Liste des élèves attribués" styleName="sectionTitle"/>
+					<g:HorizontalPanel width="70%" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+						<g:Label text="Terminé :"/>
+						<g:ListBox ui:field="lstIsFinished"/>
+					</g:HorizontalPanel>
 					<p1:DataGrid width="100%" height="600px" ui:field="tblBulletins"/>
 					<g:Label text="." styleName="hiddenText" width="350px"/>
 				</g:VerticalPanel>

@@ -1,5 +1,6 @@
 package com.lemania.sis.client.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -42,6 +43,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	// Thuan
 	private ListDataProvider<StudentProxy> studentDataProvider = new ListDataProvider<StudentProxy>();
 	private ListDataProvider<BulletinProxy> bulletinDataProvider = new ListDataProvider<BulletinProxy>();
+	private List<BulletinProxy> filteredBulletins = new ArrayList<BulletinProxy>();
+	private List<BulletinProxy> fullBulletins = new ArrayList<BulletinProxy>();
 	//
 	private StudentProxy selectedStudent;
 	private int selectedStudentIndex;
@@ -50,6 +53,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	private BulletinProxy selectedBulletin;
 	
 
+	/*
+	 * */
 	public interface Binder extends UiBinder<Widget, FrmBulletinCreationView> {
 	}
 
@@ -62,6 +67,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	public Widget asWidget() {
 		return widget;
 	}
+	
 	@UiField(provided=true) DataGrid<StudentProxy> tblStudents = new DataGrid<StudentProxy>();
 	@UiField(provided=true) DataGrid<BulletinProxy> tblBulletins = new DataGrid<BulletinProxy>();
 	@UiField ListBox lstClasses;
@@ -71,13 +77,16 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	@UiField ListBox lstProgrammes;
 	@UiField Button cmdCreateBulletin;
 	@UiField Label lblSelectedStudentName;
+	@UiField ListBox lstIsFinished;
 	
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void resetForm() {
 		// Initialize years list
 		initializeYearList();
+		initializeOptions();
 		//
 		lstEcoles.setSelectedIndex(0);
 		lstProfiles.clear();
@@ -88,6 +97,20 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	}
 	
 	
+	/*
+	 * */
+	private void initializeOptions() {
+		//
+		lstIsFinished.clear();
+		lstIsFinished.addItem("Non", "0");
+		lstIsFinished.addItem("Oui", "1");
+		lstIsFinished.addItem("Tous", "2");
+		lstIsFinished.setSelectedIndex(0);
+	}
+
+	
+	/*
+	 * */
 	public void initializeYearList(){
 		lstYear.clear();
 		lstYear.addItem("-","");
@@ -341,14 +364,21 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void setBulletinTableData(List<BulletinProxy> bulletins) {
 		//
 		bulletinDataProvider.getList().clear();
-		bulletinDataProvider.setList(bulletins);
+		bulletinDataProvider.getList().addAll(bulletins);
+		//
+		fullBulletins.clear();
+		fullBulletins.addAll( bulletins );
+		onLstIsFinishedChange( null );
 	}
 
+	/*
+	 * */
 	@Override
 	public void removeStudentWithBulletin() {
 		//
@@ -357,11 +387,49 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		studentDataProvider.refresh();
 	}
 
-	/**/
+	/*
+	 * */
 	@Override
 	public void removeDeletedBulletinFromTable() {
 		// Remove from bulletin table
 		bulletinDataProvider.getList().remove(selectedBulletinIndex);
 		bulletinDataProvider.flush();
+	}
+	
+	/*
+	 * */
+	@UiHandler("lstIsFinished")
+	void onLstIsFinishedChange(ChangeEvent event) {
+		//
+		if (lstIsFinished.getValue(lstIsFinished.getSelectedIndex()).equals("2")){
+			bulletinDataProvider.getList().clear();
+			bulletinDataProvider.getList().addAll(fullBulletins);			
+			return;
+		}
+		//
+		filteredBulletins.clear();
+		for ( BulletinProxy bp : fullBulletins ) {
+			if ( (lstIsFinished.getValue(lstIsFinished.getSelectedIndex()).equals("0") && bp.getIsFinished().equals(false)) 
+					|| (lstIsFinished.getValue(lstIsFinished.getSelectedIndex()).equals("0") && bp.getIsFinished().equals(null)) 
+					|| (lstIsFinished.getValue(lstIsFinished.getSelectedIndex()).equals("1") && bp.getIsFinished().equals(true)) )
+				filteredBulletins.add(bp);
+		}
+		bulletinDataProvider.getList().clear();
+		bulletinDataProvider.getList().addAll(filteredBulletins);
+	}
+
+	/*
+	 * */
+	@Override
+	public void refreshBulletinTable(BulletinProxy bp) {
+		// Look through the full list and update the updated bulletin
+		for (int i=0; i < fullBulletins.size(); i++ ){
+			if ( fullBulletins.get(i).getId().equals(bp.getId())) {
+				fullBulletins.set(i, bp);
+				break;
+			}
+		}
+		//
+		onLstIsFinishedChange( null );
 	}
 }
