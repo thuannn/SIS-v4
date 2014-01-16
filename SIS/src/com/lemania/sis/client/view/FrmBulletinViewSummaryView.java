@@ -534,7 +534,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@Override
 	public void drawPierreViretInterface() {
 		// 
-		imgLogo.setUrl("images/logo-pv.png");
+		imgLogo.setUrl("/images/logo-pv.jpg");
 		txtAddress1.setText("College Pierre Viret - Chemin des Cèdres 3, 1004 Lausanne");
 		txtAddress2.setText("Tél.: + 41 21 643 77 07 - Fax: + 41 21 643 77 08 - E-mail: info@pierreviret.ch");
 	}

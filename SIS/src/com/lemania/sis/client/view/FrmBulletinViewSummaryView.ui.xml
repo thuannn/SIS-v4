@@ -63,7 +63,7 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 						</g:VerticalPanel>
 					<g:VerticalPanel width="100%" spacing="2">
 						<g:Label text="Remarque :" width="" styleName="fieldTitle"/>
-						<g:TextArea width="" characterWidth="90" visibleLines="6" ui:field="txtDirectionRemarque" styleName="sis-TextArea"/>
+						<g:TextArea width="" characterWidth="90" ui:field="txtDirectionRemarque" styleName="sis-TextArea" height="" visibleLines="8"/>
 					</g:VerticalPanel>
 				</g:HorizontalPanel>
 					<g:Label ui:field="lblSpace" stylePrimaryName="hiddenText"/>
