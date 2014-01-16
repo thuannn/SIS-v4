@@ -357,8 +357,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	@Override
 	public void addNewBulletinToTable(BulletinProxy bulletin) {
 		// 
-		bulletinDataProvider.getList().add(bulletin);
-		bulletinDataProvider.refresh();
+		onLstClassesChange(null);
 	}
 	
 	
@@ -398,9 +397,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	 * */
 	@Override
 	public void removeDeletedBulletinFromTable() {
-		// Remove from bulletin table
-		bulletinDataProvider.getList().remove(selectedBulletinIndex);
-		bulletinDataProvider.flush();
+		// Reload student in currently selected class		
+		onLstClassesChange(null);
 	}
 	
 	/*
