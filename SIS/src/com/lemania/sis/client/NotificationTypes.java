@@ -3,6 +3,7 @@ package com.lemania.sis.client;
 public class NotificationTypes {
 	
 	public static String student_create_good = "L'élève a été crée avec succès.";
+	public static String student_already_attribued = "L'élève existe déjà dans cette classe.";
 	
 	public static String prof_code_access_created = "Un code d'accès a été créé pour le nouveau professeur.";
 	
