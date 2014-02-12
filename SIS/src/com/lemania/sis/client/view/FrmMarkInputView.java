@@ -490,6 +490,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtT2.setText( bulletinBranche.getT2() );
 		txtT3.setText( bulletinBranche.getT3() );
 	}
+	
 
 	/*
 	 * 
@@ -501,6 +502,15 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 			pnlT1.setVisible(true);
 			pnlT2.setVisible(true);
 			cmdSave.setVisible(true);
+		}
+		//
+		if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("prématurité")){
+			tblAverageGrade.setColumnWidth(4, 15, Unit.PCT);
+			tblAverageGrade.setColumnWidth(5, 15, Unit.PCT);
+			tblBranches.setColumnWidth(4, 15, Unit.PCT);
+			if (selectedBulletinBrancheIndex > -1)
+				if ( !pnlT3.isVisible() ) pnlT3.setVisible(true);
+			return;
 		}
 		//
 		if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){

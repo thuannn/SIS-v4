@@ -13,7 +13,7 @@
 				<g:Grid cellPadding="3" cellSpacing="2">
 					<g:row>
 						<g:customCell>
-							<g:Label text="Chosir une classe :"/>
+							<g:Label text="Choisir une classe :"/>
 						</g:customCell>
 						<g:customCell>
 							<g:ListBox ui:field="lstClasses" styleName="sis_textbox"/>

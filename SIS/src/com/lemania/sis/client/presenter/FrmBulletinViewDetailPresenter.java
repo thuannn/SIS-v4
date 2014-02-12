@@ -244,7 +244,7 @@ public class FrmBulletinViewDetailPresenter
 			}
 			@Override
 			public void onSuccess(BulletinProxy response) {
-				if (response.getProgrammeName().toLowerCase().contains("matu"))
+				if (response.getProgrammeName().toLowerCase().contains("matu") && !response.getClasseName().toLowerCase().contains("prématurité"))
 					getView().drawGradeTableMatu(subjects, branches, currentUser.isStudent());
 				else
 					getView().drawGradeTableNormal(subjects, branches, currentUser.isStudent());

@@ -138,7 +138,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	public void showUserInfo(CurrentUser currentUser) {
 		txtWelcome.setText("Vous êtes connecté(e), " + currentUser.getFullName() + " !");
 		cmdLogout.setText("Déconnexion");
-		lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()) + " - " + Integer.toString(currentUser.getCurrentYear()+1));
+		if (currentUser.getCurrentMonth() < 9)
+			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()-1) + " - " + Integer.toString(currentUser.getCurrentYear()));
+		else
+			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()) + " - " + Integer.toString(currentUser.getCurrentYear()+1));
 	}
 
 	@Override

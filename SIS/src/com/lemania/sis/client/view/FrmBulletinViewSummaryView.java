@@ -219,8 +219,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@Override
 	public void drawBulletinSubjectList(List<BulletinSubjectProxy> subjects) {
 		//
-		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("matu"))
-			drawMatuBulletin( subjects );
+		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("matu")) {
+			if ( classes.get(lstClasses.getSelectedIndex()-1).getClassName().toLowerCase().contains("prématurité") )
+				drawMatuTroisTrimestres( subjects );
+			else
+				drawMatuBulletin( subjects );
+		}
 		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("bacc"))
 			drawBacBulletin( subjects );
 		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("second"))
@@ -228,6 +232,85 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 	
 	
+	private void drawMatuTroisTrimestres(List<BulletinSubjectProxy> subjects) {
+		//
+		initializeMatuTroisTrimestresTable();
+		//
+		Integer rowStart = 1;
+		Integer rowCount = 0;		
+		Double totalMoyenne = 0.0;
+		Double totalCoef = 0.0;
+		//
+		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
+			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
+			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
+			tblNotes.setText(i, 2, subjects.get( rowCount ).getT1().toString());
+			tblNotes.setText(i, 3, subjects.get( rowCount ).getExamT1().toLowerCase());
+			tblNotes.setText(i, 4, subjects.get( rowCount ).getT2().toString());
+			tblNotes.setText(i, 5, subjects.get( rowCount ).getExamT2().toString());
+			tblNotes.setText(i, 6, subjects.get( rowCount ).getT3().toString());
+			tblNotes.setText(i, 7, subjects.get( rowCount ).getExamT3().toString());
+			tblNotes.setText(i, 8, subjects.get( rowCount ).getAn());
+			tblNotes.setText(i, 9, (
+					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
+					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
+							: subjects.get(rowCount).getRemarqueT1() ) ) );			
+			//
+			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
+				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
+			rowCount++;
+		}
+				
+		//
+		rowCount++;
+		tblNotes.setText(rowCount, 0, "Moyenne :");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
+		tblNotes.setText(rowCount, 2, "");
+		tblNotes.setText(rowCount, 3, "");
+		tblNotes.setText(rowCount, 4, "");
+		tblNotes.setText(rowCount, 5, "");
+		tblNotes.setText(rowCount, 6, "");
+		tblNotes.setText(rowCount, 7, "");
+		tblNotes.setText(rowCount, 8, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
+		tblNotes.setText(rowCount, 9, "");
+		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
+			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
+		
+		//
+		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
+		
+		//
+		styleBacTable();
+	}
+	
+
+	/*
+	 * */
+	private void initializeMatuTroisTrimestresTable() {	
+		//
+		tblNotes.removeAllRows();
+		//
+		tblNotes.setText(0, 0, "Groupe");
+		tblNotes.setText(0, 1, "Coef");
+		tblNotes.setText(0, 2, "T1");
+		tblNotes.setText(0, 3, "Examen");
+		tblNotes.setText(0, 4, "T2");
+		tblNotes.setText(0, 5, "Examen");
+		tblNotes.setText(0, 6, "T3");
+		tblNotes.setText(0, 7, "Examen");
+		tblNotes.setText(0, 8, "Moyenne Annuelle");
+		tblNotes.setText(0, 9, "Remarques relatives à la période d'évaluation");
+		tblNotes.getRowFormatter().setStyleName(0, "bulletinHeader");
+		//
+		lblConditionMatu.setVisible(true);
+		lblConditionES.setVisible(false);
+		lblConditionBac.setVisible(false);
+	}
+	
+
 	/**/
 	private void drawBacBulletin(List<BulletinSubjectProxy> subjects) {
 		//
@@ -534,7 +617,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@Override
 	public void drawPierreViretInterface() {
 		// 
-		imgLogo.setUrl("/images/logo-pv.jpg");
+		imgLogo.setUrl("/images/logo_pv.jpg");
 		txtAddress1.setText("College Pierre Viret - Chemin des Cèdres 3, 1004 Lausanne");
 		txtAddress2.setText("Tél.: + 41 21 643 77 07 - Fax: + 41 21 643 77 08 - E-mail: info@pierreviret.ch");
 	}
