@@ -60,7 +60,10 @@ public class EvaluationSubjectDao extends MyDAOBase {
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())		
-					.filter("professor", assignment.getProf())
+/*
+ * 2014.02.13 - Professor does not matter anymore
+.filter("professor", assignment.getProf())
+*/
 					.order("subjectName");
 			//
 			Query<EvaluationSubject> currentES = null;
@@ -94,7 +97,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 							
 							curES.setStudentName( bulletin.getStudentName() );
 							curES.setSubjectName( bulletinSubject.getSubjectName() );
-							curES.setProfessorName( bulletinSubject.getProfName() );
+							curES.setProfessorName( this.ofy().get(assignment.getProf()).getProfName() );
 						}
 						//
 						returnList.add( curES );						

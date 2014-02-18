@@ -221,7 +221,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("matu")) {
 			if ( classes.get(lstClasses.getSelectedIndex()-1).getClassName().toLowerCase().contains("prématurité") )
-				drawMatuTroisTrimestres( subjects );
+				drawPrematurite( subjects );
 			else
 				drawMatuBulletin( subjects );
 		}
@@ -232,9 +232,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 	
 	
-	private void drawMatuTroisTrimestres(List<BulletinSubjectProxy> subjects) {
+	private void drawPrematurite(List<BulletinSubjectProxy> subjects) {
 		//
-		initializeMatuTroisTrimestresTable();
+		initializePrematurite();
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;		
@@ -250,11 +250,14 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 5, subjects.get( rowCount ).getExamT2().toString());
 			tblNotes.setText(i, 6, subjects.get( rowCount ).getT3().toString());
 			tblNotes.setText(i, 7, subjects.get( rowCount ).getExamT3().toString());
-			tblNotes.setText(i, 8, subjects.get( rowCount ).getAn());
-			tblNotes.setText(i, 9, (
-					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
+			tblNotes.setText(i, 8, subjects.get( rowCount ).getT4().toString());
+			tblNotes.setText(i, 9, subjects.get( rowCount ).getExamT4().toString());
+			tblNotes.setText(i, 10, subjects.get( rowCount ).getAn());
+			tblNotes.setText(i, 11, (
+					!subjects.get(rowCount).getRemarqueT4().equals("") ? subjects.get(rowCount).getRemarqueT4()
+					: ( !subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
 					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
-							: subjects.get(rowCount).getRemarqueT1() ) ) );			
+							: subjects.get(rowCount).getRemarqueT1() ) ) ) );			
 			//
 			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
 				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
@@ -274,8 +277,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(rowCount, 5, "");
 		tblNotes.setText(rowCount, 6, "");
 		tblNotes.setText(rowCount, 7, "");
-		tblNotes.setText(rowCount, 8, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
+		tblNotes.setText(rowCount, 8, "");
 		tblNotes.setText(rowCount, 9, "");
+		tblNotes.setText(rowCount, 10, String.valueOf((double)Math.round(totalMoyenne/totalCoef*10)/10));
+		tblNotes.setText(rowCount, 11, "");
 		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
 			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
 		
@@ -289,7 +294,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 
 	/*
 	 * */
-	private void initializeMatuTroisTrimestresTable() {	
+	private void initializePrematurite() {	
 		//
 		tblNotes.removeAllRows();
 		//
@@ -301,8 +306,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(0, 5, "Examen");
 		tblNotes.setText(0, 6, "T3");
 		tblNotes.setText(0, 7, "Examen");
-		tblNotes.setText(0, 8, "Moyenne Annuelle");
-		tblNotes.setText(0, 9, "Remarques relatives à la période d'évaluation");
+		tblNotes.setText(0, 8, "T4");
+		tblNotes.setText(0, 9, "Examen");
+		tblNotes.setText(0, 10, "Moyenne Annuelle");
+		tblNotes.setText(0, 11, "Remarques relatives à la période d'évaluation");
 		tblNotes.getRowFormatter().setStyleName(0, "bulletinHeader");
 		//
 		lblConditionMatu.setVisible(true);

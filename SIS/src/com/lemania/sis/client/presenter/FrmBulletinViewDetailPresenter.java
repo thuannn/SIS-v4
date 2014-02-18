@@ -61,6 +61,7 @@ public class FrmBulletinViewDetailPresenter
 		void setClasseList(List<ClasseProxy> classes);
 		//
 		void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent);
+		void drawGradeTablePrematurite(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent);
 		void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent);
 	}
 
@@ -244,8 +245,12 @@ public class FrmBulletinViewDetailPresenter
 			}
 			@Override
 			public void onSuccess(BulletinProxy response) {
-				if (response.getProgrammeName().toLowerCase().contains("matu") && !response.getClasseName().toLowerCase().contains("prématurité"))
-					getView().drawGradeTableMatu(subjects, branches, currentUser.isStudent());
+				if (response.getProgrammeName().toLowerCase().contains("matu")){ 
+					if (response.getClasseName().toLowerCase().contains("prématurité"))
+						getView().drawGradeTablePrematurite(subjects, branches, currentUser.isStudent());
+					else
+						getView().drawGradeTableMatu(subjects, branches, currentUser.isStudent());
+				}
 				else
 					getView().drawGradeTableNormal(subjects, branches, currentUser.isStudent());
 			}

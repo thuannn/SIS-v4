@@ -16,6 +16,7 @@ public interface BulletinBrancheProxy extends EntityProxy {
 	public String getBulletinBrancheName();
 	public void setBulletinBrancheName(String bulletinBrancheName);
 
+	//
 	public String getT1_1();
 	public void setT1_1(String t1_1);
 
@@ -31,6 +32,7 @@ public interface BulletinBrancheProxy extends EntityProxy {
 	public String getT1_5();
 	public void setT1_5(String t1_5);
 
+	//
 	public String getT2_1();
 	public void setT2_1(String t2_1);
 
@@ -45,7 +47,8 @@ public interface BulletinBrancheProxy extends EntityProxy {
 
 	public String getT2_5();
 	public void setT2_5(String t2_5);
-
+	
+	//
 	public String getT3_1();
 	public void setT3_1(String t3_1);
 
@@ -61,7 +64,24 @@ public interface BulletinBrancheProxy extends EntityProxy {
 
 	public String getT3_5();
 	public void setT3_5(String t3_5);
-
+	
+	//
+	public String getT4_1();
+	public void setT4_1(String t4_1);
+	
+	public String getT4_2();
+	public void setT4_2(String t4_2);
+	
+	public String getT4_3();
+	public void setT4_3(String t4_3);
+	
+	public String getT4_4();
+	public void setT4_4(String t4_4);
+	
+	public String getT4_5();
+	public void setT4_5(String t4_5);
+	
+	//
 	public String getT2();
 	public void setT2(String t2);
 
@@ -70,7 +90,11 @@ public interface BulletinBrancheProxy extends EntityProxy {
 
 	public String getT1();
 	public void setT1(String t1);
+	
+	public String getT4();
+	public void setT4(String t4);
 
+	//
 	public String getAn();
 	public void setAn(String an);
 	

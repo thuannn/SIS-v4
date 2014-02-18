@@ -126,12 +126,18 @@ public class BulletinSubjectDao extends MyDAOBase {
 		Double totalT1 = -0.000001;
 		Double totalT2 = -0.000001;
 		Double totalT3 = -0.000001;
+		Double totalT4 = -0.000001;
+		//
 		Double totalCoefT1 = -0.000001;
 		Double totalCoefT2 = -0.000001;
 		Double totalCoefT3 = -0.000001;
+		Double totalCoefT4 = -0.000001;
+		//
 		Double examT1 = -0.000001;
 		Double examT2 = -0.000001;
 		Double examT3 = -0.000001;
+		Double examT4 = -0.000001;
+		//
 		Double coefExam = -0.000001;
 		Double totalAn = -0.000001;
 		Double avantExam = -0.000001;
@@ -158,6 +164,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 					if (!branche.getT3().isEmpty()) {
 						examT3 = Double.parseDouble(branche.getT3());						
 					}
+					if (!branche.getT4().isEmpty()) {
+						examT4 = Double.parseDouble(branche.getT4());						
+					}
 					coefExam = branche.getBrancheCoef();
 					//
 				} else {
@@ -176,6 +185,11 @@ public class BulletinSubjectDao extends MyDAOBase {
 						totalT3 = totalT3 + Double.parseDouble(branche.getT3()) * branche.getBrancheCoef();
 						totalCoefT3 = totalCoefT3 + branche.getBrancheCoef();
 					}
+					if (!branche.getT4().isEmpty()){
+						if (totalT4 == -0.000001) totalT4 = totalT4 + 0.000001;
+						totalT4 = totalT4 + Double.parseDouble(branche.getT4()) * branche.getBrancheCoef();
+						totalCoefT4 = totalCoefT4 + branche.getBrancheCoef();
+					}
 				}
 			}
 			//
@@ -188,6 +202,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 			if (totalCoefT1 > -0.000001) totalCoefT1 = totalCoefT1 + 0.000001;
 			if (totalCoefT2 > -0.000001) totalCoefT2 = totalCoefT2 + 0.000001;
 			if (totalCoefT3 > -0.000001) totalCoefT3 = totalCoefT3 + 0.000001;
+			if (totalCoefT4 > -0.000001) totalCoefT4 = totalCoefT4 + 0.000001;
 			if (coefExam > -0.000001) coefExam = coefExam + 0.000001;
 			//
 			if (programmeName.contains("matu")){
@@ -219,9 +234,19 @@ public class BulletinSubjectDao extends MyDAOBase {
 					if (totalT3<0 && examT3<0)
 						ps.setT3("");
 					
+					if (totalT4>=0 && examT4>=0)
+						ps.setT4( Double.toString(((double)Math.round((totalT4+(examT4*coefExam))/(totalCoefT4+coefExam)*10))/10) );
+					if (totalT4>=0 && examT4<0)
+						ps.setT4( Double.toString(((double)Math.round(totalT4/totalCoefT4*10))/10 ));
+					if (totalT4<0 && examT4>=0)
+						ps.setT4( Double.toString(((double)Math.round(examT4*10))/10 ));
+					if (totalT4<0 && examT4<0)
+						ps.setT4("");
+					
 					if (!ps.getT1().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT1()); countAn++; }
-					if (!ps.getT2().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT2());  countAn++; }
+					if (!ps.getT2().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT2()); countAn++; }
 					if (!ps.getT3().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT3()); countAn++; }
+					if (!ps.getT4().isEmpty()) { totalAn = totalAn + Double.parseDouble(ps.getT4()); countAn++; }
 					if (countAn>0)
 						ps.setAn( Double.toString(((double)Math.round(totalAn/countAn*10))/10) );
 					else
@@ -360,6 +385,11 @@ public class BulletinSubjectDao extends MyDAOBase {
 				ps.setExamT3(Double.toString(examT3));
 			else
 				ps.setExamT3("");
+			//
+			if (examT4>=0)
+				ps.setExamT4(Double.toString(examT4));
+			else
+				ps.setExamT4("");
 			
 			//
 			this.ofy().put(ps);

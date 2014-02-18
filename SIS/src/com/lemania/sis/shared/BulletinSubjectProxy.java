@@ -25,6 +25,7 @@ public interface BulletinSubjectProxy extends EntityProxy {
 	public Boolean getIsActive();
 	public void setIsActive(Boolean isActive);
 	
+	//
 	public String getT1();
 	public void setT1(String t1);
 
@@ -33,7 +34,11 @@ public interface BulletinSubjectProxy extends EntityProxy {
 
 	public String getT3();
 	public void setT3(String t3);
+	
+	public String getT4();
+	public void setT4(String t4);
 
+	//
 	public String getAn();
 	public void setAn(String an);
 
@@ -46,6 +51,10 @@ public interface BulletinSubjectProxy extends EntityProxy {
 	public String getRemarqueT3();
 	public void setRemarqueT3(String remarqueT3);
 
+	public String getRemarqueT4();
+	public void setRemarqueT4(String remarqueT4);
+	
+	//
 	public String getStudentName();
 	public void setStudentName(String studentName);
 	
@@ -57,4 +66,7 @@ public interface BulletinSubjectProxy extends EntityProxy {
 
 	public String getExamT3();
 	public void setExamT3(String examT3);
+	
+	public String getExamT4();
+	public void setExamT4(String examT4);
 }

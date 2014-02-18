@@ -275,7 +275,8 @@ public class FrmMarkInputPresenter extends
 			String t_1_1, String t_1_2,	String t_1_3, String t_1_4, String t_1_5, 
 			String t_2_1, String t_2_2, String t_2_3, String t_2_4, String t_2_5,
 			String t_3_1, String t_3_2, String t_3_3, String t_3_4,	String t_3_5, 
-			final String remarque1, final String remarque2, final String remarque3 ) {
+			String t_4_1, String t_4_2, String t_4_3, String t_4_4,	String t_4_5, 
+			final String remarque1, final String remarque2, final String remarque3, final String remarque4 ) {
 		//
 		if (this.currentUser.isReadOnly()){
 			Window.alert(NotificationTypes.readOnly);
@@ -319,6 +320,13 @@ public class FrmMarkInputPresenter extends
 		bulletinBranche.setT3_5(t_3_5);
 		bulletinBranche.setT3( calculateAverage(t_3_1, t_3_2, t_3_3, t_3_4, t_3_5));
 		//
+		bulletinBranche.setT4_1(t_4_1);
+		bulletinBranche.setT4_2(t_4_2);
+		bulletinBranche.setT4_3(t_4_3);
+		bulletinBranche.setT4_4(t_4_4);
+		bulletinBranche.setT4_5(t_4_5);
+		bulletinBranche.setT4( calculateAverage(t_4_1, t_4_2, t_4_3, t_4_4, t_4_5));
+		//
 		rcBranche.saveAndReturn(bulletinBranche).fire(new Receiver<BulletinBrancheProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
@@ -326,7 +334,7 @@ public class FrmMarkInputPresenter extends
 			}
 			@Override
 			public void onSuccess(BulletinBrancheProxy response) {
-				saveBulletinSubject(response, bulletinSubject, remarque1, remarque2, remarque3);
+				saveBulletinSubject(response, bulletinSubject, remarque1, remarque2, remarque3, remarque4);
 			}
 		});
 	}
@@ -353,7 +361,8 @@ public class FrmMarkInputPresenter extends
 
 	/*
 	 * */
-	public void saveBulletinSubject(final BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject, String remarque1, String remarque2, String remarque3) {
+	public void saveBulletinSubject(final BulletinBrancheProxy bulletinBranche, BulletinSubjectProxy bulletinSubject, 
+			String remarque1, String remarque2, String remarque3, String remarque4) {
 		//
 		if (this.currentUser.isReadOnly()){
 			Window.alert(NotificationTypes.readOnly);
@@ -369,6 +378,7 @@ public class FrmMarkInputPresenter extends
 		bulletinSubject.setRemarqueT1(remarque1);
 		bulletinSubject.setRemarqueT2(remarque2);
 		bulletinSubject.setRemarqueT3(remarque3);
+		bulletinSubject.setRemarqueT4(remarque4);
 		//
 		rcSubject.saveAndReturn(bulletinSubject).fire(new Receiver<BulletinSubjectProxy>() {
 			@Override

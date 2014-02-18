@@ -39,6 +39,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	private boolean blockT1 = false;
 	private boolean blockT2 = false;
 	private boolean blockT3 = false;
+	private boolean blockT4 = false;
 	
 	// Thuan
 	private ListDataProvider<BulletinSubjectProxy> bulletinSubjectDataProvider = new ListDataProvider<BulletinSubjectProxy>();
@@ -96,6 +97,14 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	@UiField VerticalPanel pnlT3;
 	@UiField VerticalPanel pnlNoteInput;
 	@UiField(provided=true) DataGrid<BulletinSubjectProxy> tblAverageGrade = new DataGrid<BulletinSubjectProxy>();
+	@UiField DoubleBox txt_t_4_1;
+	@UiField DoubleBox txt_t_4_2;
+	@UiField DoubleBox txt_t_4_3;
+	@UiField DoubleBox txt_t_4_4;
+	@UiField DoubleBox txt_t_4_5;
+	@UiField TextArea txtRemarque4;
+	@UiField Label txtT4;
+	@UiField VerticalPanel pnlT4;
 	
 	
 	@Override
@@ -150,25 +159,35 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_2.setText("");
 		txt_t_3_3.setText("");
 		txt_t_3_4.setText("");
-		txt_t_3_5.setText("");		
+		txt_t_3_5.setText("");
+		//
+		txt_t_4_1.setText("");
+		txt_t_4_2.setText("");
+		txt_t_4_3.setText("");
+		txt_t_4_4.setText("");
+		txt_t_4_5.setText("");	
 		//
 		txtRemarque1.setText("");
 		txtRemarque2.setText("");
 		txtRemarque3.setText("");
+		txtRemarque4.setText("");
 		//
 		txtT1.setText("");
 		txtT2.setText("");
 		txtT3.setText("");
+		txtT4.setText("");
 		//
 		lblStudentName.setText("");		
 		//
 		blockT1( blockT1 );
 		blockT2( blockT2 );
 		blockT3( blockT3 );
+		blockT4( blockT4 );
 		//		
 		pnlT1.setVisible(false);
 		pnlT2.setVisible(false);
 		pnlT3.setVisible(false);
+		pnlT4.setVisible(false);
 		cmdSave.setVisible(false);
 	}
 	
@@ -256,6 +275,24 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	    };
  	    tblAverageGrade.addColumn(colExamT3, "E3");
  	    
+ 	    //
+ 		TextColumn<BulletinSubjectProxy> colT4 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getT4();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colT4, "T4");
+ 	    
+ 	   // Add a text column to show the name.	
+ 		TextColumn<BulletinSubjectProxy> colExamT4 = new TextColumn<BulletinSubjectProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinSubjectProxy object) {
+ 	        return object.getExamT4();
+ 	      }
+ 	    };
+ 	    tblAverageGrade.addColumn(colExamT4, "E4");
+ 	    
     	// Add a text column to show the name.	
  		TextColumn<BulletinSubjectProxy> colAn = new TextColumn<BulletinSubjectProxy>() {
  	      @Override
@@ -270,7 +307,8 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	}
 	
 
-	/**/
+	/*
+	 * */
 	private void initializeBulletinBrancheTable() {
 		// Add a text column to show the name.
 		TextColumn<BulletinBrancheProxy> colBrancheName = new TextColumn<BulletinBrancheProxy>() {
@@ -320,6 +358,16 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
  	    };
  	   tblBranches.addColumn(colT3, "T3");
  	   tblBranches.setColumnWidth(colT3, 15, Unit.PCT);
+ 	   
+ 	   // Add a text column to show the name.	
+ 		TextColumn<BulletinBrancheProxy> colT4 = new TextColumn<BulletinBrancheProxy>() {
+ 	      @Override
+ 	      public String getValue(BulletinBrancheProxy object) {
+ 	        return object.getT4();
+ 	      }
+ 	    };
+ 	   tblBranches.addColumn(colT4, "T4");
+ 	   tblBranches.setColumnWidth(colT4, 15, Unit.PCT);
  	 	    
  	   	
  	    // Add a selection model to handle user selection.
@@ -338,6 +386,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	        	blockT1(blockT1);
 	        	blockT2(blockT2);
 	        	blockT3(blockT3);
+	        	blockT4(blockT4);
 	        }
 	      }
 	    });
@@ -446,22 +495,35 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_4.setText( selectedBulletinBranche.getT3_4() );
 		txt_t_3_5.setText( selectedBulletinBranche.getT3_5() );
 		//
+		txt_t_4_1.setText( selectedBulletinBranche.getT4_1() );
+		txt_t_4_2.setText( selectedBulletinBranche.getT4_2() );
+		txt_t_4_3.setText( selectedBulletinBranche.getT4_3() );
+		txt_t_4_4.setText( selectedBulletinBranche.getT4_4() );
+		txt_t_4_5.setText( selectedBulletinBranche.getT4_5() );
+		//
 		txtT1.setText( selectedBulletinBranche.getT1() );
 		txtT2.setText( selectedBulletinBranche.getT2() );
 		txtT3.setText( selectedBulletinBranche.getT3() );
+		txtT4.setText( selectedBulletinBranche.getT4() );
 		//
 		modifyUiByProgramme();
 	}
 	
+	
+	/*
+	 * */
 	@Override
 	public void showCurrentRemarques(){
 		//
 		txtRemarque1.setText( selectedBulletinSubject.getRemarqueT1() );
 		txtRemarque2.setText( selectedBulletinSubject.getRemarqueT2() );
 		txtRemarque3.setText( selectedBulletinSubject.getRemarqueT3() );
+		txtRemarque4.setText( selectedBulletinSubject.getRemarqueT4() );
 	}
 	
 	
+	/*
+	 * */
 	@UiHandler("cmdSave")
 	void onCmdSaveClick(ClickEvent event) {
 		if (getUiHandlers() != null)
@@ -469,11 +531,11 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 					txt_t_1_1.getText(), txt_t_1_2.getText(), txt_t_1_3.getText(), txt_t_1_4.getText(), txt_t_1_5.getText(), 
 					txt_t_2_1.getText(), txt_t_2_2.getText(), txt_t_2_3.getText(), txt_t_2_4.getText(), txt_t_2_5.getText(), 
 					txt_t_3_1.getText(), txt_t_3_2.getText(), txt_t_3_3.getText(), txt_t_3_4.getText(), txt_t_3_5.getText(), 
-					txtRemarque1.getText(), txtRemarque2.getText(), txtRemarque3.getText());
+					txt_t_4_1.getText(), txt_t_4_2.getText(), txt_t_4_3.getText(), txt_t_4_4.getText(), txt_t_4_5.getText(), 
+					txtRemarque1.getText(), txtRemarque2.getText(), txtRemarque3.getText(), txtRemarque4.getText() );
 	}
 
 	/*
-	 * 
 	 * */
 	@Override
 	public void showUpdatedBulletinDetails(
@@ -489,6 +551,7 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txtT1.setText( bulletinBranche.getT1() );
 		txtT2.setText( bulletinBranche.getT2() );
 		txtT3.setText( bulletinBranche.getT3() );
+		txtT4.setText( bulletinBranche.getT4() );
 	}
 	
 
@@ -505,25 +568,44 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		}
 		//
 		if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("prématurité")){
-			tblAverageGrade.setColumnWidth(4, 15, Unit.PCT);
-			tblAverageGrade.setColumnWidth(5, 15, Unit.PCT);
+			tblAverageGrade.setColumnWidth(4, 12, Unit.PCT);
+			tblAverageGrade.setColumnWidth(5, 12, Unit.PCT);
+			tblAverageGrade.setColumnWidth(6, 12, Unit.PCT);
+			tblAverageGrade.setColumnWidth(7, 12, Unit.PCT);	
+			
 			tblBranches.setColumnWidth(4, 15, Unit.PCT);
-			if (selectedBulletinBrancheIndex > -1)
+			tblBranches.setColumnWidth(5, 15, Unit.PCT);
+			
+			if (selectedBulletinBrancheIndex > -1) {
 				if ( !pnlT3.isVisible() ) pnlT3.setVisible(true);
+				if ( !pnlT4.isVisible() ) pnlT4.setVisible(true);
+			}
 			return;
 		}
 		//
 		if (lstAssignments.getItemText( lstAssignments.getSelectedIndex() ).toLowerCase().contains("matu")){
 			tblAverageGrade.setColumnWidth(4, "0px");
 			tblAverageGrade.setColumnWidth(5, "0px");
+			tblAverageGrade.setColumnWidth(6, "0px");
+			tblAverageGrade.setColumnWidth(7, "0px");
+			
 			tblBranches.setColumnWidth(4, "0px");
+			tblBranches.setColumnWidth(5, "0px");
+			
 			pnlT3.setVisible(false);
+			pnlT4.setVisible(false);
 		} else {			
 			tblAverageGrade.setColumnWidth(4, 15, Unit.PCT);
 			tblAverageGrade.setColumnWidth(5, 15, Unit.PCT);
+			tblAverageGrade.setColumnWidth(6, "0px");
+			tblAverageGrade.setColumnWidth(7, "0px");
+			
 			tblBranches.setColumnWidth(4, 15, Unit.PCT);
+			tblBranches.setColumnWidth(5, "0px");
+			
 			if (selectedBulletinBrancheIndex > -1)
 				if ( !pnlT3.isVisible() ) pnlT3.setVisible(true);
+			pnlT4.setVisible(false);
 		}
 	}
 
@@ -632,5 +714,18 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 		txt_t_3_4.setEnabled(!block);
 		txt_t_3_5.setEnabled(!block);
 		txtRemarque3.setEnabled(!block);
+	}
+	
+	/*
+	 * 
+	 * */
+	private void blockT4(boolean block) {
+		// 
+		txt_t_4_1.setEnabled(!block);
+		txt_t_4_2.setEnabled(!block);
+		txt_t_4_3.setEnabled(!block);
+		txt_t_4_4.setEnabled(!block);
+		txt_t_4_5.setEnabled(!block);
+		txtRemarque4.setEnabled(!block);
 	}
 }

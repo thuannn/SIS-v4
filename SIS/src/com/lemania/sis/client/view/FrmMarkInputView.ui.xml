@@ -96,8 +96,20 @@
 					</g:HorizontalPanel>
 						<g:TextArea ui:field="txtRemarque3" width="95%" characterWidth="50" height="40px"/>
 					</g:VerticalPanel>
-					<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
 					<g:Label text="." styleName="hiddenText"/>
+					<g:VerticalPanel spacing="5" width="100%" ui:field="pnlT4">
+						<g:HorizontalPanel width="400px">
+							<g:Label text="Trimestre 4 :"/>
+							<g:DoubleBox width="25px" ui:field="txt_t_4_1"/>
+							<g:DoubleBox width="25px" ui:field="txt_t_4_2"/>
+							<g:DoubleBox width="25px" ui:field="txt_t_4_3"/>
+							<g:DoubleBox width="25px" ui:field="txt_t_4_4"/>
+							<g:DoubleBox width="25px" ui:field="txt_t_4_5"/>
+							<g:Label styleName="averageGrade" text="-" width="25px" ui:field="txtT4"/>
+						</g:HorizontalPanel>
+						<g:TextArea characterWidth="50" height="40px" width="95%" ui:field="txtRemarque4"/>
+					</g:VerticalPanel>
+					<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
 				</g:VerticalPanel>
 					</g:VerticalPanel>
 			</g:HorizontalPanel>

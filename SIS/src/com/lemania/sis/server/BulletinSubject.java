@@ -20,16 +20,20 @@ public class BulletinSubject extends DatastoreObject implements Comparable<Bulle
 	private String T1 = "";
 	private String T2 = "";
 	private String T3 = "";
+	private String T4 = "";
 	//
 	private String examT1 = "";
 	private String examT2 = "";
 	private String examT3 = "";
+	private String examT4 = "";
 	//
 	private String An = "";
 	//
 	private String remarqueT1 = "";
 	private String remarqueT2 = "";
 	private String remarqueT3 = "";
+	private String remarqueT4 = "";
+	
 	// This number should always be 1
 	private Double totalBrancheCoef = 0.0;
 	//
@@ -193,5 +197,29 @@ public class BulletinSubject extends DatastoreObject implements Comparable<Bulle
 	public int compareTo(BulletinSubject bs) {
 		int result = this.studentName.compareTo( bs.getStudentName() );
 		return result;
+	}
+
+	public String getT4() {
+		return T4;
+	}
+
+	public void setT4(String t4) {
+		T4 = t4;
+	}
+
+	public String getExamT4() {
+		return examT4;
+	}
+
+	public void setExamT4(String examT4) {
+		this.examT4 = examT4;
+	}
+
+	public String getRemarqueT4() {
+		return remarqueT4;
+	}
+
+	public void setRemarqueT4(String remarqueT4) {
+		this.remarqueT4 = remarqueT4;
 	}
 }

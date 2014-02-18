@@ -31,9 +31,16 @@ public class BulletinBranche extends DatastoreObject implements Comparable<Bulle
 	private String t3_4 = "";
 	private String t3_5 = "";
 	
+	private String t4_1 = "";
+	private String t4_2 = "";
+	private String t4_3 = "";
+	private String t4_4 = "";
+	private String t4_5 = "";
+	
 	private String T1 = "";
 	private String T2 = "";
 	private String T3 = "";
+	private String T4 = "";
 	private String An = "";
 	
 	@NotSaved
@@ -235,5 +242,53 @@ public class BulletinBranche extends DatastoreObject implements Comparable<Bulle
 
 	public void setBulletinSubjectId(Long bulletinSubjectId) {
 		this.bulletinSubjectId = bulletinSubjectId;
+	}
+
+	public String getT4_1() {
+		return t4_1;
+	}
+
+	public void setT4_1(String t4_1) {
+		this.t4_1 = t4_1;
+	}
+
+	public String getT4_2() {
+		return t4_2;
+	}
+
+	public void setT4_2(String t4_2) {
+		this.t4_2 = t4_2;
+	}
+
+	public String getT4_3() {
+		return t4_3;
+	}
+
+	public void setT4_3(String t4_3) {
+		this.t4_3 = t4_3;
+	}
+
+	public String getT4_4() {
+		return t4_4;
+	}
+
+	public void setT4_4(String t4_4) {
+		this.t4_4 = t4_4;
+	}
+
+	public String getT4_5() {
+		return t4_5;
+	}
+
+	public void setT4_5(String t4_5) {
+		this.t4_5 = t4_5;
+	}
+
+	public String getT4() {
+		return T4;
+	}
+
+	public void setT4(String t4) {
+		T4 = t4;
 	}
 }
