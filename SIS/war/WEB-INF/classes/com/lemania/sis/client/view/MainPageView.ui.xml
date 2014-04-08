@@ -1,0 +1,150 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<g:FlowPanel width="100%" height="100%">
+		<g:DockPanel width="100%" height="100%" ui:field="dockPanel" spacing="5" borderWidth="0">
+			<g:Dock direction="NORTH">
+				<g:AbsolutePanel height="50px" width="100%">
+					<g:at left="0" top="0">
+						<g:Image url="" width="" ui:field="imgLogo"/>
+					</g:at>
+					<g:at left="552" top="0">
+						<g:Grid height="24px" width="60%" borderWidth="0">
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="lblCurrentMonth"/>
+							</g:customCell>
+							<g:customCell>
+								<g:HorizontalPanel>
+									<g:Label width="" horizontalAlignment="ALIGN_LEFT" ui:field="txtWelcome"/>
+									<g:Label text="." width="30px" styleName="hiddenText"/>
+									<g:Hyperlink targetHistoryToken="newHistoryToken" width="" ui:field="cmdLogout"/>
+								</g:HorizontalPanel>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					</g:at>
+					<g:at left="268" top="30">
+						<g:Button text="&lt;&lt; Masquer/ Afficher le menu" ui:field="cmdMenuToggle" width="190px" styleName="btnHideMenu" height="20px"/>
+					</g:at>
+				</g:AbsolutePanel>
+			</g:Dock>
+			<g:Dock direction="WEST">
+				<g:VerticalPanel ui:field="leftPanel" horizontalAlignment="ALIGN_LEFT">
+					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
+						<g:Label text="-" width="" horizontalAlignment="ALIGN_RIGHT" styleName="left_header"/>
+					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage" ui:field="cmdHome"/>
+					<g:TreeItem text="Gestion des attributions" state="true">
+							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
+							<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation" ui:field="cmdAttribution"/>
+							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement" ui:field="cmdAttributionPerson"/>
+						</g:TreeItem>
+					<g:TreeItem text="Notes" state="true">
+						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
+						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
+						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
+					</g:TreeItem>
+					<g:TreeItem text="Evaluation Intermediaire" state="true">
+						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
+						<g:Hyperlink targetHistoryToken="evaluationinput" text="Saisir les évaluations" ui:field="cmdEvaluationInputProf"/>
+						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
+					</g:TreeItem>
+					<g:TreeItem text="Information de base" state="true">
+						<g:TreeItem text="Elèves">
+							<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
+							<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève" ui:field="cmdStudentAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Professeurs">
+							<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs" ui:field="cmdProfList"/>
+							<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Branches">
+						<g:Hyperlink targetHistoryToken="branchelist" text="Liste des branches" ui:field="cmdBrancheList"/>
+						<g:Hyperlink targetHistoryToken="brancheadd" text="Rajouter une branche" ui:field="cmdBrancheAdd"/>
+					</g:TreeItem>
+						<g:TreeItem text="Matières">
+							<g:Hyperlink targetHistoryToken="subjectlist" text="Liste des matières" ui:field="cmdSubjectList"/>
+							<g:Hyperlink targetHistoryToken="subjectadd" text="Rajouter une matière" ui:field="cmdSubjectAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Classes">
+							<g:Hyperlink text="Liste des classes" targetHistoryToken="classlist" ui:field="cmdClassList"/>
+							<g:Hyperlink targetHistoryToken="classeadd" text="Rajouter une classe" ui:field="cmdClassAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Programmes">
+							<g:Hyperlink targetHistoryToken="!cours" text="Liste des programmes" ui:field="cmdProgrammeList"/>
+							<g:Hyperlink text="Rajouter un programme" targetHistoryToken="coursadd" ui:field="cmdProgrammeAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Ecoles">
+						<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage" ui:field="cmdSchoolList"/>
+						<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école" ui:field="cmdSchoolAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Gestion de l&apos;accès">
+							<g:Hyperlink text="Gestion des codes d&apos;accès" targetHistoryToken="usermanagement" ui:field="cmdUserManagement"/>
+							<g:Hyperlink targetHistoryToken="settings" text="Gérer les dates limites" ui:field="cmdSettings"/>
+						</g:TreeItem>
+					</g:TreeItem>
+					<g:TreeItem text="Autres" state="true">
+						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPassword"/>
+						<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelp"/>
+					</g:TreeItem>
+				</g:Tree>
+					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
+						<g:Label styleName="left_header" text="." width=""/>
+						<g:TreeItem text="Espace professeur" state="true">
+							<g:TreeItem text="Notes" state="true">
+								<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>
+								<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail" ui:field="cmdMarkViewProf"/>
+							</g:TreeItem>
+							<g:TreeItem text="Evaluation Intermediaire" state="true">
+								<g:Hyperlink text="Saisir les évaluations" targetHistoryToken="evaluationinput" ui:field="cmdEvaluationInputProfProf"/>
+								<g:Hyperlink text="Evaluations par élève" targetHistoryToken="evaluationinputstudent" ui:field="cmdEvaluationInputEleveProf"/>
+							</g:TreeItem>							
+							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password" ui:field="cmdPasswordProf"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpProf"/>
+						</g:TreeItem>						
+					</g:Tree>
+					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
+						<g:Label styleName="left_header" text="." width=""/>
+						<g:TreeItem state="true" text="Espace élève">
+							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewStudent"/>
+							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordStudent"/>
+							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpStudent"/>
+						</g:TreeItem>
+					</g:Tree>
+				</g:VerticalPanel>
+			</g:Dock>
+			<g:Dock direction="CENTER">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
+					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
+					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5">
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Copyright © Ecole Lémania - IT Services - " horizontalAlignment="ALIGN_LEFT" width="" ui:field="txtCopyright"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Hyperlink text="Envoyez-nous vos avis" targetHistoryToken="!contact"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+						<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" width="100%">
+							<g:Image url="images/appengine-noborder-120x30.gif"/>
+						</g:HorizontalPanel>
+					</g:HorizontalPanel>
+					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">
+						<g:HTML wordWrap="true" ui:field="htmlProgressBar" styleName="progressBar" width="100%">
+							<div id="floatingBarsG"><div class="blockG" id="rotateG_01"></div><div class="blockG" id="rotateG_02"></div><div class="blockG" id="rotateG_03"></div><div class="blockG" id="rotateG_04"></div><div class="blockG" id="rotateG_05"></div><div class="blockG" id="rotateG_06"></div><div class="blockG" id="rotateG_07"></div><div class="blockG" id="rotateG_08"></div></div>
+						</g:HTML>
+					</g:VerticalPanel>
+					</g:VerticalPanel>
+				</g:VerticalPanel>
+			</g:Dock>
+		</g:DockPanel>
+	</g:FlowPanel>
+</ui:UiBinder>

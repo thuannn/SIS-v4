@@ -96,9 +96,11 @@ public class BulletinBrancheDao extends MyDAOBase {
 					.order("bulletinBrancheName");
 			for ( BulletinBranche bulletinBranche : q ){
 				bulletinBranche.setBulletinSubjectId( subject.getId() );
+				bulletinBranche.setBulletinBrancheName( this.ofy().get( bulletinBranche.getBulletinBranche()).getBrancheName() );
 				returnList.add( bulletinBranche );
 			}
 		}
+		Collections.sort(returnList);
 		return returnList;
 	}
 	

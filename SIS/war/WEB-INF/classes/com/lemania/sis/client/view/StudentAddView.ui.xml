@@ -1,0 +1,70 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<g:HTMLPanel width="100%">
+		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="2">
+			<g:Label text="RAJOUTER UN ELEVE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:Label text="." styleName="hiddenText"/>
+			<g:Grid cellPadding="5" cellSpacing="5">
+				<g:row>
+					<g:customCell>
+						<g:Label text="Nom :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox ui:field="txtLastName" width="" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Prénom :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox ui:field="txtFirstName" width="" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="E-mail (nom d&apos;utilisateur) :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox ui:field="txtEmail" width="" styleName="sis_textbox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:CheckBox text="Actif" ui:field="blnActive" checked="true"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Enregistrer" ui:field="cmdSave"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="." styleName="hiddenText"/>
+					</g:customCell>
+					<g:customCell>
+						<g:Label ui:field="lblStatus"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>
