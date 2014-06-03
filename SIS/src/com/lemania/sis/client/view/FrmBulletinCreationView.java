@@ -115,6 +115,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		lstYear.clear();
 		lstYear.addItem("-","");
 		lstYear.addItem("2013 - 2014","2013");
+		lstYear.addItem("2014 - 2015","2014");
 	}
 	
 
@@ -436,5 +437,15 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		}
 		//
 		onLstIsFinishedChange( null );
+	}
+	
+	
+	/*
+	 * 
+	 * */
+	@UiHandler("lstYear")
+	void onLstYearChange(ChangeEvent event) {
+		//
+		getUiHandlers().onYearChanged( lstYear.getValue(lstYear.getSelectedIndex()) );
 	}
 }

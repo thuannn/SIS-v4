@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinViewSummaryUiHandler> implements
 		FrmBulletinViewSummaryPresenter.MyView {
@@ -79,6 +80,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField HTML lblConditionES;
 	@UiField HTML lblConditionBac;
 	@UiField ListBox lstModels;
+	@UiField AbsolutePanel pnlWhiteBackground;
 	
 	
 	/**/
@@ -816,13 +818,19 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			    }
 			}
 		};
-		popup.setStyleName("bulletin");
-		popup.add(pnlBulletin);
+		popup.setStyleName("whitePanel");
+		popup.add( pnlBulletin );
+		//
+		pnlWhiteBackground.setHeight( pnlBulletin.getOffsetHeight() + "px");
+		pnlWhiteBackground.setVisible(true);
+		//
 		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
 			public void onClose(CloseEvent<PopupPanel> event) {
 				pnlMainBulletin.add(pnlBulletin);
 				pnlBulletinNotes.setHeight("100%");
 				lblSpace.setHeight("1px");
+				//
+				pnlWhiteBackground.setVisible(false);
 			}
 		});
 		//

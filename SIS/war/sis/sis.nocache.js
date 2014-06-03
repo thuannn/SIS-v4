@@ -55,15 +55,15 @@ function sis(){
       return slashIndex >= 0?path.substring(0, slashIndex + 1):'';
     }
 
-    function ensureAbsoluteUrl(url_0){
-      if (url_0.match(/^\w+:\/\//)) {
+    function ensureAbsoluteUrl(url){
+      if (url.match(/^\w+:\/\//)) {
       }
        else {
         var img = $doc_0.createElement('img');
-        img.src = url_0 + 'clear.cache.gif';
-        url_0 = getDirectoryOfFile(img.src);
+        img.src = url + 'clear.cache.gif';
+        url = getDirectoryOfFile(img.src);
       }
-      return url_0;
+      return url;
     }
 
     function tryMetaTag(){
@@ -148,16 +148,16 @@ function sis(){
         if (name_0 == 'gwt:property') {
           content_0 = meta.getAttribute('content');
           if (content_0) {
-            var value_0, eq = content_0.indexOf('=');
+            var value, eq = content_0.indexOf('=');
             if (eq >= 0) {
               name_0 = content_0.substring(0, eq);
-              value_0 = content_0.substring(eq + 1);
+              value = content_0.substring(eq + 1);
             }
              else {
               name_0 = content_0;
-              value_0 = '';
+              value = '';
             }
-            metaProps[name_0] = value_0;
+            metaProps[name_0] = value;
           }
         }
          else if (name_0 == 'gwt:onPropertyErrorFn') {
@@ -187,29 +187,29 @@ function sis(){
   }
 
   function __gwt_getMetaProperty(name_0){
-    var value_0 = metaProps[name_0];
-    return value_0 == null?null:value_0;
+    var value = metaProps[name_0];
+    return value == null?null:value;
   }
 
-  function unflattenKeylistIntoAnswers(propValArray, value_0){
+  function unflattenKeylistIntoAnswers(propValArray, value){
     var answer = answers;
     for (var i = 0, n = propValArray.length - 1; i < n; ++i) {
       answer = answer[propValArray[i]] || (answer[propValArray[i]] = []);
     }
-    answer[propValArray[n]] = value_0;
+    answer[propValArray[n]] = value;
   }
 
   function computePropValue(propName){
-    var value_0 = providers[propName](), allowedValuesMap = values[propName];
-    if (value_0 in allowedValuesMap) {
-      return value_0;
+    var value = providers[propName](), allowedValuesMap = values[propName];
+    if (value in allowedValuesMap) {
+      return value;
     }
     var allowedValuesList = [];
     for (var k in allowedValuesMap) {
       allowedValuesList[allowedValuesMap[k]] = k;
     }
     if (propertyErrorFunc) {
-      propertyErrorFunc(propName, allowedValuesList, value_0);
+      propertyErrorFunc(propName, allowedValuesList, value);
     }
     throw null;
   }
@@ -236,15 +236,15 @@ function sis(){
     }
     ;
     if (function(){
+      return ua.indexOf('opera') != -1;
+    }
+    ())
+      return 'opera';
+    if (function(){
       return ua.indexOf('webkit') != -1;
     }
     ())
       return 'safari';
-    if (function(){
-      return ua.indexOf('msie') != -1 && $doc_0.documentMode >= 10;
-    }
-    ())
-      return 'ie10';
     if (function(){
       return ua.indexOf('msie') != -1 && $doc_0.documentMode >= 9;
     }
@@ -256,6 +256,13 @@ function sis(){
     ())
       return 'ie8';
     if (function(){
+      var result = /msie ([0-9]+)\.([0-9]+)/.exec(ua);
+      if (result && result.length == 3)
+        return makeVersion(result) >= 6000;
+    }
+    ())
+      return 'ie6';
+    if (function(){
       return ua.indexOf('gecko') != -1;
     }
     ())
@@ -263,7 +270,7 @@ function sis(){
     return 'unknown';
   }
   ;
-  values['user.agent'] = {gecko1_8:0, ie10:1, ie8:2, ie9:3, safari:4};
+  values['user.agent'] = {gecko1_8:0, ie6:1, ie8:2, ie9:3, opera:4, safari:5};
   sis.onScriptLoad = function(){
     if (frameInjected) {
       loadDone = true;
@@ -292,11 +299,12 @@ function sis(){
   $stats && $stats({moduleName:'sis', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers(['safari'], '45A84063185E965E8D1AAEAE79FB806A');
-      unflattenKeylistIntoAnswers(['ie9'], '5BCEA008BAE9A1D269A05FAFC8264C49');
-      unflattenKeylistIntoAnswers(['gecko1_8'], '986A881F96AA38969637353E64F3DCCC');
-      unflattenKeylistIntoAnswers(['ie10'], 'C07F12F264C22D3C0AF7C8244D60820C');
-      unflattenKeylistIntoAnswers(['ie8'], 'F076084D09763EA56BE41B3590588B4C');
+      unflattenKeylistIntoAnswers(['ie6'], '096ABD93D78E3BAD7C1000B14B4DBD9D');
+      unflattenKeylistIntoAnswers(['gecko1_8'], '2E5970D1B12F2FA4B973B90D6DC000F5');
+      unflattenKeylistIntoAnswers(['ie8'], '3FAFBD65FCA28E7195B5BB0163BA9E3F');
+      unflattenKeylistIntoAnswers(['safari'], 'B026F0EF38269E0FAC3692232FF0CD58');
+      unflattenKeylistIntoAnswers(['ie9'], 'CD766C91050A631D56A640BFB140B8F5');
+      unflattenKeylistIntoAnswers(['opera'], 'F6F96A9C08068CF817B674EC31124643');
       strongName = answers[computePropValue('user.agent')];
       var idx = strongName.indexOf(':');
       if (idx != -1) {

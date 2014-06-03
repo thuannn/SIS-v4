@@ -8,7 +8,10 @@ public interface FrmBulletinCreationUiHandler extends UiHandlers {
 	void onEcoleSelected(String ecoleId);
 	//
 	void onProgrammeSelected(String coursId);
+	//
 	void onClassChanged(String classId);
+	//
+	void onYearChanged(String year);
 	//
 	void createBulletin(String studentId, String classId, String year, String profileId);
 	//

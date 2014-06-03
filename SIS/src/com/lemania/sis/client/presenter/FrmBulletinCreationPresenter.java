@@ -328,6 +328,8 @@ public class FrmBulletinCreationPresenter
 	}
 
 	
+	/*
+	 * */
 	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
@@ -336,7 +338,8 @@ public class FrmBulletinCreationPresenter
 	}
 
 	
-	// 
+	/*
+	 * */
 	@Override
 	public void updateBulletinFinishedStatus(BulletinProxy bp,
 			Boolean isFinished) {
@@ -364,6 +367,7 @@ public class FrmBulletinCreationPresenter
 			}
 		});	
 	}
+	
 
 	/*
 	 * */
@@ -372,5 +376,14 @@ public class FrmBulletinCreationPresenter
 	public void onLoadNonAttribuedStudent(LoadNonAttribuedStudentEvent event) {
 		//
 		loadActiveStudentList();
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void onYearChanged(String year) {
+		// TODO Auto-generated method stub
+		
 	}
 }
