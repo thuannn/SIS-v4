@@ -19,6 +19,7 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -797,13 +798,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	void onCmdPrintClick(ClickEvent event) {
 		// 		
 		pnlBulletin.setVisible(true);
-		//
-		if (Navigator.getUserAgent().toLowerCase().contains("chrome"))
-			lblSpace.setHeight( Integer.toString( NotificationTypes.bulletinPageHeightChrome - tblNotes.getOffsetHeight() ) + "px");
-		else {
-			pnlBulletinNotes.setHeight(NotificationTypes.bulletinPageHeight.toString() + "px");
-			lblSpace.setHeight( NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationTypes.bulletinDirectionRemarque + "px");
-		}
+		// For Internet Explorer only
+		distributeLineHeight();
 		//
 		PopupPanel popup = new PopupPanel(true) {
 			@Override
@@ -835,6 +831,23 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		});
 		//
 		popup.show();
+	}
+	
+	
+	/*
+	 * */
+	private void distributeLineHeight() {
+		//
+		pnlBulletinNotes.setHeight(NotificationTypes.bulletinPageHeight.toString() + "px");
+		int margin = NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationTypes.bulletinDirectionRemarque;
+		int lineMargin = Math.round( margin / (tblNotes.getRowCount()-2) / 2 );
+		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+		for (int i=0; i<tblNotes.getCellCount(0); i++)
+			for (int j=1; j<tblNotes.getRowCount()-1; j++) {
+				if (tblNotes.isCellPresent(j, i)) {
+					tblNotes.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
+				}
+			}
 	}
 	
 	
