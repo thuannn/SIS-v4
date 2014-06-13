@@ -1,18 +1,4 @@
-<!-- Indices written at Fri, 30 May 2014 15:31:46 CEST -->
+<!-- Indices written at Fri, 13 Jun 2014 18:26:41 CEST -->
 
-<datastore-indexes>
+<datastore-indexes/>
 
-    <!-- Used 2 times in query history -->
-    <datastore-index kind="Profile" ancestor="false" source="auto">
-        <property name="classe" direction="asc"/>
-        <property name="isActive" direction="asc"/>
-        <property name="profileName" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
-        <property name="profile" direction="asc"/>
-        <property name="subjectName" direction="asc"/>
-    </datastore-index>
-
-</datastore-indexes>

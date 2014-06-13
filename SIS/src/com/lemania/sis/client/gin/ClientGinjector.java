@@ -6,9 +6,10 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.form.classroom.ClassroomPresenter;
+import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
@@ -107,4 +108,8 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<FrmEvaluationInputPresenter> getFrmEvaluationInputPresenter();
 
 	AsyncProvider<FrmEvaluationInputStudentPresenter> getFrmEvaluationInputStudentPresenter();
+	
+	AsyncProvider<ClassroomPresenter> getClassroomPresenter();
+	
+	AsyncProvider<MasterAgendaPresenter> getFrmMasterAgenda();
 }

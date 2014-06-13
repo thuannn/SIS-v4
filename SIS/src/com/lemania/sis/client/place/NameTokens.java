@@ -1,6 +1,11 @@
 package com.lemania.sis.client.place;
 
 public class NameTokens {
+
+	public static final String masteragenda = "masteragenda";
+
+	public static final String classroom = "classroom";
+
 	public static final String homepage = "!homepage";
 	public static final String ecolepage = "!ecolepage";
 	public static final String addecole = "!addecole";
@@ -38,7 +43,7 @@ public class NameTokens {
 	public static final String evaluationinputstudent = "evaluationinputstudent";
 
 	public static String getHomePage() {
-	    return homepage;
+		return homepage;
 	}
 
 	public static String getEcolepage() {
@@ -176,4 +181,13 @@ public class NameTokens {
 	public static String getEvaluationinputstudent() {
 		return evaluationinputstudent;
 	}
+
+	public static String getClassroom() {
+		return classroom;
+	}
+
+	public static String getMasteragenda() {
+		return masteragenda;
+	}
+
 }

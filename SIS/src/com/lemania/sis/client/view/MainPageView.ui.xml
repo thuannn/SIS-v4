@@ -54,6 +54,9 @@
 						<g:Hyperlink targetHistoryToken="evaluationinput" text="Saisir les évaluations" ui:field="cmdEvaluationInputProf"/>
 						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
 					</g:TreeItem>
+					<g:TreeItem text="Horaires" state="true">
+						<g:Hyperlink targetHistoryToken="masteragenda" text="Plan d&apos;horaire par classe" ui:field="cmdMasterAgendaPage"/>
+					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">
 							<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
@@ -79,9 +82,12 @@
 							<g:Hyperlink targetHistoryToken="!cours" text="Liste des programmes" ui:field="cmdProgrammeList"/>
 							<g:Hyperlink text="Rajouter un programme" targetHistoryToken="coursadd" ui:field="cmdProgrammeAdd"/>
 						</g:TreeItem>
+						<g:TreeItem text="Locaux">
+							<g:Hyperlink text="Salles de classe" targetHistoryToken="classroom" ui:field="cmdClassroomPage"/>
+						</g:TreeItem>
 						<g:TreeItem text="Ecoles">
-						<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage" ui:field="cmdSchoolList"/>
-						<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école" ui:field="cmdSchoolAdd"/>
+							<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage" ui:field="cmdSchoolList"/>
+							<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école" ui:field="cmdSchoolAdd"/>
 						</g:TreeItem>
 						<g:TreeItem text="Gestion de l&apos;accès">
 							<g:Hyperlink text="Gestion des codes d&apos;accès" targetHistoryToken="usermanagement" ui:field="cmdUserManagement"/>
@@ -119,7 +125,7 @@
 				</g:VerticalPanel>
 			</g:Dock>
 			<g:Dock direction="CENTER">
-				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" height="">
+				<g:VerticalPanel width="99.5%" horizontalAlignment="ALIGN_LEFT" height="">
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
 					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5">
 						<g:Grid>

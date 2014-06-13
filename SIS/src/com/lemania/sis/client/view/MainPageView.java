@@ -87,6 +87,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdEvaluationInputEleve;
 	@UiField Hyperlink cmdEvaluationInputProfProf;
 	@UiField Hyperlink cmdEvaluationInputEleveProf;
+	@UiField Hyperlink cmdClassroomPage;
+	@UiField Hyperlink cmdMasterAgendaPage;
 	
 	
 	// Thuan

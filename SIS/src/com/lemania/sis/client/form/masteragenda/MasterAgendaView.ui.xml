@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <g:HTMLPanel>
+    	<g:Label text="PLAN D&apos;HORAIRE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER" ui:field="pnlPrincipal">
+			<g:HorizontalPanel>
+				<g:Label text="Classe :"/>
+				<g:ListBox ui:field="lstClasses"/>
+			</g:HorizontalPanel>
+			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
+			<g:FlowPanel ui:field="pnlAdd" width="600px" styleName="subSection" visible="false">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+					<g:Label styleName="sectionTitle" text="-"/>
+					<g:Grid width="100%">
+						<g:row>
+							<g:customCell>
+								<g:Label text="Jour :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label ui:field="txtJour"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Période :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label ui:field="txtPeriod"/>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+					<g:Label text="-"/>
+					<g:Button text="Enregistrer" ui:field="cmdSave"/>
+				</g:VerticalPanel>
+			</g:FlowPanel>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

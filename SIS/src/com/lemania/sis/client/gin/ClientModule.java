@@ -2,6 +2,8 @@ package com.lemania.sis.client.gin;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.lemania.sis.client.form.classroom.ClassroomModule;
+import com.lemania.sis.client.form.masteragenda.MasterAgendaModule;
 import com.lemania.sis.client.place.DefaultPlace;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.presenter.MainPagePresenter;
@@ -68,6 +70,8 @@ public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
+		install(new MasterAgendaModule());
+		install(new ClassroomModule());
 		// Singletons
 		install(new DefaultModule(SISPlaceManager.class));
 		
