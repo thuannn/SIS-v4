@@ -2,6 +2,8 @@ package com.lemania.sis.client;
 
 public class ClassPeriod {
 	//
+	public static int numberOfPeriod = 12;
+	//
 	public static final String P1_Code = "P1";
 	public static final String P2_Code = "P2";
 	public static final String P3_Code = "P3";

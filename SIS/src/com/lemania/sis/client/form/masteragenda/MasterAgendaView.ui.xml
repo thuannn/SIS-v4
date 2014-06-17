@@ -10,9 +10,8 @@
 			</g:HorizontalPanel>
 			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
 			<g:FlowPanel ui:field="pnlAdd" width="600px" styleName="subSection" visible="false">
-				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
-					<g:Label styleName="sectionTitle" text="-"/>
-					<g:Grid width="100%">
+				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+					<g:Grid width="100%" cellPadding="2" cellSpacing="2">
 						<g:row>
 							<g:customCell>
 								<g:Label text="Jour :"/>
@@ -29,8 +28,16 @@
 								<g:Label ui:field="txtPeriod"/>
 							</g:customCell>
 						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Durée :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstDuration"/>
+							</g:customCell>
+						</g:row>
 					</g:Grid>
-					<g:Label text="-"/>
+					<g:Label text="-" styleName="hiddenText"/>
 					<g:Button text="Enregistrer" ui:field="cmdSave"/>
 				</g:VerticalPanel>
 			</g:FlowPanel>

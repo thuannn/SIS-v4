@@ -24,6 +24,8 @@ public class MasterAgendaPresenter extends
 	interface MyView extends View, HasUiHandlers<MasterAgendaUiHandlers> {
 		//
 		void drawTable();
+		//
+		void showSavedPeriodSchedule();
 	}
 
 	@ContentSlot
@@ -49,6 +51,14 @@ public class MasterAgendaPresenter extends
 
 	protected void onReset() {
 		super.onReset();
+	}
+
+	/*
+	 * */
+	@Override
+	public void savePeriodSchedule() {
+		//
+		getView().showSavedPeriodSchedule();
 	}
 
 }

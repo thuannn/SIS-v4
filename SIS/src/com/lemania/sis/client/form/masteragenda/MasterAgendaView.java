@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.uibinder.client.UiHandler;
 
 public class MasterAgendaView extends
 		ViewWithUiHandlers<MasterAgendaUiHandlers> implements
@@ -41,6 +42,11 @@ public class MasterAgendaView extends
 	@UiField VerticalPanel pnlPrincipal;
 	@UiField Label txtJour;
 	@UiField Label txtPeriod;
+	@UiField ListBox lstDuration;
+	
+	//
+	int clickedCellIndex;
+	int clickedRowIndex;
 	
 	/*
 	 * */
@@ -48,25 +54,25 @@ public class MasterAgendaView extends
 	public void drawTable() {
 		//
 		tblAgenda.setText(0, 0, "");
-		tblAgenda.setText(0, 1, ClassPeriod.getDayName(ClassPeriod.d2_code));
-		tblAgenda.setText(0, 2, ClassPeriod.getDayName(ClassPeriod.d3_code));
-		tblAgenda.setText(0, 3, ClassPeriod.getDayName(ClassPeriod.d4_code));
-		tblAgenda.setText(0, 4, ClassPeriod.getDayName(ClassPeriod.d5_code));
-		tblAgenda.setText(0, 5, ClassPeriod.getDayName(ClassPeriod.d6_code));
+		tblAgenda.setText(1, 0, ClassPeriod.getDayName(ClassPeriod.d2_code));
+		tblAgenda.setText(2, 0, ClassPeriod.getDayName(ClassPeriod.d3_code));
+		tblAgenda.setText(3, 0, ClassPeriod.getDayName(ClassPeriod.d4_code));
+		tblAgenda.setText(4, 0, ClassPeriod.getDayName(ClassPeriod.d5_code));
+		tblAgenda.setText(5, 0, ClassPeriod.getDayName(ClassPeriod.d6_code));
 		//
 		tblAgenda.setText(0, 0, "");
-		tblAgenda.setText(1, 0, ClassPeriod.getPeriodText( ClassPeriod.P1_Code));
-		tblAgenda.setText(2, 0, ClassPeriod.getPeriodText( ClassPeriod.P2_Code));
-		tblAgenda.setText(3, 0, ClassPeriod.getPeriodText( ClassPeriod.P3_Code));
-		tblAgenda.setText(4, 0, ClassPeriod.getPeriodText( ClassPeriod.P4_Code));
-		tblAgenda.setText(5, 0, ClassPeriod.getPeriodText( ClassPeriod.P5_Code));
-		tblAgenda.setText(6, 0, ClassPeriod.getPeriodText( ClassPeriod.P6_Code));
-		tblAgenda.setText(7, 0, ClassPeriod.getPeriodText( ClassPeriod.P7_Code));
-		tblAgenda.setText(8, 0, ClassPeriod.getPeriodText( ClassPeriod.P8_Code));
-		tblAgenda.setText(9, 0, ClassPeriod.getPeriodText( ClassPeriod.P9_Code));
-		tblAgenda.setText(10, 0, ClassPeriod.getPeriodText( ClassPeriod.P10_Code));
-		tblAgenda.setText(11, 0, ClassPeriod.getPeriodText( ClassPeriod.P11_Code));
-		tblAgenda.setText(12, 0, ClassPeriod.getPeriodText( ClassPeriod.P12_Code));
+		tblAgenda.setText(0, 1, ClassPeriod.getPeriodText( ClassPeriod.P1_Code));
+		tblAgenda.setText(0, 2, ClassPeriod.getPeriodText( ClassPeriod.P2_Code));
+		tblAgenda.setText(0, 3, ClassPeriod.getPeriodText( ClassPeriod.P3_Code));
+		tblAgenda.setText(0, 4, ClassPeriod.getPeriodText( ClassPeriod.P4_Code));
+		tblAgenda.setText(0, 5, ClassPeriod.getPeriodText( ClassPeriod.P5_Code));
+		tblAgenda.setText(0, 6, ClassPeriod.getPeriodText( ClassPeriod.P6_Code));
+		tblAgenda.setText(0, 7, ClassPeriod.getPeriodText( ClassPeriod.P7_Code));
+		tblAgenda.setText(0, 8, ClassPeriod.getPeriodText( ClassPeriod.P8_Code));
+		tblAgenda.setText(0, 9, ClassPeriod.getPeriodText( ClassPeriod.P9_Code));
+		tblAgenda.setText(0, 10, ClassPeriod.getPeriodText( ClassPeriod.P10_Code));
+		tblAgenda.setText(0, 11, ClassPeriod.getPeriodText( ClassPeriod.P11_Code));
+		tblAgenda.setText(0, 12, ClassPeriod.getPeriodText( ClassPeriod.P12_Code));
 		
 		//
 		clearTable();
@@ -79,9 +85,12 @@ public class MasterAgendaView extends
 
 			@Override
 			public void onClick(ClickEvent event) {
+				//
+				clickedCellIndex = tblAgenda.getCellForEvent(event).getCellIndex();
+				clickedRowIndex = tblAgenda.getCellForEvent(event).getRowIndex();
 				// 
-				txtJour.setText( tblAgenda.getText(0, tblAgenda.getCellForEvent(event).getCellIndex()) );
-                txtPeriod.setText( tblAgenda.getText( tblAgenda.getCellForEvent(event).getRowIndex(), 0));
+				txtJour.setText( tblAgenda.getText( clickedRowIndex , 0 ));
+                txtPeriod.setText( tblAgenda.getText( 0, clickedCellIndex ));
                 //
                 showPopup();
 			}
@@ -121,6 +130,7 @@ public class MasterAgendaView extends
 	
 	
 	/*
+	 * 
 	 * */
 	void prepareDialogBox(DialogBox popup) {
 		//
@@ -130,10 +140,18 @@ public class MasterAgendaView extends
 		popup.setHeight( pnlAdd.getOffsetHeight() + "px" );
 		popup.setWidth( pnlAdd.getOffsetWidth() + "px");
 		popup.center();
+		//
+		if (lstDuration.getItemCount()>0)
+			lstDuration.setSelectedIndex(0);
+		else {
+			for (int i=0; i<ClassPeriod.numberOfPeriod; i++)
+				lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1));
+		}
 	}
 	
 	
 	/*
+	 * 
 	 * */
 	public void clearTable() {
 		for (int i=1; i<tblAgenda.getRowCount(); i++) {
@@ -145,6 +163,7 @@ public class MasterAgendaView extends
 	
 	
 	/*
+	 * 
 	 * */
 	public void styleTable(){
 		//
@@ -154,5 +173,31 @@ public class MasterAgendaView extends
 					tblAgenda.getCellFormatter().setStyleName(i, j, "agendaNormal");
 			}
 		}
+	}
+	
+	
+	/*
+	 * 
+	 * */
+	@UiHandler("cmdSave")
+	void onCmdSaveClick(ClickEvent event) {
+		//
+		getUiHandlers().savePeriodSchedule();
+	}
+
+
+	/*
+	 * 
+	 * */
+	@Override
+	public void showSavedPeriodSchedule() {
+		//
+		int duration = Integer.parseInt(lstDuration.getValue(lstDuration.getSelectedIndex()));
+		for (int i=1; i<duration; i++)
+			tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + i, false);
+		//
+		tblAgenda.getFlexCellFormatter().setColSpan(clickedRowIndex, clickedCellIndex, duration);
+		tblAgenda.setText(clickedRowIndex, clickedCellIndex, "A class here");
+		tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex, clickedCellIndex, "subSection");
 	}
 }
