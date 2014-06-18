@@ -20,6 +20,13 @@ withOperation(new OperationKey("K7KNwqW$sLQ_nhTaC55sPTL_$is="),
   .withMethodName("listAllActiveByProfile")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
+withOperation(new OperationKey("h_OoDMrlyXXWx$hwdvkCWvsJfws="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAllActiveByProfile")
+  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
+  .build());
 withOperation(new OperationKey("thTlG6AsRrsgV9mCPA4Zy_KcFDc="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")

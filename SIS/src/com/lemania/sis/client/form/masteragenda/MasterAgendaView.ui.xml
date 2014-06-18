@@ -4,9 +4,11 @@
     <g:HTMLPanel>
     	<g:Label text="PLAN D&apos;HORAIRE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER" ui:field="pnlPrincipal">
-			<g:HorizontalPanel>
-				<g:Label text="Classe :"/>
+			<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_LEFT" spacing="5" styleName="toolbar">
+				<g:Label text="Classe :" horizontalAlignment="ALIGN_RIGHT"/>
 				<g:ListBox ui:field="lstClasses"/>
+				<g:Label text="Profil :" horizontalAlignment="ALIGN_RIGHT"/>
+				<g:ListBox ui:field="lstProfiles"/>
 			</g:HorizontalPanel>
 			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
 			<g:FlowPanel ui:field="pnlAdd" width="600px" styleName="subSection" visible="false">
@@ -26,6 +28,22 @@
 							</g:customCell>
 							<g:customCell>
 								<g:Label ui:field="txtPeriod"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Matière :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstSubject"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Professeur :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstProfs"/>
 							</g:customCell>
 						</g:row>
 						<g:row>

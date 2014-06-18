@@ -1,5 +1,7 @@
 package com.lemania.sis.client.form.masteragenda;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,12 +19,19 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.lemania.sis.client.ClassPeriod;
+import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.shared.ClasseProxy;
+import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.ProfileProxy;
+import com.lemania.sis.shared.ProfileSubjectProxy;
+import com.lemania.sis.shared.SubjectProxy;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class MasterAgendaView extends
 		ViewWithUiHandlers<MasterAgendaUiHandlers> implements
@@ -43,6 +52,9 @@ public class MasterAgendaView extends
 	@UiField Label txtJour;
 	@UiField Label txtPeriod;
 	@UiField ListBox lstDuration;
+	@UiField ListBox lstProfs;
+	@UiField ListBox lstSubject;
+	@UiField ListBox lstProfiles;
 	
 	//
 	int clickedCellIndex;
@@ -139,14 +151,12 @@ public class MasterAgendaView extends
 		popup.setAnimationEnabled(true);
 		popup.setHeight( pnlAdd.getOffsetHeight() + "px" );
 		popup.setWidth( pnlAdd.getOffsetWidth() + "px");
+		popup.setText( NotificationTypes.periodSchedule );
 		popup.center();
 		//
-		if (lstDuration.getItemCount()>0)
-			lstDuration.setSelectedIndex(0);
-		else {
-			for (int i=0; i<ClassPeriod.numberOfPeriod; i++)
-				lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1));
-		}
+		lstDuration.clear();
+		for (int i=0; i<ClassPeriod.numberOfPeriod - clickedCellIndex + 1; i++)
+			lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1) );
 	}
 	
 	
@@ -193,11 +203,106 @@ public class MasterAgendaView extends
 	public void showSavedPeriodSchedule() {
 		//
 		int duration = Integer.parseInt(lstDuration.getValue(lstDuration.getSelectedIndex()));
-		for (int i=1; i<duration; i++)
-			tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + i, false);
+		//
+		if ( tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex) > 1) {
+			for (int i=0; i < tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex); i++)
+				tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + i, true);
+		}
+		//
+		for (int j=1; j<duration; j++)
+			tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + j, false);
 		//
 		tblAgenda.getFlexCellFormatter().setColSpan(clickedRowIndex, clickedCellIndex, duration);
 		tblAgenda.setText(clickedRowIndex, clickedCellIndex, "A class here");
 		tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex, clickedCellIndex, "subSection");
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void initializeUI() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*
+	 * */
+	@Override
+	public void setClassList(List<ClasseProxy> classes) {
+		//
+		lstClasses.clear();
+		lstClasses.addItem("-","");
+		for (ClasseProxy clazz : classes) {
+			lstClasses.addItem( clazz.getClassName(), clazz.getId().toString());
+		}
+	}
+	
+	/*
+	 * */
+	@UiHandler("lstClasses")
+	void onLstClassesChange(ChangeEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().onClassChanged( lstClasses.getValue(lstClasses.getSelectedIndex()) );
+	}
+
+	/*
+	 * */
+	@Override
+	public void setProfileListData(List<ProfileProxy> profiles) {
+		//
+		lstProfiles.clear();
+		lstProfiles.addItem("-","");
+		//
+		for (ProfileProxy profile : profiles){
+			lstProfiles.addItem( profile.getProfileName(), profile.getId().toString() );
+		}
+		lstProfiles.setSelectedIndex(0);
+	}
+	
+	/*
+	 * */
+	@UiHandler("lstProfiles")
+	void onLstProfilesChange(ChangeEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().onProfileChanged( lstProfiles.getValue( lstProfiles.getSelectedIndex()) );
+	}
+	
+	/*
+	 * */
+	@UiHandler("lstSubject")
+	void onLstSubjectChange(ChangeEvent event) {
+		//
+		if (getUiHandlers() != null)
+			getUiHandlers().loadProfessorList( lstSubject.getValue( lstSubject.getSelectedIndex()), lstClasses.getValue(lstClasses.getSelectedIndex()));
+	}
+
+	/*
+	 * */
+	@Override
+	public void setProfessorListData(List<ProfessorProxy> profs) {
+		//
+		lstProfs.clear();
+		lstProfs.addItem("-","");
+		for ( ProfessorProxy prof : profs ){
+			lstProfs.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfs.setSelectedIndex(0);
+	}
+
+	/*
+	 * */
+	@Override
+	public void setSubjectListData(List<SubjectProxy> subjects) {
+		//
+		lstSubject.clear();
+		lstSubject.addItem("-","");
+		
+		for (SubjectProxy subject : subjects){
+			lstSubject.addItem( subject.getSubjectName(), subject.getId().toString() );
+		}
+		lstSubject.setSelectedIndex(0);
 	}
 }

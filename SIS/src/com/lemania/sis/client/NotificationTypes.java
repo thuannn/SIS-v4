@@ -53,4 +53,7 @@ public class NotificationTypes {
 	public static String deadline_bac_t1 = "BLOCK_BAC_T1";
 	public static String deadline_bac_t2 = "BLOCK_BAC_T2";
 	public static String deadline_bac_t3 = "BLOCK_BAC_T3";	
+	
+	// Dialogbox name
+	public static String periodSchedule = "Détails des périodes";
 }

@@ -19,6 +19,7 @@ public interface SubjectRequestFactory extends RequestFactory {
 		Request<List<SubjectProxy>> listAll();
 		Request<List<SubjectProxy>> listAllActive();
 		Request<List<SubjectProxy>> listAllActiveByProfile(BulletinProxy bulletin);
+		Request<List<SubjectProxy>> listAllActiveByProfile(String profileId);
 		
 		Request<Void> save( SubjectProxy subject );
 		Request<SubjectProxy> saveAndReturn( SubjectProxy subject );

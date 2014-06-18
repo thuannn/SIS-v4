@@ -55,7 +55,7 @@
 						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
 					</g:TreeItem>
 					<g:TreeItem text="Horaires" state="true">
-						<g:Hyperlink targetHistoryToken="masteragenda" text="Plan d&apos;horaire par classe" ui:field="cmdMasterAgendaPage"/>
+						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
 						<g:TreeItem text="Elèves">

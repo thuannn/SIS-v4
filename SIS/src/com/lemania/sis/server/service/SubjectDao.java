@@ -46,6 +46,23 @@ public class SubjectDao extends MyDAOBase {
 	/*
 	 * 
 	 * */
+	public List<Subject> listAllActiveByProfile(String profileId){
+		//
+		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong(profileId)))
+				.order("subjectName");				
+		//
+		List<Subject> returnList = new ArrayList<Subject>();
+		for (ProfileSubject ps : profileSubjects){
+			returnList.add( this.ofy().get( ps.getSubject() ));
+		}
+		return returnList;
+	}
+	
+	
+	/*
+	 * 
+	 * */
 	public List<Subject> listAllActiveByProfile(Bulletin bulletin){
 		//
 		Profile profile;

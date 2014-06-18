@@ -43,20 +43,18 @@ Agenda
 	font-size: 14px;
 	font-style: bold;
 	text-align: center;
-	background-color: palegoldenrod;
+	background-color: floralwhite;
 }
 
 .header {
-	color: firebrick;
+	color: orangered;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	font-size: 14px;
+	font-size: 16px;
 	font-style: gros;
 	font-family: sans-serif;
-	font-weight: bold;
 	letter-spacing: 1px;
 	text-align: center;
-	background-color: linen;
 }
 
 .sideBar {
@@ -72,6 +70,11 @@ Agenda
 .subSection {
 	border: 1px solid lightskyblue;
 	background-color: White;	
+}
+
+.toolbar {
+	border: 1px solid lightskyblue;
+	background-color: floralwhite;	
 }
 
 .btnHideMenu {
