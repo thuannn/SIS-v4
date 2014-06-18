@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
 
@@ -15,10 +15,10 @@ public class ClasseDao extends MyDAOBase {
 	}
 	
 	public List<Classe> listAll(){
-		Query<Classe> q = this.ofy().query(Classe.class).order("className");
+		Query<Classe> q = ofy().load().type(Classe.class).order("className");
 		List<Classe> returnList = new ArrayList<Classe>();
 		for (Classe classe : q){
-			classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
+			classe.setProgrammeName( ofy().load().key(classe.getProgramme()).now().getCoursNom());
 			returnList.add(classe);
 		}
 		return returnList;
@@ -30,13 +30,13 @@ public class ClasseDao extends MyDAOBase {
 		if (coursId.isEmpty())
 			return returnList;
 		
-		Key<Cours> cours = new Key<Cours>(Cours.class, Long.parseLong(coursId));
-		Query<Classe> q = this.ofy().query(Classe.class)
+		Key<Cours> cours = Key.create(Cours.class, Long.parseLong(coursId));
+		Query<Classe> q = ofy().load().type(Classe.class)
 				.filter("programme", cours)
 				.order("className");
 		
 		for (Classe classe : q){
-			classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
+			classe.setProgrammeName( ofy().load().key(classe.getProgramme()).now().getCoursNom());
 			returnList.add( classe );
 		}
 		
@@ -51,14 +51,14 @@ public class ClasseDao extends MyDAOBase {
 		if (coursId.isEmpty())
 			return returnList;
 		
-		Key<Cours> cours = new Key<Cours>(Cours.class, Long.parseLong( coursId ));
-		Query<Classe> q = this.ofy().query(Classe.class)
+		Key<Cours> cours = Key.create(Cours.class, Long.parseLong( coursId ));
+		Query<Classe> q = ofy().load().type(Classe.class)
 				.filter("programme", cours)
 				.order("className");
 		
 		for (Classe classe : q){
 			if (classe.getIsActive().equals(true)) {
-				classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
+				classe.setProgrammeName( ofy().load().key(classe.getProgramme()).now().getCoursNom());
 				returnList.add( classe );
 			}
 		}
@@ -71,12 +71,12 @@ public class ClasseDao extends MyDAOBase {
 	public List<Classe> listAllActive(){
 		//
 		List<Classe> returnList = new ArrayList<Classe>();
-		Query<Classe> q = this.ofy().query(Classe.class)				
+		Query<Classe> q = ofy().load().type(Classe.class)				
 				.order("className");
 		
 		for (Classe classe : q){
 			if (classe.getIsActive().equals(true)) {
-				classe.setProgrammeName( this.ofy().get(classe.getProgramme()).getCoursNom());
+				classe.setProgrammeName( ofy().load().key(classe.getProgramme()).now().getCoursNom());
 				returnList.add( classe );
 			}
 		}
@@ -85,27 +85,27 @@ public class ClasseDao extends MyDAOBase {
 	}
 	
 	public void save(Classe classe){
-		this.ofy().put( classe );
+		ofy().save().entities( classe );
 	}
 	
 	
 	public void save(Classe classe, String coursId){
-		Key<Cours> coursKey = new Key<Cours>(Cours.class, Long.parseLong(coursId));
+		Key<Cours> coursKey = Key.create(Cours.class, Long.parseLong(coursId));
 		classe.setProgramme(coursKey);
-		this.ofy().put( classe );
+		ofy().save().entities( classe );
 	}
 	
 	
 	public Classe saveAndReturn(Classe classe){
-		Key<Classe> key = this.ofy().put(classe);
+		Key<Classe> key = ofy().save().entities(classe).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	public void removeClasse(Classe classe){
-		this.ofy().delete(classe);
+		ofy().delete().entities(classe);
 	}
 }

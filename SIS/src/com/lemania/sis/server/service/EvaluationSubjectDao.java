@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinSubject;
@@ -20,7 +20,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	 * */
 	public List<EvaluationSubject> listAll(){
 		//
-		Query<EvaluationSubject> q = this.ofy().query(EvaluationSubject.class);
+		Query<EvaluationSubject> q = ofy().load().type(EvaluationSubject.class);
 		List<EvaluationSubject> returnList = new ArrayList<EvaluationSubject>();
 		for (EvaluationSubject evaluationSubject : q){
 			returnList.add( evaluationSubject );
@@ -31,15 +31,15 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	/*
 	 * */
 	public void save(EvaluationSubject evaluationSubject){
-		this.ofy().put( evaluationSubject );
+		ofy().save().entities( evaluationSubject );
 	}
 	
 	/*
 	 * */
 	public EvaluationSubject saveAndReturn(EvaluationSubject evaluationSubject){
-		Key<EvaluationSubject> key = this.ofy().put(evaluationSubject);
+		Key<EvaluationSubject> key = ofy().save().entities(evaluationSubject).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -49,16 +49,16 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	 * */
 	public List<EvaluationSubject> populateEvaluationSubjects(String profId, String assignmentId, String evaluationHeaderId) {
 		// Get the assignment object
-		Assignment assignment = this.ofy().get(Assignment.class, Long.parseLong(assignmentId));
+		Assignment assignment = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId))).now();
 		//
 		if (assignment != null) {
 			// Get the Bulletin list by class
-			Query<Bulletin> qBulletin = this.ofy().query(Bulletin.class)
+			Query<Bulletin> qBulletin = ofy().load().type(Bulletin.class)
 					.filter("classe", assignment.getClasse())
 					.filter("isActive", true);
 			
 			// Get the Bulletin Subject list
-			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
+			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())		
 /*
  * 2014.02.13 - Professor does not matter anymore
@@ -79,12 +79,12 @@ public class EvaluationSubjectDao extends MyDAOBase {
 					//
 					if (bulletinSubject.getBulletin().getId() == bulletin.getId()) {
 												
-						currentES = this.ofy().query(EvaluationSubject.class)
+						currentES = ofy().load().type(EvaluationSubject.class)
 								.filter("subject", bulletinSubject.getSubject())
 								.filter("classe", assignment.getClasse())
 								.filter("prof", assignment.getProf())
 								.filter("student", bulletin.getStudent())
-								.filter("evaluationHeader", new Key<EvaluationHeader>(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)));
+								.filter("evaluationHeader",  Key.create(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)));
 						if ( currentES.count() > 0 )
 							curES = currentES.list().get(0);
 						else {
@@ -93,11 +93,11 @@ public class EvaluationSubjectDao extends MyDAOBase {
 							curES.setClasse( assignment.getClasse() );
 							curES.setProf( assignment.getProf() );
 							curES.setStudent( bulletin.getStudent() );
-							curES.setEvaluationHeader( new Key<EvaluationHeader>(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)) );
+							curES.setEvaluationHeader(  Key.create(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)) );
 							
 							curES.setStudentName( bulletin.getStudentName() );
 							curES.setSubjectName( bulletinSubject.getSubjectName() );
-							curES.setProfessorName( this.ofy().get(assignment.getProf()).getProfName() );
+							curES.setProfessorName( ofy().load().key(assignment.getProf()).now().getProfName() );
 						}
 						//
 						returnList.add( curES );						
@@ -105,7 +105,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 				}				
 			}			
 			//
-			this.ofy().put(returnList);			
+			ofy().save().entities(returnList);			
 			return returnList;
 		}
 		return null;		
@@ -114,17 +114,17 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	/*
 	 * */
 	public void removeEvaluationSubject(EvaluationSubject evaluationSubject){
-		this.ofy().delete(evaluationSubject);
+		ofy().delete().entities(evaluationSubject);
 	}	
 
 	/*
 	 * */
 	public List<EvaluationSubject> listAllByStudent(String classId, String bulletinId, String evaluationHeaderId) {
 		//
-		Query<EvaluationSubject> q = this.ofy().query(EvaluationSubject.class)
-				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
-				.filter("student", this.ofy().get(new Key<Bulletin>(Bulletin.class, Long.parseLong(bulletinId))).getStudent())
-				.filter("evaluationHeader", new Key<EvaluationHeader>(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)))
+		Query<EvaluationSubject> q = ofy().load().type(EvaluationSubject.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
+				.filter("student", ofy().load().key( Key.create(Bulletin.class, Long.parseLong(bulletinId))).now().getStudent())
+				.filter("evaluationHeader",  Key.create(EvaluationHeader.class, Long.parseLong(evaluationHeaderId)))
 				.order("subjectName");
 		List<EvaluationSubject> returnList = new ArrayList<EvaluationSubject>();
 		for (EvaluationSubject evaluationSubject : q){

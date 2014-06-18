@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileSubject;
@@ -21,7 +21,7 @@ public class SubjectDao extends MyDAOBase {
 	 * 
 	 * */
 	public List<Subject> listAll(){
-		Query<Subject> q = this.ofy().query(Subject.class).order("subjectName");
+		Query<Subject> q = ofy().load().type(Subject.class).order("subjectName");
 		List<Subject> returnList = new ArrayList<Subject>();
 		for (Subject subject : q){
 			returnList.add(subject);
@@ -34,7 +34,7 @@ public class SubjectDao extends MyDAOBase {
 	 * 
 	 * */
 	public List<Subject> listAllActive(){
-		Query<Subject> q = this.ofy().query(Subject.class).order("subjectName");
+		Query<Subject> q = ofy().load().type(Subject.class).order("subjectName");
 		List<Subject> returnList = new ArrayList<Subject>();
 		for (Subject subject : q){
 			if (subject.getIsActive())
@@ -48,13 +48,13 @@ public class SubjectDao extends MyDAOBase {
 	 * */
 	public List<Subject> listAllActiveByProfile(String profileId){
 		//
-		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
-				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong(profileId)))
+		Query<ProfileSubject> profileSubjects = ofy().load().type(ProfileSubject.class)
+				.filter("profile", Key.create(Profile.class, Long.parseLong(profileId)))
 				.order("subjectName");				
 		//
 		List<Subject> returnList = new ArrayList<Subject>();
 		for (ProfileSubject ps : profileSubjects){
-			returnList.add( this.ofy().get( ps.getSubject() ));
+			returnList.add( ofy().load().key( ps.getSubject() ).now());
 		}
 		return returnList;
 	}
@@ -67,20 +67,20 @@ public class SubjectDao extends MyDAOBase {
 		//
 		Profile profile;
 		try { 
-			profile = this.ofy().get( bulletin.getProfile() ); 
+			profile = ofy().load().key( bulletin.getProfile() ).now(); 
 		} catch (RuntimeException exception) {
-			Query<Profile> profiles = this.ofy().query(Profile.class)
+			Query<Profile> profiles = ofy().load().type(Profile.class)
 					.filter("classe", bulletin.getClasse());
 			profile = profiles.list().get(0);
 		}
 		//
-		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+		Query<ProfileSubject> profileSubjects = ofy().load().type(ProfileSubject.class)
 				.filter("profile", profile)
 				.order("subjectName");				
 		//
 		List<Subject> returnList = new ArrayList<Subject>();
 		for (ProfileSubject ps : profileSubjects){
-			returnList.add( this.ofy().get( ps.getSubject() ));
+			returnList.add( ofy().load().key( ps.getSubject() ).now() );
 		}
 		return returnList;
 	}
@@ -90,7 +90,7 @@ public class SubjectDao extends MyDAOBase {
 	 * 
 	 * */
 	public void save(Subject subject){
-		this.ofy().put(subject);
+		ofy().save().entities(subject);
 	}
 	
 	
@@ -98,9 +98,9 @@ public class SubjectDao extends MyDAOBase {
 	 * 
 	 * */
 	public Subject saveAndReturn(Subject subject){
-		Key<Subject> key = this.ofy().put(subject);
+		Key<Subject> key = ofy().save().entities(subject).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -111,7 +111,7 @@ public class SubjectDao extends MyDAOBase {
 	 * 
 	 * */
 	public void removeSubject(Subject subject){
-		this.ofy().delete(subject);
+		ofy().delete().entities(subject);
 	}
 
 }

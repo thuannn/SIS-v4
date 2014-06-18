@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.lemania.sis.server.Assignment;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Bulletin;
@@ -25,12 +25,12 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<BulletinSubject> listAll(){
-		Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class).order("subjectName");
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class).order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for (BulletinSubject bulletinSubject : q){
 			if (bulletinSubject.getProfessor() != null)
-				bulletinSubject.setProfName( this.ofy().get(bulletinSubject.getProfessor()).getProfName() );
-			bulletinSubject.setSubjectName( this.ofy().get( bulletinSubject.getSubject()).getSubjectName() );
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );
 			returnList.add(bulletinSubject);
 		}
 		return returnList;
@@ -39,14 +39,14 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<BulletinSubject> listAllActive(){
-		Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 				.filter("isActive", true)
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
 			if (bulletinSubject.getProfessor() != null)
-				bulletinSubject.setProfName( this.ofy().get(bulletinSubject.getProfessor()).getProfName() );
-			bulletinSubject.setSubjectName( this.ofy().get( bulletinSubject.getSubject()).getSubjectName() );
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );
 			returnList.add( bulletinSubject );
 		}
 		return returnList;
@@ -55,16 +55,16 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<BulletinSubject> listAll( String bulletinId ){
-		Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
-				.filter("bulletin", new Key<Bulletin>(Bulletin.class, Long.parseLong( bulletinId )))
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
+				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
 			//
 			if (bulletinSubject.getProfessor() != null)
-				bulletinSubject.setProfName( this.ofy().get(bulletinSubject.getProfessor()).getProfName() );
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 			//
-			bulletinSubject.setSubjectName( this.ofy().get( bulletinSubject.getSubject()).getSubjectName() );						
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );						
 			//
 			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
 		}
@@ -75,16 +75,16 @@ public class BulletinSubjectDao extends MyDAOBase {
 	/**/
 	public List<BulletinSubject> listAllByAssignment(String assignmentId) {
 		// Get the assignment object
-		Assignment assignment = this.ofy().get(Assignment.class, Long.parseLong(assignmentId));
+		Assignment assignment = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId))).now();
 		//
 		if (assignment != null) {
 			// Get the Bulletin list by class
-			Query<Bulletin> qBulletin = this.ofy().query(Bulletin.class)
+			Query<Bulletin> qBulletin = ofy().load().type(Bulletin.class)
 					.filter("classe", assignment.getClasse())
 					.filter("isActive", true);
 			
 			// Get the Bulletin Subject list
-			Query<BulletinSubject> q = this.ofy().query(BulletinSubject.class)
+			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())
 /* 
  * 2014.02.12 - In case that professor change, it doesn't matter anymore who is introducing the grades
@@ -115,14 +115,14 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/**/
 	public void save(BulletinSubject bulletinSubject){
-		this.ofy().put( bulletinSubject );
+		ofy().save().entities( bulletinSubject );
 	}
 	
 	
 	/**/
 	public BulletinSubject saveAndReturn(BulletinSubject bulletin){
 		//
-		Key<BulletinSubject> key = this.ofy().put(bulletin);
+		Key<BulletinSubject> key = ofy().save().entities(bulletin).now().keySet().iterator().next();
 		Double totalT1 = -0.000001;
 		Double totalT2 = -0.000001;
 		Double totalT3 = -0.000001;
@@ -144,14 +144,14 @@ public class BulletinSubjectDao extends MyDAOBase {
 		Integer countAn = 0;
 		//
 		try {
-			BulletinSubject ps = this.ofy().get(key);
+			BulletinSubject ps = ofy().load().key(key).now();
 			if (ps.getProfessor() != null)
-				ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName() );
-			ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
-			ps.setStudentName(this.ofy().get(ps.getBulletin()).getStudentName());
+				ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+			ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
+			ps.setStudentName(ofy().load().key(ps.getBulletin()).now().getStudentName());
 			//
-			Query<BulletinBranche> qBranche = this.ofy().query(BulletinBranche.class)
-					.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, ps.getId()));
+			Query<BulletinBranche> qBranche = ofy().load().type(BulletinBranche.class)
+					.filter("bulletinSubject", Key.create(BulletinSubject.class, ps.getId()));
 			for (BulletinBranche branche : qBranche){
 				if (branche.getBulletinBrancheName().toLowerCase().contains("examen") 
 						|| branche.getBulletinBrancheName().toLowerCase().contains("bac blanc")){
@@ -193,11 +193,12 @@ public class BulletinSubjectDao extends MyDAOBase {
 				}
 			}
 			//
-			String programmeName = this.ofy().get(
-					this.ofy().get(
-							this.ofy().get(ps.getBulletin()).getClasse()).getProgramme()).getCoursNom().toLowerCase();
-			String className = this.ofy().get( 
-					this.ofy().get( ps.getBulletin() ).getClasse()).getClassName();
+			String programmeName = ofy().load().key(
+					ofy().load().key(
+							ofy().load().key(ps.getBulletin()).now().getClasse()).now().getProgramme()).now()
+								.getCoursNom().toLowerCase();
+			String className = ofy().load().key( 
+					ofy().load().key( ps.getBulletin() ).now().getClasse()).now().getClassName();
 			//
 			if (totalCoefT1 > -0.000001) totalCoefT1 = totalCoefT1 + 0.000001;
 			if (totalCoefT2 > -0.000001) totalCoefT2 = totalCoefT2 + 0.000001;
@@ -392,7 +393,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 				ps.setExamT4("");
 			
 			//
-			this.ofy().put(ps);
+			ofy().save().entities(ps);
 			return ps;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -405,36 +406,36 @@ public class BulletinSubjectDao extends MyDAOBase {
 	public BulletinSubject saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef ) {
 		//
 		BulletinSubject ps = new BulletinSubject();
-		ps.setBulletin( new Key<Bulletin>( Bulletin.class, Long.parseLong(bulletinId)));
-		ps.setSubject(new Key<Subject>( Subject.class, Long.parseLong(subjectId)));
-		ps.setProfessor( new Key<Professor>(Professor.class, Long.parseLong(professorId)));
+		ps.setBulletin( Key.create( Bulletin.class, Long.parseLong(bulletinId)));
+		ps.setSubject(Key.create( Subject.class, Long.parseLong(subjectId)));
+		ps.setProfessor( Key.create(Professor.class, Long.parseLong(professorId)));
 		
-		ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
-		ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName());
+		ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
+		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName());
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
 		
-		Key<BulletinSubject> key = this.ofy().put( ps );
+		Key<BulletinSubject> key = ofy().save().entities( ps ).now().keySet().iterator().next();
 		
 		// Save the related branches
 		BulletinBranche curBulletinBranche;		
 		//
 		Profile profile;
-		Bulletin bulletin = this.ofy().get(ps.getBulletin());
+		Bulletin bulletin = ofy().load().key(ps.getBulletin()).now();
 		if ( bulletin.getProfile() != null ) {
-			profile = this.ofy().get( bulletin.getProfile() );
+			profile = ofy().load().key( bulletin.getProfile() ).now();
 		} else {
-			Query<Profile> profiles = this.ofy().query(Profile.class)
+			Query<Profile> profiles = ofy().load().type(Profile.class)
 					.filter("classe", bulletin.getClasse());
 			profile = profiles.list().get(0);
 		}
 		//
-		Query<ProfileSubject> profileSubjects = this.ofy().query(ProfileSubject.class)
+		Query<ProfileSubject> profileSubjects = ofy().load().type(ProfileSubject.class)
 				.filter("profile", profile)
 				.filter("subject", ps.getSubject())
 				.filter("professor", ps.getProfessor());
 		//
-		Query<ProfileBranche> profileBranches = this.ofy().query(ProfileBranche.class)
-				.filter("profileSubject", profileSubjects.listKeys().get(0));
+		Query<ProfileBranche> profileBranches = ofy().load().type(ProfileBranche.class)
+				.filter("profileSubject", profileSubjects.keys().list().get(0));
 		//
 		for (ProfileBranche profileBranche : profileBranches) {
 			curBulletinBranche = new BulletinBranche();
@@ -442,15 +443,15 @@ public class BulletinSubjectDao extends MyDAOBase {
 			curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
 			curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
 			curBulletinBranche.setBulletinSubject( key );
-			this.ofy().put(curBulletinBranche);
+			ofy().save().entities(curBulletinBranche);
 			//
 			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}		
 		//
-		this.ofy().put( ps );
+		ofy().save().entities( ps );
 		//
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch ( Exception e ) {
 			throw new RuntimeException(e);
 		}
@@ -461,12 +462,12 @@ public class BulletinSubjectDao extends MyDAOBase {
 	 * */
 	public Boolean removeProfileSubject(BulletinSubject bulletinSubject) {
 		//
-		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
-				.filter("bulletinSubject", new Key<BulletinSubject>(BulletinSubject.class, bulletinSubject.getId()));
+		Query<BulletinBranche> q = ofy().load().type(BulletinBranche.class)
+				.filter("bulletinSubject", Key.create(BulletinSubject.class, bulletinSubject.getId()));
 		if (q.count() > 0)
 			return false;
 		else {
-			this.ofy().delete(bulletinSubject);
+			ofy().delete().entities(bulletinSubject);
 			return true;
 		}
 	}
@@ -476,15 +477,15 @@ public class BulletinSubjectDao extends MyDAOBase {
 	 * */
 	public BulletinSubject calculateTotalBrancheCoef(String bulletinSubjectId) {
 		//
-		BulletinSubject ps = this.ofy().get( new Key<BulletinSubject>(BulletinSubject.class, Long.parseLong(bulletinSubjectId)) );
-		Query<BulletinBranche> q = this.ofy().query(BulletinBranche.class)
-				.filter("bulletinSubject", new Key<BulletinSubject>( BulletinSubject.class, Long.parseLong(bulletinSubjectId)) )
+		BulletinSubject ps = ofy().load().key( Key.create(BulletinSubject.class, Long.parseLong(bulletinSubjectId)) ).now();
+		Query<BulletinBranche> q = ofy().load().type(BulletinBranche.class)
+				.filter("bulletinSubject", Key.create( BulletinSubject.class, Long.parseLong(bulletinSubjectId)) )
 				.order("bulletinBrancheName");
 		ps.setTotalBrancheCoef(0.0);
 		for ( BulletinBranche profileBranche : q ){
 			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}
-		this.ofy().put( ps );
+		ofy().save().entities( ps );
 		return ps;
 	}
 

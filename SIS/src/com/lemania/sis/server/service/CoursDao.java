@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
 
@@ -15,7 +15,7 @@ public class CoursDao extends MyDAOBase {
 	}
 	
 	public List<Cours> listAll(){
-		Query<Cours> q = this.ofy().query(Cours.class).order("coursNom");
+		Query<Cours> q = ofy().load().type(Cours.class).order("coursNom");
 		List<Cours> returnList = new ArrayList<Cours>();
 		for (Cours ecole : q){
 			returnList.add(ecole);
@@ -29,8 +29,8 @@ public class CoursDao extends MyDAOBase {
 		if (ecoleId.isEmpty())
 			return returnList;
 		
-		Key<Ecole> ecole = new Key<Ecole>(Ecole.class, Long.parseLong(ecoleId));
-		Query<Cours> q = this.ofy().query(Cours.class)
+		Key<Ecole> ecole = Key.create(Ecole.class, Long.parseLong(ecoleId));
+		Query<Cours> q = ofy().load().type(Cours.class)
 				.filter("ecole", ecole)
 				.order("coursNom");
 		
@@ -47,8 +47,8 @@ public class CoursDao extends MyDAOBase {
 		if (ecoleId.isEmpty())
 			return returnList;
 		
-		Key<Ecole> ecole = new Key<Ecole>(Ecole.class, Long.parseLong(ecoleId));
-		Query<Cours> q = this.ofy().query(Cours.class)
+		Key<Ecole> ecole = Key.create(Ecole.class, Long.parseLong(ecoleId));
+		Query<Cours> q = ofy().load().type(Cours.class)
 				.filter("ecole", ecole)
 				.order("coursNom");
 		
@@ -61,25 +61,25 @@ public class CoursDao extends MyDAOBase {
 	}
 	
 	public void save(Cours cours){
-		this.ofy().put(cours);
+		ofy().save().entities(cours);
 	}
 	
 	public void save(Cours cours, String ecoleId){
-		Key<Ecole> ecoleKey = new Key<Ecole>(Ecole.class, Long.parseLong(ecoleId));
+		Key<Ecole> ecoleKey = Key.create(Ecole.class, Long.parseLong(ecoleId));
 		cours.setEcole(ecoleKey);
-		this.ofy().put(cours);
+		ofy().save().entities(cours);
 	}
 	
 	public Cours saveAndReturn(Cours cours){
-		Key<Cours> key = this.ofy().put(cours);
+		Key<Cours> key = ofy().save().entities(cours).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	public void removeCours(Cours cours){
-		this.ofy().delete(cours);
+		ofy().delete().entities(cours);
 	}	
 }

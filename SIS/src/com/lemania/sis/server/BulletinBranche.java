@@ -2,7 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.NotSaved;
+import com.googlecode.objectify.annotation.IgnoreSave;
 
 @Entity
 public class BulletinBranche extends DatastoreObject implements Comparable<BulletinBranche> {
@@ -43,7 +43,7 @@ public class BulletinBranche extends DatastoreObject implements Comparable<Bulle
 	private String T4 = "";
 	private String An = "";
 	
-	@NotSaved
+	@IgnoreSave
 	Long bulletinSubjectId = Long.MIN_VALUE;
 		
 	public Double getBrancheCoef() {

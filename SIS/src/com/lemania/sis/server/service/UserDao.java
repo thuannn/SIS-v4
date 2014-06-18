@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Student;
 import com.lemania.sis.server.User;
@@ -17,7 +18,7 @@ public class UserDao extends MyDAOBase {
 	}
 	
 	public List<User> listAll(){
-		Query<User> q = this.ofy().query(User.class);
+		Query<User> q = ofy().load().type(User.class);
 		List<User> returnList = new ArrayList<User>();
 		for (User user : q){
 			returnList.add(user);
@@ -29,7 +30,7 @@ public class UserDao extends MyDAOBase {
 	/*
 	 * */
 	public List<User> listAllByType(String type) {
-		Query<User> q = this.ofy().query(User.class);
+		Query<User> q = ofy().load().type(User.class);
 		List<User> returnList = new ArrayList<User>();
 		for (User user : q){
 			if (type.contains("prof") && user.getIsProf())
@@ -44,7 +45,7 @@ public class UserDao extends MyDAOBase {
 	
 	/**/
 	public List<User> listAllActive(){
-		Query<User> q = this.ofy().query(User.class)
+		Query<User> q = ofy().load().type(User.class)
 				.filter("active", true);
 		List<User> returnList = new ArrayList<User>();
 		for (User user : q){
@@ -59,7 +60,7 @@ public class UserDao extends MyDAOBase {
 	public void save(User user){
 		//
 		user.setUserName( user.getUserName().toLowerCase() );
-		this.ofy().put(user);
+		ofy().save().entities(user);
 	}
 	
 	
@@ -67,9 +68,9 @@ public class UserDao extends MyDAOBase {
 	public User saveAndReturn(User user){
 		//
 		user.setUserName( user.getUserName().toLowerCase() );
-		Key<User> key = this.ofy().put(user);
+		Key<User> key = ofy().save().entities(user).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -77,13 +78,13 @@ public class UserDao extends MyDAOBase {
 	
 	/**/
 	public void removeUser(User user){
-		this.ofy().delete(user);
+		ofy().delete().entities(user);
 	}
 	
 	
 	/**/
 	public User authenticateUser(String userName, String password) {
-		Query<User> q = this.ofy().query(User.class)
+		Query<User> q = ofy().load().type(User.class)
 				.filter("active", true)
 				.filter("userName", userName.toLowerCase())
 				.filter("password", password);
@@ -105,7 +106,7 @@ public class UserDao extends MyDAOBase {
 					+ cal.get(Calendar.HOUR) + ":"
 					+ cal.get(Calendar.MINUTE) );
 			//
-			this.ofy().put(user);
+			ofy().save().entities(user);
 			
 			returnList.add(user);
 		}
@@ -119,7 +120,7 @@ public class UserDao extends MyDAOBase {
 	/*
 	 * */
 	public User changePassword(String userName, String password, String newPassword) {
-		Query<User> q = this.ofy().query(User.class)
+		Query<User> q = ofy().load().type(User.class)
 				.filter("active", true)
 				.filter("userName", userName.toLowerCase())
 				.filter("password", password);
@@ -130,7 +131,7 @@ public class UserDao extends MyDAOBase {
 		
 		if (returnList.size() > 0) {
 			returnList.get(0).setPassword(newPassword);
-			this.ofy().put(returnList.get(0));
+			ofy().save().entities(returnList.get(0));
 			return returnList.get(0);
 		}
 		else
@@ -140,11 +141,11 @@ public class UserDao extends MyDAOBase {
 	/*
 	 * */
 	public void updateUserActiveStatus(String userEmail, Boolean userStatus) {
-		Query<User> q = this.ofy().query(User.class)
+		Query<User> q = ofy().load().type(User.class)
 				.filter("email", userEmail);						
 		for (User user : q){		
 			user.setActive(userStatus);
-			this.ofy().put(user);
+			ofy().save().entities(user);
 		}	
 	}
 	
@@ -152,12 +153,12 @@ public class UserDao extends MyDAOBase {
 	 * */
 	public void fixStudentName() {
 		//
-		Query<User> q = this.ofy().query(User.class);		
+		Query<User> q = ofy().load().type(User.class);	
 		for (User user : q){
-			Query<Student> qStudent = this.ofy().query(Student.class).filter("Email", user.getEmail());					
+			Query<Student> qStudent = ofy().load().type(Student.class).filter("Email", user.getEmail());					
 			for (Student student : qStudent){
 				user.setFullName( student.getLastName() + " " + student.getFirstName() );
-				this.ofy().put(user);
+				ofy().save().entities(user);
 			}						
 		}		
 	}
@@ -166,8 +167,8 @@ public class UserDao extends MyDAOBase {
 	 * */
 	public boolean checkClassMasterRole(String userId, String profId) {
 		//
-		User user = this.ofy().get( new Key<User>(User.class, Long.parseLong(userId)));
-		Query<Professor> profs = this.ofy().query(Professor.class).filter("profEmail", user.getEmail());
+		User user = ofy().load().key( Key.create(User.class, Long.parseLong(userId)) ).now();
+		Query<Professor> profs = ofy().load().type(Professor.class).filter("profEmail", user.getEmail());
 		for (Professor prof : profs) {
 			if (prof.getId().toString().equals(profId))
 				return true;

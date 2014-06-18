@@ -39013,3 +39013,1232 @@ Rebinding com.lemania.sis.client.view.FrmBulletinManagementView_BinderImpl_desig
       Compiling...
          Compilation completed in 0.00 seconds
       Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 69 seconds)
+   20% complete (ETR: 49 seconds)
+   30% complete (ETR: 34 seconds)
+   40% complete (ETR: 25 seconds)
+   50% complete (ETR: 18 seconds)
+   60% complete (ETR: 13 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 5 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 27.05 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 3298 units from cache.
+Compiling...
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   80% complete (ETR: 1 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 7.58 seconds
+Validating units:
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.04 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094021239.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094021239.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094021239_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094022343.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094022343.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094022343_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094028931.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094028931.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094028931_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094031986.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094031986.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094031986_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094038513.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094038513.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403094038513_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 3298 units from cache.
+Compiling...
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   50% complete (ETR: 6 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 15.76 seconds
+Validating units:
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.03 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094339800.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094339800.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094339800_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.cellview.client.CellTable.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method cellTableFooterBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableFooterBackground'
+      Preparing method cellTableHeaderBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableHeaderBackground'
+      Preparing method cellTableLoading
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableLoading'
+      Preparing method cellTableSelectedBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSelectedBackground'
+      Preparing method cellTableSortAscending
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSortAscending'
+      Preparing method cellTableSortDescending
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSortDescending'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.cellview.client.AbstractCellTable.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.cellview.client.AbstractCellTable.Template
+         Generating method body for div()
+         Generating method body for tbody()
+         Generating method body for td()
+         Generating method body for tdBothAlign()
+         Generating method body for tdHorizontalAlign()
+         Generating method body for tdVerticalAlign()
+         Generating method body for tfoot()
+         Generating method body for thead()
+         Generating method body for tr()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094340986.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094340986.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094340986_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094392497.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094392497.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094392497_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094401681.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094401681.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403094401681_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 3298 cached/archived units.  Used 3298 / 3298 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.03 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094450710.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094450710.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.63 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094450710_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.03 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094452719.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094452719.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094452719_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094528095.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094528095.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.view.MainPageView_BinderImpl_designTime1403094528095_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   20% complete (ETR: 15 seconds)
+   20% complete (ETR: 15 seconds)
+   20% complete (ETR: 15 seconds)
+   30% complete (ETR: 13 seconds)
+   40% complete (ETR: 10 seconds)
+   50% complete (ETR: 8 seconds)
+   60% complete (ETR: 6 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 15.60 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   20% complete (ETR: 14 seconds)
+   20% complete (ETR: 14 seconds)
+   20% complete (ETR: 14 seconds)
+   30% complete (ETR: 12 seconds)
+   40% complete (ETR: 9 seconds)
+   50% complete (ETR: 7 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 11.36 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Removing invalidated units
+Finding entry point classes
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 3298 units from cache.
+Compiling...
+   Compilation completed in 1.69 seconds
+Validating units:
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.04 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096654949.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096654949.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096654949_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096655902.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096655902.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.masteragenda.MasterAgendaView_BinderImpl_designTime1403096655902_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 3298 cached/archived units.  Used 3298 / 3298 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096702793.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096702793.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096702793_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.cellview.client.CellTable.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method cellTableFooterBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableFooterBackground'
+      Preparing method cellTableHeaderBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableHeaderBackground'
+      Preparing method cellTableLoading
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableLoading'
+      Preparing method cellTableSelectedBackground
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSelectedBackground'
+      Preparing method cellTableSortAscending
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSortAscending'
+      Preparing method cellTableSortDescending
+         Adding image 'com.google.gwt.user.cellview.client.CellTable.Resources.cellTableSortDescending'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.cellview.client.AbstractCellTable.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.cellview.client.AbstractCellTable.Template
+         Generating method body for div()
+         Generating method body for tbody()
+         Generating method body for td()
+         Generating method body for tdBothAlign()
+         Generating method body for tdHorizontalAlign()
+         Generating method body for tdVerticalAlign()
+         Generating method body for tfoot()
+         Generating method body for thead()
+         Generating method body for tr()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096703905.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096703905.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096703905_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096708360.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096708360.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096708360_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096840183.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096840183.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096840183_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096842884.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096842884.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096842884_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096844885.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096844885.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403096844885_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.04 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098570291.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098570291.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098570291_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.04 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098896513.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098896513.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098896513_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098900051.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098900051.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.classroom.ClassroomView_BinderImpl_designTime1403098900051_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units

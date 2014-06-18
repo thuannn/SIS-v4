@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <g:HTMLPanel>
-    	<g:Label text="PLAN D&apos;HORAIRE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+    	<g:Label text="HORAIRES CADRES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER" ui:field="pnlPrincipal">
 			<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_LEFT" spacing="5" styleName="toolbar">
 				<g:Label text="Classe :" horizontalAlignment="ALIGN_RIGHT"/>
@@ -10,6 +10,7 @@
 				<g:Label text="Profil :" horizontalAlignment="ALIGN_RIGHT"/>
 				<g:ListBox ui:field="lstProfiles"/>
 			</g:HorizontalPanel>
+			<g:Label text="." styleName="hiddenText"/>
 			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
 			<g:FlowPanel ui:field="pnlAdd" width="600px" styleName="subSection" visible="false">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">

@@ -4,8 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.OnSave;
 
 public class DatastoreObject {
 	//
@@ -30,7 +30,7 @@ public class DatastoreObject {
 		this.version = version;
 	}
 
-	@PrePersist
+	@OnSave
 	void onPersist(){
 		this.version++ ;
 		

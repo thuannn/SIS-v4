@@ -9,14 +9,6 @@
 				<g:Grid cellPadding="2" cellSpacing="2" width="100%">
 				<g:row>
 					<g:customCell>
-						<g:Label text="Nom de l&apos;école :"/>
-					</g:customCell>
-					<g:customCell>
-						<g:ListBox ui:field="lstSchools" styleName="sis_textbox"/>
-					</g:customCell>
-				</g:row>
-				<g:row>
-					<g:customCell>
 						<g:Label text="Nom de la salle :"/>
 					</g:customCell>
 					<g:customCell>

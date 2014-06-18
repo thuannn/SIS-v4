@@ -2,7 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.NotSaved;
+import com.googlecode.objectify.annotation.IgnoreSave;
 
 @Entity
 public class EvaluationHeader extends DatastoreObject {
@@ -15,7 +15,7 @@ public class EvaluationHeader extends DatastoreObject {
 	Key<Professor> classMaster;
 	Key<Classe> classe;
 	
-	@NotSaved
+	@IgnoreSave
 	String classMasterName = "";	
 	
 	public String getFromDate() {

@@ -2,7 +2,7 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.NotSaved;
+import com.googlecode.objectify.annotation.IgnoreSave;
 
 @Entity
 public class Assignment extends DatastoreObject implements Comparable<Assignment> {
@@ -13,16 +13,16 @@ public class Assignment extends DatastoreObject implements Comparable<Assignment
 	
 	private Boolean active = false;
 	
-	@NotSaved
+	@IgnoreSave
 	private String classeName;
 	
-	@NotSaved
+	@IgnoreSave
 	private String programmeName;
 	
-	@NotSaved
+	@IgnoreSave
 	private String schoolName;
 	
-	@NotSaved
+	@IgnoreSave
 	private String subjectName;
 	
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.Student;
 
@@ -15,20 +15,24 @@ public class StudentDao extends MyDAOBase {
 	}
 	
 	public void save(Student student){
-		this.ofy().put(student);
+		ofy().save().entities(student);
 	}
 	
+	
+	/*
+	 * */
 	public Student saveAndReturn(Student student){
-		Key<Student> key = this.ofy().put(student);
+		Key<Student> key = ofy().save().entities(student).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public Student saveAndReturn( String firstName, String lastName, String email, Boolean active ){
 		Student student = new Student();
 		student.setFirstName(firstName);
@@ -36,9 +40,9 @@ public class StudentDao extends MyDAOBase {
 		student.setEmail(email);
 		student.setIsActive(active);
 		
-		Key<Student> key = this.ofy().put(student);
+		Key<Student> key = ofy().save().entities(student).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -47,13 +51,13 @@ public class StudentDao extends MyDAOBase {
 	
 	/**/
 	public void removeStudent( Student student ){
-		this.ofy().delete(student);
+		ofy().delete().entities(student);
 	}
 	
 	
 	/* List all the student both active and inactive. */
 	public List<Student> listAll(){
-		Query<Student> q = this.ofy().query(Student.class)
+		Query<Student> q = ofy().load().type(Student.class)
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
@@ -66,7 +70,7 @@ public class StudentDao extends MyDAOBase {
 	
 	/* List all the active students */
 	public List<Student> listAllActive(){
-		Query<Student> q = this.ofy().query(Student.class).filter("isActive", true)
+		Query<Student> q = ofy().load().type(Student.class).filter("isActive", true)
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
@@ -79,7 +83,7 @@ public class StudentDao extends MyDAOBase {
 	
 	/* List all the active students */
 	public List<Student> listByEmail(String email){
-		Query<Student> q = this.ofy().query(Student.class).filter("Email", email)
+		Query<Student> q = ofy().load().type(Student.class).filter("Email", email)
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
@@ -95,7 +99,7 @@ public class StudentDao extends MyDAOBase {
 	 * */
 	public List<Student> listAllActiveWithoutBulletin(){
 		// Get the list of student IDs in the list of bulletins that are not finished
-		Query<Bulletin> q = this.ofy().query(Bulletin.class)
+		Query<Bulletin> q = ofy().load().type(Bulletin.class)
 				.order("student");				
 		List<Long> studentIds = new ArrayList<Long>();
 		Long prevId = Long.MIN_VALUE;
@@ -105,14 +109,14 @@ public class StudentDao extends MyDAOBase {
 			if (bulletin.getIsFinished().equals(true))
 				continue;
 			//
-			curId = this.ofy().get(bulletin.getStudent()).getId();
+			curId = ofy().load().key(bulletin.getStudent()).now().getId();
 			if ( prevId != curId ) {
 				prevId = curId;
 				studentIds.add( prevId );
 			}
 		}
 		//
-		Query<Student> qStudent = this.ofy().query(Student.class).filter("isActive", true)
+		Query<Student> qStudent = ofy().load().type(Student.class).filter("isActive", true)
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();

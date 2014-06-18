@@ -2,18 +2,18 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Indexed;
-import com.googlecode.objectify.annotation.NotSaved;
+import com.googlecode.objectify.annotation.IgnoreSave;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Cours extends DatastoreObject implements Comparable<Cours>{
 	private String coursNom;
 	private Boolean coursActif;
 	
-	@Indexed
+	@Index
 	Key<Ecole> ecole;
 	
-	@NotSaved
+	@IgnoreSave
 	String schoolName;
 	
 	public String getSchoolName() {

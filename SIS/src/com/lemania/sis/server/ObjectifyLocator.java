@@ -1,7 +1,8 @@
 package com.lemania.sis.server;
 
 import com.google.web.bindery.requestfactory.shared.Locator;
-import com.googlecode.objectify.util.DAOBase;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyService;
 
 public class ObjectifyLocator extends Locator<DatastoreObject, Long> {
 
@@ -18,8 +19,7 @@ public class ObjectifyLocator extends Locator<DatastoreObject, Long> {
 
 	@Override
 	public DatastoreObject find(Class<? extends DatastoreObject> clazz, Long id) {
-		DAOBase daoBase = new DAOBase();
-		return daoBase.ofy().find(clazz, id);
+        return ObjectifyService.ofy().load().key( Key.create(clazz, id)).now();
 	}
 
 	@Override

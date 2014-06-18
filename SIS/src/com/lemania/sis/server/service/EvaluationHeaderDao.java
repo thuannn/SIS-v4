@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
@@ -15,10 +15,10 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	 * */
 	public List<EvaluationHeader> listAll(){
 		//
-		Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class);
+		Query<EvaluationHeader> q = ofy().load().type(EvaluationHeader.class);
 		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
 		for (EvaluationHeader evaluationHeader : q){
-			evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
+			evaluationHeader.setClassMasterName( ofy().load().key(evaluationHeader.getClassMaster()).now().getProfName() );
 			returnList.add( evaluationHeader );
 		}
 		return returnList;
@@ -28,11 +28,11 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	 * */
 	public List<EvaluationHeader> listAllByClass(String classId){
 		//
-		Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class)
-				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)));
+		Query<EvaluationHeader> q = ofy().load().type(EvaluationHeader.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)));
 		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
 		for (EvaluationHeader evaluationHeader : q){
-			evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
+			evaluationHeader.setClassMasterName( ofy().load().key(evaluationHeader.getClassMaster()).now().getProfName() );
 			returnList.add( evaluationHeader );
 		}
 		return returnList;
@@ -42,14 +42,14 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	 * */
 	public List<EvaluationHeader> listAllByAssignment(String assignmentId){
 		// Look for the Class key in the assignment
-		Assignment assingment = this.ofy().get(new Key<Assignment>(Assignment.class, Long.parseLong(assignmentId)));
+		Assignment assingment = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId))).now();
 		//
 		List<EvaluationHeader> returnList = new ArrayList<EvaluationHeader>();
 		if (assingment != null) {
-			Query<EvaluationHeader> q = this.ofy().query(EvaluationHeader.class)
+			Query<EvaluationHeader> q = ofy().load().type(EvaluationHeader.class)
 					.filter("classe", assingment.getClasse());		
 			for (EvaluationHeader evaluationHeader : q){
-				evaluationHeader.setClassMasterName( this.ofy().get(evaluationHeader.getClassMaster()).getProfName() );
+				evaluationHeader.setClassMasterName( ofy().load().key(evaluationHeader.getClassMaster()).now().getProfName() );
 				returnList.add( evaluationHeader );
 			}
 		}
@@ -59,15 +59,15 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	/*
 	 * */
 	public void save(EvaluationHeader evaluationHeader){
-		this.ofy().put(evaluationHeader);
+		ofy().save().entities(evaluationHeader);
 	}
 	
 	/*
 	 * */
 	public EvaluationHeader saveAndReturn(EvaluationHeader evaluationHeader){
-		Key<EvaluationHeader> key = this.ofy().put(evaluationHeader);
+		Key<EvaluationHeader> key = ofy().save().entities(evaluationHeader).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -80,8 +80,8 @@ public class EvaluationHeaderDao extends MyDAOBase {
 		ehUpdate.setFromDate(dateFrom);
 		ehUpdate.setToDate(dateTo);
 		ehUpdate.setObjective(objective);
-		ehUpdate.setClassMaster(new Key<Professor>(Professor.class, Long.parseLong(classMasterId)));
-		this.ofy().put(ehUpdate);
+		ehUpdate.setClassMaster( Key.create(Professor.class, Long.parseLong(classMasterId)));
+		ofy().save().entities(ehUpdate);
 		//
 		return ehUpdate;
 	}
@@ -94,12 +94,12 @@ public class EvaluationHeaderDao extends MyDAOBase {
 		evaluationHeader.setToDate(toDate);
 		evaluationHeader.setObjective(objective);
 		evaluationHeader.setSchoolYear(schoolYear);
-		evaluationHeader.setClasse(new Key<Classe>(Classe.class, Long.parseLong(classId)));
-		evaluationHeader.setClassMaster(new Key<Professor>(Professor.class, Long.parseLong(classMasterId)));
+		evaluationHeader.setClasse(Key.create(Classe.class, Long.parseLong(classId)));
+		evaluationHeader.setClassMaster( Key.create(Professor.class, Long.parseLong(classMasterId)));
 		
-		Key<EvaluationHeader> key = this.ofy().put(evaluationHeader);
+		Key<EvaluationHeader> key = ofy().save().entities(evaluationHeader).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -108,6 +108,6 @@ public class EvaluationHeaderDao extends MyDAOBase {
 	/*
 	 * */
 	public void removeEvaluationHeader(EvaluationHeader evaluationHeader){
-		this.ofy().delete(evaluationHeader);
+		ofy().delete().entities(evaluationHeader);
 	}	
 }

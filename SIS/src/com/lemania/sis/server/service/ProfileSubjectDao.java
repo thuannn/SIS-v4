@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
@@ -20,12 +20,12 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<ProfileSubject> listAll(){
-		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class).order("subjectName");
+		Query<ProfileSubject> q = ofy().load().type(ProfileSubject.class).order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for (ProfileSubject profileSubject : q){
 			if (profileSubject.getProfessor() != null)
-				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
-			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
+				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
 			returnList.add(profileSubject);
 		}
 		return returnList;
@@ -34,14 +34,14 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<ProfileSubject> listAllActive(){
-		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class)
+		Query<ProfileSubject> q = ofy().load().type(ProfileSubject.class)
 				.filter("isActive", true)
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
 			if (profileSubject.getProfessor() != null)
-				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
-			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
+				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
 			returnList.add( profileSubject );
 		}
 		return returnList;
@@ -50,14 +50,14 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/**/
 	public List<ProfileSubject> listAll( String profileId ){
-		Query<ProfileSubject> q = this.ofy().query(ProfileSubject.class)
-				.filter("profile", new Key<Profile>(Profile.class, Long.parseLong( profileId )))
+		Query<ProfileSubject> q = ofy().load().type(ProfileSubject.class)
+				.filter("profile", Key.create(Profile.class, Long.parseLong( profileId )))
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
 			if (profileSubject.getProfessor() != null)
-				profileSubject.setProfName( this.ofy().get(profileSubject.getProfessor()).getProfName() );
-			profileSubject.setSubjectName( this.ofy().get( profileSubject.getSubject()).getSubjectName() );
+				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
 			returnList.add( profileSubject );
 		}
 		return returnList;
@@ -66,18 +66,18 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/**/
 	public void save(ProfileSubject profileSubject){
-		this.ofy().put( profileSubject );
+		ofy().save().entities( profileSubject );
 	}
 	
 	
 	/**/
 	public ProfileSubject saveAndReturn(ProfileSubject profile){
-		Key<ProfileSubject> key = this.ofy().put(profile);
+		Key<ProfileSubject> key = ofy().save().entities(profile).now().keySet().iterator().next();
 		try {
-			ProfileSubject ps = this.ofy().get(key);
+			ProfileSubject ps = ofy().load().key(key).now();
 			if (ps.getProfessor() != null)
-				ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName() );
-			ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
+				ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+			ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
 			return ps;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -89,17 +89,17 @@ public class ProfileSubjectDao extends MyDAOBase {
 	public ProfileSubject saveAndReturn(String profileId, String subjectId, String professorId, String subjectCoef ){
 		//
 		ProfileSubject ps = new ProfileSubject();
-		ps.setProfile( new Key<Profile>( Profile.class, Long.parseLong(profileId)));
-		ps.setSubject(new Key<Subject>( Subject.class, Long.parseLong(subjectId)));
-		ps.setProfessor( new Key<Professor>(Professor.class, Long.parseLong(professorId)));
+		ps.setProfile( Key.create( Profile.class, Long.parseLong(profileId)));
+		ps.setSubject( Key.create( Subject.class, Long.parseLong(subjectId)));
+		ps.setProfessor( Key.create(Professor.class, Long.parseLong(professorId)));
 		
-		ps.setSubjectName( this.ofy().get( ps.getSubject()).getSubjectName() );
-		ps.setProfName( this.ofy().get(ps.getProfessor()).getProfName());
+		ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
+		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName());
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
 		
-		Key<ProfileSubject> key = this.ofy().put( ps );
+		Key<ProfileSubject> key = ofy().save().entities( ps ).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -109,12 +109,12 @@ public class ProfileSubjectDao extends MyDAOBase {
 	/**/
 	public Boolean removeProfileSubject(ProfileSubject profileSubject) {
 		//
-		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
-				.filter("profileSubject", new Key<ProfileSubject>(ProfileSubject.class, profileSubject.getId()));
+		Query<ProfileBranche> q = ofy().load().type(ProfileBranche.class)
+				.filter("profileSubject", Key.create(ProfileSubject.class, profileSubject.getId()));
 		if (q.count() > 0)
 			return false;
 		else {
-			this.ofy().delete(profileSubject);
+			ofy().delete().entities(profileSubject);
 			return true;
 		}
 	}
@@ -123,15 +123,15 @@ public class ProfileSubjectDao extends MyDAOBase {
 	/**/
 	public ProfileSubject calculateTotalBrancheCoef(String profileSubjectId) {
 		//
-		ProfileSubject ps = this.ofy().get( new Key<ProfileSubject>(ProfileSubject.class, Long.parseLong(profileSubjectId)) );
-		Query<ProfileBranche> q = this.ofy().query(ProfileBranche.class)
-				.filter("profileSubject", new Key<ProfileSubject>( ProfileSubject.class, Long.parseLong(profileSubjectId)) )
+		ProfileSubject ps = ofy().load().key( Key.create(ProfileSubject.class, Long.parseLong(profileSubjectId)) ).now();
+		Query<ProfileBranche> q = ofy().load().type(ProfileBranche.class)
+				.filter("profileSubject", Key.create( ProfileSubject.class, Long.parseLong(profileSubjectId)) )
 				.order("profileBranche");
 		ps.setTotalBrancheCoef(0.0);
 		for ( ProfileBranche profileBranche : q ){
 			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}
-		this.ofy().put( ps );
+		ofy().save().entities( ps );
 		return ps;
 	}
 }

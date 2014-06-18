@@ -2,8 +2,9 @@ package com.lemania.sis.server.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
 
 public class ProfessorDao extends MyDAOBase {
@@ -19,7 +20,7 @@ public class ProfessorDao extends MyDAOBase {
 	 * 
 	 * */
 	public List<Professor> listAll(){
-		Query<Professor> q = this.ofy().query(Professor.class).order("profName");
+		Query<Professor> q = ofy().load().type(Professor.class).order("profName");
 		List<Professor> returnList = new ArrayList<Professor>();
 		for (Professor prof : q){
 			returnList.add(prof);
@@ -31,7 +32,7 @@ public class ProfessorDao extends MyDAOBase {
 	/**/
 	public List<Professor> getByEmail(String email){
 		//
-		Query<Professor> q = this.ofy().query(Professor.class).filter("profEmail", email);
+		Query<Professor> q = ofy().load().type(Professor.class).filter("profEmail", email);
 		List<Professor> returnList = new ArrayList<Professor>();
 		for (Professor prof : q){
 			returnList.add(prof);
@@ -45,16 +46,16 @@ public class ProfessorDao extends MyDAOBase {
 	 * 
 	 * */
 	public void save(Professor prof){
-		this.ofy().put(prof);
+		ofy().save().entities(prof);
 	}
 	
 	/*
 	 * 
 	 * */
 	public Professor saveAndReturn(Professor prof){
-		Key<Professor> key = this.ofy().put(prof);
+		Key<Professor> key = ofy().save().entities(prof).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -64,6 +65,6 @@ public class ProfessorDao extends MyDAOBase {
 	 * 
 	 * */
 	public void removeProfessor(Professor prof) {
-		this.ofy().delete(prof);
+		ofy().delete().entities(prof);
 	}
 }

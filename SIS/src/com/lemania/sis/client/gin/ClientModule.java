@@ -1,5 +1,7 @@
 package com.lemania.sis.client.gin;
 
+import com.google.inject.Singleton;
+import com.googlecode.objectify.ObjectifyFilter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.lemania.sis.client.form.classroom.ClassroomModule;

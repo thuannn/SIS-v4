@@ -1,7 +1,8 @@
 package com.lemania.sis.server.service;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.Bulletin;
@@ -21,8 +22,17 @@ import com.lemania.sis.server.SettingOption;
 import com.lemania.sis.server.Student;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.User;
+import com.lemania.sis.server.classroom.Classroom;
 
-public class MyDAOBase extends DAOBase {
+public class MyDAOBase {
+	
+	public static Objectify ofy() {
+        return ObjectifyService.ofy();
+    }
+
+    public static ObjectifyFactory factory() {
+        return ObjectifyService.factory();
+    }
 
 	static {
 		try {
@@ -135,6 +145,12 @@ public class MyDAOBase extends DAOBase {
 		
 		try {
         	ObjectifyService.register(EvaluationStudentReport.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
+		
+		try {
+        	ObjectifyService.register(Classroom.class);
         } catch (Exception e) {
         	// do nothing
         }	

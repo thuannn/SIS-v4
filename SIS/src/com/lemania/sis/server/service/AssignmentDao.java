@@ -3,8 +3,9 @@ package com.lemania.sis.server.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Professor;
@@ -18,15 +19,15 @@ public class AssignmentDao extends MyDAOBase {
 	
 	
 	public List<Assignment> listAll(){
-		Query<Assignment> q = this.ofy().query(Assignment.class).order("classe");
+		Query<Assignment> q = ofy().load().type(Assignment.class).order("classe");
 		List<Assignment> returnList = new ArrayList<Assignment>();
 		for (Assignment a : q){
 			if (a.getClass() != null) {
-				a.setProgrammeName( this.ofy().get(this.ofy().get(a.getClasse()).getProgramme()).getCoursNom());
-				a.setClasseName(this.ofy().get(a.getClasse()).getClassName());
+				a.setProgrammeName( ofy().load().key(ofy().load().key(a.getClasse()).now().getProgramme()).now().getCoursNom());
+				a.setClasseName(ofy().load().key(a.getClasse()).now().getClassName());
 			}
 			if (a.getSubject() != null)
-				a.setSubjectName(this.ofy().get(a.getSubject()).getSubjectName());
+				a.setSubjectName(ofy().load().key(a.getSubject()).now().getSubjectName());
 			returnList.add(a);
 		}
 		return returnList;
@@ -35,18 +36,18 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public List<Assignment> listAll(String profId){
-		Query<Assignment> q = this.ofy().query(Assignment.class)
-				.filter("prof", new Key<Professor>(Professor.class, Long.parseLong(profId)))
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("prof", Key.create(Professor.class, Long.parseLong(profId)))
 				.order("subject")
 				.order("classe");
 		List<Assignment> returnList = new ArrayList<Assignment>();
 		for (Assignment a : q){
 			if (a.getClass() != null) {
-				a.setProgrammeName( this.ofy().get(this.ofy().get(a.getClasse()).getProgramme()).getCoursNom());
-				a.setClasseName(this.ofy().get(a.getClasse()).getClassName());
+				a.setProgrammeName( ofy().load().key(ofy().load().key(a.getClasse()).now().getProgramme()).now().getCoursNom());
+				a.setClasseName(ofy().load().key(a.getClasse()).now().getClassName());
 			}
 			if (a.getSubject() != null)
-				a.setSubjectName(this.ofy().get(a.getSubject()).getSubjectName());
+				a.setSubjectName(ofy().load().key(a.getSubject()).now().getSubjectName());
 			returnList.add(a);
 		}
 		return returnList;
@@ -55,14 +56,14 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public List<Professor> listAllProfessorBySubject(String subjectId){
-		Query<Assignment> q = this.ofy().query(Assignment.class)
-				.filter("subject", new Key<Subject>(Subject.class, Long.parseLong(subjectId)))
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)))
 				.order("prof");
 		List<Professor> returnList = new ArrayList<Professor>();
 		Professor prof = new Professor();
 		for (Assignment a : q){
 			if (a.getActive()) {
-				prof = this.ofy().get(a.getProf());
+				prof = ofy().load().key(a.getProf()).now();
 				if (prof.getProfActive())
 					returnList.add(prof);
 			}
@@ -73,15 +74,15 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public List<Professor> listAllProfessorBySubject(String subjectId, String classId){
-		Query<Assignment> q = this.ofy().query(Assignment.class)
-				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classId)))
-				.filter("subject", new Key<Subject>(Subject.class, Long.parseLong(subjectId)))
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
+				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)))
 				.order("prof");
 		List<Professor> returnList = new ArrayList<Professor>();
 		Professor prof = new Professor();
 		for (Assignment a : q){
 			if (a.getActive()) {
-				prof = this.ofy().get(a.getProf());
+				prof = ofy().load().key(a.getProf()).now();
 				if (prof.getProfActive())
 					returnList.add(prof);
 			}
@@ -92,7 +93,7 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public List<Assignment> listAllActive(){
-		Query<Assignment> q = this.ofy().query(Assignment.class)
+		Query<Assignment> q = ofy().load().type(Assignment.class)
 				.filter("schoolActive", true)
 				.order("classe");
 		List<Assignment> returnList = new ArrayList<Assignment>();
@@ -106,18 +107,18 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public List<Assignment> listAllActive(String profId){
-		Query<Assignment> q = this.ofy().query(Assignment.class)
+		Query<Assignment> q = ofy().load().type(Assignment.class)
 				.filter("active", true)
-				.filter("prof", new Key<Professor>(Professor.class, Long.parseLong(profId)))
+				.filter("prof", Key.create(Professor.class, Long.parseLong(profId)))
 				.order("classe");
 		List<Assignment> returnList = new ArrayList<Assignment>();
 		for (Assignment a : q){
 			if (a.getClass() != null) {
-				a.setProgrammeName( this.ofy().get(this.ofy().get(a.getClasse()).getProgramme()).getCoursNom());
-				a.setClasseName(this.ofy().get(a.getClasse()).getClassName());
+				a.setProgrammeName( ofy().load().key(ofy().load().key(a.getClasse()).now().getProgramme()).now().getCoursNom());
+				a.setClasseName(ofy().load().key(a.getClasse()).now().getClassName());
 			}
 			if (a.getSubject() != null)
-				a.setSubjectName(this.ofy().get(a.getSubject()).getSubjectName());
+				a.setSubjectName(ofy().load().key(a.getSubject()).now().getSubjectName());
 			returnList.add(a);
 		}
 		Collections.sort(returnList);
@@ -127,20 +128,20 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/**/
 	public void save(Assignment a){
-		this.ofy().put(a);
+		ofy().save().entities(a);
 	}
 	
 	
 	public Assignment saveAndReturn(Assignment a){
-		Key<Assignment> key = this.ofy().put(a);
+		Key<Assignment> key = ofy().save().entities(a).now().keySet().iterator().next();
 		try {
-			Assignment savedA = this.ofy().get(key);
+			Assignment savedA = ofy().load().key(key).now();
 			if (savedA.getClass() != null) {
-				savedA.setProgrammeName( this.ofy().get(this.ofy().get(savedA.getClasse()).getProgramme()).getCoursNom());
-				savedA.setClasseName(this.ofy().get(savedA.getClasse()).getClassName());
+				savedA.setProgrammeName( ofy().load().key(ofy().load().key(savedA.getClasse()).now().getProgramme()).now().getCoursNom());
+				savedA.setClasseName(ofy().load().key(savedA.getClasse()).now().getClassName());
 			}
 			if (savedA.getSubject() != null)
-				savedA.setSubjectName(this.ofy().get(savedA.getSubject()).getSubjectName());
+				savedA.setSubjectName(ofy().load().key(savedA.getSubject()).now().getSubjectName());
 			return savedA; 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -153,28 +154,28 @@ public class AssignmentDao extends MyDAOBase {
 	 * */
 	public Assignment saveAndReturn(String profId, String classeId, String subjectId, Boolean isActive){
 		// if the assignment is already existed, do not add more
-		Query<Assignment> q = this.ofy().query(Assignment.class)
-				.filter("prof", new Key<Professor>(Professor.class, Long.parseLong(profId)))
-				.filter("classe", new Key<Classe>(Classe.class, Long.parseLong(classeId)))
-				.filter("subject", new Key<Subject>(Subject.class, Long.parseLong(subjectId)));
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("prof", Key.create(Professor.class, Long.parseLong(profId)))
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classeId)))
+				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)));
 		if (q.list().size()>0) {
 			return null;
 		}
 		
 		Assignment a = new Assignment();
-		a.setClasse(new Key<Classe>(Classe.class, Long.parseLong(classeId)));
-		a.setProf(new Key<Professor>(Professor.class, Long.parseLong(profId)));
-		a.setSubject(new Key<Subject>(Subject.class, Long.parseLong(subjectId)));
+		a.setClasse(Key.create(Classe.class, Long.parseLong(classeId)));
+		a.setProf(Key.create(Professor.class, Long.parseLong(profId)));
+		a.setSubject(Key.create(Subject.class, Long.parseLong(subjectId)));
 		a.setActive(isActive);
-		Key<Assignment> key = this.ofy().put(a);		
+		Key<Assignment> key = ofy().save().entities(a).now().keySet().iterator().next();		
 		try {
-			Assignment savedA = this.ofy().get(key);
+			Assignment savedA = ofy().load().key(key).now();
 			if (savedA.getClass() != null) {
-				savedA.setProgrammeName( this.ofy().get(this.ofy().get(savedA.getClasse()).getProgramme()).getCoursNom());
-				savedA.setClasseName(this.ofy().get(savedA.getClasse()).getClassName());
+				savedA.setProgrammeName( ofy().load().key(ofy().load().key(savedA.getClasse()).now().getProgramme()).now().getCoursNom());
+				savedA.setClasseName(ofy().load().key(savedA.getClasse()).now().getClassName());
 			}
 			if (savedA.getSubject() != null)
-				savedA.setSubjectName(this.ofy().get(savedA.getSubject()).getSubjectName());
+				savedA.setSubjectName(ofy().load().key(savedA.getSubject()).now().getSubjectName());
 			return savedA; 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -188,9 +189,9 @@ public class AssignmentDao extends MyDAOBase {
 	public Assignment updateAssignmentStatus(Long userId, Assignment assignment, Boolean status) {
 		//
 		assignment.setActive(status);
-		Key<Assignment> key = this.ofy().put(assignment);
+		Key<Assignment> key = ofy().save().entities(assignment).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -201,6 +202,6 @@ public class AssignmentDao extends MyDAOBase {
 	 * 
 	 * */
 	public void removeAssignment(Assignment a){
-		this.ofy().delete(a);
+		ofy().delete().entities(a);
 	}
 }

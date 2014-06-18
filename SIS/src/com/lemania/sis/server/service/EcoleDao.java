@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Query;
+import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Ecole;
 
 public class EcoleDao extends MyDAOBase{
@@ -14,7 +14,7 @@ public class EcoleDao extends MyDAOBase{
 	}
 	
 	public List<Ecole> listAll(){
-		Query<Ecole> q = this.ofy().query(Ecole.class).order("schoolName");
+		Query<Ecole> q = ofy().load().type(Ecole.class).order("schoolName");
 		List<Ecole> returnList = new ArrayList<Ecole>();
 		for (Ecole ecole : q){
 			returnList.add(ecole);
@@ -23,7 +23,7 @@ public class EcoleDao extends MyDAOBase{
 	}
 	
 	public List<Ecole> listAllActive(){
-		Query<Ecole> q = this.ofy().query(Ecole.class)
+		Query<Ecole> q = ofy().load().type(Ecole.class)
 				.filter("schoolActive", true)
 				.order("schoolName");
 		List<Ecole> returnList = new ArrayList<Ecole>();
@@ -34,19 +34,19 @@ public class EcoleDao extends MyDAOBase{
 	}
 	
 	public void save(Ecole ecole){
-		this.ofy().put(ecole);
+		ofy().save().entities(ecole);
 	}
 	
 	public Ecole saveAndReturn(Ecole ecole){
-		Key<Ecole> key = this.ofy().put(ecole);
+		Key<Ecole> key = ofy().save().entities(ecole).now().keySet().iterator().next();
 		try {
-			return this.ofy().get(key);
+			return ofy().load().key(key).now();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	public void removeEcole(Ecole ecole){
-		this.ofy().delete(ecole);
+		ofy().delete().entities(ecole);
 	}
 }
