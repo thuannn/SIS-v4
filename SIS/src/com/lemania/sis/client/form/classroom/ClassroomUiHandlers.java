@@ -7,5 +7,5 @@ public interface ClassroomUiHandlers extends UiHandlers {
 	//
 	void addClassroom(String name, int capacity, String note, boolean isActive);
 	
-	void updateClassroom( ClassroomProxy cp );
+	void updateClassroom( ClassroomProxy cp, String name, int capacity, String note, boolean isActive );
 }

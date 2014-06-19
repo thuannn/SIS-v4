@@ -1,5 +1,7 @@
 package com.lemania.sis.client.form.classroom;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Window;
@@ -33,6 +35,7 @@ public class ClassroomPresenter extends
 		//
 		void addClassroomToList(ClassroomProxy cp);
 		void initializeUI();
+		void setClassroomTableData( List<ClassroomProxy> list);
 	}
 
 	@ContentSlot
@@ -60,7 +63,26 @@ public class ClassroomPresenter extends
 	protected void onReset() {
 		super.onReset();
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.masteragenda) );
+		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.classroom) );
+		//
+		loadClassroomList();
+	}
+
+	/*
+	 * */
+	private void loadClassroomList() {
+		//
+		ClassroomRequestContext rc = getRequestContext();
+		rc.listAll().fire(new Receiver<List<ClassroomProxy>>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( List<ClassroomProxy> response) {
+				getView().setClassroomTableData(response);
+			}
+		});
 	}
 
 	/*
@@ -94,10 +116,15 @@ public class ClassroomPresenter extends
 	/*
 	 * */
 	@Override
-	public void updateClassroom(ClassroomProxy cp) {
+	public void updateClassroom(ClassroomProxy cp, String name, int capacity,
+			String note, boolean isActive) {
 		//
 		ClassroomRequestContext rc = getRequestContext();
 		ClassroomProxy cu = rc.edit(cp);
+		cu.setRoomName(name);
+		cu.setRoomCapacity(capacity);
+		cu.setRoomNote(note);
+		cu.setActive(isActive);
 		rc.saveAndReturn( cu ).fire(new Receiver<ClassroomProxy>() {
 			@Override
 			public void onFailure(ServerFailure error){

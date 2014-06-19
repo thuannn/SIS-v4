@@ -1,10 +1,11 @@
 package com.lemania.sis.server.classroom;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.DatastoreObject;
 
-
 @Entity
+@Index
 public class Classroom extends DatastoreObject implements Comparable<Classroom> {
 	//
 	private String roomName = "";
@@ -12,7 +13,9 @@ public class Classroom extends DatastoreObject implements Comparable<Classroom> 
 	private String roomNote = "";
 	private boolean isActive = true;
 	
-	
+	public Classroom() {
+		
+	}
 	
 	public Classroom(String roomName, int roomCapacity, String roomNote,
 			boolean isActive) {

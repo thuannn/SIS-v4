@@ -1,5 +1,7 @@
 package com.lemania.sis.client.form.classroom;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
@@ -88,13 +90,55 @@ public class ClassroomView extends ViewWithUiHandlers<ClassroomUiHandlers>
 	    colName.setFieldUpdater(new FieldUpdater<ClassroomProxy, String>(){
 	    	@Override
 	    	public void update(int index, ClassroomProxy classe, String value){
-	    		if (getUiHandlers() != null) {	    			
-	    			selectedClassroomIndex = index;
-	    			classe.setRoomName(value);
-	    			getUiHandlers().updateClassroom( classe );
-	    		}	    		
+	    		//
+	    		if (classe.getRoomName() != value) {
+		    		if (getUiHandlers() != null) {	    			
+		    			selectedClassroomIndex = index;
+		    			getUiHandlers().updateClassroom( classe, value, classe.getRoomCapacity(), classe.getRoomNote(), classe.isActive() );
+		    		}	    		
+	    		}
 	    	}
 	    });
+	    
+	    Column<ClassroomProxy, String> colCapacity = new Column<ClassroomProxy, String>(new EditTextCell()) {
+		      @Override
+		      public String getValue(ClassroomProxy object) {
+		        return Integer.toString( object.getRoomCapacity() );
+		      }
+		    };
+		cellTable.addColumn(colCapacity, "Capacité");
+		colCapacity.setFieldUpdater(new FieldUpdater<ClassroomProxy, String>(){
+		    @Override
+		    public void update(int index, ClassroomProxy classe, String value){
+		    	//
+		    	if (classe.getRoomCapacity() != Integer.parseInt(value)) {
+			    	if (getUiHandlers() != null) {	    			
+			    		selectedClassroomIndex = index;
+			    		getUiHandlers().updateClassroom( classe, classe.getRoomName(), Integer.parseInt(value), classe.getRoomNote(), classe.isActive() );
+			    	}	    
+		    	}
+		    }
+		});
+		    
+		Column<ClassroomProxy, String> colNote = new Column<ClassroomProxy, String>(new EditTextCell()) {
+		      @Override
+		      public String getValue(ClassroomProxy object) {
+		        return object.getRoomNote();
+		      }
+		};
+		cellTable.addColumn(colNote, "Commentaire");
+		colNote.setFieldUpdater(new FieldUpdater<ClassroomProxy, String>(){
+			@Override
+			public void update(int index, ClassroomProxy classe, String value) {
+				//
+				if (classe.getRoomNote() != value) {
+				    if (getUiHandlers() != null) {	    			
+				    	selectedClassroomIndex = index;
+				    	getUiHandlers().updateClassroom( classe, classe.getRoomName(), classe.getRoomCapacity(), value, classe.isActive() );
+				    }	    		
+				}
+			}
+		});
 	    
 	    // Active
 	    CheckboxCell cellActive = new CheckboxCell();
@@ -108,15 +152,25 @@ public class ClassroomView extends ViewWithUiHandlers<ClassroomUiHandlers>
 	    colActive.setFieldUpdater(new FieldUpdater<ClassroomProxy, Boolean>(){
 	    	@Override
 	    	public void update(int index, ClassroomProxy classe, Boolean value){
+	    		//
 	    		if (getUiHandlers() != null) {
 	    			selectedClassroomIndex = index;
-	    			classe.setActive( value );
-	    			getUiHandlers().updateClassroom( classe );
+	    			getUiHandlers().updateClassroom( classe, classe.getRoomName(), classe.getRoomCapacity(), classe.getRoomNote(), value );
 	    		}	    		
 	    	}
 	    });
 	    //
 	    
 	    classroomDataProvider.addDataDisplay(cellTable);
+	}
+
+	/*
+	 * */
+	@Override
+	public void setClassroomTableData(List<ClassroomProxy> list) {
+		//
+		classroomDataProvider.getList().clear();
+		classroomDataProvider.setList(list);
+		classroomDataProvider.flush();
 	}
 }

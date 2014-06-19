@@ -1,6 +1,5 @@
 package com.lemania.sis.server.classroom;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
@@ -18,9 +17,8 @@ public class ClassroomDao extends MyDAOBase {
 	 * */
 	public List<Classroom> listAll(){
 		//
-		Query<Classroom> q = ofy().load().type(Classroom.class).order("className");
-		List<Classroom> returnList = new ArrayList<Classroom>();
-		returnList = q.list();
+		Query<Classroom> q = ofy().load().type(Classroom.class);
+		List<Classroom> returnList = q.list();
 		Collections.sort(returnList);
 		return returnList;
 	}

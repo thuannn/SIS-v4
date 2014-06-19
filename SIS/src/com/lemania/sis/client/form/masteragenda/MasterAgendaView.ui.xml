@@ -55,9 +55,20 @@
 								<g:ListBox ui:field="lstDuration"/>
 							</g:customCell>
 						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Salle de classe :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="lstClassrooms"/>
+							</g:customCell>
+						</g:row>
 					</g:Grid>
 					<g:Label text="-" styleName="hiddenText"/>
-					<g:Button text="Enregistrer" ui:field="cmdSave"/>
+					<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+						<g:Button text="Enregistrer" ui:field="cmdSave"/>
+						<g:Button ui:field="cmdDelete" text="Supprimer"/>
+					</g:HorizontalPanel>
 				</g:VerticalPanel>
 			</g:FlowPanel>
 		</g:VerticalPanel>

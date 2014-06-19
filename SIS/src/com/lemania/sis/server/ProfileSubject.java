@@ -2,8 +2,10 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
+@Index
 public class ProfileSubject extends DatastoreObject {
 	//
 	private Key<Subject> subject;

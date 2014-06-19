@@ -92,7 +92,7 @@ public class UserDao extends MyDAOBase {
 		
 		Calendar cal = Calendar.getInstance();
 		
-		for (User user : q){
+		for ( User user : q ){
 			// the months in Java start by zero, so increase one
 			user.setCurrentMonth(cal.get(Calendar.MONTH) +1);
 			user.setCurrentYear(cal.get(Calendar.YEAR));
@@ -125,7 +125,7 @@ public class UserDao extends MyDAOBase {
 				.filter("userName", userName.toLowerCase())
 				.filter("password", password);
 		List<User> returnList = new ArrayList<User>();
-		for (User user : q){		
+		for ( User user : q ){		
 			returnList.add(user);
 		}
 		
@@ -143,7 +143,7 @@ public class UserDao extends MyDAOBase {
 	public void updateUserActiveStatus(String userEmail, Boolean userStatus) {
 		Query<User> q = ofy().load().type(User.class)
 				.filter("email", userEmail);						
-		for (User user : q){		
+		for (User user : q ){		
 			user.setActive(userStatus);
 			ofy().save().entities(user);
 		}	
@@ -154,7 +154,7 @@ public class UserDao extends MyDAOBase {
 	public void fixStudentName() {
 		//
 		Query<User> q = ofy().load().type(User.class);	
-		for (User user : q){
+		for (User user : q ){
 			Query<Student> qStudent = ofy().load().type(Student.class).filter("Email", user.getEmail());					
 			for (Student student : qStudent){
 				user.setFullName( student.getLastName() + " " + student.getFirstName() );
@@ -169,7 +169,7 @@ public class UserDao extends MyDAOBase {
 		//
 		User user = ofy().load().key( Key.create(User.class, Long.parseLong(userId)) ).now();
 		Query<Professor> profs = ofy().load().type(Professor.class).filter("profEmail", user.getEmail());
-		for (Professor prof : profs) {
+		for (Professor prof : profs ) {
 			if (prof.getId().toString().equals(profId))
 				return true;
 		} 

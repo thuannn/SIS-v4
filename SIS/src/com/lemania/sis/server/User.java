@@ -2,9 +2,11 @@ package com.lemania.sis.server;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
+import com.googlecode.objectify.annotation.Index;
 
 
 @Entity
+@Index
 public class User extends DatastoreObject implements Comparable<User> {
 	private String fullName;
 	private String userName;
@@ -28,6 +30,8 @@ public class User extends DatastoreObject implements Comparable<User> {
 	
 	@IgnoreSave
 	private int currentDay = 0;
+	
+	public User() {}
 	
 	public String getUserName() {
 		return userName;

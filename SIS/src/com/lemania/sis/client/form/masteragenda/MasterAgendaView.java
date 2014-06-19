@@ -23,8 +23,8 @@ import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Button;
@@ -55,6 +55,8 @@ public class MasterAgendaView extends
 	@UiField ListBox lstProfs;
 	@UiField ListBox lstSubject;
 	@UiField ListBox lstProfiles;
+	@UiField ListBox lstClassrooms;
+	@UiField Button cmdDelete;
 	
 	//
 	int clickedCellIndex;
@@ -155,8 +157,9 @@ public class MasterAgendaView extends
 		popup.center();
 		//
 		lstDuration.clear();
-		for (int i=0; i<ClassPeriod.numberOfPeriod - clickedCellIndex + 1; i++)
+		for (int i=0; i<ClassPeriod.numberOfPeriod - clickedCellIndex + 1; i++) {
 			lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1) );
+		}
 	}
 	
 	
@@ -197,24 +200,29 @@ public class MasterAgendaView extends
 
 
 	/*
-	 * 
 	 * */
 	@Override
 	public void showSavedPeriodSchedule() {
 		//
+		// how many period user selected ?
 		int duration = Integer.parseInt(lstDuration.getValue(lstDuration.getSelectedIndex()));
-		//
+		// if it's less than the current saved periods, show the one available
 		if ( tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex) > 1) {
 			for (int i=0; i < tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex); i++)
 				tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + i, true);
 		}
 		//
+		// fill the periods
 		for (int j=1; j<duration; j++)
 			tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + j, false);
 		//
 		tblAgenda.getFlexCellFormatter().setColSpan(clickedRowIndex, clickedCellIndex, duration);
-		tblAgenda.setText(clickedRowIndex, clickedCellIndex, "A class here");
-		tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex, clickedCellIndex, "subSection");
+		tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex, clickedCellIndex, "agendaSelected");
+		//
+		tblAgenda.setWidget(clickedRowIndex, clickedCellIndex, new VerticalPanel());
+		((VerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).add(new Label( lstSubject.getItemText(lstSubject.getSelectedIndex()) ));
+		((VerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).add(new Label( lstProfs.getItemText(lstProfs.getSelectedIndex())));
+		((VerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).add(new Label( lstClassrooms.getItemText(lstClassrooms.getSelectedIndex()) ));
 	}
 
 
@@ -304,5 +312,34 @@ public class MasterAgendaView extends
 			lstSubject.addItem( subject.getSubjectName(), subject.getId().toString() );
 		}
 		lstSubject.setSelectedIndex(0);
+	}
+
+	/*
+	 * */
+	@Override
+	public void setClassroomList(List<ClassroomProxy> rooms) {
+		//
+		lstClassrooms.clear();
+		lstClassrooms.addItem("-","");
+		for ( ClassroomProxy cp : rooms ) {
+			lstClassrooms.addItem( cp.getRoomName(), cp.getId().toString() );
+		}
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdDelete")
+	void onCmdDeleteClick(ClickEvent event) {
+		//
+		((VerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).removeFromParent();
+		//
+		if ( tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex) > 1) {
+			for (int i=0; i < tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex); i++) {
+				tblAgenda.getCellFormatter().setVisible(clickedRowIndex, clickedCellIndex + i, true);
+				tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex, clickedCellIndex + i, "agendaNormal");
+			}
+		}
+		//
+		tblAgenda.getFlexCellFormatter().setColSpan(clickedRowIndex, clickedCellIndex, 1);
 	}
 }

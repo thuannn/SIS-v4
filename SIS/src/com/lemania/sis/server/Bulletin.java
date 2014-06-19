@@ -3,8 +3,10 @@ package com.lemania.sis.server;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
+@Index
 public class Bulletin extends DatastoreObject implements Comparable<Bulletin> {
 	//
 	private String bulletinName;

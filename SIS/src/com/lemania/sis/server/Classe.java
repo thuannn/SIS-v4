@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 
 @Entity
+@Index
 public class Classe extends DatastoreObject implements Comparable<Classe> {
 	private String className;
 	private Boolean isActive;

@@ -1,8 +1,10 @@
 package com.lemania.sis.server;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
+@Index
 public class Branche extends DatastoreObject {
 	private String brancheName;
 	private Double defaultCoef;

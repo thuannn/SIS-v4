@@ -26,18 +26,18 @@ import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.classroom.ClassroomProxy;
+import com.lemania.sis.shared.classroom.ClassroomRequestFactory;
+import com.lemania.sis.shared.classroom.ClassroomRequestFactory.ClassroomRequestContext;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
 public class MasterAgendaPresenter extends
@@ -55,6 +55,7 @@ public class MasterAgendaPresenter extends
 		void setProfileListData( List<ProfileProxy> profiles );
 		void setSubjectListData( List<SubjectProxy> response );
 		void setProfessorListData( List<ProfessorProxy> profs );
+		void setClassroomList( List<ClassroomProxy> response);
 	}
 
 	@ContentSlot
@@ -85,7 +86,36 @@ public class MasterAgendaPresenter extends
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.masteragenda) );
 		//
 		getView().initializeUI();
+		//
 		loadClassList();
+		//
+		loadClassroomList();
+	}
+
+	/*
+	 * */
+	private void loadClassroomList() {
+		//
+		ClassroomRequestContext rc = getRequestContext();
+		rc.listAll().fire(new Receiver<List<ClassroomProxy>>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( List<ClassroomProxy> response) {
+				getView().setClassroomList(response);
+			}
+		});
+	}
+	
+	/*
+	 * */
+	private ClassroomRequestContext getRequestContext(){
+		//
+		ClassroomRequestFactory rf = GWT.create(ClassroomRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		return rf.classroomRequestContext();
 	}
 
 	/*
