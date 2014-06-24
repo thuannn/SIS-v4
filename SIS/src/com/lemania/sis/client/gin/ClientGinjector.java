@@ -9,13 +9,14 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.lemania.sis.client.form.classroom.ClassroomPresenter;
+import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
+import com.lemania.sis.client.form.periodmanagement.PeriodManagementPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
 import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
-import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
@@ -112,4 +113,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<ClassroomPresenter> getClassroomPresenter();
 	
 	AsyncProvider<MasterAgendaPresenter> getFrmMasterAgenda();
+	
+	AsyncProvider<PeriodManagementPresenter> getPeriodManagementPresenter();
 }

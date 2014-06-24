@@ -13,6 +13,7 @@ import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHa
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler;
+import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
@@ -27,7 +28,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;

@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
-import com.lemania.sis.client.presenter.MainPagePresenter;
+import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
@@ -30,6 +30,12 @@ import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory.ClassroomRequestContext;
+import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemProxy;
+import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemRequestFactory;
+import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemRequestFactory.MasterAgendaItemRequestContext;
+import com.lemania.sis.shared.period.PeriodProxy;
+import com.lemania.sis.shared.period.PeriodRequestFactory;
+import com.lemania.sis.shared.period.PeriodRequestFactory.PeriodRequestContext;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
@@ -47,9 +53,11 @@ public class MasterAgendaPresenter extends
 	interface MyView extends View, HasUiHandlers<MasterAgendaUiHandlers> {
 		//
 		void initializeUI();
-		void drawTable();
+		void initializeUI(List<PeriodProxy> periods);
 		//
-		void showSavedPeriodSchedule();
+		void drawTable(List<PeriodProxy> periods);
+		//
+		void showAddedMasterAgendaItem(MasterAgendaItemProxy mai);
 		//
 		void setClassList(List<ClasseProxy> classes);
 		void setProfileListData( List<ProfileProxy> profiles );
@@ -76,11 +84,10 @@ public class MasterAgendaPresenter extends
 
 	protected void onBind() {
 		super.onBind();
-		//
-		getView().drawTable();
 	}
 
 	protected void onReset() {
+		//
 		super.onReset();
 		//
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.masteragenda) );
@@ -140,23 +147,35 @@ public class MasterAgendaPresenter extends
 	/*
 	 * */
 	@Override
-	public void savePeriodSchedule() {
-		//
-		getView().showSavedPeriodSchedule();
-	}
-
-	/*
-	 * */
-	@Override
 	public void onClassChanged(String classId) {
 		//
 		if (classId.isEmpty())			
 			return;
 		//
 		loadProfileList(classId);
+		//
+		loadPeriodParClass(classId);
 	}
 	
-	
+	/*
+	 * */
+	private void loadPeriodParClass(String classId) {
+		//
+		PeriodRequestFactory rf = GWT.create(PeriodRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		PeriodRequestContext rc = rf.periodRequestContext();
+		rc.listAllByClass(classId).fire(new Receiver<List<PeriodProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<PeriodProxy> response) {
+				getView().initializeUI(response);
+			}
+		});
+	}
+
 	/*
 	 * Load profile list when form is opened
 	 * */
@@ -221,6 +240,28 @@ public class MasterAgendaPresenter extends
 			@Override
 			public void onSuccess(List<ProfessorProxy> response) {
 				getView().setProfessorListData(response);
+			}
+		});		
+	}
+
+	/*
+	 * */
+	@Override
+	public void addMasterAgendaItem(String jourCode, String periodId,
+			String profileId, String subjectId, String profId,
+			String classroomId, int duration) {
+		//
+		MasterAgendaItemRequestFactory rf = GWT.create(MasterAgendaItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		MasterAgendaItemRequestContext rc = rf.masterAgendaItemRequestContext();
+		rc.addMasterAgendaItem(jourCode, periodId, profileId, subjectId, profId, classroomId, duration).fire(new Receiver<MasterAgendaItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(MasterAgendaItemProxy response) {
+				getView().showAddedMasterAgendaItem(response);
 			}
 		});		
 	}

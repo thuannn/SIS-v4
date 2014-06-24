@@ -66,6 +66,7 @@
 					</g:Grid>
 					<g:Label text="-" styleName="hiddenText"/>
 					<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+						<g:Label ui:field="txtPeriodId" text=""/>
 						<g:Button text="Enregistrer" ui:field="cmdSave"/>
 						<g:Button ui:field="cmdDelete" text="Supprimer"/>
 					</g:HorizontalPanel>

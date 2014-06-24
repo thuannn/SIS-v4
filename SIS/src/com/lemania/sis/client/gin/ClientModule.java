@@ -1,14 +1,13 @@
 package com.lemania.sis.client.gin;
 
-import com.google.inject.Singleton;
-import com.googlecode.objectify.ObjectifyFilter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.lemania.sis.client.form.classroom.ClassroomModule;
+import com.lemania.sis.client.form.mainpage.MainPagePresenter;
+import com.lemania.sis.client.form.mainpage.MainPageView;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaModule;
 import com.lemania.sis.client.place.DefaultPlace;
 import com.lemania.sis.client.place.NameTokens;
-import com.lemania.sis.client.presenter.MainPagePresenter;
 import com.lemania.sis.client.presenter.HomePresenter;
 import com.lemania.sis.client.presenter.EcolePresenter;
 import com.lemania.sis.client.view.ContactView;
@@ -29,7 +28,6 @@ import com.lemania.sis.client.view.FrmPasswordView;
 import com.lemania.sis.client.view.FrmSubjectAddView;
 import com.lemania.sis.client.view.FrmSubjectListView;
 import com.lemania.sis.client.view.HomeView;
-import com.lemania.sis.client.view.MainPageView;
 import com.lemania.sis.client.view.ProfileManagementView;
 import com.lemania.sis.client.view.ProfsAddView;
 import com.lemania.sis.client.view.ProfsView;
@@ -67,11 +65,13 @@ import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
 import com.lemania.sis.client.view.FrmEvaluationReportListView;
 import com.lemania.sis.client.view.FrmEvaluationInputView;
 import com.lemania.sis.client.view.FrmEvaluationInputStudentView;
+import com.lemania.sis.client.form.periodmanagement.PeriodManagementModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
+		install(new PeriodManagementModule());
 		install(new MasterAgendaModule());
 		install(new ClassroomModule());
 		// Singletons

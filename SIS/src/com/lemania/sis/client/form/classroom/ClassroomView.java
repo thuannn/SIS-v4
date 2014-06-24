@@ -76,7 +76,8 @@ public class ClassroomView extends ViewWithUiHandlers<ClassroomUiHandlers>
 		initializeTable();
 	}
 
-	/**/
+	/*
+	 * */
 	private void initializeTable() {
 		//
 		// Add a text column to show the name.

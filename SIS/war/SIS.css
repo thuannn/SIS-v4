@@ -15,8 +15,24 @@ Agenda
 .agendaNormal {
 	padding: 3px;
 	width: 20px;
-	border-top: 1px solid silver;
-	border-right: 1px solid silver;
+	border: 1px solid silver;
+	height: 22px;
+}
+
+.agendaSelected {
+	padding: 3px;
+	width: 20px;
+	border: 1px solid lightskyblue;
+	background-color: cornflowerblue;
+	color: white;
+}
+
+.agendaHidden {
+	padding: 3px;
+	width: 20px;
+	border: 0px solid white;
+	height: 22px;
+	color: white;
 }
 
 

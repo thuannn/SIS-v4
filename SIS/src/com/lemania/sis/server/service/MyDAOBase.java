@@ -23,6 +23,8 @@ import com.lemania.sis.server.Student;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.User;
 import com.lemania.sis.server.classroom.Classroom;
+import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
+import com.lemania.sis.server.period.Period;
 
 public class MyDAOBase {
 	
@@ -151,6 +153,18 @@ public class MyDAOBase {
 		
 		try {
         	ObjectifyService.register(Classroom.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
+		
+		try {
+        	ObjectifyService.register(Period.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
+		
+		try {
+        	ObjectifyService.register(MasterAgendaItem.class);
         } catch (Exception e) {
         	// do nothing
         }	
