@@ -137,8 +137,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 
 	@Override
 	public void showUserInfo(CurrentUser currentUser) {
+		//
 		txtWelcome.setText("Vous êtes connecté(e), " + currentUser.getFullName() + " !");
 		cmdLogout.setText("Déconnexion");
+		//
 		if (currentUser.getCurrentMonth() < 9)
 			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()-1) + " - " + Integer.toString(currentUser.getCurrentYear()));
 		else
@@ -149,6 +151,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	public void initializeUi(CurrentUser currentUser) {
 		//
 		if ( currentUser!=null && currentUser.isLoggedIn() ) {
+			//
 			showUserInfo(currentUser);
 			//		
 			if (currentUser.isAdmin())

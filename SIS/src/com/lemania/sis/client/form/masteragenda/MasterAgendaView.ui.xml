@@ -4,14 +4,15 @@
     <g:HTMLPanel>
     	<g:Label text="HORAIRES CADRES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER" ui:field="pnlPrincipal">
-			<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_LEFT" spacing="5" styleName="toolbar">
+			<g:VerticalPanel width="100%" spacing="10" horizontalAlignment="ALIGN_CENTER">
+				<g:HorizontalPanel width="50%" horizontalAlignment="ALIGN_LEFT" spacing="5" styleName="toolbar">
 				<g:Label text="Classe :" horizontalAlignment="ALIGN_RIGHT"/>
 				<g:ListBox ui:field="lstClasses"/>
 				<g:Label text="Profil :" horizontalAlignment="ALIGN_RIGHT"/>
 				<g:ListBox ui:field="lstProfiles"/>
 			</g:HorizontalPanel>
-			<g:Label text="." styleName="hiddenText"/>
-			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
+				<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
+			</g:VerticalPanel>
 			<g:FlowPanel ui:field="pnlAdd" width="500px" visible="false">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
 					<g:Grid width="100%" cellPadding="2" cellSpacing="2">

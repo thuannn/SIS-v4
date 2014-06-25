@@ -121,22 +121,33 @@ public class MasterAgendaView extends
 	 * */
 	public void addRow( int rowIndex ) {
 		//
+		int lastCellIndex = tblAgenda.getCellCount(0)-1;
+		
+		//
 		tblAgenda.insertRow(rowIndex);
+		
 		//
 		for (int j=0; j< this.periods.size() + 3; j++) {
 			tblAgenda.insertCell(rowIndex, j);
 			tblAgenda.getCellFormatter().setStyleName(rowIndex, j, "agendaNormal");
 		}
-		// hide date
+		// Copy title
 		tblAgenda.setText(rowIndex, 0, tblAgenda.getText(rowIndex + 1, 0));
+		tblAgenda.getCellFormatter().setStyleName(rowIndex, 0, "agendaTitle");
+		
+		// Hide date
 		tblAgenda.getCellFormatter().setStyleName(rowIndex + 1, 0, "agendaHidden");
-		// remove plus sign
+		
+		// Copy plus sign
 		tblAgenda.setText(rowIndex, 1, tblAgenda.getText(rowIndex + 1, 1));
+		
+		// Hide plus sign
 		tblAgenda.setText(rowIndex + 1, 1, "");
 		tblAgenda.getCellFormatter().setStyleName(rowIndex + 1, 1, "agendaHidden");
-		// Keep day code
-		tblAgenda.setText(rowIndex, tblAgenda.getCellCount(0)-1, tblAgenda.getText(rowIndex + 1, tblAgenda.getCellCount(0)-1 ));
-		tblAgenda.getCellFormatter().setStyleName(rowIndex, tblAgenda.getCellCount(0)-1, "agendaHidden");
+		
+		// Copy and hide day code
+		tblAgenda.setText(rowIndex, lastCellIndex, tblAgenda.getText(rowIndex + 1, lastCellIndex ));
+		tblAgenda.getCellFormatter().setStyleName(rowIndex, lastCellIndex, "agendaHidden");
 	}
 	
 	
@@ -187,7 +198,7 @@ public class MasterAgendaView extends
 		popup.center();
 		//
 		lstDuration.clear();
-		for (int i=0; i<ClassPeriod.numberOfPeriod - clickedCellIndex + 1; i++) {
+		for (int i=0; i< periods.size() - clickedCellIndex + 2; i++) {
 			lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1) );
 		}
 		//
@@ -197,28 +208,37 @@ public class MasterAgendaView extends
 			txtPeriodId.setText("");
 			lstProfs.setSelectedIndex(0);
 			lstSubject.setSelectedIndex(0);
+			cmdSave.setEnabled(true);
+			cmdDelete.setEnabled(false);
 		} else {
 			txtJour.setText( ClassPeriod.getDayName( mai.getJourCode() ) );
 			txtPeriod.setText( mai.getPeriodDescription() );
 			txtPeriodId.setText( mai.getId().toString() );
-			FieldValidation.selectItemByText(lstProfs, mai.getProfName());
+			
+			// We're not going to call a database load here for profs list
+			lstProfs.clear();
+			lstProfs.addItem( mai.getProfName() );
+			
 			FieldValidation.selectItemByText(lstSubject, mai.getSubjectName());
 			FieldValidation.selectItemByText(lstDuration, Integer.toString(mai.getDuration()));
 			FieldValidation.selectItemByText(lstClassrooms, mai.getClassroomName());
+			
+			cmdSave.setEnabled(false);
+			cmdDelete.setEnabled(true);
 		}
 	}
 	
 	/*
 	 * */
 	public void styleTable(){
-		//
+		// All cells
 		for (int i=0; i<tblAgenda.getRowCount(); i++) {
 			for (int j=0; j<tblAgenda.getCellCount(0); j++) {
 				if (tblAgenda.isCellPresent(i, j))
 					tblAgenda.getCellFormatter().setStyleName(i, j, "agendaNormal");
 			}
 		}
-		//
+		// Hidden data
 		for (int j=0; j<tblAgenda.getCellCount(0); j++) {
 			if (tblAgenda.isCellPresent( tblAgenda.getRowCount() - 1, j))
 				tblAgenda.getCellFormatter().setStyleName( tblAgenda.getRowCount() - 1, j, "agendaHidden");
@@ -227,6 +247,15 @@ public class MasterAgendaView extends
 		for (int i=0; i<tblAgenda.getRowCount(); i++)
 			if (tblAgenda.isCellPresent(i, tblAgenda.getCellCount(0) - 1))
 				tblAgenda.getCellFormatter().setStyleName(i, tblAgenda.getCellCount(0) - 1, "agendaHidden");
+		// Titles
+		for (int j=0; j<tblAgenda.getCellCount(0)-1; j++) {
+			if (tblAgenda.isCellPresent( 0, j))
+				tblAgenda.getCellFormatter().setStyleName( 0, j, "agendaTitle");
+		}
+		//
+		for (int i=0; i<tblAgenda.getRowCount()-1; i++)
+			if (tblAgenda.isCellPresent(i, 0))
+				tblAgenda.getCellFormatter().setStyleName(i, 0, "agendaTitle");
 	}
 	
 	

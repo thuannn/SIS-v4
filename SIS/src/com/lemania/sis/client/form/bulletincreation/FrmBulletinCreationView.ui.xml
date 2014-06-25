@@ -15,9 +15,17 @@
 					<p1:DataGrid width="100%" height="600px" ui:field="tblStudents"/>
 					<g:Label text="." width="300px" styleName="hiddenText"/>
 				</g:VerticalPanel>
-				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
+				<g:VerticalPanel width="100%" spacing="2" styleName="subSection" horizontalAlignment="ALIGN_RIGHT">
 					<g:Label text="Choisir un programme à attribuer" styleName="sectionTitle"/>
 					<g:Grid width="100%" cellPadding="5" cellSpacing="5">
+						<g:row>
+							<g:customCell>
+								<g:Label text="Année :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox width="150px" ui:field="lstYear"/>
+							</g:customCell>
+						</g:row>
 						<g:row>
 							<g:customCell>
 								<g:Label text="Ecole :"/>
@@ -52,34 +60,14 @@
 						</g:row>
 						<g:row>
 							<g:customCell>
-								<g:Label text="Année :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox width="150px" ui:field="lstYear"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
 								<g:Label text="Elève choisit :"/>
 							</g:customCell>
 							<g:customCell>
 								<g:Label text="." ui:field="lblSelectedStudentName" styleName="header"/>
 							</g:customCell>
 						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Label text="." styleName="hiddenText"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button text="Attribuer le programme choisi à l&apos;élève" ui:field="cmdCreateBulletin" width="151px"/>
-							</g:customCell>
-						</g:row>
 					</g:Grid>
+					<g:Button text="Attribuer le programme choisi à l&apos;élève" ui:field="cmdCreateBulletin" width=""/>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 					<g:Label text="Liste des élèves attribués" styleName="sectionTitle"/>

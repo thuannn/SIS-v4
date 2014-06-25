@@ -33,6 +33,11 @@ Agenda
 	font-size: 2px;
 }
 
+.agendaTitle {
+	border: 1px solid lightskyblue;
+	background-color: floralwhite;	
+}
+
 
 /* stock list header row */
 .pageTitle {
@@ -53,11 +58,11 @@ Agenda
 }
 .sectionTitle {
 	color: Black;
-	padding: 2px;
+	padding: 3px;
 	font-size: 14px;
 	font-style: bold;
 	text-align: center;
-	background-color: floralwhite;
+	background-color: papayawhip;
 }
 
 .header {

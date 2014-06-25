@@ -1,4 +1,4 @@
-package com.lemania.sis.client.presenter;
+package com.lemania.sis.client.form.bulletincreation;
 
 import java.util.List;
 
@@ -27,7 +27,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.client.uihandler.FrmBulletinCreationUiHandler;
 import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
@@ -97,6 +96,8 @@ public class FrmBulletinCreationPresenter
 		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
 	}
 
+	/*
+	 * */
 	@Override
 	protected void onBind() {
 		super.onBind();
@@ -106,6 +107,8 @@ public class FrmBulletinCreationPresenter
 		getView().initializeTables();
 	}
 	
+	/*
+	 * */
 	@Override
 	protected void onReset() {
 		//
