@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.lemania.sis.client.AgendaVerticalPanel;
 import com.lemania.sis.client.ClassPeriod;
+import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
@@ -118,22 +119,24 @@ public class MasterAgendaView extends
 	
 	/*
 	 * */
-	public void addRow() {
+	public void addRow( int rowIndex ) {
 		//
-		tblAgenda.insertRow(clickedRowIndex);
+		tblAgenda.insertRow(rowIndex);
+		//
 		for (int j=0; j< this.periods.size() + 3; j++) {
-			tblAgenda.insertCell(clickedRowIndex, j);
-			tblAgenda.getCellFormatter().setStyleName(clickedRowIndex, j, "agendaNormal");
+			tblAgenda.insertCell(rowIndex, j);
+			tblAgenda.getCellFormatter().setStyleName(rowIndex, j, "agendaNormal");
 		}
 		// hide date
-		tblAgenda.setText(clickedRowIndex, 0, tblAgenda.getText(clickedRowIndex + 1, 0));
-		tblAgenda.getCellFormatter().setStyleName(clickedRowIndex + 1, 0, "agendaHidden");
+		tblAgenda.setText(rowIndex, 0, tblAgenda.getText(rowIndex + 1, 0));
+		tblAgenda.getCellFormatter().setStyleName(rowIndex + 1, 0, "agendaHidden");
 		// remove plus sign
-		tblAgenda.setText(clickedRowIndex, 1, tblAgenda.getText(clickedRowIndex + 1, 1));
-		tblAgenda.setText(clickedRowIndex + 1, 1, "");
-		tblAgenda.getCellFormatter().setStyleName(clickedRowIndex + 1, 1, "agendaHidden");
+		tblAgenda.setText(rowIndex, 1, tblAgenda.getText(rowIndex + 1, 1));
+		tblAgenda.setText(rowIndex + 1, 1, "");
+		tblAgenda.getCellFormatter().setStyleName(rowIndex + 1, 1, "agendaHidden");
 		// Keep day code
-		tblAgenda.setText(clickedRowIndex, tblAgenda.getCellCount(0)-1, tblAgenda.getText(clickedRowIndex + 1, tblAgenda.getCellCount(0)-1 ));
+		tblAgenda.setText(rowIndex, tblAgenda.getCellCount(0)-1, tblAgenda.getText(rowIndex + 1, tblAgenda.getCellCount(0)-1 ));
+		tblAgenda.getCellFormatter().setStyleName(rowIndex, tblAgenda.getCellCount(0)-1, "agendaHidden");
 	}
 	
 	
@@ -171,30 +174,38 @@ public class MasterAgendaView extends
 	 * */
 	void prepareDialogBox(DialogBox popup, String jour, String period) {
 		//
+		MasterAgendaItemProxy mai = null;
+		if ( tblAgenda.getWidget(clickedRowIndex, clickedCellIndex) != null)
+			mai = ((AgendaVerticalPanel) tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).getMai();
+		//
 		pnlAdd.setVisible(true);
 		popup.add(pnlAdd);
 		popup.setAnimationEnabled(true);
 		popup.setHeight( pnlAdd.getOffsetHeight() + "px" );
 		popup.setWidth( pnlAdd.getOffsetWidth() + "px");
-		popup.setText( NotificationTypes.periodSchedule );
+		popup.setText( NotificationTypes.popupPeriodDetailTitle );
 		popup.center();
-		// 
-		txtJour.setText( jour );
-        txtPeriod.setText( period );
 		//
 		lstDuration.clear();
 		for (int i=0; i<ClassPeriod.numberOfPeriod - clickedCellIndex + 1; i++) {
 			lstDuration.addItem( Integer.toString(i+1), Integer.toString(i+1) );
 		}
 		//
-		lstProfs.setSelectedIndex(0);
-		//
-		lstSubject.setSelectedIndex(0);
-		//
-		if ( tblAgenda.getWidget(clickedRowIndex, clickedCellIndex) != null)
-			txtPeriodId.setText( ((AgendaVerticalPanel) tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).getMai().getId().toString() );
-		else
+		if ( mai == null) {
+			txtJour.setText( jour );
+			txtPeriod.setText( period );
 			txtPeriodId.setText("");
+			lstProfs.setSelectedIndex(0);
+			lstSubject.setSelectedIndex(0);
+		} else {
+			txtJour.setText( ClassPeriod.getDayName( mai.getJourCode() ) );
+			txtPeriod.setText( mai.getPeriodDescription() );
+			txtPeriodId.setText( mai.getId().toString() );
+			FieldValidation.selectItemByText(lstProfs, mai.getProfName());
+			FieldValidation.selectItemByText(lstSubject, mai.getSubjectName());
+			FieldValidation.selectItemByText(lstDuration, Integer.toString(mai.getDuration()));
+			FieldValidation.selectItemByText(lstClassrooms, mai.getClassroomName());
+		}
 	}
 	
 	/*
@@ -207,6 +218,15 @@ public class MasterAgendaView extends
 					tblAgenda.getCellFormatter().setStyleName(i, j, "agendaNormal");
 			}
 		}
+		//
+		for (int j=0; j<tblAgenda.getCellCount(0); j++) {
+			if (tblAgenda.isCellPresent( tblAgenda.getRowCount() - 1, j))
+				tblAgenda.getCellFormatter().setStyleName( tblAgenda.getRowCount() - 1, j, "agendaHidden");
+		}
+		//
+		for (int i=0; i<tblAgenda.getRowCount(); i++)
+			if (tblAgenda.isCellPresent(i, tblAgenda.getCellCount(0) - 1))
+				tblAgenda.getCellFormatter().setStyleName(i, tblAgenda.getCellCount(0) - 1, "agendaHidden");
 	}
 	
 	
@@ -231,28 +251,46 @@ public class MasterAgendaView extends
 	@Override
 	public void showAddedMasterAgendaItem(MasterAgendaItemProxy mai) {
 		//
-		// how many period user selected ?
-		int duration = mai.getDuration();
+		showMasterAgendaItem( mai, clickedRowIndex, clickedCellIndex );
+	}
+	
+	/*
+	 * */
+	public void showMasterAgendaItem( MasterAgendaItemProxy mai, int rowIndex, int cellIndex ) {
 		//
-		// if it's less than the current saved periods, show the one available
-		if ( tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex , clickedCellIndex) > 1) {
-			for (int i=0; i < tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex , clickedCellIndex); i++)
-				tblAgenda.getCellFormatter().setVisible(clickedRowIndex , clickedCellIndex + i, true);
+		boolean newRowNeeded = false;
+		int duration = mai.getDuration();
+		int currentColspan = tblAgenda.getFlexCellFormatter().getColSpan(rowIndex , cellIndex);
+		
+		// Add more row in 2 cases : the current cell is invisible, or the current cell has widget
+		for (int k=0; k<duration; k++) {
+			if ( (tblAgenda.getWidget(rowIndex, cellIndex + k) != null) || (!tblAgenda.getCellFormatter().isVisible(rowIndex, cellIndex + k)) ) {
+				newRowNeeded = true;
+				break;
+			}
+		}
+		if (newRowNeeded)
+			addRow( rowIndex );
+		
+		//
+		if ( currentColspan > 1) {
+			for (int i=0; i < currentColspan; i++)
+				tblAgenda.getCellFormatter().setVisible(rowIndex , cellIndex + i, true);
 		}
 		//
-		// fill the periods
 		for (int j=1; j<duration; j++)
-			tblAgenda.getCellFormatter().setVisible(clickedRowIndex , clickedCellIndex + j, false);
+			tblAgenda.getCellFormatter().setVisible(rowIndex , cellIndex + j, false);
 		//
-		tblAgenda.getFlexCellFormatter().setColSpan(clickedRowIndex , clickedCellIndex, duration);
-		tblAgenda.getFlexCellFormatter().setStyleName(clickedRowIndex , clickedCellIndex, "agendaSelected");
+		tblAgenda.getFlexCellFormatter().setColSpan(rowIndex , cellIndex, duration);
+		tblAgenda.getFlexCellFormatter().setStyleName(rowIndex , cellIndex, "agendaSelected");
+		
 		// show the plan
 		AgendaVerticalPanel avp = new AgendaVerticalPanel();
 		avp.setMai(mai);
 		avp.add(new Label( mai.getSubjectName() ));
 		avp.add(new Label( mai.getProfName() ));
 		avp.add(new Label( mai.getClassroomName() ));
-		tblAgenda.setWidget(clickedRowIndex , clickedCellIndex, avp);
+		tblAgenda.setWidget(rowIndex , cellIndex, avp);
 	}
 
 	
@@ -353,6 +391,16 @@ public class MasterAgendaView extends
 	@UiHandler("cmdDelete")
 	void onCmdDeleteClick(ClickEvent event) {
 		//
+		if (tblAgenda.getWidget(clickedRowIndex, clickedCellIndex) != null) {
+			getUiHandlers().removeMasterAgendaItem( ((AgendaVerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).getMai() );
+		}
+	}
+	
+	/*
+	 * */
+	@Override
+	public void clearSelectedMasterAgendaItem() {
+		//
 		((VerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).removeFromParent();
 		//
 		for (int i=0; i < tblAgenda.getFlexCellFormatter().getColSpan(clickedRowIndex, clickedCellIndex); i++) {
@@ -378,7 +426,7 @@ public class MasterAgendaView extends
 	/*
 	 * */
 	@Override
-	public void initializeUI() {
+	public void setEventHandlers() {
 		//
 		tblAgenda.addClickHandler(new ClickHandler(){
 
@@ -391,9 +439,57 @@ public class MasterAgendaView extends
 				if (clickedCellIndex > 1)
 					showPopup( tblAgenda.getText(clickedRowIndex, 0), tblAgenda.getText(0, clickedCellIndex) );
 				if ( tblAgenda.getText(clickedRowIndex, clickedCellIndex).equals("+") )
-					addRow();
+					addRow( clickedRowIndex );
 			}
 			
 		});
+	}
+
+
+	/*
+	 * */
+	private int getRowIndexById(String jourCode) {
+		//
+		for ( int i=0; i < tblAgenda.getRowCount(); i++ ) {
+			if ( tblAgenda.getText(i, tblAgenda.getCellCount(0)-1).equals(jourCode) )
+				return i;
+		}
+		return -1;
+	}
+	
+	/*
+	 * */
+	private int getCellIndexById(String periodId) {
+		//
+		for ( int i=0; i < tblAgenda.getCellCount(0); i++ ) {
+			if ( tblAgenda.getText( tblAgenda.getRowCount()-1, i).equals(periodId) )
+				return i;
+		}
+		return -1;
+	}
+	
+	/*
+	 * */
+	@Override
+	public void showMasterAgendaItemData(List<MasterAgendaItemProxy> mais) {
+		//
+		int rowIndex;
+		int cellIndex;
+		for ( MasterAgendaItemProxy mai : mais ) {
+			rowIndex = getRowIndexById( mai.getJourCode() );
+			cellIndex = getCellIndexById( mai.getPeriodId() );
+			if ( (rowIndex != -1) && (cellIndex != -1))
+				showMasterAgendaItem( mai, rowIndex, cellIndex );
+		}
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void initializeUI() {
+		//
+		tblAgenda.removeAllRows();
+		lstProfiles.clear();
 	}
 }

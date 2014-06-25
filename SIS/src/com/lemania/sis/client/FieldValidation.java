@@ -1,5 +1,7 @@
 package com.lemania.sis.client;
 
+import com.google.gwt.user.client.ui.ListBox;
+
 public class FieldValidation {
 	
 	// User name validation
@@ -37,5 +39,27 @@ public class FieldValidation {
 	// Number validation
 	public static boolean isNumeric(String str) {
 		return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+	}
+	
+	/*
+	 * */
+	public static void selectItemByValue( ListBox list, String value) {
+		//
+		for (int i=0; i<list.getItemCount(); i++)
+			if (list.getValue(i) == value) {
+				list.setSelectedIndex(i);
+				break;
+			}
+	}
+	
+	/*
+	 * */
+	public static void selectItemByText( ListBox list, String text) {
+		//
+		for (int i=0; i<list.getItemCount(); i++)
+			if (list.getItemText(i) == text) {
+				list.setSelectedIndex(i);
+				break;
+			}
 	}
 }

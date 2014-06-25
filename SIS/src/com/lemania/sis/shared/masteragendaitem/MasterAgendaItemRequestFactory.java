@@ -15,7 +15,9 @@ public interface MasterAgendaItemRequestFactory extends RequestFactory {
 	interface MasterAgendaItemRequestContext extends RequestContext {
 		//	
 		Request<Void> initialize();
+		
 		Request<List<MasterAgendaItemProxy>> listAll();
+		Request<List<MasterAgendaItemProxy>> listAllByProfile(String profileId);
 
 		Request<Void> save(MasterAgendaItemProxy c);
 		Request<MasterAgendaItemProxy> saveAndReturn(MasterAgendaItemProxy c);

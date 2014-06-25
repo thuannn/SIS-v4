@@ -20,4 +20,5 @@ public interface MasterAgendaItemProxy extends EntityProxy {
 	public String getSubjectName();
 	public String getProfName();
 	public String getClassroomName();
+	public String getPeriodId();
 }

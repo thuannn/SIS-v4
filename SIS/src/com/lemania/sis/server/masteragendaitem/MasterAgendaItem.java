@@ -31,6 +31,9 @@ public class MasterAgendaItem extends DatastoreObject {
 	private String profName;
 	@IgnoreSave
 	private String classroomName;
+	@IgnoreSave
+	private String periodId;
+	
 	
 	public String getJourCode() {
 		return jourCode;
@@ -107,5 +110,11 @@ public class MasterAgendaItem extends DatastoreObject {
 	}
 	public void setClassroomName(String classroomName) {
 		this.classroomName = classroomName;
+	}
+	public String getPeriodId() {
+		return periodId;
+	}
+	public void setPeriodId(String periodId) {
+		this.periodId = periodId;
 	}
 }

@@ -17,9 +17,12 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.event.MasterAgendaLoadEvent;
+import com.lemania.sis.client.event.MasterAgendaLoadEvent.MasterAgendaLoadHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
@@ -48,16 +51,19 @@ import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContex
 
 public class MasterAgendaPresenter extends
 		Presenter<MasterAgendaPresenter.MyView, MasterAgendaPresenter.MyProxy>
-		implements MasterAgendaUiHandlers {
+		implements MasterAgendaUiHandlers, MasterAgendaLoadHandler {
 	
 	interface MyView extends View, HasUiHandlers<MasterAgendaUiHandlers> {
 		//
 		void initializeUI();
 		void initializeUI(List<PeriodProxy> periods);
+		void setEventHandlers();
 		//
 		void drawTable(List<PeriodProxy> periods);
+		void clearSelectedMasterAgendaItem();
 		//
 		void showAddedMasterAgendaItem(MasterAgendaItemProxy mai);
+		void showMasterAgendaItemData(List<MasterAgendaItemProxy> mais);
 		//
 		void setClassList(List<ClasseProxy> classes);
 		void setProfileListData( List<ProfileProxy> profiles );
@@ -84,6 +90,8 @@ public class MasterAgendaPresenter extends
 
 	protected void onBind() {
 		super.onBind();
+		//
+		getView().setEventHandlers();
 	}
 
 	protected void onReset() {
@@ -202,7 +210,7 @@ public class MasterAgendaPresenter extends
 	/*
 	 * */
 	@Override
-	public void onProfileChanged(String profileId) {
+	public void onProfileChanged(final String profileId) {
 		//
 		if (profileId.isEmpty()) {
 			Window.alert( NotificationTypes.invalid_input + " - Profil");
@@ -220,6 +228,8 @@ public class MasterAgendaPresenter extends
 			@Override
 			public void onSuccess(List<SubjectProxy> response) {
 				getView().setSubjectListData(response);
+				//
+				getEventBus().fireEvent( new MasterAgendaLoadEvent(profileId) );
 			}
 		});
 	}
@@ -262,6 +272,47 @@ public class MasterAgendaPresenter extends
 			@Override
 			public void onSuccess(MasterAgendaItemProxy response) {
 				getView().showAddedMasterAgendaItem(response);
+			}
+		});		
+	}
+
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onMasterAgendaLoad(MasterAgendaLoadEvent event) {
+		//
+		MasterAgendaItemRequestFactory rf = GWT.create(MasterAgendaItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		MasterAgendaItemRequestContext rc = rf.masterAgendaItemRequestContext();
+		rc.listAllByProfile( event.getProfileId() ).fire(new Receiver<List<MasterAgendaItemProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<MasterAgendaItemProxy> response) {
+				getView().showMasterAgendaItemData(response);
+			}
+		});		
+	}
+
+	/*
+	 * */
+	@Override
+	public void removeMasterAgendaItem(MasterAgendaItemProxy mai) {
+		//
+		MasterAgendaItemRequestFactory rf = GWT.create(MasterAgendaItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		MasterAgendaItemRequestContext rc = rf.masterAgendaItemRequestContext();
+		rc.removeMasterAgendaItem(mai).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				getView().clearSelectedMasterAgendaItem();
 			}
 		});		
 	}

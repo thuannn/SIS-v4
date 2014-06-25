@@ -23,6 +23,24 @@ public class MasterAgendaItemDao extends MyDAOBase {
 		//
 		Query<MasterAgendaItem> q = ofy().load().type(MasterAgendaItem.class);
 		List<MasterAgendaItem> returnList = q.list();
+		
+		return returnList;
+	}
+	
+	
+	/*
+	 * */
+	public List<MasterAgendaItem> listAllByProfile(String profileId){
+		//
+		Query<MasterAgendaItem> q = ofy().load().type(MasterAgendaItem.class).filter("profile", Key.create(Profile.class, Long.parseLong(profileId)));
+		List<MasterAgendaItem> returnList = q.list();
+		for ( MasterAgendaItem mai : returnList ) {
+			mai.setPeriodDescription( (ofy().load().key( mai.getPeriod() ).now()).getDescription() );
+			mai.setSubjectName( (ofy().load().key( mai.getSubject() ).now()).getSubjectName() );
+			mai.setProfName( (ofy().load().key( mai.getProf() ).now()).getProfName() );
+			mai.setClassroomName( (ofy().load().key( mai.getClassroom() ).now()).getRoomName() );
+			mai.setPeriodId( Long.toString( mai.getPeriod().getId() ));
+		}
 		return returnList;
 	}
 
@@ -64,6 +82,7 @@ public class MasterAgendaItemDao extends MyDAOBase {
 			returnMai.setSubjectName( (ofy().load().key( Key.create(Subject.class, Long.parseLong(subjectId))).now()).getSubjectName() );
 			returnMai.setProfName( (ofy().load().key( Key.create(Professor.class, Long.parseLong(profId))).now()).getProfName() );
 			returnMai.setClassroomName( (ofy().load().key( Key.create(Classroom.class, Long.parseLong(classroomId))).now()).getRoomName() );
+			returnMai.setPeriodId(periodId);
 			return returnMai;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

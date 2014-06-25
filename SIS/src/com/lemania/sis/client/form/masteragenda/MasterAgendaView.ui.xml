@@ -12,7 +12,7 @@
 			</g:HorizontalPanel>
 			<g:Label text="." styleName="hiddenText"/>
 			<g:FlexTable width="100%" ui:field="tblAgenda" borderWidth="0"/>
-			<g:FlowPanel ui:field="pnlAdd" width="600px" styleName="subSection" visible="false">
+			<g:FlowPanel ui:field="pnlAdd" width="500px" visible="false">
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
 					<g:Grid width="100%" cellPadding="2" cellSpacing="2">
 						<g:row>
@@ -65,8 +65,8 @@
 						</g:row>
 					</g:Grid>
 					<g:Label text="-" styleName="hiddenText"/>
-					<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
-						<g:Label ui:field="txtPeriodId" text=""/>
+					<g:HorizontalPanel width="60%" horizontalAlignment="ALIGN_RIGHT" spacing="10">
+						<g:Label ui:field="txtPeriodId" text="" styleName="hiddenText"/>
 						<g:Button text="Enregistrer" ui:field="cmdSave"/>
 						<g:Button ui:field="cmdDelete" text="Supprimer"/>
 					</g:HorizontalPanel>
