@@ -13,22 +13,23 @@ Agenda
 */
 
 .agendaNormal {
-	padding: 3px;
+	padding: 2px;
 	border: 1px solid silver;
-	height: 22px;
+	height: 16px;
 }
 
 .agendaSelected {
-	padding: 3px;
+	padding: 4px;
 	border: 1px solid lightskyblue;
 	background-color: cornflowerblue;
 	color: white;
+	font-size: 1px;
 }
 
 .agendaHidden {
-	padding: 3px;
+	padding: 1px;
 	border: 0px solid white;
-	height: 22px;
+	height: 16px;
 	color: white;
 	font-size: 2px;
 }

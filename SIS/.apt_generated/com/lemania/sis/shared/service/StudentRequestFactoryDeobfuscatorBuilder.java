@@ -34,17 +34,17 @@ withOperation(new OperationKey("U5iKnjkT5z54XNB7n73Lysgelew="),
   .withMethodName("listAllActive")
   .withRequestContext("com.lemania.sis.shared.service.StudentRequestFactory$StudentRequestContext")
   .build());
-withOperation(new OperationKey("H7T3piM3Kmr8gzT3cosCJ1Jim9w="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lcom/lemania/sis/server/Student;")
-  .withMethodName("saveAndReturn")
-  .withRequestContext("com.lemania.sis.shared.service.StudentRequestFactory$StudentRequestContext")
-  .build());
 withOperation(new OperationKey("qI0_B1hYf67V$_VpVTF2RqSn4Ag="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/StudentProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Lcom/lemania/sis/server/Student;)Lcom/lemania/sis/server/Student;")
+  .withMethodName("saveAndReturn")
+  .withRequestContext("com.lemania.sis.shared.service.StudentRequestFactory$StudentRequestContext")
+  .build());
+withOperation(new OperationKey("H7T3piM3Kmr8gzT3cosCJ1Jim9w="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lcom/lemania/sis/server/Student;")
   .withMethodName("saveAndReturn")
   .withRequestContext("com.lemania.sis.shared.service.StudentRequestFactory$StudentRequestContext")
   .build());

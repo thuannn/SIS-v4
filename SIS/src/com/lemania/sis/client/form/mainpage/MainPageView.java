@@ -88,6 +88,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdClassroomPage;
 	@UiField Hyperlink cmdMasterAgendaPage;
 	@UiField Hyperlink cmdPeriodMgt;
+	@UiField Hyperlink cmdStudentAgendaPage;
+	@UiField Hyperlink cmdClassAgendaPage;
 	
 	
 	// Thuan

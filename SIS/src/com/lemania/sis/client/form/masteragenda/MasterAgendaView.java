@@ -68,6 +68,7 @@ public class MasterAgendaView extends
 	int clickedCellIndex;
 	int clickedRowIndex;
 	List<PeriodProxy> periods = new ArrayList<PeriodProxy>();
+	List<SubjectProxy> subjects = new ArrayList<SubjectProxy>();
 	
 	/*
 	 * */
@@ -283,6 +284,7 @@ public class MasterAgendaView extends
 		showMasterAgendaItem( mai, clickedRowIndex, clickedCellIndex );
 	}
 	
+	
 	/*
 	 * */
 	public void showMasterAgendaItem( MasterAgendaItemProxy mai, int rowIndex, int cellIndex ) {
@@ -394,9 +396,16 @@ public class MasterAgendaView extends
 	@Override
 	public void setSubjectListData(List<SubjectProxy> subjects) {
 		//
+		this.subjects = subjects;
+		prepareSubjectList( this.subjects );
+	}
+	
+	/*
+	 * */
+	public void prepareSubjectList( List<SubjectProxy> subjects ){
+		//
 		lstSubject.clear();
 		lstSubject.addItem("-","");
-		
 		for (SubjectProxy subject : subjects){
 			lstSubject.addItem( subject.getSubjectName(), subject.getId().toString() );
 		}
@@ -424,6 +433,7 @@ public class MasterAgendaView extends
 			getUiHandlers().removeMasterAgendaItem( ((AgendaVerticalPanel)tblAgenda.getWidget(clickedRowIndex, clickedCellIndex)).getMai() );
 		}
 	}
+	
 	
 	/*
 	 * */
@@ -486,6 +496,7 @@ public class MasterAgendaView extends
 		return -1;
 	}
 	
+	
 	/*
 	 * */
 	private int getCellIndexById(String periodId) {
@@ -497,6 +508,7 @@ public class MasterAgendaView extends
 		return -1;
 	}
 	
+	
 	/*
 	 * */
 	@Override
@@ -507,8 +519,9 @@ public class MasterAgendaView extends
 		for ( MasterAgendaItemProxy mai : mais ) {
 			rowIndex = getRowIndexById( mai.getJourCode() );
 			cellIndex = getCellIndexById( mai.getPeriodId() );
-			if ( (rowIndex != -1) && (cellIndex != -1))
+			if ( (rowIndex != -1) && (cellIndex != -1)) {
 				showMasterAgendaItem( mai, rowIndex, cellIndex );
+			}
 		}
 	}
 
