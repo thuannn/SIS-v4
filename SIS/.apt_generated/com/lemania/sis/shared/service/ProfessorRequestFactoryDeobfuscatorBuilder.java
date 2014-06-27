@@ -34,6 +34,13 @@ withOperation(new OperationKey("r40nsuspLjsgFmZjsa7kYiKZaMQ="),
   .withMethodName("removeProfessor")
   .withRequestContext("com.lemania.sis.shared.service.ProfessorRequestFactory$ProfessorRequestContext")
   .build());
+withOperation(new OperationKey("XfqPGxXVWqTIW45R1NSL08uZm7g="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAllByProfileAndSubject")
+  .withRequestContext("com.lemania.sis.shared.service.ProfessorRequestFactory$ProfessorRequestContext")
+  .build());
 withOperation(new OperationKey("7vC3$wpOCQmBs0$q0LXfL81qLho="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/ProfessorProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")

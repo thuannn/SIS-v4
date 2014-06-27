@@ -22,8 +22,7 @@ public interface MasterAgendaItemRequestFactory extends RequestFactory {
 		Request<Void> save(MasterAgendaItemProxy c);
 		Request<MasterAgendaItemProxy> saveAndReturn(MasterAgendaItemProxy c);
 		
-		Request<MasterAgendaItemProxy> addMasterAgendaItem( String jourCode, String periodId, String profileId, 
-				String subjectId, String profId, String classroomId, int duration );
+		Request<MasterAgendaItemProxy> addMasterAgendaItem( String jourCode, String periodId, String profileId, String profileSubjectId, String classroomId, int duration );
 		
 		Request<Void> removeMasterAgendaItem(MasterAgendaItemProxy mai);
 	}

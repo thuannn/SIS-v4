@@ -24,9 +24,8 @@ import com.lemania.sis.client.ClassPeriod;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
-import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
@@ -57,7 +56,6 @@ public class MasterAgendaView extends
 	@UiField Label txtJour;
 	@UiField Label txtPeriod;
 	@UiField ListBox lstDuration;
-	@UiField ListBox lstProfs;
 	@UiField ListBox lstSubject;
 	@UiField ListBox lstProfiles;
 	@UiField ListBox lstClassrooms;
@@ -68,7 +66,7 @@ public class MasterAgendaView extends
 	int clickedCellIndex;
 	int clickedRowIndex;
 	List<PeriodProxy> periods = new ArrayList<PeriodProxy>();
-	List<SubjectProxy> subjects = new ArrayList<SubjectProxy>();
+	List<ProfileSubjectProxy> subjects = new ArrayList<ProfileSubjectProxy>();
 	
 	/*
 	 * */
@@ -207,7 +205,6 @@ public class MasterAgendaView extends
 			txtJour.setText( jour );
 			txtPeriod.setText( period );
 			txtPeriodId.setText("");
-			lstProfs.setSelectedIndex(0);
 			lstSubject.setSelectedIndex(0);
 			cmdSave.setEnabled(true);
 			cmdDelete.setEnabled(false);
@@ -215,10 +212,6 @@ public class MasterAgendaView extends
 			txtJour.setText( ClassPeriod.getDayName( mai.getJourCode() ) );
 			txtPeriod.setText( mai.getPeriodDescription() );
 			txtPeriodId.setText( mai.getId().toString() );
-			
-			// We're not going to call a database load here for profs list
-			lstProfs.clear();
-			lstProfs.addItem( mai.getProfName() );
 			
 			FieldValidation.selectItemByText(lstSubject, mai.getSubjectName());
 			FieldValidation.selectItemByText(lstDuration, Integer.toString(mai.getDuration()));
@@ -269,8 +262,7 @@ public class MasterAgendaView extends
 				tblAgenda.getText( clickedRowIndex, tblAgenda.getCellCount(0) - 1 ), 
 				tblAgenda.getText( tblAgenda.getRowCount() - 1, clickedCellIndex ), 
 				lstProfiles.getValue(lstProfiles.getSelectedIndex()), 
-				lstSubject.getValue(lstSubject.getSelectedIndex()), 
-				lstProfs.getValue( lstProfs.getSelectedIndex() ), 
+				lstSubject.getValue(lstSubject.getSelectedIndex()),
 				lstClassrooms.getValue( lstClassrooms.getSelectedIndex() ), 
 				Integer.parseInt( lstDuration.getValue( lstDuration.getSelectedIndex())) );
 	}
@@ -318,7 +310,9 @@ public class MasterAgendaView extends
 		// show the plan
 		AgendaVerticalPanel avp = new AgendaVerticalPanel();
 		avp.setMai(mai);
-		avp.add(new Label( mai.getSubjectName() ));
+		Label lblSubject = new Label( mai.getSubjectName() );
+			lblSubject.setStyleName("agendaSubjectText");
+		avp.add( lblSubject );
 		avp.add(new Label( mai.getProfName() ));
 		avp.add(new Label( mai.getClassroomName() ));
 		tblAgenda.setWidget(rowIndex , cellIndex, avp);
@@ -369,32 +363,11 @@ public class MasterAgendaView extends
 			getUiHandlers().onProfileChanged( lstProfiles.getValue( lstProfiles.getSelectedIndex()) );
 	}
 	
-	/*
-	 * */
-	@UiHandler("lstSubject")
-	void onLstSubjectChange(ChangeEvent event) {
-		//
-		if (getUiHandlers() != null)
-			getUiHandlers().loadProfessorList( lstSubject.getValue( lstSubject.getSelectedIndex()), lstClasses.getValue(lstClasses.getSelectedIndex()));
-	}
 
 	/*
 	 * */
 	@Override
-	public void setProfessorListData(List<ProfessorProxy> profs) {
-		//
-		lstProfs.clear();
-		lstProfs.addItem("-","");
-		for ( ProfessorProxy prof : profs ){
-			lstProfs.addItem( prof.getProfName(), prof.getId().toString() );
-		}
-		lstProfs.setSelectedIndex(0);
-	}
-
-	/*
-	 * */
-	@Override
-	public void setSubjectListData(List<SubjectProxy> subjects) {
+	public void setSubjectListData(List<ProfileSubjectProxy> subjects) {
 		//
 		this.subjects = subjects;
 		prepareSubjectList( this.subjects );
@@ -402,12 +375,12 @@ public class MasterAgendaView extends
 	
 	/*
 	 * */
-	public void prepareSubjectList( List<SubjectProxy> subjects ){
+	public void prepareSubjectList( List<ProfileSubjectProxy> subjects ){
 		//
 		lstSubject.clear();
 		lstSubject.addItem("-","");
-		for (SubjectProxy subject : subjects){
-			lstSubject.addItem( subject.getSubjectName(), subject.getId().toString() );
+		for (ProfileSubjectProxy subject : subjects){
+			lstSubject.addItem( subject.getSubjectName() + " - " + subject.getProfName(), subject.getId().toString() );
 		}
 		lstSubject.setSelectedIndex(0);
 	}

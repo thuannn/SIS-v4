@@ -27,9 +27,8 @@ import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.ClasseProxy;
-import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory.ClassroomRequestContext;
@@ -39,15 +38,13 @@ import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemRequestFactory.Ma
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
 import com.lemania.sis.shared.period.PeriodRequestFactory.PeriodRequestContext;
-import com.lemania.sis.shared.service.AssignmentRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.SubjectRequestFactory;
-import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
-import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
 public class MasterAgendaPresenter extends
 		Presenter<MasterAgendaPresenter.MyView, MasterAgendaPresenter.MyProxy>
@@ -67,8 +64,7 @@ public class MasterAgendaPresenter extends
 		//
 		void setClassList(List<ClasseProxy> classes);
 		void setProfileListData( List<ProfileProxy> profiles );
-		void setSubjectListData( List<SubjectProxy> response );
-		void setProfessorListData( List<ProfessorProxy> profs );
+		void setSubjectListData( List<ProfileSubjectProxy> response );
 		void setClassroomList( List<ClassroomProxy> response);
 	}
 
@@ -217,16 +213,16 @@ public class MasterAgendaPresenter extends
 			return;
 		}
 		//
-		SubjectRequestFactory rf = GWT.create(SubjectRequestFactory.class);
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		SubjectRequestContext rc = rf.subjectRequest();
-		rc.listAllActiveByProfile( profileId ).fire(new Receiver<List<SubjectProxy>>(){
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
+		rc.listAll( profileId ).fire(new Receiver<List<ProfileSubjectProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
 			@Override
-			public void onSuccess(List<SubjectProxy> response) {
+			public void onSuccess(List<ProfileSubjectProxy> response) {
 				getView().setSubjectListData(response);
 				//
 				getEventBus().fireEvent( new MasterAgendaLoadEvent(profileId) );
@@ -237,34 +233,14 @@ public class MasterAgendaPresenter extends
 	/*
 	 * */
 	@Override
-	public void loadProfessorList(String subjectId, String classId) {
-		//
-		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<ProfessorProxy> response) {
-				getView().setProfessorListData(response);
-			}
-		});		
-	}
-
-	/*
-	 * */
-	@Override
 	public void addMasterAgendaItem(String jourCode, String periodId,
-			String profileId, String subjectId, String profId,
+			String profileId, String profileSubjectId,
 			String classroomId, int duration) {
 		//
 		MasterAgendaItemRequestFactory rf = GWT.create(MasterAgendaItemRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		MasterAgendaItemRequestContext rc = rf.masterAgendaItemRequestContext();
-		rc.addMasterAgendaItem(jourCode, periodId, profileId, subjectId, profId, classroomId, duration).fire(new Receiver<MasterAgendaItemProxy>(){
+		rc.addMasterAgendaItem(jourCode, periodId, profileId, profileSubjectId, classroomId, duration).fire(new Receiver<MasterAgendaItemProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

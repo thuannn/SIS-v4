@@ -9,9 +9,7 @@ public interface MasterAgendaUiHandlers extends UiHandlers {
 	//
 	void onProfileChanged( String profileId );
 	//
-	void loadProfessorList( String subjectId, String classId );
-	//
-	void addMasterAgendaItem( String jourCode, String periodId, String profileId, String subjectId, String profId, String classroomId, int duration );
+	void addMasterAgendaItem( String jourCode, String periodId, String profileId, String profileSubjectId, String classroomId, int duration );
 	//
 	void removeMasterAgendaItem(MasterAgendaItemProxy mai);
 }

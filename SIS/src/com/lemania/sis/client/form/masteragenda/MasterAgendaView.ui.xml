@@ -42,14 +42,6 @@
 						</g:row>
 						<g:row>
 							<g:customCell>
-								<g:Label text="Professeur :"/>
-							</g:customCell>
-							<g:customCell>
-								<g:ListBox ui:field="lstProfs"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
 								<g:Label text="Durée :"/>
 							</g:customCell>
 							<g:customCell>

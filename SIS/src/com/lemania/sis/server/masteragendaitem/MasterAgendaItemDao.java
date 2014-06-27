@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
-import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.classroom.Classroom;
 import com.lemania.sis.server.period.Period;
 import com.lemania.sis.server.service.MyDAOBase;
@@ -64,14 +63,17 @@ public class MasterAgendaItemDao extends MyDAOBase {
 	/*
 	 * */
 	public MasterAgendaItem addMasterAgendaItem( String jourCode, String periodId, String profileId, 
-			String subjectId, String profId, String classroomId, int duration ) {
+			String profileSubjectId, String classroomId, int duration ) {
 		//
 		MasterAgendaItem mai = new MasterAgendaItem();
 		mai.setJourCode(jourCode);
 		mai.setPeriod( Key.create(Period.class, Long.parseLong(periodId)));
 		mai.setProfile( Key.create(Profile.class, Long.parseLong(profileId)));
-		mai.setSubject( Key.create( Subject.class, Long.parseLong(subjectId)));
-		mai.setProf( Key.create(Professor.class, Long.parseLong(profId)));
+		
+		ProfileSubject ps = ofy().load().key( Key.create(ProfileSubject.class, Long.parseLong(profileSubjectId))).now();
+		mai.setSubject( ps.getSubject() );
+		mai.setProf( ps.getProfessor() );
+		
 		mai.setClassroom( Key.create(Classroom.class, Long.parseLong(classroomId)));
 		mai.setDuration(duration);
 		
@@ -79,8 +81,8 @@ public class MasterAgendaItemDao extends MyDAOBase {
 		try {
 			MasterAgendaItem returnMai = ofy().load().key(key).now();
 			returnMai.setPeriodDescription( (ofy().load().key( Key.create(Period.class, Long.parseLong(periodId))).now()).getDescription() );
-			returnMai.setSubjectName( (ofy().load().key( Key.create(Subject.class, Long.parseLong(subjectId))).now()).getSubjectName() );
-			returnMai.setProfName( (ofy().load().key( Key.create(Professor.class, Long.parseLong(profId))).now()).getProfName() );
+			returnMai.setSubjectName( (ofy().load().key( ps.getSubject() ).now()).getSubjectName() );
+			returnMai.setProfName( (ofy().load().key( ps.getProfessor() ).now()).getProfName() );
 			returnMai.setClassroomName( (ofy().load().key( Key.create(Classroom.class, Long.parseLong(classroomId))).now()).getRoomName() );
 			returnMai.setPeriodId(periodId);
 			return returnMai;

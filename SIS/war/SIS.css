@@ -21,9 +21,13 @@ Agenda
 .agendaSelected {
 	padding: 4px;
 	border: 1px solid lightskyblue;
-	background-color: cornflowerblue;
-	color: white;
-	font-size: 1px;
+	font-size: 12px;
+	background-color: ghostwhite;
+}
+
+.agendaSubjectText {
+	color: orangered;
+	font-size: 14px;
 }
 
 .agendaHidden {
