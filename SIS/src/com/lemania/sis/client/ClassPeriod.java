@@ -1,5 +1,8 @@
 package com.lemania.sis.client;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ClassPeriod {
 	//
 	public static int numberOfPeriod = 12;
@@ -22,6 +25,8 @@ public class ClassPeriod {
 	public static final String d4_code = "D4";
 	public static final String d5_code = "D5";
 	public static final String d6_code = "D6";
+	
+	public static List<String> colors = Arrays.asList("#fffaf0", "#fffafa", "#f5f5f5");
 	
 	public static String getPeriodText(String code) {
 		//

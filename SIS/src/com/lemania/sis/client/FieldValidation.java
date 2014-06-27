@@ -46,7 +46,7 @@ public class FieldValidation {
 	public static void selectItemByValue( ListBox list, String value) {
 		//
 		for (int i=0; i<list.getItemCount(); i++)
-			if (list.getValue(i) == value) {
+			if (list.getValue(i).equals(value)) {
 				list.setSelectedIndex(i);
 				break;
 			}
@@ -57,7 +57,7 @@ public class FieldValidation {
 	public static void selectItemByText( ListBox list, String text) {
 		//
 		for (int i=0; i<list.getItemCount(); i++)
-			if (list.getItemText(i) == text) {
+			if (list.getItemText(i).equals(text)) {
 				list.setSelectedIndex(i);
 				break;
 			}

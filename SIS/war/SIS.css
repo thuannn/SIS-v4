@@ -16,18 +16,28 @@ Agenda
 	padding: 2px;
 	border: 1px solid silver;
 	height: 16px;
+	width: 16%;
+}
+
+.agendaItemContainer {
+	width: 100%;
 }
 
 .agendaSelected {
-	padding: 4px;
-	border: 1px solid lightskyblue;
-	font-size: 12px;
-	background-color: ghostwhite;
+	border: 0px solid lightskyblue;
+	background-color: #f2f2f2;
+	width: 90%;
+	margin-bottom: 3px;
 }
 
 .agendaSubjectText {
 	color: orangered;
-	font-size: 14px;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.agendaNormalText {
+	font-size: 10px;
 }
 
 .agendaHidden {
@@ -35,7 +45,7 @@ Agenda
 	border: 0px solid white;
 	height: 16px;
 	color: white;
-	font-size: 2px;
+	font-size: 1px;
 }
 
 .agendaTitle {
