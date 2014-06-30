@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -90,6 +91,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdPeriodMgt;
 	@UiField Hyperlink cmdStudentAgendaPage;
 	@UiField Hyperlink cmdClassAgendaPage;
+	@UiField AbsolutePanel pnlNorth;
 	
 	
 	// Thuan
@@ -172,7 +174,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
-	/**/
+	
+	
+	/*
+	 * */
 	void showMenu(){
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
@@ -186,7 +191,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		cmdMenuToggle.setVisible(true);
 	}
 	
-	/**/
+	/*
+	 * */
 	void showProfMenu(){
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
@@ -199,7 +205,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	void showStudentMenu(){
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
@@ -212,7 +219,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	void hideMenu(){
 		//
 		dockPanel.remove( leftPanel );
@@ -239,7 +247,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void showProgressBar(boolean visible) {
 		//
@@ -257,7 +266,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void enableMainPanel(Boolean enabled) {
 		enableAllChildren(enabled, mainContentPanel);

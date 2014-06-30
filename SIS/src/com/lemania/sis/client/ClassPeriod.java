@@ -26,7 +26,7 @@ public class ClassPeriod {
 	public static final String d5_code = "D5";
 	public static final String d6_code = "D6";
 	
-	public static List<String> colors = Arrays.asList("#fffaf0", "#fffafa", "#f5f5f5");
+	public static List<String> colors = Arrays.asList("#BE9F29", "#81B1F4", "#FFAE7B", "#27E875", "#FF7B7E", "#4BEAE4");
 	
 	public static String getPeriodText(String code) {
 		//

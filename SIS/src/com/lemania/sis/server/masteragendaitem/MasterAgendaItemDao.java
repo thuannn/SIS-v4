@@ -1,5 +1,6 @@
 package com.lemania.sis.server.masteragendaitem;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -40,6 +41,7 @@ public class MasterAgendaItemDao extends MyDAOBase {
 			mai.setClassroomName( (ofy().load().key( mai.getClassroom() ).now()).getRoomName() );
 			mai.setPeriodId( Long.toString( mai.getPeriod().getId() ));
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 

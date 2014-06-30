@@ -13,7 +13,7 @@ import com.lemania.sis.server.period.Period;
 
 @Entity
 @Index
-public class MasterAgendaItem extends DatastoreObject {
+public class MasterAgendaItem extends DatastoreObject implements Comparable<MasterAgendaItem> {
 	//
 	private String jourCode = "";
 	private Key<Period> period;
@@ -116,5 +116,10 @@ public class MasterAgendaItem extends DatastoreObject {
 	}
 	public void setPeriodId(String periodId) {
 		this.periodId = periodId;
+	}
+	@Override
+	public int compareTo(MasterAgendaItem o) {
+		//
+		return this.jourCode.equals( o.getJourCode() ) ? 1 : -1 ;
 	}
 }

@@ -56,12 +56,19 @@
 								<g:ListBox ui:field="lstClassrooms"/>
 							</g:customCell>
 						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="txtPeriodId" text="" styleName="hiddenText"/>
+							</g:customCell>
+						</g:row>
 					</g:Grid>
-					<g:Label text="-" styleName="hiddenText"/>
-					<g:HorizontalPanel width="60%" horizontalAlignment="ALIGN_RIGHT" spacing="10">
-						<g:Label ui:field="txtPeriodId" text="" styleName="hiddenText"/>
-						<g:Button text="Enregistrer" ui:field="cmdSave"/>
+					<g:HorizontalPanel width="100%" spacing="5">
 						<g:Button ui:field="cmdDelete" text="Supprimer"/>
+						<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+							<g:Label text="................................" styleName="hiddenText"/>
+						<g:Button text="Enregistrer" ui:field="cmdSave"/>
+						<g:Button ui:field="cmdClose">Fermer</g:Button>
+					</g:HorizontalPanel>
 					</g:HorizontalPanel>
 				</g:VerticalPanel>
 			</g:FlowPanel>

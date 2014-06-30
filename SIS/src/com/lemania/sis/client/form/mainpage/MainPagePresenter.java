@@ -72,8 +72,6 @@ public class MainPagePresenter extends
 		
 		// Thuan: attach Ui handler
 		getView().setUiHandlers(this);
-		//
-		getView().initializeUi(currentUser);
 	}
 
 	
