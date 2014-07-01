@@ -372,6 +372,7 @@ public class MasterAgendaView extends
 		}
 	}
 	
+	
 	/*
 	 * */
 	@UiHandler("lstClasses")

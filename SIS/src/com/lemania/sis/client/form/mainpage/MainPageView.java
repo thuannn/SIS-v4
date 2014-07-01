@@ -355,6 +355,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (tokenName.equals(NameTokens.masteragenda)) switchStyle(this.cmdMasterAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.classroom)) switchStyle(this.cmdClassroomPage, false, false);
 		if (tokenName.equals(NameTokens.periodmgt)) switchStyle(this.cmdPeriodMgt, false, false);
+		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
 	}
 	
 	

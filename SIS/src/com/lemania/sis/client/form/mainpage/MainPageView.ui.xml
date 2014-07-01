@@ -57,7 +57,7 @@
 					<g:TreeItem text="Horaires" state="true">
 						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>
 						<g:TreeItem text="Horaires personnalisés" state="true">
-							<g:Hyperlink targetHistoryToken="masteragenda" text="Elèves" ui:field="cmdStudentAgendaPage"/>
+							<g:Hyperlink targetHistoryToken="studentagenda" text="Elèves" ui:field="cmdStudentAgendaPage"/>
 							<g:Hyperlink targetHistoryToken="masteragenda" text="Professeurs" ui:field="cmdProfessorAgendaPage"/>
 							<g:Hyperlink targetHistoryToken="masteragenda" text="Classes" ui:field="cmdClassAgendaPage"/>
 						</g:TreeItem>
