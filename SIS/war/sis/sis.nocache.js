@@ -299,12 +299,12 @@ function sis(){
   $stats && $stats({moduleName:'sis', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers(['ie8'], '07EE9F246DCCE2DAB4B77118C9BA396F');
-      unflattenKeylistIntoAnswers(['gecko1_8'], '5910821995968A4C892DF8D3191013F1');
-      unflattenKeylistIntoAnswers(['ie9'], '68D29B7339BB086E48FB0C1992AC5316');
-      unflattenKeylistIntoAnswers(['opera'], 'A0A5C78DBC00962623588E5A4598E997');
-      unflattenKeylistIntoAnswers(['safari'], 'A2049E52DC1930F2F8693FB5A5B3AA69');
-      unflattenKeylistIntoAnswers(['ie6'], 'E5AB2F21AF7396A4E7CD18E451D140A9');
+      unflattenKeylistIntoAnswers(['ie8'], '19B39046E946C5CDB4C68DB0DEC20EAB');
+      unflattenKeylistIntoAnswers(['ie6'], '2E313A6C2837A4E9008E7AF08D3647DF');
+      unflattenKeylistIntoAnswers(['opera'], '79719873335F18A6868BD4117CD2B0A2');
+      unflattenKeylistIntoAnswers(['safari'], 'C2D01FF516945F9638212786BBDCA34A');
+      unflattenKeylistIntoAnswers(['ie9'], 'D971CA4929AC5E2FBE155FE952BE3B91');
+      unflattenKeylistIntoAnswers(['gecko1_8'], 'E37D3CAE7FB4822A6D8E4235919EDA70');
       strongName = answers[computePropValue('user.agent')];
       var idx = strongName.indexOf(':');
       if (idx != -1) {
@@ -321,6 +321,13 @@ function sis(){
   function onBodyDone(){
     if (!bodyDone) {
       bodyDone = true;
+      if (!__gwt_stylesLoaded['gwt/standard/standard.css']) {
+        var l = $doc_0.createElement('link');
+        __gwt_stylesLoaded['gwt/standard/standard.css'] = l;
+        l.setAttribute('rel', 'stylesheet');
+        l.setAttribute('href', base + 'gwt/standard/standard.css');
+        $doc_0.getElementsByTagName('head')[0].appendChild(l);
+      }
       maybeStartModule();
       if ($doc_0.removeEventListener) {
         $doc_0.removeEventListener('DOMContentLoaded', onBodyDone, false);

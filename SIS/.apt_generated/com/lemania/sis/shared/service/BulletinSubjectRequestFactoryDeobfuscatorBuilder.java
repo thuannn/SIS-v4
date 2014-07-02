@@ -20,17 +20,17 @@ withOperation(new OperationKey("VymUbXc_ROo2PDmggwuojrxtJuk="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.BulletinSubjectRequestFactory$BulletinSubjectRequestContext")
   .build());
-withOperation(new OperationKey("IHxjV6mfFBceYw_hi0xQETlgpgo="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.service.BulletinSubjectRequestFactory$BulletinSubjectRequestContext")
-  .build());
 withOperation(new OperationKey("A8s3THypEWvUH3BLaesPhZ05CrM="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAll")
+  .withRequestContext("com.lemania.sis.shared.service.BulletinSubjectRequestFactory$BulletinSubjectRequestContext")
+  .build());
+withOperation(new OperationKey("IHxjV6mfFBceYw_hi0xQETlgpgo="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
   .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.BulletinSubjectRequestFactory$BulletinSubjectRequestContext")
   .build());

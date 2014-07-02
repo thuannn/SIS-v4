@@ -3,7 +3,6 @@ package com.lemania.sis.server.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.web.bindery.requestfactory.shared.Request;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Assignment;
@@ -12,7 +11,6 @@ import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.EvaluationSubject;
 import com.lemania.sis.server.bulletin.Bulletin;
-import com.lemania.sis.shared.EvaluationSubjectProxy;
 
 public class EvaluationSubjectDao extends MyDAOBase {
 	

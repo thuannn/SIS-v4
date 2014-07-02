@@ -144,11 +144,11 @@
 								<g:customCell>
 									<g:Hyperlink text="Envoyez-nous vos avis" targetHistoryToken="!contact"/>
 								</g:customCell>
+								<g:customCell>
+									<g:Image url="images/Google_App_Engine_Logo_2013.png" height="30px" altText="Powered by Google App Engine"/>
+								</g:customCell>
 							</g:row>
 						</g:Grid>
-						<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" width="100%">
-							<g:Image url="images/appengine-noborder-120x30.gif"/>
-						</g:HorizontalPanel>
 					</g:HorizontalPanel>
 					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">

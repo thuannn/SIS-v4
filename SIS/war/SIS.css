@@ -1,13 +1,8 @@
 /* Add css rules here for your application. */
 
 body {
-	font-size: 12px;
-	font-family: Arial Unicode MS, Arial, sans-serif;
-	background-color: snow;
-}
-
-th {
-    white-space: normal !important;
+	font-size: 12px !important;
+	background-color: snow !important;
 }
 
 /*
@@ -207,8 +202,8 @@ Agenda
 }
 .left_header {
 	color: cornflowerblue;
+	margin: -3px -3px 0px -23px;
 	padding: 3px 0px;
-	margin-left:-20px;
 	font-size: 14px;
 	font-family: sans-serif;
 	background-color: cornflowerblue;	
