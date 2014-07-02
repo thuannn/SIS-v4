@@ -8,8 +8,8 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
-import com.lemania.sis.server.Student;
 import com.lemania.sis.server.User;
+import com.lemania.sis.server.student.Student;
 
 public class UserDao extends MyDAOBase {
 	

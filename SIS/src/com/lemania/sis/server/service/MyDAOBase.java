@@ -5,7 +5,6 @@ import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Branche;
-import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
@@ -19,12 +18,13 @@ import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.SettingOption;
-import com.lemania.sis.server.Student;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.User;
+import com.lemania.sis.server.bulletin.Bulletin;
 import com.lemania.sis.server.classroom.Classroom;
 import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
 import com.lemania.sis.server.period.Period;
+import com.lemania.sis.server.student.Student;
 
 public class MyDAOBase {
 	

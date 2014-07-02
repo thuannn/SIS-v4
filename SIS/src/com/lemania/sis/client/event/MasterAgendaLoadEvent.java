@@ -12,6 +12,8 @@ public class MasterAgendaLoadEvent extends
 	
 	//
 	private String profileId = "";
+	private String classId = "";
+	private String bulletinId = "";
 
 	public interface MasterAgendaLoadHandler extends EventHandler {
 		void onMasterAgendaLoad(MasterAgendaLoadEvent event);
@@ -27,6 +29,12 @@ public class MasterAgendaLoadEvent extends
 	
 	public MasterAgendaLoadEvent(String profileId) {
 		this.profileId = profileId;
+	}
+	
+	public MasterAgendaLoadEvent(String classId, String profileId, String bulletinId) {
+		this.classId = classId;
+		this.profileId = profileId;
+		this.bulletinId = bulletinId;
 	}
 
 	@Override
@@ -53,5 +61,29 @@ public class MasterAgendaLoadEvent extends
 
 	public void setProfileId(String profileId) {
 		this.profileId = profileId;
+	}
+
+	public static Type<MasterAgendaLoadHandler> getTYPE() {
+		return TYPE;
+	}
+
+	public static void setTYPE(Type<MasterAgendaLoadHandler> tYPE) {
+		TYPE = tYPE;
+	}
+
+	public String getClassId() {
+		return classId;
+	}
+
+	public void setClassId(String classId) {
+		this.classId = classId;
+	}
+
+	public String getBulletinId() {
+		return bulletinId;
+	}
+
+	public void setBulletinId(String bulletinId) {
+		this.bulletinId = bulletinId;
 	}
 }

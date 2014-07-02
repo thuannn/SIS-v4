@@ -13,10 +13,10 @@ withOperation(new OperationKey("k$JK6orbDR9gy4pyPOcLB4mMzQo="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
-withOperation(new OperationKey("K7KNwqW$sLQ_nhTaC55sPTL_$is="),
+withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
   new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/Bulletin;)Ljava/util/List;")
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/bulletin/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bulletin/Bulletin;)Ljava/util/List;")
   .withMethodName("listAllActiveByProfile")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
@@ -62,10 +62,10 @@ withOperation(new OperationKey("DaOK700FEqNvkqiZLH5oytuN3Vs="),
   .withMethodName("initialize")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
-withRawTypeToken("PkLDLJoNPIgrtihI5OG0UPtvprs=", "com.lemania.sis.shared.BulletinProxy");
 withRawTypeToken("abvmZrXvW20lV3odxZOEzl3XlbY=", "com.lemania.sis.shared.SubjectProxy");
+withRawTypeToken("g8ViTgnhn4rmoYT8NZBKmguwdvI=", "com.lemania.sis.shared.bulletin.BulletinProxy");
 withRawTypeToken("w1Qg$YHpDaNcHrR5HZ$23y518nA=", "com.google.web.bindery.requestfactory.shared.EntityProxy");
 withRawTypeToken("FXHD5YU0TiUl3uBaepdkYaowx9k=", "com.google.web.bindery.requestfactory.shared.BaseProxy");
-withClientToDomainMappings("com.lemania.sis.server.Bulletin", Arrays.asList("com.lemania.sis.shared.BulletinProxy"));
 withClientToDomainMappings("com.lemania.sis.server.Subject", Arrays.asList("com.lemania.sis.shared.SubjectProxy"));
+withClientToDomainMappings("com.lemania.sis.server.bulletin.Bulletin", Arrays.asList("com.lemania.sis.shared.bulletin.BulletinProxy"));
 }}

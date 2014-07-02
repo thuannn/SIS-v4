@@ -1,7 +1,9 @@
 /* Add css rules here for your application. */
 
 body {
-	background-color: whitesmoke;
+	font-size: 12px;
+	font-family: Arial Unicode MS, Arial, sans-serif;
+	background-color: snow;
 }
 
 th {

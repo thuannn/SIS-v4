@@ -1,7 +1,7 @@
 package com.lemania.sis.client.form.bulletincreation;
 
 import com.gwtplatform.mvp.client.UiHandlers;
-import com.lemania.sis.shared.BulletinProxy;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
 
 public interface FrmBulletinCreationUiHandler extends UiHandlers {
 	//

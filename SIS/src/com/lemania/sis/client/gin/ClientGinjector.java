@@ -13,7 +13,7 @@ import com.lemania.sis.client.form.classroom.ClassroomPresenter;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementPresenter;
-import com.lemania.sis.client.form.studentagenda.studentagenda.StudentAgendaPresenter;
+import com.lemania.sis.client.form.studentagenda.StudentAgendaPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;

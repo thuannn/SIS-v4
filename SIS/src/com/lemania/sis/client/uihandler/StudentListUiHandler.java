@@ -1,7 +1,7 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
-import com.lemania.sis.shared.StudentProxy;
+import com.lemania.sis.shared.student.StudentProxy;
 
 public interface StudentListUiHandler extends UiHandlers {
 	void updateStudentStatus(StudentProxy student, Boolean value);

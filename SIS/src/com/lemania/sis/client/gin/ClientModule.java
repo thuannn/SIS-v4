@@ -66,7 +66,7 @@ import com.lemania.sis.client.view.FrmEvaluationReportListView;
 import com.lemania.sis.client.view.FrmEvaluationInputView;
 import com.lemania.sis.client.view.FrmEvaluationInputStudentView;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementModule;
-import com.lemania.sis.client.form.studentagenda.studentagenda.StudentAgendaModule;
+import com.lemania.sis.client.form.studentagenda.StudentAgendaModule;
 
 public class ClientModule extends AbstractPresenterModule {
 

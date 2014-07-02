@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.EvaluationStudentReport;
+import com.lemania.sis.server.bulletin.Bulletin;
 
 public class EvaluationStudentReportDao extends MyDAOBase {
 	/*

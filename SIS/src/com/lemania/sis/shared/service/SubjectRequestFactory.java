@@ -8,8 +8,8 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.server.service.SubjectDao;
-import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
 
 public interface SubjectRequestFactory extends RequestFactory {
 	@Service(value=SubjectDao.class, locator=DaoServiceLocator.class)

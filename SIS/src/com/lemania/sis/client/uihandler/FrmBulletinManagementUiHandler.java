@@ -2,8 +2,8 @@ package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 import com.lemania.sis.shared.BulletinBrancheProxy;
-import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
 
 public interface FrmBulletinManagementUiHandler extends UiHandlers {
 	//

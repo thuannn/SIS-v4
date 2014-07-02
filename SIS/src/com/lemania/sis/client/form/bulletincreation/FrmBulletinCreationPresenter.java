@@ -27,25 +27,25 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.shared.BulletinProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.StudentProxy;
-import com.lemania.sis.shared.service.BulletinRequestFactory;
-import com.lemania.sis.shared.service.BulletinRequestFactory.BulletinRequestContext;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
+import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
+import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.StudentRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
 import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
-import com.lemania.sis.shared.service.StudentRequestFactory.StudentRequestContext;
+import com.lemania.sis.shared.student.StudentProxy;
+import com.lemania.sis.shared.student.StudentRequestFactory;
+import com.lemania.sis.shared.student.StudentRequestFactory.StudentRequestContext;
 
 public class FrmBulletinCreationPresenter
 		extends

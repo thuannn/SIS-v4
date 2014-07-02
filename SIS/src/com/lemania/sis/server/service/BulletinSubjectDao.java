@@ -8,13 +8,13 @@ import com.lemania.sis.server.Assignment;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinBranche;
-import com.lemania.sis.server.Professor;
-import com.lemania.sis.server.Bulletin;
 import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bulletin.Bulletin;
 
 public class BulletinSubjectDao extends MyDAOBase {
 	//

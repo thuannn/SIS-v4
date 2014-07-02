@@ -26,10 +26,10 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.StudentAddUiHandler;
-import com.lemania.sis.shared.StudentProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.StudentRequestFactory;
-import com.lemania.sis.shared.service.StudentRequestFactory.StudentRequestContext;
+import com.lemania.sis.shared.student.StudentProxy;
+import com.lemania.sis.shared.student.StudentRequestFactory;
+import com.lemania.sis.shared.student.StudentRequestFactory.StudentRequestContext;
 
 public class StudentAddPresenter 
 	extends Presenter<StudentAddPresenter.MyView, StudentAddPresenter.MyProxy> 

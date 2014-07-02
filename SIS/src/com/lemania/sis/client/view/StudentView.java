@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.uihandler.StudentListUiHandler;
-import com.lemania.sis.shared.StudentProxy;
+import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;

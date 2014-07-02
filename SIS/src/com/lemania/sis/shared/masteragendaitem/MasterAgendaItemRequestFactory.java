@@ -18,6 +18,7 @@ public interface MasterAgendaItemRequestFactory extends RequestFactory {
 		
 		Request<List<MasterAgendaItemProxy>> listAll();
 		Request<List<MasterAgendaItemProxy>> listAllByProfile(String profileId);
+		Request<List<MasterAgendaItemProxy>> listAllByClassProfileStudent(String classId, String profileId, String bulletinId);
 
 		Request<Void> save(MasterAgendaItemProxy c);
 		Request<MasterAgendaItemProxy> saveAndReturn(MasterAgendaItemProxy c);
