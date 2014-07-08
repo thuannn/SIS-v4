@@ -20,7 +20,6 @@ public class ProfessorDao extends MyDAOBase {
 	}
 	
 	/*
-	 * 
 	 * */
 	public List<Professor> listAll(){
 		Query<Professor> q = ofy().load().type(Professor.class).order("profName");
@@ -30,6 +29,19 @@ public class ProfessorDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
+	
+	/*
+	 * */
+	public List<Professor> listAllActive(){
+		Query<Professor> q = ofy().load().type(Professor.class).filter("profActive", true).order("profName");
+		List<Professor> returnList = new ArrayList<Professor>();
+		for (Professor prof : q){
+			returnList.add(prof);
+		}
+		return returnList;
+	}
+	
 	
 	
 	/*

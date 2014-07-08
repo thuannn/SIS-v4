@@ -6,6 +6,7 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
+import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
 import com.lemania.sis.server.masteragendaitem.MasterAgendaItemDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 
@@ -18,6 +19,7 @@ public interface MasterAgendaItemRequestFactory extends RequestFactory {
 		
 		Request<List<MasterAgendaItemProxy>> listAll();
 		Request<List<MasterAgendaItemProxy>> listAllByProfile(String profileId);
+		Request<List<MasterAgendaItemProxy>> listAllByProf(String profId);
 		Request<List<MasterAgendaItemProxy>> listAllByClassProfileStudent(String classId, String profileId, String bulletinId);
 
 		Request<Void> save(MasterAgendaItemProxy c);

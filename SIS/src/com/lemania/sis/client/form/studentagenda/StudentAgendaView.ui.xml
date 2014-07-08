@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <g:HTMLPanel>
-    	<g:Label text="HORAIRES CADRES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+    	<g:Label text="Les horaires des élèves" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER" ui:field="pnlPrincipal">
 			<g:VerticalPanel width="100%" spacing="10" horizontalAlignment="ALIGN_CENTER">
 				<g:HorizontalPanel width="80%" horizontalAlignment="ALIGN_LEFT" spacing="5" styleName="toolbar">

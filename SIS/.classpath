@@ -11,8 +11,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-assistedinject-3.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.inject.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-all-1.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-jsr107cache-1.8.8.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-api-labs.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr107cache-1.1.jar"/>
@@ -20,8 +18,23 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-17.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-gwt-17.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-5.0.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/maven-artifact-3.2.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-all-1.2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA.jar" sourcepath="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.5.1/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/ngocthuannguyen/Documents/gwt-2.5.1/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.5.1/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/ngocthuannguyen/Documents/gwt-2.5.1/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.5.1/validation-api-1.0.0.GA.jar" sourcepath="/Users/ngocthuannguyen/Documents/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

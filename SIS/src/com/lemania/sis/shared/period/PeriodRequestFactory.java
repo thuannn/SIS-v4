@@ -16,6 +16,7 @@ public interface PeriodRequestFactory extends RequestFactory {
 		//	
 		Request<Void> initialize();
 		Request<List<PeriodProxy>> listAll();
+		Request<List<PeriodProxy>> listAllByClassAndStatus(String classId, boolean active);
 		Request<List<PeriodProxy>> listAllByClass(String classId);
 
 		Request<Void> save(PeriodProxy c);

@@ -172,7 +172,7 @@ public class MasterAgendaPresenter extends
 		PeriodRequestFactory rf = GWT.create(PeriodRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		PeriodRequestContext rc = rf.periodRequestContext();
-		rc.listAllByClass(classId).fire(new Receiver<List<PeriodProxy>>(){
+		rc.listAllByClassAndStatus(classId, true).fire(new Receiver<List<PeriodProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

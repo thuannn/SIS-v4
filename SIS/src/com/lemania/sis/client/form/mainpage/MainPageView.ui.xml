@@ -58,7 +58,7 @@
 						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>
 						<g:TreeItem text="Horaires personnalisés" state="true">
 							<g:Hyperlink targetHistoryToken="studentagenda" text="Elèves" ui:field="cmdStudentAgendaPage"/>
-							<g:Hyperlink targetHistoryToken="masteragenda" text="Professeurs" ui:field="cmdProfessorAgendaPage"/>
+							<g:Hyperlink targetHistoryToken="profagenda" text="Professeurs" ui:field="cmdProfessorAgendaPage"/>
 							<g:Hyperlink targetHistoryToken="masteragenda" text="Classes" ui:field="cmdClassAgendaPage"/>
 						</g:TreeItem>
 					</g:TreeItem>
@@ -135,17 +135,17 @@
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="99.5%" horizontalAlignment="ALIGN_LEFT" height="">
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5">
+					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
 						<g:Grid>
 							<g:row>
 								<g:customCell>
-									<g:Label text="Copyright © Ecole Lémania - IT Services - " horizontalAlignment="ALIGN_LEFT" width="" ui:field="txtCopyright"/>
+									<g:Label text="Copyright © Ecole Lémania - " horizontalAlignment="ALIGN_LEFT" width="" ui:field="txtCopyright"/>
 								</g:customCell>
 								<g:customCell>
 									<g:Hyperlink text="Envoyez-nous vos avis" targetHistoryToken="!contact"/>
 								</g:customCell>
 								<g:customCell>
-									<g:Image url="images/Google_App_Engine_Logo_2013.png" height="30px" altText="Powered by Google App Engine"/>
+									<g:Image url="images/Google_App_Engine_Logo_2013.png" height="25px" altText="Powered by Google App Engine"/>
 								</g:customCell>
 							</g:row>
 						</g:Grid>

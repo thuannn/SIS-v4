@@ -26,13 +26,28 @@ public class PeriodDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public List<Period> listAllByClass(String classId){
+	public List<Period> listAllByClassAndStatus(String classId, boolean active){
 		//
-		Query<Period> q = ofy().load().type(Period.class).filter("classe", Key.create(Classe.class, Long.parseLong(classId)));
+		Query<Period> q = ofy().load().type(Period.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
+				.filter("isActive", active);
 		List<Period> returnList = q.list();
 		Collections.sort(returnList);
 		return returnList;
 	}
+	
+	
+	/*
+	 * */
+	public List<Period> listAllByClass(String classId){
+		//
+		Query<Period> q = ofy().load().type(Period.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)));
+		List<Period> returnList = q.list();
+		Collections.sort(returnList);
+		return returnList;
+	}
+	
 
 	/*
 	 * */

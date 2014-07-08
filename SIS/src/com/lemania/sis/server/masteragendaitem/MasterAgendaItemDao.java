@@ -7,6 +7,7 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinSubject;
+import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
@@ -32,6 +33,7 @@ public class MasterAgendaItemDao extends MyDAOBase {
 	}
 	
 	
+	
 	/*
 	 * */
 	public List<MasterAgendaItem> listAllByProfile(String profileId){
@@ -44,6 +46,25 @@ public class MasterAgendaItemDao extends MyDAOBase {
 			mai.setProfName( (ofy().load().key( mai.getProf() ).now()).getProfName() );
 			mai.setClassroomName( (ofy().load().key( mai.getClassroom() ).now()).getRoomName() );
 			mai.setPeriodId( Long.toString( mai.getPeriod().getId() ));
+		}
+		Collections.sort( returnList );
+		return returnList;
+	}
+	
+	
+	
+	/*
+	 * */
+	public List<MasterAgendaItem> listAllByProf(String profId){
+		//
+		Query<MasterAgendaItem> q = ofy().load().type(MasterAgendaItem.class).filter("prof", Key.create(Professor.class, Long.parseLong(profId)));
+		List<MasterAgendaItem> returnList = q.list();
+		for ( MasterAgendaItem mai : returnList ) {
+			mai.setSubjectName( (ofy().load().key( mai.getSubject() ).now()).getSubjectName() );
+			mai.setProfName( (ofy().load().key( mai.getProf() ).now()).getProfName() );
+			mai.setClassroomName( (ofy().load().key( mai.getClassroom() ).now()).getRoomName() );
+			mai.setPeriodId( Long.toString( mai.getPeriod().getId() ));
+			mai.setPeriodDescription( (ofy().load().key( mai.getPeriod() ).now()).getDescription() );
 		}
 		Collections.sort( returnList );
 		return returnList;

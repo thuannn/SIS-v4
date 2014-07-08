@@ -106,12 +106,15 @@ public class MasterAgendaView extends
 			tblAgenda.setText( i+ 1, 0, periods.get(i).getDescription() );
 		}
 		//
+		Button bt;
 		for (int i=1; i<tblAgenda.getRowCount(); i++) {
 			for (int j=1; j<tblAgenda.getCellCount(0); j++) {
 					//
 					final VerticalPanel vp = new VerticalPanel();
-					vp.add(new Label("+"));
-					vp.getWidget(0).setStyleName("hiddenText");
+					bt = new Button("+");
+					bt.setStyleName("agendaAddButton");
+					bt.getElement().getStyle().setFloat( Style.Float.RIGHT );
+					vp.add( bt );
 					tblAgenda.setWidget(i, j, vp);
 					vp.addDomHandler(new MouseOverHandler() {
 
