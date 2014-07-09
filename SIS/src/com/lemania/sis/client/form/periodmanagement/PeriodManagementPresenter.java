@@ -21,6 +21,7 @@ import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupPresenter;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
@@ -46,6 +47,10 @@ public class PeriodManagementPresenter
 		//
 		void updatePeriod(PeriodProxy period);
 	}
+	
+	
+	private PeriodListPopupPresenter periodItemPopup;
+	
 
 	@ContentSlot
 	public static final Type<RevealContentHandler<?>> SLOT_PeriodManagement = new Type<RevealContentHandler<?>>();
@@ -56,9 +61,11 @@ public class PeriodManagementPresenter
 	}
 
 	@Inject
-	public PeriodManagementPresenter(EventBus eventBus, MyView view,
-			MyProxy proxy) {
+	public PeriodManagementPresenter(EventBus eventBus, MyView view, MyProxy proxy,
+			PeriodListPopupPresenter pp) {
 		super(eventBus, view, proxy, MainPagePresenter.TYPE_SetMainContent);
+		
+		this.periodItemPopup = pp;
 
 		getView().setUiHandlers(this);
 	}
@@ -169,6 +176,16 @@ public class PeriodManagementPresenter
 				getView().updatePeriod(response);
 			}
 		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void showPeriodItemPopup() {
+		//
+		addToPopupSlot(periodItemPopup, true);
+		periodItemPopup.loadPeriods();
 	}
 
 }

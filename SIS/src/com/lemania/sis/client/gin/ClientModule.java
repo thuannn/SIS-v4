@@ -68,12 +68,14 @@ import com.lemania.sis.client.view.FrmEvaluationInputStudentView;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementModule;
 import com.lemania.sis.client.form.studentagenda.StudentAgendaModule;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaModule;
+import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
 		
+		install(new PeriodListPopupModule());
 		install(new ProfessorAgendaModule());
 		install(new StudentAgendaModule());
 		install(new PeriodManagementModule());

@@ -17,6 +17,17 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
+						<g:Label text="Période :"/>
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox/>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Rajouter une période" ui:field="cmdAddPeriodItem"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
 						<g:Label text="Description :"/>
 					</g:customCell>
 					<g:customCell>

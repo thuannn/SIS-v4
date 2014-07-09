@@ -41,6 +41,7 @@ public class PeriodManagementView extends
 	@UiField Button cmdAdd;
 	@UiField CellTable<PeriodProxy> tblPeriods;
 	@UiField IntegerBox txtOrder;
+	@UiField Button cmdAddPeriodItem;
 	
 	//
 	ListDataProvider<PeriodProxy> periodDataProvider = new ListDataProvider<PeriodProxy>();
@@ -204,5 +205,14 @@ public class PeriodManagementView extends
 		periodDataProvider.getList().clear();
 		periodDataProvider.setList(periods);
 		periodDataProvider.flush();
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdAddPeriodItem")
+	void onCmdAddPeriodItemClick(ClickEvent event) {
+		//
+		getUiHandlers().showPeriodItemPopup();
 	}
 }

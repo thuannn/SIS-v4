@@ -136,7 +136,8 @@ public class ProfessorAgendaView extends
 			lblNormal.setStyleName("agendaNormalText");
 			avp.add( lblNormal);
 			//
-			((VerticalPanel) tblAgenda.getWidget(rowIndex + i, cellIndex)).add(avp);
+			// ((VerticalPanel) tblAgenda.getWidget(rowIndex + i, cellIndex)).add(avp);
+			((VerticalPanel) tblAgenda.getWidget(rowIndex, cellIndex)).add(avp);
 		}
 		//
 		if ( (colorIndex+1) < ClassPeriod.colors.size() ) colorIndex++; else colorIndex = 0;
@@ -148,11 +149,12 @@ public class ProfessorAgendaView extends
 	 * */
 	private int getRowIndexById(String periodId) {
 		//
-		for ( int i=0; i < tblAgenda.getRowCount(); i++ ) {
-			if ( tblAgenda.getText(i, tblAgenda.getCellCount(i)-1).equals(periodId) )
-				return i;
-		}
-		return -1;
+//		for ( int i=0; i < tblAgenda.getRowCount(); i++ ) {
+//			if ( tblAgenda.getText(i, tblAgenda.getCellCount(i)-1).equals(periodId) )
+//				return i;
+//		}
+//		return -1;
+		return 1;
 	}
 	
 	

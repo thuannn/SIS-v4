@@ -61,7 +61,7 @@ public class StudentDao extends MyDAOBase {
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
-		for (Student student : q){
+		for ( Student student : q.list() ){
 			returnList.add(student);
 		}
 		return returnList;
@@ -69,8 +69,9 @@ public class StudentDao extends MyDAOBase {
 	
 	
 	/* List all the active students */
-	public List<Student> listAllActive(){
-		Query<Student> q = ofy().load().type(Student.class).filter("isActive", true)
+	public List<Student> listAllActive() {
+		Query<Student> q = ofy().load().type(Student.class)
+				.filter("isActive", true)
 				.order("LastName")
 				.order("FirstName");
 		List<Student> returnList = new ArrayList<Student>();
@@ -79,8 +80,7 @@ public class StudentDao extends MyDAOBase {
 		}
 		return returnList;
 	}
-	
-	
+		
 	
 	/* List all the active students */
 	public List<Student> listAllActiveByClassAndProfile(){

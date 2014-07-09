@@ -10,4 +10,6 @@ public interface PeriodManagementUiHandlers extends UiHandlers {
 	void addPeriod(String classId, String description, int order, String note, boolean isActive);
 	//
 	void updatePeriod(PeriodProxy pp, String description, int order, String note, boolean isActive);
+	//
+	void showPeriodItemPopup();
 }
