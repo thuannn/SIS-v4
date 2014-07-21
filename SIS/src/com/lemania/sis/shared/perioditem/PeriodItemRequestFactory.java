@@ -6,7 +6,7 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.lemania.sis.server.perioditem.PeriodItemDao;
+import com.lemania.sis.server.bean.perioditem.PeriodItemDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 
 public interface PeriodItemRequestFactory extends RequestFactory {

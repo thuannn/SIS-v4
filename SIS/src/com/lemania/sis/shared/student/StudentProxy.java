@@ -4,7 +4,7 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.lemania.sis.server.ObjectifyLocator;
 
-@ProxyFor(value=com.lemania.sis.server.student.Student.class, locator=ObjectifyLocator.class)
+@ProxyFor(value=com.lemania.sis.server.bean.student.Student.class, locator=ObjectifyLocator.class)
 public interface StudentProxy extends EntityProxy {
 	//
 	public Long getId();

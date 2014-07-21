@@ -13,17 +13,17 @@ withOperation(new OperationKey("k$JK6orbDR9gy4pyPOcLB4mMzQo="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
+withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/bulletin/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/bulletin/Bulletin;)Ljava/util/List;")
+  .withMethodName("listAllActiveByProfile")
+  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
+  .build());
 withOperation(new OperationKey("h_OoDMrlyXXWx$hwdvkCWvsJfws="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
-  .withMethodName("listAllActiveByProfile")
-  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
-  .build());
-withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/bulletin/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bulletin/Bulletin;)Ljava/util/List;")
   .withMethodName("listAllActiveByProfile")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
@@ -67,5 +67,5 @@ withRawTypeToken("g8ViTgnhn4rmoYT8NZBKmguwdvI=", "com.lemania.sis.shared.bulleti
 withRawTypeToken("w1Qg$YHpDaNcHrR5HZ$23y518nA=", "com.google.web.bindery.requestfactory.shared.EntityProxy");
 withRawTypeToken("FXHD5YU0TiUl3uBaepdkYaowx9k=", "com.google.web.bindery.requestfactory.shared.BaseProxy");
 withClientToDomainMappings("com.lemania.sis.server.Subject", Arrays.asList("com.lemania.sis.shared.SubjectProxy"));
-withClientToDomainMappings("com.lemania.sis.server.bulletin.Bulletin", Arrays.asList("com.lemania.sis.shared.bulletin.BulletinProxy"));
+withClientToDomainMappings("com.lemania.sis.server.bean.bulletin.Bulletin", Arrays.asList("com.lemania.sis.shared.bulletin.BulletinProxy"));
 }}

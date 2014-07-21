@@ -23,6 +23,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
+import com.lemania.sis.shared.perioditem.PeriodItemProxy;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -42,6 +43,7 @@ public class PeriodManagementView extends
 	@UiField CellTable<PeriodProxy> tblPeriods;
 	@UiField IntegerBox txtOrder;
 	@UiField Button cmdAddPeriodItem;
+	@UiField ListBox lstPeriods;
 	
 	//
 	ListDataProvider<PeriodProxy> periodDataProvider = new ListDataProvider<PeriodProxy>();
@@ -214,5 +216,17 @@ public class PeriodManagementView extends
 	void onCmdAddPeriodItemClick(ClickEvent event) {
 		//
 		getUiHandlers().showPeriodItemPopup();
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void setPeriodListData(List<PeriodItemProxy> periods) {
+		//
+		lstPeriods.clear();
+		for (PeriodItemProxy pp : periods) {
+			lstPeriods.addItem( pp.getPeriod(), pp.getId().toString() );
+		}
 	}
 }

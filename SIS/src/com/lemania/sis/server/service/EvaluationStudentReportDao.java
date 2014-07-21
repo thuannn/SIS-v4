@@ -7,7 +7,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.EvaluationStudentReport;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 public class EvaluationStudentReportDao extends MyDAOBase {
 	/*

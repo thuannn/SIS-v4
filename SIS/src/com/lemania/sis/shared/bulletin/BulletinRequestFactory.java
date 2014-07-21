@@ -6,7 +6,7 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.lemania.sis.server.bulletin.BulletinDao;
+import com.lemania.sis.server.bean.bulletin.BulletinDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 
 public interface BulletinRequestFactory extends RequestFactory {

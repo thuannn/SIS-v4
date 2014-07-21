@@ -3,7 +3,7 @@ package com.lemania.sis.shared.masteragendaitem;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
+import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
 
 @ProxyFor( value=MasterAgendaItem.class, locator=ObjectifyLocator.class )
 public interface MasterAgendaItemProxy extends EntityProxy {

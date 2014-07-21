@@ -6,7 +6,7 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.lemania.sis.server.classroom.ClassroomDao;
+import com.lemania.sis.server.bean.classroom.ClassroomDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 
 public interface ClassroomRequestFactory extends RequestFactory {

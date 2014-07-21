@@ -12,7 +12,7 @@ import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 public class BulletinBrancheDao extends MyDAOBase {
 	/*

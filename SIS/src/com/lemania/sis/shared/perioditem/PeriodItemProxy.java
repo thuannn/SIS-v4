@@ -3,10 +3,12 @@ package com.lemania.sis.shared.perioditem;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.perioditem.PeriodItem;
+import com.lemania.sis.server.bean.perioditem.PeriodItem;
 
 @ProxyFor( value=PeriodItem.class, locator=ObjectifyLocator.class )
 public interface PeriodItemProxy extends EntityProxy {
+	
+	public Long getId();
 	
 	public String getPeriod();
 	public void setPeriod(String period);

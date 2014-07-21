@@ -26,7 +26,11 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.StackPanel;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -43,7 +47,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField DockPanel dockPanel;
 	@UiField Tree treeMenuProf;
 	@UiField Tree treeMenuEleve;
-	@UiField VerticalPanel leftPanel;
 	@UiField HTML htmlProgressBar;
 	@UiField Hyperlink cmdProfileManagement;
 	@UiField Hyperlink cmdAttribution;
@@ -93,6 +96,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdClassAgendaPage;
 	@UiField AbsolutePanel pnlNorth;
 	@UiField Hyperlink cmdProfessorAgendaPage;
+	@UiField VerticalPanel leftPanel;
+	@UiField Hyperlink cmdParentMgt;
 	
 	
 	// Thuan
@@ -358,6 +363,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (tokenName.equals(NameTokens.periodmgt)) switchStyle(this.cmdPeriodMgt, false, false);
 		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
+		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
 	}
 	
 	
@@ -406,5 +412,21 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (getUiHandlers() != null) {			
 			getUiHandlers().logOut();
 		}
+	}
+
+	/*
+	 * */
+	@Override
+	public void setWindowEventHanlder() {
+		//
+		Window.addResizeHandler( new ResizeHandler() {
+
+			@Override
+			public void onResize(ResizeEvent event) {
+				//
+				leftPanel.setHeight( Window.getClientHeight() - pnlNorth.getOffsetHeight() - 20 + "px");
+			}
+			
+		});
 	}
 }

@@ -11,6 +11,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
+import com.lemania.sis.client.event.PeriodItemPopupCloseEvent;
 import com.lemania.sis.shared.perioditem.PeriodItemProxy;
 import com.lemania.sis.shared.perioditem.PeriodItemRequestFactory;
 import com.lemania.sis.shared.perioditem.PeriodItemRequestFactory.PeriodItemRequestContext;
@@ -79,7 +80,7 @@ public class PeriodListPopupPresenter extends
 		PeriodItemRequestFactory rf = GWT.create(PeriodItemRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		PeriodItemRequestContext rc = rf.periodItemRequestContext();
-		rc.addPeriodItem( fromHour, fromMinute, toHour, toMinute, note, isActive).fire(new Receiver<PeriodItemProxy>(){
+		rc.addPeriodItem( fromHour, fromMinute, toHour, toMinute, note, isActive).fire(new Receiver<PeriodItemProxy>() {
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -89,6 +90,16 @@ public class PeriodListPopupPresenter extends
 				getView().addNewPeriodItem(response);
 			}
 		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void hidePopup() {
+		//
+		getView().hide();
+		getEventBus().fireEvent( new PeriodItemPopupCloseEvent() );
 	}
 
 }

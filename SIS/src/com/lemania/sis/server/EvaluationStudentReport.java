@@ -3,7 +3,7 @@ package com.lemania.sis.server;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
-import com.lemania.sis.server.student.Student;
+import com.lemania.sis.server.bean.student.Student;
 
 @Entity
 @Index

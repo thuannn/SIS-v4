@@ -20,12 +20,12 @@ import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.SettingOption;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.User;
-import com.lemania.sis.server.bulletin.Bulletin;
-import com.lemania.sis.server.classroom.Classroom;
-import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
-import com.lemania.sis.server.period.Period;
-import com.lemania.sis.server.perioditem.PeriodItem;
-import com.lemania.sis.server.student.Student;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.classroom.Classroom;
+import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
+import com.lemania.sis.server.bean.period.Period;
+import com.lemania.sis.server.bean.perioditem.PeriodItem;
+import com.lemania.sis.server.bean.student.Student;
 
 public class MyDAOBase {
 	

@@ -4,7 +4,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 @Entity
 @Index

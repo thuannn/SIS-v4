@@ -49,6 +49,7 @@ public class MainPagePresenter extends
 		void showCurrentPageOnMenu( String tokenName );
 		//
 		void drawSchoolInterface(String schoolCode);
+		void setWindowEventHanlder();
 	}
 	
 	@ProxyStandard
@@ -63,6 +64,7 @@ public class MainPagePresenter extends
 
 	@Override
 	protected void revealInParent() {
+		//
 		RevealRootContentEvent.fire(this, this);
 	}
 
@@ -72,6 +74,9 @@ public class MainPagePresenter extends
 		
 		// Thuan: attach Ui handler
 		getView().setUiHandlers(this);
+		
+		//
+		getView().setWindowEventHanlder();
 	}
 
 	

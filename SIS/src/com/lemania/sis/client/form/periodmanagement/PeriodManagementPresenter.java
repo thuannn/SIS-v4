@@ -17,8 +17,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
+import com.lemania.sis.client.event.PeriodItemPopupCloseEvent;
+import com.lemania.sis.client.event.PeriodItemPopupCloseEvent.PeriodItemPopupCloseHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupPresenter;
@@ -26,6 +29,9 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
 import com.lemania.sis.shared.period.PeriodRequestFactory.PeriodRequestContext;
+import com.lemania.sis.shared.perioditem.PeriodItemProxy;
+import com.lemania.sis.shared.perioditem.PeriodItemRequestFactory;
+import com.lemania.sis.shared.perioditem.PeriodItemRequestFactory.PeriodItemRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
@@ -33,7 +39,7 @@ import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 public class PeriodManagementPresenter
 		extends
 		Presenter<PeriodManagementPresenter.MyView, PeriodManagementPresenter.MyProxy>
-		implements PeriodManagementUiHandlers {
+		implements PeriodManagementUiHandlers, PeriodItemPopupCloseHandler {
 	
 	interface MyView extends View, HasUiHandlers<PeriodManagementUiHandlers> {
 		//
@@ -46,6 +52,8 @@ public class PeriodManagementPresenter
 		void addNewPeriod(PeriodProxy period);
 		//
 		void updatePeriod(PeriodProxy period);
+		//
+		void setPeriodListData( List<PeriodItemProxy> periods);
 	}
 	
 	
@@ -82,6 +90,8 @@ public class PeriodManagementPresenter
 		getView().initializeUI();
 		//
 		loadClassList();
+		//
+		onPeriodItemPopupClose(null);
 	}
 	
 	/*
@@ -186,6 +196,28 @@ public class PeriodManagementPresenter
 		//
 		addToPopupSlot(periodItemPopup, true);
 		periodItemPopup.loadPeriods();
+	}
+
+	
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onPeriodItemPopupClose(PeriodItemPopupCloseEvent event) {
+		//
+		PeriodItemRequestFactory rf = GWT.create(PeriodItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		PeriodItemRequestContext rc = rf.periodItemRequestContext();
+		rc.listAll().fire(new Receiver<List<PeriodItemProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<PeriodItemProxy> response) {
+				getView().setPeriodListData(response);
+			}
+		});
 	}
 
 }

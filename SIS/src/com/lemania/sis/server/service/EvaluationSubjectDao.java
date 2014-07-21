@@ -10,7 +10,7 @@ import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.EvaluationSubject;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 public class EvaluationSubjectDao extends MyDAOBase {
 	

@@ -20,7 +20,7 @@
 						<g:Label text="Période :"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox/>
+						<g:ListBox ui:field="lstPeriods"/>
 					</g:customCell>
 					<g:customCell>
 						<g:Button text="Rajouter une période" ui:field="cmdAddPeriodItem"/>

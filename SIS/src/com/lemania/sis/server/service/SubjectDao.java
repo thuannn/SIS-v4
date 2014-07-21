@@ -8,7 +8,7 @@ import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 public class SubjectDao extends MyDAOBase {
 	

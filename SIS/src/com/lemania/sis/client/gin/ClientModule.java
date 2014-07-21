@@ -34,21 +34,17 @@ import com.lemania.sis.client.view.ProfsAddView;
 import com.lemania.sis.client.view.ProfsView;
 import com.lemania.sis.client.view.SettingsView;
 import com.lemania.sis.client.view.StudentAddView;
-import com.lemania.sis.client.view.StudentView;
-import com.lemania.sis.client.view.UserManagementView;
 import com.lemania.sis.client.presenter.EcoleAddPresenter;
 import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.presenter.ProfsAddPresenter;
 import com.lemania.sis.client.presenter.ContactPresenter;
-import com.lemania.sis.client.presenter.UserManagementPresenter;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.presenter.FrmPasswordPresenter;
 import com.lemania.sis.client.place.SISPlaceManager;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
-import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.presenter.StudentAddPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
@@ -67,14 +63,22 @@ import com.lemania.sis.client.view.FrmEvaluationInputView;
 import com.lemania.sis.client.view.FrmEvaluationInputStudentView;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementModule;
 import com.lemania.sis.client.form.studentagenda.StudentAgendaModule;
+import com.lemania.sis.client.form.studentmgt.StudentPresenter;
+import com.lemania.sis.client.form.studentmgt.StudentView;
+import com.lemania.sis.client.form.usermgt.UserManagementPresenter;
+import com.lemania.sis.client.form.usermgt.UserManagementView;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaModule;
 import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupModule;
+import com.lemania.sis.client.form.parentmgt.ParentManagementModule;
+import com.lemania.sis.client.popup.parentprofile.ParentProfileModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
 		
+		install(new ParentProfileModule());
+		install(new ParentManagementModule());
 		install(new PeriodListPopupModule());
 		install(new ProfessorAgendaModule());
 		install(new StudentAgendaModule());

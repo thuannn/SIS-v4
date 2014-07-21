@@ -3,7 +3,7 @@ package com.lemania.sis.shared.bulletin;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletin.Bulletin;
 
 @ProxyFor(value=Bulletin.class, locator=ObjectifyLocator.class)
 public interface BulletinProxy extends EntityProxy {

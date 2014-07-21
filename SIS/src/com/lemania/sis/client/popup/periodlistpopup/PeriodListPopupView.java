@@ -54,7 +54,7 @@ public class PeriodListPopupView extends
 	@UiHandler("cmdClose")
 	void onCmdCloseClick(ClickEvent event) {
 		//
-		this.hide();
+		getUiHandlers().hidePopup();
 	}
 	
 	

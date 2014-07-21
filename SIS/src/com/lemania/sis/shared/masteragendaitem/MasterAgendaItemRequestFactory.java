@@ -6,8 +6,8 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.lemania.sis.server.masteragendaitem.MasterAgendaItem;
-import com.lemania.sis.server.masteragendaitem.MasterAgendaItemDao;
+import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
+import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItemDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 
 public interface MasterAgendaItemRequestFactory extends RequestFactory {

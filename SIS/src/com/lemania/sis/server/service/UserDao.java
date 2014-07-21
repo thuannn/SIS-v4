@@ -9,7 +9,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.User;
-import com.lemania.sis.server.student.Student;
+import com.lemania.sis.server.bean.student.Student;
 
 public class UserDao extends MyDAOBase {
 	

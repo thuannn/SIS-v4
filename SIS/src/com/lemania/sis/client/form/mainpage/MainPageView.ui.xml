@@ -6,7 +6,6 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:FlowPanel width="100%" height="100%">
 		<g:DockPanel width="100%" height="100%" ui:field="dockPanel" spacing="5" borderWidth="0">
 			<g:Dock direction="NORTH">
 				<g:AbsolutePanel height="50px" width="100%" ui:field="pnlNorth">
@@ -56,53 +55,60 @@
 					</g:TreeItem>
 					<g:TreeItem text="Horaires" state="true">
 						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>
-						<g:TreeItem text="Horaires personnalisés" state="true">
+						<g:TreeItem text="Horaires personnalisés">
 							<g:Hyperlink targetHistoryToken="studentagenda" text="Elèves" ui:field="cmdStudentAgendaPage"/>
 							<g:Hyperlink targetHistoryToken="profagenda" text="Professeurs" ui:field="cmdProfessorAgendaPage"/>
 							<g:Hyperlink targetHistoryToken="masteragenda" text="Classes" ui:field="cmdClassAgendaPage"/>
 						</g:TreeItem>
 					</g:TreeItem>
 					<g:TreeItem text="Information de base" state="true">
-						<g:TreeItem text="Elèves">
-							<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
-							<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève" ui:field="cmdStudentAdd"/>
+						<g:TreeItem text="Administration des profils" state="true">
+							<g:TreeItem text="Elèves">
+								<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
+								<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève" ui:field="cmdStudentAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Professeurs">
+								<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs" ui:field="cmdProfList"/>
+								<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Responsables">
+								<g:Hyperlink targetHistoryToken="parentmgt" text="Liste des parents" ui:field="cmdParentMgt"/>
+							</g:TreeItem>
 						</g:TreeItem>
-						<g:TreeItem text="Professeurs">
-							<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs" ui:field="cmdProfList"/>
-							<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
-						</g:TreeItem>
-						<g:TreeItem text="Branches">
-							<g:Hyperlink targetHistoryToken="branchelist" text="Liste des branches" ui:field="cmdBrancheList"/>
-							<g:Hyperlink targetHistoryToken="brancheadd" text="Rajouter une branche" ui:field="cmdBrancheAdd"/>
-						</g:TreeItem>
-						<g:TreeItem text="Matières">
-							<g:Hyperlink targetHistoryToken="subjectlist" text="Liste des matières" ui:field="cmdSubjectList"/>
-							<g:Hyperlink targetHistoryToken="subjectadd" text="Rajouter une matière" ui:field="cmdSubjectAdd"/>
-						</g:TreeItem>
-						<g:TreeItem text="Horaires">
-							<g:Hyperlink text="Organisation des périodes" targetHistoryToken="periodmgt" ui:field="cmdPeriodMgt"/>
-						</g:TreeItem>
-						<g:TreeItem text="Classes">
-							<g:Hyperlink text="Liste des classes" targetHistoryToken="classlist" ui:field="cmdClassList"/>
-							<g:Hyperlink targetHistoryToken="classeadd" text="Rajouter une classe" ui:field="cmdClassAdd"/>
-						</g:TreeItem>
-						<g:TreeItem text="Programmes">
-							<g:Hyperlink targetHistoryToken="!cours" text="Liste des programmes" ui:field="cmdProgrammeList"/>
-							<g:Hyperlink text="Rajouter un programme" targetHistoryToken="coursadd" ui:field="cmdProgrammeAdd"/>
-						</g:TreeItem>
-						<g:TreeItem text="Locaux">
-							<g:Hyperlink text="Salles de classe" targetHistoryToken="classroom" ui:field="cmdClassroomPage"/>
-						</g:TreeItem>
-						<g:TreeItem text="Ecoles">
-							<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage" ui:field="cmdSchoolList"/>
-							<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école" ui:field="cmdSchoolAdd"/>
+						<g:TreeItem text="Ressources" state="true">
+							<g:TreeItem text="Branches">
+								<g:Hyperlink targetHistoryToken="branchelist" text="Liste des branches" ui:field="cmdBrancheList"/>
+								<g:Hyperlink targetHistoryToken="brancheadd" text="Rajouter une branche" ui:field="cmdBrancheAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Matières">
+								<g:Hyperlink targetHistoryToken="subjectlist" text="Liste des matières" ui:field="cmdSubjectList"/>
+								<g:Hyperlink targetHistoryToken="subjectadd" text="Rajouter une matière" ui:field="cmdSubjectAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Horaires">
+								<g:Hyperlink text="Organisation des périodes" targetHistoryToken="periodmgt" ui:field="cmdPeriodMgt"/>
+							</g:TreeItem>
+							<g:TreeItem text="Classes">
+								<g:Hyperlink text="Liste des classes" targetHistoryToken="classlist" ui:field="cmdClassList"/>
+								<g:Hyperlink targetHistoryToken="classeadd" text="Rajouter une classe" ui:field="cmdClassAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Programmes">
+								<g:Hyperlink targetHistoryToken="!cours" text="Liste des programmes" ui:field="cmdProgrammeList"/>
+								<g:Hyperlink text="Rajouter un programme" targetHistoryToken="coursadd" ui:field="cmdProgrammeAdd"/>
+							</g:TreeItem>
+							<g:TreeItem text="Locaux">
+								<g:Hyperlink text="Salles de classe" targetHistoryToken="classroom" ui:field="cmdClassroomPage"/>
+							</g:TreeItem>
+							<g:TreeItem text="Ecoles">
+								<g:Hyperlink text="Liste des écoles" targetHistoryToken="!ecolepage" ui:field="cmdSchoolList"/>
+								<g:Hyperlink targetHistoryToken="!addecole" text="Rajouter une école" ui:field="cmdSchoolAdd"/>
+							</g:TreeItem>
 						</g:TreeItem>
 						<g:TreeItem text="Gestion de l&apos;accès">
 							<g:Hyperlink text="Gestion des codes d&apos;accès" targetHistoryToken="usermanagement" ui:field="cmdUserManagement"/>
 							<g:Hyperlink targetHistoryToken="settings" text="Gérer les dates limites" ui:field="cmdSettings"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:TreeItem text="Autres" state="true">
+					<g:TreeItem text="Profil" state="true">
 						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPassword"/>
 						<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelp"/>
 					</g:TreeItem>
@@ -160,5 +166,4 @@
 				</g:VerticalPanel>
 			</g:Dock>
 		</g:DockPanel>
-	</g:FlowPanel>
 </ui:UiBinder>

@@ -12,9 +12,12 @@ import com.lemania.sis.client.form.bulletincreation.FrmBulletinCreationPresenter
 import com.lemania.sis.client.form.classroom.ClassroomPresenter;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
+import com.lemania.sis.client.form.parentmgt.ParentManagementPresenter;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementPresenter;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaPresenter;
 import com.lemania.sis.client.form.studentagenda.StudentAgendaPresenter;
+import com.lemania.sis.client.form.studentmgt.StudentPresenter;
+import com.lemania.sis.client.form.usermgt.UserManagementPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
@@ -25,10 +28,8 @@ import com.lemania.sis.client.presenter.EcoleAddPresenter;
 import com.lemania.sis.client.presenter.ProfsPresenter;
 import com.lemania.sis.client.presenter.ProfsAddPresenter;
 import com.lemania.sis.client.presenter.ContactPresenter;
-import com.lemania.sis.client.presenter.UserManagementPresenter;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.presenter.FrmPasswordPresenter;
-import com.lemania.sis.client.presenter.StudentPresenter;
 import com.lemania.sis.client.presenter.StudentAddPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
 import com.lemania.sis.client.presenter.FrmBrancheAddPresenter;
@@ -121,4 +122,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<StudentAgendaPresenter> getStudentAgendaPresenter();
 	
 	AsyncProvider<ProfessorAgendaPresenter> getProfessorAgendaPresenter();
+	
+	AsyncProvider<ParentManagementPresenter> getParentManagementPresenter();
 }
