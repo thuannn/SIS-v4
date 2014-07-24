@@ -29,9 +29,9 @@ import com.lemania.sis.client.uihandler.SettingOptionsUiHandler;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory;
-import com.lemania.sis.shared.service.UserRequestFactory;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory.SettingOptionRequestContext;
-import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
+import com.lemania.sis.shared.user.UserRequestFactory;
+import com.lemania.sis.shared.user.UserRequestFactory.UserRequestContext;
 
 public class SettingsPresenter 
 	extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> 

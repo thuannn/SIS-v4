@@ -19,7 +19,6 @@ import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.SettingOption;
 import com.lemania.sis.server.Subject;
-import com.lemania.sis.server.User;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
@@ -27,6 +26,7 @@ import com.lemania.sis.server.bean.parent.Parent;
 import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.bean.perioditem.PeriodItem;
 import com.lemania.sis.server.bean.student.Student;
+import com.lemania.sis.server.bean.user.User;
 
 public class MyDAOBase {
 	

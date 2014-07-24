@@ -26,10 +26,10 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmPasswordUiHandler;
-import com.lemania.sis.shared.UserProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.UserRequestFactory;
-import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
+import com.lemania.sis.shared.user.UserProxy;
+import com.lemania.sis.shared.user.UserRequestFactory;
+import com.lemania.sis.shared.user.UserRequestFactory.UserRequestContext;
 
 public class FrmPasswordPresenter 
 		extends	Presenter<FrmPasswordPresenter.MyView, FrmPasswordPresenter.MyProxy> 

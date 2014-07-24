@@ -11,6 +11,8 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
+import com.lemania.sis.client.event.ParentAfterAddEvent;
+import com.lemania.sis.client.event.ParentAfterAddEvent.ParentAfterAddHandler;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent.ProfessorAfterAddHandler;
 import com.lemania.sis.client.event.StudentAfterAddEvent;
@@ -29,18 +31,24 @@ import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.shared.ProfessorProxy;
-import com.lemania.sis.shared.UserProxy;
+import com.lemania.sis.shared.parent.ParentProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.UserRequestFactory;
-import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
 import com.lemania.sis.shared.student.StudentProxy;
+import com.lemania.sis.shared.user.UserProxy;
+import com.lemania.sis.shared.user.UserRequestFactory;
+import com.lemania.sis.shared.user.UserRequestFactory.UserRequestContext;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class UserManagementPresenter
 		extends Presenter<UserManagementPresenter.MyView, UserManagementPresenter.MyProxy> 
-		implements UserManagementUiHandler, StudentAfterAddHandler, ProfessorAfterAddHandler, StudentAfterStatusChangeHandler, LoginAuthenticatedHandler {
+		implements UserManagementUiHandler, 
+				StudentAfterAddHandler, 
+				ProfessorAfterAddHandler, 
+				StudentAfterStatusChangeHandler, 
+				LoginAuthenticatedHandler,
+				ParentAfterAddHandler {
 	
 	
 	//
@@ -153,7 +161,7 @@ public class UserManagementPresenter
 	}
 
 	@Override
-	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, String password) {
+	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, Boolean isParent, String password) {
 		//
 		if (this.currentUser.isReadOnly()){
 			Window.alert(NotificationTypes.readOnly);
@@ -169,6 +177,7 @@ public class UserManagementPresenter
 		updatedUser.setAdmin(admin);
 		updatedUser.setIsProf(isProf);
 		updatedUser.setIsStudent(isStudent);
+		updatedUser.setIsParent(isParent);
 		
 		if (!password.equals(""))
 			updatedUser.setPassword(password);
@@ -313,11 +322,48 @@ public class UserManagementPresenter
 		} );	
 	}
 
-	
+
+	/*
+	 * */
 	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
 		//
 		this.currentUser = event.getCurrentUser();
+	}
+
+	
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onParentAfterAdd(ParentAfterAddEvent event) {
+		//
+		UserRequestFactory rf = GWT.create(UserRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		UserRequestContext rc = rf.userRequest();
+		
+		ParentProxy parent = event.getAddedParent();
+		UserProxy updatedUser = rc.create( UserProxy.class );
+		updatedUser.setFullName( parent.getLastName() + " " + parent.getFirstName() );
+		updatedUser.setActive( true );
+		updatedUser.setAdmin( false );
+		updatedUser.setIsProf( false );
+		updatedUser.setIsStudent( false );
+		updatedUser.setIsParent( true );
+		updatedUser.setEmail( parent.geteMail() );
+		updatedUser.setUserName( parent.geteMail() );
+		updatedUser.setPassword( Long.toHexString(Double.doubleToLongBits(Math.random())).substring(8) );
+		
+		rc.save(updatedUser).fire( new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error) {
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				Window.alert( NotificationTypes.user_created );
+			}
+		} );		
 	}	
 }

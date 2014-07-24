@@ -6,6 +6,12 @@ import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.lemania.sis.shared.parent.ParentProxy;
 
+/*
+ * Presenters :
+ * 		- ParentManagementPresenter : show newly added Parent
+ * 		- UserPresenter : create new User for newly added Parent
+ * */
+
 public class ParentAfterAddEvent extends
 		GwtEvent<ParentAfterAddEvent.ParentAfterAddHandler> {
 

@@ -162,7 +162,7 @@ public class ParentProfilePresenter extends
 			public void onSuccess(ParentProxy response) {
 				//
 				if (! editExisting)
-					getEventBus().fireEvent( new ParentAfterAddEvent(response) );		// Add this new parent to the main grid
+					getEventBus().fireEvent( new ParentAfterAddEvent(response) );		// Add this new parent to the main grid, create new User for this person
 				else
 					getEventBus().fireEvent( new ParentAfterUpdateEvent(response) );
 			}

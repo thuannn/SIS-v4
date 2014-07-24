@@ -28,12 +28,12 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.HomeUiHandler;
 import com.lemania.sis.shared.SettingOptionProxy;
-import com.lemania.sis.shared.UserProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory;
-import com.lemania.sis.shared.service.UserRequestFactory;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory.SettingOptionRequestContext;
-import com.lemania.sis.shared.service.UserRequestFactory.UserRequestContext;
+import com.lemania.sis.shared.user.UserProxy;
+import com.lemania.sis.shared.user.UserRequestFactory;
+import com.lemania.sis.shared.user.UserRequestFactory.UserRequestContext;
 
 public class HomePresenter 
 		extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> 

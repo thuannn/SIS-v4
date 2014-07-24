@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.FieldValidation;
 import com.lemania.sis.client.NotificationTypes;
-import com.lemania.sis.shared.UserProxy;
+import com.lemania.sis.shared.user.UserProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
@@ -136,7 +136,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, value, user.getAdmin(), user.getIsProf(), user.getIsStudent(), "");
+	    			getUiHandlers().updateUserStatus(user, value, user.getAdmin(), user.getIsProf(), user.getIsStudent(), user.getIsParent(), "");
 	    		}	    		
 	    	}
 	    });
@@ -157,7 +157,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, user.getActive(), value, user.getIsProf(), user.getIsStudent(), "");
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), value, user.getIsProf(), user.getIsStudent(), user.getIsParent(), "");
 	    		}	    		
 	    	}
 	    });
@@ -190,7 +190,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), value, user.getIsStudent(), "");
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), value, user.getIsStudent(), user.getIsParent(), "");
 	    		}
 	    	}
 	    });
@@ -211,7 +211,28 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    	public void update(int index, UserProxy user, Boolean value){
 	    		if (getUiHandlers() != null) {
 	    			selectedUserIndex = index;
-	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), user.getIsProf(), value, "");
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), user.getIsProf(), value, user.getIsParent(), "");
+	    		}
+	    	}
+	    });
+	    
+	    // Parent
+	    CheckboxCell cellParent = new CheckboxCell();
+	    Column<UserProxy, Boolean> colParent = new Column<UserProxy, Boolean>(cellParent) {
+	    	@Override
+	    	public Boolean getValue(UserProxy user){
+	    		return user.getIsParent();
+	    	}
+	    };
+	    tblUser.addColumn(colParent, "Parent");
+	    tblUser.setColumnWidth(colParent, 5, Unit.PCT);
+	    
+	    colParent.setFieldUpdater(new FieldUpdater<UserProxy, Boolean>(){
+	    	@Override
+	    	public void update(int index, UserProxy user, Boolean value){
+	    		if (getUiHandlers() != null) {
+	    			selectedUserIndex = index;
+	    			getUiHandlers().updateUserStatus(user, user.getActive(), user.getAdmin(), user.getIsProf(), user.getIsStudent(), value, "");
 	    		}
 	    	}
 	    });

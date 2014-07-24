@@ -11,6 +11,8 @@ public class CurrentUser {
 	private boolean isAdmin = false;
 	private boolean isProf = false;
 	private boolean isStudent = false;
+	private boolean isParent = false;
+	
 	private boolean isLoggedIn = false;
 	private boolean isReadOnly = false;
 	
@@ -120,5 +122,13 @@ public class CurrentUser {
 
 	public void setReadOnly(boolean isReadOnly) {
 		this.isReadOnly = isReadOnly;
+	}
+
+	public boolean isParent() {
+		return isParent;
+	}
+
+	public void setParent(boolean isParent) {
+		this.isParent = isParent;
 	}
 }

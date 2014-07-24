@@ -60,4 +60,7 @@ public class NotificationTypes {
 	// Parent profile
 	public static String student_notselected = "Aucun élève n'est sélectionné !";
 	public static String child_notselected = "Aucun enfant n'est sélectionné !";
+	
+	// User management
+	public static String user_created = "Code d'accès créé pour cet utilisateur.";
 }
