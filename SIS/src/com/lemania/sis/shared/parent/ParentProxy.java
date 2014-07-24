@@ -39,6 +39,7 @@ public interface ParentProxy extends EntityProxy {
 
 	public boolean isAcceptEmail();
 	public void setAcceptEmail(boolean acceptEmail);
-
-	public List<StudentProxy> getChildren();
+	
+	public String getChildIds();
+	public void setChildIds(String childIds);
 }

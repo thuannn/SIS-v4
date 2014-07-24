@@ -168,7 +168,7 @@ public class FrmBulletinViewDetailPresenter
 	/**/
 	@Override
 	public void onStudentSelected() {
-		// TODO
+		//
 	}
 
 	

@@ -1,6 +1,9 @@
 package com.lemania.sis.client.popup.parentprofile;
 
+import java.util.List;
+
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.student.StudentProxy;
 
 public interface ParentProfileUiHandlers extends UiHandlers {
 	//
@@ -12,5 +15,6 @@ public interface ParentProfileUiHandlers extends UiHandlers {
 		 String phoneHome,
 		 String phoneWork,
 		 boolean acceptSMS,
-		 boolean acceptEmail );
+		 boolean acceptEmail,
+		 List<StudentProxy> children );
 }

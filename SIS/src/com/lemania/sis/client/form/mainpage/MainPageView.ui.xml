@@ -72,7 +72,7 @@
 								<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
 							</g:TreeItem>
 							<g:TreeItem text="Responsables">
-								<g:Hyperlink targetHistoryToken="parentmgt" text="Liste des parents" ui:field="cmdParentMgt"/>
+								<g:Hyperlink targetHistoryToken="parentmgt" text="Liste des responsables" ui:field="cmdParentMgt"/>
 							</g:TreeItem>
 						</g:TreeItem>
 						<g:TreeItem text="Ressources" state="true">

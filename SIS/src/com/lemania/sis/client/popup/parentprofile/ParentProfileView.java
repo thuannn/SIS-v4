@@ -3,6 +3,7 @@ package com.lemania.sis.client.popup.parentprofile;
 import java.util.List;
 
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -15,7 +16,12 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
+import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.Title;
+import com.lemania.sis.shared.parent.ParentProxy;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.TextBox;
@@ -56,6 +62,9 @@ public class ParentProfileView extends
 	//
 	ListDataProvider<StudentProxy> providerStudents = new ListDataProvider<StudentProxy>(); 
 	ListDataProvider<StudentProxy> providerChildren = new ListDataProvider<StudentProxy>();
+	
+	StudentProxy selectedStudent;
+	StudentProxy selectedChild;
 	
 	
 	/*
@@ -122,7 +131,18 @@ public class ParentProfileView extends
 	    };
 	    tblStudents.addColumn(colLastName, "Prénom");
 	    
+		// Add a selection model to handle user selection.
+		final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
+		tblStudents.setSelectionModel(selectionModel);
+		selectionModel
+				.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+					public void onSelectionChange(SelectionChangeEvent event) {
+						selectedStudent = selectionModel.getSelectedObject();
+					}
+				});
+	    
 		//
+		
 		providerStudents.addDataDisplay( tblStudents );
 		pagerStudents.setDisplay( tblStudents );
 	}
@@ -150,6 +170,16 @@ public class ParentProfileView extends
 	    };
 	    tblChildren.addColumn(colLastName, "Prénom");
 	    
+	    // Add a selection model to handle user selection.
+		final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
+		tblChildren.setSelectionModel(selectionModel);
+		selectionModel
+				.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+					public void onSelectionChange(SelectionChangeEvent event) {
+						selectedChild = selectionModel.getSelectedObject();
+					}
+				});
+	    
 		//
 		providerChildren.addDataDisplay( tblChildren );
 	}
@@ -169,6 +199,83 @@ public class ParentProfileView extends
 				txtPhoneHome.getText(), 
 				txtPhoneWork.getText(), 
 				chkAcceptSMS.getValue(), 
-				chkAcceptEmail.getValue() );
+				chkAcceptEmail.getValue(),
+				providerChildren.getList() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdAdd")
+	void onCmdAddClick(ClickEvent event) {
+		//
+		if (selectedStudent == null) { Window.alert( NotificationTypes.student_notselected ); return;}
+		//
+		providerChildren.getList().add(selectedStudent);
+		providerChildren.flush();
+		//
+		providerStudents.getList().remove( providerStudents.getList().indexOf(selectedStudent));
+		providerStudents.flush();
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdRemove")
+	void onCmdRemoveClick(ClickEvent event) {
+		//
+		if (selectedChild == null) { Window.alert( NotificationTypes.child_notselected ); return;}
+		//
+		providerStudents.getList().add(selectedChild);
+		providerStudents.flush();
+		//
+		providerChildren.getList().remove( providerChildren.getList().indexOf(selectedChild));
+		providerChildren.flush();
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void showParentDetails(ParentProxy parent) {
+		//
+		FieldValidation.selectItemByText(lstTitle, parent.getTitle());
+		txtFirstName.setText( parent.getFirstName() ); 
+		txtLastName.setText( parent.getLastName() );
+		txtEmail.setText( parent.geteMail() );
+		txtMobile.setText( parent.getPhoneMobile() );
+		txtPhoneHome.setText( parent.getPhoneHome() );
+		txtPhoneWork.setText( parent.getPhoneWork() );
+		chkAcceptSMS.setValue( parent.isAcceptSMS() );
+		chkAcceptEmail.setValue( parent.isAcceptEmail() );
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void showChildren(List<StudentProxy> children) {
+		//
+		providerChildren.getList().clear();
+		providerChildren.getList().addAll( children );
+		providerChildren.flush();
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void resetUI() {
+		//
+		lstTitle.setSelectedIndex(0);
+		txtFirstName.setText( "" ); 
+		txtLastName.setText( "" );
+		txtEmail.setText( "" );
+		txtMobile.setText( "" );
+		txtPhoneHome.setText( "" );
+		txtPhoneWork.setText( "" );
+		chkAcceptSMS.setValue( false );
+		chkAcceptEmail.setValue( false );
+		//
+		providerChildren.getList().clear();
+		providerChildren.flush();
 	}
 }

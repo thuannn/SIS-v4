@@ -79,7 +79,7 @@ public class EcolePresenter extends
 	
 	@Override
 	protected void onReveal(){
-		// TODO
+		//
 	}
 	
 	@Override

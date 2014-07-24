@@ -13,17 +13,17 @@ withOperation(new OperationKey("k$JK6orbDR9gy4pyPOcLB4mMzQo="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
-withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/bulletin/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/bulletin/Bulletin;)Ljava/util/List;")
-  .withMethodName("listAllActiveByProfile")
-  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
-  .build());
 withOperation(new OperationKey("h_OoDMrlyXXWx$hwdvkCWvsJfws="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAllActiveByProfile")
+  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
+  .build());
+withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/bulletin/BulletinProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/bulletin/Bulletin;)Ljava/util/List;")
   .withMethodName("listAllActiveByProfile")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());

@@ -56,4 +56,8 @@ public class NotificationTypes {
 	
 	// Dialogbox name
 	public static String popupPeriodDetailTitle = "Détails des périodes";
+	
+	// Parent profile
+	public static String student_notselected = "Aucun élève n'est sélectionné !";
+	public static String child_notselected = "Aucun enfant n'est sélectionné !";
 }

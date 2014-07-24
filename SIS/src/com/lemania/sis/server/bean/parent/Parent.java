@@ -2,14 +2,9 @@ package com.lemania.sis.server.bean.parent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Load;
 import com.lemania.sis.server.DatastoreObject;
 import com.lemania.sis.server.bean.student.Student;
 
@@ -26,8 +21,7 @@ public class Parent extends DatastoreObject implements Comparable<Parent> {
 	private String phoneWork;
 	boolean acceptSMS = false;
 	boolean acceptEmail = false;
-	
-	@Load List<Ref<Student>> children = new ArrayList<Ref<Student>>();
+	private String childIds;
 	
 	
 	public String getTitle() {
@@ -120,18 +114,20 @@ public class Parent extends DatastoreObject implements Comparable<Parent> {
 	}
 
 
-	public List<Student> getChildren() {
-		//
-		Map<Key<Student>, Student> c = ObjectifyService.ofy().load().refs(children);
-		return (List<Student>) c.values();
+	public String getChildIds() {
+		return childIds;
+	}
+
+
+	public void setChildIds(String childIds) {
+		this.childIds = childIds;
 	}
 
 
 	@Override
 	public int compareTo(Parent o) {
 		//
-		int result = -1;
-		return result;
+		return this.lastName.compareTo(o.getLastName());
 	}
 	
 }

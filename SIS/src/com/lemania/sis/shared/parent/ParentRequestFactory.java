@@ -8,6 +8,7 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.bean.parent.ParentDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
+import com.lemania.sis.shared.student.StudentProxy;
 
 public interface ParentRequestFactory extends RequestFactory {
 
@@ -18,6 +19,7 @@ public interface ParentRequestFactory extends RequestFactory {
 		Request<Void> save(ParentProxy parent); 
 		Request<ParentProxy> saveAndReturn(ParentProxy parent);
 		Request<Void> removeParent(ParentProxy parent);
+		Request<List<StudentProxy>> loadChildren(ParentProxy parent);
 	}
 	
 	ParentRequestContext parentRequestContext();

@@ -5,11 +5,11 @@
     	<g:Label text="Responsables" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
     	<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_RIGHT">
     		<g:HorizontalPanel horizontalAlignment="ALIGN_LEFT">
-    			<g:Button text="Rajouter un Responsable" ui:field="cmdAdd"/>
+    			<g:Button text="Rajouter un Responsable" ui:field="cmdAdd" styleName="buttonToolbar"/>
     		</g:HorizontalPanel>
-    		<p1:DataGrid width="100%" height="450px" ui:field="tblParents" pageSize="15"/>
+    		<p1:DataGrid width="100%" height="550px" ui:field="tblParents" pageSize="15"/>
     		<g:Cell horizontalAlignment="ALIGN_CENTER">
-    			<p1:SimplePager location="CENTER" page="0" pageSize="15" pageStart="0" ui:field="pagerParent"/>
+    			<p1:SimplePager location="CENTER" page="0" pageSize="15" pageStart="0" ui:field="pagerParents"/>
     		</g:Cell>
     	</g:VerticalPanel>
     </g:HTMLPanel>
