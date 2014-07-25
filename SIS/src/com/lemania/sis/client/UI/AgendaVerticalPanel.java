@@ -1,4 +1,4 @@
-package com.lemania.sis.client;
+package com.lemania.sis.client.UI;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemProxy;

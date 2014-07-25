@@ -1,12 +1,8 @@
 package com.lemania.sis.server.bean.parent;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.DatastoreObject;
-import com.lemania.sis.server.bean.student.Student;
 
 @Entity
 @Index

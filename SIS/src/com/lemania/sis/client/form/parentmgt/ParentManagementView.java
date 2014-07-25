@@ -23,6 +23,7 @@ import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
 import com.lemania.sis.shared.parent.ParentProxy;
 import com.google.gwt.cell.client.Cell.Context;
@@ -156,18 +157,7 @@ public class ParentManagementView extends
 	    tblParents.addColumn(colSMS, "Notif. SMS");
 	    
 		// Edit button
-		ButtonCell cellEdit = new ButtonCell() {
-			//
-			@Override
-			public void render(final Context context, final SafeHtml data,
-					final SafeHtmlBuilder sb) {
-				sb.appendHtmlConstant("<button type=\"button\" class=\"gridButton\" tabindex=\"-1\">");
-				if (data != null) {
-					sb.append(data);
-				}
-				sb.appendHtmlConstant("</button>");
-			}
-		};
+		GridButtonCell cellEdit = new GridButtonCell();
 		Column<ParentProxy, String> colEdit = new Column<ParentProxy, String>(cellEdit) {
 			
 			//

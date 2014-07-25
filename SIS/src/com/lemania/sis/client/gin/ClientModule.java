@@ -71,12 +71,14 @@ import com.lemania.sis.client.form.profagenda.ProfessorAgendaModule;
 import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupModule;
 import com.lemania.sis.client.form.parentmgt.ParentManagementModule;
 import com.lemania.sis.client.popup.parentprofile.ParentProfileModule;
+import com.lemania.sis.client.form.motifabsence.MotifAbsenceModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
 		
+		install(new MotifAbsenceModule());
 		install(new ParentProfileModule());
 		install(new ParentManagementModule());
 		install(new PeriodListPopupModule());

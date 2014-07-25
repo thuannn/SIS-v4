@@ -1,12 +1,9 @@
 package com.lemania.sis.shared.parent;
 
-import java.util.List;
-
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
 import com.lemania.sis.server.bean.parent.Parent;
-import com.lemania.sis.shared.student.StudentProxy;
 
 @ProxyFor( value=Parent.class, locator=ObjectifyLocator.class)
 public interface ParentProxy extends EntityProxy {

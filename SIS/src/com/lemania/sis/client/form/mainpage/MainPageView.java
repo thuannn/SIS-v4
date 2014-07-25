@@ -98,6 +98,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdProfessorAgendaPage;
 	@UiField VerticalPanel leftPanel;
 	@UiField Hyperlink cmdParentMgt;
+	@UiField Hyperlink cmdMotifAbsence;
 	
 	
 	// Thuan
@@ -364,6 +365,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
+		if (tokenName.equals(NameTokens.motifabsence)) switchStyle(this.cmdMotifAbsence, false, false);
 	}
 	
 	

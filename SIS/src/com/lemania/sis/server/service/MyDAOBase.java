@@ -22,6 +22,7 @@ import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
+import com.lemania.sis.server.bean.motifabsence.MotifAbsence;
 import com.lemania.sis.server.bean.parent.Parent;
 import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.bean.perioditem.PeriodItem;
@@ -179,6 +180,12 @@ public class MyDAOBase {
 		
 		try {
         	ObjectifyService.register(Parent.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
+		
+		try {
+        	ObjectifyService.register(MotifAbsence.class);
         } catch (Exception e) {
         	// do nothing
         }	
