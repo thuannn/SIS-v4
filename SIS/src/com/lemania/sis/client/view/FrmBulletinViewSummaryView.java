@@ -9,9 +9,9 @@ import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
 import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -837,8 +837,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	 * */
 	private void distributeLineHeight() {
 		//
-		pnlBulletinNotes.setHeight(NotificationTypes.bulletinPageHeight.toString() + "px");
-		int margin = NotificationTypes.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationTypes.bulletinDirectionRemarque;
+		pnlBulletinNotes.setHeight(NotificationValues.bulletinPageHeight.toString() + "px");
+		int margin = NotificationValues.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationValues.bulletinDirectionRemarque;
 		int lineMargin = Math.round( margin / (tblNotes.getRowCount()-2) / 2 );
 		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
 		for (int i=0; i<tblNotes.getCellCount(0); i++)

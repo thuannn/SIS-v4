@@ -19,7 +19,7 @@ import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.view.client.ListDataProvider;
@@ -52,7 +52,7 @@ public class ClassroomView extends ViewWithUiHandlers<ClassroomUiHandlers>
 	void onCmdAddClick(ClickEvent event) {
 		//
 		if (txtCapacity.getValue() == null) {
-			Window.alert( NotificationTypes.invalid_input + " - Capacité");
+			Window.alert( NotificationValues.invalid_input + " - Capacité");
 			return;
 		}
 		//

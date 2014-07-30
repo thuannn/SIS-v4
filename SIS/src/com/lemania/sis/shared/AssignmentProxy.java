@@ -27,4 +27,7 @@ public interface AssignmentProxy extends EntityProxy {
 	
 	public Boolean getActive();	
 	public void setActive(Boolean active);
+	
+	public String getClassId();
+	public void setClassId(String classId);
 }

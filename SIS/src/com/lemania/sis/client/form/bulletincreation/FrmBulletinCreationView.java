@@ -8,7 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -237,7 +237,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    //
 	    studentDataProvider.addDataDisplay(tblStudents);
 	    //
-	    tblStudents.setPageSize( NotificationTypes.pageSize );
+	    tblStudents.setPageSize( NotificationValues.pageSize );
 	}
 	
 
@@ -338,7 +338,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 		// Check if student is already exist in the selected class
 		for (BulletinProxy bp : fullBulletins) {
 			if (bp.getStudentId().equals(selectedStudent.getId())) {
-				Window.alert( NotificationTypes.student_already_attribued );
+				Window.alert( NotificationValues.student_already_attribued );
 				return;
 			}
 		}

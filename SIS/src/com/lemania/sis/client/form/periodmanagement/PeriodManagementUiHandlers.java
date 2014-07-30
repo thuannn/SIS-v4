@@ -7,7 +7,7 @@ public interface PeriodManagementUiHandlers extends UiHandlers {
 	//
 	void onClassSelected( String classId );
 	//
-	void addPeriod(String classId, String description, int order, String note, boolean isActive);
+	void addPeriod(String periodItemId, String classId, String description, int order, String note, boolean isActive);
 	//
 	void updatePeriod(PeriodProxy pp, String description, int order, String note, boolean isActive);
 	//

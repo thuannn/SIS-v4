@@ -6,6 +6,7 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Classe;
+import com.lemania.sis.server.bean.perioditem.PeriodItem;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class PeriodDao extends MyDAOBase {
@@ -20,6 +21,8 @@ public class PeriodDao extends MyDAOBase {
 		//
 		Query<Period> q = ofy().load().type(Period.class);
 		List<Period> returnList = q.list();
+		for (Period p :  returnList)
+			p.setPeriodText( ofy().load().key( p.getPeriodItem() ).now().getPeriod() );
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -32,6 +35,8 @@ public class PeriodDao extends MyDAOBase {
 				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
 				.filter("isActive", active);
 		List<Period> returnList = q.list();
+		for (Period p :  returnList)
+			p.setPeriodText( ofy().load().key( p.getPeriodItem() ).now().getPeriod() );
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -44,6 +49,8 @@ public class PeriodDao extends MyDAOBase {
 		Query<Period> q = ofy().load().type(Period.class)
 				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)));
 		List<Period> returnList = q.list();
+		for (Period p :  returnList)
+			p.setPeriodText( ofy().load().key( p.getPeriodItem() ).now().getPeriod() );
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -68,9 +75,10 @@ public class PeriodDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public Period addPeriod( String classId, String description, int order, String note, boolean isActive ) {
+	public Period addPeriod( String periodItemId, String classId, String description, int order, String note, boolean isActive ) {
 		//
 		Period period = new Period();
+		period.setPeriodItem( Key.create(PeriodItem.class, Long.parseLong(periodItemId)) );
 		period.setClasse( Key.create(Classe.class, Long.parseLong(classId)));
 		period.setDescription(description);
 		period.setOrder(order);
@@ -79,7 +87,9 @@ public class PeriodDao extends MyDAOBase {
 		//
 		Key<Period> key = ofy().save().entities( period ).now().keySet().iterator().next();
 		try {
-			return ofy().load().key(key).now();
+			Period returnPeriod = ofy().load().key(key).now();
+			returnPeriod.setPeriodText( ofy().load().key( returnPeriod.getPeriodItem() ).now().getPeriod() );
+			return returnPeriod;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

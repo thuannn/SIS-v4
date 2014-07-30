@@ -2,6 +2,7 @@ package com.lemania.sis.server.bean.period;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.DatastoreObject;
@@ -18,7 +19,18 @@ public class Period extends DatastoreObject implements Comparable<Period> {
 	private String note = "";
 	private boolean isActive = true;
 	
+	@IgnoreSave
+	private String periodText;
 	
+	
+	public String getPeriodText() {
+		return periodText;
+	}
+
+	public void setPeriodText(String periodText) {
+		this.periodText = periodText;
+	}
+
 	public Key<PeriodItem> getPeriodItem() {
 		return periodItem;
 	}

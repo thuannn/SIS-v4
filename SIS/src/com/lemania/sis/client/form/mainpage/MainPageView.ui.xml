@@ -62,7 +62,7 @@
 						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
 					</g:TreeItem>
 					<g:TreeItem text="Absences" state="true">
-						<g:Hyperlink text="Saisir des absences" targetHistoryToken="motifabsencemgt" ui:field="cmdAbsenceInput"/>
+						<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceList"/>
 					</g:TreeItem>
 					<g:TreeItem text="Evaluation Intermediaire" state="true">
 						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>

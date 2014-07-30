@@ -22,7 +22,7 @@ public interface PeriodRequestFactory extends RequestFactory {
 		Request<Void> save(PeriodProxy c);
 		Request<PeriodProxy> saveAndReturn(PeriodProxy pp);
 		
-		Request<PeriodProxy> addPeriod( String classId, String description, int order, String note, boolean isActive );
+		Request<PeriodProxy> addPeriod( String periodItemId, String classId, String description, int order, String note, boolean isActive );
 		
 		Request<Void> removePeriod(PeriodProxy classroom);
 	}

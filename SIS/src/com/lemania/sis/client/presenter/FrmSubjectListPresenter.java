@@ -17,7 +17,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -27,6 +26,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmSubjectListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
@@ -90,16 +90,16 @@ public class FrmSubjectListPresenter
 	public void updateSubject(SubjectProxy subject, String subjectName, String subjectCoef, Boolean isActive) {
 		// Validate data
 		if ( subjectName.isEmpty() ){
-			Window.alert( NotificationTypes.invalid_input + " - Nom de la matière.");
+			Window.alert( NotificationValues.invalid_input + " - Nom de la matière.");
 			return;
 		}
 		if ( FieldValidation.isNumeric( subjectCoef) ) {
 			if ( Double.parseDouble(subjectCoef) < 0 ) {
-				Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+				Window.alert( NotificationValues.invalid_input + " - Coefficient");
 				return;
 			}
 		} else {
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient");
 			return;
 		}
 		// Update

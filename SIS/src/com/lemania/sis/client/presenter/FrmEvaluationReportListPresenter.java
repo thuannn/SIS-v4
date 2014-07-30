@@ -14,10 +14,10 @@ import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationReportListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -204,16 +204,16 @@ public class FrmEvaluationReportListPresenter
 			String classMasterId) {
 		//
 		if (currentUser.isReadOnly()){
-			Window.alert( NotificationTypes.readOnly );
+			Window.alert( NotificationValues.readOnly );
 			return;
 		}
 		//
 		if (classMasterId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Maître de la classe");
+			Window.alert(NotificationValues.invalid_input + " - Maître de la classe");
 			return;
 		}
 		if (fromDate.isEmpty() || toDate.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Les dates");
+			Window.alert(NotificationValues.invalid_input + " - Les dates");
 			return;
 		}
 		//
@@ -260,7 +260,7 @@ public class FrmEvaluationReportListPresenter
 			String objective) {		
 		//
 		if (currentUser.isReadOnly()){
-			Window.alert( NotificationTypes.readOnly );
+			Window.alert( NotificationValues.readOnly );
 			return;
 		}
 		//

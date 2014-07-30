@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.view.client.ListDataProvider;
-import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.perioditem.PeriodItemProxy;
@@ -87,13 +87,24 @@ public class PeriodManagementView extends
 	    	}
 	    });
 	    
+	    
+	    //
+	    Column<PeriodProxy, String> colPeriodItemText = new Column<PeriodProxy, String>(new EditTextCell()) {
+	      @Override
+	      public String getValue(PeriodProxy object) {
+	        return object.getPeriodText();
+	      }
+	    };
+	    tblPeriods.addColumn(colPeriodItemText, "Period");
+	    
+	    //
 	    Column<PeriodProxy, String> colDescription = new Column<PeriodProxy, String>(new EditTextCell()) {
 		      @Override
 		      public String getValue(PeriodProxy object) {
 		        return object.getDescription();
 		      }
 		    };
-		tblPeriods.addColumn(colDescription, "Description");
+		tblPeriods.addColumn(colDescription, "Format");
 		colDescription.setFieldUpdater(new FieldUpdater<PeriodProxy, String>(){
 		    @Override
 		    public void update(int index, PeriodProxy period, String value){
@@ -107,6 +118,7 @@ public class PeriodManagementView extends
 		    }
 		});
 		    
+		//
 		Column<PeriodProxy, String> colNote = new Column<PeriodProxy, String>(new EditTextCell()) {
 		      @Override
 		      public String getValue(PeriodProxy object) {
@@ -176,9 +188,15 @@ public class PeriodManagementView extends
 	@UiHandler("cmdAdd")
 	void onCmdAddClick(ClickEvent event) {
 		//
-		if (txtOrder.getValue() == null) { Window.alert(NotificationTypes.invalid_input + " Ordre"); return; }
+		if (txtOrder.getValue() == null) { Window.alert(NotificationValues.invalid_input + " Ordre"); return; }
 		//
-		getUiHandlers().addPeriod(lstClasses.getValue(lstClasses.getSelectedIndex()), txtDescription.getText(), txtOrder.getValue(), txtNote.getText(), chkActif.getValue());
+		getUiHandlers().addPeriod(
+				lstPeriods.getValue( lstPeriods.getSelectedIndex() ),
+				lstClasses.getValue(lstClasses.getSelectedIndex()), 
+				txtDescription.getText(), 
+				txtOrder.getValue(), 
+				txtNote.getText(), 
+				chkActif.getValue());
 	}
 
 	/*
@@ -225,8 +243,21 @@ public class PeriodManagementView extends
 	public void setPeriodListData(List<PeriodItemProxy> periods) {
 		//
 		lstPeriods.clear();
+		lstPeriods.addItem("Choisir", "");
 		for (PeriodItemProxy pp : periods) {
 			lstPeriods.addItem( pp.getPeriod(), pp.getId().toString() );
 		}
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("lstPeriods")
+	void onLstPeriodsChange(ChangeEvent event) {
+		//
+		if (lstPeriods.getSelectedIndex() > 0)
+			txtDescription.setText( lstPeriods.getItemText(lstPeriods.getSelectedIndex()) );
+		else
+			txtDescription.setText("");
 	}
 }

@@ -16,7 +16,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -26,6 +25,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.StudentAddUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.lemania.sis.shared.student.StudentRequestFactory;
@@ -81,21 +81,21 @@ public class StudentAddPresenter
 	public void createStudent(String firstName, String lastName, String email, Boolean active) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (firstName.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Prénom" );
+			Window.alert( NotificationValues.invalid_input + " - Prénom" );
 			return;
 		}
 		if (lastName.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Nom");
+			Window.alert( NotificationValues.invalid_input + " - Nom");
 			return;
 		}
 		if ( ! FieldValidation.isValidEmailAddress( email )) {
-			Window.alert( NotificationTypes.invalid_input + " - Email");
+			Window.alert( NotificationValues.invalid_input + " - Email");
 			return;
 		}
 		
@@ -109,7 +109,7 @@ public class StudentAddPresenter
 			@Override
 			public void onSuccess(StudentProxy response) {
 				getEventBus().fireEvent(new StudentAfterAddEvent(response));
-				getView().statusMessage( NotificationTypes.student_create_good );
+				getView().statusMessage( NotificationValues.student_create_good );
 			}
 		});
 	}

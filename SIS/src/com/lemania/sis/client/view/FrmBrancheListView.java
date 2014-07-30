@@ -9,9 +9,9 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmBrancheListPresenter;
 import com.lemania.sis.client.uihandler.FrmBrancheListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -115,7 +115,7 @@ public class FrmBrancheListView extends ViewWithUiHandlers<FrmBrancheListUiHandl
 		//
 		dataProvider.setList(branches);
 		//
-		tblBranche.setHeight( Integer.toString( branches.size() * NotificationTypes.lineHeight) + "px");
+		tblBranche.setHeight( Integer.toString( branches.size() * NotificationValues.lineHeight) + "px");
 	}
 
 	

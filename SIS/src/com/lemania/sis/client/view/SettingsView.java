@@ -6,9 +6,9 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.SettingsPresenter;
 import com.lemania.sis.client.uihandler.SettingOptionsUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -109,8 +109,8 @@ public class SettingsView
 		// Ecoles
 		lstEcoles.clear();
 		lstEcoles.addItem("-", "");
-		lstEcoles.addItem("Ecole Lemania", NotificationTypes.ecoleLemania);
-		lstEcoles.addItem("Pierre Viret", NotificationTypes.pierreViret);
+		lstEcoles.addItem("Ecole Lemania", NotificationValues.ecoleLemania);
+		lstEcoles.addItem("Pierre Viret", NotificationValues.pierreViret);
 		
 		//
 		clearDateLists();
@@ -241,23 +241,23 @@ public class SettingsView
 						lstEcoles.setSelectedIndex(i);
 			}
 			//
-			if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t1))
+			if (setting.getOptionName().equals(NotificationValues.deadline_matu_t1))
 				setSelectedDate(setting.getOptionValue(), dayMatuT1, monthMatuT1, yearMatuT1);
-			if (setting.getOptionName().equals(NotificationTypes.deadline_matu_t2))
+			if (setting.getOptionName().equals(NotificationValues.deadline_matu_t2))
 				setSelectedDate(setting.getOptionValue(), dayMatuT2, monthMatuT2, yearMatuT2);			
 			//
-			if (setting.getOptionName().equals(NotificationTypes.deadline_es_t1))
+			if (setting.getOptionName().equals(NotificationValues.deadline_es_t1))
 				setSelectedDate(setting.getOptionValue(), dayEST1, monthEST1, yearEST1);
-			if (setting.getOptionName().equals(NotificationTypes.deadline_es_t2))
+			if (setting.getOptionName().equals(NotificationValues.deadline_es_t2))
 				setSelectedDate(setting.getOptionValue(), dayEST2, monthEST2, yearEST2);
-			if (setting.getOptionName().equals(NotificationTypes.deadline_es_t3))
+			if (setting.getOptionName().equals(NotificationValues.deadline_es_t3))
 				setSelectedDate(setting.getOptionValue(), dayEST3, monthEST3, yearEST3);
 			//
-			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t1))
+			if (setting.getOptionName().equals(NotificationValues.deadline_bac_t1))
 				setSelectedDate(setting.getOptionValue(), dayBacT1, monthBacT1, yearBacT1);
-			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t2))
+			if (setting.getOptionName().equals(NotificationValues.deadline_bac_t2))
 				setSelectedDate(setting.getOptionValue(), dayBacT2, monthBacT2, yearBacT2);
-			if (setting.getOptionName().equals(NotificationTypes.deadline_bac_t3))
+			if (setting.getOptionName().equals(NotificationValues.deadline_bac_t3))
 				setSelectedDate(setting.getOptionValue(), dayBacT3, monthBacT3, yearBacT3);
 		}
 	}

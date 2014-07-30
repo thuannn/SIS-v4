@@ -18,7 +18,6 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -28,6 +27,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -167,7 +167,7 @@ public class FrmBulletinViewSummaryPresenter
 	public void saveBulletinRemarques(String bulletinId, final String remarqueDirection) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -191,7 +191,7 @@ public class FrmBulletinViewSummaryPresenter
 	@Override
 	public void onDrawSchoolInterface(DrawSchoolInterfaceEvent event) {
 		//
-		if (event.getSchoolCode() == NotificationTypes.pierreViret)
+		if (event.getSchoolCode() == NotificationValues.pierreViret)
 			getView().drawPierreViretInterface();
 	}
 

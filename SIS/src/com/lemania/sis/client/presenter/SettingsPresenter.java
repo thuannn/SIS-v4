@@ -16,7 +16,6 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -26,6 +25,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.SettingOptionsUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory;
@@ -94,7 +94,7 @@ public class SettingsPresenter
 	public void updateSettingOptionDeadline(String dayNumber) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -141,7 +141,7 @@ public class SettingsPresenter
 	public void updateSettingOptionManualBlock(Boolean blnBlock) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -175,7 +175,7 @@ public class SettingsPresenter
 	public void updateCurrentEcole(String ecoleCode) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -201,7 +201,7 @@ public class SettingsPresenter
 	public void fixStudentName() {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -239,12 +239,12 @@ public class SettingsPresenter
 	public void updateDeadlinesMatu(String deadlineT1, String deadlineT2) {
 		// 
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//
-		saveDeadline(NotificationTypes.deadline_matu_t1, deadlineT1);
-		saveDeadline(NotificationTypes.deadline_matu_t2, deadlineT2);		
+		saveDeadline(NotificationValues.deadline_matu_t1, deadlineT1);
+		saveDeadline(NotificationValues.deadline_matu_t2, deadlineT2);		
 	}
 	
 
@@ -254,7 +254,7 @@ public class SettingsPresenter
 	private void saveDeadline(String code, String value) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -282,13 +282,13 @@ public class SettingsPresenter
 	public void updateDeadlinesES(String deadlineT1, String deadlineT2, String deadlineT3) {
 		// 
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//
-		saveDeadline(NotificationTypes.deadline_es_t1, deadlineT1);
-		saveDeadline(NotificationTypes.deadline_es_t2, deadlineT2);	
-		saveDeadline(NotificationTypes.deadline_es_t3, deadlineT3);
+		saveDeadline(NotificationValues.deadline_es_t1, deadlineT1);
+		saveDeadline(NotificationValues.deadline_es_t2, deadlineT2);	
+		saveDeadline(NotificationValues.deadline_es_t3, deadlineT3);
 	}
 
 	/*
@@ -298,12 +298,12 @@ public class SettingsPresenter
 			String deadlineT3) {
 		// 
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//
-		saveDeadline(NotificationTypes.deadline_bac_t1, deadlineT1);
-		saveDeadline(NotificationTypes.deadline_bac_t2, deadlineT2);	
-		saveDeadline(NotificationTypes.deadline_bac_t3, deadlineT3);
+		saveDeadline(NotificationValues.deadline_bac_t1, deadlineT1);
+		saveDeadline(NotificationValues.deadline_bac_t2, deadlineT2);	
+		saveDeadline(NotificationValues.deadline_bac_t3, deadlineT3);
 	}	
 }

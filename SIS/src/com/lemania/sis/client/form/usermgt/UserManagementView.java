@@ -14,7 +14,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.user.UserProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;

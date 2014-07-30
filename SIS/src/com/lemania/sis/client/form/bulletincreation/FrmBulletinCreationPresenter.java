@@ -15,10 +15,10 @@ import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHa
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -237,25 +237,25 @@ public class FrmBulletinCreationPresenter
 	public void createBulletin(String studentId, String classId, String year, String profileId) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (studentId.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Elève");
+			Window.alert( NotificationValues.invalid_input + " - Elève");
 			return;
 		}
 		if (classId.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Classe");
+			Window.alert( NotificationValues.invalid_input + " - Classe");
 			return;
 		}
 		if (year.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Année");
+			Window.alert( NotificationValues.invalid_input + " - Année");
 			return;
 		}
 		if (profileId.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			Window.alert( NotificationValues.invalid_input + " - Profil");
 			return;
 		}
 		//
@@ -281,7 +281,7 @@ public class FrmBulletinCreationPresenter
 	public void onClassChanged(final String classId) {
 		//
 		if (classId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Classe");
+			Window.alert(NotificationValues.invalid_input + " - Classe");
 			return;
 		}
 		// 
@@ -306,7 +306,7 @@ public class FrmBulletinCreationPresenter
 	public void removeBulletin(BulletinProxy bp) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -348,7 +348,7 @@ public class FrmBulletinCreationPresenter
 			Boolean isFinished) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		

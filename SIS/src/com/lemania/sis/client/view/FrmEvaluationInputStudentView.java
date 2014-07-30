@@ -9,10 +9,10 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.EvaluationValues;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmEvaluationInputStudentPresenter;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputStudentUiHandler;
+import com.lemania.sis.client.values.EvaluationValues;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -374,7 +374,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 		providerEvaluationSubject.getList().clear();
 		providerEvaluationSubject.setList(evaluationSubject);
 		//
-		tblEvaluations.setHeight( (NotificationTypes.lineHeight * (evaluationSubject.size()+1) + 100) + "px");
+		tblEvaluations.setHeight( (NotificationValues.lineHeight * (evaluationSubject.size()+1) + 100) + "px");
 	}
 	
 	/*

@@ -9,7 +9,7 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;

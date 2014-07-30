@@ -10,6 +10,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -18,7 +19,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -29,8 +29,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.StackPanel;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -99,6 +97,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField VerticalPanel leftPanel;
 	@UiField Hyperlink cmdParentMgt;
 	@UiField Hyperlink cmdMotifAbsence;
+	@UiField Hyperlink cmdAttendanceList;
 	
 	
 	// Thuan
@@ -366,6 +365,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
 		if (tokenName.equals(NameTokens.motifabsence)) switchStyle(this.cmdMotifAbsence, false, false);
+		if (tokenName.equals(NameTokens.attendancelist)) switchStyle(this.cmdAttendanceList, false, false);
 	}
 	
 	
@@ -391,11 +391,11 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@Override
 	public void drawSchoolInterface(String schoolCode) {
 		//
-		if (schoolCode.equals(NotificationTypes.pierreViret)) {
+		if (schoolCode.equals(NotificationValues.pierreViret)) {
 			imgLogo.setUrl("images/logo-pv.png");
 			txtCopyright.setText("Copyright © Pierre Viret - IT Services -");
 		}
-		if (schoolCode.equals(NotificationTypes.ecoleLemania)) {
+		if (schoolCode.equals(NotificationValues.ecoleLemania)) {
 			imgLogo.setUrl("images/logo.png");
 			txtCopyright.setText("Copyright © Ecole Lémania - IT Services -");
 		}

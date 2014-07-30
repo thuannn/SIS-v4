@@ -18,10 +18,10 @@ import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputStudentUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -230,15 +230,15 @@ public class FrmEvaluationInputStudentPresenter
 	public void onEvaluationHeaderSelected(String classId, final String bulletinId, final String evaluationHeaderId, final String classMasterId) {
 		//
 		if (classId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Classe");
+			Window.alert(NotificationValues.invalid_input + " - Classe");
 			return;
 		}
 		if (bulletinId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Elève");
+			Window.alert(NotificationValues.invalid_input + " - Elève");
 			return;
 		}
 		if (evaluationHeaderId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Evaluation");
+			Window.alert(NotificationValues.invalid_input + " - Evaluation");
 			return;
 		}
 		//
@@ -304,7 +304,7 @@ public class FrmEvaluationInputStudentPresenter
 			String evaluationHeaderId, String commentaire) {
 		//
 		if (currentUser.isReadOnly()) {
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//
@@ -354,12 +354,12 @@ public class FrmEvaluationInputStudentPresenter
 	public void removeEvaluationSubject(EvaluationSubjectProxy es) {
 		//
 		if (currentUser.isReadOnly()) {
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//
 		if (!currentUser.isAdmin()) {
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//

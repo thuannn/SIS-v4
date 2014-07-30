@@ -11,7 +11,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -26,6 +25,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.ProfessorListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
@@ -172,7 +172,7 @@ public class ProfsPresenter
 	public void updateProfessorStatus(ProfessorProxy prof, Boolean status) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -218,7 +218,7 @@ public class ProfsPresenter
 	public void updateProfessorName(ProfessorProxy prof, String name) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -321,7 +321,7 @@ public class ProfsPresenter
 	public void saveAssignment(String professorId, String classId, String subjectId, Boolean isActive) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -349,7 +349,7 @@ public class ProfsPresenter
 	public void updateAssignmentStatus(AssignmentProxy assignment, Boolean value) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		

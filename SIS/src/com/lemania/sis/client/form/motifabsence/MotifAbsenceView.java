@@ -74,6 +74,7 @@ public class MotifAbsenceView extends
 	        return object.getMotifCode();
 	      } 
 	    };
+	    tblMotifs.setColumnWidth(colCode, 10, Unit.PCT);
 	    tblMotifs.addColumn(colCode, "Code");
 	    
 		// Label
@@ -92,6 +93,7 @@ public class MotifAbsenceView extends
 	        return object.getTextLetter().substring(0, object.getTextLetter().length()>20? 20:object.getTextLetter().length()-1) + "...";
 	      }
 	    };
+	    tblMotifs.setColumnWidth(colLetter, 20, Unit.PCT);
 	    tblMotifs.addColumn(colLetter, "Texte lettre");
 	    
 		// SMS
@@ -101,6 +103,7 @@ public class MotifAbsenceView extends
 				return object.getTextSMS().substring(0, object.getTextSMS().length()>20? 20:object.getTextSMS().length()-1) + "...";
 			}
 		};
+		tblMotifs.setColumnWidth(colSMS, 20, Unit.PCT);
 		tblMotifs.addColumn(colSMS, "Texte SMS");
 		
 		// Receivable

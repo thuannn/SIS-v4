@@ -17,10 +17,10 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -176,7 +176,7 @@ public class StudentAgendaPresenter
 	public void onProfileChanged(String classId, String profileId) {
 		//
 		if (profileId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " : Profil");
+			Window.alert( NotificationValues.invalid_input + " : Profil");
 			return;
 		}
 		// 

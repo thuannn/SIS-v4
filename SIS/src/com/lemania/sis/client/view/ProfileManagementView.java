@@ -7,9 +7,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.ProfileManagementPresenter;
 import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
@@ -231,7 +231,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@UiHandler("cmdAddBranche")
 	void onCmdAddBrancheClick(ClickEvent event) {
 		if (selectedSubject == null) {
-			Window.alert( NotificationTypes.subject_not_selected );
+			Window.alert( NotificationValues.subject_not_selected );
 			return;
 		}
 		if ( (getUiHandlers() != null) && (selectedSubject != null) )
@@ -252,8 +252,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.getList().add( profileSubject );
 		subjectDataProvider.refresh();
 		//
-		tblSubjects.setHeight( Integer.toString( NotificationTypes.lineHeightShortList * subjectDataProvider.getList().size() 
-				+ NotificationTypes.headerHeight) + "px");
+		tblSubjects.setHeight( Integer.toString( NotificationValues.lineHeightShortList * subjectDataProvider.getList().size() 
+				+ NotificationValues.headerHeight) + "px");
 	}
 	
 
@@ -477,7 +477,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.refresh();
 		tblSubjects.redraw();
 		//
-		tblSubjects.setHeight(Integer.toString(NotificationTypes.lineHeightShortList * subjects.size() + NotificationTypes.headerHeight) + "px");
+		tblSubjects.setHeight(Integer.toString(NotificationValues.lineHeightShortList * subjects.size() + NotificationValues.headerHeight) + "px");
 	}
 	
 
@@ -500,7 +500,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		brancheDataProvider.getList().clear();
 		brancheDataProvider.setList(branches);		
 		//
-		tblBranches.setHeight( Integer.toString(NotificationTypes.lineHeightShortList * branches.size() + NotificationTypes.headerHeight) + "px");
+		tblBranches.setHeight( Integer.toString(NotificationValues.lineHeightShortList * branches.size() + NotificationValues.headerHeight) + "px");
 	}
 	
 
@@ -513,7 +513,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		brancheDataProvider.getList().add(branche);
 		brancheDataProvider.refresh();
 		//
-		tblBranches.setHeight( Integer.toString(NotificationTypes.lineHeightShortList * brancheDataProvider.getList().size() + NotificationTypes.headerHeight) + "px");
+		tblBranches.setHeight( Integer.toString(NotificationValues.lineHeightShortList * brancheDataProvider.getList().size() + NotificationValues.headerHeight) + "px");
 	}
 	
 

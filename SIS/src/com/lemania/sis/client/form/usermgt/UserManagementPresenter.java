@@ -21,10 +21,10 @@ import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent.StudentAfterStatusChangeHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -132,7 +132,7 @@ public class UserManagementPresenter
 	public void addNewUser(String fullName, String userName, String password, String email) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -164,7 +164,7 @@ public class UserManagementPresenter
 	public void updateUserStatus(UserProxy user, Boolean active, Boolean admin, Boolean isProf, Boolean isStudent, Boolean isParent, String password) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -199,7 +199,7 @@ public class UserManagementPresenter
 	public void onStudentAfterAdd(StudentAfterAddEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -226,7 +226,7 @@ public class UserManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				Window.alert( NotificationTypes.student_code_access_created );
+				Window.alert( NotificationValues.student_code_access_created );
 			}
 		} );	
 	}
@@ -239,7 +239,7 @@ public class UserManagementPresenter
 	public void onProfessorAfterAdd(ProfessorAfterAddEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -266,7 +266,7 @@ public class UserManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				Window.alert( NotificationTypes.prof_code_access_created );
+				Window.alert( NotificationValues.prof_code_access_created );
 			}
 		} );		
 	}
@@ -302,7 +302,7 @@ public class UserManagementPresenter
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -362,7 +362,7 @@ public class UserManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				Window.alert( NotificationTypes.user_created );
+				Window.alert( NotificationValues.user_created );
 			}
 		} );		
 	}	

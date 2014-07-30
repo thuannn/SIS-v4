@@ -4,7 +4,7 @@
     <g:HTMLPanel width="100%" height="100%">
     	<g:Label text="ORGANISATION DES PERIODES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER">
-			<g:VerticalPanel width="543px" styleName="subSection" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+			<g:VerticalPanel width="600px" styleName="subSection" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 				<g:Label text="Rajouter une période" styleName="sectionTitle"/>
 				<g:Grid cellPadding="2" cellSpacing="2" width="100%">
 				<g:row>
@@ -23,12 +23,12 @@
 						<g:ListBox ui:field="lstPeriods"/>
 					</g:customCell>
 					<g:customCell>
-						<g:Button text="Rajouter une période" ui:field="cmdAddPeriodItem"/>
+						<g:Button text="Rajouter une période" ui:field="cmdAddPeriodItem" styleName="gridButton"/>
 					</g:customCell>
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Description :"/>
+						<g:Label text="Format personnalisé :"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="txtDescription"/>
@@ -64,7 +64,7 @@
 					</g:customCell>
 					<g:customCell>
 						<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
-								<g:Button ui:field="cmdAdd" text="Enregistrer">Ajouter</g:Button>
+								<g:Button ui:field="cmdAdd" text="Enregistrer" styleName="buttonToolbar" width="150px">Ajouter</g:Button>
 							</g:HorizontalPanel>
 					</g:customCell>
 				</g:row>

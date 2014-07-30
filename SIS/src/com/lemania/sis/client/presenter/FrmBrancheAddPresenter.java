@@ -15,7 +15,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.inject.Inject;
 import com.google.web.bindery.requestfactory.shared.Receiver;
@@ -25,6 +24,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmBrancheAddUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
@@ -91,22 +91,22 @@ public class FrmBrancheAddPresenter
 	public void addNewBranche(String brancheName, String brancheCoef, Boolean brancheActive) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		// Validate data
 		if ( brancheName.isEmpty() ){
-			Window.alert( NotificationTypes.invalid_input + " - Nom de la branche.");
+			Window.alert( NotificationValues.invalid_input + " - Nom de la branche.");
 			return;
 		}
 		if ( FieldValidation.isNumeric( brancheCoef) ) {
 			if ( Double.parseDouble(brancheCoef) < 0 ) {
-				Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+				Window.alert( NotificationValues.invalid_input + " - Coefficient");
 				return;
 			}
 		} else {
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient");
 			return;
 		}
 		// Save
@@ -121,7 +121,7 @@ public class FrmBrancheAddPresenter
 		rc.save(ep).fire( new Receiver<Void>() {
 			@Override
 			public void onSuccess(Void response){
-				getView().showStatus( NotificationTypes.branche_create_good );
+				getView().showStatus( NotificationValues.branche_create_good );
 				getView().resetForm();
 			}
 			@Override

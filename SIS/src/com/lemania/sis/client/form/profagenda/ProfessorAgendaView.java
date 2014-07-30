@@ -12,8 +12,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.lemania.sis.client.ClassPeriod;
 import com.lemania.sis.client.UI.AgendaVerticalPanel;
+import com.lemania.sis.client.values.ClassPeriodValues;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemProxy;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -102,7 +102,7 @@ public class ProfessorAgendaView extends
 			// 
 			final AgendaVerticalPanel avp = new AgendaVerticalPanel();
 			avp.setStyleName("agendaSelected");
-			avp.getElement().getStyle().setBackgroundColor( ClassPeriod.colors.get( colorIndex ));
+			avp.getElement().getStyle().setBackgroundColor( ClassPeriodValues.colors.get( colorIndex ));
 			//
 			avp.addDomHandler( new MouseOverHandler(){
 				@Override
@@ -140,7 +140,7 @@ public class ProfessorAgendaView extends
 			((VerticalPanel) tblAgenda.getWidget(rowIndex, cellIndex)).add(avp);
 		}
 		//
-		if ( (colorIndex+1) < ClassPeriod.colors.size() ) colorIndex++; else colorIndex = 0;
+		if ( (colorIndex+1) < ClassPeriodValues.colors.size() ) colorIndex++; else colorIndex = 0;
 	}
 	
 	
@@ -196,11 +196,11 @@ public class ProfessorAgendaView extends
 		tblAgenda.removeAllRows();
 		//
 		tblAgenda.setText(0, 0, "");
-		tblAgenda.setText(0, 1, ClassPeriod.getDayName(ClassPeriod.d2_code));
-		tblAgenda.setText(0, 2, ClassPeriod.getDayName(ClassPeriod.d3_code));
-		tblAgenda.setText(0, 3, ClassPeriod.getDayName(ClassPeriod.d4_code));
-		tblAgenda.setText(0, 4, ClassPeriod.getDayName(ClassPeriod.d5_code));
-		tblAgenda.setText(0, 5, ClassPeriod.getDayName(ClassPeriod.d6_code));
+		tblAgenda.setText(0, 1, ClassPeriodValues.getDayName(ClassPeriodValues.d2_code));
+		tblAgenda.setText(0, 2, ClassPeriodValues.getDayName(ClassPeriodValues.d3_code));
+		tblAgenda.setText(0, 3, ClassPeriodValues.getDayName(ClassPeriodValues.d4_code));
+		tblAgenda.setText(0, 4, ClassPeriodValues.getDayName(ClassPeriodValues.d5_code));
+		tblAgenda.setText(0, 5, ClassPeriodValues.getDayName(ClassPeriodValues.d6_code));
 		// Add one row
 		for (int i=0; i < tblAgenda.getCellCount(0); i++) {
 			tblAgenda.setText( 1, i, " " );
@@ -241,11 +241,11 @@ public class ProfessorAgendaView extends
 		// Set IDs
 		int i = tblAgenda.getRowCount();
 		tblAgenda.setText(i, 0, "");
-		tblAgenda.setText(i, 1, ClassPeriod.d2_code);
-		tblAgenda.setText(i, 2, ClassPeriod.d3_code);
-		tblAgenda.setText(i, 3, ClassPeriod.d4_code);
-		tblAgenda.setText(i, 4, ClassPeriod.d5_code);
-		tblAgenda.setText(i, 5, ClassPeriod.d6_code);
+		tblAgenda.setText(i, 1, ClassPeriodValues.d2_code);
+		tblAgenda.setText(i, 2, ClassPeriodValues.d3_code);
+		tblAgenda.setText(i, 3, ClassPeriodValues.d4_code);
+		tblAgenda.setText(i, 4, ClassPeriodValues.d5_code);
+		tblAgenda.setText(i, 5, ClassPeriodValues.d6_code);
 		//
 		styleTable();
 	}

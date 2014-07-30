@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -29,6 +28,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmBrancheListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
@@ -127,22 +127,22 @@ public class FrmBrancheListPresenter
 	public void updateBranche(BrancheProxy branche, String brancheName, String brancheCoef, Boolean isActive) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		// Validate data
 		if ( brancheName.isEmpty() ){
-			Window.alert( NotificationTypes.invalid_input + " - Nom de la branche.");
+			Window.alert( NotificationValues.invalid_input + " - Nom de la branche.");
 			return;
 		}
 		if ( FieldValidation.isNumeric( brancheCoef) ) {
 			if ( Double.parseDouble(brancheCoef) < 0 ) {
-				Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+				Window.alert( NotificationValues.invalid_input + " - Coefficient");
 				return;
 			}
 		} else {
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient");
 			return;
 		}
 		
@@ -195,7 +195,7 @@ public class FrmBrancheListPresenter
 	public void onBrancheNameAfterChange(BrancheNameAfterChangeEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		//		

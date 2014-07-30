@@ -16,7 +16,6 @@ import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.inject.Inject;
 import com.google.web.bindery.requestfactory.shared.Receiver;
@@ -26,6 +25,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmClasseAddUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -122,18 +122,18 @@ public class FrmClasseAddPresenter
 	public void addNewClasse(String className, String coursId, Boolean isActif) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		// 
 		if (className.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Nom de la classe");
+			Window.alert( NotificationValues.invalid_input + " - Nom de la classe");
 			return;
 		}
 		
 		if (coursId.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Merci de choisir un programme");
+			Window.alert( NotificationValues.invalid_input + " - Merci de choisir un programme");
 			return;
 		}
 		
@@ -149,7 +149,7 @@ public class FrmClasseAddPresenter
 		rc.save(classe, coursId).fire(new Receiver<Void>(){
 			@Override
 			public void onSuccess(Void response){
-				getView().showStatus( NotificationTypes.classe_create_good );
+				getView().showStatus( NotificationValues.classe_create_good );
 				getView().resetForm();
 			}
 			@Override

@@ -155,5 +155,7 @@
 			<attribute name="javadoc_location" value="file:/Users/ngocthuannguyen/Documents/eclipse-kepler/plugins/com.google.appengine.eclipse.sdkbundle_1.9.7/appengine-java-sdk-1.9.7/docs/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

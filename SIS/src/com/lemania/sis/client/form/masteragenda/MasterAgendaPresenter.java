@@ -20,12 +20,12 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.MasterAgendaLoadEvent;
 import com.lemania.sis.client.event.MasterAgendaLoadEvent.MasterAgendaLoadHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.ProfileSubjectProxy;
@@ -213,7 +213,7 @@ public class MasterAgendaPresenter extends
 	public void onProfileChanged(final String profileId) {
 		//
 		if (profileId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			Window.alert( NotificationValues.invalid_input + " - Profil");
 			return;
 		}
 		//

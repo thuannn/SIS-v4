@@ -14,10 +14,10 @@ import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
@@ -211,7 +211,7 @@ public class FrmEvaluationInputPresenter
 			String assignmentId, String evaluationHeaderId ) {		
 		//
 		if (currentUser.isReadOnly()){
-			Window.alert( NotificationTypes.readOnly );
+			Window.alert( NotificationValues.readOnly );
 			return;
 		}
 		//
@@ -235,7 +235,7 @@ public class FrmEvaluationInputPresenter
 	public void updateEvaluation(EvaluationSubjectProxy es, String value, int order) {
 		//
 		if (currentUser.isReadOnly()){
-			Window.alert( NotificationTypes.readOnly );
+			Window.alert( NotificationValues.readOnly );
 			return;
 		}
 		//

@@ -18,13 +18,13 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.PeriodItemPopupCloseEvent;
 import com.lemania.sis.client.event.PeriodItemPopupCloseEvent.PeriodItemPopupCloseHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupPresenter;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
@@ -118,7 +118,7 @@ public class PeriodManagementPresenter
 	@Override
 	public void onClassSelected(String classId) {
 		//
-		if (classId.equals("")) { Window.alert( NotificationTypes.invalid_input + " Classe"); return; }
+		if (classId.equals("")) { Window.alert( NotificationValues.invalid_input + " Classe"); return; }
 		//
 		PeriodRequestFactory rf = GWT.create(PeriodRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -138,15 +138,16 @@ public class PeriodManagementPresenter
 	/*
 	 * */
 	@Override
-	public void addPeriod(String classId, String description, int order, String note, boolean isActive) {
+	public void addPeriod(String periodItemId, String classId, String description, int order, String note, boolean isActive) {
 		//
-		if (classId.equals("")) { Window.alert( NotificationTypes.invalid_input + " Classe"); return; }
-		if (description.equals("")) { Window.alert( NotificationTypes.invalid_input + " Decsription"); return; }
+		if (periodItemId.equals("")) { Window.alert( NotificationValues.invalid_input + " Period"); return; }
+		if (classId.equals("")) { Window.alert( NotificationValues.invalid_input + " Classe"); return; }
+		if (description.equals("")) { Window.alert( NotificationValues.invalid_input + " Decsription"); return; }
 		//
 		PeriodRequestFactory rf = GWT.create(PeriodRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		PeriodRequestContext rc = rf.periodRequestContext();
-		rc.addPeriod(classId, description, order, note, isActive).fire(new Receiver<PeriodProxy>(){
+		rc.addPeriod(periodItemId, classId, description, order, note, isActive).fire(new Receiver<PeriodProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -164,7 +165,7 @@ public class PeriodManagementPresenter
 	public void updatePeriod(PeriodProxy pp, String description, int order,
 			String note, boolean isActive) {
 		//
-		if (description.equals("")) { Window.alert( NotificationTypes.invalid_input + " Decsription"); return; }
+		if (description.equals("")) { Window.alert( NotificationValues.invalid_input + " Decsription"); return; }
 		//
 		PeriodRequestFactory rf = GWT.create(PeriodRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));

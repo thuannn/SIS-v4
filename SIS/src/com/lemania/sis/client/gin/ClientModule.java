@@ -7,6 +7,8 @@ import com.lemania.sis.client.form.bulletincreation.FrmBulletinCreationView;
 import com.lemania.sis.client.form.classroom.ClassroomModule;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.mainpage.MainPageView;
+import com.lemania.sis.client.form.markinput.FrmMarkInputPresenter;
+import com.lemania.sis.client.form.markinput.FrmMarkInputView;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaModule;
 import com.lemania.sis.client.place.DefaultPlace;
 import com.lemania.sis.client.place.NameTokens;
@@ -24,7 +26,6 @@ import com.lemania.sis.client.view.FrmBulletinViewDetailView;
 import com.lemania.sis.client.view.FrmBulletinViewSummaryView;
 import com.lemania.sis.client.view.FrmClasseAddView;
 import com.lemania.sis.client.view.FrmClasseListView;
-import com.lemania.sis.client.view.FrmMarkInputView;
 import com.lemania.sis.client.view.FrmPasswordView;
 import com.lemania.sis.client.view.FrmSubjectAddView;
 import com.lemania.sis.client.view.FrmSubjectListView;
@@ -54,7 +55,6 @@ import com.lemania.sis.client.presenter.CoursPresenter;
 import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 import com.lemania.sis.client.presenter.ProfileManagementPresenter;
-import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
@@ -72,12 +72,14 @@ import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupModule;
 import com.lemania.sis.client.form.parentmgt.ParentManagementModule;
 import com.lemania.sis.client.popup.parentprofile.ParentProfileModule;
 import com.lemania.sis.client.form.motifabsence.MotifAbsenceModule;
+import com.lemania.sis.client.form.attendancelist.AttendanceListModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
 		
+		install(new AttendanceListModule());
 		install(new MotifAbsenceModule());
 		install(new ParentProfileModule());
 		install(new ParentManagementModule());

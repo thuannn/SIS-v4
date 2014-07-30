@@ -7,10 +7,10 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.EvaluationValues;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmEvaluationInputPresenter;
 import com.lemania.sis.client.uihandler.FrmEvaluationInputUiHandler;
+import com.lemania.sis.client.values.EvaluationValues;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.EvaluationHeaderProxy;
 import com.lemania.sis.shared.EvaluationSubjectProxy;
@@ -160,7 +160,7 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
 		providerEvaluationSubject.setList(evaluationSubjectList);
 		
 		//
-		tblEvaluations.setHeight( Integer.toString( NotificationTypes.lineHeightShortList * (evaluationSubjectList.size()+1) + 100 ) + "px" );
+		tblEvaluations.setHeight( Integer.toString( NotificationValues.lineHeightShortList * (evaluationSubjectList.size()+1) + 100 ) + "px" );
 	}
 
 	/*

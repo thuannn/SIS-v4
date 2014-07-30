@@ -10,9 +10,9 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.presenter.FrmSubjectListPresenter;
 import com.lemania.sis.client.uihandler.FrmSubjectListUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -117,7 +117,7 @@ public class FrmSubjectListView extends ViewWithUiHandlers<FrmSubjectListUiHandl
 		// 
 		dataProvider.setList(subjectList);
 		//
-		tblSubjectList.setHeight( Integer.toString(subjectList.size() * NotificationTypes.lineHeight) + "px" );
+		tblSubjectList.setHeight( Integer.toString(subjectList.size() * NotificationValues.lineHeight) + "px" );
 	}
 
 	@Override

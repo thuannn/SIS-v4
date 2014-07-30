@@ -19,8 +19,8 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
-import com.lemania.sis.client.Title;
+import com.lemania.sis.client.values.NotificationValues;
+import com.lemania.sis.client.values.TitleValues;
 import com.lemania.sis.shared.parent.ParentProxy;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.user.cellview.client.SimplePager;
@@ -104,8 +104,8 @@ public class ParentProfileView extends
 		// 
 		lstTitle.clear();
 		lstTitle.addItem("Choisir");
-		for (int i=0; i<Title.titles.size(); i++)
-			lstTitle.addItem( Title.titles.get(i), Title.titles.get(i));
+		for (int i=0; i<TitleValues.titles.size(); i++)
+			lstTitle.addItem( TitleValues.titles.get(i), TitleValues.titles.get(i));
 	}
 
 
@@ -208,7 +208,7 @@ public class ParentProfileView extends
 	@UiHandler("cmdAdd")
 	void onCmdAddClick(ClickEvent event) {
 		//
-		if (selectedStudent == null) { Window.alert( NotificationTypes.student_notselected ); return;}
+		if (selectedStudent == null) { Window.alert( NotificationValues.student_notselected ); return;}
 		//
 		providerChildren.getList().add(selectedStudent);
 		providerChildren.flush();
@@ -222,7 +222,7 @@ public class ParentProfileView extends
 	@UiHandler("cmdRemove")
 	void onCmdRemoveClick(ClickEvent event) {
 		//
-		if (selectedChild == null) { Window.alert( NotificationTypes.child_notselected ); return;}
+		if (selectedChild == null) { Window.alert( NotificationValues.child_notselected ); return;}
 		//
 		providerStudents.getList().add(selectedChild);
 		providerStudents.flush();

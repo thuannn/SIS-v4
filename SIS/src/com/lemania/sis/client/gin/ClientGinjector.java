@@ -8,9 +8,11 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.form.attendancelist.AttendanceListPresenter;
 import com.lemania.sis.client.form.bulletincreation.FrmBulletinCreationPresenter;
 import com.lemania.sis.client.form.classroom.ClassroomPresenter;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
+import com.lemania.sis.client.form.markinput.FrmMarkInputPresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
 import com.lemania.sis.client.form.motifabsence.MotifAbsencePresenter;
 import com.lemania.sis.client.form.parentmgt.ParentManagementPresenter;
@@ -40,7 +42,6 @@ import com.lemania.sis.client.presenter.CoursPresenter;
 import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 import com.lemania.sis.client.presenter.ProfileManagementPresenter;
-import com.lemania.sis.client.presenter.FrmMarkInputPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
@@ -127,4 +128,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<ParentManagementPresenter> getParentManagementPresenter();
 	
 	AsyncProvider<MotifAbsencePresenter> getMotifAbsencePresenter();
+	
+	AsyncProvider<AttendanceListPresenter> getAttendanceListPresenter();
 }

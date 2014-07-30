@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -29,6 +28,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
@@ -243,7 +243,7 @@ public class FrmBulletinManagementPresenter
 	public void onClassChange(String classId) {
 		//
 		if (classId.isEmpty()){
-			Window.alert(NotificationTypes.invalid_input + " - Classe choisie");
+			Window.alert(NotificationValues.invalid_input + " - Classe choisie");
 			return;
 		}
 		// 
@@ -285,7 +285,7 @@ public class FrmBulletinManagementPresenter
 	public void removeSubject(BulletinSubjectProxy subject) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -303,7 +303,7 @@ public class FrmBulletinManagementPresenter
 				if (response)
 					getView().removeDeletedSubjectFromTable();
 				else
-					Window.alert( NotificationTypes.branche_list_not_empty );
+					Window.alert( NotificationValues.branche_list_not_empty );
 			}
 		});	
 	}
@@ -333,13 +333,13 @@ public class FrmBulletinManagementPresenter
 	public void updateBrancheCoef(BulletinBrancheProxy branche, String coef) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (!FieldValidation.isNumeric(coef)){
-			Window.alert(NotificationTypes.invalid_input + " - Coefficient");
+			Window.alert(NotificationValues.invalid_input + " - Coefficient");
 			return;
 		}
 		//
@@ -367,7 +367,7 @@ public class FrmBulletinManagementPresenter
 	public void removeBranche(BulletinBrancheProxy branche) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -394,7 +394,7 @@ public class FrmBulletinManagementPresenter
 	public void updateSubjectCoef(BulletinSubjectProxy subject, String coef, final Integer lastSubjectIndex) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -423,7 +423,7 @@ public class FrmBulletinManagementPresenter
 	public void addSubject(String bulletinId, String subjectId, String profId, String coef) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -450,7 +450,7 @@ public class FrmBulletinManagementPresenter
 	public void addBranche(String bulletinSubjectId, String brancheId, String coef) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -478,7 +478,7 @@ public class FrmBulletinManagementPresenter
 	public void onStudentAfterDesactivate(StudentAfterStatusChangeEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		

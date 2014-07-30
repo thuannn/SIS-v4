@@ -14,11 +14,11 @@ import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.StudentAfterStatusChangeEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -107,7 +107,7 @@ public class StudentPresenter
 	public void updateStudentStatus( final StudentProxy student, final Boolean value ) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -143,7 +143,7 @@ public class StudentPresenter
 	public void updateStudentFirstName(StudentProxy student, String firstName) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -152,7 +152,7 @@ public class StudentPresenter
 			return;
 		//
 		if (firstName.equals("")){
-			Window.alert( NotificationTypes.invalid_input + " - Prénom");
+			Window.alert( NotificationValues.invalid_input + " - Prénom");
 			return;
 		}
 		//
@@ -178,7 +178,7 @@ public class StudentPresenter
 	public void updateStudentLastName(StudentProxy student, String lastName) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -187,7 +187,7 @@ public class StudentPresenter
 			return;
 		//
 		if (lastName.equals("")){
-			Window.alert( NotificationTypes.invalid_input + " - Nom");
+			Window.alert( NotificationValues.invalid_input + " - Nom");
 			return;
 		}
 		//
@@ -211,7 +211,7 @@ public class StudentPresenter
 	public void updateStudentEmail(StudentProxy student, String email) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -220,7 +220,7 @@ public class StudentPresenter
 			return;
 		//
 		if (FieldValidation.isValidEmailAddress(email)){
-			Window.alert(NotificationTypes.invalid_input + " - Email");
+			Window.alert(NotificationValues.invalid_input + " - Email");
 			return;
 		}
 		//

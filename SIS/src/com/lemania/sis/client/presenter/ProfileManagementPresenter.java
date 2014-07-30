@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.NotificationTypes;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -29,6 +28,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
@@ -223,17 +223,17 @@ public class ProfileManagementPresenter
 	public void createNewProfile(String profileName, final String classId) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (profileName.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Nom du profil");
+			Window.alert( NotificationValues.invalid_input + " - Nom du profil");
 			return;
 		}
 		if (classId.isEmpty()){
-			Window.alert( NotificationTypes.invalid_input + " - Classe");
+			Window.alert( NotificationValues.invalid_input + " - Classe");
 			return;
 		}
 		//
@@ -284,21 +284,21 @@ public class ProfileManagementPresenter
 	public void addSubjectToProfile(String profileId, String subjectId, String professorId,	String subjectCoef) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (profileId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			Window.alert( NotificationValues.invalid_input + " - Profil");
 			return;
 		}
 		if (subjectId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Matière");
+			Window.alert( NotificationValues.invalid_input + " - Matière");
 			return;
 		}
 		if ( !FieldValidation.isNumeric( subjectCoef ) ) {
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient de la matière");
 			return;
 		}
 		
@@ -327,21 +327,21 @@ public class ProfileManagementPresenter
 			String brancheCoef, final Integer subjectLastPosition ) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (profileSubjectId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Matière");
+			Window.alert( NotificationValues.invalid_input + " - Matière");
 			return;
 		}
 		if (brancheId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Branche");
+			Window.alert( NotificationValues.invalid_input + " - Branche");
 			return;
 		}
 		if ( !FieldValidation.isNumeric(brancheCoef) ) {
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la branche");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient de la branche");
 			return;
 		}
 		
@@ -370,7 +370,7 @@ public class ProfileManagementPresenter
 	public void onProfileChanged(String profileId) {
 		//
 		if (profileId.isEmpty()) {
-			Window.alert( NotificationTypes.invalid_input + " - Profil");
+			Window.alert( NotificationValues.invalid_input + " - Profil");
 			return;
 		}
 		//
@@ -397,13 +397,13 @@ public class ProfileManagementPresenter
 	public void updateProfileSubject(ProfileSubjectProxy ps, String coef, Boolean isActive, final Integer lastPosition) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if ( !FieldValidation.isNumeric(coef)){
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la matière");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient de la matière");
 			return;
 		}
 		//
@@ -437,7 +437,7 @@ public class ProfileManagementPresenter
 	public void onSubjectSelected(final String profileSubjectId) {
 		//
 		if (profileSubjectId.isEmpty()) {
-			Window.alert( NotificationTypes.subject_not_selected );
+			Window.alert( NotificationValues.subject_not_selected );
 			return;
 		}
 		
@@ -466,7 +466,7 @@ public class ProfileManagementPresenter
 	public void onProfileBrancheAfterAdd(final ProfileBrancheAfterAddEvent event) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -493,7 +493,7 @@ public class ProfileManagementPresenter
 	public void removeBranche( ProfileBrancheProxy bp, final String profileSubjectId, final Integer subjectLastPosition ) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -519,7 +519,7 @@ public class ProfileManagementPresenter
 	public void removeSubject(ProfileSubjectProxy ps) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
@@ -537,7 +537,7 @@ public class ProfileManagementPresenter
 				if (deleted)
 					getView().removeProfileSubjectFromTable();
 				else
-					Window.alert( NotificationTypes.branche_list_not_empty );
+					Window.alert( NotificationValues.branche_list_not_empty );
 			}
 		});
 	}
@@ -558,13 +558,13 @@ public class ProfileManagementPresenter
 	public void updateProfileBranche(ProfileBrancheProxy pb, String coef, final String profileSubjectId, final Integer lastPosition) {
 		//
 		if (this.currentUser.isReadOnly()){
-			Window.alert(NotificationTypes.readOnly);
+			Window.alert(NotificationValues.readOnly);
 			return;
 		}
 		
 		//
 		if (!FieldValidation.isNumeric(coef)){
-			Window.alert( NotificationTypes.invalid_input + " - Coefficient de la branche");
+			Window.alert( NotificationValues.invalid_input + " - Coefficient de la branche");
 			return;
 		}
 		//

@@ -9,7 +9,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.NotificationTypes;
 import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.AfterUserLogOutEvent.AfterUserLogOutHandler;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
@@ -27,6 +26,7 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.HomeUiHandler;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.SettingOptionRequestFactory;
@@ -199,11 +199,11 @@ public class HomePresenter
 		
 		if ( !currentUser.isAdmin() && !currentUser.isProf() ){		
 			if (systemBlocked) {
-				Window.alert( NotificationTypes.system_student_block );
+				Window.alert( NotificationValues.system_student_block );
 				return;
 			}
 			if (currentUser.getCurrentDay() > deadLine) {
-				Window.alert( NotificationTypes.system_student_block );
+				Window.alert( NotificationValues.system_student_block );
 				return;
 			}
 		}

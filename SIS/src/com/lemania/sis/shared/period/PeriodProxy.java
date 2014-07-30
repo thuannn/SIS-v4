@@ -21,4 +21,7 @@ public interface PeriodProxy extends EntityProxy {
 
 	public int getOrder();
 	public void setOrder(int order);
+	
+	public String getPeriodText();
+	public void setPeriodText(String periodText);
 }
