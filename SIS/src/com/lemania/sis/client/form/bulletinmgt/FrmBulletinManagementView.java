@@ -1,4 +1,4 @@
-package com.lemania.sis.client.view;
+package com.lemania.sis.client.form.bulletinmgt;
 
 import java.util.List;
 
@@ -6,8 +6,6 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.presenter.FrmBulletinManagementPresenter;
-import com.lemania.sis.client.uihandler.FrmBulletinManagementUiHandler;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.BulletinSubjectProxy;
@@ -34,6 +32,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.cellview.client.SimplePager;
 
 public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinManagementUiHandler> implements
 		FrmBulletinManagementPresenter.MyView {
@@ -80,6 +79,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiField ListBox lstBranches;
 	@UiField DoubleBox txtBrancheCoef;
 	@UiField Label lblStudentName;
+	@UiField SimplePager pagerSubjects;
 	
 	
 	/**/
@@ -374,6 +374,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	        }
 	      }
 	    });
+	    //
+	    pagerSubjects.setDisplay(tblSubjects);
 	    //
 	    subjectDataProvider.addDataDisplay(tblSubjects);
 	}

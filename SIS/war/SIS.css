@@ -51,6 +51,16 @@ div, table td {
 }
 
 
+/*
+	Navigation
+*/
+.gwt-Hyperlink {
+	font-size: 12px !important;
+}
+.gwt-TreeItem {
+	font-size: 14px !important;
+}
+
 
 /*
 Agenda
@@ -229,7 +239,6 @@ Agenda
 	font-size: 14px !important;
 	font-style: gros;
 	font-family: Arial;
-	font-weight: bold;
 	letter-spacing: 1px;
 	background-color: cornflowerblue;
 }
@@ -272,7 +281,7 @@ Agenda
 }
 
 .subSection {
-	border: 1px solid lightskyblue;
+	border: 1px solid darkkhaki;
 	background-color: White;	
 }
 
@@ -379,7 +388,7 @@ Agenda
 	background-color: cornflowerblue;	
 }
 .step {
-	color: Maroon;
+	color: Blue;
 	padding: 2px;
 	font-size: 14px;
 	font-family: Verdana;

@@ -25,6 +25,8 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.CheckBox;
 
 class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
@@ -191,7 +193,17 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	 * */
 	@Override
 	public void initializeUI() {
-		// TODO Initialize UI - Attendance List
+		//
+		tblAttendance.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				//
+				clickedCellIndex = tblAttendance.getCellForEvent(event).getCellIndex();
+				clickedRowIndex = tblAttendance.getCellForEvent(event).getRowIndex();
+			}
+			
+		});
 	}
 	
 	
@@ -261,6 +273,43 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		}
 	}
 	
+	
+	
+	/*
+	 * */
+	void prepareLateWidget() {
+		//
+		TextBox txtMinutes;
+		int indexRemarqueCol = tblAttendance.getCellCount(0) - 1;
+		//
+		for ( int i= this.constantStudentNameRowStart; i < tblAttendance.getRowCount(); i++ ) {
+			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget the Remarque column
+				if ( tblAttendance.isCellPresent(i, j) ) {
+					txtMinutes = new TextBox();
+					txtMinutes.setWidth("20px");
+					txtMinutes.addValueChangeHandler(new ValueChangeHandler<String>(){
+
+						@Override
+						public void onValueChange(ValueChangeEvent<String> event) {
+							//
+							Window.alert( providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart ).getStudentName() 
+									+ " - "
+									+ providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart ).getDescription() );
+						}
+						
+					});
+					//
+					tblAttendance.setWidget(i, j, txtMinutes);
+				}
+			}
+		}
+		// Remarque column
+		for (int i= this.constantStudentNameRowStart; i< tblAttendance.getRowCount(); i++) {
+			tblAttendance.setText(i, indexRemarqueCol, "");
+			tblAttendance.setWidget(i, indexRemarqueCol, new TextBox() );
+		}
+	}
+	
 
 	
 	/*
@@ -285,7 +334,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		removeAllWidgets();
 		//
-		prepareAbsentWidget();
+		prepareLateWidget();
 	}
 	
 	

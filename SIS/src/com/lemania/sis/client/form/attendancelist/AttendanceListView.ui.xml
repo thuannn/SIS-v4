@@ -11,7 +11,7 @@
     						<g:Label text="1." styleName="step"/>
     					</g:customCell>
     					<g:customCell>
-    						<g:Label text="Date : " horizontalAlignment="ALIGN_RIGHT"/>
+    						<g:Label text="Date d&apos;aujourd&apos;hui :" horizontalAlignment="ALIGN_RIGHT"/>
     					</g:customCell>
     					<g:customCell>
     						<g:Label text="-" ui:field="lblDate" styleName="header"/>
@@ -24,7 +24,7 @@
     						<g:Label text="2." styleName="step"/>
     					</g:customCell>
     					<g:customCell>
-    						<g:Label text="Nom :" horizontalAlignment="ALIGN_RIGHT"/>
+    						<g:Label text="Professeur :" horizontalAlignment="ALIGN_RIGHT"/>
     					</g:customCell>
     					<g:customCell>
     						<g:ListBox ui:field="lstProfs"/>
@@ -35,30 +35,36 @@
     						<g:Label text="-" styleName="hiddenText"/>
     					</g:customCell>
     					<g:customCell>
-    						<g:Label text="Matière - Classe :" horizontalAlignment="ALIGN_RIGHT"/>
+    						<g:Label text="Classe &amp; Cours :" horizontalAlignment="ALIGN_RIGHT"/>
     					</g:customCell>
     					<g:customCell>
     						<g:ListBox ui:field="lstAssignments"/>
     					</g:customCell>
     				</g:row>
     			</g:Grid>
-    			<g:HorizontalPanel>
+    			<g:HorizontalPanel width="100%">
     							<g:Label text="3." styleName="step"/>
-    							<g:Grid width="100%">
-    				<g:row>
-    					<g:customCell>
-    						<g:Label text="Type d&apos;absence à saisir :" horizontalAlignment="ALIGN_RIGHT"/>
-    					</g:customCell>
-    					<g:customCell>
-    						<g:VerticalPanel width="100%" spacing="5">
-    							<g:RadioButton name="absenceType" text="Absence" checked="true" ui:field="optAbsent"/>
-    							<g:RadioButton name="absenceType" text="Retard" ui:field="optLate"/>
-    							<g:RadioButton name="absenceType" text="Exclusion" ui:field="optExclude"/>
-    							<g:RadioButton name="absenceType" text="Infirmerie" ui:field="optHealth"/>
+    							<g:VerticalPanel width="100%">
+    								<g:Label text="Type d&apos;absence à saisir :" horizontalAlignment="ALIGN_LEFT" height=""/>
+    							<g:Grid width="100%" cellSpacing="5">
+    								<g:row>
+    									<g:customCell>
+    										<g:RadioButton name="absenceType" text="Absence" checked="true" ui:field="optAbsent"/>
+    									</g:customCell>
+    									<g:customCell>
+    										<g:RadioButton name="absenceType" text="Exclusion" ui:field="optExclude"/>
+    									</g:customCell>
+    								</g:row>
+    								<g:row>
+    									<g:customCell>
+    										<g:RadioButton name="absenceType" text="Retard" ui:field="optLate"/>
+    									</g:customCell>
+    									<g:customCell>
+    										<g:RadioButton name="absenceType" text="Infirmerie" ui:field="optHealth"/>
+    									</g:customCell>
+    								</g:row>
+    							</g:Grid>
     						</g:VerticalPanel>
-    					</g:customCell>
-    				</g:row>
-    			</g:Grid>
     						</g:HorizontalPanel>
     		</g:HorizontalPanel>
     		<g:Label text="4." horizontalAlignment="ALIGN_LEFT" styleName="step" width=""/>

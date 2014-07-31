@@ -13,17 +13,17 @@ withOperation(new OperationKey("clfxIrc2wmOuD83qT7b80LZVS8I="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
   .build());
-withOperation(new OperationKey("$XzRrF97rZOR5bxrszlABtqDYrQ="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
-  .build());
 withOperation(new OperationKey("lMwcXIZKGtBXRAcy4JERU31qNR0="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAll")
+  .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
+  .build());
+withOperation(new OperationKey("$XzRrF97rZOR5bxrszlABtqDYrQ="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
   .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
   .build());
@@ -41,17 +41,17 @@ withOperation(new OperationKey("21O3UykrH4dNWa_vsVEHJGb_pqI="),
   .withMethodName("updateAssignmentStatus")
   .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
   .build());
-withOperation(new OperationKey("OHqd1g5e1z94itKpVZ2uF$_Ib4A="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
-  .withMethodName("listAllActive")
-  .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
-  .build());
 withOperation(new OperationKey("OUsQVzt2GJ_YRvTxLUMSlXrdNHA="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAllActive")
+  .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
+  .build());
+withOperation(new OperationKey("OHqd1g5e1z94itKpVZ2uF$_Ib4A="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
   .withMethodName("listAllActive")
   .withRequestContext("com.lemania.sis.shared.service.AssignmentRequestFactory$AssignmentRequestContext")
   .build());

@@ -1,18 +1,4 @@
-<!-- Indices written at Wed, 30 Jul 2014 16:20:25 CEST -->
+<!-- Indices written at Thu, 31 Jul 2014 10:46:57 CEST -->
 
-<datastore-indexes>
+<datastore-indexes/>
 
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Assignment" ancestor="false" source="auto">
-        <property name="active" direction="asc"/>
-        <property name="prof" direction="asc"/>
-        <property name="classe" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
-        <property name="subject" direction="asc"/>
-        <property name="subjectName" direction="asc"/>
-    </datastore-index>
-
-</datastore-indexes>

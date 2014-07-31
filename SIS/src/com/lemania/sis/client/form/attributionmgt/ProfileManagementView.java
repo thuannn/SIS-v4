@@ -1,4 +1,4 @@
-package com.lemania.sis.client.view;
+package com.lemania.sis.client.form.attributionmgt;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.presenter.ProfileManagementPresenter;
-import com.lemania.sis.client.uihandler.ProfileManagementUiHandler;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
@@ -37,6 +35,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.cellview.client.SimplePager;
 
 public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementUiHandler> implements
 		ProfileManagementPresenter.MyView {
@@ -83,6 +82,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@UiField(provided=true) DataGrid<ProfileSubjectProxy> tblSubjects = new DataGrid<ProfileSubjectProxy>();
 	@UiField(provided=true) DataGrid<ProfileBrancheProxy> tblBranches = new DataGrid<ProfileBrancheProxy>();
 	@UiField ListBox lstClasses;
+	@UiField SimplePager pagerSubjects;
 	
 	/*
 	 * 
@@ -366,9 +366,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    });
 	    tblSubjects.setColumnWidth(colDelete, 10.0, Unit.PCT);
 	    tblSubjects.addColumn(colDelete, "");	    
-	    
-	    // -- Set data display
-	    subjectDataProvider.addDataDisplay(tblSubjects);	    
+	
 	    
 	    // -- Selection model
 	    // Add a selection model to handle user selection.
@@ -387,6 +385,12 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    	  }
 	      }
 	    });
+	    
+	    //
+	    pagerSubjects.setDisplay(tblSubjects);
+	    
+	    // -- Set data display
+	    subjectDataProvider.addDataDisplay(tblSubjects);
 	}
 	
 	
@@ -474,10 +478,10 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.getList().clear();
 		subjectDataProvider.getList().addAll(subjects);
 		subjectDataProvider.flush();
-		subjectDataProvider.refresh();
-		tblSubjects.redraw();
+//		subjectDataProvider.refresh();
+//		tblSubjects.redraw();
 		//
-		tblSubjects.setHeight(Integer.toString(NotificationValues.lineHeightShortList * subjects.size() + NotificationValues.headerHeight) + "px");
+//		tblSubjects.setHeight(Integer.toString(NotificationValues.lineHeightShortList * subjects.size() + NotificationValues.headerHeight) + "px");
 	}
 	
 
