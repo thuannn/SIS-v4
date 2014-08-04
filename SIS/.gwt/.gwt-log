@@ -5096,3 +5096,1024 @@ Validating units:
       [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
 Removing invalidated units
 Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2740 units from cache.
+Compiling...
+   20% complete (ETR: 19 seconds)
+   20% complete (ETR: 19 seconds)
+   20% complete (ETR: 19 seconds)
+   30% complete (ETR: 14 seconds)
+   40% complete (ETR: 10 seconds)
+   50% complete (ETR: 8 seconds)
+   60% complete (ETR: 6 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 15.25 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2740 cached/archived units.  Used 2740 / 2740 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2740 cached/archived units.  Used 2740 / 2740 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2740 units from cache.
+Compiling...
+   30% complete (ETR: 9 seconds)
+   30% complete (ETR: 9 seconds)
+   30% complete (ETR: 9 seconds)
+   30% complete (ETR: 9 seconds)
+   40% complete (ETR: 8 seconds)
+   50% complete (ETR: 6 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 11.55 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2740 cached/archived units.  Used 2740 / 2740 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2740 cached/archived units.  Used 2740 / 2740 units from cache.
+Compiling...
+   Compilation completed in 0.00 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+Removing invalidated units
+Finding entry point classes
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 2740 cached/archived units.  Used 2740 / 3680 units from cache.
+Compiling...
+   Compilation completed in 3.71 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/bulletin/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/classroom/ClassroomRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/masteragendaitem/MasterAgendaItemRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/motifabsence/MotifAbsenceRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/parent/ParentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/period/PeriodRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/perioditem/PeriodItemRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/student/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/user/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138032312.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138032312.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138032312_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138033403.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138033403.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138033403_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138046477.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138046477.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138046477_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138049460.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138049460.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138049460_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138057153.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138057153.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138057153_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138060850.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138060850.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138060850_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138081375.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138081375.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138081375_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138085478.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138085478.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138085478_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138092838.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138092838.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138092838_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138096355.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138096355.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138096355_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138099803.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138099803.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138099803_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138103893.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138103893.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138103893_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138109807.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138109807.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138109807_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138124424.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138124424.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138124424_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138214139.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138214139.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138214139_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138217515.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138217515.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138217515_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138249712.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138249712.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138249712_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138256357.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138256357.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138256357_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138296145.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138296145.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138296145_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138299343.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138299343.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138299343_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138302325.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138302325.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138302325_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138314370.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138314370.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138314370_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138317266.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138317266.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138317266_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Loading inherited module 'com.lemania.sis.SIS'
+   [WARN] Ignoring identical definition of the configuration property named gin.ginjector (originally defined in com.gwtplatform.mvp.Mvp, redefined in com.lemania.sis.SIS)
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 3680 units from cache.
+Compiling...
+   10% complete (ETR: 35 seconds)
+   10% complete (ETR: 35 seconds)
+   20% complete (ETR: 29 seconds)
+   30% complete (ETR: 24 seconds)
+   40% complete (ETR: 20 seconds)
+   50% complete (ETR: 17 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 11 seconds)
+   80% complete (ETR: 9 seconds)
+   90% complete (ETR: 5 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 65.73 seconds
+Validating units:
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/OnSuccessExecutor.java'
+      [ERROR] Line 34: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java'
+      [ERROR] Line 29: The method executeOnSuccess0(RunAsyncCallback) is undefined for the type AsyncFragmentLoader
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupport.java'
+      [ERROR] Line 44: Referencing method 'com.google.gwt.core.client.impl.Impl.dispose(Lcom/google/gwt/core/client/impl/Disposable;)': unable to resolve method
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/client/impl/UnloadSupportEnabled.java'
+      [ERROR] Line 71: Referencing method 'com.google.gwt.core.client.GWT.unloadModule()': unable to resolve method
+      [ERROR] Line 108: The method isModuleUnloaded() is undefined for the type Impl
+      [ERROR] Line 136: The method reportUncaughtException(Throwable) is undefined for the type GWT
+      [ERROR] Line 154: The method isModuleUnloaded() is undefined for the type Impl
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/core/translatable/com/google/gwt/core/shared/impl/ThrowableTypeResolver.java'
+      [ERROR] Line 31: The method isClassMetadataEnabled() from the type Class is not visible
+   [ERROR] Errors in 'jar:file:/Users/ngocthuannguyen/Documents/gwt-2.6.1/gwt-user.jar!/com/google/gwt/event/dom/client/LoadedMetadataEvent.java'
+      [ERROR] Line 37: BrowserEvents.LOADEDMETADATA cannot be resolved
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/bulletin/BulletinRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/classroom/ClassroomRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/masteragendaitem/MasterAgendaItemRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/motifabsence/MotifAbsenceRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/parent/ParentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/period/PeriodRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/perioditem/PeriodItemRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/AssignmentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/BulletinSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ClasseRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ContactRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/CoursRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EcoleRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationHeaderRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationStudentReportRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/EvaluationSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfessorRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileBrancheRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/ProfileSubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SettingOptionRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/service/SubjectRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/student/StudentRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/Users/ngocthuannguyen/Documents/workspace-pp/SIS/SIS/.apt_generated/com/lemania/sis/shared/user/UserRequestFactoryDeobfuscatorBuilder.java'
+      [ERROR] Line 7: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder; did you forget to inherit a required module?
+      [ERROR] Line 9: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationKey; did you forget to inherit a required module?
+      [ERROR] Line 10: No source code is available for type com.google.web.bindery.requestfactory.vm.impl.OperationData.Builder; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138505887.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138505887.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138505887_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138507753.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138507753.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138507753_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.02 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138521917.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138521917.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138521917_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528269.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528269.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528269_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528392.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528392.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138528392_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138552881.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138552881.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138552881_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView.Binder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0.01 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138557110.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138557110.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units
+Rebinding com.lemania.sis.client.form.attendancelist.AttendanceListView_BinderImpl_designTime1407138557110_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.00 seconds
+      Removing invalidated units

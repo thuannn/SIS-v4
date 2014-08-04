@@ -13,10 +13,13 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.lemania.sis.client.CurrentUser;
+import com.lemania.sis.client.values.AbsenceValues;
 import com.lemania.sis.shared.AssignmentProxy;
-import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
@@ -241,12 +244,17 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	void prepareAbsentWidget() {
 		//
 		CheckBox chkAbsent;
+		VerticalPanel pnlAbsenceCell;
 		int indexRemarqueCol = tblAttendance.getCellCount(0) - 1;
 		//
 		for ( int i= this.constantStudentNameRowStart; i < tblAttendance.getRowCount(); i++ ) {
 			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget the Remarque column
 				if ( tblAttendance.isCellPresent(i, j) ) {
+					//
+					pnlAbsenceCell = new VerticalPanel();
 					chkAbsent = new CheckBox();
+					pnlAbsenceCell.add( chkAbsent );
+					//
 					chkAbsent.addClickHandler(new ClickHandler(){
 
 						@Override
@@ -255,14 +263,34 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 							clickedCellIndex = tblAttendance.getCellForEvent(event).getCellIndex();
 							clickedRowIndex = tblAttendance.getCellForEvent(event).getRowIndex();
 							//
-							Window.alert( providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart ).getStudentName() 
-									+ " - "
-									+ providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart ).getDescription() );
+							// If user check the box
+							if ( ((CheckBox)event.getSource()).getValue() ) {
+								//
+								BulletinSubjectProxy bulletinSubject = providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart );
+								PeriodProxy pp = providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart );
+								getUiHandlers().saveAbsenceItem(
+										bulletinSubject.getStudentId(),
+										pp.getId().toString(),
+										bulletinSubject.getProfId(),
+										bulletinSubject.getClassId(),
+										bulletinSubject.getSubjectId(),
+										"",
+										getCodeAbsence(),
+										((TextBox) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getText(),
+										-1,
+										false,
+										false );
+							} else {
+								//
+								if ( tblAttendance.getWidget(clickedRowIndex, clickedCellIndex) != null ) {
+									getUiHandlers().removeAbsenceItem( ((Label)((VerticalPanel)((CheckBox)event.getSource()).getParent()).getWidget(1)).getText() );
+								}
+							}
 						}
 						
 					});
 					//
-					tblAttendance.setWidget(i, j, chkAbsent);
+					tblAttendance.setWidget(i, j, pnlAbsenceCell);
 				}
 			}
 		}
@@ -273,6 +301,21 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		}
 	}
 	
+	
+	/*
+	 * */
+	public String getCodeAbsence(){
+		//
+		if (optAbsent.getValue())
+			return AbsenceValues.absenceType_Absence_Code;
+		if (optLate.getValue())
+			return AbsenceValues.absenceType_Late_Code;
+		if (optExclude.getValue())
+			return AbsenceValues.absenceType_Exclude_Code;
+		if (optHealth.getValue())
+			return AbsenceValues.absenceType_Health_Code;
+		return AbsenceValues.absenceType_Absence_Code;
+	}
 	
 	
 	/*
@@ -361,5 +404,30 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		removeAllWidgets();
 		//
 		prepareAbsentWidget();
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void setAddedAbsenceItem(AbsenceItemProxy aip) {
+		//
+		Label id;
+		if ( tblAttendance.getWidget(clickedRowIndex, clickedCellIndex) != null ) {
+			id = new Label(aip.getId().toString());
+			id.setVisible(false);
+			((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).add( id );
+		}
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void removeDeletedAbsenceItemId() {
+		//
+		if ( tblAttendance.getWidget(clickedRowIndex, clickedCellIndex) != null ) {
+			((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).getWidget(1).removeFromParent();
+		}
 	}
 }

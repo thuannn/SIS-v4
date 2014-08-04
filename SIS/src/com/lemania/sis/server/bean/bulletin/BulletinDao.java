@@ -7,11 +7,11 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinBranche;
-import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.service.MyDAOBase;
 

@@ -28,15 +28,15 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
 import com.lemania.sis.client.values.NotificationValues;
-import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 
 public class FrmBulletinViewSummaryPresenter

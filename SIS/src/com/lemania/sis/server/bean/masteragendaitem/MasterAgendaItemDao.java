@@ -6,12 +6,12 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.service.MyDAOBase;

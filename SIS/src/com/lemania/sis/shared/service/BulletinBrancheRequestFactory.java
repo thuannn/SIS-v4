@@ -9,7 +9,7 @@ import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.BulletinBrancheDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.shared.BulletinBrancheProxy;
-import com.lemania.sis.shared.BulletinSubjectProxy;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
 
 public interface BulletinBrancheRequestFactory extends RequestFactory {
 	//

@@ -18,7 +18,6 @@ public interface MotifAbsenceRequestFactory extends RequestFactory {
 		Request<Void> save(MotifAbsenceProxy motif); 
 		Request<MotifAbsenceProxy> saveAndReturn(MotifAbsenceProxy motif);
 		Request<Void> removeParent(MotifAbsenceProxy motif);
-		
 	}
 	
 	MotifAbsenceRequestContext motifAbsenceRequestContext();

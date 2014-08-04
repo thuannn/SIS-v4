@@ -5,26 +5,18 @@
     	<g:Label text="Feuille d&apos;appel" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
     	<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="5">
     		<g:HorizontalPanel width="90%" styleName="subSection">
-    			<g:Grid width="100%">
-    				<g:row>
-    					<g:customCell>
-    						<g:Label text="1." styleName="step"/>
-    					</g:customCell>
-    					<g:customCell>
-    						<g:Label text="Date d&apos;aujourd&apos;hui :" horizontalAlignment="ALIGN_RIGHT"/>
-    					</g:customCell>
-    					<g:customCell>
-    						<g:Label text="-" ui:field="lblDate" styleName="header"/>
-    					</g:customCell>
-    				</g:row>
-    			</g:Grid>
+    			<g:HorizontalPanel width="" verticalAlignment="ALIGN_MIDDLE" spacing="2">
+    				<g:Label text="1." styleName="step"/>
+    				<g:Label text="Date d&apos;aujourd&apos;hui :" horizontalAlignment="ALIGN_RIGHT" width="110px"/>
+    				<g:Label text="-" ui:field="lblDate" styleName="header"/>
+    			</g:HorizontalPanel>
     			<g:Grid width="100%">
     				<g:row>
     					<g:customCell>
     						<g:Label text="2." styleName="step"/>
     					</g:customCell>
     					<g:customCell>
-    						<g:Label text="Professeur :" horizontalAlignment="ALIGN_RIGHT"/>
+    						<g:Label text="Professeur :" horizontalAlignment="ALIGN_LEFT"/>
     					</g:customCell>
     					<g:customCell>
     						<g:ListBox ui:field="lstProfs"/>
@@ -35,14 +27,14 @@
     						<g:Label text="-" styleName="hiddenText"/>
     					</g:customCell>
     					<g:customCell>
-    						<g:Label text="Classe &amp; Cours :" horizontalAlignment="ALIGN_RIGHT"/>
+    						<g:Label text="Classe &amp; Cours :" horizontalAlignment="ALIGN_LEFT"/>
     					</g:customCell>
     					<g:customCell>
     						<g:ListBox ui:field="lstAssignments"/>
     					</g:customCell>
     				</g:row>
     			</g:Grid>
-    			<g:HorizontalPanel width="100%">
+    			<g:HorizontalPanel width="100%" spacing="4">
     							<g:Label text="3." styleName="step"/>
     							<g:VerticalPanel width="100%">
     								<g:Label text="Type d&apos;absence à saisir :" horizontalAlignment="ALIGN_LEFT" height=""/>
@@ -67,8 +59,10 @@
     						</g:VerticalPanel>
     						</g:HorizontalPanel>
     		</g:HorizontalPanel>
-    		<g:Label text="4." horizontalAlignment="ALIGN_LEFT" styleName="step" width=""/>
-    		<g:Label text="-" styleName="header" ui:field="lblTitle"/>
+    		<g:HorizontalPanel spacing="5" verticalAlignment="ALIGN_MIDDLE">
+    			<g:Label text="4." horizontalAlignment="ALIGN_LEFT" styleName="step" width=""/>
+    			<g:Label text="-" styleName="header" ui:field="lblTitle"/>
+    		</g:HorizontalPanel>
     		<g:FlexTable width="100%" ui:field="tblAttendance"/>
     		<g:Label text="-" styleName="hiddenText"/>
     		<g:CheckBox text="Appel terminé" styleName="buttonToolbar" ui:field="chkComplete"/>

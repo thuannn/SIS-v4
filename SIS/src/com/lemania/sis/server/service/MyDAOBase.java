@@ -6,7 +6,6 @@ import com.googlecode.objectify.ObjectifyService;
 import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.BulletinBranche;
-import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
@@ -19,7 +18,9 @@ import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.SettingOption;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bean.absenceitem.AbsenceItem;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.masteragendaitem.MasterAgendaItem;
 import com.lemania.sis.server.bean.motifabsence.MotifAbsence;
@@ -186,6 +187,12 @@ public class MyDAOBase {
 		
 		try {
         	ObjectifyService.register(MotifAbsence.class);
+        } catch (Exception e) {
+        	// do nothing
+        }	
+		
+		try {
+        	ObjectifyService.register( AbsenceItem.class );
         } catch (Exception e) {
         	// do nothing
         }	

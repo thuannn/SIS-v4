@@ -27,17 +27,20 @@ import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHa
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.AssignmentProxy;
-import com.lemania.sis.shared.BulletinSubjectProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
+import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory;
+import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory.AbsenceItemRequestContext;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory;
+import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
 import com.lemania.sis.shared.period.PeriodRequestFactory.PeriodRequestContext;
 import com.lemania.sis.shared.service.AssignmentRequestFactory;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfessorRequestFactory;
 import com.lemania.sis.shared.service.AssignmentRequestFactory.AssignmentRequestContext;
-import com.lemania.sis.shared.service.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
 import com.lemania.sis.shared.service.ProfessorRequestFactory.ProfessorRequestContext;
 
 public class AttendanceListPresenter
@@ -64,6 +67,10 @@ public class AttendanceListPresenter
 		void initializeUI();
 		//
 		void resetUI( CurrentUser curUser );
+		//
+		void setAddedAbsenceItem( AbsenceItemProxy aip );
+		//
+		void removeDeletedAbsenceItemId();
 	}
 
 	@ContentSlot
@@ -179,6 +186,7 @@ public class AttendanceListPresenter
 		rc.listAllByAssignment( a.getId().toString() ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
+				//
 				Window.alert(error.getMessage());
 			}
 			@Override
@@ -189,6 +197,7 @@ public class AttendanceListPresenter
 			}
 		});
 	}
+	
 
 	/*
 	 * Load the period list
@@ -213,5 +222,55 @@ public class AttendanceListPresenter
 			}
 		});
 		
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void saveAbsenceItem(String studentId, String periodId,
+			String profId, String classId, String subjectId, String motifId,
+			String codeAbsence, String profComment, int lateMinute,
+			boolean justified, boolean parentNotified) {
+		// 
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.saveAbsenceItem(studentId, periodId, profId, classId, subjectId, motifId, codeAbsence, profComment, lateMinute, justified, parentNotified)
+			.fire(new Receiver<AbsenceItemProxy>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					//
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess( AbsenceItemProxy response ) {
+					//
+					getView().setAddedAbsenceItem( response );
+				}
+			});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void removeAbsenceItem(String aiID) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.removeAbsenceItem( aiID ).fire(new Receiver<Void>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					//
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess( Void response ) {
+					//
+					getView().removeDeletedAbsenceItemId();
+				}
+			});
 	}
 }

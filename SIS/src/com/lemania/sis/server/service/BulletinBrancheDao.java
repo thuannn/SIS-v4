@@ -8,11 +8,11 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.BulletinBranche;
-import com.lemania.sis.server.BulletinSubject;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 
 public class BulletinBrancheDao extends MyDAOBase {
 	/*
