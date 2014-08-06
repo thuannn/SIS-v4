@@ -1,4 +1,4 @@
-package com.lemania.sis.shared.service;
+package com.lemania.sis.shared.assignment;
 
 import java.util.List;
 
@@ -6,9 +6,8 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.lemania.sis.server.service.AssignmentDao;
+import com.lemania.sis.server.bean.assignment.AssignmentDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
-import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 
 public interface AssignmentRequestFactory extends RequestFactory {

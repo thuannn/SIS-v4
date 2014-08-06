@@ -9,7 +9,7 @@
 	<g:HTMLPanel width="100%" height="100%">
 		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" height="600px">
 			<g:Label text="Lemania eProfil" styleName="pageTitle" width=""/>
-			<g:Label text="." styleName="hiddenText"/>
+			<g:Image url="images/Capture.PNG" width="339px" height="336px"/>
 			<g:Grid width="" ui:field="panelLogin" styleName="subSection" cellPadding="5" cellSpacing="5">
 				<g:row>
 					<g:customCell>
@@ -32,10 +32,10 @@
 						<g:Label/>
 					</g:customCell>
 					<g:customCell>
-						<g:Button text="Se connecter" ui:field="cmdLogin"/>
+						<g:Button text="Se connecter" ui:field="cmdLogin" styleName="buttonToolbar"/>
 					</g:customCell>
 				</g:row>
 			</g:Grid>
-			<g:Image url="images/Capture.PNG" width="339px" height="336px"/>
+			<g:Label text="-" styleName="hiddenText" height="100px"/>
 		</g:VerticalPanel></g:HTMLPanel>
 </ui:UiBinder>

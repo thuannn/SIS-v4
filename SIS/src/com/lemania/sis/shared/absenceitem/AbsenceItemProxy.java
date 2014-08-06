@@ -25,6 +25,9 @@ public interface AbsenceItemProxy extends EntityProxy {
 	public boolean isParentNotified();
 	public void setParentNotified(boolean parentNotified);
 	
+	public String getStrAbsenceDate();
+	public void setStrAbsenceDate(String strAbsenceDate);
+	
 	// 
 	
 	public String getPeriodId();

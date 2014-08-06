@@ -1,4 +1,4 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.assignment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,10 +6,10 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class AssignmentDao extends MyDAOBase {
 	//

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.lemania.sis.server.Assignment;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinBranche;
@@ -13,6 +12,7 @@ import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.service.MyDAOBase;
 
@@ -104,6 +104,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())
+					.filter("professor", assignment.getProf())
 					.order("subjectName");
 			List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 			for ( BulletinSubject bulletinSubject : q ){

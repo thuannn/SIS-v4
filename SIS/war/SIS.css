@@ -234,13 +234,12 @@ Agenda
 
 /* stock list header row */
 .pageTitle {
-	color: #FFFFFF;
-	padding: 5px;
-	font-size: 14px !important;
-	font-style: gros;
-	font-family: Arial;
+	color: White;
+	padding: 2px;
+	font-size: 12px !important;
+	font-family: Verdana;
 	letter-spacing: 1px;
-	background-color: cornflowerblue;
+	background-color: dodgerblue;
 }
 .whitePanel{
 	margin: 0px;
@@ -281,8 +280,12 @@ Agenda
 }
 
 .subSection {
-	border: 1px solid darkkhaki;
-	background-color: White;	
+	padding: 5px;
+	border-top: 0px solid;
+	border-right: 1px solid Silver;
+	border-bottom: 1px solid Silver;
+	border-left: 0px solid;
+	background-color: snow;	
 }
 
 .toolbar {
@@ -380,12 +383,12 @@ Agenda
 	color: white;
 }
 .left_header {
-	color: cornflowerblue;
+	color: dodgerblue;
 	margin: -3px -3px 0px -23px;
 	padding: 3px 0px;
 	font-size: 14px;
 	font-family: sans-serif;
-	background-color: cornflowerblue;	
+	background-color: dodgerblue;	
 }
 .step {
 	color: Blue;

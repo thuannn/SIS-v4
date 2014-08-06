@@ -1,9 +1,9 @@
-package com.lemania.sis.shared;
+package com.lemania.sis.shared.assignment;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
-import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.ObjectifyLocator;
+import com.lemania.sis.server.bean.assignment.Assignment;
 
 @ProxyFor(value=Assignment.class, locator=ObjectifyLocator.class)
 public interface AssignmentProxy extends EntityProxy {

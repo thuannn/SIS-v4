@@ -28,6 +28,7 @@ public class AbsenceItem extends DatastoreObject {
 	private int lateMinutes = -1;
 	private boolean justtified = false;
 	private boolean parentNotified = false;
+	private String strAbsenceDate;				// Format : YYYYMMDD
 	
 	@IgnoreSave
 	private String periodId;
@@ -111,6 +112,12 @@ public class AbsenceItem extends DatastoreObject {
 	}
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
+	}
+	public String getStrAbsenceDate() {
+		return strAbsenceDate;
+	}
+	public void setStrAbsenceDate(String strAbsenceDate) {
+		this.strAbsenceDate = strAbsenceDate;
 	}
 	
 }

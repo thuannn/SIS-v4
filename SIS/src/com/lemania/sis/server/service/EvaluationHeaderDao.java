@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Assignment;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.Professor;
+import com.lemania.sis.server.bean.assignment.Assignment;
 
 public class EvaluationHeaderDao extends MyDAOBase {
 	/*

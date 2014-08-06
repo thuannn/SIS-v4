@@ -7,6 +7,7 @@ import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.motifabsence.MotifAbsence;
 import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.bean.student.Student;
@@ -30,6 +31,26 @@ public class AbsenceItemDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
+	/*
+	 * */
+	public List<AbsenceItem> listAllByAssignment( String assignmentId, String strAbsenceDate ){
+		//
+		Assignment asg = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId)) ).now();
+		//
+		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class)
+				.filter("strAbsenceDate", strAbsenceDate)
+				.filter("keyProf", asg.getProf())
+				.filter("keySubject", asg.getSubject())
+				.filter("keyClasse", asg.getClasse());
+  		List<AbsenceItem> returnList = q.list();
+		for ( AbsenceItem ai : q ) {
+			populateIDs( ai );
+		}
+		return returnList;
+	}
+	
+	
 
 	/*
 	 * */
@@ -38,9 +59,30 @@ public class AbsenceItemDao extends MyDAOBase {
 	}
 	
 	
+	
+	/*
+	 * */
+	public AbsenceItem updateAbsenceLateItem(String aiID, int minutes) {
+		AbsenceItem returnAI;
+		AbsenceItem ai = ofy().load().key( Key.create(AbsenceItem.class, Long.parseLong(aiID)) ).now();
+		ai.setLateMinutes(minutes);
+		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
+		try {
+			returnAI = ofy().load().key(key).now();
+			populateIDs( returnAI );
+			
+			return returnAI;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	
 	/*
 	 * */
 	public AbsenceItem saveAbsenceItem(
+			String strDate,
 			String studentId,
 			String periodId,
 			String profId,
@@ -54,6 +96,7 @@ public class AbsenceItemDao extends MyDAOBase {
 			boolean parentNotified ) {
 		//
 		AbsenceItem returnAI = new AbsenceItem();
+		returnAI.setStrAbsenceDate(strDate);
 		returnAI.setKeyStudent( Key.create(Student.class, Long.parseLong(studentId)));
 		returnAI.setKeyPeriod( Key.create(Period.class, Long.parseLong(periodId)));
 		returnAI.setKeyProf( Key.create(Professor.class, Long.parseLong(profId)));

@@ -1,8 +1,8 @@
 package com.lemania.sis.client.uihandler;
 
 import com.gwtplatform.mvp.client.UiHandlers;
-import com.lemania.sis.shared.AssignmentProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.assignment.AssignmentProxy;
 
 public interface ProfessorListUiHandler extends UiHandlers {
 	

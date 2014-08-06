@@ -98,6 +98,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdParentMgt;
 	@UiField Hyperlink cmdMotifAbsence;
 	@UiField Hyperlink cmdAttendanceList;
+	@UiField Hyperlink cmdAttendanceListProf;
 	
 	
 	// Thuan
@@ -357,21 +358,30 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			switchStyle(this.cmdEvaluationInputEleveProf, true, false);
 		}
 		
+		// Profiles
+		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
+		
 		// Agenda
 		if (tokenName.equals(NameTokens.masteragenda)) switchStyle(this.cmdMasterAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.classroom)) switchStyle(this.cmdClassroomPage, false, false);
 		if (tokenName.equals(NameTokens.periodmgt)) switchStyle(this.cmdPeriodMgt, false, false);
 		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
 		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
-		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
+		
+		// Attendance
 		if (tokenName.equals(NameTokens.motifabsence)) switchStyle(this.cmdMotifAbsence, false, false);
 		if (tokenName.equals(NameTokens.attendancelist)) switchStyle(this.cmdAttendanceList, false, false);
+		if (tokenName.equals(NameTokens.attendancelist)) {
+			switchStyle(this.cmdAttendanceList, false, false);
+			switchStyle(this.cmdAttendanceListProf, true, false);
+		}
 	}
 	
 	
 	/*
 	 * */
 	private void switchStyle( Hyperlink link, Boolean prof, Boolean student ){		
+		//
 		if (!prof && !student) {
 			if (lastPage != null) lastPage.setStyleName("");
 			if (lastPageProf != null) lastPageProf.setStyleName("");

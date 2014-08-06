@@ -114,7 +114,7 @@ public class EcoleAddPresenter extends
 
 	@Override
 	public void ecoleAddCancel() {
-		// TODO Auto-generated method stub
+		// 
 		returnToEcoleListCancel();
 	}
 

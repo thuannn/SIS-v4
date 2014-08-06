@@ -1,15 +1,16 @@
 package com.lemania.sis.client.form.attendancelist;
 
 import com.gwtplatform.mvp.client.UiHandlers;
-import com.lemania.sis.shared.AssignmentProxy;
+import com.lemania.sis.shared.assignment.AssignmentProxy;
 
 interface AttendanceListUiHandlers extends UiHandlers {
 	//
 	void onProfessorSelected(String profId);
 	//
-	void onAssignmentSelected(AssignmentProxy a);
+	void onAssignmentSelected(AssignmentProxy a, String strAbsenceDate );
 	//
 	void saveAbsenceItem(
+			String strAbsenceDate,
 			String studentId,
 			String periodId,
 			String profId,
@@ -23,4 +24,6 @@ interface AttendanceListUiHandlers extends UiHandlers {
 			boolean parentNotified );
 	//
 	void removeAbsenceItem( String aiID );
+	//
+	void updateAbsenceLateItem( String aiID, String minutes );
 }

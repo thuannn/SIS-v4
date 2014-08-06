@@ -39,23 +39,23 @@
 						<g:Label text="-" width="" horizontalAlignment="ALIGN_RIGHT" styleName="left_header"/>
 					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage" ui:field="cmdHome"/>
 					<g:TreeItem text="Administration des profils" state="true">
-							<g:TreeItem text="Elèves">
-								<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
-								<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève" ui:field="cmdStudentAdd"/>
-							</g:TreeItem>
-							<g:TreeItem text="Professeurs">
-								<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs" ui:field="cmdProfList"/>
-								<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
-							</g:TreeItem>
-							<g:TreeItem text="Responsables">
-								<g:Hyperlink targetHistoryToken="parentmgt" text="Liste des responsables" ui:field="cmdParentMgt"/>
-							</g:TreeItem>
-							<g:TreeItem text="Gestion des attributions">
-								<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
-								<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation" ui:field="cmdAttribution"/>
-								<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement" ui:field="cmdAttributionPerson"/>
-							</g:TreeItem>
+						<g:TreeItem text="Elèves">
+							<g:Hyperlink targetHistoryToken="students" text="Liste des élèves" ui:field="cmdStudentList"/>
+							<g:Hyperlink targetHistoryToken="studentadd" text="Rajouter un élève" ui:field="cmdStudentAdd"/>
 						</g:TreeItem>
+						<g:TreeItem text="Professeurs">
+							<g:Hyperlink targetHistoryToken="!profs" text="Liste des professeurs" ui:field="cmdProfList"/>
+							<g:Hyperlink targetHistoryToken="!profsadd" text="Rajouter un professeur" ui:field="cmdProfAdd"/>
+						</g:TreeItem>
+						<g:TreeItem text="Responsables">
+							<g:Hyperlink targetHistoryToken="parentmgt" text="Liste des responsables" ui:field="cmdParentMgt"/>
+						</g:TreeItem>
+						<g:TreeItem text="Gestion des attributions">
+							<g:Hyperlink text="Programmes / Classes" targetHistoryToken="profilemgt" ui:field="cmdProfileManagement"/>
+							<g:Hyperlink text="Attribution Programme / Elève" targetHistoryToken="bulletincreation" ui:field="cmdAttribution"/>
+							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement" ui:field="cmdAttributionPerson"/>
+						</g:TreeItem>
+					</g:TreeItem>
 					<g:TreeItem text="Notes">
 						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
 						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
@@ -122,6 +122,9 @@
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="Espace professeur" state="true">
+							<g:TreeItem text="Absences" state="true">
+								<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceListProf"/>
+							</g:TreeItem>
 							<g:TreeItem text="Notes" state="true">
 								<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>
 								<g:Hyperlink text="Consulter les bulletins" targetHistoryToken="bulletindetail" ui:field="cmdMarkViewProf"/>
@@ -129,7 +132,7 @@
 							<g:TreeItem text="Evaluation Intermediaire" state="true">
 								<g:Hyperlink text="Saisir les évaluations" targetHistoryToken="evaluationinput" ui:field="cmdEvaluationInputProfProf"/>
 								<g:Hyperlink text="Evaluations par élève" targetHistoryToken="evaluationinputstudent" ui:field="cmdEvaluationInputEleveProf"/>
-							</g:TreeItem>							
+							</g:TreeItem>						
 							<g:Hyperlink text="Modifier le mot de passe" targetHistoryToken="password" ui:field="cmdPasswordProf"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpProf"/>
 						</g:TreeItem>						

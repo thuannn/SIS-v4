@@ -147,7 +147,7 @@ public class CoursAddPresenter
 	}
 	
 	private void returnToCoursListSuccess() {
-		// TODO Auto-generated method stub
+		//
 		getEventBus().fireEvent(new CoursAddedEvent(cours));
 	}
 

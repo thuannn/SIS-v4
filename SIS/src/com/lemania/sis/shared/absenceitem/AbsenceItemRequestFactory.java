@@ -15,12 +15,17 @@ public interface AbsenceItemRequestFactory extends RequestFactory {
 	interface AbsenceItemRequestContext extends RequestContext {
 		//
 		Request<List<AbsenceItemProxy>> listAll();
+		Request<List<AbsenceItemProxy>> listAllByAssignment( String assignmentId, String strAbsenceDate );
+		//
 		Request<Void> save(AbsenceItemProxy ai); 
+		Request<AbsenceItemProxy> updateAbsenceLateItem(String aiID, int minutes); 
 		Request<AbsenceItemProxy> saveAndReturn(AbsenceItemProxy ai);
+		//
 		Request<Void> removeAbsenceItem(AbsenceItemProxy ai);
 		Request<Void> removeAbsenceItem(String aiID);
 		//
 		Request<AbsenceItemProxy> saveAbsenceItem(
+				String strAbsenceDate,
 				String studentId,
 				String periodId,
 				String profId,
