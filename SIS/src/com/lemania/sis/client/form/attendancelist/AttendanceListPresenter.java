@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
-import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
 import com.lemania.sis.client.event.AttendanceListAssignmentAfterSelectedEvent;

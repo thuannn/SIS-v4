@@ -5,6 +5,10 @@ body {
 	background-color: snow !important;
 }
 
+.flowpanel {
+	
+}
+
 div, table td {
 	font-size: 12px !important;
 }
@@ -276,7 +280,7 @@ Agenda
 	padding-bottom: 5px;
 	border: 1px solid royalblue;
 	font-size: 12px;
-	background-color: #F9F9F9;
+	background-color: White;
 }
 
 .subSection {

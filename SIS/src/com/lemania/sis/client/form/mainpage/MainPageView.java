@@ -99,6 +99,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdMotifAbsence;
 	@UiField Hyperlink cmdAttendanceList;
 	@UiField Hyperlink cmdAttendanceListProf;
+	@UiField Hyperlink cmdAbsenceMgt;
 	
 	
 	// Thuan

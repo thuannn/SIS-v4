@@ -28,8 +28,17 @@ public interface AbsenceItemProxy extends EntityProxy {
 	public String getStrAbsenceDate();
 	public void setStrAbsenceDate(String strAbsenceDate);
 	
+	public String getAdminComment();
+	public void setAdminComment(String adminComment);
+	
 	// 
 	
 	public String getPeriodId();
 	public String getStudentId();
+	public String getMotifId();
+	
+	//
+	
+	public String getSubjectName();
+	public String getProfName();
 }

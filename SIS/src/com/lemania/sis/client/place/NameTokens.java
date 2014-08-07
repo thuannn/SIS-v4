@@ -54,6 +54,8 @@ public class NameTokens {
 	public static final String evaluationinput = "evaluationinput";
 	public static final String evaluationinputstudent = "evaluationinputstudent";
 
+	public static final String absencesmgt = "absencesmgt";
+
 	public static String getHomePage() {
 		return homepage;
 	}
@@ -224,6 +226,11 @@ public class NameTokens {
 
 	public static String getAttendancelist() {
 		return attendancelist;
+	}
+
+
+	public static String getAbsencesmgt() {
+		return absencesmgt;
 	}
 
 }

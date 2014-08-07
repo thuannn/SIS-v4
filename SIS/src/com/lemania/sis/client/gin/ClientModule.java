@@ -73,6 +73,8 @@ import com.lemania.sis.client.form.motifabsence.MotifAbsenceModule;
 import com.lemania.sis.client.form.attendancelist.AttendanceListModule;
 import com.lemania.sis.client.form.attributionmgt.ProfileManagementPresenter;
 import com.lemania.sis.client.form.attributionmgt.ProfileManagementView;
+import com.lemania.sis.client.form.absencemgt.AbsenceManagementPresenter;
+import com.lemania.sis.client.form.absencemgt.AbsenceManagementView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -210,5 +212,10 @@ public class ClientModule extends AbstractPresenterModule {
 				FrmEvaluationInputStudentPresenter.MyView.class,
 				FrmEvaluationInputStudentView.class,
 				FrmEvaluationInputStudentPresenter.MyProxy.class);
+
+		bindPresenter(AbsenceManagementPresenter.class,
+				AbsenceManagementPresenter.MyView.class,
+				AbsenceManagementView.class,
+				AbsenceManagementPresenter.MyProxy.class);
 	}
 }

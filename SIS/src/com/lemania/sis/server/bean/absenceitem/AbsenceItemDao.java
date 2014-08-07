@@ -26,7 +26,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class);
 		List<AbsenceItem> returnList = q.list();
 		for ( AbsenceItem ai : q ) {
-			populateIDs( ai );
+			populateUnsavedValues( ai );
 		}
 		return returnList;
 	}
@@ -45,7 +45,23 @@ public class AbsenceItemDao extends MyDAOBase {
 				.filter("keyClasse", asg.getClasse());
   		List<AbsenceItem> returnList = q.list();
 		for ( AbsenceItem ai : q ) {
-			populateIDs( ai );
+			populateUnsavedValues( ai );
+		}
+		return returnList;
+	}
+	
+	
+	/*
+	 * */
+	public List<AbsenceItem> listAllByStudent( String studentId ){
+		//
+		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class)
+				.filter("keyStudent", Key.create(Student.class, Long.parseLong(studentId)))
+				.order("strAbsenceDate");
+  		List<AbsenceItem> returnList = q.list();
+		for ( AbsenceItem ai : q ) {
+			//
+			populateUnsavedValues( ai );
 		}
 		return returnList;
 	}
@@ -69,7 +85,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateIDs( returnAI );
+			populateUnsavedValues( returnAI );
 			
 			return returnAI;
 		} catch (Exception e) {
@@ -113,7 +129,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( returnAI ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateIDs( returnAI );
+			populateUnsavedValues( returnAI );
 			return returnAI;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -129,7 +145,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateIDs( returnAI );
+			populateUnsavedValues( returnAI );
 			
 			return returnAI;
 		} catch (Exception e) {
@@ -154,10 +170,21 @@ public class AbsenceItemDao extends MyDAOBase {
 	
 	/*
 	 * */
-	private void populateIDs(AbsenceItem ai) {
+	private void populateUnsavedValues(AbsenceItem ai) {
 		//
 		ai.setStudentId( Long.toString( ai.getKeyStudent().getId() ));
 		ai.setPeriodId( Long.toString( ai.getKeyPeriod().getId() ));
+		//
+		if ( ai.getKeyMotif() != null)
+			ai.setMotifId( Long.toString( ai.getKeyMotif().getId() ));
+		else
+			ai.setMotifId("");
+		//
+		Subject subject = ofy().load().key( ai.getKeySubject() ).now();
+		ai.setSubjectName( subject.getSubjectName() );
+		//
+		Professor prof = ofy().load().key( ai.getKeyProf() ).now();
+		ai.setProfName( prof.getProfName() );
 	}
 	
 }

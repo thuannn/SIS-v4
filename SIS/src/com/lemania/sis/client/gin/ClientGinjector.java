@@ -45,6 +45,7 @@ import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
 import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
+import com.lemania.sis.client.form.absencemgt.AbsenceManagementPresenter;
 
 @GinModules({ ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -130,4 +131,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<MotifAbsencePresenter> getMotifAbsencePresenter();
 	
 	AsyncProvider<AttendanceListPresenter> getAttendanceListPresenter();
+
+	AsyncProvider<AbsenceManagementPresenter> getAbsenceManagementPresenter();
 }

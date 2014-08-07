@@ -21,7 +21,7 @@ public class AbsenceItem extends DatastoreObject {
 	@Load private Key<Period> keyPeriod;
 	private Key<Professor> keyProf;
 	private Key<Classe> keyClasse;
-	private Key<Subject> keySubject;
+	@Load private Key<Subject> keySubject;
 	private Key<MotifAbsence> keyMotif;
 	private String codeAbsenceType;
 	private String profComment;
@@ -29,11 +29,14 @@ public class AbsenceItem extends DatastoreObject {
 	private boolean justtified = false;
 	private boolean parentNotified = false;
 	private String strAbsenceDate;				// Format : YYYYMMDD
+	private String adminComment;
 	
-	@IgnoreSave
-	private String periodId;
-	@IgnoreSave
-	private String studentId;
+	@IgnoreSave private String periodId;
+	@IgnoreSave private String studentId;
+	@IgnoreSave private String motifId;
+	
+	@IgnoreSave private String subjectName;
+	@IgnoreSave private String profName;
 	
 	public Key<Student> getKeyStudent() {
 		return keyStudent;
@@ -118,6 +121,30 @@ public class AbsenceItem extends DatastoreObject {
 	}
 	public void setStrAbsenceDate(String strAbsenceDate) {
 		this.strAbsenceDate = strAbsenceDate;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public String getProfName() {
+		return profName;
+	}
+	public void setProfName(String profName) {
+		this.profName = profName;
+	}
+	public String getAdminComment() {
+		return adminComment;
+	}
+	public void setAdminComment(String adminComment) {
+		this.adminComment = adminComment;
+	}
+	public String getMotifId() {
+		return motifId;
+	}
+	public void setMotifId(String motifId) {
+		this.motifId = motifId;
 	}
 	
 }
