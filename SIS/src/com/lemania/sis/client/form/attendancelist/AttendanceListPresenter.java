@@ -335,4 +335,27 @@ public class AttendanceListPresenter
 			}
 		});
 	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateRemarque(String absenceItemID, String strRemarque) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.updateRemarque( absenceItemID, strRemarque ).fire(new Receiver<AbsenceItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().setUpdatedAbsenceItem( response );
+			}
+		});
+	}
 }

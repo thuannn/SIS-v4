@@ -1,6 +1,7 @@
 package com.lemania.sis.server.bean.student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -64,6 +65,7 @@ public class StudentDao extends MyDAOBase {
 		for ( Student student : q.list() ){
 			returnList.add(student);
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 	
@@ -78,6 +80,7 @@ public class StudentDao extends MyDAOBase {
 		for (Student student : q){
 			returnList.add(student);
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 		
@@ -92,6 +95,7 @@ public class StudentDao extends MyDAOBase {
 		for (Student student : q){
 			returnList.add(student);
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 	
@@ -106,6 +110,7 @@ public class StudentDao extends MyDAOBase {
 		for (Student student : q){
 			returnList.add(student);
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 	
@@ -150,6 +155,7 @@ public class StudentDao extends MyDAOBase {
 			else
 				returnList.add(student);
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 }

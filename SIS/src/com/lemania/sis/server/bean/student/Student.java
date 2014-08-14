@@ -6,7 +6,7 @@ import com.lemania.sis.server.DatastoreObject;
 
 @Entity
 @Index
-public class Student extends DatastoreObject {
+public class Student extends DatastoreObject implements Comparable<Student> {
 	private String FirstName;
 	private String LastName;
 	private String Email;
@@ -42,5 +42,11 @@ public class Student extends DatastoreObject {
 	
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		//
+		return (this.FirstName + this.LastName).compareTo( o.getFirstName() + o.getLastName() );
 	}
 }

@@ -41,4 +41,5 @@ public interface AbsenceItemProxy extends EntityProxy {
 	
 	public String getSubjectName();
 	public String getProfName();
+	public String getPeriodDesc();
 }

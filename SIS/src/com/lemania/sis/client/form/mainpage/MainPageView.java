@@ -29,6 +29,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.TreeItem;
 
 public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implements MainPagePresenter.MyView {
 	
@@ -94,16 +95,20 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdClassAgendaPage;
 	@UiField AbsolutePanel pnlNorth;
 	@UiField Hyperlink cmdProfessorAgendaPage;
-	@UiField VerticalPanel leftPanel;
 	@UiField Hyperlink cmdParentMgt;
 	@UiField Hyperlink cmdMotifAbsence;
 	@UiField Hyperlink cmdAttendanceList;
 	@UiField Hyperlink cmdAttendanceListProf;
 	@UiField Hyperlink cmdAbsenceMgt;
+	@UiField VerticalPanel leftPanel;
+	@UiField TreeItem tiAbsences;
+	@UiField TreeItem tiTimetable;
+	@UiField TreeItem tiParamAbsences;
+	@UiField TreeItem tiAbsencesProf;
 	
 	
 	// Thuan
-	PopupPanel popup = new PopupPanel(false);	
+	PopupPanel popup = new PopupPanel(false);
 	
 	//
 	private Hyperlink lastPage;
@@ -180,10 +185,22 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			//
 			hideMenu();
 		}
+		//
+		hideDevFunctions();
 	}
 	
 	
+	/*
+	 * */
+	private void hideDevFunctions() {
+//		//
+//		tiAbsences.setVisible(false);
+//		tiTimetable.setVisible(false);
+//		//
+//		tiAbsencesProf.setVisible(false);
+	}
 	
+
 	/*
 	 * */
 	void showMenu(){
@@ -376,6 +393,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			switchStyle(this.cmdAttendanceList, false, false);
 			switchStyle(this.cmdAttendanceListProf, true, false);
 		}
+		if (tokenName.equals(NameTokens.absencesmgt)) switchStyle(this.cmdAbsenceMgt, false, false);
 	}
 	
 	
@@ -412,9 +430,11 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		}
 	}
 	
+	
 	@UiHandler("cmdMenuToggle")
 	void onCmdMenuToggleClick(ClickEvent event) {
-		if (leftPanel.isVisible())
+		//
+		if ( leftPanel.isVisible() )
 			hidePanel();
 		else
 			showPanel();

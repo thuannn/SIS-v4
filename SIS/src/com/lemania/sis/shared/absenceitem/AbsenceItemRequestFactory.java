@@ -19,8 +19,10 @@ public interface AbsenceItemRequestFactory extends RequestFactory {
 		Request<List<AbsenceItemProxy>> listAllByStudent( String studentId );
 		//
 		Request<Void> save(AbsenceItemProxy ai); 
-		Request<AbsenceItemProxy> updateAbsenceLateItem(String aiID, int minutes); 
 		Request<AbsenceItemProxy> saveAndReturn(AbsenceItemProxy ai);
+		//
+		Request<AbsenceItemProxy> updateAbsenceLateItem(String aiID, int minutes); 
+		Request<AbsenceItemProxy> updateRemarque(String aiID, String strRemarque); 
 		//
 		Request<Void> removeAbsenceItem(AbsenceItemProxy ai);
 		Request<Void> removeAbsenceItem(String aiID);

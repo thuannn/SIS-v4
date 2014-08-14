@@ -46,25 +46,6 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	/* Initialize Student table */
 	@Override
 	public void initializeTable(){
-		// Add a text column to show the name.
-	    Column<StudentProxy, String> colFirstName = new Column<StudentProxy, String>(new EditTextCell()) {
-	      @Override
-	      public String getValue(StudentProxy object) {
-	        return object.getLastName();
-	      }
-	    };
-	    tblStudents.addColumn(colFirstName, "Nom");
-	    // Field updater
-	    colFirstName.setFieldUpdater(new FieldUpdater<StudentProxy, String>(){
-	    	@Override
-	    	public void update(int index, StudentProxy student, String value){
-	    		if (getUiHandlers() != null) {	    			
-	    			selectedStudent = index;
-	    			getUiHandlers().updateStudentLastName(student, value);
-	    		}	    		
-	    	}
-	    });
-	    
 		//
 	    Column<StudentProxy, String> colLastName = new Column<StudentProxy, String>(new EditTextCell()) {
 	      @Override
@@ -80,6 +61,25 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	    		if (getUiHandlers() != null) {	    			
 	    			selectedStudent = index;
 	    			getUiHandlers().updateStudentFirstName(student, value);
+	    		}	    		
+	    	}
+	    });
+		
+		// Add a text column to show the name.
+	    Column<StudentProxy, String> colFirstName = new Column<StudentProxy, String>(new EditTextCell()) {
+	      @Override
+	      public String getValue(StudentProxy object) {
+	        return object.getLastName();
+	      }
+	    };
+	    tblStudents.addColumn(colFirstName, "Nom");
+	    // Field updater
+	    colFirstName.setFieldUpdater(new FieldUpdater<StudentProxy, String>(){
+	    	@Override
+	    	public void update(int index, StudentProxy student, String value){
+	    		if (getUiHandlers() != null) {	    			
+	    			selectedStudent = index;
+	    			getUiHandlers().updateStudentLastName(student, value);
 	    		}	    		
 	    	}
 	    });

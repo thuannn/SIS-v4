@@ -56,7 +56,7 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 						</g:customCell>
 					</g:row>
 				</g:Grid>
-				<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlBulletinNotes">
+				<g:VerticalPanel width="100%" styleName="bulletinMainSection" ui:field="pnlBulletinNotes">
 					<g:FlexTable width="100%" cellPadding="3" ui:field="tblNotes"/>
 					<g:HorizontalPanel width="100%" height="100%">
 						<g:VerticalPanel width="100%" spacing="2">

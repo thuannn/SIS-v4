@@ -8,6 +8,7 @@ import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.SelectionCell;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -95,15 +96,27 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	      } 
 	    };
 	    tblAbsences.addColumn(colLastName, "Date");
+	    tblAbsences.setColumnWidth(colLastName, 10, Unit.PCT);
+	    
+	    //
+	    TextColumn<AbsenceItemProxy> colPeriod = new TextColumn<AbsenceItemProxy>() {
+	      @Override
+	      public String getValue(AbsenceItemProxy object) {
+	    	  return object.getPeriodDesc();
+	      } 
+	    };
+	    tblAbsences.addColumn(colPeriod, "Period");
+	    tblAbsences.setColumnWidth(colPeriod, 10, Unit.PCT);
 	    
 	    // Add a text column to show the name.
-	    TextColumn<AbsenceItemProxy> colFirstName = new TextColumn<AbsenceItemProxy>() {
+	    TextColumn<AbsenceItemProxy> colType = new TextColumn<AbsenceItemProxy>() {
 	      @Override
 	      public String getValue(AbsenceItemProxy object) {
 	        return object.getCodeAbsenceType();
 	      }
 	    };
-	    tblAbsences.addColumn(colFirstName, "Type");
+	    tblAbsences.addColumn(colType, "Type");
+	    tblAbsences.setColumnWidth(colType, 5, Unit.PCT);
 	    
 	    // Prof
 	    TextColumn<AbsenceItemProxy> colProf = new TextColumn<AbsenceItemProxy>() {
@@ -113,6 +126,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	      }
 	    };
 	    tblAbsences.addColumn(colProf, "Professeur");
+	    tblAbsences.setColumnWidth(colProf, 15, Unit.PCT);
 	    
 	    // Cours
 	    TextColumn<AbsenceItemProxy> colSubject = new TextColumn<AbsenceItemProxy>() {
@@ -127,7 +141,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    TextColumn<AbsenceItemProxy> colRemarqueProf = new TextColumn<AbsenceItemProxy>() {
 	      @Override
 	      public String getValue(AbsenceItemProxy object) {
-	        return object.getProfComment().substring(0,20) + "...";
+	        return (object.getProfComment().length() > 21 )? (object.getProfComment().substring(0,20) + "...") : object.getProfComment();
 	      }
 	    };
 	    tblAbsences.addColumn(colRemarqueProf, "Comment du prof");
@@ -141,6 +155,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    	}	    	
 	    };
 	    tblAbsences.addColumn(colJustify, "Excusée");
+	    tblAbsences.setColumnWidth(colJustify, 5, Unit.PCT);
 	    
 	    //
 	    CheckboxCell cellParent = new CheckboxCell();
@@ -151,6 +166,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    	}	    	
 	    };
 	    tblAbsences.addColumn(colParent, "Parent notif.");
+	    tblAbsences.setColumnWidth(colParent, 5, Unit.PCT);
 	    
 	    //
 	    SelectionCell cellMotifs = new SelectionCell( motifList );
@@ -173,7 +189,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    Column<AbsenceItemProxy, String> colAdminComment = new Column<AbsenceItemProxy, String>(new EditTextCell()) {
 	      @Override
 	      public String getValue(AbsenceItemProxy object) {
-	        return object.getAdminComment().substring(0,20) + "...";
+	        return (object.getAdminComment().length() > 21) ? (object.getAdminComment().substring(0,20) + "...") : object.getAdminComment();
 	      } 
 	    };
 	    tblAbsences.addColumn(colAdminComment, "Note");

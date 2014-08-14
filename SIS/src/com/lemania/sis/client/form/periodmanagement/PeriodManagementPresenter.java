@@ -80,14 +80,14 @@ public class PeriodManagementPresenter
 
 	protected void onBind() {
 		super.onBind();
+		//
+		getView().initializeUI();
 	}
 
 	protected void onReset() {
 		super.onReset();
 		//
 		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.periodmgt) );
-		//
-		getView().initializeUI();
 		//
 		loadClassList();
 		//

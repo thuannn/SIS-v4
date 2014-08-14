@@ -276,7 +276,7 @@ Agenda
 	-webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow:    0px 0px 5px rgba(50, 50, 50, 0.75);
 	box-shadow:         0px 0px 5px rgba(50, 50, 50, 0.75);
-	margin: 2px 2px 10px;
+	margin: 0px 0px 10px 0px;
 	padding-bottom: 5px;
 	border: 1px solid royalblue;
 	font-size: 12px;
@@ -298,13 +298,15 @@ Agenda
 }
 
 .btnHideMenu {
-	color: darkblue;
-	padding: 1px;
-	border-bottom: 1px ridge Silver;
+	color: chocolate;
+	border-top: 1px;
+	border-right: 1px solid Silver;
+	border-bottom: 1px solid Silver;
+	border-left: 1px;
 	font-size: 11px;
 	font-family: Tahoma;
 	letter-spacing: 1px;
-	background-color: lightcyan;
+	background-color: lightgray;
 }
 
 .paneMain {
@@ -499,6 +501,10 @@ Agenda
 	font-style: italic;
 	width: 95%;
 	z-index: 9999;
+}
+
+.bulletinMainSection {
+	border: 1px solid deepskyblue;
 }
 
 .progressBarPanel {

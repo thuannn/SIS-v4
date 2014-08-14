@@ -28,13 +28,10 @@
 						</g:row>
 					</g:Grid>
 					</g:at>
-					<g:at left="268" top="30">
-						<g:Button text="&lt;&lt; Masquer/ Afficher le menu" ui:field="cmdMenuToggle" width="190px" styleName="btnHideMenu" height="20px"/>
-					</g:at>
 				</g:AbsolutePanel>
 			</g:Dock>
 			<g:Dock direction="WEST">
-				<g:VerticalPanel ui:field="leftPanel" horizontalAlignment="ALIGN_LEFT">
+				<g:VerticalPanel ui:field="leftPanel" horizontalAlignment="ALIGN_LEFT" spacing="2">
 					<g:Tree animationEnabled="true" styleName="sideBar" height="" width="250px" ui:field="treeMenuAdmin">
 						<g:Label text="-" width="" horizontalAlignment="ALIGN_RIGHT" styleName="left_header"/>
 					<g:Hyperlink text="Accueil" targetHistoryToken="!homepage" ui:field="cmdHome"/>
@@ -61,7 +58,7 @@
 						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
 						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
 					</g:TreeItem>
-					<g:TreeItem text="Absences" state="true">
+					<g:TreeItem text="Absences" ui:field="tiAbsences">
 						<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceList"/>
 						<g:Hyperlink text="Gestion des absences" targetHistoryToken="absencesmgt" ui:field="cmdAbsenceMgt"/>
 					</g:TreeItem>
@@ -70,7 +67,7 @@
 						<g:Hyperlink targetHistoryToken="evaluationinput" text="Saisir les évaluations" ui:field="cmdEvaluationInputProf"/>
 						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
 					</g:TreeItem>
-					<g:TreeItem text="Horaires">
+					<g:TreeItem text="Horaires" ui:field="tiTimetable">
 						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>
 						<g:TreeItem text="Horaires personnalisés">
 							<g:Hyperlink targetHistoryToken="studentagenda" text="Elèves" ui:field="cmdStudentAgendaPage"/>
@@ -79,7 +76,7 @@
 						</g:TreeItem>
 					</g:TreeItem>
 					<g:TreeItem text="Paramètres">
-						<g:TreeItem text="Absences">
+						<g:TreeItem text="Absences" ui:field="tiParamAbsences">
 							<g:Hyperlink text="Motifs d’absences" targetHistoryToken="motifabsence" ui:field="cmdMotifAbsence" />
 						</g:TreeItem>
 						<g:TreeItem text="Ressources" state="true">
@@ -115,7 +112,7 @@
 							<g:Hyperlink targetHistoryToken="settings" text="Gérer les dates limites" ui:field="cmdSettings"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:TreeItem text="Profil" state="true">
+					<g:TreeItem text="Mon compte" state="true">
 						<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPassword"/>
 						<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelp"/>
 					</g:TreeItem>
@@ -123,7 +120,7 @@
 					<g:Tree ui:field="treeMenuProf" styleName="sideBar" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem text="Espace professeur" state="true">
-							<g:TreeItem text="Absences" state="true">
+							<g:TreeItem text="Absences" state="true" ui:field="tiAbsencesProf">
 								<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceListProf"/>
 							</g:TreeItem>
 							<g:TreeItem text="Notes" state="true">
@@ -151,8 +148,11 @@
 			<g:Dock direction="CENTER">
 				<g:VerticalPanel width="99.5%" horizontalAlignment="ALIGN_LEFT" height="">
 					<g:FlowPanel ui:field="mainContentPanel" width="100%" height="" styleName="paneMain"/>
-					<g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE" width="100%" horizontalAlignment="ALIGN_RIGHT" spacing="5">
-						<g:Grid>
+					
+					<g:HorizontalPanel verticalAlignment="ALIGN_TOP" width="100%" horizontalAlignment="ALIGN_LEFT" spacing="5">
+						<g:Button text="Afficher / Cacher le menu" ui:field="cmdMenuToggle" width="" styleName="btnHideMenu" height=""/>
+						<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+							<g:Grid>
 							<g:row>
 								<g:customCell>
 									<g:Label text="Copyright © Ecole Lémania - " horizontalAlignment="ALIGN_LEFT" width="" ui:field="txtCopyright"/>
@@ -165,6 +165,7 @@
 								</g:customCell>
 							</g:row>
 						</g:Grid>
+						</g:VerticalPanel>
 					</g:HorizontalPanel>
 					<g:VerticalPanel ui:field="pnlProgressBar" visible="false" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 						<g:VerticalPanel ui:field="pnlProgressBarIn" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="300px" height="100px" styleName="progressBarPanel">

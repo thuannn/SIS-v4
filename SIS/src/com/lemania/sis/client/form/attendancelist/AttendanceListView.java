@@ -27,8 +27,6 @@ import com.lemania.sis.shared.period.PeriodProxy;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.dom.client.Style.VerticalAlign;
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -56,7 +54,6 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	@UiField RadioButton optLate;
 	@UiField RadioButton optExclude;
 	@UiField RadioButton optHealth;
-	@UiField CheckBox chkComplete;
 	@UiField Label lblTitle;
 	@UiField DateBox dtAbsenceDate;
 	
@@ -275,7 +272,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		int indexRemarqueCol = tblAttendance.getCellCount(0) - 1;
 		//
 		for ( int i= this.constantStudentNameRowStart; i < tblAttendance.getRowCount(); i++ ) {
-			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget the Remarque column
+			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget to avoid the Remarque column
 				if ( tblAttendance.isCellPresent(i, j) ) {
 					//
 					pnlAbsenceCell = new VerticalPanel();
@@ -292,6 +289,11 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 							// If user check the box
 							if ( ((CheckBox)event.getSource()).getValue() ) {
 								//
+								// If there exists a comment linked to an item, no need to add
+								String strRemarque = "";
+								if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidgetCount() < 2 )
+									strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidget(0)).getText();
+								//
 								BulletinSubjectProxy bulletinSubject = providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart );
 								PeriodProxy pp = providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart );
 								getUiHandlers().saveAbsenceItem(
@@ -303,7 +305,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 										bulletinSubject.getSubjectId(),
 										"",
 										getSelectedAbsenceTypeCode(),
-										((TextBox) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getText(),
+										strRemarque,
 										-1,
 										false,
 										false );
@@ -321,11 +323,10 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 				}
 			}
 		}
+		
+		//
 		// Remarque column
-		for (int i= this.constantStudentNameRowStart; i< tblAttendance.getRowCount(); i++) {
-			tblAttendance.setText(i, indexRemarqueCol, "");
-			tblAttendance.setWidget(i, indexRemarqueCol, new TextBox() );
-		}
+		addRemarqueColumn( indexRemarqueCol );
 	}
 	
 	
@@ -397,6 +398,11 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 								// If this is a new absence item (no ID found) ...
 								if ( ((VerticalPanel)((TextBox)event.getSource()).getParent()).getWidgetCount() < 2 ) {
 									//
+									// If there exists a comment linked to an item, no need to add
+									String strRemarque = "";
+									if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidgetCount() < 2 )
+										strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidget(0)).getText();
+									//
 									BulletinSubjectProxy bulletinSubject = providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart );
 									PeriodProxy pp = providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart );
 									getUiHandlers().saveAbsenceItem(
@@ -408,7 +414,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 											bulletinSubject.getSubjectId(),
 											"",
 											getSelectedAbsenceTypeCode(),
-											((TextBox) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getText(),
+											strRemarque,
 											Integer.parseInt( strMinutes ),
 											false,
 											false );
@@ -431,10 +437,56 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 				}
 			}
 		}
+		
+		//
 		// Remarque column
+		addRemarqueColumn( indexRemarqueCol );
+	}
+	
+	
+	
+	/*
+	 * */
+	public void addRemarqueColumn(int remarqueColumnIndex) {
+		//
+		VerticalPanel vPanel;
+		TextBox txtRemarque;
 		for (int i= this.constantStudentNameRowStart; i< tblAttendance.getRowCount(); i++) {
-			tblAttendance.setText(i, indexRemarqueCol, "");
-			tblAttendance.setWidget(i, indexRemarqueCol, new TextBox() );
+			//
+			tblAttendance.setText(i, remarqueColumnIndex, "");
+			vPanel = new VerticalPanel();
+			txtRemarque = new TextBox();
+			//
+			txtRemarque.addValueChangeHandler(new ValueChangeHandler<String>(){
+
+				@Override
+				public void onValueChange(ValueChangeEvent<String> event) {
+					//
+					getWidgetIndex( (TextBox)event.getSource(), tblAttendance );
+					//
+					String strRemarque = ((TextBox)event.getSource()).getText().trim();
+					String absenceItemID = "";
+					//
+					// If there is already an ID with this comment
+					if ( ((VerticalPanel) ((TextBox)event.getSource()).getParent()).getWidgetCount() > 1 )
+						absenceItemID = ((Label)((VerticalPanel) ((TextBox)event.getSource()).getParent()).getWidget(1)).getText();
+					else { // Get the ID of one of the absence item
+						for (int col= constantPeriodsColStart; col< tblAttendance.getCellCount(clickedRowIndex) - 1; col++) {
+							if ( ((VerticalPanel) tblAttendance.getWidget(clickedRowIndex, col)).getWidgetCount() > 1 ) {
+								absenceItemID = ((Label)((VerticalPanel) tblAttendance.getWidget(clickedRowIndex, col)).getWidget(1)).getText();
+								break;
+							}
+						}
+					}
+					//
+					if ( !absenceItemID.equals("") )
+						getUiHandlers().updateRemarque( absenceItemID, strRemarque );
+						
+				}
+			});
+			//
+			vPanel.add(txtRemarque);
+			tblAttendance.setWidget(i, remarqueColumnIndex, vPanel );
 		}
 	}
 	
@@ -523,9 +575,19 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	@Override
 	public void removeDeletedAbsenceItemId() {
 		//
+		String aID = ((Label)((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).getWidget(1)).getText();
+		for (AbsenceItemProxy ai : providerAbsenceItems.getList()) {
+			if (ai.getId().toString().equals(aID)) {
+				providerAbsenceItems.getList().remove(ai);
+				break;
+			}
+		}
+		//
 		if ( tblAttendance.getWidget(clickedRowIndex, clickedCellIndex) != null ) {
 			((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).getWidget(1).removeFromParent();
 		}
+		//
+		redrawAbsenceItems();
 	}
 
 
@@ -536,6 +598,14 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		providerAbsenceItems.getList().clear();
 		providerAbsenceItems.getList().addAll(aip);
+		//
+		redrawAbsenceItems();
+	}
+	
+	
+	/*
+	 * */
+	public void redrawAbsenceItems() {
 		//
 		// Depends on the currently selected option, prepare the table and show the data
 		if (getSelectedAbsenceTypeCode().equals( AbsenceValues.absenceType_Absence_Code))
@@ -580,6 +650,12 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 							lblId = new Label(ai.getId().toString());
 							lblId.setVisible(false);
 							vpanel.add( lblId );
+							//
+							// Show remarque
+							if ( !ai.getProfComment().equals("") ) {
+								((TextBox)((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).getWidget(0)).setText( ai.getProfComment() );
+								((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).add(new Label(ai.getId().toString()));
+							}
 						}
 					}
 				}
@@ -595,7 +671,11 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		for (int index=0; index< providerAbsenceItems.getList().size(); index++ ) {
 			if ( providerAbsenceItems.getList().get(index).getId().equals(ai.getId()) ) {
+				//
 				providerAbsenceItems.getList().set(index, ai);
+				//
+				((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).add(new Label(ai.getId().toString()));
+				//
 				break;
 			}
 		}

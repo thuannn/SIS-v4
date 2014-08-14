@@ -26,7 +26,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class);
 		List<AbsenceItem> returnList = q.list();
 		for ( AbsenceItem ai : q ) {
-			populateUnsavedValues( ai );
+			populateIgnoreSaveValues( ai );
 		}
 		return returnList;
 	}
@@ -45,7 +45,7 @@ public class AbsenceItemDao extends MyDAOBase {
 				.filter("keyClasse", asg.getClasse());
   		List<AbsenceItem> returnList = q.list();
 		for ( AbsenceItem ai : q ) {
-			populateUnsavedValues( ai );
+			populateIgnoreSaveValues( ai );
 		}
 		return returnList;
 	}
@@ -61,7 +61,7 @@ public class AbsenceItemDao extends MyDAOBase {
   		List<AbsenceItem> returnList = q.list();
 		for ( AbsenceItem ai : q ) {
 			//
-			populateUnsavedValues( ai );
+			populateIgnoreSaveValues( ai );
 		}
 		return returnList;
 	}
@@ -85,7 +85,25 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateUnsavedValues( returnAI );
+			populateIgnoreSaveValues( returnAI );
+			
+			return returnAI;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	/*
+	 * */
+	public AbsenceItem updateRemarque( String aiID, String strRemarque ) {
+		AbsenceItem returnAI;
+		AbsenceItem ai = ofy().load().key( Key.create(AbsenceItem.class, Long.parseLong(aiID)) ).now();
+		ai.setProfComment( strRemarque );
+		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
+		try {
+			returnAI = ofy().load().key(key).now();
+			populateIgnoreSaveValues( returnAI );
 			
 			return returnAI;
 		} catch (Exception e) {
@@ -129,7 +147,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( returnAI ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateUnsavedValues( returnAI );
+			populateIgnoreSaveValues( returnAI );
 			return returnAI;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -145,7 +163,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();
-			populateUnsavedValues( returnAI );
+			populateIgnoreSaveValues( returnAI );
 			
 			return returnAI;
 		} catch (Exception e) {
@@ -170,10 +188,13 @@ public class AbsenceItemDao extends MyDAOBase {
 	
 	/*
 	 * */
-	private void populateUnsavedValues(AbsenceItem ai) {
+	private void populateIgnoreSaveValues(AbsenceItem ai) {
 		//
 		ai.setStudentId( Long.toString( ai.getKeyStudent().getId() ));
-		ai.setPeriodId( Long.toString( ai.getKeyPeriod().getId() ));
+		//
+		Period p = ofy().load().key( ai.getKeyPeriod() ).now();
+		ai.setPeriodId( p.getId().toString() );
+		ai.setPeriodDesc( p.getDescription() );
 		//
 		if ( ai.getKeyMotif() != null)
 			ai.setMotifId( Long.toString( ai.getKeyMotif().getId() ));

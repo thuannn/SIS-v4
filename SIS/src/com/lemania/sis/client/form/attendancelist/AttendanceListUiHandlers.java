@@ -26,4 +26,6 @@ interface AttendanceListUiHandlers extends UiHandlers {
 	void removeAbsenceItem( String aiID );
 	//
 	void updateAbsenceLateItem( String aiID, String minutes );
+	//
+	void updateRemarque( String absenceItemID, String strRemarque);
 }

@@ -65,7 +65,6 @@
     		</g:HorizontalPanel>
     		<g:FlexTable width="100%" ui:field="tblAttendance"/>
     		<g:Label text="-" styleName="hiddenText"/>
-    		<g:CheckBox text="Appel terminé" styleName="buttonToolbar" ui:field="chkComplete"/>
     	</g:VerticalPanel>
     </g:HTMLPanel>
 </ui:UiBinder>
