@@ -653,8 +653,10 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 							//
 							// Show remarque
 							if ( !ai.getProfComment().equals("") ) {
+								Label r = new Label(ai.getId().toString());
+								r.setVisible(false);
 								((TextBox)((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).getWidget(0)).setText( ai.getProfComment() );
-								((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).add(new Label(ai.getId().toString()));
+								((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).add( r );
 							}
 						}
 					}
@@ -674,7 +676,9 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 				//
 				providerAbsenceItems.getList().set(index, ai);
 				//
-				((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).add(new Label(ai.getId().toString()));
+				Label r = new Label(ai.getId().toString());
+				r.setVisible(false);
+				((VerticalPanel)tblAttendance.getWidget(clickedRowIndex, clickedCellIndex)).add( r );
 				//
 				break;
 			}
