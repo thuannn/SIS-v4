@@ -4,33 +4,67 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
-	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client" xmlns:p2="urn:import:com.google.gwt.user.datepicker.client">
 
-	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="pnlMain">
 		<g:Label text="Gestion des absences des élèves" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-		<g:HorizontalPanel width="100%" spacing="5">
-			<g:cell width="300">
-				<g:VerticalPanel width="100%" styleName="s" verticalAlignment="ALIGN_TOP">
-					<g:Label text="-" styleName="hiddenText" height="28px"/>
-					<g:Label text="Liste des élèves" height=""/>
-					<p1:DataGrid width="100%" height="450px" ui:field="tblStudents" pageSize="15"/>
-					<g:Cell horizontalAlignment="ALIGN_CENTER">
-						<p1:SimplePager location="CENTER" ui:field="pagerStudents" page="0" pageSize="10" pageStart="0"/>
-					</g:Cell>
-				</g:VerticalPanel>
-			</g:cell>
-			<g:Cell>
+		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER">
+			<g:HorizontalPanel width="100%" styleName="subSection" horizontalAlignment="ALIGN_RIGHT">
 				<g:VerticalPanel width="100%">
-					<g:Cell verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_CENTER">
-						<g:Label text="-" styleName="header" ui:field="lblStudentName"/>
-					</g:Cell>
-					<g:Label text="Liste des absences"/>
+					<g:Grid>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Elève :"/>
+							</g:customCell>
+							<g:customCell>
+								<g:HorizontalPanel ui:field="pnlNames" spacing="2" verticalAlignment="ALIGN_MIDDLE">
+									<g:Label text="ou"/>
+									<g:ListBox ui:field="lstStudents" width=""/>
+								</g:HorizontalPanel>
+							</g:customCell>
+							<g:customCell>
+								<g:Label text="-------------" styleName="hiddenText"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label text="Date du :"/>
+							</g:customCell>
+							<g:customCell>
+								<p2:DateBox ui:field="dateFrom"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Label text="au :"/>
+							</g:customCell>
+							<g:customCell>
+								<p2:DateBox ui:field="dateTo"/>
+							</g:customCell>
+							<g:customCell>
+								<g:Button styleName="gridButton" ui:field="cmdFilter">Valider</g:Button>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+				</g:VerticalPanel>
+				<g:HorizontalPanel spacing="5">
+				<g:Button text="Saisir" styleName="buttonToolbar" ui:field="cmdAddAbsence">Saisir des absences</g:Button>
+				<g:Button text="Imprimer" styleName="buttonToolbar" ui:field="cmdPrint"/>
+			</g:HorizontalPanel>
+			</g:HorizontalPanel>
+			<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlMainAbsences">
+					<g:Label text="Liste des absences" styleName="sectionTitle"/>
+					<g:Label text="-" styleName="header" ui:field="lblStudentName"/>
 					<p1:DataGrid width="100%" height="450px" ui:field="tblAbsences" pageSize="15"/>
 					<g:Cell horizontalAlignment="ALIGN_CENTER">
-						<p1:SimplePager location="CENTER" ui:field="pagerAbsences" page="0" pageSize="10" pageStart="0"/>
+						<p1:SimplePager location="CENTER" ui:field="pagerAbsences" page="0" pageSize="15" pageStart="0"/>
 					</g:Cell>
 				</g:VerticalPanel>
-			</g:Cell>
-		</g:HorizontalPanel>
+		</g:VerticalPanel>
+		<g:VerticalPanel ui:field="pnlWhiteBackground" width="100%">
+			<g:VerticalPanel ui:field="pnlBulletin" width="100%">
+				<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_BOTTOM">
+					<g:Image url="images/logo_lemania.png"/>
+					<g:Label text="RELEVE DES ABSENCES" styleName="bulletinTitle"/>
+				</g:HorizontalPanel>
+				<g:FlexTable width="100%" ui:field="tblFlexAbsences"/>
+			</g:VerticalPanel>
+		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

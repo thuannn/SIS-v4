@@ -15,7 +15,7 @@ import com.lemania.sis.server.bean.student.Student;
 
 @Entity
 @Index
-public class AbsenceItem extends DatastoreObject {
+public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceItem> {
 	
 	@Load private Key<Student> keyStudent;
 	@Load private Key<Period> keyPeriod;
@@ -28,7 +28,7 @@ public class AbsenceItem extends DatastoreObject {
 	private int lateMinutes = -1;
 	private boolean justtified = false;
 	private boolean parentNotified = false;
-	private String strAbsenceDate;				// Format : YYYYMMDD
+	private String strAbsenceDate = "";				// Format : YYYYMMDD
 	private String adminComment  = "";
 	
 	@IgnoreSave private String periodId  = "";;
@@ -152,6 +152,13 @@ public class AbsenceItem extends DatastoreObject {
 	}
 	public void setPeriodDesc(String periodDesc) {
 		this.periodDesc = periodDesc;
+	}
+	
+	
+	@Override
+	public int compareTo(AbsenceItem o) {
+		// 
+		return (this.strAbsenceDate + this.periodDesc).compareTo( o.getStrAbsenceDate() + o.getPeriodDesc() );
 	}
 	
 }

@@ -67,6 +67,8 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	int clickedCellIndex;
 	int clickedRowIndex;
 	
+	Date prevSelectedDate = new Date();
+	
 	//
 	ListDataProvider<AssignmentProxy> providerAssignments = new ListDataProvider<AssignmentProxy>();
 	ListDataProvider<BulletinSubjectProxy> providerBulletins = new ListDataProvider<BulletinSubjectProxy>();
@@ -214,20 +216,14 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		dtAbsenceDate.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd.MM.yyyy")));
 		dtAbsenceDate.addValueChangeHandler( new ValueChangeHandler<Date>(){
-
-			int pog = 0;
-			
 			@Override
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				//
-				if (pog == 0) { 
+				if ( !dtAbsenceDate.equals( prevSelectedDate ) ) { 
 					onLstAssignmentsChange( null );
-					pog++;
-				} else {
-					pog = 0;
+					prevSelectedDate = dtAbsenceDate.getValue();
 				}
 			}
-			
 		});
 	}
 	

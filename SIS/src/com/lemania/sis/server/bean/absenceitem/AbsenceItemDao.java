@@ -1,5 +1,6 @@
 package com.lemania.sis.server.bean.absenceitem;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -63,9 +64,28 @@ public class AbsenceItemDao extends MyDAOBase {
 			//
 			populateIgnoreSaveValues( ai );
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
 	
+	
+	/*
+	 * */
+	public List<AbsenceItem> listAllByStudentAndDate( String studentId, String dateFrom, String dateTo ){
+		//
+		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class)
+				.filter("keyStudent", Key.create(Student.class, Long.parseLong(studentId)))
+				.filter("strAbsenceDate >=", dateFrom)
+				.filter("strAbsenceDate <=", dateTo)
+				.order("strAbsenceDate");
+  		List<AbsenceItem> returnList = q.list();
+		for ( AbsenceItem ai : q ) {
+			//
+			populateIgnoreSaveValues( ai );
+		}
+		Collections.sort( returnList );
+		return returnList;
+	}
 	
 
 	/*
@@ -160,6 +180,24 @@ public class AbsenceItemDao extends MyDAOBase {
 	public AbsenceItem saveAndReturn(AbsenceItem ai){
 		//
 		AbsenceItem returnAI;
+		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
+		try {
+			returnAI = ofy().load().key(key).now();
+			populateIgnoreSaveValues( returnAI );
+			
+			return returnAI;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	/*
+	 * */
+	public AbsenceItem updateMotif(AbsenceItem ai, String motifID){
+		//
+		AbsenceItem returnAI;
+		ai.setKeyMotif( Key.create( MotifAbsence.class, Long.parseLong(motifID)) );
 		Key<AbsenceItem> key = ofy().save().entities( ai ).now().keySet().iterator().next();
 		try {
 			returnAI = ofy().load().key(key).now();

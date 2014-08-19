@@ -88,10 +88,10 @@ public class MotifAbsenceView extends
 	    
 		// Letter
 		TextColumn<MotifAbsenceProxy> colLetter = new TextColumn<MotifAbsenceProxy>() {
-	      @Override
-	      public String getValue(MotifAbsenceProxy object) {
-	        return object.getTextLetter().substring(0, object.getTextLetter().length()>20? 20:object.getTextLetter().length()-1) + "...";
-	      }
+			@Override
+			public String getValue(MotifAbsenceProxy object) {
+					return (object.getTextLetter().length() < 20) ? object.getTextLetter() : object.getTextLetter().substring(0, 20) + "..."; 
+			}
 	    };
 	    tblMotifs.setColumnWidth(colLetter, 20, Unit.PCT);
 	    tblMotifs.addColumn(colLetter, "Texte lettre");
@@ -100,7 +100,7 @@ public class MotifAbsenceView extends
 		TextColumn<MotifAbsenceProxy> colSMS = new TextColumn<MotifAbsenceProxy>() {
 			@Override
 			public String getValue(MotifAbsenceProxy object) {
-				return object.getTextSMS().substring(0, object.getTextSMS().length()>20? 20:object.getTextSMS().length()-1) + "...";
+				return (object.getTextSMS().length() < 20) ? object.getTextSMS() : object.getTextSMS().substring(0, 20) + "..."; 
 			}
 		};
 		tblMotifs.setColumnWidth(colSMS, 20, Unit.PCT);

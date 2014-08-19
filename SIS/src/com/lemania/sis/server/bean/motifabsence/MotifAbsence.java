@@ -14,8 +14,8 @@ public class MotifAbsence extends DatastoreObject implements Comparable<MotifAbs
 	private boolean isOutside = false;
 	private boolean isHealth = false;
 	private boolean isDispensable = false;
-	private String textLetter;
-	private String textSMS;
+	private String textLetter = "";
+	private String textSMS = "";
 
 	public String getMotifCode() {
 		return motifCode;

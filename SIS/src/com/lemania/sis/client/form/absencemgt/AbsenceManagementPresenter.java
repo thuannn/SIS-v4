@@ -44,6 +44,10 @@ public class AbsenceManagementPresenter
 		void setMotifListData(List<MotifAbsenceProxy> motifs);
 		//
 		void initializeUI();
+		//
+		void resetUI();
+		//
+		void setUpdatedAbsenceItem( AbsenceItemProxy aip );
 	}
 
 	@ProxyCodeSplit
@@ -76,6 +80,8 @@ public class AbsenceManagementPresenter
 	@Override
 	protected void onReset() {
 		super.onReset();
+		//
+		getView().resetUI();
 		// Thuan
 		loadStudentList();
 		//
@@ -153,5 +159,131 @@ public class AbsenceManagementPresenter
 					getView().setAbsenceItemTableData( response );
 				}
 			});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateJustifyStatus(AbsenceItemProxy ai, boolean isJustified) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		//
+		AbsenceItemProxy updateAI = rc.edit(ai);
+		updateAI.setJusttified(isJustified);
+		rc.saveAndReturn(updateAI).fire(new Receiver<AbsenceItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().setUpdatedAbsenceItem( response );
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateParentNotifiedStatus(AbsenceItemProxy ai, boolean parentNotified) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		//
+		AbsenceItemProxy updateAI = rc.edit(ai);
+		updateAI.setParentNotified(parentNotified);
+		rc.saveAndReturn(updateAI).fire(new Receiver<AbsenceItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().setUpdatedAbsenceItem( response );
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateAdminComment(AbsenceItemProxy ai, String adminComment) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		//
+		AbsenceItemProxy updateAI = rc.edit(ai);
+		updateAI.setAdminComment(adminComment);
+		rc.saveAndReturn(updateAI).fire(new Receiver<AbsenceItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().setUpdatedAbsenceItem( response );
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateMotif(AbsenceItemProxy ai, String motifID) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		//
+		AbsenceItemProxy updateAI = rc.edit(ai);
+		rc.updateMotif(updateAI, motifID).fire(new Receiver<AbsenceItemProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().setUpdatedAbsenceItem( response );
+			}
+		});
+	}
+	
+
+	/*
+	 * */
+	@Override
+	public void filterDate(StudentProxy student, String dateFrom, String dateTo) {
+		// 
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.listAllByStudentAndDate( student.getId().toString(), dateFrom, dateTo ).fire(new Receiver<List<AbsenceItemProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( List<AbsenceItemProxy> response ) {
+				//
+				getView().setAbsenceItemTableData( response );
+			}
+		});
 	}
 }
