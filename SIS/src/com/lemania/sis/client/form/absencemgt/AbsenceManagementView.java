@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -31,6 +32,8 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.lemania.sis.client.UI.DynamicSelectionCell;
+import com.lemania.sis.client.values.AbsenceValues;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
 import com.lemania.sis.shared.student.StudentProxy;
@@ -50,6 +53,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementUiHandlers> implements
 		AbsenceManagementPresenter.MyView {
@@ -98,10 +102,18 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiField Button cmdPrint;
 	@UiField HorizontalPanel pnlNames;
 	@UiField VerticalPanel pnlBulletin;
-	@UiField HTMLPanel pnlMain;
-	@UiField VerticalPanel pnlWhiteBackground;
+	@UiField HTMLPanel lblDateTo;
+	@UiField VerticalPanel pnlMainBulletin;
 	@UiField VerticalPanel pnlMainAbsences;
 	@UiField FlexTable tblFlexAbsences;
+	@UiField Label lblBulletinStudentName;
+	@UiField Label lblBulletinClasse;
+	@UiField Label lblToDate;
+	@UiField Label lblFromDate;
+	@UiField AbsolutePanel pnlWhiteBackground;
+	@UiField Label lblSpace;
+	@UiField HorizontalPanel non;
+	@UiField VerticalPanel pnlDirection;
 	
 	/*
 	 * */
@@ -562,16 +574,18 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		};
 		popup.setStyleName("whitePanel");
 		popup.add( pnlBulletin );
-		pnlBulletin.setVisible(true);
+		//
 		drawAbsenceTable();
 		//
-		pnlWhiteBackground.setHeight( Window.getClientHeight() + "px");
+		distributeLineHeight();
+		//
+		pnlWhiteBackground.setHeight( pnlBulletin.getOffsetHeight() + "px");
 		pnlWhiteBackground.setVisible(true);
 		//
 		popup.addCloseHandler(new CloseHandler<PopupPanel>() {
 			public void onClose(CloseEvent<PopupPanel> event) {
 				//
-				pnlMain.add(pnlBulletin);
+				pnlMainBulletin.add(pnlBulletin);
 				//
 				pnlWhiteBackground.setVisible(false);
 			}
@@ -579,6 +593,28 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		//
 		popup.show();
 	}
+	
+	
+	
+	/*
+	 * */
+	private void distributeLineHeight() {
+		//
+		int directionSectionHeight = 260;
+		pnlBulletin.setHeight(NotificationValues.bulletinPageHeight.toString() + "px");
+		int margin = NotificationValues.bulletinPageHeight - tblFlexAbsences.getOffsetHeight() - directionSectionHeight;
+		lblSpace.setHeight( margin + "px");
+		//
+//		int lineMargin = Math.round( margin / (tblFlexAbsences.getRowCount() - 1 ) / 2 );
+//		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+//		for (int i=0; i<tblFlexAbsences.getCellCount(0); i++)
+//			for (int j=1; j<tblFlexAbsences.getRowCount(); j++) {
+//				if (tblFlexAbsences.isCellPresent(j, i)) {
+//					tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
+//				}
+//			}
+	}
+	
 	
 	
 	/*
@@ -596,6 +632,11 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		int indexColCourse = 5;
 		int indexColJustify = 6;
 		//
+		lblBulletinStudentName.setText( lblStudentName.getText() );
+		lblBulletinClasse.setText( "" );
+		lblFromDate.setText( dateFrom.getTextBox().getText() );
+		lblToDate.setText( dateTo.getTextBox().getText() );
+		//
 		tblFlexAbsences.removeAllRows();
 		//
 		tblFlexAbsences.setText( 0 , indexColDate, "Date" );
@@ -609,9 +650,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		AbsenceItemProxy ai;
 		for ( int row = 0; row < providerAbsences.getList().size(); row++ ) {
 			ai = providerAbsences.getList().get(row);
-			tblFlexAbsences.setText( row + headerRow , indexColDate, ai.getStrAbsenceDate() );
+			tblFlexAbsences.setText( row + headerRow , indexColDate, ai.getStrAbsenceDate().substring(6) + "." + ai.getStrAbsenceDate().substring(4,6) + "." + ai.getStrAbsenceDate().substring(0,4)  );
 			tblFlexAbsences.setText( row + headerRow , indexColPeriod, ai.getPeriodDesc() );
-			tblFlexAbsences.setText( row + headerRow , indexColType, ai.getCodeAbsenceType() );
+			tblFlexAbsences.setText( row + headerRow , indexColType, AbsenceValues.getCodeFR( ai.getCodeAbsenceType() ) );
 			tblFlexAbsences.setText( row + headerRow , indexColMinute, (ai.getLateMinutes()>0) ? Integer.toString( ai.getLateMinutes() ) : "" );
 			tblFlexAbsences.setText( row + headerRow , indexColProf, ai.getProfName() );
 			tblFlexAbsences.setText( row + headerRow , indexColCourse, ai.getSubjectName() );

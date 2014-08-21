@@ -1,4 +1,4 @@
-<!-- Indices written at Tue, 19 Aug 2014 17:28:49 CEST -->
+<!-- Indices written at Thu, 21 Aug 2014 11:03:10 CEST -->
 
 <datastore-indexes>
 
@@ -9,7 +9,7 @@
         <property name="FirstName" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="AbsenceItem" ancestor="false" source="auto">
         <property name="keyStudent" direction="asc"/>
         <property name="strAbsenceDate" direction="asc"/>

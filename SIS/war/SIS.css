@@ -13,6 +13,54 @@ div, table td {
 	font-size: 12px !important;
 }
 
+.page {
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 1cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 0px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	font-size: 12px;
+	font-family: sans-serif;
+	vertical-align: top;
+	background-color: white;
+    page-break-after: always;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    .page {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+}
+
+
+/*
+	Absence bulletin
+*/
+.absenceBulletinTitle {
+	font-size: 16px !important;
+	color: darkblue;
+}
+
+.absencePnlDirection {
+	height: 160px;
+}
+
+
 
 /*
 	Toolbar
@@ -556,7 +604,7 @@ Agenda
 
 /* Bulletins */
 .bulletinFooter {
-	font-size: 11px;
+	font-size: 11px !important;
 }
 /**/
 
