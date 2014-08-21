@@ -130,8 +130,8 @@
 								</g:customCell>
 							</g:row>
 						</g:Grid>
+				<g:Label text="-" styleName="hiddenText" ui:field="lblSpace" height="10px"/>
 				<g:VerticalPanel ui:field="pnlDirection" styleName="absencePnlDirection">
-					<g:Label text="-" styleName="hiddenText" ui:field="lblSpace" height="10px"/>
 					<g:HorizontalPanel width="100%" ui:field="non">
 						<g:Label text="La Direction des Etudes" horizontalAlignment="ALIGN_RIGHT"/>
 						<g:Label text="-" styleName="hiddenText" width="10px"/>

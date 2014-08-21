@@ -38,6 +38,8 @@ import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.datepicker.client.CalendarModel;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -54,6 +56,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.ibm.icu.util.Calendar;
 
 public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementUiHandlers> implements
 		AbsenceManagementPresenter.MyView {
@@ -179,7 +182,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 				lstStudents.setSelectedIndex( providerStudents.getList().indexOf(sp) + 1);
 				lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
 				//
-				getUiHandlers().onStudentSelected(selectedStudent);
+				loadAbsenceByDate();
 				break;
 			}
 		}
@@ -510,6 +513,22 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		lstStudents.setSelectedIndex(0);
 		//
 		sgbStudents.setValue("");
+		//
+		setDaysOfTheMonth();
+	}
+
+	/*
+	 * */
+	private void setDaysOfTheMonth() {
+		//
+		Date date = new Date();
+		
+		CalendarUtil.setToFirstDayOfMonth(date);
+		dateFrom.setValue(date);
+		
+		CalendarUtil.addMonthsToDate(date, 1);
+		CalendarUtil.addDaysToDate(date, -1);
+		dateTo.setValue(date);
 	}
 
 	/*
@@ -532,8 +551,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
 		sgbStudents.setValue( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
 		//
-		getUiHandlers().onStudentSelected(selectedStudent);
+		loadAbsenceByDate();
 	}
+	
 	
 	
 	/*
@@ -544,12 +564,19 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		if (selectedStudent == null)
 			return;
 		//
+		loadAbsenceByDate();
+	}
+	
+	
+	/*
+	 * */
+	void loadAbsenceByDate() {
+		//
 		String fromDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateFrom.getValue() );
 		String toDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateTo.getValue() );
 		//
 		getUiHandlers().filterDate(selectedStudent, fromDate, toDate);
 	}
-	
 	
 	
 	
@@ -600,19 +627,44 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	 * */
 	private void distributeLineHeight() {
 		//
-		int directionSectionHeight = 260;
-		pnlBulletin.setHeight(NotificationValues.bulletinPageHeight.toString() + "px");
-		int margin = NotificationValues.bulletinPageHeight - tblFlexAbsences.getOffsetHeight() - directionSectionHeight;
-		lblSpace.setHeight( margin + "px");
-		//
-//		int lineMargin = Math.round( margin / (tblFlexAbsences.getRowCount() - 1 ) / 2 );
-//		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+//		int headerHeight = 80;
+//		int directionSectionHeight = 80;
+//		int rowHeight = 25;
+//		int whiteSpace = 0;
+//		//
+//		pnlBulletin.setHeight( NotificationValues.bulletinPageHeight.toString() + "px" );
+//		tblFlexAbsences.setHeight( (tblFlexAbsences.getRowCount() * rowHeight) + "px" );
+//		whiteSpace = NotificationValues.bulletinPageHeight - (tblFlexAbsences.getRowCount() * rowHeight) - headerHeight - directionSectionHeight;
+//		lblSpace.setHeight( whiteSpace + "px");
+//		//
+////		int lineMargin = Math.round( whiteSpace / (tblFlexAbsences.getRowCount() - 1 ) / 2 );
+//// 		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+//		StyleInjector.inject(".bulletinCellMargin { height:"+ rowHeight +"px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
 //		for (int i=0; i<tblFlexAbsences.getCellCount(0); i++)
 //			for (int j=1; j<tblFlexAbsences.getRowCount(); j++) {
 //				if (tblFlexAbsences.isCellPresent(j, i)) {
 //					tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
 //				}
 //			}
+
+		double pageHeight = 25.7;
+		double headerHeight = 3.6;
+		double directionSectionHeight = 5.4;
+		double rowHeight = 0.8;
+		double whiteSpace = 0;
+		//
+		pnlBulletin.setHeight( pageHeight + "cm" );
+		tblFlexAbsences.setHeight( (tblFlexAbsences.getRowCount() * rowHeight) + "cm" );
+		whiteSpace = pageHeight - (tblFlexAbsences.getRowCount() * rowHeight) - headerHeight - directionSectionHeight;
+		lblSpace.setHeight( whiteSpace + "cm");
+		//
+		StyleInjector.inject(".bulletinCellMargin { height:"+ rowHeight +"cm; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+		for (int i=0; i<tblFlexAbsences.getCellCount(0); i++)
+			for (int j=1; j<tblFlexAbsences.getRowCount(); j++) {
+				if (tblFlexAbsences.isCellPresent(j, i)) {
+					tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
+				}
+			}
 	}
 	
 	
