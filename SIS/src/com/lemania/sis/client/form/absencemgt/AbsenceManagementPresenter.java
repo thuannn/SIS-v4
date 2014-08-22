@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.popup.absenceinput.AbsenceInputPresenter;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -50,17 +51,23 @@ public class AbsenceManagementPresenter
 		void setUpdatedAbsenceItem( AbsenceItemProxy aip );
 	}
 
+	//
+	private AbsenceInputPresenter popupAbsenceInput;
+	
+	
 	@ProxyCodeSplit
 	@NameToken(NameTokens.absencesmgt)
 	@UseGatekeeper(AdminGateKeeper.class)
-	
 	public interface MyProxy extends ProxyPlace<AbsenceManagementPresenter> {
 	}
+	
 
 	@Inject
 	public AbsenceManagementPresenter(final EventBus eventBus, final MyView view,
-			final MyProxy proxy) {
+			final MyProxy proxy, AbsenceInputPresenter aip ) {
 		super(eventBus, view, proxy);
+		//
+		this.popupAbsenceInput = aip;
 	}
 
 	@Override
@@ -285,5 +292,15 @@ public class AbsenceManagementPresenter
 				getView().setAbsenceItemTableData( response );
 			}
 		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void showAbsenceInputPopup(StudentProxy student) {
+		//
+		addToPopupSlot( popupAbsenceInput, true);
+		popupAbsenceInput.onPopupStart(student);
 	}
 }

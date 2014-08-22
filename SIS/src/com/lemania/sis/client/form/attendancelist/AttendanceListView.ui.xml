@@ -35,29 +35,29 @@
     				</g:row>
     			</g:Grid>
     			<g:HorizontalPanel width="100%" spacing="4">
-    							<g:Label text="3." styleName="step"/>
-    							<g:VerticalPanel width="100%">
-    								<g:Label text="Type d&apos;absence à saisir :" horizontalAlignment="ALIGN_LEFT" height=""/>
-    							<g:Grid width="100%" cellSpacing="5">
-    								<g:row>
-    									<g:customCell>
-    										<g:RadioButton name="absenceType" text="Absence" checked="true" ui:field="optAbsent"/>
-    									</g:customCell>
-    									<g:customCell>
-    										<g:RadioButton name="absenceType" text="Exclusion" ui:field="optExclude"/>
-    									</g:customCell>
-    								</g:row>
-    								<g:row>
-    									<g:customCell>
-    										<g:RadioButton name="absenceType" text="Retard" ui:field="optLate"/>
-    									</g:customCell>
-    									<g:customCell>
-    										<g:RadioButton name="absenceType" text="Infirmerie" ui:field="optHealth"/>
-    									</g:customCell>
-    								</g:row>
-    							</g:Grid>
-    						</g:VerticalPanel>
-    						</g:HorizontalPanel>
+							<g:Label text="3." styleName="step"/>
+							<g:VerticalPanel width="100%">
+								<g:Label text="Type d&apos;absence à saisir :" horizontalAlignment="ALIGN_LEFT" height=""/>
+							<g:Grid width="100%" cellSpacing="5">
+								<g:row>
+									<g:customCell>
+										<g:RadioButton name="absenceType" text="Absence" checked="true" ui:field="optAbsent"/>
+									</g:customCell>
+									<g:customCell>
+										<g:RadioButton name="absenceType" text="Exclusion" ui:field="optExclude"/>
+									</g:customCell>
+								</g:row>
+								<g:row>
+									<g:customCell>
+										<g:RadioButton name="absenceType" text="Retard" ui:field="optLate"/>
+									</g:customCell>
+									<g:customCell>
+										<g:RadioButton name="absenceType" text="Infirmerie" ui:field="optHealth"/>
+									</g:customCell>
+								</g:row>
+							</g:Grid>
+						</g:VerticalPanel>
+    			</g:HorizontalPanel>
     		</g:HorizontalPanel>
     		<g:HorizontalPanel spacing="5" verticalAlignment="ALIGN_MIDDLE">
     			<g:Label text="4." horizontalAlignment="ALIGN_LEFT" styleName="step" width=""/>

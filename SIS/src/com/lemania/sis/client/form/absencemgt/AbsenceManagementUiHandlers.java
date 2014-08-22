@@ -24,4 +24,6 @@ public interface AbsenceManagementUiHandlers extends UiHandlers {
 	void updateMotif(AbsenceItemProxy ai, String motifID);
 	//
 	void filterDate( StudentProxy student, String dateFrom, String dateTo);
+	//
+	void showAbsenceInputPopup(StudentProxy student);
 }

@@ -14,6 +14,7 @@ import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class BulletinSubjectDao extends MyDAOBase {
@@ -65,7 +66,8 @@ public class BulletinSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public List<BulletinSubject> listAll( String bulletinId ){
 		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
@@ -88,6 +90,41 @@ public class BulletinSubjectDao extends MyDAOBase {
 		}
 		return returnList;
 	}
+	
+	
+	
+	/*
+	 * */
+	public List<BulletinSubject> listAllByStudent( String studentId ) throws Exception{
+		//
+		// First load the bulletin of this student
+		Query<Bulletin> qBulletin = ofy().load().type( Bulletin.class )
+				.filter("student", Key.create( Student.class, Long.parseLong(studentId)))
+				.filter("isFinished", false);
+		if ( ! (qBulletin.count() > 0) )
+			throw new Exception();
+		//
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
+				.filter("bulletin", Key.create( Bulletin.class, qBulletin.list().get(0).getId() ));
+		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
+		for ( BulletinSubject bulletinSubject : q ){
+			//
+			if (bulletinSubject.getProfessor() != null){
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
+				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			//
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
+			bulletinSubject.setSubjectId( Long.toString(
+					ofy().load().key( bulletinSubject.getSubject()).now().getId() ));
+			bulletinSubject.setClassId( Long.toString( 
+					ofy().load().key( ofy().load().key( bulletinSubject.getBulletin()).now().getClasse() ).now().getId() ));
+			//
+			returnList.add( bulletinSubject );
+		}
+		return returnList;
+	}
+	
 	
 	
 	/**/

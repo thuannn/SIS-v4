@@ -75,6 +75,8 @@ import com.lemania.sis.client.form.attributionmgt.ProfileManagementPresenter;
 import com.lemania.sis.client.form.attributionmgt.ProfileManagementView;
 import com.lemania.sis.client.form.absencemgt.AbsenceManagementPresenter;
 import com.lemania.sis.client.form.absencemgt.AbsenceManagementView;
+import com.lemania.sis.client.popup.absenceinput.AbsenceInputPresenter;
+import com.lemania.sis.client.popup.absenceinput.AbsenceInputView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -217,5 +219,8 @@ public class ClientModule extends AbstractPresenterModule {
 				AbsenceManagementPresenter.MyView.class,
 				AbsenceManagementView.class,
 				AbsenceManagementPresenter.MyProxy.class);
+
+		bindPresenterWidget(AbsenceInputPresenter.class,
+				AbsenceInputPresenter.MyView.class, AbsenceInputView.class);
 	}
 }

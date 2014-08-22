@@ -627,29 +627,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	 * */
 	private void distributeLineHeight() {
 		//
-//		int headerHeight = 80;
-//		int directionSectionHeight = 80;
-//		int rowHeight = 25;
-//		int whiteSpace = 0;
-//		//
-//		pnlBulletin.setHeight( NotificationValues.bulletinPageHeight.toString() + "px" );
-//		tblFlexAbsences.setHeight( (tblFlexAbsences.getRowCount() * rowHeight) + "px" );
-//		whiteSpace = NotificationValues.bulletinPageHeight - (tblFlexAbsences.getRowCount() * rowHeight) - headerHeight - directionSectionHeight;
-//		lblSpace.setHeight( whiteSpace + "px");
-//		//
-////		int lineMargin = Math.round( whiteSpace / (tblFlexAbsences.getRowCount() - 1 ) / 2 );
-//// 		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
-//		StyleInjector.inject(".bulletinCellMargin { height:"+ rowHeight +"px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
-//		for (int i=0; i<tblFlexAbsences.getCellCount(0); i++)
-//			for (int j=1; j<tblFlexAbsences.getRowCount(); j++) {
-//				if (tblFlexAbsences.isCellPresent(j, i)) {
-//					tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
-//				}
-//			}
-
 		double pageHeight = 25.7;
 		double headerHeight = 3.6;
-		double directionSectionHeight = 5.4;
+		double directionSectionHeight = 5.7;
 		double rowHeight = 0.8;
 		double whiteSpace = 0;
 		//
@@ -659,10 +639,14 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		lblSpace.setHeight( whiteSpace + "cm");
 		//
 		StyleInjector.inject(".bulletinCellMargin { height:"+ rowHeight +"cm; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
+		StyleInjector.inject(".absenceBulletinHeader { height:"+ rowHeight +"cm; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; background-color: palegoldenrod; }", true);
 		for (int i=0; i<tblFlexAbsences.getCellCount(0); i++)
-			for (int j=1; j<tblFlexAbsences.getRowCount(); j++) {
+			for (int j=0; j<tblFlexAbsences.getRowCount(); j++) {
 				if (tblFlexAbsences.isCellPresent(j, i)) {
-					tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
+					if (j > 0)
+						tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
+					else
+						tblFlexAbsences.getCellFormatter().addStyleName(j, i, "absenceBulletinHeader");
 				}
 			}
 	}
@@ -731,5 +715,15 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 						tblFlexAbsences.getCellFormatter().setStyleName(j, i, "bulletinBrancheLine");
 				}
 			}
+	}
+	
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdAddAbsence")
+	void onCmdAddAbsenceClick(ClickEvent event) {
+		//
+		getUiHandlers().showAbsenceInputPopup( providerStudents.getList().get( lstStudents.getSelectedIndex() - 1) );
 	}
 }

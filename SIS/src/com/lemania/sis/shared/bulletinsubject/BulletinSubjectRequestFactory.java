@@ -19,7 +19,8 @@ public interface BulletinSubjectRequestFactory extends RequestFactory {
 		//
 		Request<List<BulletinSubjectProxy>> listAllActive();		
 		//
-		Request<List<BulletinSubjectProxy>> listAllByAssignment(String assignmentId);
+		Request<List<BulletinSubjectProxy>> listAllByAssignment( String assignmentId );
+		Request<List<BulletinSubjectProxy>> listAllByStudent( String studentId );
 		//
 		Request<Void> save(BulletinSubjectProxy profile);
 		Request<BulletinSubjectProxy> saveAndReturn(BulletinSubjectProxy newBulletinSubject);

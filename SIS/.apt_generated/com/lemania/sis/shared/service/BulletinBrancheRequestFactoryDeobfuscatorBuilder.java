@@ -34,17 +34,17 @@ withOperation(new OperationKey("b_cGvyTvVK0KmAIb9bEGcvU4pTA="),
   .withMethodName("listAllActive")
   .withRequestContext("com.lemania.sis.shared.service.BulletinBrancheRequestFactory$BulletinBrancheRequestContext")
   .build());
-withOperation(new OperationKey("Kf2RiekkWBDFUvUHNA91iC23_GI="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/BulletinBrancheProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/BulletinBranche;)Lcom/lemania/sis/server/BulletinBranche;")
-  .withMethodName("saveAndReturn")
-  .withRequestContext("com.lemania.sis.shared.service.BulletinBrancheRequestFactory$BulletinBrancheRequestContext")
-  .build());
 withOperation(new OperationKey("UJ6LZIE8clOCJkV6tknwFoLzhhM="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/lemania/sis/server/BulletinBranche;")
+  .withMethodName("saveAndReturn")
+  .withRequestContext("com.lemania.sis.shared.service.BulletinBrancheRequestFactory$BulletinBrancheRequestContext")
+  .build());
+withOperation(new OperationKey("Kf2RiekkWBDFUvUHNA91iC23_GI="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/BulletinBrancheProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/BulletinBranche;)Lcom/lemania/sis/server/BulletinBranche;")
   .withMethodName("saveAndReturn")
   .withRequestContext("com.lemania.sis.shared.service.BulletinBrancheRequestFactory$BulletinBrancheRequestContext")
   .build());
