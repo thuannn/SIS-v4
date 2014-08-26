@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 public class ParentProfileView extends
 		PopupViewWithUiHandlers<ParentProfileUiHandlers> implements
 		ParentProfilePresenter.MyView {
+	
 	public interface Binder extends UiBinder<PopupPanel, ParentProfileView> {
 	}
 

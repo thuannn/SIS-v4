@@ -38,7 +38,7 @@ public class BulletinDao extends MyDAOBase {
 	
 	public List<Bulletin> listAllActive(){
 		Query<Bulletin> q = ofy().load().type(Bulletin.class)
-				.filter("schoolActive", true)
+				.filter("isFinished", false)
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();

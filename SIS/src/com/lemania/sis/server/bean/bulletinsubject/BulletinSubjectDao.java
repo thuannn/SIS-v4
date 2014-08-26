@@ -120,6 +120,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 			bulletinSubject.setClassId( Long.toString( 
 					ofy().load().key( ofy().load().key( bulletinSubject.getBulletin()).now().getClasse() ).now().getId() ));
 			//
+			bulletinSubject.setStudentName( qBulletin.list().get(0).getStudentName() );
+			bulletinSubject.setStudentId( qBulletin.list().get(0).getStudentId().toString() );
+			//
 			returnList.add( bulletinSubject );
 		}
 		return returnList;

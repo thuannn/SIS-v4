@@ -19,7 +19,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -33,12 +32,10 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.lemania.sis.client.UI.DynamicSelectionCell;
 import com.lemania.sis.client.values.AbsenceValues;
-import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
-import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.datepicker.client.CalendarModel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.Button;
@@ -56,7 +53,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.ibm.icu.util.Calendar;
 
 public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementUiHandlers> implements
 		AbsenceManagementPresenter.MyView {
@@ -64,9 +60,13 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	private final Widget widget;
 	
 	//
-	int selectedStudentIndex = -1;
-	ListDataProvider<StudentProxy> providerStudents = new ListDataProvider<StudentProxy>();
-	StudentProxy selectedStudent;
+//	int selectedStudentIndex = -1;
+//	ListDataProvider<StudentProxy> providerStudents = new ListDataProvider<StudentProxy>();
+//	StudentProxy selectedStudent;
+	
+	int selectedBulletinIndex = -1;
+	ListDataProvider<BulletinProxy> providerBulletins = new ListDataProvider<BulletinProxy>();
+	BulletinProxy selectedBulletin;
 	
 	ListDataProvider<AbsenceItemProxy> providerAbsences = new ListDataProvider<AbsenceItemProxy>();
 	int selectedAbsenceItemIndex = -1;
@@ -118,23 +118,45 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiField HorizontalPanel non;
 	@UiField VerticalPanel pnlDirection;
 	
+	
+//	/*
+//	 * */
+//	@Override
+//	public void setStudentTableData(List<StudentProxy> studentList) {
+//		//
+//		providerStudents.getList().clear();
+//		providerStudents.setList(studentList);
+//		providerStudents.flush();
+//		//
+//		mySuggestions.clear();
+//		lstStudents.clear();
+//		lstStudents.addItem("Choisir");
+//		for (StudentProxy sp : studentList) {
+//			lstStudents.addItem( sp.getFirstName() + " " + sp.getLastName(), sp.getId().toString() );
+//			mySuggestions.add( sp.getFirstName() + " " + sp.getLastName() );
+//		}
+//	}
+	
+	
 	/*
 	 * */
 	@Override
-	public void setStudentTableData(List<StudentProxy> studentList) {
+	public void setStudentTableData(List<BulletinProxy> studentList) {
 		//
-		providerStudents.getList().clear();
-		providerStudents.setList(studentList);
-		providerStudents.flush();
+		providerBulletins.getList().clear();
+		providerBulletins.setList(studentList);
+		providerBulletins.flush();
 		//
 		mySuggestions.clear();
 		lstStudents.clear();
 		lstStudents.addItem("Choisir");
-		for (StudentProxy sp : studentList) {
-			lstStudents.addItem( sp.getFirstName() + " " + sp.getLastName(), sp.getId().toString() );
-			mySuggestions.add( sp.getFirstName() + " " + sp.getLastName() );
+		for (BulletinProxy sp : studentList) {
+			lstStudents.addItem( sp.getStudentName(), sp.getStudentId().toString() );
+			mySuggestions.add( sp.getStudentName() );
 		}
 	}
+	
+	
 
 	/*
 	 * */
@@ -172,15 +194,32 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	
 	
 	
+//	/*
+//	 * */
+//	void onStudentSuggestionSelected( String typedName ) {
+//		//
+//		for( StudentProxy sp : providerStudents.getList() ) {
+//			if ( typedName.equals( sp.getFirstName() + " " + sp.getLastName()) ) {
+//				selectedStudent = sp;
+//				lstStudents.setSelectedIndex( providerStudents.getList().indexOf(sp) + 1);
+//				lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+//				//
+//				loadAbsenceByDate();
+//				break;
+//			}
+//		}
+//	}
+	
+	
 	/*
 	 * */
 	void onStudentSuggestionSelected( String typedName ) {
 		//
-		for( StudentProxy sp : providerStudents.getList() ) {
-			if ( typedName.equals( sp.getFirstName() + " " + sp.getLastName()) ) {
-				selectedStudent = sp;
-				lstStudents.setSelectedIndex( providerStudents.getList().indexOf(sp) + 1);
-				lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+		for( BulletinProxy sp : providerBulletins.getList() ) {
+			if ( typedName.equals( sp.getStudentName() )) {
+				selectedBulletin = sp;
+				lstStudents.setSelectedIndex( providerBulletins.getList().indexOf(sp) + 1);
+				lblStudentName.setText( selectedBulletin.getStudentName() );
 				//
 				loadAbsenceByDate();
 				break;
@@ -541,15 +580,30 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	}
 	
 	
+//	/*
+//	 * */
+//	@UiHandler("lstStudents")
+//	void onLstStudentsChange(ChangeEvent event) {
+//		//
+//		selectedStudent = providerStudents.getList().get( lstStudents.getSelectedIndex() - 1 );
+//		//
+//		lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+//		sgbStudents.setValue( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+//		//
+//		loadAbsenceByDate();
+//	}
+	
+	
+	
 	/*
 	 * */
 	@UiHandler("lstStudents")
 	void onLstStudentsChange(ChangeEvent event) {
 		//
-		selectedStudent = providerStudents.getList().get( lstStudents.getSelectedIndex() - 1 );
+		selectedBulletin = providerBulletins.getList().get( lstStudents.getSelectedIndex() - 1 );
 		//
-		lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
-		sgbStudents.setValue( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
+		lblStudentName.setText( selectedBulletin.getStudentName() );
+		sgbStudents.setValue( selectedBulletin.getStudentName() );
 		//
 		loadAbsenceByDate();
 	}
@@ -561,7 +615,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiHandler("cmdFilter")
 	void onCmdFilterClick(ClickEvent event) {
 		//
-		if (selectedStudent == null)
+		if ( selectedBulletin == null )
 			return;
 		//
 		loadAbsenceByDate();
@@ -575,7 +629,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		String fromDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateFrom.getValue() );
 		String toDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateTo.getValue() );
 		//
-		getUiHandlers().filterDate(selectedStudent, fromDate, toDate);
+		getUiHandlers().filterDate( selectedBulletin.getStudentId().toString() , fromDate, toDate);
 	}
 	
 	
@@ -629,13 +683,14 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		//
 		double pageHeight = 25.7;
 		double headerHeight = 3.6;
-		double directionSectionHeight = 5.7;
-		double rowHeight = 0.8;
+		double directionSectionHeight = 6;
+		double rowHeight = 0.5;
 		double whiteSpace = 0;
+		double commentHeight = 1.2;
 		//
 		pnlBulletin.setHeight( pageHeight + "cm" );
-		tblFlexAbsences.setHeight( (tblFlexAbsences.getRowCount() * rowHeight) + "cm" );
-		whiteSpace = pageHeight - (tblFlexAbsences.getRowCount() * rowHeight) - headerHeight - directionSectionHeight;
+		tblFlexAbsences.setHeight( ( tblFlexAbsences.getRowCount() * rowHeight) + "cm" );
+		whiteSpace = pageHeight - ( tblFlexAbsences.getRowCount() * rowHeight) - headerHeight - directionSectionHeight - commentHeight;
 		lblSpace.setHeight( whiteSpace + "cm");
 		//
 		StyleInjector.inject(".bulletinCellMargin { height:"+ rowHeight +"cm; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
@@ -724,6 +779,6 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiHandler("cmdAddAbsence")
 	void onCmdAddAbsenceClick(ClickEvent event) {
 		//
-		getUiHandlers().showAbsenceInputPopup( providerStudents.getList().get( lstStudents.getSelectedIndex() - 1) );
+		getUiHandlers().showAbsenceInputPopup( selectedBulletin.getStudentId().toString(), selectedBulletin.getStudentName() );
 	}
 }

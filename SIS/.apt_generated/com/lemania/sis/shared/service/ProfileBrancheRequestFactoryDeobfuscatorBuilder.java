@@ -20,17 +20,17 @@ withOperation(new OperationKey("t8kqVv8_9B9EkA9eL0dp9$MGjjk="),
   .withMethodName("removeProfileBranche")
   .withRequestContext("com.lemania.sis.shared.service.ProfileBrancheRequestFactory$ProfileBrancheRequestContext")
   .build());
-withOperation(new OperationKey("7xRcAB7QfarAW3UCq$sn_Wv31J0="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.service.ProfileBrancheRequestFactory$ProfileBrancheRequestContext")
-  .build());
 withOperation(new OperationKey("V7dv6KIgirTxSag8or0MDidZdzI="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAll")
+  .withRequestContext("com.lemania.sis.shared.service.ProfileBrancheRequestFactory$ProfileBrancheRequestContext")
+  .build());
+withOperation(new OperationKey("7xRcAB7QfarAW3UCq$sn_Wv31J0="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
   .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.ProfileBrancheRequestFactory$ProfileBrancheRequestContext")
   .build());

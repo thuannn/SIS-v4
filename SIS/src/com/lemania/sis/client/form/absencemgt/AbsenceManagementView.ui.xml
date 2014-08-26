@@ -52,7 +52,7 @@
 			<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlMainAbsences">
 					<g:Label text="Liste des absences" styleName="sectionTitle"/>
 					<g:Label text="-" styleName="header" ui:field="lblStudentName"/>
-					<p1:DataGrid width="100%" height="450px" ui:field="tblAbsences" pageSize="15"/>
+					<p1:DataGrid width="100%" height="500px" ui:field="tblAbsences" pageSize="15"/>
 					<g:Cell horizontalAlignment="ALIGN_CENTER">
 						<p1:SimplePager location="CENTER" ui:field="pagerAbsences" page="0" pageSize="15" pageStart="0"/>
 					</g:Cell>
@@ -101,36 +101,38 @@
 						</g:row>
 					</g:Grid>
 				</g:HorizontalPanel>
-				<g:FlexTable width="100%" ui:field="tblFlexAbsences" styleName="bulletinMainSection"/>
-				<g:Grid>
-							<g:row>
-								<g:customCell>
-									<g:Label text="AB = " styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="Absence ;" styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="R =" styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="Retard ;" styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="Excl = " styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="Exclusion ;" styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="IN = " styleName="bulletinFooter"/>
-								</g:customCell>
-								<g:customCell>
-									<g:Label text="Infirmerie" styleName="bulletinFooter"/>
-								</g:customCell>
-							</g:row>
-						</g:Grid>
-				<g:Label text="-" styleName="hiddenText" ui:field="lblSpace" height="10px"/>
+				<g:VerticalPanel width="100%" styleName="bulletinMainSection">
+					<g:FlexTable width="100%" ui:field="tblFlexAbsences" styleName="bulletinMainSection"/>
+					<g:Grid>
+								<g:row>
+									<g:customCell>
+										<g:Label text="AB = " styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="Absence ;" styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="R =" styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="Retard ;" styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="Excl = " styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="Exclusion ;" styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="IN = " styleName="bulletinFooter"/>
+									</g:customCell>
+									<g:customCell>
+										<g:Label text="Infirmerie" styleName="bulletinFooter"/>
+									</g:customCell>
+								</g:row>
+							</g:Grid>
+					<g:Label text="-" styleName="hiddenText" ui:field="lblSpace" height="10px"/>
+				</g:VerticalPanel>
 				<g:VerticalPanel ui:field="pnlDirection" styleName="absencePnlDirection">
 					<g:HorizontalPanel width="100%" ui:field="non">
 						<g:Label text="La Direction des Etudes" horizontalAlignment="ALIGN_RIGHT"/>

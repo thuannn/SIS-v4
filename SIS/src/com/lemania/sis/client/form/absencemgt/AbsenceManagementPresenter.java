@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.popup.absenceinput.AbsenceInputPresenter;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
@@ -18,27 +19,31 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.lemania.sis.client.event.AbsenceAfterInputEvent;
+import com.lemania.sis.client.event.AbsenceAfterInputEvent.AbsenceAfterInputHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory;
 import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory.AbsenceItemRequestContext;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
+import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
+import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory.MotifAbsenceRequestContext;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
-import com.lemania.sis.shared.student.StudentProxy;
 import com.lemania.sis.shared.student.StudentRequestFactory;
 import com.lemania.sis.shared.student.StudentRequestFactory.StudentRequestContext;
 
 public class AbsenceManagementPresenter
 		extends Presenter<AbsenceManagementPresenter.MyView, AbsenceManagementPresenter.MyProxy>
-		implements AbsenceManagementUiHandlers {
+		implements AbsenceManagementUiHandlers, AbsenceAfterInputHandler {
 
 	public interface MyView extends View, HasUiHandlers<AbsenceManagementUiHandlers> {
 		//
-		public void setStudentTableData( List<StudentProxy> studentList );
+//		public void setStudentTableData( List<StudentProxy> studentList );
+		public void setStudentTableData( List<BulletinProxy> studentList );
 		//
 		public void setAbsenceItemTableData( List<AbsenceItemProxy> absenceItems );
 		//
@@ -53,6 +58,9 @@ public class AbsenceManagementPresenter
 
 	//
 	private AbsenceInputPresenter popupAbsenceInput;
+	//
+	String curStudentId;
+	String fromDate = "", toDate = "";
 	
 	
 	@ProxyCodeSplit
@@ -64,16 +72,12 @@ public class AbsenceManagementPresenter
 
 	@Inject
 	public AbsenceManagementPresenter(final EventBus eventBus, final MyView view,
-			final MyProxy proxy, AbsenceInputPresenter aip ) {
-		super(eventBus, view, proxy);
+			final MyProxy proxy, AbsenceInputPresenter aip) {
+		super(eventBus, view, proxy, MainPagePresenter.TYPE_SetMainContent);
 		//
 		this.popupAbsenceInput = aip;
 	}
 
-	@Override
-	protected void revealInParent() {
-		RevealContentEvent.fire(this, MainPagePresenter.TYPE_SetMainContent, this);
-	}
 
 	@Override
 	protected void onBind() {
@@ -121,15 +125,18 @@ public class AbsenceManagementPresenter
 	/* 
 	 * Load student list when form is opened 
 	 * */
-	private void loadStudentList(){
-		StudentRequestContext rc = getStudentRequestContext();
-		rc.listAllActive().fire(new Receiver<List<StudentProxy>>(){
+	private void loadStudentList() {
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.listAllActive().fire(new Receiver<List<BulletinProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
 			@Override
-			public void onSuccess(List<StudentProxy> response) {
+			public void onSuccess(List<BulletinProxy> response) {
 				getView().setStudentTableData(response);
 			}
 		});
@@ -145,28 +152,28 @@ public class AbsenceManagementPresenter
 	}
 
 	
-	/*
-	 * When a student is selected, load his absences history
-	 * */
-	@Override
-	public void onStudentSelected(StudentProxy student) {
-		// 
-		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
-		rc.listAllByStudent( student.getId().toString() ).fire(new Receiver<List<AbsenceItemProxy>>(){
-				@Override
-				public void onFailure(ServerFailure error){
-					//
-					Window.alert(error.getMessage());
-				}
-				@Override
-				public void onSuccess( List<AbsenceItemProxy> response ) {
-					//
-					getView().setAbsenceItemTableData( response );
-				}
-			});
-	}
+//	/*
+//	 * When a student is selected, load his absences history
+//	 * */
+//	@Override
+//	public void onStudentSelected(StudentProxy student) {
+//		// 
+//		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+//		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+//		rc.listAllByStudent( student.getId().toString() ).fire(new Receiver<List<AbsenceItemProxy>>(){
+//				@Override
+//				public void onFailure(ServerFailure error){
+//					//
+//					Window.alert(error.getMessage());
+//				}
+//				@Override
+//				public void onSuccess( List<AbsenceItemProxy> response ) {
+//					//
+//					getView().setAbsenceItemTableData( response );
+//				}
+//			});
+//	}
 
 	
 	/*
@@ -275,12 +282,16 @@ public class AbsenceManagementPresenter
 	/*
 	 * */
 	@Override
-	public void filterDate(StudentProxy student, String dateFrom, String dateTo) {
-		// 
+	public void filterDate(String studentId, String dateFrom, String dateTo) {
+		// Keep the current selected values
+		curStudentId = studentId;
+		fromDate = dateFrom;
+		toDate = dateTo;
+		//
 		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
-		rc.listAllByStudentAndDate( student.getId().toString(), dateFrom, dateTo ).fire(new Receiver<List<AbsenceItemProxy>>(){
+		rc.listAllByStudentAndDate( studentId, dateFrom, dateTo ).fire(new Receiver<List<AbsenceItemProxy>>() {
 			@Override
 			public void onFailure(ServerFailure error){
 				//
@@ -298,9 +309,20 @@ public class AbsenceManagementPresenter
 	/*
 	 * */
 	@Override
-	public void showAbsenceInputPopup(StudentProxy student) {
+	public void showAbsenceInputPopup( String studentId, String studentName ) {
 		//
-		addToPopupSlot( popupAbsenceInput, true);
-		popupAbsenceInput.onPopupStart(student);
+		addToPopupSlot( popupAbsenceInput, true );
+		popupAbsenceInput.onPopupStart( studentId, studentName );
+	}
+
+
+	
+	/*
+	 * */
+	@ProxyEvent
+	@Override
+	public void onAbsenceAfterInput(AbsenceAfterInputEvent event) {
+		// Fire the selection with the current selected value
+		filterDate( curStudentId, fromDate, toDate );
 	}
 }
