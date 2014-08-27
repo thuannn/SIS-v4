@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.values.AppSettingValues;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
@@ -112,8 +113,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	public void initializeYearList(){
 		lstYear.clear();
 		lstYear.addItem("-","");
-		lstYear.addItem("2013 - 2014","2013");
-		lstYear.addItem("2014 - 2015","2014");
+		lstYear.addItem( AppSettingValues.schoolYearDescription, AppSettingValues.schoolYearCode );
 	}
 	
 

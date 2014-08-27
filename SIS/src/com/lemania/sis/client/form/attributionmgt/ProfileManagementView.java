@@ -4,9 +4,13 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
@@ -17,6 +21,7 @@ import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.cellview.client.Column;
@@ -34,8 +39,12 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementUiHandler> implements
 		ProfileManagementPresenter.MyView {
@@ -52,6 +61,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	//
 	private int selectedBrancheIndex;
 	private ProfileBrancheProxy selectedBranche;
+	//
+	private PopupPanel pp;
 	
 	
 	public interface Binder extends UiBinder<Widget, ProfileManagementView> {
@@ -83,6 +94,9 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@UiField(provided=true) DataGrid<ProfileBrancheProxy> tblBranches = new DataGrid<ProfileBrancheProxy>();
 	@UiField ListBox lstClasses;
 	@UiField SimplePager pagerSubjects;
+	@UiField VerticalPanel pnlSubject;
+	@UiField VerticalPanel pnlSubjectAdd;
+	@UiField Button cmdSaveSubject;
 	
 	/*
 	 * 
@@ -252,8 +266,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		subjectDataProvider.getList().add( profileSubject );
 		subjectDataProvider.refresh();
 		//
-		tblSubjects.setHeight( Integer.toString( NotificationValues.lineHeightShortList * subjectDataProvider.getList().size() 
-				+ NotificationValues.headerHeight) + "px");
+//		tblSubjects.setHeight( Integer.toString( NotificationValues.lineHeightShortList * subjectDataProvider.getList().size() 
+//				+ NotificationValues.headerHeight) + "px");
 	}
 	
 
@@ -350,8 +364,60 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    tblSubjects.addColumn( colTotalBrancheCoef, "Branche Coefs" );
 	    
 	    
+	    // -- Edit
+	    Column<ProfileSubjectProxy, String> colEdit = new Column<ProfileSubjectProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(ProfileSubjectProxy bp){
+	    		return "Editer";
+	    	}
+	    };
+	    colEdit.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, String>(){
+	    	@Override
+	    	public void update(int index, ProfileSubjectProxy ps, String value){
+	    		//
+	    		selectedSubjectIndex = index;
+	    		selectedSubject = ps;
+	    		//
+	    		pp = new PopupPanel(true) {
+	    			@Override
+	    			  protected void onPreviewNativeEvent(final NativePreviewEvent event) {
+	    			    super.onPreviewNativeEvent(event);
+	    			    switch (event.getTypeInt()) {
+	    			        case Event.ONKEYDOWN:
+	    			            if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+	    			            	//
+	    			                hide();
+	    			            }
+	    			            break;
+	    			    }
+	    			}
+	    		};
+	    		//
+	    		pp.addCloseHandler(new CloseHandler<PopupPanel>() {
+	    			public void onClose(CloseEvent<PopupPanel> event) {
+	    				//
+	    				pnlSubject.add( pnlSubjectAdd );
+	    				cmdSaveSubject.setVisible(false);
+	    				cmdAddSubject.setVisible(true);
+	    			}
+	    		});
+	    		//
+	    		pp.add( pnlSubjectAdd );
+	    		cmdSaveSubject.setVisible(true);
+				cmdAddSubject.setVisible(false);
+	    		pp.show();
+	    		pp.center();
+	    		//
+	    		FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
+	    		onLstSubjectsChange( null );
+	    	}
+	    });
+	    tblSubjects.setColumnWidth(colEdit, 10.0, Unit.PCT);
+	    tblSubjects.addColumn(colEdit, "");	 
+	    
+	    
 	    // -- Delete
-	    Column<ProfileSubjectProxy, String> colDelete = new Column<ProfileSubjectProxy, String> (new ButtonCell()){
+	    Column<ProfileSubjectProxy, String> colDelete = new Column<ProfileSubjectProxy, String> (new GridButtonCell()){
 	    	@Override
 	    	public String getValue(ProfileSubjectProxy bp){
 	    		return "X";
@@ -431,7 +497,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    tblBranches.addColumn( colCoef, "Coefficient" );
 	    
 	    // -- Delete
-	    Column<ProfileBrancheProxy, String> colDelete = new Column<ProfileBrancheProxy, String> (new ButtonCell()){
+	    Column<ProfileBrancheProxy, String> colDelete = new Column<ProfileBrancheProxy, String> (new GridButtonCell()){
 	    	@Override
 	    	public String getValue(ProfileBrancheProxy bp){
 	    		return "X";
@@ -492,6 +558,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	public void showUpdatedProfileSubject(ProfileSubjectProxy ps, Integer subjectLastIndex) {
 		//
 		subjectDataProvider.getList().set( subjectLastIndex, ps );
+		//
+		pp.hide();
 	}
 	
 
@@ -591,5 +659,16 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@Override
 	public void setReadOnly(boolean isReadOnly) {
 		//
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSaveSubject")
+	void onCmdSaveSubjectClick(ClickEvent event) {
+		//
+		if ( selectedSubject != null ) {
+			getUiHandlers().updateSubjectProf(selectedSubject, lstProfessors.getValue( lstProfessors.getSelectedIndex() ), selectedSubjectIndex );
+		}
 	}
 }

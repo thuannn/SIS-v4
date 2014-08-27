@@ -10,6 +10,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.client.values.AppSettingValues;
 import com.lemania.sis.client.values.NotificationValues;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FocusWidget;
@@ -158,10 +159,12 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		txtWelcome.setText("Vous êtes connecté(e), " + currentUser.getFullName() + " !");
 		cmdLogout.setText("Déconnexion");
 		//
-		if (currentUser.getCurrentMonth() < 9)
-			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()-1) + " - " + Integer.toString(currentUser.getCurrentYear()));
-		else
-			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()) + " - " + Integer.toString(currentUser.getCurrentYear()+1));
+//		if (currentUser.getCurrentMonth() < 8)
+//			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()-1) + " - " + Integer.toString(currentUser.getCurrentYear()));
+//		else
+//			lblCurrentMonth.setText( "L'année scolaire : " + Integer.toString(currentUser.getCurrentYear()) + " - " + Integer.toString(currentUser.getCurrentYear()+1));
+		//
+		lblCurrentMonth.setText( "L'année scolaire : " + AppSettingValues.schoolYearDescription );
 	}
 
 	@Override

@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2">
+		<g:VerticalPanel width="100%">
 			<g:Label text="ATTRIBUTION PROGRAMME / ELEVE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel width="100%" spacing="5">
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">

@@ -23,7 +23,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA.jar" sourcepath="/Users/ngocthuannguyen/Documents/gwt-2.6.1/validation-api-1.0.0.GA-sources.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

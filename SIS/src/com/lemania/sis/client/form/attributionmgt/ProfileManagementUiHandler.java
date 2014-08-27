@@ -23,4 +23,6 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	void updateProfileBranche( ProfileBrancheProxy pb, String coef, String profileSubjectId, Integer lastPosition );
 	//
 	void onSubjectSelected( String profileSubjectId );
+	//
+	void updateSubjectProf( ProfileSubjectProxy ps, String profId, final Integer lastPosition );
 }

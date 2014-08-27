@@ -30,6 +30,7 @@ public interface ProfileSubjectRequestFactory extends RequestFactory {
 		//
 		Request<ProfileSubjectProxy> calculateTotalBrancheCoef( String profileSubjectId );
 		//
+		Request<ProfileSubjectProxy> updateSubjectProf( ProfileSubjectProxy profile, String profId );
 	}
 	
 	ProfileSubjectRequestContext profileSubjectRequest();

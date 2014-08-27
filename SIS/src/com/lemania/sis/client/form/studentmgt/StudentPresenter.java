@@ -45,6 +45,7 @@ public class StudentPresenter
 		public void setTableData( List<StudentProxy> studentList );
 		public void initializeTable();
 		public void updateEditedStudent(StudentProxy student);
+		public void initializeUI();
 	}
 
 	@ProxyCodeSplit
@@ -73,6 +74,8 @@ public class StudentPresenter
 	@Override
 	protected void onBind() {
 		super.onBind();
+		//
+		getView().initializeUI();
 	}
 	
 	@Override

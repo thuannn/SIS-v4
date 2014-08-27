@@ -130,7 +130,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	
 	
-	/**/
+	/*
+	 * Dans les cas qu'il y a deux us plus profs pour une matière, il faut pas filtrer les bulletin subject par prof
+	 * */
 	public List<BulletinSubject> listAllByAssignment(String assignmentId) {
 		// Get the assignment object
 		Assignment assignment = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId))).now();
@@ -144,7 +146,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())
-					.filter("professor", assignment.getProf())
+//					.filter("professor", assignment.getProf())
 					.order("subjectName");
 			List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 			for ( BulletinSubject bulletinSubject : q ){

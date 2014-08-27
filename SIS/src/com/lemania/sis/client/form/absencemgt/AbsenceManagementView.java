@@ -724,7 +724,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		int indexColJustify = 6;
 		//
 		lblBulletinStudentName.setText( lblStudentName.getText() );
-		lblBulletinClasse.setText( "" );
+		lblBulletinClasse.setText( selectedBulletin.getClasseName() );
 		lblFromDate.setText( dateFrom.getTextBox().getText() );
 		lblToDate.setText( dateTo.getTextBox().getText() );
 		//

@@ -6,6 +6,13 @@ import com.google.web.bindery.requestfactory.vm.impl.OperationData;
 import com.google.web.bindery.requestfactory.vm.impl.OperationKey;
 public final class ProfileSubjectRequestFactoryDeobfuscatorBuilder extends com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder {
 {
+withOperation(new OperationKey("xXKM4ftCdI9TlcI2aT5k5t2FvDY="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/ProfileSubjectProxy;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/ProfileSubject;Ljava/lang/String;)Lcom/lemania/sis/server/ProfileSubject;")
+  .withMethodName("updateSubjectProf")
+  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
+  .build());
 withOperation(new OperationKey("4oslgQo44QiRUaRMww77Wr0Ja8E="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/ProfileSubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")

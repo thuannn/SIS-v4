@@ -8,11 +8,15 @@
 
 	<g:HTMLPanel width="100%">
 		<g:VerticalPanel width="100%">
-			<g:Label text="LISTE DES ELEVES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
-			<p1:DataGrid width="100%" height="450px" ui:field="tblStudents" pageSize="15"/>
-			<g:Cell horizontalAlignment="ALIGN_CENTER">
+			<g:Label text="Liste des élèves" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
+			<g:VerticalPanel spacing="5" width="100%">
+				<g:HorizontalPanel spacing="2" verticalAlignment="ALIGN_MIDDLE" styleName="subSection" ui:field="pnlSearch">
+				<g:Label text="-" styleName="hiddenText" width="100px"/>
+				<g:Label text="Recherche un nom :" width="" horizontalAlignment="ALIGN_RIGHT"/>
+			</g:HorizontalPanel>
+				<p1:DataGrid width="100%" height="450px" ui:field="tblStudents" pageSize="15"/>
 				<p1:SimplePager location="CENTER" ui:field="pagerStudent" page="0" pageSize="15" pageStart="0"/>
-			</g:Cell>
+			</g:VerticalPanel>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

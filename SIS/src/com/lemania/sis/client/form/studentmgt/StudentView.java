@@ -6,15 +6,25 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implements StudentPresenter.MyView {
 
@@ -23,10 +33,14 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	/* Thuan */
 	private int selectedStudent = -1;
 	ListDataProvider<StudentProxy> dataProvider = new ListDataProvider<StudentProxy>();
+	//
+	private final MultiWordSuggestOracle mySuggestions = new MultiWordSuggestOracle();
+	SuggestBox sgbStudents;
 
 	
 	@UiField(provided=true) DataGrid<StudentProxy> tblStudents = new DataGrid<StudentProxy>();
 	@UiField SimplePager pagerStudent;
+	@UiField HorizontalPanel pnlSearch;
 	
 	
 	public interface Binder extends UiBinder<Widget, StudentView> {
@@ -123,6 +137,16 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	    	}
 	    });
 	    
+	    // Add a selection model to handle user selection.
+	    final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
+	    tblStudents.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	    	//
+	    	public void onSelectionChange(SelectionChangeEvent event) {
+	    		//
+	    	}
+	    });
+	    
 	    //
 	    pagerStudent.setDisplay(tblStudents);
 	    
@@ -137,18 +161,69 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 		
 	}
 
+	/*
+	 * */
 	@Override
 	public void setTableData(List<StudentProxy> studentList) {
 		//
 		dataProvider.getList().clear();
 		dataProvider.setList(studentList);
 		dataProvider.flush();
+		//
+		mySuggestions.clear();
+		for (StudentProxy sp : studentList) {
+			mySuggestions.add( sp.getFirstName() + " " + sp.getLastName() );
+		}
 	}
 
+	/*
+	 * */
 	@Override
 	public void updateEditedStudent(StudentProxy student) {
 		dataProvider.getList().remove(selectedStudent);
 		dataProvider.getList().add(selectedStudent, student);
 		dataProvider.refresh();
+	}
+	
+	
+	/*
+	 * */
+	private void initializeSuggestBox() {
+		//
+		sgbStudents = new SuggestBox( mySuggestions );
+		sgbStudents.addSelectionHandler( new SelectionHandler<Suggestion>(){
+
+			@Override
+			public void onSelection(SelectionEvent<Suggestion> event) {
+				//
+				showSelectedStudent( event.getSelectedItem().getReplacementString() );
+			}
+			
+		});
+		sgbStudents.setWidth( "300px" );
+		pnlSearch.add( sgbStudents );
+	}
+	
+	
+	/*
+	 * */
+	public void showSelectedStudent( String studentName ) {
+		//
+		for (StudentProxy sp : dataProvider.getList() ) {
+			if ( studentName.contains( sp.getFirstName() + " " + sp.getLastName() ) ) {
+				tblStudents.getSelectionModel().setSelected( sp, true );
+				pagerStudent.setPage( Math.round( dataProvider.getList().indexOf(sp) / pagerStudent.getPageSize() ) );
+				break;
+			}
+		}
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void initializeUI() {
+		// 
+		initializeSuggestBox();
 	}
 }

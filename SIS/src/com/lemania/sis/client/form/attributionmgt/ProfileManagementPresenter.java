@@ -597,4 +597,29 @@ public class ProfileManagementPresenter
 		this.currentUser = event.getCurrentUser();
 		getView().setReadOnly(this.currentUser.isReadOnly());
 	}
+
+
+	/*
+	 * */
+	@Override
+	public void updateSubjectProf(ProfileSubjectProxy ps, String profId, final Integer lastPosition) {
+		//
+		if (profId.equals(""))
+			return;
+		//
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
+		rc.updateSubjectProf( ps, profId ).fire(new Receiver<ProfileSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(ProfileSubjectProxy psp) {
+				//
+				getView().showUpdatedProfileSubject(psp, lastPosition);
+			}
+		});
+	}
 }

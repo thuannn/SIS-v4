@@ -70,7 +70,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public ProfileSubject saveAndReturn(ProfileSubject profile){
 		Key<ProfileSubject> key = ofy().save().entities(profile).now().keySet().iterator().next();
 		try {
@@ -83,6 +84,25 @@ public class ProfileSubjectDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	/*
+	 * */
+	public ProfileSubject updateSubjectProf( ProfileSubject profile, String profId ){
+		//
+		profile.setProfessor( Key.create( Professor.class, Long.parseLong(profId)));
+		Key<ProfileSubject> key = ofy().save().entities(profile).now().keySet().iterator().next();
+		try {
+			ProfileSubject ps = ofy().load().key(key).now();
+			if (ps.getProfessor() != null)
+				ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+			ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
+			return ps;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	
 	
 	/**/
