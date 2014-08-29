@@ -12,6 +12,8 @@ import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
  */
 public interface AbsenceManagementUiHandlers extends UiHandlers {
 	//
+	void onStudentSelected( String studentId );
+	//
 	void updateJustifyStatus(AbsenceItemProxy ai, boolean isJustified);
 	//
 	void updateParentNotifiedStatus(AbsenceItemProxy ai, boolean parentNotified);
@@ -22,5 +24,13 @@ public interface AbsenceManagementUiHandlers extends UiHandlers {
 	//
 	void filterDate( String studentId, String dateFrom, String dateTo);
 	//
+	void loadAbsentStudens( String dateFrom, String dateTo );
+	//
 	void showAbsenceInputPopup(String studentId, String studentName);
+	//
+	void removeAbsenceItem( AbsenceItemProxy aip );
+	//
+	void sendEmail(String studentName, String parentName, String parentEmail, String message);
+	//
+	void sendSMS(String number, String message);
 }

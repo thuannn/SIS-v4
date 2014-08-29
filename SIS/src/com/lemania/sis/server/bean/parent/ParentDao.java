@@ -24,6 +24,21 @@ public class ParentDao extends MyDAOBase{
 		Collections.sort(returnList);
 		return returnList;
 	}
+	
+	
+	/*
+	 * */
+	public List<Parent> listAllByStudent( String studentId ){
+		//
+		Query<Parent> q = ofy().load().type(Parent.class)
+				.filter( "childIds >= ", studentId )
+				.filter( "childIds <", studentId + "Z");
+		List<Parent> returnList = q.list();
+		Collections.sort(returnList);
+		return returnList;
+	}
+	
+	
 
 	/*
 	 * */

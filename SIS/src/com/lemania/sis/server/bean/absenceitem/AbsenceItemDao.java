@@ -1,6 +1,8 @@
 package com.lemania.sis.server.bean.absenceitem;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -194,7 +196,7 @@ public class AbsenceItemDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public AbsenceItem updateMotif(AbsenceItem ai, String motifID){
+	public AbsenceItem updateMotif(AbsenceItem ai, String motifID) {
 		//
 		AbsenceItem returnAI;
 		ai.setKeyMotif( Key.create( MotifAbsence.class, Long.parseLong(motifID)) );
@@ -228,7 +230,9 @@ public class AbsenceItemDao extends MyDAOBase {
 	 * */
 	private void populateIgnoreSaveValues(AbsenceItem ai) {
 		//
-		ai.setStudentId( Long.toString( ai.getKeyStudent().getId() ));
+		Student student = ofy().load().key( ai.getKeyStudent() ).now();
+		ai.setStudentId( student.getId().toString() );
+		ai.setStudentName( student.getFirstName() + " " + student.getLastName() );
 		//
 		Period p = ofy().load().key( ai.getKeyPeriod() ).now();
 		ai.setPeriodId( p.getId().toString() );
@@ -244,6 +248,42 @@ public class AbsenceItemDao extends MyDAOBase {
 		//
 		Professor prof = ofy().load().key( ai.getKeyProf() ).now();
 		ai.setProfName( prof.getProfName() );
+		//
+		Classe classe = ofy().load().key( ai.getKeyClasse() ).now();
+		ai.setClassName( classe.getClassName() );
 	}
 	
+	
+	/*
+	 * */
+	public List<AbsenceItem> loadAbsentStudents( String dateFrom, String dateTo ) {
+		//
+		Query<AbsenceItem> q = ofy().load().type(AbsenceItem.class)
+				.filter("strAbsenceDate >=", dateFrom)
+				.filter("strAbsenceDate <=", dateTo);
+		List<AbsenceItem> sourceList = q.list();
+   		List<AbsenceItem> returnList = new ArrayList<AbsenceItem>();
+  		//
+  		Collections.sort( sourceList, new Comparator<AbsenceItem>() {
+  			//
+			@Override
+			public int compare(AbsenceItem o1, AbsenceItem o2) {
+				//
+				return Long.toString( o1.getKeyStudent().getId() ).compareTo( Long.toString( o2.getKeyStudent().getId() ) );
+			}
+		});
+  		//
+  		AbsenceItem prevItem = null;
+		for ( AbsenceItem ai : sourceList ) {
+			//
+			populateIgnoreSaveValues( ai );
+			//
+			if ( (prevItem == null) || !prevItem.getStudentId().equals( ai.getStudentId() ) ) {
+				//
+				returnList.add( ai );
+				prevItem = ai;
+			}
+		}
+		return returnList;
+	}
 }

@@ -37,7 +37,9 @@ public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceIt
 	
 	@IgnoreSave private String subjectName  = "";
 	@IgnoreSave private String profName = "";
+	@IgnoreSave private String studentName = "";
 	@IgnoreSave private String periodDesc = "";
+	@IgnoreSave private String className = "";
 	
 	public Key<Student> getKeyStudent() {
 		return keyStudent;
@@ -159,6 +161,19 @@ public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceIt
 	public int compareTo(AbsenceItem o) {
 		// 
 		return (this.strAbsenceDate + this.periodDesc).compareTo( o.getStrAbsenceDate() + o.getPeriodDesc() );
+	}
+	
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
 	}
 	
 }

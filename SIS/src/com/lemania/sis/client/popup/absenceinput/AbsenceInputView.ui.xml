@@ -6,7 +6,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
 	<ui:style>
     </ui:style>
-	<g:DialogBox ui:field="dialog" text="Responsable" width="900px" height="">
+	<g:DialogBox ui:field="dialog" text="Saisir les absences pour l'élève" width="900px" height="" glassEnabled="true">
 		<g:VerticalPanel width="900px">
 			<g:Button styleName="popupCloseButton" ui:field="cmdClose">X</g:Button>
 			<g:HorizontalPanel width="100%" spacing="5" styleName="subSection">

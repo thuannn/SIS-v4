@@ -140,6 +140,7 @@ public class AbsenceInputView extends PopupViewWithUiHandlers<AbsenceInputUiHand
 			for ( int col = this.constantPeriodsColStart; col < tblAbsences.getCellCount(0); col++ ) {
 				vp = new VerticalPanel();
 				tb = new TextBox();
+				tb.setStyleName("textboxLateInput");
 				vp.add( tb );
 				tblAbsences.setWidget(row, col, vp);
 				//
@@ -334,6 +335,8 @@ public class AbsenceInputView extends PopupViewWithUiHandlers<AbsenceInputUiHand
 	 * */
 	@Override
 	public void resetUI(String studentName) {
+		//
+		this.setPosition( 200, 50 );
 		//
 		lblStudentName.setText( studentName );
 		//

@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.dom.client.Style.Unit;
@@ -20,6 +19,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.gwt.uibinder.client.UiField;
@@ -31,21 +31,25 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.lemania.sis.client.UI.DynamicSelectionCell;
+import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.client.values.AbsenceValues;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
+import com.lemania.sis.shared.parent.ParentProxy;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -53,6 +57,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementUiHandlers> implements
 		AbsenceManagementPresenter.MyView {
@@ -60,9 +66,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	private final Widget widget;
 	
 	//
-//	int selectedStudentIndex = -1;
-//	ListDataProvider<StudentProxy> providerStudents = new ListDataProvider<StudentProxy>();
-//	StudentProxy selectedStudent;
+	int selectedAbsentStudentIndex = -1;
+	ListDataProvider<AbsenceItemProxy> providerAbsentStudents = new ListDataProvider<AbsenceItemProxy>();
+	AbsenceItemProxy selectedAbsentStudent;
 	
 	int selectedBulletinIndex = -1;
 	ListDataProvider<BulletinProxy> providerBulletins = new ListDataProvider<BulletinProxy>();
@@ -72,12 +78,27 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	int selectedAbsenceItemIndex = -1;
 	AbsenceItemProxy selectedAbsenceItem;
 	
+	ListDataProvider<ParentProxy> providerParents = new ListDataProvider<ParentProxy>();
+	int selectedParentIndex = -1;
+	ParentProxy selectedParent;
+	
 	ListDataProvider<MotifAbsenceProxy> providerMotifs = new ListDataProvider<MotifAbsenceProxy>();
 	List<String> motifList = new ArrayList<String>();
 	
 	DynamicSelectionCell cellMotifs;
 	SuggestBox sgbStudents;
 	private final MultiWordSuggestOracle mySuggestions = new MultiWordSuggestOracle();
+	
+	String selectedStudentId;
+	String selectedStudentName;
+	
+	DialogBox popupSMSEmail = new DialogBox();
+	
+	private enum messageType {
+		SMS,
+		Email
+	}
+	private messageType sendMethod;
 	
 	//
 	
@@ -95,17 +116,17 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		return widget;
 	}
 	@UiField(provided=true) DataGrid<AbsenceItemProxy> tblAbsences = new DataGrid<AbsenceItemProxy>();
+	@UiField(provided=true) DataGrid<AbsenceItemProxy> tblStudents = new DataGrid<AbsenceItemProxy>();
 	@UiField SimplePager pagerAbsences;
 	@UiField Label lblStudentName;
 	@UiField DateBox dateFrom;
 	@UiField DateBox dateTo;
 	@UiField Button cmdFilter;
-	@UiField ListBox lstStudents;
 	@UiField Button cmdAddAbsence;
 	@UiField Button cmdPrint;
 	@UiField HorizontalPanel pnlNames;
 	@UiField VerticalPanel pnlBulletin;
-	@UiField HTMLPanel lblDateTo;
+	@UiField HTMLPanel pnlMainAbsenceMgt;
 	@UiField VerticalPanel pnlMainBulletin;
 	@UiField VerticalPanel pnlMainAbsences;
 	@UiField FlexTable tblFlexAbsences;
@@ -117,43 +138,26 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiField Label lblSpace;
 	@UiField HorizontalPanel non;
 	@UiField VerticalPanel pnlDirection;
+	@UiField SimplePager pagerStudents;
+	@UiField VerticalPanel pnlSMSEmail;
+	@UiField Label lblNotifStudentName;
+	@UiField ListBox lstParents;
+	@UiField Label lblSendMethod;
+	@UiField Button cmdClosePopupSMS;
+	@UiField Button cmdSend;
+	@UiField TextArea txtSendMessage;
 	
 	
-//	/*
-//	 * */
-//	@Override
-//	public void setStudentTableData(List<StudentProxy> studentList) {
-//		//
-//		providerStudents.getList().clear();
-//		providerStudents.setList(studentList);
-//		providerStudents.flush();
-//		//
-//		mySuggestions.clear();
-//		lstStudents.clear();
-//		lstStudents.addItem("Choisir");
-//		for (StudentProxy sp : studentList) {
-//			lstStudents.addItem( sp.getFirstName() + " " + sp.getLastName(), sp.getId().toString() );
-//			mySuggestions.add( sp.getFirstName() + " " + sp.getLastName() );
-//		}
-//	}
 	
 	
 	/*
 	 * */
 	@Override
-	public void setStudentTableData(List<BulletinProxy> studentList) {
+	public void setStudentTableData(List<AbsenceItemProxy> studentList) {
 		//
-		providerBulletins.getList().clear();
-		providerBulletins.setList(studentList);
-		providerBulletins.flush();
-		//
-		mySuggestions.clear();
-		lstStudents.clear();
-		lstStudents.addItem("Choisir");
-		for (BulletinProxy sp : studentList) {
-			lstStudents.addItem( sp.getStudentName(), sp.getStudentId().toString() );
-			mySuggestions.add( sp.getStudentName() );
-		}
+		providerAbsentStudents.getList().clear();
+		providerAbsentStudents.setList(studentList);
+		providerAbsentStudents.flush();
 	}
 	
 	
@@ -163,17 +167,58 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@Override
 	public void initializeUI() {
 		//
-//		initializeStudentTable();
+		initializeStudentTable();
 		//
 		initializeAbsenceTable();
 		//
 		initializeDateFields();
 		//
 		initializeSuggestBox();
+		//
+		initializePopupSMSEmail();
 	}
 	
 	
 	
+	/*
+	 * */
+	private void initializePopupSMSEmail() {
+		//
+		popupSMSEmail.setGlassEnabled( true );
+		popupSMSEmail.setText("Envoyer SMS / Email aux parents");
+		//
+		popupSMSEmail.addCloseHandler( new CloseHandler<PopupPanel>(){
+
+			@Override
+			public void onClose(CloseEvent<PopupPanel> event) {
+				//
+				pnlSMSEmail.setVisible( false );
+				pnlMainAbsenceMgt.add( pnlSMSEmail );
+			}
+			
+		});
+	}
+	
+	
+	/*
+	 * */
+	private void showPopupSMSEmail( messageType method ) {
+		//
+		sendMethod = method;
+		lblNotifStudentName.setText( selectedAbsenceItem.getStudentName() );
+		//
+		if ( method == messageType.SMS )
+			lblSendMethod.setText( "SMS" );
+		if ( method == messageType.Email )
+			lblSendMethod.setText( "Email" );
+		//
+		pnlSMSEmail.setVisible( true );
+		popupSMSEmail.add( pnlSMSEmail );
+		popupSMSEmail.center();
+	}
+	
+	
+
 	/*
 	 * */
 	private void initializeSuggestBox() {
@@ -189,39 +234,26 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 			
 		});
 		
-		pnlNames.insert(sgbStudents, 0);
+		pnlNames.add( sgbStudents );
 	}
 	
-	
-	
-//	/*
-//	 * */
-//	void onStudentSuggestionSelected( String typedName ) {
-//		//
-//		for( StudentProxy sp : providerStudents.getList() ) {
-//			if ( typedName.equals( sp.getFirstName() + " " + sp.getLastName()) ) {
-//				selectedStudent = sp;
-//				lstStudents.setSelectedIndex( providerStudents.getList().indexOf(sp) + 1);
-//				lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
-//				//
-//				loadAbsenceByDate();
-//				break;
-//			}
-//		}
-//	}
 	
 	
 	/*
 	 * */
 	void onStudentSuggestionSelected( String typedName ) {
 		//
-		for( BulletinProxy sp : providerBulletins.getList() ) {
-			if ( typedName.equals( sp.getStudentName() )) {
-				selectedBulletin = sp;
-				lstStudents.setSelectedIndex( providerBulletins.getList().indexOf(sp) + 1);
-				lblStudentName.setText( selectedBulletin.getStudentName() );
+		for( BulletinProxy bp : providerBulletins.getList() ) {
+			if ( typedName.equals( bp.getStudentName() ) ) {
 				//
-				loadAbsenceByDate();
+				selectedStudentId = bp.getStudentId().toString();
+				selectedStudentName = bp.getStudentName();
+				selectedBulletin = bp;
+				lblStudentName.setText( bp.getStudentName() );
+				//
+				getUiHandlers().filterDate( selectedStudentId.toString(), 
+						DateTimeFormat.getFormat("yyyyMMdd").format( dateFrom.getValue() ), 
+						DateTimeFormat.getFormat("yyyyMMdd").format( dateTo.getValue() ) );
 				break;
 			}
 		}
@@ -296,7 +328,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	      }
 	    };
 	    tblAbsences.addColumn(colType, "Type");
-	    tblAbsences.setColumnWidth(colType, 5, Unit.PCT);
+	    tblAbsences.setColumnWidth(colType, 50, Unit.PX);
 	    
 	    // Add a text column to show the name.
 	    TextColumn<AbsenceItemProxy> colMinutes = new TextColumn<AbsenceItemProxy>() {
@@ -306,7 +338,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	      }
 	    };
 	    tblAbsences.addColumn(colMinutes, "Minutes");
-	    tblAbsences.setColumnWidth(colMinutes, 5, Unit.PCT);
+	    tblAbsences.setColumnWidth(colMinutes, 50, Unit.PX);
 	    
 	    // Prof
 	    TextColumn<AbsenceItemProxy> colProf = new TextColumn<AbsenceItemProxy>() {
@@ -326,15 +358,59 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	      }
 	    };
 	    tblAbsences.addColumn(colSubject, "Cours");
+	    tblAbsences.setColumnWidth(colSubject, 15, Unit.PCT);
 	    
-	    // Remarque prof
-	    TextColumn<AbsenceItemProxy> colRemarqueProf = new TextColumn<AbsenceItemProxy>() {
-	      @Override
-	      public String getValue(AbsenceItemProxy object) {
-	        return (object.getProfComment().length() > 21 )? (object.getProfComment().substring(0,20) + "...") : object.getProfComment();
-	      }
+	  
+//	    // Remarque prof
+//	    TextColumn<AbsenceItemProxy> colRemarqueProf = new TextColumn<AbsenceItemProxy>() {
+//	      @Override
+//	      public String getValue(AbsenceItemProxy object) {
+//	        return (object.getProfComment().length() > 21 )? (object.getProfComment().substring(0,20) + "...") : object.getProfComment();
+//	      }
+//	    };
+//	    tblAbsences.addColumn(colRemarqueProf, "Comment du prof");
+	    
+	    
+	    // -- Comment prof
+	    Column<AbsenceItemProxy, String> colProfNote = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(AbsenceItemProxy bp){
+	    		return ( bp.getProfComment().equals("") ? "+" : "..." );
+	    	}
 	    };
-	    tblAbsences.addColumn(colRemarqueProf, "Comment du prof");
+	    colProfNote.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    	@Override
+	    	public void update(int index, final AbsenceItemProxy ps, String value){
+	    		selectedAbsenceItemIndex = index;
+	    		selectedAbsenceItem = ps;
+	    		//
+	    		VerticalPanel vp = new VerticalPanel();
+	    		vp.setHorizontalAlignment( VerticalPanel.ALIGN_RIGHT );
+	    		final PopupPanel pNote = new PopupPanel(true);
+	    		final TextArea tNote = new TextArea();
+	    		tNote.setStyleName("popupNotePanel");
+	    		tNote.setText( ps.getProfComment() );
+	    		Button cmdSave = new Button("Fermer");
+	    		cmdSave.setStyleName("buttonToolbar");
+	    		cmdSave.addClickHandler( new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						//
+						pNote.hide();
+					}
+	    			
+	    		});
+	    		vp.add( tNote );
+	    		vp.add( cmdSave );
+	    		pNote.add( vp );
+	    		pNote.center();
+	    		pNote.show();
+	    	}
+	    });
+	    tblAbsences.setColumnWidth(colProfNote, 50, Unit.PX);
+	    tblAbsences.addColumn(colProfNote, "Prof");	
+	    
 	    
 	    // ---
 	    CheckboxCell cellJustify = new CheckboxCell();
@@ -409,28 +485,131 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    tblAbsences.addColumn(colMotifs, "Motif");
 	    tblAbsences.setColumnWidth(colMotifs, 100, Unit.PX);
 	    
-	    //
-	    // Admin comment
-	    Column<AbsenceItemProxy, String> colAdminComment = new Column<AbsenceItemProxy, String>(new EditTextCell()) {
-	      @Override
-	      public String getValue(AbsenceItemProxy object) {
-	        return (object.getAdminComment().length() > 21) ? (object.getAdminComment().substring(0,20) + "...") : object.getAdminComment();
-	      } 
-	    };
-	    tblAbsences.addColumn(colAdminComment, "Note");
-	    // Field updater
-	    colAdminComment.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    
+//	    //
+//	    // Admin comment
+//	    Column<AbsenceItemProxy, String> colAdminComment = new Column<AbsenceItemProxy, String>(new EditTextCell()) {
+//	      @Override
+//	      public String getValue(AbsenceItemProxy object) {
+//	        return (object.getAdminComment().length() > 21) ? (object.getAdminComment().substring(0,20) + "...") : object.getAdminComment();
+//	      } 
+//	    };
+//	    tblAbsences.addColumn(colAdminComment, "Note");
+//	    // Field updater
+//	    colAdminComment.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+//	    	@Override
+//	    	public void update(int index, AbsenceItemProxy object, String value) {
+//	    		if ( !object.getAdminComment().equals(value) ) {
+//		    		if (getUiHandlers() != null) {	    	
+//		    			//
+//		    			selectedAbsenceItemIndex = index;
+//		    			getUiHandlers().updateAdminComment(object, value);
+//		    		}	    		
+//	    		}
+//	    	}
+//	    });
+	    
+	    
+	    // -- comment admin
+	    Column<AbsenceItemProxy, String> colAdminNote = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
 	    	@Override
-	    	public void update(int index, AbsenceItemProxy object, String value) {
-	    		if ( !object.getAdminComment().equals(value) ) {
-		    		if (getUiHandlers() != null) {	    	
-		    			//
-		    			selectedAbsenceItemIndex = index;
-		    			getUiHandlers().updateAdminComment(object, value);
-		    		}	    		
-	    		}
+	    	public String getValue(AbsenceItemProxy bp){
+	    		return ( bp.getAdminComment().equals("") ? "+" : "..." );
+	    	}
+	    };
+	    colAdminNote.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    	@Override
+	    	public void update(int index, final AbsenceItemProxy ps, String value){
+	    		selectedAbsenceItemIndex = index;
+	    		selectedAbsenceItem = ps;
+	    		//
+	    		VerticalPanel vp = new VerticalPanel();
+	    		vp.setHorizontalAlignment( VerticalPanel.ALIGN_RIGHT );
+	    		final PopupPanel pNote = new PopupPanel(true);
+	    		final TextArea tNote = new TextArea();
+	    		tNote.setStyleName("popupNotePanel");
+	    		tNote.setText( ps.getAdminComment() );
+	    		Button cmdSave = new Button("Valider");
+	    		cmdSave.setStyleName("buttonToolbar");
+	    		cmdSave.addClickHandler( new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						//
+						getUiHandlers().updateAdminComment( ps, tNote.getText() );
+						pNote.hide();
+					}
+	    			
+	    		});
+	    		vp.add( tNote );
+	    		vp.add( cmdSave );
+	    		pNote.add( vp );
+	    		pNote.center();
+	    		pNote.show();
 	    	}
 	    });
+	    tblAbsences.setColumnWidth(colAdminNote, 50, Unit.PX);
+	    tblAbsences.addColumn(colAdminNote, "Admin");	
+	    
+	    
+	    // -- SMS
+	    Column<AbsenceItemProxy, String> colSMS = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(AbsenceItemProxy bp){
+	    		return "SMS";
+	    	}
+	    };
+	    colSMS.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    	@Override
+	    	public void update(int index, AbsenceItemProxy ps, String value){
+	    		selectedAbsenceItemIndex = index;
+	    		selectedAbsenceItem = ps;
+	    		//
+	    		showPopupSMSEmail( messageType.SMS );
+	    	}
+	    });
+	    tblAbsences.setColumnWidth(colSMS, 75, Unit.PX);
+	    tblAbsences.addColumn(colSMS, "");	
+	    
+	    
+	    // -- Email
+	    Column<AbsenceItemProxy, String> colEmail = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(AbsenceItemProxy bp){
+	    		return "Email";
+	    	}
+	    };
+	    colEmail.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    	@Override
+	    	public void update(int index, AbsenceItemProxy ps, String value){
+	    		selectedAbsenceItemIndex = index;
+	    		selectedAbsenceItem = ps;
+	    		//
+	    		showPopupSMSEmail( messageType.Email );
+	    	}
+	    });
+	    tblAbsences.setColumnWidth(colEmail, 75, Unit.PX);
+	    tblAbsences.addColumn(colEmail, "");	
+	    
+	   
+	    // -- Delete
+	    Column<AbsenceItemProxy, String> colDelete = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(AbsenceItemProxy bp){
+	    		return "X";
+	    	}
+	    };
+	    colDelete.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
+	    	@Override
+	    	public void update(int index, AbsenceItemProxy ps, String value){
+	    		selectedAbsenceItemIndex = index;
+	    		selectedAbsenceItem = ps;
+	    		getUiHandlers().removeAbsenceItem( ps );
+	    	}
+	    });
+	    tblAbsences.setColumnWidth(colDelete, 50, Unit.PX);
+	    tblAbsences.addColumn(colDelete, "");	   
+	    
 	    
 	    // 
 	    //	Selection model
@@ -453,52 +632,47 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	
 	
 
-//	/* 
-//	 * Initialize Student table 
-//	 * */
-//	public void initializeStudentTable(){
-//		//
-//	    TextColumn<StudentProxy> colLastName = new TextColumn<StudentProxy>() {
-//	      @Override
-//	      public String getValue(StudentProxy object) {
-//	        return object.getFirstName();
-//	      } 
-//	    };
-//	    tblStudents.addColumn(colLastName, "Prénom");
-//	    
-//	    // Add a text column to show the name.
-//	    TextColumn<StudentProxy> colFirstName = new TextColumn<StudentProxy>() {
-//	      @Override
-//	      public String getValue(StudentProxy object) {
-//	        return object.getLastName();
-//	      }
-//	    };
-//	    tblStudents.addColumn(colFirstName, "Nom");
-//	    
-//	    // When user select a student, load his absence history
-//	    //	Selection model
-//	    final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
-//	    tblStudents.setSelectionModel(selectionModel);
-//	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-//	      public void onSelectionChange(SelectionChangeEvent event) {
-//	    	  //
-//	    	  selectedStudent = selectionModel.getSelectedObject();
-//	    	  if (selectedStudent != null) {
-//	    		  //
-//	    		  lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName());
-//	    		  //
-//	    		  getUiHandlers().onStudentSelected(selectedStudent);
-//	    	  }
-//	      }
-//	    });
-//	    
-//	    //
-//	    pagerStudents.setDisplay(tblStudents);
-//	    
-//	    //
-//	    providerStudents.addDataDisplay(tblStudents);
-//	    
-//	}
+	/* 
+	 * Initialize Student table 
+	 * */
+	public void initializeStudentTable(){
+		//
+		TextColumn<AbsenceItemProxy> colName = new TextColumn<AbsenceItemProxy>() {
+	      @Override
+	      public String getValue( AbsenceItemProxy object ) {
+	        return object.getStudentName();
+	      }
+	    };
+	    tblStudents.addColumn(colName, "Elève");
+	    
+	    //
+	    // When user select a student, load his absence history
+	    final SingleSelectionModel<AbsenceItemProxy> selectionModel = new SingleSelectionModel<AbsenceItemProxy>();
+	    tblStudents.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	    	  //
+	    	  selectedAbsentStudent = selectionModel.getSelectedObject();
+	    	  if (selectedAbsentStudent != null) {
+	    		  //
+	    		  lblStudentName.setText( selectedAbsentStudent.getStudentName() );
+	    		  //
+	    		  selectedStudentId = selectedAbsentStudent.getStudentId();
+	    		  selectedStudentName = selectedAbsentStudent.getStudentName();
+	    		  getUiHandlers().filterDate( selectedStudentId,
+	    				  DateTimeFormat.getFormat("yyyyMMdd").format(dateFrom.getValue()),
+	    				  DateTimeFormat.getFormat("yyyyMMdd").format(dateTo.getValue()) );
+	    	  }
+	      }
+	    });
+	    
+	    //
+	    pagerStudents.setDisplay(tblStudents);
+	    
+	    //
+	    providerAbsentStudents.addDataDisplay(tblStudents);
+	    
+	}
 
 	
 	/*
@@ -548,8 +722,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		providerAbsences.flush();
 		//
 		// Clear student selection
-//		tblStudents.getSelectionModel().setSelected( selectedStudent, false);
-		lstStudents.setSelectedIndex(0);
+//		tblStudents.getSelectionModel().setSelected( selectedAbsentStudent, false);
 		//
 		sgbStudents.setValue("");
 		//
@@ -580,43 +753,11 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	}
 	
 	
-//	/*
-//	 * */
-//	@UiHandler("lstStudents")
-//	void onLstStudentsChange(ChangeEvent event) {
-//		//
-//		selectedStudent = providerStudents.getList().get( lstStudents.getSelectedIndex() - 1 );
-//		//
-//		lblStudentName.setText( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
-//		sgbStudents.setValue( selectedStudent.getFirstName() + " " + selectedStudent.getLastName() );
-//		//
-//		loadAbsenceByDate();
-//	}
-	
-	
-	
-	/*
-	 * */
-	@UiHandler("lstStudents")
-	void onLstStudentsChange(ChangeEvent event) {
-		//
-		selectedBulletin = providerBulletins.getList().get( lstStudents.getSelectedIndex() - 1 );
-		//
-		lblStudentName.setText( selectedBulletin.getStudentName() );
-		sgbStudents.setValue( selectedBulletin.getStudentName() );
-		//
-		loadAbsenceByDate();
-	}
-	
-	
 	
 	/*
 	 * */
 	@UiHandler("cmdFilter")
 	void onCmdFilterClick(ClickEvent event) {
-		//
-		if ( selectedBulletin == null )
-			return;
 		//
 		loadAbsenceByDate();
 	}
@@ -629,7 +770,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		String fromDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateFrom.getValue() );
 		String toDate = DateTimeFormat.getFormat("yyyyMMdd").format( dateTo.getValue() );
 		//
-		getUiHandlers().filterDate( selectedBulletin.getStudentId().toString() , fromDate, toDate);
+		getUiHandlers().loadAbsentStudens( fromDate, toDate );
 	}
 	
 	
@@ -724,7 +865,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		int indexColJustify = 6;
 		//
 		lblBulletinStudentName.setText( lblStudentName.getText() );
-		lblBulletinClasse.setText( selectedBulletin.getClasseName() );
+		lblBulletinClasse.setText( selectedAbsentStudent.getClassName() );
 		lblFromDate.setText( dateFrom.getTextBox().getText() );
 		lblToDate.setText( dateTo.getTextBox().getText() );
 		//
@@ -754,7 +895,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	private void styleTable() {
 		//		
 		tblFlexAbsences.setCellSpacing(0);
@@ -779,6 +921,101 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiHandler("cmdAddAbsence")
 	void onCmdAddAbsenceClick(ClickEvent event) {
 		//
-		getUiHandlers().showAbsenceInputPopup( selectedBulletin.getStudentId().toString(), selectedBulletin.getStudentName() );
+		getUiHandlers().showAbsenceInputPopup( selectedStudentId, selectedStudentName );
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void removeDeletedAbsenceItem() {
+		//
+		providerAbsences.getList().remove( providerAbsences.getList().indexOf( selectedAbsenceItem ) );
+		providerAbsences.flush();
+		//
+		selectedAbsenceItem = null;
+		selectedAbsenceItemIndex = -1;
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void setStudentSuggestboxData(List<BulletinProxy> bulletins) {
+		//
+		providerBulletins.getList().clear();
+		providerBulletins.getList().addAll( bulletins ); 
+		//
+		mySuggestions.clear();
+		for (BulletinProxy bp : bulletins) {
+			mySuggestions.add( bp.getStudentName() );
+		}
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdClosePopupSMS")
+	void onCmdClosePopupSMSClick(ClickEvent event) {
+		//
+		popupSMSEmail.hide();
+	}
+	
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSend")
+	void onCmdSendClick(ClickEvent event) {
+		//
+		if ( sendMethod == messageType.Email ) {
+			if ( lstParents.getSelectedIndex() < 1 ) {
+				Window.alert( NotificationValues.invalid_input + " - Parents");
+				return;
+			}
+			getUiHandlers().sendEmail( 
+					selectedAbsenceItem.getStudentName(), 
+					selectedParent.getFirstName() + " " + selectedParent.getLastName(),
+					selectedParent.geteMail(), 
+					txtSendMessage.getText() );
+		}
+		
+		if ( sendMethod == messageType.SMS ) {
+			if ( lstParents.getSelectedIndex() < 1 ) {
+				Window.alert( NotificationValues.invalid_input + " - Parents");
+				return;
+			}
+			getUiHandlers().sendSMS (
+					selectedParent.getPhoneMobile(), 
+					txtSendMessage.getText() );
+		}
+	}
+	
+	
+
+	/*
+	 * */
+	@Override
+	public void setParentData(List<ParentProxy> parents) {
+		//
+		providerParents.getList().clear();
+		providerParents.getList().addAll( parents );
+		//
+		lstParents.clear();
+		lstParents.addItem("Choisir");
+		for ( ParentProxy pp : parents ) {
+			lstParents.addItem( pp.getFirstName() + " " + pp.getLastName() + " - " + pp.geteMail() + " - " + pp.getPhoneMobile() );
+		}
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("lstParents")
+	void onLstParentsChange(ChangeEvent event) {
+		//
+		selectedParentIndex = lstParents.getSelectedIndex() - 1;
+		if ( selectedParentIndex > -1)
+			selectedParent = providerParents.getList().get(selectedParentIndex);
 	}
 }

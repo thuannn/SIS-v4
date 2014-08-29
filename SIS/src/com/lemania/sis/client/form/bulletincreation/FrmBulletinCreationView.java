@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.client.values.AppSettingValues;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
@@ -180,7 +181,7 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    tblBulletins.addColumn(colFinished, "Terminé");
 	    
 	    //
-	    Column<BulletinProxy, String> colDelete = new Column<BulletinProxy, String> (new ButtonCell()){
+	    Column<BulletinProxy, String> colDelete = new Column<BulletinProxy, String> (new GridButtonCell()){
 	    	@Override
 	    	public String getValue(BulletinProxy bp){
 	    		return "X";
@@ -207,6 +208,14 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	/**/
 	private void initializeStudentTable() {
 		//
+	    TextColumn<StudentProxy> colLastName = new TextColumn<StudentProxy>() {
+	      @Override
+	      public String getValue(StudentProxy object) {
+	        return object.getFirstName();
+	      } 
+	    };
+	    tblStudents.addColumn(colLastName, "Prénom");
+		//
 	    TextColumn<StudentProxy> colFirstName = new TextColumn<StudentProxy>() {
 	      @Override
 	      public String getValue(StudentProxy object) {
@@ -215,13 +224,6 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	    };
 	    tblStudents.addColumn(colFirstName, "Nom");
 	    //
-	    TextColumn<StudentProxy> colLastName = new TextColumn<StudentProxy>() {
-	      @Override
-	      public String getValue(StudentProxy object) {
-	        return object.getFirstName();
-	      } 
-	    };
-	    tblStudents.addColumn(colLastName, "Prénom");
 	    // Selection model
 	    final SingleSelectionModel<StudentProxy> selectionModel = new SingleSelectionModel<StudentProxy>();
 	    tblStudents.setSelectionModel(selectionModel);

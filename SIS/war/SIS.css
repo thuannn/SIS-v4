@@ -60,6 +60,16 @@ div, table td {
 	height: 160px;
 }
 
+.textboxLateInput {
+	width: 30px;
+}
+
+.popupNotePanel {
+	width: 300px;
+	height: 200px;
+	padding: 2px;
+}
+
 
 
 /*
@@ -224,7 +234,7 @@ Agenda
 	font-family:arial;
 	font-size:12px;
 	font-weight:normal;
-	padding:5px 10px;
+	padding:4px 8px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffee66;
 }
@@ -449,11 +459,17 @@ Agenda
 	background-color: dodgerblue;	
 }
 .step {
-	color: Blue;
+	width: 15px;
+	height: 15px;
+	color: chocolate;
 	padding: 2px;
+	border: 1px solid Silver;
 	font-size: 14px;
 	font-family: Verdana;
 	font-weight: bold;
+	text-align: center;
+	background-color: lavenderblush;
+	border-radius: 25px;
 }
 .fieldTitle {
 	color: navy;

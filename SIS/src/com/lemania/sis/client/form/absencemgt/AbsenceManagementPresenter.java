@@ -32,7 +32,12 @@ import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestCon
 import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory;
 import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory.MotifAbsenceRequestContext;
+import com.lemania.sis.shared.parent.ParentProxy;
+import com.lemania.sis.shared.parent.ParentRequestFactory;
+import com.lemania.sis.shared.parent.ParentRequestFactory.ParentRequestContext;
+import com.lemania.sis.shared.service.ContactRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.ContactRequestFactory.ContactRequestContext;
 import com.lemania.sis.shared.student.StudentRequestFactory;
 import com.lemania.sis.shared.student.StudentRequestFactory.StudentRequestContext;
 
@@ -42,8 +47,9 @@ public class AbsenceManagementPresenter
 
 	public interface MyView extends View, HasUiHandlers<AbsenceManagementUiHandlers> {
 		//
-//		public void setStudentTableData( List<StudentProxy> studentList );
-		public void setStudentTableData( List<BulletinProxy> studentList );
+		public void setStudentTableData( List<AbsenceItemProxy> aip );
+		//
+		public void setStudentSuggestboxData( List<BulletinProxy> bulleetins );
 		//
 		public void setAbsenceItemTableData( List<AbsenceItemProxy> absenceItems );
 		//
@@ -54,6 +60,10 @@ public class AbsenceManagementPresenter
 		void resetUI();
 		//
 		void setUpdatedAbsenceItem( AbsenceItemProxy aip );
+		//
+		void removeDeletedAbsenceItem();
+		//
+		void setParentData( List<ParentProxy> parents );
 	}
 
 	//
@@ -92,9 +102,9 @@ public class AbsenceManagementPresenter
 	protected void onReset() {
 		super.onReset();
 		//
-		getView().resetUI();
-		// Thuan
 		loadStudentList();
+		//
+		getView().resetUI();
 		//
 		loadMotifs();
 		//
@@ -130,14 +140,14 @@ public class AbsenceManagementPresenter
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinRequestContext rc = rf.bulletinRequest();
-		rc.listAllActive().fire(new Receiver<List<BulletinProxy>>(){
+		rc.listAllActive().fire(new Receiver<List<BulletinProxy>>() {
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
 			@Override
 			public void onSuccess(List<BulletinProxy> response) {
-				getView().setStudentTableData(response);
+				getView().setStudentSuggestboxData( response );
 			}
 		});
 	}
@@ -152,28 +162,28 @@ public class AbsenceManagementPresenter
 	}
 
 	
-//	/*
-//	 * When a student is selected, load his absences history
-//	 * */
-//	@Override
-//	public void onStudentSelected(StudentProxy student) {
-//		// 
-//		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
-//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-//		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
-//		rc.listAllByStudent( student.getId().toString() ).fire(new Receiver<List<AbsenceItemProxy>>(){
-//				@Override
-//				public void onFailure(ServerFailure error){
-//					//
-//					Window.alert(error.getMessage());
-//				}
-//				@Override
-//				public void onSuccess( List<AbsenceItemProxy> response ) {
-//					//
-//					getView().setAbsenceItemTableData( response );
-//				}
-//			});
-//	}
+	/*
+	 * When a student is selected, load his absences history
+	 * */
+	@Override
+	public void onStudentSelected( String studentId ) {
+		// 
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.listAllByStudent( studentId ).fire(new Receiver<List<AbsenceItemProxy>>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					//
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess( List<AbsenceItemProxy> response ) {
+					//
+					getView().setAbsenceItemTableData( response );
+				}
+			});
+	}
 
 	
 	/*
@@ -282,7 +292,7 @@ public class AbsenceManagementPresenter
 	/*
 	 * */
 	@Override
-	public void filterDate(String studentId, String dateFrom, String dateTo) {
+	public void filterDate(final String studentId, String dateFrom, String dateTo) {
 		// Keep the current selected values
 		curStudentId = studentId;
 		fromDate = dateFrom;
@@ -301,6 +311,28 @@ public class AbsenceManagementPresenter
 			public void onSuccess( List<AbsenceItemProxy> response ) {
 				//
 				getView().setAbsenceItemTableData( response );
+				//
+				loadStudentsParents( studentId );
+			}
+		});
+	}
+	
+	
+	/*
+	 * */
+	private void loadStudentsParents( String studentId ) {
+		//
+		ParentRequestFactory rf = GWT.create(ParentRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ParentRequestContext rc = rf.parentRequestContext();
+		rc.listAllByStudent( studentId ).fire(new Receiver<List<ParentProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ParentProxy> response) {
+				getView().setParentData(response);
 			}
 		});
 	}
@@ -311,7 +343,7 @@ public class AbsenceManagementPresenter
 	@Override
 	public void showAbsenceInputPopup( String studentId, String studentName ) {
 		//
-		addToPopupSlot( popupAbsenceInput, true );
+		addToPopupSlot( popupAbsenceInput, false );
 		popupAbsenceInput.onPopupStart( studentId, studentName );
 	}
 
@@ -324,5 +356,105 @@ public class AbsenceManagementPresenter
 	public void onAbsenceAfterInput(AbsenceAfterInputEvent event) {
 		// Fire the selection with the current selected value
 		filterDate( curStudentId, fromDate, toDate );
+	}
+
+
+	
+	/*
+	 * */
+	@Override
+	public void removeAbsenceItem(AbsenceItemProxy aip) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.removeAbsenceItem(aip).fire(new Receiver<Void>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( Void response ) {
+				//
+				getView().removeDeletedAbsenceItem();
+			}
+		});
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void loadAbsentStudens(String dateFrom, String dateTo) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.loadAbsentStudents( dateFrom, dateTo ).fire(new Receiver<List<AbsenceItemProxy>>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( List<AbsenceItemProxy> response ) {
+				//
+				getView().setStudentTableData( response );
+			}
+		});
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void sendEmail(String studentName, String parentName,
+			String parentEmail, String message) {
+		//
+		String subject = "Notification de l'absence de " + studentName;
+		//
+		String from = "thuannn@gmail.com, Ecole Lemania";
+		//
+		String to = parentEmail + "," + parentName + "/";
+		//
+		String replyto = "info@lemania.ch, Ecole Lemania"  + "/";
+		//
+		String cc = "thuan.nguyen@lemania.ch, Thuan Nguyen"  + "/";
+		//
+		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ContactRequestContext rc = rf.contactRequest();
+		rc.sendEmail( subject, from, to, replyto, cc, message ).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				Window.alert("Message envoyé !");
+			}
+		});
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void sendSMS(String number, String message) {
+		//
+		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ContactRequestContext rc = rf.contactRequest();
+		rc.sendSMS( number, message ).fire(new Receiver<Void>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(Void response) {
+				Window.alert("Message envoyé !");
+			}
+		});
 	}
 }

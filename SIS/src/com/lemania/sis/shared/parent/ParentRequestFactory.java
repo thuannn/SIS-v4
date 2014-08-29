@@ -16,6 +16,8 @@ public interface ParentRequestFactory extends RequestFactory {
 	interface ParentRequestContext extends RequestContext {
 		//
 		Request<List<ParentProxy>> listAll();
+		Request<List<ParentProxy>> listAllByStudent( String studentId );
+		//
 		Request<Void> save(ParentProxy parent); 
 		Request<ParentProxy> saveAndReturn(ParentProxy parent);
 		Request<Void> removeParent(ParentProxy parent);

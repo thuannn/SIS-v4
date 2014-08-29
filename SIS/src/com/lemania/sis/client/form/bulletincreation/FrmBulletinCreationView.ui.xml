@@ -10,11 +10,14 @@
 		<g:VerticalPanel width="100%">
 			<g:Label text="ATTRIBUTION PROGRAMME / ELEVE" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel width="100%" spacing="5">
+				<g:cell width="25%">
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 					<g:Label text="Choisir un élève non-attribué" styleName="sectionTitle" width=""/>
 					<p1:DataGrid width="100%" height="600px" ui:field="tblStudents"/>
 					<g:Label text="." width="300px" styleName="hiddenText"/>
 				</g:VerticalPanel>
+				</g:cell>
+				<g:cell width="25%">
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection" horizontalAlignment="ALIGN_RIGHT">
 					<g:Label text="Choisir un programme à attribuer" styleName="sectionTitle"/>
 					<g:Grid width="100%" cellPadding="5" cellSpacing="5">
@@ -67,12 +70,13 @@
 							</g:customCell>
 						</g:row>
 					</g:Grid>
-					<g:Button text="Attribuer le programme choisi à l&apos;élève" ui:field="cmdCreateBulletin" width=""/>
+					<g:Button text="Attribuer le programme choisi à l&apos;élève" ui:field="cmdCreateBulletin" width="" styleName="buttonToolbar"/>
 				</g:VerticalPanel>
+				</g:cell>
 				<g:VerticalPanel width="100%" spacing="2" styleName="subSection">
 					<g:Label text="Liste des élèves attribués" styleName="sectionTitle"/>
 					<g:HorizontalPanel width="70%" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
-						<g:Label text="Terminé :"/>
+						<g:Label text="Terminé le 1ère trimestre:"/>
 						<g:ListBox ui:field="lstIsFinished"/>
 					</g:HorizontalPanel>
 					<p1:DataGrid width="100%" height="600px" ui:field="tblBulletins"/>
