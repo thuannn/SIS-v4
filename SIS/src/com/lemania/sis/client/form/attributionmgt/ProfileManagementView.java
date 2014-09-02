@@ -399,12 +399,16 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    				pnlSubject.add( pnlSubjectAdd );
 	    				cmdSaveSubject.setVisible(false);
 	    				cmdAddSubject.setVisible(true);
+	    				lstSubjects.setEnabled(true);
 	    			}
 	    		});
 	    		//
 	    		pp.add( pnlSubjectAdd );
 	    		cmdSaveSubject.setVisible(true);
 				cmdAddSubject.setVisible(false);
+				lstSubjects.setEnabled(false);
+				//
+				pp.setGlassEnabled(true);
 	    		pp.show();
 	    		pp.center();
 	    		//

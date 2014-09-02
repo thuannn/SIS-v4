@@ -23,6 +23,8 @@ public interface FrmBulletinManagementUiHandler extends UiHandlers {
 	void updateBrancheCoef(BulletinBrancheProxy branche, String coef);
 	void updateSubjectCoef( BulletinSubjectProxy subject, String coef, Integer lastSubjectIndex);
 	//
+	void updateSubjectProf ( BulletinSubjectProxy subject, String profId, Integer lastSubjectIndex );
+	//
 	void addSubject(String bulletinId, String subjectId, String profId, String coef);
 	void addBranche(String bulletinSubjectId, String brancheId, String coef);
 	//

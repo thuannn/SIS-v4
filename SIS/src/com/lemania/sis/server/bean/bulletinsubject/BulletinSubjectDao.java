@@ -558,5 +558,23 @@ public class BulletinSubjectDao extends MyDAOBase {
 		ofy().save().entities( ps );
 		return ps;
 	}
+	
+	
+	/*
+	 * */
+	public BulletinSubject updateBulletinSubjectProf( BulletinSubject bs, String profId ) {
+		//
+		Key<Professor> kf = Key.create(Professor.class, Long.parseLong(profId));
+		bs.setProfessor( kf );
+		bs.setProfName( ofy().load().key( kf ).now().getProfName() );
+		//
+		Key<BulletinSubject> key = ofy().save().entities( bs ).now().keySet().iterator().next();
+		//
+		try {
+			return ofy().load().key(key).now();
+		} catch ( Exception e ) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }

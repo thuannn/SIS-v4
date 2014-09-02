@@ -26,6 +26,8 @@ public interface BulletinSubjectRequestFactory extends RequestFactory {
 		Request<BulletinSubjectProxy> saveAndReturn(BulletinSubjectProxy newBulletinSubject);
 		Request<BulletinSubjectProxy> saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef );
 		//
+		Request<BulletinSubjectProxy> updateBulletinSubjectProf( BulletinSubjectProxy bs, String profId );
+		//
 		Request<Boolean> removeProfileSubject(BulletinSubjectProxy bulletinSubject);
 		//
 		Request<Void> initialize();

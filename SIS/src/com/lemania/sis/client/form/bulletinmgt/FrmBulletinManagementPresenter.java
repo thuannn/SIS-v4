@@ -525,4 +525,26 @@ public class FrmBulletinManagementPresenter
 		//
 		this.currentUser = event.getCurrentUser();
 	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateSubjectProf(BulletinSubjectProxy subject, String profId,
+			final Integer lastSubjectIndex) {
+		//
+		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
+		rc.updateBulletinSubjectProf( subject, profId ).fire(new Receiver<BulletinSubjectProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinSubjectProxy response) {
+				getView().showUpdatedSubject(response, lastSubjectIndex );
+			}			
+		});		
+	}
 }

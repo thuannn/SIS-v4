@@ -7,12 +7,12 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2">
+		<g:VerticalPanel width="100%">
 			<g:Label text="SAISIR LES NOTES" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:Grid width="80%">
 						<g:row>
 							<g:customCell>
-								<g:Label text="1" horizontalAlignment="ALIGN_LEFT" styleName="step"/>
+								<g:Label text="1" horizontalAlignment="ALIGN_CENTER" styleName="step"/>
 							</g:customCell>
 							<g:customCell>
 								<g:Label text="Choisir le nom du professeur :" styleName="fieldTitle"/>

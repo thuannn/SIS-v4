@@ -461,14 +461,14 @@ Agenda
 .step {
 	width: 15px;
 	height: 15px;
-	color: chocolate;
+	color: yellow;
 	padding: 2px;
 	border: 1px solid Silver;
-	font-size: 14px;
+	font-size: 12px;
 	font-family: Verdana;
-	font-weight: bold;
+	font-weight: normal;
 	text-align: center;
-	background-color: lavenderblush;
+	background-color: gray;
 	border-radius: 25px;
 }
 .fieldTitle {

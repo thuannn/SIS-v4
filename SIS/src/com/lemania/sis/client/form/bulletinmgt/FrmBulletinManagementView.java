@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
@@ -24,15 +28,21 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinManagementUiHandler> implements
 		FrmBulletinManagementPresenter.MyView {
@@ -53,6 +63,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	//
 	BulletinBrancheProxy selectedBranche;
 	Integer selectedBrancheIndex = -1;
+	//
+	private PopupPanel pp;
 	
 
 	public interface Binder extends UiBinder<Widget, FrmBulletinManagementView> {
@@ -80,6 +92,10 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiField DoubleBox txtBrancheCoef;
 	@UiField Label lblStudentName;
 	@UiField SimplePager pagerSubjects;
+	@UiField Button cmdAddSubject;
+	@UiField VerticalPanel pnlSubjectAdd;
+	@UiField Button cmdSaveSubject;
+	@UiField VerticalPanel pnlSubject;
 	
 	
 	/**/
@@ -258,7 +274,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    tblBranches.addColumn( colCoef, "Coef" );
 	    
 	    //
-	    Column<BulletinBrancheProxy, String> colDelete = new Column<BulletinBrancheProxy, String> (new ButtonCell()){
+	    Column<BulletinBrancheProxy, String> colDelete = new Column<BulletinBrancheProxy, String> (new GridButtonCell()){
 	    	@Override
 	    	public String getValue(BulletinBrancheProxy bp){
 	    		return "X";
@@ -343,7 +359,62 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    
 	    
 	    //
-	    Column<BulletinSubjectProxy, String> colDelete = new Column<BulletinSubjectProxy, String> (new ButtonCell()){
+	    Column<BulletinSubjectProxy, String> colEdit = new Column<BulletinSubjectProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(BulletinSubjectProxy bp){
+	    		return "Editer";
+	    	}
+	    };
+	    colEdit.setFieldUpdater(new FieldUpdater<BulletinSubjectProxy, String>(){
+	    	@Override
+	    	public void update(int index, BulletinSubjectProxy subject, String value){
+	    		selectedSubjectIndex = index;
+	    		selectedSubject = subject;
+	    		//
+	    		pp = new PopupPanel(true) {
+	    			@Override
+	    			  protected void onPreviewNativeEvent(final NativePreviewEvent event) {
+	    			    super.onPreviewNativeEvent(event);
+	    			    switch (event.getTypeInt()) {
+	    			        case Event.ONKEYDOWN:
+	    			            if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+	    			            	//
+	    			                hide();
+	    			            }
+	    			            break;
+	    			    }
+	    			}
+	    		};
+	    		
+	    		pp.addCloseHandler(new CloseHandler<PopupPanel>() {
+	    			public void onClose(CloseEvent<PopupPanel> event) {
+	    				//
+	    				pnlSubject.add( pnlSubjectAdd );
+	    				cmdSaveSubject.setVisible(false);
+	    				cmdAddSubject.setVisible(true);
+	    				lstSubjects.setEnabled(true);
+	    			}
+	    		});
+	    		//
+	    		pp.add( pnlSubjectAdd );
+	    		cmdSaveSubject.setVisible(true);
+				cmdAddSubject.setVisible(false);
+				lstSubjects.setEnabled(false);
+				//
+				pp.setGlassEnabled( true );
+	    		pp.show();
+	    		pp.center();
+	    		//
+	    		FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
+	    		onLstSubjectsChange( null );
+	    	}
+	    });
+	    tblSubjects.setColumnWidth(colEdit, 13, Unit.PCT);
+	    tblSubjects.addColumn(colEdit, "");
+	    
+	    
+	    //
+	    Column<BulletinSubjectProxy, String> colDelete = new Column<BulletinSubjectProxy, String> (new GridButtonCell()){
 	    	@Override
 	    	public String getValue(BulletinSubjectProxy bp){
 	    		return "X";
@@ -452,12 +523,20 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		selectedBranche = null;
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void showUpdatedSubject(BulletinSubjectProxy subject, Integer lastSubjectIndex) {
 		// 
 		subjectDataProvider.getList().set( lastSubjectIndex, subject);
+		//
+		pp.hide();
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public void removeDeletedSubjectFromTable() {
 		//
@@ -558,5 +637,14 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 			lstProfessors.addItem( prof.getProfName(), prof.getId().toString() );
 		}
 		lstProfessors.setSelectedIndex(0);
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSaveSubject")
+	void onCmdSaveSubjectClick(ClickEvent event) {
+		//
+		getUiHandlers().updateSubjectProf( selectedSubject, lstProfessors.getValue( lstProfessors.getSelectedIndex() ), selectedSubjectIndex );
 	}
 }

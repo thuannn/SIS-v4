@@ -1,7 +1,5 @@
 package com.lemania.sis.server.service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -10,12 +8,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.SmsFactory;
-import com.twilio.sdk.resource.instance.Account;
-import com.twilio.sdk.resource.instance.Sms;
 
 
 public class ContactDao extends MyDAOBase {
@@ -99,6 +91,34 @@ public class ContactDao extends MyDAOBase {
 	 * */
 	public void sendSMS( String number, String message ) {
 		//
-		
+		//
+		Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+        
+        String from = "thuannn@gmail.com, Ecole Lémania";
+        String to = number + "@neprlp85uw7k65lf.sms.vtx.ch,Mobile/";
+        String subject = "Absence";
+
+        try {
+	        Message msg = new MimeMessage(session);
+	        //
+	        String[] fromEmails = from.split(",");
+	        msg.setFrom(new InternetAddress( fromEmails[0].trim(), fromEmails[1].trim() ));
+	        //
+	        String[] toto;
+ 	        String[] toPairs = to.split("/");
+	        for ( String toMail : toPairs ) {
+	        	toto = toMail.split(",");
+	        	msg.addRecipient( Message.RecipientType.TO, new InternetAddress( toto[0].trim(), toto[1].trim() ));
+	        }
+	        //
+	        msg.setSubject( subject );
+	        msg.setText( message );
+	        //
+	        Transport.send(msg);
+	        //
+	    } catch (Exception e) {
+	    	throw new RuntimeException(e);
+	    }
 	}
 }

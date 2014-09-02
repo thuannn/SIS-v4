@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2" ui:field="pnlMain" horizontalAlignment="ALIGN_CENTER">
+		<g:VerticalPanel width="100%" spacing="0" ui:field="pnlMain" horizontalAlignment="ALIGN_CENTER">
 			<g:AbsolutePanel width="100%" height="10px" ui:field="pnlWhiteBackground" styleName="whitePanel" visible="false"/>
 			<g:Label text="IMPRIMER LES BULLETINS" horizontalAlignment="ALIGN_CENTER" styleName="pageTitle"/>
 			<g:HorizontalPanel spacing="5" styleName="subSection" verticalAlignment="ALIGN_MIDDLE">

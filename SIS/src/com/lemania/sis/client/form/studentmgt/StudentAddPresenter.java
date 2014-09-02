@@ -1,4 +1,4 @@
-package com.lemania.sis.client.presenter;
+package com.lemania.sis.client.form.studentmgt;
 
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
