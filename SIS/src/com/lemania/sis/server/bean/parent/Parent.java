@@ -1,6 +1,7 @@
 package com.lemania.sis.server.bean.parent;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.DatastoreObject;
 
@@ -18,6 +19,8 @@ public class Parent extends DatastoreObject implements Comparable<Parent> {
 	boolean acceptSMS = false;
 	boolean acceptEmail = false;
 	private String childIds;
+	
+	@IgnoreSave String childrenNames = "";
 	
 	
 	public String getTitle() {
@@ -124,6 +127,16 @@ public class Parent extends DatastoreObject implements Comparable<Parent> {
 	public int compareTo(Parent o) {
 		//
 		return this.lastName.compareTo(o.getLastName());
+	}
+
+
+	public String getChildrenNames() {
+		return childrenNames;
+	}
+
+
+	public void setChildrenNames(String childrenNames) {
+		this.childrenNames = childrenNames;
 	}
 	
 }

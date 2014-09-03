@@ -158,7 +158,7 @@
 				<g:Label text="-" ui:field="lblSendMethod" styleName="header"/>
 			</g:HorizontalPanel>
 			<g:Label text="Message :"/>
-			<g:TextArea width="100%" visibleLines="5" ui:field="txtSendMessage"/>
+			<g:TextArea width="100%" visibleLines="5" ui:field="txtSendMessage" enabled="false"/>
 			<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE">
 				<g:Button styleName="buttonToolbar" ui:field="cmdSend">Envoyer</g:Button>
 				<g:Button styleName="gridButton" ui:field="cmdClosePopupSMS">Fermer</g:Button>

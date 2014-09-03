@@ -206,6 +206,10 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		//
 		sendMethod = method;
 		lblNotifStudentName.setText( selectedAbsenceItem.getStudentName() );
+		txtSendMessage.setText( 
+				"Absence de " + selectedAbsenceItem.getStudentName()  +" de 12h00-13h00. \n\n"
+				+ "Merci d’en prendre note et de nous faire parvenir rapidement l’éventuelle excuse. \n\n"
+				+ "ECOLE LEMANIA" );
 		//
 		if ( method == messageType.SMS )
 			lblSendMethod.setText( "SMS" );
@@ -722,7 +726,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		providerAbsences.flush();
 		//
 		// Clear student selection
-//		tblStudents.getSelectionModel().setSelected( selectedAbsentStudent, false);
+		tblStudents.getSelectionModel().setSelected( selectedAbsentStudent, false );
+		providerAbsentStudents.getList().clear();
+		providerAbsentStudents.flush();
 		//
 		sgbStudents.setValue("");
 		//
@@ -969,6 +975,10 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	void onCmdSendClick(ClickEvent event) {
 		//
 		if ( sendMethod == messageType.Email ) {
+			if ( !selectedParent.isAcceptEmail() ) {
+				Window.alert( "Le responsable n'a pas choisi cette option de notification.");
+				return;
+			}
 			if ( lstParents.getSelectedIndex() < 1 ) {
 				Window.alert( NotificationValues.invalid_input + " - Parents");
 				return;
@@ -981,6 +991,10 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		}
 		
 		if ( sendMethod == messageType.SMS ) {
+			if ( !selectedParent.isAcceptSMS() ) {
+				Window.alert( "Le responsable n'a pas choisi cette option de notification.");
+				return;
+			}
 			if ( lstParents.getSelectedIndex() < 1 ) {
 				Window.alert( NotificationValues.invalid_input + " - Parents");
 				return;

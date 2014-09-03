@@ -23,6 +23,7 @@ public interface StudentRequestFactory extends RequestFactory {
 		
 		Request<List<StudentProxy>> listAll();
 		Request<List<StudentProxy>> listAllActive();
+		Request<List<StudentProxy>> listAllInactive();
 		Request<List<StudentProxy>> listAllActiveWithoutBulletin();
 		Request<List<StudentProxy>> listByEmail(String email);
 	}

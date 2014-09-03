@@ -58,6 +58,7 @@ public class UserManagementPresenter
 	public interface MyView extends View, HasUiHandlers<UserManagementUiHandler> {
 		//
 		public void initializeTables();
+		public void initilizeUI();
 		//
 		public void populateSelectedUserInfo();
 		//		
@@ -96,6 +97,7 @@ public class UserManagementPresenter
 		// Thuan
 		getView().setUiHandlers(this);
 		getView().initializeTables();
+		getView().initilizeUI();
 	}
 	
 	@Override

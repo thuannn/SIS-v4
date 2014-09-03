@@ -83,6 +83,21 @@ public class StudentDao extends MyDAOBase {
 		Collections.sort( returnList );
 		return returnList;
 	}
+	
+	
+	/* List all the active students */
+	public List<Student> listAllInactive() {
+		Query<Student> q = ofy().load().type(Student.class)
+				.filter("isActive", false)
+				.order("LastName")
+				.order("FirstName");
+		List<Student> returnList = new ArrayList<Student>();
+		for (Student student : q){
+			returnList.add(student);
+		}
+		Collections.sort( returnList );
+		return returnList;
+	}
 		
 	
 	/* List all the active students */

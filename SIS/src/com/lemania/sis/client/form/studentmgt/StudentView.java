@@ -9,11 +9,9 @@ import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -25,6 +23,9 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implements StudentPresenter.MyView {
 
@@ -41,6 +42,9 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	@UiField(provided=true) DataGrid<StudentProxy> tblStudents = new DataGrid<StudentProxy>();
 	@UiField SimplePager pagerStudent;
 	@UiField HorizontalPanel pnlSearch;
+	@UiField RadioButton optAll;
+	@UiField RadioButton optActive;
+	@UiField RadioButton optInactive;
 	
 	
 	public interface Binder extends UiBinder<Widget, StudentView> {
@@ -174,6 +178,8 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 		for (StudentProxy sp : studentList) {
 			mySuggestions.add( sp.getFirstName() + " " + sp.getLastName() );
 		}
+		//
+		pagerStudent.setPage(0);
 	}
 
 	/*
@@ -225,5 +231,32 @@ public class StudentView extends ViewWithUiHandlers<StudentListUiHandler> implem
 	public void initializeUI() {
 		// 
 		initializeSuggestBox();
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("optAll")
+	void onOptAllClick(ClickEvent event) {
+		//
+		getUiHandlers().listAllStudent();
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("optActive")
+	void onOptActiveClick(ClickEvent event) {
+		//
+		getUiHandlers().listAllStudentActive();
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("optInactive")
+	void onOptInactiveClick(ClickEvent event) {
+		//
+		getUiHandlers().listAllStudentInactive();
 	}
 }

@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT" spacing="2">
+		<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
 			<g:Label text="RAJOUTER UN ELEVE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:Label text="." styleName="hiddenText"/>
 			<g:Grid cellPadding="5" cellSpacing="5">

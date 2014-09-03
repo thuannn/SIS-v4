@@ -19,8 +19,25 @@ public class ParentDao extends MyDAOBase{
 	 * */
 	public List<Parent> listAll(){
 		//
+		List<String> ids;
+		String childrenName = "";
+		Student student;
+		//
 		Query<Parent> q = ofy().load().type(Parent.class);
 		List<Parent> returnList = q.list();
+		for ( Parent parent : returnList ) {
+			childrenName = "";
+			if ( ! parent.getChildIds().equals("") ) {
+				ids = Arrays.asList( parent.getChildIds().trim().split(" ") );
+				for ( String s : ids ){
+					if (!s.equals("")) {
+						student = ofy().load().key( Key.create(Student.class, Long.parseLong(s)) ).now();
+						childrenName = childrenName + " - " + student.getFirstName() + " " + student.getLastName();
+					}
+				}
+			}
+			parent.setChildrenNames( childrenName.substring(2));
+		}
 		Collections.sort(returnList);
 		return returnList;
 	}

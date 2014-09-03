@@ -400,6 +400,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    				cmdSaveSubject.setVisible(false);
 	    				cmdAddSubject.setVisible(true);
 	    				lstSubjects.setEnabled(true);
+	    				txtSubjectCoef.setEnabled(true);
 	    			}
 	    		});
 	    		//
@@ -407,6 +408,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    		cmdSaveSubject.setVisible(true);
 				cmdAddSubject.setVisible(false);
 				lstSubjects.setEnabled(false);
+				txtSubjectCoef.setEnabled(false);
 				//
 				pp.setGlassEnabled(true);
 	    		pp.show();

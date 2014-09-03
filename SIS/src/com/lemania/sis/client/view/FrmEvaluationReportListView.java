@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.presenter.FrmEvaluationReportListPresenter;
 import com.lemania.sis.client.uihandler.FrmEvaluationReportListUiHandler;
+import com.lemania.sis.client.values.AppSettingValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -68,7 +69,7 @@ public class FrmEvaluationReportListView extends ViewWithUiHandlers<FrmEvaluatio
 	public void initializeYearList(){
 		lstYears.clear();
 		lstYears.addItem("-","");
-		lstYears.addItem("2013 - 2014","2013");
+		lstYears.addItem( AppSettingValues.schoolYearDescription, AppSettingValues.schoolYearCode );
 	}
 
 	/*

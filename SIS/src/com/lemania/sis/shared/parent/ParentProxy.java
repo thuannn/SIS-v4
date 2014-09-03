@@ -39,4 +39,6 @@ public interface ParentProxy extends EntityProxy {
 	
 	public String getChildIds();
 	public void setChildIds(String childIds);
+	
+	public String getChildrenNames();
 }

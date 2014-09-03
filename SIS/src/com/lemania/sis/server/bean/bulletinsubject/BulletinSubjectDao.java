@@ -146,7 +146,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())
-//					.filter("professor", assignment.getProf())
+					.filter("professor", assignment.getProf())
 					.order("subjectName");
 			List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 			for ( BulletinSubject bulletinSubject : q ){

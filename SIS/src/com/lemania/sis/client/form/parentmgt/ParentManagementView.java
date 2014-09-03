@@ -1,12 +1,14 @@
 package com.lemania.sis.client.form.parentmgt;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.user.cellview.client.Column;
@@ -18,16 +20,13 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.lemania.sis.client.UI.GridButtonCell;
-import com.lemania.sis.shared.EvaluationSubjectProxy;
 import com.lemania.sis.shared.parent.ParentProxy;
-import com.google.gwt.cell.client.Cell.Context;
-import com.google.gwt.safehtml.shared.*;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 public class ParentManagementView extends
 		ViewWithUiHandlers<ParentManagementUiHandlers> implements
@@ -38,19 +37,26 @@ public class ParentManagementView extends
 	@UiField(provided=true) DataGrid<ParentProxy> tblParents = new DataGrid<ParentProxy>();
 	@UiField SimplePager pagerParents;
 	@UiField Button cmdAdd;
+	@UiField HorizontalPanel pnlSearch;
 	
 	
 	//
 	ListDataProvider<ParentProxy> providerParents = new ListDataProvider<ParentProxy>();
 	ParentProxy selectedParent;
 	int selectedParentIndex = -1;
+	//
+	private final MultiWordSuggestOracle mySuggestions = new MultiWordSuggestOracle();
+	SuggestBox sgbStudents;
 	
 	
-
+	/*
+	 * */
 	@Inject
 	ParentManagementView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+	
+	
 	
 	/*
 	 * */
@@ -67,7 +73,44 @@ public class ParentManagementView extends
 	public void initializeUI() {
 		//
 		initializeTable();
+		// 
+		initializeSuggestBox();
 	}
+	
+	
+	/*
+	 * */
+	private void initializeSuggestBox() {
+		//
+		sgbStudents = new SuggestBox( mySuggestions );
+		sgbStudents.addSelectionHandler( new SelectionHandler<Suggestion>(){
+
+			@Override
+			public void onSelection(SelectionEvent<Suggestion> event) {
+				//
+				showSelectedStudent( event.getSelectedItem().getReplacementString() );
+			}
+			
+		});
+		sgbStudents.setWidth( "300px" );
+		pnlSearch.add( sgbStudents );
+	}
+	
+	
+	
+	/*
+	 * */
+	public void showSelectedStudent( String studentName ) {
+		//
+		for (ParentProxy sp : providerParents.getList() ) {
+			if ( studentName.contains( sp.getChildrenNames() ) ) {
+				tblParents.getSelectionModel().setSelected( sp, true );
+				pagerParents.setPage( Math.round( providerParents.getList().indexOf(sp) / pagerParents.getPageSize() ) );
+				break;
+			}
+		}
+	}
+	
 	
 	
 	/*
@@ -202,6 +245,13 @@ public class ParentManagementView extends
 		providerParents.getList().clear();
 		providerParents.getList().addAll(parents);
 		providerParents.flush();
+		//
+		mySuggestions.clear();
+		for (ParentProxy sp : parents) {
+			mySuggestions.add( sp.getChildrenNames() );
+		}
+		//
+		pagerParents.setPage(0);
 	}
 
 	

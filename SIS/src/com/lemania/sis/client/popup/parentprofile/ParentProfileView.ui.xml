@@ -3,11 +3,11 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
     <ui:style>
     </ui:style>
-    <g:DialogBox ui:field="dialog" text="Responsable" width="900px" height="">
-    	<g:VerticalPanel width="100%" height="100%" horizontalAlignment="ALIGN_CENTER">
+    <g:DialogBox ui:field="dialog" text="Responsable" width="900px">
+    	<g:VerticalPanel width="100%" height="100%" horizontalAlignment="ALIGN_CENTER" spacing="5">
     		<g:Button styleName="popupCloseButton" ui:field="cmdClose">X</g:Button>
     		<g:HorizontalPanel width="100%" spacing="5">
-    			<g:VerticalPanel width="100%" spacing="5">
+    			<g:VerticalPanel width="100%" spacing="5" styleName="subSection">
     				<g:Label text="Profile du responsable"/>
     				<g:Grid width="100%">
     				<g:row>
@@ -52,6 +52,14 @@
     			</g:row>
     			<g:row>
     				<g:customCell>
+    					<g:Label text="-" styleName="hiddenText"/>
+    				</g:customCell>
+    				<g:customCell>
+    					<g:Label text="(+41XXXXXXX)"/>
+    				</g:customCell>
+    			</g:row>
+    			<g:row>
+    				<g:customCell>
     					<g:Label text="Téléphone à domicile"/>
     				</g:customCell>
     				<g:customCell>
@@ -84,14 +92,14 @@
     			</g:row>
     		</g:Grid>
     			</g:VerticalPanel>
-    			<g:VerticalPanel width="100%" spacing="5">
+    			<g:VerticalPanel width="100%" spacing="5" styleName="subSection">
     				<g:Label text="Accès à l&apos;espace parent des élèves"/>
     				<g:Cell width="100%">
     					<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
     					<p1:DataGrid ui:field="tblChildren" height="330px" width="270px"/>
     					<g:VerticalPanel spacing="5">
-    						<g:Button text="&lt;&lt;" ui:field="cmdAdd"/>
-    						<g:Button text="&gt;&gt;" ui:field="cmdRemove"/>
+    						<g:Button text="&lt;&lt;" ui:field="cmdAdd" styleName="gridButton"/>
+    						<g:Button text="&gt;&gt;" ui:field="cmdRemove" styleName="gridButton"/>
     					</g:VerticalPanel>
     					<g:VerticalPanel>
     						<p1:DataGrid width="270px" height="300px" ui:field="tblStudents" pageSize="10"/>
@@ -103,8 +111,7 @@
     				</g:Cell>
     			</g:VerticalPanel>
     		</g:HorizontalPanel>
-    		<g:Label text="-" styleName="hiddenText"/>
-    		<g:Button text="Valider" ui:field="cmdSave"/>
+    		<g:Button text="Valider" ui:field="cmdSave" styleName="buttonToolbar"/>
     	</g:VerticalPanel>
     </g:DialogBox>
 </ui:UiBinder>

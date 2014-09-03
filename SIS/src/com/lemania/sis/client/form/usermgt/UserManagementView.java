@@ -14,19 +14,27 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.FieldValidation;
-import com.lemania.sis.client.values.NotificationValues;
+import com.lemania.sis.shared.student.StudentProxy;
 import com.lemania.sis.shared.user.UserProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandler> implements
 		UserManagementPresenter.MyView {
@@ -36,15 +44,30 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	private UserProxy selectedUser;
 	private int selectedUserIndex;
 	private ListDataProvider<UserProxy> dpUser = new ListDataProvider<UserProxy>();
+	private ListDataProvider<UserProxy> dpUserAll = new ListDataProvider<UserProxy>();
+	private ListDataProvider<UserProxy> dpUserActive = new ListDataProvider<UserProxy>();
+	private ListDataProvider<UserProxy> dpUserInactive = new ListDataProvider<UserProxy>();
+	//
+	private final MultiWordSuggestOracle mySuggestions = new MultiWordSuggestOracle();
+	SuggestBox sgbStudents;
 
+	
+	/*
+	 * */
 	public interface Binder extends UiBinder<Widget, UserManagementView> {
 	}
 
+	
+	/*
+	 * */
 	@Inject
 	public UserManagementView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
 	}
 
+	
+	/*
+	 * */
 	@Override
 	public Widget asWidget() {
 		return widget;
@@ -59,6 +82,10 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	@UiField ListBox lstUserTypes;
 	@UiField HorizontalPanel pnlAdd;
 	@UiField SimplePager pagerUser;
+	@UiField RadioButton optTout;
+	@UiField RadioButton optActif;
+	@UiField RadioButton optInactif;
+	@UiField HorizontalPanel pnlToolbar;
 	
 	@UiHandler("cmdAdd")
 	public void onCmdAddClicked(ClickEvent event) {
@@ -246,6 +273,17 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	    };
 	    tblUser.addColumn(colLastLogin, "Dernière login");
 	    
+	    
+	    // Add a selection model to handle user selection.
+	    final SingleSelectionModel<UserProxy> selectionModel = new SingleSelectionModel<UserProxy>();
+	    tblUser.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	    	//
+	    	public void onSelectionChange(SelectionChangeEvent event) {
+	    		//
+	    	}
+	    });
+	    
 	    //
 	    dpUser.addDataDisplay(tblUser);
 	    
@@ -272,9 +310,26 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	@Override
 	public void setUserData(List<UserProxy> list) {
 		//
+		optTout.setValue(true);
+		//
 		dpUser.getList().clear();
 		dpUser.setList(list);
 		dpUser.flush();
+		//
+		dpUserActive.getList().clear();
+		dpUserInactive.getList().clear();
+		dpUserAll.getList().clear();
+		//
+		for (UserProxy up : list) {
+			if (up.getActive())
+				dpUserActive.getList().add(up);
+			if (!up.getActive()) {
+				dpUserInactive.getList().add(up);
+			}
+			dpUserAll.getList().add(up);
+		}
+		//
+		populateSuggestBox( dpUser.getList() );
 	}
 
 	/*
@@ -328,5 +383,104 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 	public void hideCodesAcces(boolean hide) {
 		//
 		tblUser.setVisible(!hide);
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("optTout")
+	void onOptToutClick(ClickEvent event) {
+		//
+		dpUser.getList().clear();
+		dpUser.getList().addAll( dpUserAll.getList() );
+		//
+		dpUser.flush();
+		dpUser.refresh();
+		tblUser.redraw();
+		//
+		populateSuggestBox( dpUser.getList() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("optActif")
+	void onOptActifClick(ClickEvent event) {
+		//
+		dpUser.getList().clear();
+		dpUser.getList().addAll( dpUserActive.getList() );
+		//
+		dpUserActive.flush();
+		dpUserActive.refresh();
+		tblUser.redraw();
+		//
+		populateSuggestBox( dpUser.getList() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("optInactif")
+	void onOptInactifClick(ClickEvent event) {
+		//
+		dpUser.getList().clear();
+		dpUser.getList().addAll( dpUserInactive.getList() );
+		//
+		dpUserInactive.flush();
+		dpUserInactive.refresh();
+		tblUser.redraw();
+		//
+		populateSuggestBox( dpUser.getList() );
+	}
+	
+	
+	private void populateSuggestBox( List<UserProxy> userList ) {
+		//
+		mySuggestions.clear();
+		for (UserProxy up : userList) {
+			mySuggestions.add( up.getFullName() );
+		}
+		//
+		pagerUser.setPage(0);
+	}
+
+
+	/*
+	 * */
+	@Override
+	public void initilizeUI() {
+		// 
+		initializeSuggestBox();
+	}
+	
+	
+	/*
+	 * */
+	private void initializeSuggestBox() {
+		//
+		sgbStudents = new SuggestBox( mySuggestions );
+		sgbStudents.addSelectionHandler( new SelectionHandler<Suggestion>(){
+
+			@Override
+			public void onSelection(SelectionEvent<Suggestion> event) {
+				//
+				showSelectedUser( event.getSelectedItem().getReplacementString() );
+			}
+			
+		});
+		sgbStudents.setWidth( "300px" );
+		pnlToolbar.add( sgbStudents );
+	}
+	
+	
+	/*
+	 * */
+	public void showSelectedUser( String userName ) {
+		//
+		for (UserProxy up : dpUser.getList() ) {
+			if ( userName.contains( up.getFullName() ) ) {
+				tblUser.getSelectionModel().setSelected( up, true );
+				pagerUser.setPage( Math.round( dpUser.getList().indexOf(up) / pagerUser.getPageSize() ) );
+				break;
+			}
+		}
 	}
 }

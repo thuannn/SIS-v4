@@ -250,4 +250,61 @@ public class StudentPresenter
 		//
 		this.currentUser = event.getCurrentUser();
 	}
+
+	
+	/*
+	 * */
+	@Override
+	public void listAllStudentActive() {
+		//
+		StudentRequestContext rc = getStudentRequestContext();
+		rc.listAllActive().fire(new Receiver<List<StudentProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<StudentProxy> response) {
+				getView().setTableData(response);
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void listAllStudentInactive() {
+		//
+		StudentRequestContext rc = getStudentRequestContext();
+		rc.listAllInactive().fire(new Receiver<List<StudentProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<StudentProxy> response) {
+				getView().setTableData(response);
+			}
+		});
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void listAllStudent() {
+		//
+		StudentRequestContext rc = getStudentRequestContext();
+		rc.listAll().fire(new Receiver<List<StudentProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<StudentProxy> response) {
+				getView().setTableData(response);
+			}
+		});
+	}
 }
