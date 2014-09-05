@@ -91,7 +91,7 @@
 													<g:Button ui:field="cmdAddSubject" text="Ajouter la matière" styleName="buttonToolbar"></g:Button>
 												</g:customCell>
 												<g:customCell>
-													<g:Button text="Valider" ui:field="cmdSaveSubject" styleName="buttonToolbar"/>
+													<g:Button text="Valider" ui:field="cmdSaveSubject" styleName="buttonToolbar" visible="false"/>
 												</g:customCell>
 											</g:row>
 										</g:Grid>

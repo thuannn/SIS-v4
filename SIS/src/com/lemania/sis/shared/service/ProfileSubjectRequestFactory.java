@@ -8,6 +8,7 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.service.DaoServiceLocator;
 import com.lemania.sis.server.service.ProfileSubjectDao;
+import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileSubjectProxy;
 
 public interface ProfileSubjectRequestFactory extends RequestFactory {
@@ -31,6 +32,8 @@ public interface ProfileSubjectRequestFactory extends RequestFactory {
 		Request<ProfileSubjectProxy> calculateTotalBrancheCoef( String profileSubjectId );
 		//
 		Request<ProfileSubjectProxy> updateSubjectProf( ProfileSubjectProxy profile, String profId );
+		//
+		Request<List<ProfessorProxy>> listProfessorsByProfileSubject( String subjectId, String classId );
 	}
 	
 	ProfileSubjectRequestContext profileSubjectRequest();

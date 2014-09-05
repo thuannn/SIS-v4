@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
+import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
@@ -140,7 +141,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public ProfileSubject calculateTotalBrancheCoef(String profileSubjectId) {
 		//
 		ProfileSubject ps = ofy().load().key( Key.create(ProfileSubject.class, Long.parseLong(profileSubjectId)) ).now();
@@ -153,5 +155,27 @@ public class ProfileSubjectDao extends MyDAOBase {
 		}
 		ofy().save().entities( ps );
 		return ps;
+	}
+	
+	
+	/*
+	 * */
+	public List<Professor> listProfessorsByProfileSubject( String subjectId, String classId ) {
+		//
+		Query<Profile> qp = ofy().load().type(Profile.class)
+				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)));
+		Key<Profile> keyP = qp.keys().iterator().next();
+		
+		Query<ProfileSubject> q = ofy().load().type(ProfileSubject.class)
+				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)))
+				.filter("profile", keyP )
+				.order("profName");
+		//
+		List<Professor> returnList = new ArrayList<Professor>();
+		for ( ProfileSubject profileSubject : q ){
+			if (profileSubject.getProfessor() != null)
+				returnList.add( ofy().load().key( profileSubject.getProfessor() ).now() );
+		}
+		return returnList;
 	}
 }

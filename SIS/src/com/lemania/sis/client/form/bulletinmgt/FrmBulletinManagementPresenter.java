@@ -34,6 +34,7 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.ProfileProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.assignment.AssignmentRequestFactory;
 import com.lemania.sis.shared.assignment.AssignmentRequestFactory.AssignmentRequestContext;
@@ -49,12 +50,16 @@ import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.ProfileRequestFactory;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
 import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
 import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
+import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory.SubjectRequestContext;
 
 public class FrmBulletinManagementPresenter
@@ -503,19 +508,33 @@ public class FrmBulletinManagementPresenter
 	@Override
 	public void loadProfessorList(String subjectId, String classId) {
 		//
-		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+//		AssignmentRequestFactory rf = GWT.create(AssignmentRequestFactory.class);
+//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+//		AssignmentRequestContext rc = rf.assignmentRequest();
+//		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
+//			@Override
+//			public void onFailure(ServerFailure error){
+//				Window.alert(error.getMessage());
+//			}
+//			@Override
+//			public void onSuccess(List<ProfessorProxy> response) {
+//				getView().setProfessorListData(response);
+//			}
+//		});		
+		
+		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AssignmentRequestContext rc = rf.assignmentRequest();
-		rc.listAllProfessorBySubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
+		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
+		rc.listProfessorsByProfileSubject(subjectId, classId).fire(new Receiver<List<ProfessorProxy>>(){
+			@Override
+			public void onSuccess(List<ProfessorProxy> response){
+				getView().setProfessorListData(response);
+			}
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
-			@Override
-			public void onSuccess(List<ProfessorProxy> response) {
-				getView().setProfessorListData(response);
-			}
-		});		
+		}); 
 	}
 
 	

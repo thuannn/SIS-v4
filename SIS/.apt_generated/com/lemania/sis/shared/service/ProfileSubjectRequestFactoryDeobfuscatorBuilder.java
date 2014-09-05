@@ -48,6 +48,13 @@ withOperation(new OperationKey("qTOdZ6XT2bC4RQ$sfLmvUoGt3gg="),
   .withMethodName("calculateTotalBrancheCoef")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());
+withOperation(new OperationKey("GAckpuuT34X93XpAoBx_Tk$YanM="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listProfessorsByProfileSubject")
+  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
+  .build());
 withOperation(new OperationKey("IcnkMtdZgCQ8S6KSdnuHt4TYDhI="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
@@ -76,8 +83,10 @@ withOperation(new OperationKey("k7u_yhtyjbULamASOOqH904Nms0="),
   .withMethodName("initialize")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());
+withRawTypeToken("GRB8BzGrI1tM_EULmiOBQtqIX0o=", "com.lemania.sis.shared.ProfessorProxy");
 withRawTypeToken("j7rtdtaz0ZtchwX8fbXOqSPLDOo=", "com.lemania.sis.shared.ProfileSubjectProxy");
 withRawTypeToken("w1Qg$YHpDaNcHrR5HZ$23y518nA=", "com.google.web.bindery.requestfactory.shared.EntityProxy");
 withRawTypeToken("FXHD5YU0TiUl3uBaepdkYaowx9k=", "com.google.web.bindery.requestfactory.shared.BaseProxy");
+withClientToDomainMappings("com.lemania.sis.server.Professor", Arrays.asList("com.lemania.sis.shared.ProfessorProxy"));
 withClientToDomainMappings("com.lemania.sis.server.ProfileSubject", Arrays.asList("com.lemania.sis.shared.ProfileSubjectProxy"));
 }}

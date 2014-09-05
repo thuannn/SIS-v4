@@ -76,11 +76,22 @@ public class SubjectDao extends MyDAOBase {
 		//
 		Query<ProfileSubject> profileSubjects = ofy().load().type(ProfileSubject.class)
 				.filter("profile", profile)
-				.order("subjectName");				
+				.order("subjectName");
 		//
 		List<Subject> returnList = new ArrayList<Subject>();
+		Subject subject;
+		Subject prevSubject = null;
 		for (ProfileSubject ps : profileSubjects){
-			returnList.add( ofy().load().key( ps.getSubject() ).now() );
+			//
+			subject = ofy().load().key( ps.getSubject() ).now();
+			if (prevSubject == null)
+				prevSubject = subject;
+			else {
+				if (subject.getSubjectName().equals(prevSubject.getSubjectName()))
+					continue;
+			}
+			returnList.add( subject );
+			prevSubject = subject;
 		}
 		return returnList;
 	}

@@ -74,7 +74,8 @@ public class AssignmentDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public List<Professor> listAllProfessorBySubject(String subjectId, String classId){
 		Query<Assignment> q = ofy().load().type(Assignment.class)
 				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
