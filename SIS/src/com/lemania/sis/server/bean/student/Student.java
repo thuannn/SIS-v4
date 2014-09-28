@@ -47,6 +47,6 @@ public class Student extends DatastoreObject implements Comparable<Student> {
 	@Override
 	public int compareTo(Student o) {
 		//
-		return (this.FirstName + this.LastName).compareTo( o.getFirstName() + o.getLastName() );
+		return ( this.LastName + this.FirstName ).compareTo( o.getLastName() + o.getFirstName() );
 	}
 }

@@ -8,7 +8,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.shared.BrancheProxy;
 import com.lemania.sis.shared.BulletinBrancheProxy;

@@ -27,7 +27,7 @@ public class ParentDao extends MyDAOBase{
 		List<Parent> returnList = q.list();
 		for ( Parent parent : returnList ) {
 			childrenName = "";
-			if ( ! parent.getChildIds().equals("") ) {
+			if ( ! parent.getChildIds().trim().equals("") ) {
 				ids = Arrays.asList( parent.getChildIds().trim().split(" ") );
 				for ( String s : ids ){
 					if (!s.equals("")) {
@@ -36,7 +36,7 @@ public class ParentDao extends MyDAOBase{
 					}
 				}
 			}
-			parent.setChildrenNames( childrenName.substring(2));
+			parent.setChildrenNames( (!childrenName.equals("")) ? childrenName.substring(2) : "" );
 		}
 		Collections.sort(returnList);
 		return returnList;
@@ -99,6 +99,23 @@ public class ParentDao extends MyDAOBase{
 	 * */
 	public void removeParent(Parent parent){
 		ofy().delete().entities(parent);
+	}
+	
+	
+	/*
+	 * */
+	public boolean checkExistence( String email ) {
+		//
+		boolean isExisted = false;
+		//
+		Query<Parent> q = ofy().load().type(Parent.class)
+				.filter( "eMail", email );
+		if (q.list().size() > 0)
+			isExisted = true;
+		else
+			isExisted = false;
+		//
+		return isExisted;
 	}
 
 }

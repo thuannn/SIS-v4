@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.values.AbsenceValues;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ProfessorProxy;

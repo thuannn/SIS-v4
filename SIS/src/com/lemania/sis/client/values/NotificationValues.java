@@ -60,6 +60,7 @@ public class NotificationValues {
 	// Parent profile
 	public static String student_notselected = "Aucun élève n'est sélectionné !";
 	public static String child_notselected = "Aucun enfant n'est sélectionné !";
+	public static String parent_already_existed = "Profil déjà existé dans la base de données!";
 	
 	// User management
 	public static String user_created = "Code d'accès créé pour cet utilisateur.";

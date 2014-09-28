@@ -18,6 +18,8 @@ public interface ParentRequestFactory extends RequestFactory {
 		Request<List<ParentProxy>> listAll();
 		Request<List<ParentProxy>> listAllByStudent( String studentId );
 		//
+		Request<Boolean> checkExistence( String email );
+		//
 		Request<Void> save(ParentProxy parent); 
 		Request<ParentProxy> saveAndReturn(ParentProxy parent);
 		Request<Void> removeParent(ParentProxy parent);

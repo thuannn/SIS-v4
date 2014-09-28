@@ -11,8 +11,10 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.event.ParentAfterAddEvent;
 import com.lemania.sis.client.event.ParentAfterUpdateEvent;
+import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.parent.ParentProxy;
 import com.lemania.sis.shared.parent.ParentRequestFactory;
 import com.lemania.sis.shared.parent.ParentRequestFactory.ParentRequestContext;
@@ -34,8 +36,8 @@ public class ParentProfilePresenter extends
 	public interface MyView extends PopupView,
 			HasUiHandlers<ParentProfileUiHandlers> {
 		//
-		void initializeUI();
-		void resetUI();
+		void initializeUI(boolean editExisting);
+		void resetUI(boolean editExisting);
 		void setStudentsData(List<StudentProxy> students);
 		void showParentDetails(ParentProxy parent);
 		void showChildren(List<StudentProxy> children);
@@ -59,6 +61,15 @@ public class ParentProfilePresenter extends
 	//
 	protected void onReset() {
 		super.onReset();
+	}
+	
+	//
+	@Override
+	protected void onHide() {
+	  super.onHide();
+	  //
+	  editExisting = false;
+	  existingParent = null;
 	}
 	
 	
@@ -119,13 +130,59 @@ public class ParentProfilePresenter extends
 	 * */
 	public void initializeUI() {
 		//
-		getView().initializeUI();
+		getView().initializeUI( editExisting );
 	}
+	
 
 	/*
 	 * */
 	@Override
-	public void saveParent(String title, String firstName, String lastName,
+	public void saveParent(final String title, final String firstName, final String lastName,
+			final String eMail, final String phoneMobile, final String phoneHome,
+			final String phoneWork, final boolean acceptSMS, final boolean acceptEmail, final List<StudentProxy> children ) {
+		//
+		if (!FieldValidation.isValidEmailAddress(eMail)) {
+			Window.alert( NotificationValues.invalid_input + " - Email");
+			return;
+		}
+		if ( firstName.equals("") || lastName.equals("") ) {
+			Window.alert( NotificationValues.invalid_input + " - Nom & Prénom");
+			return;
+		}
+		//
+		if ( !editExisting ) {
+			ParentRequestFactory rf = GWT.create(ParentRequestFactory.class);
+			rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+			ParentRequestContext rc = rf.parentRequestContext();
+			//
+			rc.checkExistence(eMail).fire(new Receiver<Boolean>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess(Boolean isExisted) {
+					//
+					if (isExisted) {
+						Window.alert( NotificationValues.parent_already_existed );
+					} else {
+						saveNewParent( title,  firstName,  lastName,
+								 eMail,  phoneMobile,  phoneHome,
+								 phoneWork,  acceptSMS,  acceptEmail, children );
+					}
+				}
+			});
+		} else {
+			saveNewParent( title,  firstName,  lastName,
+					 eMail,  phoneMobile,  phoneHome,
+					 phoneWork,  acceptSMS,  acceptEmail, children );
+		}
+	}
+	
+	
+	/*
+	 * */
+	public void saveNewParent(String title, String firstName, String lastName,
 			String eMail, String phoneMobile, String phoneHome,
 			String phoneWork, boolean acceptSMS, boolean acceptEmail, List<StudentProxy> children ) {
 		//
@@ -161,9 +218,10 @@ public class ParentProfilePresenter extends
 			@Override
 			public void onSuccess(ParentProxy response) {
 				//
-				if (! editExisting)
+				if (! editExisting) {
 					getEventBus().fireEvent( new ParentAfterAddEvent(response) );		// Add this new parent to the main grid, create new User for this person
-				else
+					getView().hide();
+				} else
 					getEventBus().fireEvent( new ParentAfterUpdateEvent(response) );
 			}
 		});

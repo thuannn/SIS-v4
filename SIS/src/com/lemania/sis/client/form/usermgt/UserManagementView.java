@@ -13,7 +13,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.shared.student.StudentProxy;
 import com.lemania.sis.shared.user.UserProxy;
 import com.google.gwt.uibinder.client.UiField;

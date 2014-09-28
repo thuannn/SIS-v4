@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-import com.lemania.sis.client.FieldValidation;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.client.values.TitleValues;
 import com.lemania.sis.shared.parent.ParentProxy;
@@ -91,11 +91,16 @@ public class ParentProfileView extends
 	/*
 	 * */
 	@Override
-	public void initializeUI() {
+	public void initializeUI(boolean editExisting) {
 		//
 		initializeStudentTable();
 		initializeChildrenTable();
 		initializeList();
+		//
+		if (editExisting)
+			txtEmail.setEnabled(false);
+		else
+			txtEmail.setEnabled(true);
 	}
 	
 	
@@ -264,7 +269,7 @@ public class ParentProfileView extends
 	/*
 	 * */
 	@Override
-	public void resetUI() {
+	public void resetUI(boolean editExisting) {
 		//
 		lstTitle.setSelectedIndex(0);
 		txtFirstName.setText( "" ); 
@@ -278,5 +283,8 @@ public class ParentProfileView extends
 		//
 		providerChildren.getList().clear();
 		providerChildren.flush();
+		//
+		if (editExisting) txtEmail.setEnabled(false);
+			else txtEmail.setEnabled(true);
 	}
 }

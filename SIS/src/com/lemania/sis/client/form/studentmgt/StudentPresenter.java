@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
@@ -18,7 +19,6 @@ import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.FieldValidation;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -222,7 +222,7 @@ public class StudentPresenter
 		if (student.getEmail().equals(email))
 			return;
 		//
-		if (FieldValidation.isValidEmailAddress(email)){
+		if ( !FieldValidation.isValidEmailAddress(email) ){
 			Window.alert(NotificationValues.invalid_input + " - Email");
 			return;
 		}

@@ -108,7 +108,8 @@ public class ParentManagementPresenter
 		addToPopupSlot(popupParentProfile, true);
 		popupParentProfile.loadActiveStudents();
 		popupParentProfile.editExisting = false;
-		popupParentProfile.getView().resetUI();
+		popupParentProfile.existingParent = null;
+		popupParentProfile.getView().resetUI(popupParentProfile.editExisting);
 	}
 
 	/*
@@ -120,6 +121,7 @@ public class ParentManagementPresenter
 		popupParentProfile.loadActiveStudents();
 		popupParentProfile.editExisting = true;
 		popupParentProfile.existingParent = parent;
+		popupParentProfile.getView().resetUI(popupParentProfile.editExisting);
 		popupParentProfile.showParentDetail(parent);
 	}
 
