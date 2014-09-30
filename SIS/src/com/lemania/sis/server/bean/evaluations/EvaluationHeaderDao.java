@@ -1,14 +1,15 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.evaluations;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.EvaluationHeader;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.bean.assignment.Assignment;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class EvaluationHeaderDao extends MyDAOBase {
 	/*
@@ -21,8 +22,10 @@ public class EvaluationHeaderDao extends MyDAOBase {
 			evaluationHeader.setClassMasterName( ofy().load().key(evaluationHeader.getClassMaster()).now().getProfName() );
 			returnList.add( evaluationHeader );
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
+	
 	
 	/*
 	 * */
@@ -35,8 +38,10 @@ public class EvaluationHeaderDao extends MyDAOBase {
 			evaluationHeader.setClassMasterName( ofy().load().key(evaluationHeader.getClassMaster()).now().getProfName() );
 			returnList.add( evaluationHeader );
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
+	
 	
 	/*
 	 * */
@@ -53,14 +58,17 @@ public class EvaluationHeaderDao extends MyDAOBase {
 				returnList.add( evaluationHeader );
 			}
 		}
+		Collections.sort( returnList );
 		return returnList;
 	}
+	
 	
 	/*
 	 * */
 	public void save(EvaluationHeader evaluationHeader){
 		ofy().save().entities(evaluationHeader);
 	}
+	
 	
 	/*
 	 * */
@@ -72,6 +80,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	/*
 	 * */
@@ -85,6 +94,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 		//
 		return ehUpdate;
 	}
+	
 	
 	/*
 	 * */
@@ -104,6 +114,7 @@ public class EvaluationHeaderDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	/*
 	 * */

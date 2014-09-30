@@ -1,8 +1,9 @@
-package com.lemania.sis.server;
+package com.lemania.sis.server.bean.evaluations;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
+import com.lemania.sis.server.DatastoreObject;
 import com.lemania.sis.server.bean.student.Student;
 
 @Entity

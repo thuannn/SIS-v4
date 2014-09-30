@@ -9,7 +9,7 @@ public final class EvaluationSubjectRequestFactoryDeobfuscatorBuilder extends co
 withOperation(new OperationKey("ikXxg6twlVU$3O1LVe0Sj0bA8n4="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/EvaluationSubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/EvaluationSubject;)V")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/evaluations/EvaluationSubject;)V")
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.EvaluationSubjectRequestFactory$EvaluationSubjectRequestContext")
   .build());
@@ -37,19 +37,19 @@ withOperation(new OperationKey("DcbeRzgoUx$R4_wYv0pz3a1ONRc="),
 withOperation(new OperationKey("jD2PEeCgvW4OBviZMX1Uzv0I74I="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/EvaluationSubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/EvaluationSubject;)Lcom/lemania/sis/server/EvaluationSubject;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/evaluations/EvaluationSubject;)Lcom/lemania/sis/server/bean/evaluations/EvaluationSubject;")
   .withMethodName("saveAndReturn")
   .withRequestContext("com.lemania.sis.shared.service.EvaluationSubjectRequestFactory$EvaluationSubjectRequestContext")
   .build());
 withOperation(new OperationKey("EDtQQpngFQzRcWpmiLnNWAD5xIU="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/EvaluationSubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/EvaluationSubject;)V")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/evaluations/EvaluationSubject;)V")
   .withMethodName("removeEvaluationSubject")
   .withRequestContext("com.lemania.sis.shared.service.EvaluationSubjectRequestFactory$EvaluationSubjectRequestContext")
   .build());
 withRawTypeToken("FaopnYaBvC3D84BOuK4iWIgxoFA=", "com.lemania.sis.shared.EvaluationSubjectProxy");
 withRawTypeToken("w1Qg$YHpDaNcHrR5HZ$23y518nA=", "com.google.web.bindery.requestfactory.shared.EntityProxy");
 withRawTypeToken("FXHD5YU0TiUl3uBaepdkYaowx9k=", "com.google.web.bindery.requestfactory.shared.BaseProxy");
-withClientToDomainMappings("com.lemania.sis.server.EvaluationSubject", Arrays.asList("com.lemania.sis.shared.EvaluationSubjectProxy"));
+withClientToDomainMappings("com.lemania.sis.server.bean.evaluations.EvaluationSubject", Arrays.asList("com.lemania.sis.shared.EvaluationSubjectProxy"));
 }}

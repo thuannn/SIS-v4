@@ -1,13 +1,12 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.evaluations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.EvaluationHeader;
-import com.lemania.sis.server.EvaluationStudentReport;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class EvaluationStudentReportDao extends MyDAOBase {
 	/*

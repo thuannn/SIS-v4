@@ -1,13 +1,16 @@
-package com.lemania.sis.server;
+package com.lemania.sis.server.bean.evaluations;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
+import com.lemania.sis.server.Classe;
+import com.lemania.sis.server.DatastoreObject;
+import com.lemania.sis.server.Professor;
 
 @Entity
 @Index
-public class EvaluationHeader extends DatastoreObject {
+public class EvaluationHeader extends DatastoreObject implements Comparable<EvaluationHeader> {
 	//
 	private String fromDate;
 	private String toDate;
@@ -67,5 +70,15 @@ public class EvaluationHeader extends DatastoreObject {
 	}
 	public void setClassMasterName(String classMasterName) {
 		this.classMasterName = classMasterName;
+	}
+	
+	/*
+	 * */
+	@Override
+	public int compareTo(EvaluationHeader o) {
+		//
+		StringBuilder sb1 = new StringBuilder(this.fromDate.replace(".", ""));
+		StringBuilder sb2 = new StringBuilder(o.fromDate.replace(".", ""));
+		return ( sb1.reverse().toString() ).compareTo( sb2.reverse().toString() );
 	}
 }

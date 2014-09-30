@@ -1,4 +1,4 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.evaluations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,10 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.EvaluationHeader;
-import com.lemania.sis.server.EvaluationSubject;
 import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class EvaluationSubjectDao extends MyDAOBase {
 	
@@ -26,11 +25,13 @@ public class EvaluationSubjectDao extends MyDAOBase {
 		return returnList;
 	}
 	
+	
 	/*
 	 * */
 	public void save(EvaluationSubject evaluationSubject){
 		ofy().save().entities( evaluationSubject );
 	}
+	
 	
 	/*
 	 * */
@@ -42,6 +43,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	/*
 	 * */
@@ -57,11 +59,8 @@ public class EvaluationSubjectDao extends MyDAOBase {
 			
 			// Get the Bulletin Subject list
 			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
-					.filter("subject", assignment.getSubject())		
-/*
- * 2014.02.13 - Professor does not matter anymore
-.filter("professor", assignment.getProf())
-*/
+					.filter("subject", assignment.getSubject())
+					.filter("professor", assignment.getProf())
 					.order("subjectName");
 			//
 			Query<EvaluationSubject> currentES = null;
@@ -109,11 +108,13 @@ public class EvaluationSubjectDao extends MyDAOBase {
 		return null;		
 	}
 	
+	
 	/*
 	 * */
 	public void removeEvaluationSubject(EvaluationSubject evaluationSubject){
 		ofy().delete().entities(evaluationSubject);
 	}	
+	
 
 	/*
 	 * */

@@ -146,6 +146,9 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
 		lstEvaluationHeaders.addItem("-","");
 		for (EvaluationHeaderProxy evh : headers)
 			lstEvaluationHeaders.addItem( evh.getFromDate() + " - " + evh.getToDate(), evh.getId().toString() );
+		// Clear the table
+		selectedEvaluationSubject = null;
+		providerEvaluationSubject.getList().clear();	
 	}
 
 	/*
@@ -302,8 +305,6 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	    	  getUiHandlers().updateEvaluation(object, value, 6);
  	      }
  	    });
- 	    
- 	    
  	    
  	    //
  	    providerEvaluationSubject.addDataDisplay(tblEvaluations); 

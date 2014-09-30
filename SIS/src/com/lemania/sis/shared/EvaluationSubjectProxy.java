@@ -2,8 +2,8 @@ package com.lemania.sis.shared;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
-import com.lemania.sis.server.EvaluationSubject;
 import com.lemania.sis.server.ObjectifyLocator;
+import com.lemania.sis.server.bean.evaluations.EvaluationSubject;
 
 @ProxyFor(value=EvaluationSubject.class, locator=ObjectifyLocator.class)
 public interface EvaluationSubjectProxy extends EntityProxy {
