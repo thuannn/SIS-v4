@@ -92,7 +92,7 @@ public class UserDao extends MyDAOBase {
 		
 		Calendar cal = Calendar.getInstance();
 		
-		for ( User user : q ){
+		for ( User user : q ) {
 			// the months in Java start by zero, so increase one
 			user.setCurrentMonth(cal.get(Calendar.MONTH) +1);
 			user.setCurrentYear(cal.get(Calendar.YEAR));

@@ -13,17 +13,17 @@ withOperation(new OperationKey("J2dYBZPgceh2WC27LnDN98huk1U="),
   .withMethodName("sendSMS")
   .withRequestContext("com.lemania.sis.shared.service.ContactRequestFactory$ContactRequestContext")
   .build());
-withOperation(new OperationKey("I1azCoQdwAuO$EIomhCWkeE43Xk="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-  .withMethodName("sendEmail")
-  .withRequestContext("com.lemania.sis.shared.service.ContactRequestFactory$ContactRequestContext")
-  .build());
 withOperation(new OperationKey("6ufXlHRbcpJq62hfd1D_6sdbJ9Q="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+  .withMethodName("sendEmail")
+  .withRequestContext("com.lemania.sis.shared.service.ContactRequestFactory$ContactRequestContext")
+  .build());
+withOperation(new OperationKey("I1azCoQdwAuO$EIomhCWkeE43Xk="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
   .withMethodName("sendEmail")
   .withRequestContext("com.lemania.sis.shared.service.ContactRequestFactory$ContactRequestContext")
   .build());

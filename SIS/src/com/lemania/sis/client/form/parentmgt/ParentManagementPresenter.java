@@ -132,7 +132,7 @@ public class ParentManagementPresenter
 	@Override
 	public void onParentAfterAdd(ParentAfterAddEvent event) {
 		//
-		getView().addNewParent( event.getAddedParent() );
+		loadParents();
 	}
 
 	
