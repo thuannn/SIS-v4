@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.values.EvaluationValues;
@@ -158,7 +159,9 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
 			List<EvaluationSubjectProxy> evaluationSubjectList) {
 		//
 		providerEvaluationSubject.getList().clear();
-		providerEvaluationSubject.setList(evaluationSubjectList);
+		providerEvaluationSubject.getList().addAll(evaluationSubjectList);
+		providerEvaluationSubject.refresh();
+		providerEvaluationSubject.flush();
 		
 		//
 		tblEvaluations.setHeight( Integer.toString( NotificationValues.lineHeightShortList * (evaluationSubjectList.size()+1) + 100 ) + "px" );
@@ -194,10 +197,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 1);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 1);
  	      }
  	    });
  	     	    
@@ -215,10 +218,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 2);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 2);
  	      }
  	    });
  	    
@@ -236,10 +239,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 3);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 3);
  	      }
  	    }); 	       
  	    
@@ -257,10 +260,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 4);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 4);
  	      }
  	    });
  	    
@@ -278,10 +281,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 5);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 5);
  	      }
  	    });
  	    
@@ -299,10 +302,10 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      @Override
  	      public void update(int index, EvaluationSubjectProxy object, String value) {
  	    	  //
- 	    	  selectedEvaluationSubject = object;
  	    	  selectedEvaluationSubjectIndex = index;
+ 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
  	    	  //
- 	    	  getUiHandlers().updateEvaluation(object, value, 6);
+ 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 6);
  	      }
  	    });
  	    

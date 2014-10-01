@@ -185,6 +185,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
 	    		getUiHandlers().removeEvaluationSubject( es );
 	    	}
 	    });	    
+	    tblEvaluations.setColumnWidth(colDelete, 5, Unit.PCT);
 	    tblEvaluations.addColumn(colDelete, "");
  	    
  	    //

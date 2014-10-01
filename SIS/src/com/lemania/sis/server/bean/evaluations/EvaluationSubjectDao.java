@@ -29,6 +29,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 	/*
 	 * */
 	public void save(EvaluationSubject evaluationSubject){
+		//
 		ofy().save().entities( evaluationSubject );
 	}
 	
@@ -66,6 +67,7 @@ public class EvaluationSubjectDao extends MyDAOBase {
 			Query<EvaluationSubject> currentES = null;
 			List<EvaluationSubject> returnList = new ArrayList<EvaluationSubject>();
 			EvaluationSubject curES = null;
+			Key<EvaluationSubject> key = null;
 			//
 			for ( BulletinSubject bulletinSubject : q ){
 				// Check if this Bulletin Subject belongs to Bulletin list of the class
@@ -97,12 +99,12 @@ public class EvaluationSubjectDao extends MyDAOBase {
 							curES.setProfessorName( ofy().load().key(assignment.getProf()).now().getProfName() );
 						}
 						//
-						returnList.add( curES );						
+						key = ofy().save().entities( curES ).now().keySet().iterator().next();
+						returnList.add( ofy().load().key(key).now() );						
 					}
 				}				
 			}			
 			//
-			ofy().save().entities(returnList);			
 			return returnList;
 		}
 		return null;		
