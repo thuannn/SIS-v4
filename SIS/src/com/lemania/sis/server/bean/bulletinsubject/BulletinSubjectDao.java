@@ -465,6 +465,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 			//
 			ofy().save().entities(ps);
 			return ps;
+			//
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

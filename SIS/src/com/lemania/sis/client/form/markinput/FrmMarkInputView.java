@@ -541,10 +541,14 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 			BulletinSubjectProxy bulletinSubject) {
 		//
 		bulletinSubjectDataProvider.getList().set(selectedBulletinSubjectIndex, bulletinSubject);
+		bulletinSubjectDataProvider.flush();
 		//
+		selectedBulletinBranche = bulletinBranche;
 		bulletinBrancheDataProvider.getList().set(selectedBulletinBrancheIndex, bulletinBranche);
+		bulletinBrancheDataProvider.flush();
 		//
 		bulletinSubjectAverageDataProvider.getList().set(0, bulletinSubject);
+		bulletinSubjectAverageDataProvider.flush();
 		//
 		txtT1.setText( bulletinBranche.getT1() );
 		txtT2.setText( bulletinBranche.getT2() );

@@ -184,14 +184,16 @@ public class BulletinBrancheDao extends MyDAOBase {
 		Query<ProfileBranche> profileBranches = ofy().load().type(ProfileBranche.class)
 				.filter("profileSubject", profileSubjects.keys().list().get(0));
 		//
+		Key<BulletinBranche> key = null;
 		for (ProfileBranche profileBranche : profileBranches) {
 			curBulletinBranche = new BulletinBranche();
 			curBulletinBranche.setBulletinBranche( profileBranche.getProfileBranche() );
 			curBulletinBranche.setBrancheCoef( profileBranche.getBrancheCoef() );
 			curBulletinBranche.setBulletinBrancheName( profileBranche.getProfileBrancheName() );
 			curBulletinBranche.setBulletinSubject( Key.create(BulletinSubject.class, bulletinSubject.getId()));
-			ofy().save().entities(curBulletinBranche);
-			returnList.add(curBulletinBranche);
+			//
+			key = ofy().save().entities(curBulletinBranche).now().keySet().iterator().next();
+			returnList.add( ofy().load().key(key).now() );
 			//
 			bulletinSubject.setTotalBrancheCoef( bulletinSubject.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}
