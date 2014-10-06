@@ -1,4 +1,4 @@
-package com.lemania.sis.client.presenter;
+package com.lemania.sis.client.form.bulletins;
 
 import java.util.List;
 
@@ -26,7 +26,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;

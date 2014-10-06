@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.lemania.sis.server.bean.parent.Parent;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.BulletinBranche;
@@ -13,6 +14,7 @@ import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 import com.lemania.sis.server.bean.student.Student;
+import com.lemania.sis.server.bean.user.User;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class BulletinDao extends MyDAOBase {
@@ -79,6 +81,56 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		Student student;
+		for (Bulletin bulletin : q){
+			if (bulletin.getIsFinished().equals(true))
+				continue;
+			student = ofy().load().key( bulletin.getStudent() ).now();
+			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
+			returnList.add( bulletin );
+		}
+		Collections.sort(returnList);
+		return returnList;
+	}
+	
+	
+	/*
+	 * */
+	/* List all bulletin by parent */
+	public List<Bulletin> listAllByParentUserId(String userId) {
+		//
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		//
+		// Load the Parent by user id
+		User user = ofy().load().key( Key.create(User.class, Long.parseLong(userId)) ).now();
+		Parent parent = null;
+		Query<Parent> parents = ofy().load().type(Parent.class)
+				.filter("eMail", user.getEmail());
+		if (parents.list().size() <= 0)
+			return returnList;
+		else
+			parent = parents.list().get(0);
+		//
+		// Load all the children
+		String[] childIds = null;
+		if (!parent.getChildIds().equals("")) {
+			childIds = parent.getChildIds().split(" ");
+		}
+		// 
+		// Create list of student keys
+		if (childIds == null)
+			return returnList;
+		List<Key<Student>> studentKeys = new ArrayList<Key<Student>>();
+		for (int i=0; i<childIds.length; i++) {
+			studentKeys.add( Key.create(Student.class, Long.parseLong(childIds[i].trim())));
+		}
+		// Load the bulletins of each child
+		//
+		Query<Bulletin> q = ofy().load().type(Bulletin.class)
+				.filter( "student IN", studentKeys )
+				.filter( "isActive", true)
+				.order( "classeName" )
+				.order( "studentName" );
 		Student student;
 		for (Bulletin bulletin : q){
 			if (bulletin.getIsFinished().equals(true))

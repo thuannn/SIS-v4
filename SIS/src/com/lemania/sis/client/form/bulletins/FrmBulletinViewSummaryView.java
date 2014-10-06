@@ -1,4 +1,4 @@
-package com.lemania.sis.client.view;
+package com.lemania.sis.client.form.bulletins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.presenter.FrmBulletinViewSummaryPresenter;
-import com.lemania.sis.client.uihandler.FrmBulletinViewSummaryUiHandler;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;

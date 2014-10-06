@@ -17,6 +17,7 @@ public interface BulletinRequestFactory extends RequestFactory {
 		Request<List<BulletinProxy>> listAll();			
 		Request<List<BulletinProxy>> listAllActive();
 		Request<List<BulletinProxy>> listAllByClass(String classId);
+		Request<List<BulletinProxy>> listAllByParentUserId(String parentId);
 		Request<List<BulletinProxy>> listAllActiveByClass(String classId);
 		Request<List<BulletinProxy>> listAllActiveByClassProfile( String classId, String profileId );
 		Request<List<BulletinProxy>> listAllByEmail(String email);

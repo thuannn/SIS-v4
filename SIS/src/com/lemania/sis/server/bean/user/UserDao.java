@@ -37,6 +37,10 @@ public class UserDao extends MyDAOBase {
 				returnList.add(user);
 			if (type.contains("eleve") && user.getIsStudent())
 				returnList.add(user);
+			if (type.contains("parent") && user.getIsParent())
+				returnList.add(user);
+			if (type.contains("admin") && user.getAdmin())
+				returnList.add(user);
 		}
 		Collections.sort(returnList);
 		return returnList;

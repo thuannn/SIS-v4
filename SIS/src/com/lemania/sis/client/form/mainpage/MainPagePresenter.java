@@ -177,6 +177,7 @@ public class MainPagePresenter extends
 	@ProxyEvent
 	@Override
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
+		//
 		currentUser = event.getCurrentUser();
 		getView().initializeUi(currentUser);
 	}

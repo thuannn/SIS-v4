@@ -1,4 +1,4 @@
-package com.lemania.sis.client.uihandler;
+package com.lemania.sis.client.form.bulletins;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

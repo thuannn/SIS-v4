@@ -18,7 +18,7 @@ public class Parent extends DatastoreObject implements Comparable<Parent> {
 	private String phoneWork;
 	boolean acceptSMS = false;
 	boolean acceptEmail = false;
-	private String childIds;
+	private String childIds = "";
 	
 	@IgnoreSave String childrenNames = "";
 	

@@ -47,6 +47,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField DockPanel dockPanel;
 	@UiField Tree treeMenuProf;
 	@UiField Tree treeMenuEleve;
+	@UiField Tree treeMenuParent;
 	@UiField HTML htmlProgressBar;
 	@UiField Hyperlink cmdProfileManagement;
 	@UiField Hyperlink cmdAttribution;
@@ -106,6 +107,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField TreeItem tiTimetable;
 	@UiField TreeItem tiParamAbsences;
 	@UiField TreeItem tiAbsencesProf;
+	@UiField Hyperlink cmdMarkViewParent;
+	@UiField Hyperlink cmdAbsencesViewParent;
+	@UiField Hyperlink cmdPasswordParent;
+	@UiField Hyperlink cmdHelpParent;
 	
 	
 	// Thuan
@@ -180,6 +185,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 				showProfMenu();
 			if (currentUser.isStudent())
 				showStudentMenu();
+			if ( currentUser.isParent() )
+				showParentMenu();
 		}
 		else {
 			txtWelcome.setText("");
@@ -215,6 +222,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		treeMenuAdmin.setVisible( true );
 		treeMenuEleve.setVisible( false );
 		treeMenuProf.setVisible( false );
+		treeMenuParent.setVisible( false );
 		//
 		cmdMenuToggle.setVisible(true);
 	}
@@ -249,6 +257,20 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	
 	/*
 	 * */
+	void showParentMenu(){
+		//
+		dockPanel.add( leftPanel, DockPanel.WEST );
+		dockPanel.setCellWidth( leftPanel, "250px" );
+		//
+		leftPanel.setVisible(true);
+		treeMenuParent.setVisible( true );
+		//
+		cmdMenuToggle.setVisible(true);
+	}
+	
+	
+	/*
+	 * */
 	void hideMenu(){
 		//
 		dockPanel.remove( leftPanel );
@@ -257,6 +279,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		treeMenuProf.setVisible( false );
 		treeMenuEleve.setVisible( false );
 		treeMenuAdmin.setVisible( false );
+		treeMenuParent.setVisible(false);
 		//
 		cmdMenuToggle.setVisible(false);
 	}

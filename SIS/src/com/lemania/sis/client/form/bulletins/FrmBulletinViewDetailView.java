@@ -1,4 +1,4 @@
-package com.lemania.sis.client.view;
+package com.lemania.sis.client.form.bulletins;
 
 import java.util.List;
 
@@ -6,8 +6,6 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.lemania.sis.client.presenter.FrmBulletinViewDetailPresenter;
-import com.lemania.sis.client.uihandler.FrmBulletinViewDetailUiHandler;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -105,7 +103,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	@Override
-	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent) {
+	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean hideRemark) {
 		//
 		tblBulletin.removeAllRows();
 		//
@@ -127,7 +125,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			tblBulletin.setText(rowCount, 7, subject.getT1());
 			tblBulletin.setText(rowCount, 13, subject.getT2());
 			tblBulletin.setText(rowCount, 14, subject.getAn());			
-			if (isStudent)
+			if (hideRemark)
 				tblBulletin.setText(rowCount+1, 14, "");
 			else
 				tblBulletin.setText(rowCount+1, 14, 
@@ -217,7 +215,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	@Override
-	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent) {
+	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean hideRemark) {
 		//
 		tblBulletin.removeAllRows();
 		//
@@ -241,7 +239,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			tblBulletin.setText(rowCount, 13, subject.getT2());
 			tblBulletin.setText(rowCount, 19, subject.getT3());
 			tblBulletin.setText(rowCount, 20, subject.getAn());			
-			if (isStudent)
+			if (hideRemark)
 				tblBulletin.setText(rowCount+1, 20, "");
 			else
 				tblBulletin.setText(rowCount+1, 20, 
@@ -311,7 +309,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	/*
 	 * */
 	@Override
-	public void drawGradeTablePrematurite(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean isStudent) {
+	public void drawGradeTablePrematurite(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean hideRemark) {
 		//
 		tblBulletin.removeAllRows();
 		//
@@ -337,7 +335,7 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			tblBulletin.setText(rowCount, 19, subject.getT3());
 			tblBulletin.setText(rowCount, 25, subject.getT3());
 			tblBulletin.setText(rowCount, 26, subject.getAn());			
-			if (isStudent)
+			if (hideRemark)
 				tblBulletin.setText(rowCount+1, 26, "");
 			else
 				tblBulletin.setText(rowCount+1, 26, 

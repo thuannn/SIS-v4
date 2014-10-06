@@ -1,4 +1,4 @@
-package com.lemania.sis.client.presenter;
+package com.lemania.sis.client.form.bulletins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.client.uihandler.FrmBulletinViewDetailUiHandler;
 import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -106,6 +105,30 @@ public class FrmBulletinViewDetailPresenter
 			loadClassListByProf();
 		if (currentUser.isStudent())
 			loadStudentList();
+		if ( currentUser.isParent() )
+			loadStudentListByParent();
+	}
+	
+	
+	/**/
+	private void loadStudentListByParent() {
+		//
+		// Hide the class list
+		getView().showAdminPanel(false);
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.listAllByParentUserId( currentUser.getUserId().toString() ).fire(new Receiver<List<BulletinProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BulletinProxy> response) {
+				getView().setStudentListData(response);
+			}
+		});
 	}
 
 	
@@ -247,12 +270,12 @@ public class FrmBulletinViewDetailPresenter
 			public void onSuccess(BulletinProxy response) {
 				if (response.getProgrammeName().toLowerCase().contains("matu")){ 
 					if (response.getClasseName().toLowerCase().contains("prématurité"))
-						getView().drawGradeTablePrematurite(subjects, branches, currentUser.isStudent());
+						getView().drawGradeTablePrematurite(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
 					else
-						getView().drawGradeTableMatu(subjects, branches, currentUser.isStudent());
+						getView().drawGradeTableMatu(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
 				}
 				else
-					getView().drawGradeTableNormal(subjects, branches, currentUser.isStudent());
+					getView().drawGradeTableNormal(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
 			}
 		});
 	}

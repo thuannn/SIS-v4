@@ -1,4 +1,4 @@
-package com.lemania.sis.client.presenter;
+package com.lemania.sis.client.form.homepage;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.lemania.sis.client.uihandler.HomeUiHandler;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.SettingOptionProxy;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
@@ -196,6 +195,7 @@ public class HomePresenter
 		currentUser.setProf(response.getIsProf());
 		currentUser.setStudent(response.getIsStudent());
 		currentUser.setReadOnly(response.getIsReadOnly());
+		currentUser.setParent( response.getIsParent() );
 		
 		if ( !currentUser.isAdmin() && !currentUser.isProf() ){		
 			if (systemBlocked) {

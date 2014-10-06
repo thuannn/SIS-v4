@@ -50,7 +50,6 @@ public class UserManagementPresenter
 				LoginAuthenticatedHandler,
 				ParentAfterAddHandler {
 	
-	
 	//
 	private CurrentUser currentUser;
 	

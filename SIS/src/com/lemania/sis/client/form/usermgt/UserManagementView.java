@@ -14,7 +14,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.UI.FieldValidation;
-import com.lemania.sis.shared.student.StudentProxy;
 import com.lemania.sis.shared.user.UserProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -302,8 +301,11 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		lstUserTypes.addItem("-", "");
 		lstUserTypes.addItem("Professeurs", "professeures");
 		lstUserTypes.addItem("Elèves", "eleves");
+		lstUserTypes.addItem("Parents", "parents");
+		lstUserTypes.addItem("Admin", "admin");
 		lstUserTypes.addItem("Tout", "tout");
 	}
+	
 
 	/*
 	 * */
@@ -331,6 +333,7 @@ public class UserManagementView extends ViewWithUiHandlers<UserManagementUiHandl
 		//
 		populateSuggestBox( dpUser.getList() );
 	}
+	
 
 	/*
 	 * */

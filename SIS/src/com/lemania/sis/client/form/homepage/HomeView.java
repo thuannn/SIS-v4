@@ -1,4 +1,4 @@
-package com.lemania.sis.client.view;
+package com.lemania.sis.client.form.homepage;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.core.client.GWT;
@@ -12,8 +12,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.UI.FieldValidation;
-import com.lemania.sis.client.presenter.HomePresenter;
-import com.lemania.sis.client.uihandler.HomeUiHandler;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
