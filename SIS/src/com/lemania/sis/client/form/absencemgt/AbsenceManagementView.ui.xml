@@ -10,7 +10,7 @@
 		<g:AbsolutePanel ui:field="pnlWhiteBackground" width="100%"/>
 		<g:Label text="Gestion des absences des élèves" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 		<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_CENTER">
-			<g:HorizontalPanel width="100%" styleName="subSection" horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel width="100%" styleName="subSection" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE">
 				<g:VerticalPanel width="100%">
 					<g:Grid>
 						<g:row>
@@ -27,11 +27,14 @@
 								<p2:DateBox ui:field="dateTo" width="100px"/>
 							</g:customCell>
 							<g:customCell>
-								<g:Button styleName="gridButton" ui:field="cmdFilter">Valider</g:Button>
+								<g:Button styleName="gridButton" ui:field="cmdFilter" text="Lister les élèves">Valider</g:Button>
 							</g:customCell>
 						</g:row>
 					</g:Grid>
 				</g:VerticalPanel>
+				<g:HorizontalPanel ui:field="pnlNames" spacing="2" verticalAlignment="ALIGN_MIDDLE" height="28px">
+						<g:Label text="Recherche un élève specifique :"/>
+								</g:HorizontalPanel>
 				<g:HorizontalPanel spacing="5">
 				<g:Button text="Saisir" styleName="buttonToolbar" ui:field="cmdAddAbsence">Saisir des absences</g:Button>
 				<g:Button text="Imprimer" styleName="buttonToolbar" ui:field="cmdPrint"/>
@@ -41,9 +44,7 @@
 				<g:cell width="15%">
 				<g:VerticalPanel width="100%" styleName="subSection">
 					<g:Label text="Liste des élèves" styleName="sectionTitle"></g:Label>
-					<g:HorizontalPanel ui:field="pnlNames" spacing="2" verticalAlignment="ALIGN_MIDDLE" height="28px">
-						<g:Label text="Recherche :"/>
-								</g:HorizontalPanel>
+					<g:Label text="Choisir un élève pour consulter ses absences."/>
 					<p1:DataGrid width="100%" ui:field="tblStudents" pageSize="15" height="550px"></p1:DataGrid>
 					<g:Cell horizontalAlignment="ALIGN_CENTER">
 						<p1:SimplePager location="CENTER" ui:field="pagerStudents" page="0" pageSize="15" pageStart="0"/>

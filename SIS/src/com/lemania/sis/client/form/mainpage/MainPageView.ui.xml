@@ -147,7 +147,7 @@
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="Espace parents">
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewParent"/>
-							<g:Hyperlink targetHistoryToken="#" text="Consulter les absences" ui:field="cmdAbsencesViewParent"/>
+							<g:Hyperlink targetHistoryToken="absenceslist" text="Consulter les absences" ui:field="cmdAbsencesViewParent"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordParent"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpParent"/>
 						</g:TreeItem>

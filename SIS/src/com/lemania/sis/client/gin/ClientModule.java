@@ -67,6 +67,7 @@ import com.lemania.sis.client.form.usermgt.UserManagementPresenter;
 import com.lemania.sis.client.form.usermgt.UserManagementView;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaModule;
 import com.lemania.sis.client.popup.periodlistpopup.PeriodListPopupModule;
+import com.lemania.sis.client.form.parent.absencelist.AbsenceListModule;
 import com.lemania.sis.client.form.parentmgt.ParentManagementModule;
 import com.lemania.sis.client.popup.parentprofile.ParentProfileModule;
 import com.lemania.sis.client.form.motifabsence.MotifAbsenceModule;
@@ -93,7 +94,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new PeriodManagementModule());
 		install(new MasterAgendaModule());
 		install(new ClassroomModule());
-		
+		install(new AbsenceListModule());
 		
 		// Singletons
 		install(new DefaultModule(SISPlaceManager.class));

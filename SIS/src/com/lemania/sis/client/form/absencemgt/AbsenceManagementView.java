@@ -200,6 +200,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	}
 	
 	
+	
 	/*
 	 * */
 	private void showPopupSMSEmail( messageType method ) {
@@ -216,7 +217,10 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		if ( method == messageType.Email )
 			lblSendMethod.setText( "Email" );
 		//
+		populateParentList( method );
+		//
 		pnlSMSEmail.setVisible( true );
+		//
 		popupSMSEmail.add( pnlSMSEmail );
 		popupSMSEmail.center();
 	}
@@ -364,17 +368,6 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    tblAbsences.addColumn(colSubject, "Cours");
 	    tblAbsences.setColumnWidth(colSubject, 15, Unit.PCT);
 	    
-	  
-//	    // Remarque prof
-//	    TextColumn<AbsenceItemProxy> colRemarqueProf = new TextColumn<AbsenceItemProxy>() {
-//	      @Override
-//	      public String getValue(AbsenceItemProxy object) {
-//	        return (object.getProfComment().length() > 21 )? (object.getProfComment().substring(0,20) + "...") : object.getProfComment();
-//	      }
-//	    };
-//	    tblAbsences.addColumn(colRemarqueProf, "Comment du prof");
-	    
-	    
 	    // -- Comment prof
 	    Column<AbsenceItemProxy, String> colProfNote = new Column<AbsenceItemProxy, String> (new GridButtonCell()){
 	    	@Override
@@ -413,7 +406,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    	}
 	    });
 	    tblAbsences.setColumnWidth(colProfNote, 50, Unit.PX);
-	    tblAbsences.addColumn(colProfNote, "Prof");	
+	    tblAbsences.addColumn(colProfNote, "Note Prof");	
 	    
 	    
 	    // ---
@@ -454,64 +447,41 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 			}
 	    	
 	    });
-	    tblAbsences.addColumn(colParent, "Parent notif.");
+	    tblAbsences.addColumn(colParent, "Notif. Envoyée");
 	    tblAbsences.setColumnWidth(colParent, 50, Unit.PX);
 	    
 	    
-	    // ---
-	    cellMotifs = new DynamicSelectionCell( motifList );
-	    Column<AbsenceItemProxy, String> colMotifs = new Column<AbsenceItemProxy, String>(cellMotifs) {
-			@Override
-			public String getValue(AbsenceItemProxy object) {
-				//
-				if ( !object.getMotifId().equals("") )
-					return getMotifTextById( object.getMotifId() );
-				else
-					return "";
-			}
-	    };
-	    colMotifs.setFieldUpdater( new FieldUpdater<AbsenceItemProxy, String>(){
-
-			@Override
-			public void update(int index, AbsenceItemProxy object, String value) {
-				//
-				selectedAbsenceItemIndex = index;
-				selectedAbsenceItem = object;
-				for (MotifAbsenceProxy ma : providerMotifs.getList()) {
-					if ( value.equals( ma.getMotifCode() + " - " + ma.getMotifLabel() )) {
-						getUiHandlers().updateMotif( object, ma.getId().toString() );
-						break;
-					}
-				}
-			}
-	    	
-	    });
-	    tblAbsences.addColumn(colMotifs, "Motif");
-	    tblAbsences.setColumnWidth(colMotifs, 100, Unit.PX);
-	    
-	    
-//	    //
-//	    // Admin comment
-//	    Column<AbsenceItemProxy, String> colAdminComment = new Column<AbsenceItemProxy, String>(new EditTextCell()) {
-//	      @Override
-//	      public String getValue(AbsenceItemProxy object) {
-//	        return (object.getAdminComment().length() > 21) ? (object.getAdminComment().substring(0,20) + "...") : object.getAdminComment();
-//	      } 
+//	    // ---
+//	    // 07.10.2014 - Not used for the moment
+//	    cellMotifs = new DynamicSelectionCell( motifList );
+//	    Column<AbsenceItemProxy, String> colMotifs = new Column<AbsenceItemProxy, String>(cellMotifs) {
+//			@Override
+//			public String getValue(AbsenceItemProxy object) {
+//				//
+//				if ( !object.getMotifId().equals("") )
+//					return getMotifTextById( object.getMotifId() );
+//				else
+//					return "";
+//			}
 //	    };
-//	    tblAbsences.addColumn(colAdminComment, "Note");
-//	    // Field updater
-//	    colAdminComment.setFieldUpdater(new FieldUpdater<AbsenceItemProxy, String>(){
-//	    	@Override
-//	    	public void update(int index, AbsenceItemProxy object, String value) {
-//	    		if ( !object.getAdminComment().equals(value) ) {
-//		    		if (getUiHandlers() != null) {	    	
-//		    			//
-//		    			selectedAbsenceItemIndex = index;
-//		    			getUiHandlers().updateAdminComment(object, value);
-//		    		}	    		
-//	    		}
-//	    	}
+//	    colMotifs.setFieldUpdater( new FieldUpdater<AbsenceItemProxy, String>(){
+//
+//			@Override
+//			public void update(int index, AbsenceItemProxy object, String value) {
+//				//
+//				selectedAbsenceItemIndex = index;
+//				selectedAbsenceItem = object;
+//				for (MotifAbsenceProxy ma : providerMotifs.getList()) {
+//					if ( value.equals( ma.getMotifCode() + " - " + ma.getMotifLabel() )) {
+//						getUiHandlers().updateMotif( object, ma.getId().toString() );
+//						break;
+//					}
+//				}
+//			}
+//	    	
 //	    });
+//	    tblAbsences.addColumn(colMotifs, "Motif");
+//	    tblAbsences.setColumnWidth(colMotifs, 100, Unit.PX);
 	    
 	    
 	    // -- comment admin
@@ -553,7 +523,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    	}
 	    });
 	    tblAbsences.setColumnWidth(colAdminNote, 50, Unit.PX);
-	    tblAbsences.addColumn(colAdminNote, "Admin");	
+	    tblAbsences.addColumn(colAdminNote, "Note Admin");	
 	    
 	    
 	    // -- SMS
@@ -620,11 +590,12 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    final SingleSelectionModel<AbsenceItemProxy> selectionModel = new SingleSelectionModel<AbsenceItemProxy>();
 	    tblAbsences.setSelectionModel(selectionModel);
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-	      public void onSelectionChange(SelectionChangeEvent event) {
-	    	  //
-	    	  selectedAbsenceItem = selectionModel.getSelectedObject();
-	    	  selectedAbsenceItemIndex = providerAbsences.getList().indexOf(selectedAbsenceItem);
-	      }
+	    	//
+		    public void onSelectionChange(SelectionChangeEvent event) {
+		    	//
+		    	selectedAbsenceItem = selectionModel.getSelectedObject();
+		    	selectedAbsenceItemIndex = providerAbsences.getList().indexOf(selectedAbsenceItem);
+		    }
 	    });
 	    
 	    //
@@ -690,19 +661,20 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	}
 
 	
-	/*
-	 * */
-	@Override
-	public void setMotifListData(List<MotifAbsenceProxy> motifs) {
-		//
-		providerMotifs.getList().clear();
-		providerMotifs.getList().addAll(motifs);
-		//
-		cellMotifs.clear();
-		cellMotifs.addOption("Choisir");
-		for(MotifAbsenceProxy ma : motifs)
-			cellMotifs.addOption( ma.getMotifCode() + " - " + ma.getMotifLabel() );
-	}
+//	/*
+//	 * */
+//	@Override
+//	public void setMotifListData(List<MotifAbsenceProxy> motifs) {
+//		//
+//		providerMotifs.getList().clear();
+//		providerMotifs.getList().addAll(motifs);
+//		//
+////		// 07.10.2014 - Motif is not needed for the moment
+//		cellMotifs.clear();
+//		cellMotifs.addOption("Choisir");
+//		for(MotifAbsenceProxy ma : motifs)
+//			cellMotifs.addOption( ma.getMotifCode() + " - " + ma.getMotifLabel() );
+//	}
 	
 	
 	/*
@@ -1014,11 +986,20 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		//
 		providerParents.getList().clear();
 		providerParents.getList().addAll( parents );
+	}
+	
+	
+	/*
+	 * */
+	public void populateParentList( messageType type ) {
 		//
 		lstParents.clear();
 		lstParents.addItem("Choisir");
-		for ( ParentProxy pp : parents ) {
-			lstParents.addItem( pp.getFirstName() + " " + pp.getLastName() + " - " + pp.geteMail() + " - " + pp.getPhoneMobile() );
+		for ( ParentProxy pp : providerParents.getList() ) {
+			if ( pp.isAcceptEmail() && (type == messageType.Email) )
+				lstParents.addItem( pp.getFirstName() + " " + pp.getLastName() + " - " + pp.geteMail() + " - " + pp.getPhoneMobile() );
+			if ( pp.isAcceptSMS() && (type == messageType.SMS) )
+				lstParents.addItem( pp.getFirstName() + " " + pp.getLastName() + " - " + pp.geteMail() + " - " + pp.getPhoneMobile() );
 		}
 	}
 	

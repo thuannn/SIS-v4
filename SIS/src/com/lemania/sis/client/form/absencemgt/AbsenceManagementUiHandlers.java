@@ -20,7 +20,7 @@ public interface AbsenceManagementUiHandlers extends UiHandlers {
 	//
 	void updateAdminComment(AbsenceItemProxy ai, String adminComment);
 	//
-	void updateMotif(AbsenceItemProxy ai, String motifID);
+//	void updateMotif(AbsenceItemProxy ai, String motifID);
 	//
 	void filterDate( String studentId, String dateFrom, String dateTo);
 	//

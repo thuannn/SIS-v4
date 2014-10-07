@@ -25,6 +25,7 @@ import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.markinput.FrmMarkInputPresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
 import com.lemania.sis.client.form.motifabsence.MotifAbsencePresenter;
+import com.lemania.sis.client.form.parent.absencelist.AbsenceListPresenter;
 import com.lemania.sis.client.form.parentmgt.ParentManagementPresenter;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementPresenter;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaPresenter;
@@ -133,4 +134,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<AttendanceListPresenter> getAttendanceListPresenter();
 
 	AsyncProvider<AbsenceManagementPresenter> getAbsenceManagementPresenter();
+	
+	AsyncProvider<AbsenceListPresenter> getAbsenceListPresenter();
 }

@@ -112,6 +112,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdPasswordParent;
 	@UiField Hyperlink cmdHelpParent;
 	
+	Hyperlink currentSelectedItem;
+	
 	
 	// Thuan
 	PopupPanel popup = new PopupPanel(false);
@@ -487,5 +489,50 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			}
 			
 		});
+	}
+	
+	
+	/*
+	 * Hight light the selected item
+	 * */
+	@UiHandler("cmdAbsencesViewParent")
+	void onCmdAbsencesViewParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	
+	/*
+	 * */
+	public void switchButton(Hyperlink button) {
+		//
+		if (currentSelectedItem != null)
+			currentSelectedItem.setStyleName("");
+		//
+		button.setStyleName("currentPage");
+		currentSelectedItem = button;
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdMarkViewParent")
+	void onCmdMarkViewParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdPasswordParent")
+	void onCmdPasswordParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdHelpParent")
+	void onCmdHelpParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
 	}
 }

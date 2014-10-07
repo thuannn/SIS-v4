@@ -29,9 +29,6 @@ import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory.AbsenceItemR
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
-import com.lemania.sis.shared.motifabsence.MotifAbsenceProxy;
-import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory;
-import com.lemania.sis.shared.motifabsence.MotifAbsenceRequestFactory.MotifAbsenceRequestContext;
 import com.lemania.sis.shared.parent.ParentProxy;
 import com.lemania.sis.shared.parent.ParentRequestFactory;
 import com.lemania.sis.shared.parent.ParentRequestFactory.ParentRequestContext;
@@ -53,7 +50,7 @@ public class AbsenceManagementPresenter
 		//
 		public void setAbsenceItemTableData( List<AbsenceItemProxy> absenceItems );
 		//
-		void setMotifListData(List<MotifAbsenceProxy> motifs);
+//		void setMotifListData(List<MotifAbsenceProxy> motifs);
 		//
 		void initializeUI();
 		//
@@ -106,30 +103,30 @@ public class AbsenceManagementPresenter
 		//
 		getView().resetUI();
 		//
-		loadMotifs();
+//		loadMotifs();
 		//
 		this.getEventBus().fireEvent( new PageAfterSelectEvent( NameTokens.absencesmgt ));
 	}
 	
 	
-	/*
-	 * */
-	private void loadMotifs() {
-		//
-		MotifAbsenceRequestFactory rf = GWT.create(MotifAbsenceRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		MotifAbsenceRequestContext rc = rf.motifAbsenceRequestContext();
-		rc.listAll().fire(new Receiver<List<MotifAbsenceProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<MotifAbsenceProxy> response) {
-				getView().setMotifListData(response);
-			}
-		});
-	}
+//	/*
+//	 * */
+//	private void loadMotifs() {
+//		//
+//		MotifAbsenceRequestFactory rf = GWT.create(MotifAbsenceRequestFactory.class);
+//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+//		MotifAbsenceRequestContext rc = rf.motifAbsenceRequestContext();
+//		rc.listAll().fire(new Receiver<List<MotifAbsenceProxy>>(){
+//			@Override
+//			public void onFailure(ServerFailure error){
+//				Window.alert(error.getMessage());
+//			}
+//			@Override
+//			public void onSuccess(List<MotifAbsenceProxy> response) {
+//				getView().setMotifListData(response);
+//			}
+//		});
+//	}
 	
 
 	/* 
@@ -264,32 +261,33 @@ public class AbsenceManagementPresenter
 	}
 
 	
-	/*
-	 * */
-	@Override
-	public void updateMotif(AbsenceItemProxy ai, String motifID) {
-		//
-		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
-		//
-		AbsenceItemProxy updateAI = rc.edit(ai);
-		rc.updateMotif(updateAI, motifID).fire(new Receiver<AbsenceItemProxy>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				//
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess( AbsenceItemProxy response ) {
-				//
-				getView().setUpdatedAbsenceItem( response );
-			}
-		});
-	}
+//	/*
+//	 * */
+//	@Override
+//	public void updateMotif(AbsenceItemProxy ai, String motifID) {
+//		//
+//		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+//		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+//		//
+//		AbsenceItemProxy updateAI = rc.edit(ai);
+//		rc.updateMotif(updateAI, motifID).fire(new Receiver<AbsenceItemProxy>(){
+//			@Override
+//			public void onFailure(ServerFailure error){
+//				//
+//				Window.alert(error.getMessage());
+//			}
+//			@Override
+//			public void onSuccess( AbsenceItemProxy response ) {
+//				//
+//				getView().setUpdatedAbsenceItem( response );
+//			}
+//		});
+//	}
 	
 
 	/*
+	 * CRITICAL - load student absences base on student id and date range
 	 * */
 	@Override
 	public void filterDate(final String studentId, String dateFrom, String dateTo) {
