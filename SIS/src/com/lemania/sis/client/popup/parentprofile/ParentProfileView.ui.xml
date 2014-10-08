@@ -3,7 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
     <ui:style>
     </ui:style>
-    <g:DialogBox ui:field="dialog" text="Responsable" width="900px">
+    <g:DialogBox ui:field="dialog" text="Responsable" width="900px" glassEnabled="true">
     	<g:VerticalPanel width="100%" height="100%" horizontalAlignment="ALIGN_CENTER" spacing="5">
     		<g:Button styleName="popupCloseButton" ui:field="cmdClose">Fermer X</g:Button>
     		<g:HorizontalPanel width="100%" spacing="5">

@@ -704,6 +704,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		//
 		sgbStudents.setValue("");
 		//
+		lblStudentName.setText("");
+		//
 		setDaysOfTheMonth();
 	}
 

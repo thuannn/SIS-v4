@@ -76,6 +76,7 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
 			tblAbsences.setText(rowPos, 4, ab.getProfName() );
 			tblAbsences.setText(rowPos, 5, ab.getSubjectName() );
 			tblAbsences.setText(rowPos, 6, (ab.isJusttified() ? "Oui" : "Non") );
+			rowPos++;
 		}
 		styleTable();
 	}
