@@ -30,7 +30,7 @@ public interface AbsenceManagementUiHandlers extends UiHandlers {
 	//
 	void removeAbsenceItem( AbsenceItemProxy aip );
 	//
-	void sendEmail(String studentName, String parentName, String parentEmail, String message);
+	void sendEmail(String absenceItemID, String studentName, String parentName, String parentEmail, String message);
 	//
-	void sendSMS(String number, String message);
+	void sendSMS(String absenceItemID, String number, String message);
 }

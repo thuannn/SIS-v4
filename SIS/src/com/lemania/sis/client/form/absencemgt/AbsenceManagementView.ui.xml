@@ -148,7 +148,7 @@
 				</g:VerticalPanel>
 			</g:VerticalPanel>
 		</g:VerticalPanel>
-		<g:VerticalPanel ui:field="pnlSMSEmail" width="600px" spacing="2" visible="false" height="">
+		<g:VerticalPanel ui:field="pnlSMSEmail" width="600px" spacing="2" height="">
 			<g:Label text="-" styleName="header" ui:field="lblNotifStudentName"/>
 			<g:HorizontalPanel width="" horizontalAlignment="ALIGN_LEFT">
 				<g:Label text="Responsable : "/>
@@ -160,6 +160,7 @@
 			</g:HorizontalPanel>
 			<g:Label text="Message :"/>
 			<g:TextArea width="100%" visibleLines="5" ui:field="txtSendMessage" enabled="false"/>
+			<g:HTML wordWrap="true" ui:field="lblNotificationDates"/>
 			<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE">
 				<g:Button styleName="buttonToolbar" ui:field="cmdSend">Envoyer</g:Button>
 				<g:Button styleName="gridButton" ui:field="cmdClosePopupSMS">Fermer</g:Button>

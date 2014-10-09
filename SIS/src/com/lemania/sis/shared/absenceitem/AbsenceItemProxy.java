@@ -31,6 +31,12 @@ public interface AbsenceItemProxy extends EntityProxy {
 	public String getAdminComment();
 	public void setAdminComment(String adminComment);
 	
+	public String getNotificationDateSMS();
+	public void setNotificationDateSMS(String notificationDate);
+	
+	public String getNotificationDateEmail();
+	public void setNotificationDateEmail(String notificationDate);
+	
 	// 
 	
 	public String getPeriodId();

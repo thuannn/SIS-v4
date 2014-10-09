@@ -39,15 +39,10 @@ public class ParentManagementPresenter
 		void initializeUI();
 		void setParentData(List<ParentProxy> parents);
 		void addNewParent(ParentProxy newParent);
-		void updateParent(ParentProxy updatedParent);
 	}
 	
 	//
 	private ParentProfilePresenter popupParentProfile;
-	
-
-//	@ContentSlot
-//	public static final Type<RevealContentHandler<?>> SLOT_ParentManagementPresenter = new Type<RevealContentHandler<?>>();
 	
 
 	@NameToken(NameTokens.parentmgt)
@@ -142,7 +137,7 @@ public class ParentManagementPresenter
 	@Override
 	public void onParentAfterUpdate(ParentAfterUpdateEvent event) {
 		//
-		getView().updateParent( event.getUpdatedParent() );
+		loadParents();
 	}
 
 }

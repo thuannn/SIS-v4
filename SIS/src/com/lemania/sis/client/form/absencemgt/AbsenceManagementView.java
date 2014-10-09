@@ -59,6 +59,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.user.client.ui.HTML;
 
 public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementUiHandlers> implements
 		AbsenceManagementPresenter.MyView {
@@ -146,6 +147,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	@UiField Button cmdClosePopupSMS;
 	@UiField Button cmdSend;
 	@UiField TextArea txtSendMessage;
+	@UiField HTML lblNotificationDates;
 	
 	
 	
@@ -212,10 +214,14 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 				+ "Merci d’en prendre note et de nous faire parvenir rapidement l’éventuelle excuse. \n\n"
 				+ "ECOLE LEMANIA" );
 		//
-		if ( method == messageType.SMS )
+		if ( method == messageType.SMS ) {
 			lblSendMethod.setText( "SMS" );
-		if ( method == messageType.Email )
+			showNotificationDatesSMS( selectedAbsenceItem );
+		}
+		if ( method == messageType.Email ) {
 			lblSendMethod.setText( "Email" );
+			showNotificationDatesEmail( selectedAbsenceItem );
+		}
 		//
 		populateParentList( method );
 		//
@@ -958,6 +964,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 				return;
 			}
 			getUiHandlers().sendEmail( 
+					selectedAbsenceItem.getId().toString(),
 					selectedAbsenceItem.getStudentName(), 
 					selectedParent.getFirstName() + " " + selectedParent.getLastName(),
 					selectedParent.geteMail(), 
@@ -974,6 +981,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 				return;
 			}
 			getUiHandlers().sendSMS (
+					selectedAbsenceItem.getId().toString(),
 					selectedParent.getPhoneMobile(), 
 					txtSendMessage.getText() );
 		}
@@ -1014,5 +1022,53 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		selectedParentIndex = lstParents.getSelectedIndex() - 1;
 		if ( selectedParentIndex > -1)
 			selectedParent = providerParents.getList().get(selectedParentIndex);
+	}
+
+	
+	/*
+	 * */
+	@Override
+	public void showNotificationDatesEmail(AbsenceItemProxy ai) {
+		//
+		lblNotificationDates.setText("");
+		//
+		String date[] = ai.getNotificationDateEmail().split("\\|");
+		String formatedDate = "";
+		//
+		lblNotificationDates.setHTML( "Derniers envois :" + "</br>" );
+		for (int i=0; i<date.length; i++) {
+			if (date[i].length() > 0)
+			formatedDate = 
+					date[i].substring(6, 8) + "." +
+					date[i].substring(4, 6) + "." +
+					date[i].substring(0, 4) + " " +
+					date[i].substring(8, 10) + ":" +
+					date[i].substring(10)  + "</br>";
+			lblNotificationDates.setHTML( lblNotificationDates.getHTML() + formatedDate );
+		}
+	}
+	
+	
+	/*
+	 * */
+	@Override
+	public void showNotificationDatesSMS(AbsenceItemProxy ai) {
+		//
+		lblNotificationDates.setText("");
+		//
+		String date[] = ai.getNotificationDateSMS().split("\\|");
+		String formatedDate = "";
+		//
+		lblNotificationDates.setHTML( "Derniers envois :" + "</br>" );
+		for (int i=0; i<date.length; i++) {
+			if (date[i].length() > 0)
+				formatedDate = 
+					date[i].substring(6, 8) + "." +
+					date[i].substring(4, 6) + "." +
+					date[i].substring(0, 4) + " " +
+					date[i].substring(8, 10) + ":" +
+					date[i].substring(10) + "</br>";
+			lblNotificationDates.setHTML( lblNotificationDates.getHTML() + formatedDate );
+		}
 	}
 }

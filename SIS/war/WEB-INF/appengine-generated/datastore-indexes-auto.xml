@@ -1,25 +1,18 @@
-<!-- Indices written at Wed, 8 Oct 2014 18:03:24 CEST -->
+<!-- Indices written at Thu, 9 Oct 2014 17:30:36 CEST -->
 
 <datastore-indexes>
 
-    <!-- Used 3 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Bulletin" ancestor="false" source="auto">
         <property name="isFinished" direction="asc"/>
         <property name="classeName" direction="asc"/>
         <property name="studentName" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 6 times in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="AbsenceItem" ancestor="false" source="auto">
         <property name="keyStudent" direction="asc"/>
         <property name="strAbsenceDate" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Student" ancestor="false" source="auto">
-        <property name="isActive" direction="asc"/>
-        <property name="LastName" direction="asc"/>
-        <property name="FirstName" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

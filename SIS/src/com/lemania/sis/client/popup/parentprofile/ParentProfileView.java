@@ -216,8 +216,11 @@ public class ParentProfileView extends
 		//
 		if (selectedStudent == null) { Window.alert( NotificationValues.student_notselected ); return;}
 		//
-		providerChildren.getList().add(selectedStudent);
-		providerChildren.flush();
+		if ( providerChildren.getList().indexOf(selectedStudent) < 0) {
+			//
+			providerChildren.getList().add(selectedStudent);
+			providerChildren.flush();
+		}
 		//
 		providerStudents.getList().remove( providerStudents.getList().indexOf(selectedStudent));
 		providerStudents.flush();
@@ -230,11 +233,15 @@ public class ParentProfileView extends
 		//
 		if (selectedChild == null) { Window.alert( NotificationValues.child_notselected ); return;}
 		//
-		providerStudents.getList().add(selectedChild);
-		providerStudents.flush();
+		if ( providerStudents.getList().indexOf(selectedChild) < 0) {
+			//
+			providerStudents.getList().add(selectedChild);
+			providerStudents.flush();
+		}
 		//
 		providerChildren.getList().remove( providerChildren.getList().indexOf(selectedChild));
 		providerChildren.flush();
+		
 	}
 
 

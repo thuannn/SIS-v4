@@ -21,13 +21,22 @@ public class ContactDao extends MyDAOBase {
 
         try {
 	        Message msg = new MimeMessage(session);
+	        //
 	        msg.setFrom(new InternetAddress("thuannn@gmail.com", "Lemania eProfil"));
+	        //
 	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Thuan.Nguyen@lemania.ch", "Thuan NGUYEN"));
 	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Cindy.Clemence@lemania.ch", "Cindy CLEMENCE"));
 	        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("Olga.Theofanidis@lemania.ch", "Olga THEOFANIDIS"));
+	        //
+	        // Reply to
+ 	        Address[] rraa = new Address[1];
+ 	        rraa[0] = new InternetAddress( email, email );
+	        msg.setReplyTo( rraa );
+	        //
 	        msg.setSubject("Nouveau message de "+ firstName + " " + lastName +" depuis eProfil");
-	        msg.setText(msgBody);
-	        Transport.send(msg);
+	        msg.setText( msgBody );
+	        //
+	        Transport.send( msg );
 	    } catch (Exception e) {
 	    	throw new RuntimeException(e);
 	    }
@@ -48,9 +57,11 @@ public class ContactDao extends MyDAOBase {
         try {
 	        Message msg = new MimeMessage(session);
 	        //
+	        // From
 	        String[] fromEmails = from.split(",");
 	        msg.setFrom(new InternetAddress( fromEmails[0].trim(), fromEmails[1].trim() ));
 	        //
+	        // To
 	        String[] toto;
  	        String[] toPairs = to.split("/");
 	        for ( String toMail : toPairs ) {
@@ -58,6 +69,7 @@ public class ContactDao extends MyDAOBase {
 	        	msg.addRecipient( Message.RecipientType.TO, new InternetAddress( toto[0].trim(), toto[1].trim() ));
 	        }
 	        //
+	        // CC
 	        String[] cccc;
  	        String[] ccPairs = cc.split("/");
 	        for ( String ccMail : ccPairs ) {
@@ -65,6 +77,7 @@ public class ContactDao extends MyDAOBase {
 	        	msg.addRecipient( Message.RecipientType.TO, new InternetAddress( cccc[0].trim(), cccc[1].trim() ));
 	        }
 	        //
+	        // Reply to
 	        String[] rrrr;
  	        String[] rrPairs = replyto.split("/");
  	        Address[] rraa = new Address[ rrPairs.length ];
@@ -74,10 +87,12 @@ public class ContactDao extends MyDAOBase {
 	        	rraa[i] = new InternetAddress( rrrr[0].trim(), rrrr[1].trim() );
 	        }
 	        msg.setReplyTo( rraa );
-	        //
+	        // 
+	        // Message
 	        msg.setSubject( messageSubject );
 	        msg.setText( messageBody );
 	        //
+	        // Send
 	        Transport.send(msg);
 	        //
 	    } catch (Exception e) {

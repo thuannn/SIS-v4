@@ -61,6 +61,9 @@ public class AbsenceManagementPresenter
 		void removeDeletedAbsenceItem();
 		//
 		void setParentData( List<ParentProxy> parents );
+		//
+		void showNotificationDatesEmail( AbsenceItemProxy ai );
+		void showNotificationDatesSMS( AbsenceItemProxy ai );
 	}
 
 	//
@@ -407,7 +410,7 @@ public class AbsenceManagementPresenter
 	/*
 	 * */
 	@Override
-	public void sendEmail(String studentName, String parentName,
+	public void sendEmail(final String absenceItemID, String studentName, String parentName,
 			String parentEmail, String message) {
 		//
 		String subject = "Notification de l'absence de " + studentName;
@@ -419,6 +422,7 @@ public class AbsenceManagementPresenter
 		String replyto = "info@lemania.ch, Ecole Lemania"  + "/";
 		//
 		String cc = "info@lemania.ch, INFO Lemania" + "/" + "thuan.nguyen@lemania.ch, Thuan Nguyen"  + "/";
+		cc = "/";
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -430,7 +434,8 @@ public class AbsenceManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				Window.alert("Message envoyé !");
+				//
+				saveNotificationDateEmail( absenceItemID );
 			}
 		});
 	}
@@ -439,7 +444,7 @@ public class AbsenceManagementPresenter
 	/*
 	 * */
 	@Override
-	public void sendSMS(String number, String message) {
+	public void sendSMS(final String absenceItemID, String number, String message) {
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
@@ -451,7 +456,54 @@ public class AbsenceManagementPresenter
 			}
 			@Override
 			public void onSuccess(Void response) {
-				Window.alert("Message envoyé !");
+				//
+				saveNotificationDateSMS( absenceItemID );
+			}
+		});
+	}
+	
+	
+	/*
+	 * */
+	private void saveNotificationDateEmail(String absenceItemID) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.saveNotificationDateEmail( absenceItemID ).fire(new Receiver<AbsenceItemProxy>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().showNotificationDatesEmail( response );
+				getView().setUpdatedAbsenceItem(response);
+			}
+		});
+	}
+	
+	
+	/*
+	 * */
+	private void saveNotificationDateSMS(String absenceItemID) {
+		//
+		AbsenceItemRequestFactory rf = GWT.create(AbsenceItemRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		AbsenceItemRequestContext rc = rf.absenceItemRequestContext();
+		rc.saveNotificationDateSMS( absenceItemID ).fire(new Receiver<AbsenceItemProxy>() {
+			@Override
+			public void onFailure(ServerFailure error){
+				//
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess( AbsenceItemProxy response ) {
+				//
+				getView().showNotificationDatesSMS( response );
+				getView().setUpdatedAbsenceItem(response);
 			}
 		});
 	}

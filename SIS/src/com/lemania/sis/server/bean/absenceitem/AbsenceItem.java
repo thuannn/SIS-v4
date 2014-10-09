@@ -30,6 +30,8 @@ public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceIt
 	private boolean parentNotified = false;
 	private String strAbsenceDate = "";				// Format : YYYYMMDD
 	private String adminComment  = "";
+	private String notificationDateSMS = "";			// A delimited string, format YYYYMMDDHHMM|YYYYMMDDHHMM ...
+	private String notificationDateEmail = "";			// A delimited string, format YYYYMMDDHHMM|YYYYMMDDHHMM ...
 	
 	@IgnoreSave private String periodId  = "";;
 	@IgnoreSave private String studentId  = "";
@@ -174,6 +176,18 @@ public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceIt
 	}
 	public void setClassName(String className) {
 		this.className = className;
+	}
+	public String getNotificationDateSMS() {
+		return notificationDateSMS;
+	}
+	public void setNotificationDateSMS(String notificationDate) {
+		this.notificationDateSMS = notificationDate;
+	}
+	public String getNotificationDateEmail() {
+		return notificationDateEmail;
+	}
+	public void setNotificationDateEmail(String notificationDate) {
+		this.notificationDateEmail = notificationDate;
 	}
 	
 }

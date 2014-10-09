@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -22,6 +23,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -48,6 +50,9 @@ public class ParentManagementView extends
 	//
 	private final MultiWordSuggestOracle mySuggestions = new MultiWordSuggestOracle();
 	SuggestBox sgbStudents;
+	//
+	private final MultiWordSuggestOracle myParentSuggestions = new MultiWordSuggestOracle();
+	SuggestBox sgbParents;
 	
 	
 	/*
@@ -83,6 +88,7 @@ public class ParentManagementView extends
 	 * */
 	private void initializeSuggestBox() {
 		//
+		// Search by student name
 		sgbStudents = new SuggestBox( mySuggestions );
 		sgbStudents.addSelectionHandler( new SelectionHandler<Suggestion>(){
 
@@ -94,7 +100,23 @@ public class ParentManagementView extends
 			
 		});
 		sgbStudents.setWidth( "300px" );
+		pnlSearch.add( new Label("Elèves :"));
 		pnlSearch.add( sgbStudents );
+		//
+		// Search by parent name
+		sgbParents = new SuggestBox( myParentSuggestions);
+		sgbParents.addSelectionHandler( new SelectionHandler<Suggestion>(){
+
+			@Override
+			public void onSelection(SelectionEvent<Suggestion> event) {
+				//
+				showSelectedParent( event.getSelectedItem().getReplacementString() );
+			}
+			
+		});
+		sgbParents.setWidth( "300px" );
+		pnlSearch.add( new Label(" - Parents :"));
+		pnlSearch.add( sgbParents );
 	}
 	
 	
@@ -104,7 +126,21 @@ public class ParentManagementView extends
 	public void showSelectedStudent( String studentName ) {
 		//
 		for (ParentProxy sp : providerParents.getList() ) {
-			if ( studentName.contains( sp.getChildrenNames() ) ) {
+			if ( studentName.equals( sp.getChildrenNames() ) ) {
+				tblParents.getSelectionModel().setSelected( sp, true );
+				pagerParents.setPage( Math.round( providerParents.getList().indexOf(sp) / pagerParents.getPageSize() ) );
+				break;
+			}
+		}
+	}
+	
+	
+	/*
+	 * */
+	public void showSelectedParent( String parentName ) {
+		//
+		for (ParentProxy sp : providerParents.getList() ) {
+			if ( parentName.contains( sp.getLastName() + " " + sp.getFirstName() ) ) {
 				tblParents.getSelectionModel().setSelected( sp, true );
 				pagerParents.setPage( Math.round( providerParents.getList().indexOf(sp) / pagerParents.getPageSize() ) );
 				break;
@@ -145,6 +181,15 @@ public class ParentManagementView extends
 	    };
 	    tblParents.addColumn(colFirstName, "Prénom");
 	    
+	    // Number of children
+ 		TextColumn<ParentProxy> colChildNumber = new TextColumn<ParentProxy>() {
+ 			@Override
+ 			public String getValue(ParentProxy object) {
+ 				return object.getChildrenNames().equals("") ? "0" : Integer.toString(object.getChildrenNames().split("-").length );
+ 			}
+ 		};
+ 		tblParents.addColumn(colChildNumber, "No. Enfant");
+	    
 		// Email
 		TextColumn<ParentProxy> colEmail = new TextColumn<ParentProxy>() {
 			@Override
@@ -152,6 +197,7 @@ public class ParentManagementView extends
 				return object.geteMail();
 			}
 		};
+		tblParents.setColumnWidth(colEmail, 15, Unit.PCT);
 		tblParents.addColumn(colEmail, "Email");
 		
 		// Mobile
@@ -161,6 +207,7 @@ public class ParentManagementView extends
 				return object.getPhoneMobile();
 			}
 		};
+		tblParents.setColumnWidth(colMobile, 15, Unit.PCT);
 		tblParents.addColumn(colMobile, "Mobile");
 		
 		// Mobile
@@ -254,6 +301,11 @@ public class ParentManagementView extends
 			mySuggestions.add( sp.getChildrenNames() );
 		}
 		//
+		myParentSuggestions.clear();
+		for (ParentProxy sp : parents) {
+			myParentSuggestions.add( sp.getLastName() + " " + sp.getFirstName() );
+		}
+		//
 		pagerParents.setPage(0);
 	}
 
@@ -267,13 +319,4 @@ public class ParentManagementView extends
 		providerParents.flush();
 	}
 
-	
-	/*
-	 * */
-	@Override
-	public void updateParent(ParentProxy updatedParent) {
-		//
-		providerParents.getList().set(selectedParentIndex, updatedParent);	// Replace the current selected Parent with the updated one
-		providerParents.flush();
-	}
 }

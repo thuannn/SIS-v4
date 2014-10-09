@@ -1,8 +1,10 @@
 package com.lemania.sis.server.bean.absenceitem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -285,5 +287,63 @@ public class AbsenceItemDao extends MyDAOBase {
 			}
 		}
 		return returnList;
+	}
+	
+	
+	/*
+	 * */
+	public AbsenceItem saveNotificationDateEmail( String absenceItemID ) {
+		//
+		AbsenceItem returnAI;
+		String date = "";
+		Date nn = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		Key<AbsenceItem> key = null;
+		// Load the item
+		AbsenceItem ai = ofy().load().key( Key.create(AbsenceItem.class, Long.parseLong(absenceItemID))).now();
+		if (ai != null) {
+			date = sdf.format(nn)
+					+ "|" 
+					+ ((ai.getNotificationDateEmail() == null) ? "":ai.getNotificationDateEmail());
+			ai.setNotificationDateEmail( date );
+			key = ofy().save().entities( ai ).now().keySet().iterator().next();
+		}
+		//
+		try {
+			returnAI = ofy().load().key(key).now();
+			populateIgnoreSaveValues( returnAI );
+			return returnAI;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	/*
+	 * */
+	public AbsenceItem saveNotificationDateSMS( String absenceItemID ) {
+		//
+		AbsenceItem returnAI;
+		String date = "";
+		Date nn = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		Key<AbsenceItem> key = null;
+		// Load the item
+		AbsenceItem ai = ofy().load().key( Key.create(AbsenceItem.class, Long.parseLong(absenceItemID))).now();
+		if (ai != null) {
+			date = sdf.format(nn)
+					+ "|" 
+					+ ((ai.getNotificationDateSMS() == null) ? "":ai.getNotificationDateSMS());
+			ai.setNotificationDateSMS( date );
+			key = ofy().save().entities( ai ).now().keySet().iterator().next();
+		}
+		//
+		try {
+			returnAI = ofy().load().key(key).now();
+			populateIgnoreSaveValues( returnAI );
+			return returnAI;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

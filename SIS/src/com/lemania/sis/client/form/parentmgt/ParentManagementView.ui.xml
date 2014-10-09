@@ -6,7 +6,7 @@
     	<g:VerticalPanel width="100%" spacing="5" horizontalAlignment="ALIGN_RIGHT">
     		<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE" styleName="subSection">
     			<g:HorizontalPanel width="100%" ui:field="pnlSearch">
-    				<g:Label text="Recherche par nom d&apos;élève :"/>
+    				<g:Label text="Recherche par nom - "/>
     			</g:HorizontalPanel>
     			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" width="100%">
     			<g:Button text="Rajouter un Responsable" ui:field="cmdAdd" styleName="buttonToolbar"/>

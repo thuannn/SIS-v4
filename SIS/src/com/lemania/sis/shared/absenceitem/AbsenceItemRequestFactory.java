@@ -31,6 +31,9 @@ public interface AbsenceItemRequestFactory extends RequestFactory {
 		Request<Void> removeAbsenceItem(AbsenceItemProxy ai);
 		Request<Void> removeAbsenceItem(String aiID);
 		//
+		Request<AbsenceItemProxy> saveNotificationDateEmail( String absenceItemID ); 
+		Request<AbsenceItemProxy> saveNotificationDateSMS( String absenceItemID ); 
+		//
 		Request<AbsenceItemProxy> saveAbsenceItem(
 				String strAbsenceDate,
 				String studentId,
