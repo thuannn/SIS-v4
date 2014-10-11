@@ -17,6 +17,8 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
@@ -42,6 +44,7 @@ public class MotifAbsencePresenter extends
 
 	@NameToken(NameTokens.motifabsence)
 	@ProxyCodeSplit
+	@UseGatekeeper(AdminGateKeeper.class)
 	public interface MyProxy extends ProxyPlace<MotifAbsencePresenter> {
 	}
 

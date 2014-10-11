@@ -182,7 +182,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			showUserInfo(currentUser);
 			//		
 			if (currentUser.isAdmin())
-				showMenu();
+				showAdminMenu();
 			if (currentUser.isProf())
 				showProfMenu();
 			if (currentUser.isStudent())
@@ -215,16 +215,17 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 
 	/*
 	 * */
-	void showMenu(){
+	void showAdminMenu(){
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
 		dockPanel.setCellWidth( leftPanel, "250px" );
-		//
 		leftPanel.setVisible(true);
-		treeMenuAdmin.setVisible( true );
-		treeMenuEleve.setVisible( false );
-		treeMenuProf.setVisible( false );
-		treeMenuParent.setVisible( false );
+		//
+		// 20141110 - After showing the Parent menu, remove completely the others
+		addMenuToDom( treeMenuAdmin );
+		removeMenuFromDom( treeMenuParent );
+		removeMenuFromDom( treeMenuProf );
+		removeMenuFromDom( treeMenuEleve );
 		//
 		cmdMenuToggle.setVisible(true);
 	}
@@ -235,9 +236,13 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
 		dockPanel.setCellWidth( leftPanel, "250px" );
-		//
 		leftPanel.setVisible(true);
-		treeMenuProf.setVisible( true );
+		//
+		// 20141110 - After showing the Parent menu, remove completely the others
+		addMenuToDom( treeMenuProf );
+		removeMenuFromDom( treeMenuAdmin );
+		removeMenuFromDom( treeMenuParent );
+		removeMenuFromDom( treeMenuEleve );
 		//
 		cmdMenuToggle.setVisible(true);
 	}
@@ -249,9 +254,13 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
 		dockPanel.setCellWidth( leftPanel, "250px" );
-		//
 		leftPanel.setVisible(true);
-		treeMenuEleve.setVisible( true );
+		//
+		// 20141110 - After showing the Parent menu, remove completely the others
+		addMenuToDom( treeMenuEleve );
+		removeMenuFromDom( treeMenuAdmin );
+		removeMenuFromDom( treeMenuParent );
+		removeMenuFromDom( treeMenuProf );
 		//
 		cmdMenuToggle.setVisible(true);
 	}
@@ -263,14 +272,37 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
 		dockPanel.setCellWidth( leftPanel, "250px" );
-		//
 		leftPanel.setVisible(true);
-		treeMenuParent.setVisible( true );
+		//
+		// 20141110 - After showing the Parent menu, remove completely the others
+		addMenuToDom( treeMenuParent );
+		removeMenuFromDom( treeMenuAdmin );
+		removeMenuFromDom( treeMenuProf );
+		removeMenuFromDom( treeMenuEleve );
 		//
 		cmdMenuToggle.setVisible(true);
 	}
 	
 	
+	/*
+	 * Remove completely the menu from DOM so that one cannot inspect using developer tool
+	 * */
+	private void removeMenuFromDom( Tree menu) {
+		// 
+		menu.setVisible(false);
+		leftPanel.remove( menu );
+	}
+	
+	/*
+	 * Remove completely the menu from DOM so that one cannot inspect using developer tool
+	 * */
+	private void addMenuToDom( Tree menu) {
+		// 
+		menu.setVisible(true);
+		leftPanel.add( menu );
+	}
+	
+
 	/*
 	 * */
 	void hideMenu(){
@@ -286,6 +318,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		cmdMenuToggle.setVisible(false);
 	}
 
+	/*
+	 * */
 	private void showPanel() {
 		//
 		dockPanel.add( leftPanel, DockPanel.WEST );
@@ -293,6 +327,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		leftPanel.setVisible(true);
 	}
 
+	/*
+	 * */
 	private void hidePanel() {
 		//
 		leftPanel.setVisible(false);
@@ -323,6 +359,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	 * */
 	@Override
 	public void enableMainPanel(Boolean enabled) {
+		//
 		enableAllChildren(enabled, mainContentPanel);
 	}
 	
@@ -459,6 +496,8 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 	
 	
+	/*
+	 * */
 	@UiHandler("cmdMenuToggle")
 	void onCmdMenuToggleClick(ClickEvent event) {
 		//
@@ -468,12 +507,16 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 			showPanel();
 	}
 	
+	
+	/*
+	 * */
 	@UiHandler("cmdLogout")
 	void onCmdLogoutClick(ClickEvent event) {
 		if (getUiHandlers() != null) {			
 			getUiHandlers().logOut();
 		}
 	}
+	
 
 	/*
 	 * */
@@ -495,14 +538,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	/*
 	 * Hight light the selected item
 	 * */
-	@UiHandler("cmdAbsencesViewParent")
-	void onCmdAbsencesViewParentClick(ClickEvent event) {
-		//
-		switchButton( (Hyperlink)event.getSource() );
-	}
-	
-	/*
-	 * */
 	public void switchButton(Hyperlink button) {
 		//
 		if (currentSelectedItem != null)
@@ -510,6 +545,14 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 		//
 		button.setStyleName("currentPage");
 		currentSelectedItem = button;
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdAbsencesViewParent")
+	void onCmdAbsencesViewParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
 	}
 	
 	/*

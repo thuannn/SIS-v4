@@ -18,7 +18,7 @@ import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.ProfessorGateKeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -77,7 +77,7 @@ public class FrmMarkInputPresenter extends
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.markinput)
-	@UseGatekeeper(LoggedInGatekeeper.class)
+	@UseGatekeeper( ProfessorGateKeeper.class )
 	public interface MyProxy extends ProxyPlace<FrmMarkInputPresenter> {
 	}
 

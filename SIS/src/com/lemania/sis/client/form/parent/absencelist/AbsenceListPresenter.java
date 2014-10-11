@@ -51,7 +51,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 
     @NameToken(NameTokens.absenceslist)
     @ProxyCodeSplit
-    @UseGatekeeper(LoggedInGatekeeper.class)
+    @UseGatekeeper( LoggedInGatekeeper.class )
     interface MyProxy extends ProxyPlace<AbsenceListPresenter> {
     }
 

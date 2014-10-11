@@ -21,6 +21,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.ProfessorGateKeeper;
 import com.lemania.sis.client.event.AttendanceListAssignmentAfterSelectedEvent;
 import com.lemania.sis.client.event.AttendanceListAssignmentAfterSelectedEvent.AttendanceListAssignmentAfterSelectedHandler;
 import com.lemania.sis.client.event.AttendanceListAssignmentSelectedEvent;
@@ -88,7 +89,7 @@ public class AttendanceListPresenter
 
 	@NameToken(NameTokens.attendancelist)
 	@ProxyCodeSplit
-	@UseGatekeeper(LoggedInGatekeeper.class)
+	@UseGatekeeper( ProfessorGateKeeper.class )
 	interface MyProxy extends ProxyPlace<AttendanceListPresenter> {
 	}
 

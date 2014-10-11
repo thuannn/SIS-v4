@@ -422,7 +422,7 @@ public class AbsenceManagementPresenter
 		String replyto = "info@lemania.ch, Ecole Lemania"  + "/";
 		//
 		String cc = "info@lemania.ch, INFO Lemania" + "/" + "thuan.nguyen@lemania.ch, Thuan Nguyen"  + "/";
-		cc = "/";
+//		cc = "/";
 		//
 		ContactRequestFactory rf = GWT.create(ContactRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));

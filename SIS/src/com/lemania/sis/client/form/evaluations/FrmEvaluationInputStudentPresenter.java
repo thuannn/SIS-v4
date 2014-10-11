@@ -20,7 +20,7 @@ import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.NotificationValues;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.CurrentUser;
-import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.ProfessorGateKeeper;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -88,7 +88,7 @@ public class FrmEvaluationInputStudentPresenter
 
 	@ProxyCodeSplit
 	@NameToken(NameTokens.evaluationinputstudent)
-	@UseGatekeeper(LoggedInGatekeeper.class)
+	@UseGatekeeper( ProfessorGateKeeper.class )
 	public interface MyProxy extends ProxyPlace<FrmEvaluationInputStudentPresenter> {
 	}
 

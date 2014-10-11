@@ -8,6 +8,7 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.ProfessorGateKeeper;
 import com.lemania.sis.client.form.attendancelist.AttendanceListPresenter;
 import com.lemania.sis.client.form.attributionmgt.ProfileManagementPresenter;
 import com.lemania.sis.client.form.branches.FrmBrancheAddPresenter;
@@ -69,9 +70,14 @@ public interface ClientGinjector extends Ginjector {
 
 	AsyncProvider<ContactPresenter> getContactPresenter();	
 	
-	// Thuan
+	// Gate keepers
 	LoggedInGatekeeper getLoggedInGatekeeper();
+	
 	AdminGateKeeper getAdminGateKeeper();
+	
+	ProfessorGateKeeper getProfessorGateKeeper();
+	
+	// Presenters
 
 	AsyncProvider<UserManagementPresenter> getUserManagementPresenter();
 

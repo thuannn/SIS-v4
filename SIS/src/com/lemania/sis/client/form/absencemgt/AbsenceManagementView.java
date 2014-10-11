@@ -16,6 +16,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
@@ -1035,7 +1036,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		String date[] = ai.getNotificationDateEmail().split("\\|");
 		String formatedDate = "";
 		//
-		lblNotificationDates.setHTML( "Derniers envois :" + "</br>" );
+		SafeHtmlBuilder builder = new SafeHtmlBuilder();
+		builder.appendEscaped("Derniers envois :").appendHtmlConstant("<br/>");
 		for (int i=0; i<date.length; i++) {
 			if (date[i].length() > 0)
 			formatedDate = 
@@ -1043,8 +1045,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 					date[i].substring(4, 6) + "." +
 					date[i].substring(0, 4) + " " +
 					date[i].substring(8, 10) + ":" +
-					date[i].substring(10)  + "</br>";
-			lblNotificationDates.setHTML( lblNotificationDates.getHTML() + formatedDate );
+					date[i].substring(10);
+			builder.appendEscaped(formatedDate).appendHtmlConstant("<br/>");
+			lblNotificationDates.setHTML( builder.toSafeHtml() );
 		}
 	}
 	
@@ -1059,7 +1062,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		String date[] = ai.getNotificationDateSMS().split("\\|");
 		String formatedDate = "";
 		//
-		lblNotificationDates.setHTML( "Derniers envois :" + "</br>" );
+		SafeHtmlBuilder builder = new SafeHtmlBuilder();
+		builder.appendEscaped("Derniers envois :").appendHtmlConstant("<br/>");
 		for (int i=0; i<date.length; i++) {
 			if (date[i].length() > 0)
 				formatedDate = 
@@ -1067,8 +1071,9 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 					date[i].substring(4, 6) + "." +
 					date[i].substring(0, 4) + " " +
 					date[i].substring(8, 10) + ":" +
-					date[i].substring(10) + "</br>";
-			lblNotificationDates.setHTML( lblNotificationDates.getHTML() + formatedDate );
+					date[i].substring(10);
+			builder.appendEscaped(formatedDate).appendHtmlConstant("<br/>");
+			lblNotificationDates.setHTML( builder.toSafeHtml() );
 		}
 	}
 }
