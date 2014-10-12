@@ -68,6 +68,17 @@
 		<servlet-name>RemoteApiServlet</servlet-name>
 		<url-pattern>/remote_api</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Configure HTTPS URLs  -->
+	<security-constraint>
+        <web-resource-collection>
+            <web-resource-name>allpages</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 
 
 </web-app>

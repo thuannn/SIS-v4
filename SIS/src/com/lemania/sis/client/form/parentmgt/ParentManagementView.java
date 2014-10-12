@@ -185,7 +185,7 @@ public class ParentManagementView extends
  		TextColumn<ParentProxy> colChildNumber = new TextColumn<ParentProxy>() {
  			@Override
  			public String getValue(ParentProxy object) {
- 				return object.getChildrenNames().equals("") ? "0" : Integer.toString(object.getChildrenNames().split("-").length );
+ 				return object.getChildIds().trim().equals("") ? "0" : Integer.toString(object.getChildIds().trim().split(" ").length );
  			}
  		};
  		tblParents.addColumn(colChildNumber, "No. Enfant");
