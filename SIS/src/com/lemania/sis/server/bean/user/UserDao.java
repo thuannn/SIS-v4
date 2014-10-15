@@ -5,9 +5,12 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jetty.server.Request;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
+import com.lemania.sis.server.SessionIdentifierGenerator;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.service.MyDAOBase;
 
@@ -88,19 +91,20 @@ public class UserDao extends MyDAOBase {
 	
 	/**/
 	public User authenticateUser(String userName, String password) {
+		//
 		Query<User> q = ofy().load().type(User.class)
 				.filter("active", true)
 				.filter("userName", userName.toLowerCase())
 				.filter("password", password);
 		List<User> returnList = new ArrayList<User>();
-		
+		//
 		Calendar cal = Calendar.getInstance();
-		
+		SessionIdentifierGenerator sig;
 		for ( User user : q ) {
 			// the months in Java start by zero, so increase one
-			user.setCurrentMonth(cal.get(Calendar.MONTH) +1);
-			user.setCurrentYear(cal.get(Calendar.YEAR));
-			user.setCurrentDay(cal.get(Calendar.DAY_OF_MONTH));
+//			user.setCurrentMonth(cal.get(Calendar.MONTH) +1);
+//			user.setCurrentYear(cal.get(Calendar.YEAR));
+//			user.setCurrentDay(cal.get(Calendar.DAY_OF_MONTH));
 			
 			user.setLastLoggedInTime( user.getCurrentLoggedInTime() );
 			user.setCurrentLoggedInTime( 
@@ -110,16 +114,29 @@ public class UserDao extends MyDAOBase {
 					+ cal.get(Calendar.HOUR) + ":"
 					+ cal.get(Calendar.MINUTE) );
 			//
+			sig = new SessionIdentifierGenerator();
+			user.setSessionId( sig.nextSessionId() );
+			//
 			ofy().save().entities(user);
-			
-			returnList.add(user);
+			//
+			removeSensitiveData(user);
+			//
+			returnList.add( user ); 
 		}
-		
 		if (returnList.size() > 0)
 			return returnList.get(0);
 		else
 			return null;
 	}
+
+	
+	/*
+	 * */
+	private void removeSensitiveData(User user) {
+		//
+		user.setPassword("");
+	}
+
 	
 	/*
 	 * */

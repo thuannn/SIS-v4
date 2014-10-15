@@ -180,15 +180,16 @@ public class HomePresenter
 	 * If user pass authentication, check if he's Admin. 
 	 * If not, check if the system is being blocked by Admin.*/
 	private void checkAccessBlock(UserProxy response){		
+		//
 		CurrentUser currentUser = new CurrentUser();
 		currentUser.setFullName(response.getFullName());
 		currentUser.setUserEmail(response.getEmail());
 		currentUser.setUserId(response.getId());
-		currentUser.setCurrentMonth(response.getCurrentMonth());
-		currentUser.setCurrentYear(response.getCurrentYear());
-		currentUser.setCurrentDay(response.getCurrentDay());
+//		currentUser.setCurrentMonth(response.getCurrentMonth());
+//		currentUser.setCurrentYear(response.getCurrentYear());
+//		currentUser.setCurrentDay(response.getCurrentDay());
 		currentUser.setUserName(response.getUserName());
-		currentUser.setUserPassword(response.getPassword());
+//		currentUser.setUserPassword(response.getPassword());
 		//
 		currentUser.setLoggedIn(true);
 		currentUser.setAdmin(response.getAdmin());

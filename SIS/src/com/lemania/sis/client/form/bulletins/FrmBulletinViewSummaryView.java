@@ -236,6 +236,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 	
 	
+	/*
+	 * */
 	private void drawPrematurite(List<BulletinSubjectProxy> subjects, boolean redraw) {
 		//
 		if (!redraw) {

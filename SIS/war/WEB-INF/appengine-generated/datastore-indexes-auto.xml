@@ -1,16 +1,28 @@
-<!-- Indices written at Sun, 12 Oct 2014 11:22:58 CEST -->
+<!-- Indices written at Wed, 15 Oct 2014 09:54:14 CEST -->
 
 <datastore-indexes>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Cours" ancestor="false" source="auto">
+        <property name="ecole" direction="asc"/>
+        <property name="coursNom" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Classe" ancestor="false" source="auto">
+        <property name="programme" direction="asc"/>
+        <property name="className" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Bulletin" ancestor="false" source="auto">
+        <property name="classe" direction="asc"/>
         <property name="isActive" direction="asc"/>
-        <property name="student" direction="asc"/>
         <property name="classeName" direction="asc"/>
         <property name="studentName" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 1 time in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
         <property name="bulletin" direction="asc"/>
         <property name="subjectName" direction="asc"/>
@@ -23,9 +35,16 @@
     </datastore-index>
 
     <!-- Used 2 times in query history -->
-    <datastore-index kind="AbsenceItem" ancestor="false" source="auto">
-        <property name="keyStudent" direction="asc"/>
-        <property name="strAbsenceDate" direction="asc"/>
+    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
+        <property name="profile" direction="asc"/>
+        <property name="subjectName" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 5 times in query history -->
+    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
+        <property name="profile" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="profName" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

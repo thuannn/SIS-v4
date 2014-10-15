@@ -1,7 +1,6 @@
 package com.lemania.sis.server.bean.user;
 
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.DatastoreObject;
 
@@ -23,15 +22,18 @@ public class User extends DatastoreObject implements Comparable<User> {
 	//
 	private String lastLoggedInTime;
 	private String currentLoggedInTime;
-	
-	@IgnoreSave
-	private int currentMonth = 0;
+	//
+	private String sessionId = "";
 
-	@IgnoreSave
-	private int currentYear = 0;
-	
-	@IgnoreSave
-	private int currentDay = 0;
+// 2014-10-15 - No need anymore	
+//	@IgnoreSave
+//	private int currentMonth = 0;
+//
+//	@IgnoreSave
+//	private int currentYear = 0;
+//	
+//	@IgnoreSave
+//	private int currentDay = 0;
 	
 	public User() {}
 	
@@ -83,29 +85,29 @@ public class User extends DatastoreObject implements Comparable<User> {
 		this.email = email;
 	}
 	
-	public int getCurrentMonth() {
-		return currentMonth;
-	}
-	
-	public int getCurrentYear() {
-		return currentYear;
-	}
-	
-	public void setCurrentMonth(int currentMonth) {
-		this.currentMonth = currentMonth;
-	}
-
-	public void setCurrentYear(int currentYear) {
-		this.currentYear = currentYear;
-	}
-
-	public int getCurrentDay() {
-		return currentDay;
-	}
-
-	public void setCurrentDay(int currentDay) {
-		this.currentDay = currentDay;
-	}
+//	public int getCurrentMonth() {
+//		return currentMonth;
+//	}
+//	
+//	public int getCurrentYear() {
+//		return currentYear;
+//	}
+//	
+//	public void setCurrentMonth(int currentMonth) {
+//		this.currentMonth = currentMonth;
+//	}
+//
+//	public void setCurrentYear(int currentYear) {
+//		this.currentYear = currentYear;
+//	}
+//
+//	public int getCurrentDay() {
+//		return currentDay;
+//	}
+//
+//	public void setCurrentDay(int currentDay) {
+//		this.currentDay = currentDay;
+//	}
 	
 	public Boolean getIsProf() {
 		return isProf;
@@ -158,5 +160,13 @@ public class User extends DatastoreObject implements Comparable<User> {
 
 	public void setIsParent(Boolean isParent) {
 		this.isParent = isParent;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 }

@@ -34,11 +34,13 @@ public interface UserProxy extends EntityProxy {
 	public Boolean getIsReadOnly();
 	public void setIsReadOnly(Boolean isReadOnly);
 	
-	public int getCurrentYear();
-	public int getCurrentMonth();
-	public int getCurrentDay();
+//	public int getCurrentYear();
+//	public int getCurrentMonth();
+//	public int getCurrentDay();
 	
 	public Long getId();
+	
+	public String getSessionId();
 	
 	public String getLastLoggedInTime();
 	public void setLastLoggedInTime(String lastLoggedInTime);
