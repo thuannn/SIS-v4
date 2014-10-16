@@ -185,10 +185,12 @@ public class HomePresenter
 		currentUser.setFullName(response.getFullName());
 		currentUser.setUserEmail(response.getEmail());
 		currentUser.setUserId(response.getId());
+		currentUser.setSessionId( response.getSessionId() );
+		currentUser.setUserName(response.getUserName());
+		
 //		currentUser.setCurrentMonth(response.getCurrentMonth());
 //		currentUser.setCurrentYear(response.getCurrentYear());
 //		currentUser.setCurrentDay(response.getCurrentDay());
-		currentUser.setUserName(response.getUserName());
 //		currentUser.setUserPassword(response.getPassword());
 		//
 		currentUser.setLoggedIn(true);

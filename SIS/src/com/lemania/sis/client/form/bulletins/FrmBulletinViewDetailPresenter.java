@@ -132,13 +132,16 @@ public class FrmBulletinViewDetailPresenter
 	}
 
 	
-	/**/
+	/*
+	 * */
 	private void loadClassListByProf() {
 		//
 		loadClassList();
 	}
+	
 
-	/**/
+	/*
+	 * */
 	private void loadClassList() {
 		//
 		getView().showAdminPanel(true);
@@ -167,16 +170,30 @@ public class FrmBulletinViewDetailPresenter
 		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinRequestContext rc = rf.bulletinRequest();
-		rc.listAllByEmail( currentUser.getUserEmail() ).fire(new Receiver<List<BulletinProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<BulletinProxy> response) {
-				getView().setStudentListData(response);
-			}
-		});
+		//
+		if ( currentUser.isAdmin() || currentUser.isProf() ) {
+			rc.listAllByEmail( currentUser.getUserEmail() ).fire(new Receiver<List<BulletinProxy>>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess(List<BulletinProxy> response) {
+					getView().setStudentListData(response);
+				}
+			});
+		} else {
+			rc.listAllByEmailForPublic( currentUser.getUserEmail() ).fire(new Receiver<List<BulletinProxy>>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess(List<BulletinProxy> response) {
+					getView().setStudentListData(response);
+				}
+			});
+		}
 	}
 
 	
@@ -221,18 +238,33 @@ public class FrmBulletinViewDetailPresenter
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
-		rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(List<BulletinSubjectProxy> response) {
-				subjects.clear();
-				subjects.addAll(response);
-				getBranches(bulletinId);
-			}
-		});
+		if ( currentUser.isAdmin() || currentUser.isProf() ) {
+			rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess(List<BulletinSubjectProxy> response) {
+					subjects.clear();
+					subjects.addAll(response);
+					getBranches(bulletinId);
+				}
+			});
+		} else {
+			rc.listAllForPublic( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+				@Override
+				public void onFailure(ServerFailure error){
+					Window.alert(error.getMessage());
+				}
+				@Override
+				public void onSuccess(List<BulletinSubjectProxy> response) {
+					subjects.clear();
+					subjects.addAll(response);
+					getBranches(bulletinId);
+				}
+			});
+		}
 	}
 
 	

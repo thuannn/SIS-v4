@@ -168,7 +168,7 @@ public class BulletinDao extends MyDAOBase {
 	
 	
 	
-	/* List all bulletin by class */
+	/* List all bulletin by student's email address */
 	public List<Bulletin> listAllByEmail(String email){
 		Student student = null;
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
@@ -184,6 +184,30 @@ public class BulletinDao extends MyDAOBase {
 				.order("classeName")
 				.order("year");
 		for (Bulletin bulletin : q){
+			returnList.add(bulletin);
+		}
+		return returnList;
+	}
+	
+	
+	/* List all bulletin by student's email address */
+	public List<Bulletin> listAllByEmailForPublic(String email){
+		Student student = null;
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		//
+		Query<Student> qStudent = ofy().load().type(Student.class).filter("Email", email);
+		if (qStudent.count()>0) 
+			student = qStudent.list().get(0);
+		else
+			return returnList;
+		//
+		Query<Bulletin> q = ofy().load().type(Bulletin.class)
+				.filter("student", Key.create(Student.class, student.getId()))
+				.order("classeName")
+				.order("year");
+		for (Bulletin bulletin : q){
+			//
+			bulletin.setRemarqueDirection( "" );
 			returnList.add(bulletin);
 		}
 		return returnList;

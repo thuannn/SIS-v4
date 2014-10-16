@@ -3,9 +3,10 @@ package com.lemania.sis.client;
 public class CurrentUser {
 	
 	private Long userId;
+	private String sessionId;
+	
 	private String fullName;
 	private String userName;
-	private String userPassword;
 	private String userEmail;
 	
 	private boolean isAdmin = false;
@@ -19,6 +20,8 @@ public class CurrentUser {
 	private int currentMonth;
 	private int currentYear;
 	private int currentDay;
+	
+//	private String userPassword;
 	
 	public int getCurrentMonth() {
 		return currentMonth;
@@ -84,13 +87,13 @@ public class CurrentUser {
 		this.userName = userName;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
+//	public String getUserPassword() {
+//		return userPassword;
+//	}
+//
+//	public void setUserPassword(String userPassword) {
+//		this.userPassword = userPassword;
+//	}
 
 	public boolean isProf() {
 		return isProf;
@@ -130,5 +133,13 @@ public class CurrentUser {
 
 	public void setParent(boolean isParent) {
 		this.isParent = isParent;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 }

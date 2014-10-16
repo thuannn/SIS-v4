@@ -16,6 +16,7 @@ public interface BulletinSubjectRequestFactory extends RequestFactory {
 		//
 		Request<List<BulletinSubjectProxy>> listAll();		
 		Request<List<BulletinSubjectProxy>> listAll( String bulletinId );	
+		Request<List<BulletinSubjectProxy>> listAllForPublic( String bulletinId );	
 		//
 		Request<List<BulletinSubjectProxy>> listAllActive();		
 		//

@@ -92,6 +92,39 @@ public class BulletinSubjectDao extends MyDAOBase {
 	}
 	
 	
+	/*
+	 * List all for public : for Student & Parents - Hide comments from professors
+	 * */
+	public List<BulletinSubject> listAllForPublic( String bulletinId ){
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
+				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
+				.order("subjectName");
+		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
+		for ( BulletinSubject bulletinSubject : q ){
+			//
+			if (bulletinSubject.getProfessor() != null){
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
+				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			//
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
+			bulletinSubject.setSubjectId( Long.toString(
+					ofy().load().key( bulletinSubject.getSubject()).now().getId() ));
+			bulletinSubject.setClassId( Long.toString( 
+					ofy().load().key( ofy().load().key( bulletinSubject.getBulletin()).now().getClasse() ).now().getId() ));
+			//
+			// Remove comment
+			bulletinSubject.setRemarqueT1("");
+			bulletinSubject.setRemarqueT2("");
+			bulletinSubject.setRemarqueT3("");
+			bulletinSubject.setRemarqueT4("");
+			//
+			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
+		}
+		return returnList;
+	}
+	
+	
 	
 	/*
 	 * */
