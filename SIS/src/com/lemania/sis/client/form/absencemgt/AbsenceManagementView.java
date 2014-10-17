@@ -699,6 +699,16 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	 * */
 	@Override
 	public void resetUI() {
+		//
+		clearData();
+		//
+		setDaysOfTheMonth();
+	}
+	
+	
+	/*
+	 * */
+	public void clearData() {
 		// 
 		// Clear absence items
 		providerAbsences.getList().clear();
@@ -712,9 +722,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		sgbStudents.setValue("");
 		//
 		lblStudentName.setText("");
-		//
-		setDaysOfTheMonth();
 	}
+	
 
 	/*
 	 * */
@@ -745,6 +754,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	 * */
 	@UiHandler("cmdFilter")
 	void onCmdFilterClick(ClickEvent event) {
+		//
+		clearData();
 		//
 		loadAbsenceByDate();
 	}

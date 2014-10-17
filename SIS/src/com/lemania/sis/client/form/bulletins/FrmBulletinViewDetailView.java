@@ -1,5 +1,6 @@
 package com.lemania.sis.client.form.bulletins;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -40,8 +41,12 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	@UiField ListBox lstClasses;
 	@UiField HorizontalPanel pnlAdmin;
 	
+	//
+	List<BulletinProxy> bulletins = new ArrayList<BulletinProxy>(); 
 	
-	/**/
+	
+	/*
+	 * */
 	@Override
 	public void resetForm() {
 		//
@@ -51,20 +56,25 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void setStudentListData(List<BulletinProxy> bulletins) {
 		//
+		this.bulletins.clear();
+		this.bulletins.addAll( bulletins );
+		//
 		lstBulletins.clear();
 		lstBulletins.addItem("-","");
-		for (BulletinProxy bulletin : bulletins) {
+		for (BulletinProxy bulletin : this.bulletins) {
 			lstBulletins.addItem( bulletin.getStudentName() + " - " + bulletin.getClasseName() + " - " + bulletin.getYear(), 
 					bulletin.getId().toString());
 		}
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void setClasseList(List<ClasseProxy> classes) {
 		//
@@ -76,7 +86,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	@UiHandler("lstClasses")
 	void onLstClassesChange(ChangeEvent event) {
 		if (getUiHandlers() != null)
@@ -84,7 +95,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void showAdminPanel(Boolean show) {
 		//
@@ -92,16 +104,19 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	@UiHandler("lstBulletins")
 	void onLstBulletinsChange(ChangeEvent event) {
 		//		
 		tblBulletin.removeAllRows();
 		//
 		if (getUiHandlers() != null)
-			getUiHandlers().onBulletinChange( lstBulletins.getValue(lstBulletins.getSelectedIndex()));
+			getUiHandlers().onBulletinChange( this.bulletins.get( lstBulletins.getSelectedIndex() - 1 ) );
 	}
 
+	/*
+	 * */
 	@Override
 	public void drawGradeTableMatu(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean hideRemark) {
 		//
@@ -182,7 +197,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 	}
 
 	
-	/**/
+	/*
+	 * */
 	private void styleTableMatu() {
 		//		
 		tblBulletin.setCellSpacing(0);
@@ -198,7 +214,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			}
 	}
 	
-	/**/
+	/*
+	 * */
 	private void styleTableNormal() {
 		//
 		tblBulletin.setCellSpacing(0);
@@ -214,6 +231,8 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 			}
 	}
 
+	/*
+	 * */
 	@Override
 	public void drawGradeTableNormal(List<BulletinSubjectProxy> subjects, List<BulletinBrancheProxy> branches, Boolean hideRemark) {
 		//

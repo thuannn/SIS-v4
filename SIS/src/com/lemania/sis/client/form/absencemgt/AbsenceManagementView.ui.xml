@@ -148,7 +148,7 @@
 				</g:VerticalPanel>
 			</g:VerticalPanel>
 		</g:VerticalPanel>
-		<g:VerticalPanel ui:field="pnlSMSEmail" width="600px" spacing="2" height="">
+		<g:VerticalPanel ui:field="pnlSMSEmail" width="600px" spacing="2" height="" visible="false">
 			<g:Label text="-" styleName="header" ui:field="lblNotifStudentName"/>
 			<g:HorizontalPanel width="" horizontalAlignment="ALIGN_LEFT">
 				<g:Label text="Responsable : "/>

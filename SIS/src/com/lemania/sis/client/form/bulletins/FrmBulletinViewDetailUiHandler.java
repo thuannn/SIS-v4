@@ -1,6 +1,7 @@
 package com.lemania.sis.client.form.bulletins;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.lemania.sis.shared.bulletin.BulletinProxy;
 
 public interface FrmBulletinViewDetailUiHandler extends UiHandlers {
 	//
@@ -8,5 +9,5 @@ public interface FrmBulletinViewDetailUiHandler extends UiHandlers {
 	//
 	void onClassChange(String classId);
 	//
-	void onBulletinChange(String bulletinId);
+	void onBulletinChange(BulletinProxy bulletin);
 }

@@ -1,50 +1,19 @@
-<!-- Indices written at Wed, 15 Oct 2014 09:54:14 CEST -->
+<!-- Indices written at Fri, 17 Oct 2014 16:28:56 CEST -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="Cours" ancestor="false" source="auto">
-        <property name="ecole" direction="asc"/>
-        <property name="coursNom" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Classe" ancestor="false" source="auto">
-        <property name="programme" direction="asc"/>
-        <property name="className" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Bulletin" ancestor="false" source="auto">
+    <datastore-index kind="Assignment" ancestor="false" source="auto">
+        <property name="active" direction="asc"/>
+        <property name="prof" direction="asc"/>
         <property name="classe" direction="asc"/>
-        <property name="isActive" direction="asc"/>
-        <property name="classeName" direction="asc"/>
-        <property name="studentName" direction="asc"/>
     </datastore-index>
 
     <!-- Used 2 times in query history -->
     <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
-        <property name="bulletin" direction="asc"/>
-        <property name="subjectName" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 6 times in query history -->
-    <datastore-index kind="BulletinBranche" ancestor="false" source="auto">
-        <property name="bulletinSubject" direction="asc"/>
-        <property name="bulletinBrancheName" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 2 times in query history -->
-    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
-        <property name="profile" direction="asc"/>
-        <property name="subjectName" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 5 times in query history -->
-    <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
-        <property name="profile" direction="asc"/>
+        <property name="professor" direction="asc"/>
         <property name="subject" direction="asc"/>
-        <property name="profName" direction="asc"/>
+        <property name="subjectName" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

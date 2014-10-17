@@ -230,16 +230,18 @@ public class FrmBulletinViewDetailPresenter
 			}
 		});
 	}
+	
 
-	/**/
+	/*
+	 * */
 	@Override
-	public void onBulletinChange(final String bulletinId) {
+	public void onBulletinChange(final BulletinProxy bulletin) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
 		if ( currentUser.isAdmin() || currentUser.isProf() ) {
-			rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+			rc.listAll( bulletin.getId().toString() ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());
@@ -248,11 +250,11 @@ public class FrmBulletinViewDetailPresenter
 				public void onSuccess(List<BulletinSubjectProxy> response) {
 					subjects.clear();
 					subjects.addAll(response);
-					getBranches(bulletinId);
+					getBranches( bulletin );
 				}
 			});
 		} else {
-			rc.listAllForPublic( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+			rc.listAllForPublic( bulletin.getId().toString() ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());
@@ -261,54 +263,56 @@ public class FrmBulletinViewDetailPresenter
 				public void onSuccess(List<BulletinSubjectProxy> response) {
 					subjects.clear();
 					subjects.addAll(response);
-					getBranches(bulletinId);
+					getBranches( bulletin );
 				}
 			});
 		}
 	}
 
 	
-	/**/
-	protected void getBranches(final String bulletinId) {
+	/*
+	 * */
+	protected void getBranches(final BulletinProxy bulletin) {
 		//
 		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
-		rc.listAllByBulletin( bulletinId ).fire(new Receiver<List<BulletinBrancheProxy>>(){
+		rc.listAllByBulletin( bulletin.getId().toString() ).fire(new Receiver<List<BulletinBrancheProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
 			}
 			@Override
 			public void onSuccess(List<BulletinBrancheProxy> response) {
-				drawBulletin(bulletinId, subjects, response);
+				drawBulletin( bulletin, subjects, response);
 			}
 		});
 	}
 	
 	
-	/**/
-	protected void drawBulletin(String bulletinId, final List<BulletinSubjectProxy> subjects, final List<BulletinBrancheProxy> branches){
+	/*
+	 * */
+	protected void drawBulletin(BulletinProxy bulletin, final List<BulletinSubjectProxy> subjects, final List<BulletinBrancheProxy> branches){
 		//
-		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
-		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
-		BulletinRequestContext rc = rf.bulletinRequest();
-		rc.getBulletin( bulletinId ).fire(new Receiver<BulletinProxy>(){
-			@Override
-			public void onFailure(ServerFailure error){
-				Window.alert(error.getMessage());
-			}
-			@Override
-			public void onSuccess(BulletinProxy response) {
-				if (response.getProgrammeName().toLowerCase().contains("matu")){ 
-					if (response.getClasseName().toLowerCase().contains("prématurité"))
+//		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+//		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+//		BulletinRequestContext rc = rf.bulletinRequest();
+//		rc.getBulletin( bulletinId ).fire(new Receiver<BulletinProxy>(){
+//			@Override
+//			public void onFailure(ServerFailure error){
+//				Window.alert(error.getMessage());
+//			}
+//			@Override
+//			public void onSuccess(BulletinProxy response) {
+				if (bulletin.getProgrammeName().toLowerCase().contains("matu")){ 
+					if (bulletin.getClasseName().toLowerCase().contains("prématurité"))
 						getView().drawGradeTablePrematurite(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
 					else
 						getView().drawGradeTableMatu(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
 				}
 				else
 					getView().drawGradeTableNormal(subjects, branches, (currentUser.isStudent() || currentUser.isParent()) ? true:false );
-			}
-		});
+//			}
+//		});
 	}
 }
