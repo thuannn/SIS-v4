@@ -211,8 +211,10 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		sendMethod = method;
 		lblNotifStudentName.setText( selectedAbsenceItem.getStudentName() );
 		txtSendMessage.setText( 
-				"Absence de " + selectedAbsenceItem.getStudentName()  +" de "+ selectedAbsenceItem.getPeriodDesc() +". \n\n"
-				+ "Merci d’en prendre note et de nous faire parvenir rapidement l’éventuelle excuse. \n\n"
+				"Absence de " + selectedAbsenceItem.getStudentName() 
+				+ " le " + selectedAbsenceItem.getStrAbsenceDate().substring(6) + "." + selectedAbsenceItem.getStrAbsenceDate().substring(4,6) + "." + selectedAbsenceItem.getStrAbsenceDate().substring(0,4)  
+				+ " de "+ selectedAbsenceItem.getPeriodDesc().replace(":", "h") +".\n\n"
+				+ "Merci d’en prendre note et de nous faire parvenir rapidement l’éventuelle excuse.\n"
 				+ "ECOLE LEMANIA" );
 		//
 		if ( method == messageType.SMS ) {

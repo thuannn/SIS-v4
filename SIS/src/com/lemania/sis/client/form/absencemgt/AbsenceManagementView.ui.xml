@@ -41,7 +41,7 @@
 			</g:HorizontalPanel>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel width="100%" spacing="5">
-				<g:cell width="15%">
+				<g:cell width="20%">
 				<g:VerticalPanel width="100%" styleName="subSection">
 					<g:Label text="Liste des élèves" styleName="sectionTitle"></g:Label>
 					<g:Label text="Choisir un élève pour consulter ses absences."/>
