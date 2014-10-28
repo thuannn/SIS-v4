@@ -17,7 +17,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ParentAfterAddEvent;
 import com.lemania.sis.client.event.ParentAfterAddEvent.ParentAfterAddHandler;
 import com.lemania.sis.client.event.ParentAfterUpdateEvent;
@@ -72,8 +71,6 @@ public class ParentManagementPresenter
 
 	protected void onReset() {
 		super.onReset();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.parentmgt) );
 		//
 		loadParents();
 	}

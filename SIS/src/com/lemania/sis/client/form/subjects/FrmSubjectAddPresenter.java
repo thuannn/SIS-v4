@@ -9,7 +9,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
@@ -70,9 +69,7 @@ public class FrmSubjectAddPresenter
 	@Override
 	protected void onReset(){
 		//
-		super.onReset();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.subjectadd));		
+		super.onReset();	
 		// Thuan
 		getView().resetForm();
 	}

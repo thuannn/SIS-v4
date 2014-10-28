@@ -12,7 +12,6 @@ import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
@@ -74,8 +73,6 @@ public class ProfsAddPresenter
 	protected void onReset(){
 		//
 		getView().initializeUi();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.profsadd));
 	}
 
 	@Override

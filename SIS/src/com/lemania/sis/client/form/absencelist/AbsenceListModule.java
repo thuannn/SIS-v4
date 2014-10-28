@@ -1,4 +1,4 @@
-package com.lemania.sis.client.form.parent.absencelist;
+package com.lemania.sis.client.form.absencelist;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 

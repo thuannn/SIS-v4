@@ -10,7 +10,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.NotificationValues;
@@ -101,10 +100,6 @@ public class FrmEvaluationReportListPresenter
 	@Override
 	protected void onReset() {
 		super.onReset();
-		
-		// Highlight this item
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationlist));
-		
 		//
 		getView().resetForm();
 		getView().resetEditForm();

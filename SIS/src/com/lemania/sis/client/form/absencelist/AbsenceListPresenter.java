@@ -1,4 +1,4 @@
-package com.lemania.sis.client.form.parent.absencelist;
+package com.lemania.sis.client.form.absencelist;
 
 import java.util.List;
 
@@ -25,13 +25,16 @@ import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
+import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory;
 import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory.AbsenceItemRequestContext;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
+import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
+import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView, AbsenceListPresenter.MyProxy> 
 	implements AbsenceListUiHandlers, LoginAuthenticatedHandler {
 	
@@ -43,6 +46,10 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
     	void setStudentAbsenceListData( List<AbsenceItemProxy> absences );
     	//
     	void resetUI();
+    	//
+    	void showAdminPanel(Boolean show);
+    	//
+		void setClasseList(List<ClasseProxy> classes);
     }
     
     //
@@ -72,12 +79,46 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
         super.onBind();
     }
     
+    /*
+     * */
     protected void onReset() {
         super.onReset();
         //
         getView().resetUI();
-        loadStudentListByParent();
+        //
+        if (currentUser.isParent())
+        	loadStudentListByParent();
+        if (currentUser.isProf())
+        	loadClassListByProf();
     }
+    
+    /*
+	 * */
+	private void loadClassList() {
+		//
+		getView().showAdminPanel(true);
+		//
+		ClasseRequestFactory rf = GWT.create(ClasseRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		ClasseRequestContext rc = rf.classeRequest();
+		rc.listAllActive().fire(new Receiver<List<ClasseProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<ClasseProxy> response) {
+				getView().setClasseList(response);
+			}
+		});
+	}
+    
+    /*
+	 * */
+	private void loadClassListByProf() {
+		//
+		loadClassList();
+	}
 
     /*
      * */
@@ -127,6 +168,27 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 			public void onSuccess( List<AbsenceItemProxy> response ) {
 				//
 				getView().setStudentAbsenceListData( response );
+			}
+		});
+	}
+	
+	
+	/*
+	 * */
+	@Override
+	public void onClassChange(String classId) {
+		// 
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		rc.listAllActiveByClass( classId ).fire(new Receiver<List<BulletinProxy>>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BulletinProxy> response) {
+				getView().setStudentListData(response);
 			}
 		});
 	}

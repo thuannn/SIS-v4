@@ -26,7 +26,6 @@ import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.form.markinput.FrmMarkInputPresenter;
 import com.lemania.sis.client.form.masteragenda.MasterAgendaPresenter;
 import com.lemania.sis.client.form.motifabsence.MotifAbsencePresenter;
-import com.lemania.sis.client.form.parent.absencelist.AbsenceListPresenter;
 import com.lemania.sis.client.form.parentmgt.ParentManagementPresenter;
 import com.lemania.sis.client.form.periodmanagement.PeriodManagementPresenter;
 import com.lemania.sis.client.form.profagenda.ProfessorAgendaPresenter;
@@ -47,6 +46,7 @@ import com.lemania.sis.client.presenter.CoursAddPresenter;
 import com.lemania.sis.client.presenter.CoursPresenter;
 import com.lemania.sis.client.presenter.FrmClasseListPresenter;
 import com.lemania.sis.client.presenter.FrmClasseAddPresenter;
+import com.lemania.sis.client.form.absencelist.AbsenceListPresenter;
 import com.lemania.sis.client.form.absencemgt.AbsenceManagementPresenter;
 
 @GinModules({ ClientModule.class })

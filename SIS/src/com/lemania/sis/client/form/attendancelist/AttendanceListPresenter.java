@@ -27,7 +27,6 @@ import com.lemania.sis.client.event.AttendanceListAssignmentAfterSelectedEvent.A
 import com.lemania.sis.client.event.AttendanceListAssignmentSelectedEvent;
 import com.lemania.sis.client.event.AttendanceListAssignmentSelectedEvent.AttendanceListAssignmentSelectedHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
@@ -101,15 +100,15 @@ public class AttendanceListPresenter
 	}
 
 	protected void onBind() {
+		//
 		super.onBind();
 		//
 		getView().initializeUI();
 	}
 
 	protected void onReset() {
-		super.onReset();
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.attendancelist));	
+		super.onReset();
 		//
 		getView().resetUI( currentUser );
 		// Thuan

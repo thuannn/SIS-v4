@@ -165,6 +165,9 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	public void styleTable(){
 		// Add the Remarque column
 		tblAttendance.setText(0, tblAttendance.getCellCount(0), "Remarque");
+		//
+		// 2014-10-28 : Add admin remarque
+		tblAttendance.setText(0, tblAttendance.getCellCount(0), "Remarque Admin");
 
 		// Add empty cells
 		for (int i= this.constantStudentNameRowStart; i<tblAttendance.getRowCount(); i++) {
@@ -265,7 +268,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		CheckBox chkAbsent;
 		VerticalPanel pnlAbsenceCell;
-		int indexRemarqueCol = tblAttendance.getCellCount(0) - 1;
+		int indexRemarqueCol = tblAttendance.getCellCount(0) - 2;
 		//
 		for ( int i= this.constantStudentNameRowStart; i < tblAttendance.getRowCount(); i++ ) {
 			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget to avoid the Remarque column
@@ -287,8 +290,8 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 								//
 								// If there exists a comment linked to an item, no need to add
 								String strRemarque = "";
-								if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidgetCount() < 2 )
-									strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidget(0)).getText();
+								if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex) - 2 )).getWidgetCount() < 2 )
+									strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex) - 2 )).getWidget(0)).getText();
 								//
 								BulletinSubjectProxy bulletinSubject = providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart );
 								PeriodProxy pp = providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart );
@@ -366,7 +369,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		//
 		VerticalPanel pnlAbsenceCell;
 		TextBox txtMinutes;
-		int indexRemarqueCol = tblAttendance.getCellCount(0) - 1;
+		int indexRemarqueCol = tblAttendance.getCellCount(0) - 2;
 		//
 		for ( int i= this.constantStudentNameRowStart; i < tblAttendance.getRowCount(); i++ ) {
 			for ( int j= this.constantPeriodsColStart; j < indexRemarqueCol; j++ ) {   	// don't forget the Remarque column
@@ -494,8 +497,9 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 	public void resetUI( CurrentUser curUser ) {
 		//
 		dtAbsenceDate.setValue( new Date());
-		if (!curUser.isAdmin())
-			dtAbsenceDate.setEnabled(false);
+		//
+//		if (!curUser.isAdmin())
+//			dtAbsenceDate.setEnabled(false);
 		//
 		lstProfs.clear();
 		lstAssignments.clear();
@@ -626,7 +630,7 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 		Label lblId;
 		//
 		for (int row= this.constantStudentNameRowStart; row< tblAttendance.getRowCount(); row++) {
-			for (int col= this.constantPeriodsColStart; col< tblAttendance.getCellCount(0)-1; col++) {
+			for (int col= this.constantPeriodsColStart; col< tblAttendance.getCellCount(0) - 2; col++) {
 				//
 				bulletinSubject = providerBulletins.getList().get( row - this.constantStudentNameRowStart );
 				studentId = bulletinSubject.getStudentId();
@@ -651,9 +655,12 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 							if ( !ai.getProfComment().equals("") ) {
 								Label r = new Label(ai.getId().toString());
 								r.setVisible(false);
-								((TextBox)((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).getWidget(0)).setText( ai.getProfComment() );
-								((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-1)).add( r );
+								((TextBox)((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row) - 2 )).getWidget(0)).setText( ai.getProfComment() );
+								((VerticalPanel) tblAttendance.getWidget(row, tblAttendance.getCellCount(row)-2)).add( r );
 							}
+							// Show admin remarque
+							tblAttendance.setText(row,  tblAttendance.getCellCount(row) - 1, 
+									tblAttendance.getText(row, tblAttendance.getCellCount(row) - 1) + " " + ai.getAdminComment());
 						}
 					}
 				}

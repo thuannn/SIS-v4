@@ -234,7 +234,7 @@ public class AbsenceItemDao extends MyDAOBase {
 		//
 		Student student = ofy().load().key( ai.getKeyStudent() ).now();
 		ai.setStudentId( student.getId().toString() );
-		ai.setStudentName( student.getFirstName() + " " + student.getLastName() );
+		ai.setStudentName( student.getLastName() + " " + student.getFirstName() );
 		//
 		Period p = ofy().load().key( ai.getKeyPeriod() ).now();
 		ai.setPeriodId( p.getId().toString() );
@@ -257,6 +257,8 @@ public class AbsenceItemDao extends MyDAOBase {
 	
 	
 	/*
+	 * Load all students that have absences in the date range
+	 * Sort student list by last name
 	 * */
 	public List<AbsenceItem> loadAbsentStudents( String dateFrom, String dateTo ) {
 		//
@@ -271,7 +273,9 @@ public class AbsenceItemDao extends MyDAOBase {
 			@Override
 			public int compare(AbsenceItem o1, AbsenceItem o2) {
 				//
-				return Long.toString( o1.getKeyStudent().getId() ).compareTo( Long.toString( o2.getKeyStudent().getId() ) );
+				return ofy().load().key( o1.getKeyStudent() ).now().getLastName()
+						.compareTo( 
+								ofy().load().key( o2.getKeyStudent() ).now().getLastName() );
 			}
 		});
   		//

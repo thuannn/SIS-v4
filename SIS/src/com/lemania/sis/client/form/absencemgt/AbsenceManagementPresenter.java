@@ -21,7 +21,6 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.lemania.sis.client.event.AbsenceAfterInputEvent;
 import com.lemania.sis.client.event.AbsenceAfterInputEvent.AbsenceAfterInputHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemRequestFactory;
@@ -107,8 +106,6 @@ public class AbsenceManagementPresenter
 		getView().resetUI();
 		//
 //		loadMotifs();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent( NameTokens.absencesmgt ));
 	}
 	
 	
@@ -133,7 +130,8 @@ public class AbsenceManagementPresenter
 	
 
 	/* 
-	 * Load student list when form is opened 
+	 * Load student list when form is opened.
+	 * This data is used for the suggest box.
 	 * */
 	private void loadStudentList() {
 		//
@@ -294,6 +292,7 @@ public class AbsenceManagementPresenter
 	 * */
 	@Override
 	public void filterDate(final String studentId, String dateFrom, String dateTo) {
+		//
 		// Keep the current selected values
 		curStudentId = studentId;
 		fromDate = dateFrom;

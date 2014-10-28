@@ -9,7 +9,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.AppSettingValues;
 import com.lemania.sis.client.values.NotificationValues;
 import com.google.gwt.user.client.ui.Button;
@@ -99,7 +98,6 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdProfessorAgendaPage;
 	@UiField Hyperlink cmdParentMgt;
 	@UiField Hyperlink cmdMotifAbsence;
-	@UiField Hyperlink cmdAttendanceList;
 	@UiField Hyperlink cmdAttendanceListProf;
 	@UiField Hyperlink cmdAbsenceMgt;
 	@UiField VerticalPanel leftPanel;
@@ -111,6 +109,7 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdAbsencesViewParent;
 	@UiField Hyperlink cmdPasswordParent;
 	@UiField Hyperlink cmdHelpParent;
+	@UiField Hyperlink cmdAbsencesViewProf;
 	
 	Hyperlink currentSelectedItem;
 	
@@ -118,10 +117,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	// Thuan
 	PopupPanel popup = new PopupPanel(false);
 	
-	//
-	private Hyperlink lastPage;
-	private Hyperlink lastPageProf;
-	private Hyperlink lastPageStudent;
+//	//
+//	private Hyperlink lastPage;
+//	private Hyperlink lastPageProf;
+//	private Hyperlink lastPageStudent;
 	
 	/*
 	 * */
@@ -384,100 +383,101 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 
 	
 	/*
+	 * 2014-10-23 : This is not needed anymore. Replaced by the function switchButton()
 	 * */
-	@Override
-	public void showCurrentPageOnMenu(String tokenName) {
-		//
-		if (tokenName.equals(NameTokens.homepage)) switchStyle(this.cmdHome, false, false);
-		if (tokenName.equals(NameTokens.profilemgt)) switchStyle(this.cmdProfileManagement, false, false);
-		if (tokenName.equals(NameTokens.bulletincreation)) switchStyle(this.cmdAttribution, false, false);
-		if (tokenName.equals(NameTokens.bulletinmanagement)) switchStyle(this.cmdAttributionPerson, false, false);
-		if (tokenName.equals(NameTokens.bulletindetail)) {
-			switchStyle(this.cmdMarkView, false, false);
-			switchStyle(this.cmdMarkViewProf, true, false);
-			switchStyle(this.cmdMarkViewStudent, false, true);
-		}
-		if (tokenName.equals(NameTokens.markinput)) {
-			switchStyle(this.cmdMarkInput, false, false);
-			switchStyle(this.cmdMarkInputProf, true, false);			
-		}
-		if (tokenName.equals(NameTokens.students)) switchStyle(this.cmdStudentList, false, false);
-		if (tokenName.equals(NameTokens.studentadd)) switchStyle(this.cmdStudentAdd, false, false);
-		if (tokenName.equals(NameTokens.profs)) switchStyle(this.cmdProfList, false, false);
-		if (tokenName.equals(NameTokens.profsadd)) switchStyle(this.cmdProfAdd, false, false);
-		if (tokenName.equals(NameTokens.branchelist)) switchStyle(this.cmdBrancheList, false, false);
-		if (tokenName.equals(NameTokens.brancheadd)) switchStyle(this.cmdBrancheAdd, false, false);
-		if (tokenName.equals(NameTokens.subjectlist)) switchStyle(this.cmdSubjectList, false, false);
-		if (tokenName.equals(NameTokens.subjectadd)) switchStyle(this.cmdSubjectAdd, false, false);
-		if (tokenName.equals(NameTokens.classlist)) switchStyle(this.cmdClassList, false, false);
-		if (tokenName.equals(NameTokens.classeadd)) switchStyle(this.cmdClassAdd, false, false);
-		if (tokenName.equals(NameTokens.cours)) switchStyle(this.cmdProgrammeList, false, false);
-		if (tokenName.equals(NameTokens.coursadd)) switchStyle(this.cmdProgrammeAdd, false, false);
-		if (tokenName.equals(NameTokens.ecolepage)) switchStyle(this.cmdSchoolList, false, false);
-		if (tokenName.equals(NameTokens.addecole)) switchStyle(this.cmdSchoolAdd, false, false);
-		if (tokenName.equals(NameTokens.usermanagement)) switchStyle(this.cmdUserManagement, false, false);
-		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings, false, false);
-		if (tokenName.equals(NameTokens.password)) {
-			switchStyle(this.cmdPassword, false, false);
-			switchStyle(this.cmdPasswordProf, true, false);
-			switchStyle(this.cmdPasswordStudent, false, true);
-		}
-		if (tokenName.equals(NameTokens.contact)) {
-			switchStyle(this.cmdHelp, false, false);
-			switchStyle(this.cmdHelpProf, true, false);
-			switchStyle(this.cmdHelpStudent, false, true);
-		}
-		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin, false, false);
-		//		
-		if (tokenName.equals(NameTokens.evaluationlist)) switchStyle(this.cmdEvaluationList, false, false);
-		//
-		if (tokenName.equals(NameTokens.evaluationinput)) { 
-			switchStyle(this.cmdEvaluationInputProf, false, false);
-			switchStyle(this.cmdEvaluationInputProfProf, true, false);
-		}
-		//
-		if (tokenName.equals(NameTokens.evaluationinputstudent)) {
-			switchStyle(this.cmdEvaluationInputEleve, false, false);
-			switchStyle(this.cmdEvaluationInputEleveProf, true, false);
-		}
-		
-		// Profiles
-		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
-		
-		// Agenda
-		if (tokenName.equals(NameTokens.masteragenda)) switchStyle(this.cmdMasterAgendaPage, false, false);
-		if (tokenName.equals(NameTokens.classroom)) switchStyle(this.cmdClassroomPage, false, false);
-		if (tokenName.equals(NameTokens.periodmgt)) switchStyle(this.cmdPeriodMgt, false, false);
-		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
-		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
-		
-		// Attendance
-		if (tokenName.equals(NameTokens.motifabsence)) switchStyle(this.cmdMotifAbsence, false, false);
-		if (tokenName.equals(NameTokens.attendancelist)) switchStyle(this.cmdAttendanceList, false, false);
-		if (tokenName.equals(NameTokens.attendancelist)) {
-			switchStyle(this.cmdAttendanceList, false, false);
-			switchStyle(this.cmdAttendanceListProf, true, false);
-		}
-		if (tokenName.equals(NameTokens.absencesmgt)) switchStyle(this.cmdAbsenceMgt, false, false);
-	}
+//	@Override
+//	public void showCurrentPageOnMenu(String tokenName) {
+//		//
+//		if (tokenName.equals(NameTokens.homepage)) switchStyle(this.cmdHome, false, false);
+//		if (tokenName.equals(NameTokens.profilemgt)) switchStyle(this.cmdProfileManagement, false, false);
+//		if (tokenName.equals(NameTokens.bulletincreation)) switchStyle(this.cmdAttribution, false, false);
+//		if (tokenName.equals(NameTokens.bulletinmanagement)) switchStyle(this.cmdAttributionPerson, false, false);
+//		if (tokenName.equals(NameTokens.bulletindetail)) {
+//			switchStyle(this.cmdMarkView, false, false);
+//			switchStyle(this.cmdMarkViewProf, true, false);
+//			switchStyle(this.cmdMarkViewStudent, false, true);
+//		}
+//		if (tokenName.equals(NameTokens.markinput)) {
+//			switchStyle(this.cmdMarkInput, false, false);
+//			switchStyle(this.cmdMarkInputProf, true, false);			
+//		}
+//		if (tokenName.equals(NameTokens.students)) switchStyle(this.cmdStudentList, false, false);
+//		if (tokenName.equals(NameTokens.studentadd)) switchStyle(this.cmdStudentAdd, false, false);
+//		if (tokenName.equals(NameTokens.profs)) switchStyle(this.cmdProfList, false, false);
+//		if (tokenName.equals(NameTokens.profsadd)) switchStyle(this.cmdProfAdd, false, false);
+//		if (tokenName.equals(NameTokens.branchelist)) switchStyle(this.cmdBrancheList, false, false);
+//		if (tokenName.equals(NameTokens.brancheadd)) switchStyle(this.cmdBrancheAdd, false, false);
+//		if (tokenName.equals(NameTokens.subjectlist)) switchStyle(this.cmdSubjectList, false, false);
+//		if (tokenName.equals(NameTokens.subjectadd)) switchStyle(this.cmdSubjectAdd, false, false);
+//		if (tokenName.equals(NameTokens.classlist)) switchStyle(this.cmdClassList, false, false);
+//		if (tokenName.equals(NameTokens.classeadd)) switchStyle(this.cmdClassAdd, false, false);
+//		if (tokenName.equals(NameTokens.cours)) switchStyle(this.cmdProgrammeList, false, false);
+//		if (tokenName.equals(NameTokens.coursadd)) switchStyle(this.cmdProgrammeAdd, false, false);
+//		if (tokenName.equals(NameTokens.ecolepage)) switchStyle(this.cmdSchoolList, false, false);
+//		if (tokenName.equals(NameTokens.addecole)) switchStyle(this.cmdSchoolAdd, false, false);
+//		if (tokenName.equals(NameTokens.usermanagement)) switchStyle(this.cmdUserManagement, false, false);
+//		if (tokenName.equals(NameTokens.settings)) switchStyle(this.cmdSettings, false, false);
+//		if (tokenName.equals(NameTokens.password)) {
+//			switchStyle(this.cmdPassword, false, false);
+//			switchStyle(this.cmdPasswordProf, true, false);
+//			switchStyle(this.cmdPasswordStudent, false, true);
+//		}
+//		if (tokenName.equals(NameTokens.contact)) {
+//			switchStyle(this.cmdHelp, false, false);
+//			switchStyle(this.cmdHelpProf, true, false);
+//			switchStyle(this.cmdHelpStudent, false, true);
+//		}
+//		if (tokenName.equals(NameTokens.bulletin)) switchStyle(this.cmdBulletin, false, false);
+//		//		
+//		if (tokenName.equals(NameTokens.evaluationlist)) switchStyle(this.cmdEvaluationList, false, false);
+//		//
+//		if (tokenName.equals(NameTokens.evaluationinput)) { 
+//			switchStyle(this.cmdEvaluationInputProf, false, false);
+//			switchStyle(this.cmdEvaluationInputProfProf, true, false);
+//		}
+//		//
+//		if (tokenName.equals(NameTokens.evaluationinputstudent)) {
+//			switchStyle(this.cmdEvaluationInputEleve, false, false);
+//			switchStyle(this.cmdEvaluationInputEleveProf, true, false);
+//		}
+//		
+//		// Profiles
+//		if (tokenName.equals(NameTokens.parentmgt)) switchStyle(this.cmdParentMgt, false, false);
+//		
+//		// Agenda
+//		if (tokenName.equals(NameTokens.masteragenda)) switchStyle(this.cmdMasterAgendaPage, false, false);
+//		if (tokenName.equals(NameTokens.classroom)) switchStyle(this.cmdClassroomPage, false, false);
+//		if (tokenName.equals(NameTokens.periodmgt)) switchStyle(this.cmdPeriodMgt, false, false);
+//		if (tokenName.equals(NameTokens.studentagenda)) switchStyle(this.cmdStudentAgendaPage, false, false);
+//		if (tokenName.equals(NameTokens.profagenda)) switchStyle(this.cmdProfessorAgendaPage, false, false);
+//		
+//		// Attendance
+//		if (tokenName.equals(NameTokens.motifabsence)) switchStyle(this.cmdMotifAbsence, false, false);
+//		if (tokenName.equals(NameTokens.attendancelist)) switchStyle(this.cmdAttendanceList, false, false);
+//		if (tokenName.equals(NameTokens.attendancelist)) {
+//			switchStyle(this.cmdAttendanceList, false, false);
+//			switchStyle(this.cmdAttendanceListProf, true, false);
+//		}
+//		if (tokenName.equals(NameTokens.absencesmgt)) switchStyle(this.cmdAbsenceMgt, false, false);
+//	}
 	
 	
-	/*
-	 * */
-	private void switchStyle( Hyperlink link, Boolean prof, Boolean student ){		
-		//
-		if (!prof && !student) {
-			if (lastPage != null) lastPage.setStyleName("");
-			if (lastPageProf != null) lastPageProf.setStyleName("");
-			if (lastPageStudent != null) lastPageStudent.setStyleName("");
-		}
-		
-		link.setStyleName("currentPage");
-		
-		if (prof) lastPageProf = link;
-		if (student) lastPageStudent = link;
-		if (!prof && !student) lastPage = link;
-	}
+//	/*
+//	 * */
+//	private void switchStyle( Hyperlink link, Boolean prof, Boolean student ){		
+//		//
+//		if (!prof && !student) {
+//			if (lastPage != null) lastPage.setStyleName("");
+//			if (lastPageProf != null) lastPageProf.setStyleName("");
+//			if (lastPageStudent != null) lastPageStudent.setStyleName("");
+//		}
+//		
+//		link.setStyleName("currentPage");
+//		
+//		if (prof) lastPageProf = link;
+//		if (student) lastPageStudent = link;
+//		if (!prof && !student) lastPage = link;
+//	}
 	
 
 	/*
@@ -575,6 +575,254 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	 * */
 	@UiHandler("cmdHelpParent")
 	void onCmdHelpParentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	
+	/*
+	 * */
+	@UiHandler("cmdAbsencesViewProf")
+	void onCmdAbsencesViewProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdHome")
+	void onCmdHomeClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudentList")
+	void onCmdStudentListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudentAdd")
+	void onCmdStudentAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProfList")
+	void onCmdProfListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProfAdd")
+	void onCmdProfAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdParentMgt")
+	void onCmdParentMgtClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProfileManagement")
+	void onCmdProfileManagementClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdAttribution")
+	void onCmdAttributionClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdAttributionPerson")
+	void onCmdAttributionPersonClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMarkInput")
+	void onCmdMarkInputClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMarkView")
+	void onCmdMarkViewClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdBulletin")
+	void onCmdBulletinClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdAttendanceList")
+	void onCmdAttendanceListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdAbsenceMgt")
+	void onCmdAbsenceMgtClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdEvaluationList")
+	void onCmdEvaluationListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdEvaluationInputProf")
+	void onCmdEvaluationInputProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdEvaluationInputEleve")
+	void onCmdEvaluationInputEleveClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMasterAgendaPage")
+	void onCmdMasterAgendaPageClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudentAgendaPage")
+	void onCmdStudentAgendaPageClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProfessorAgendaPage")
+	void onCmdProfessorAgendaPageClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdClassAgendaPage")
+	void onCmdClassAgendaPageClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMotifAbsence")
+	void onCmdMotifAbsenceClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMarkViewStudent")
+	void onCmdMarkViewStudentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdPasswordStudent")
+	void onCmdPasswordStudentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdHelpStudent")
+	void onCmdHelpStudentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdHelpProf")
+	void onCmdHelpProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdPasswordProf")
+	void onCmdPasswordProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdEvaluationInputEleveProf")
+	void onCmdEvaluationInputEleveProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdEvaluationInputProfProf")
+	void onCmdEvaluationInputProfProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMarkViewProf")
+	void onCmdMarkViewProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdMarkInputProf")
+	void onCmdMarkInputProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdAttendanceListProf")
+	void onCmdAttendanceListProfClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdHelp")
+	void onCmdHelpClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdPassword")
+	void onCmdPasswordClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdBrancheList")
+	void onCmdBrancheListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdBrancheAdd")
+	void onCmdBrancheAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdSubjectList")
+	void onCmdSubjectListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdSubjectAdd")
+	void onCmdSubjectAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdPeriodMgt")
+	void onCmdPeriodMgtClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdClassList")
+	void onCmdClassListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdClassAdd")
+	void onCmdClassAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProgrammeList")
+	void onCmdProgrammeListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdProgrammeAdd")
+	void onCmdProgrammeAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdClassroomPage")
+	void onCmdClassroomPageClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdSchoolList")
+	void onCmdSchoolListClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdSchoolAdd")
+	void onCmdSchoolAddClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdUserManagement")
+	void onCmdUserManagementClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdSettings")
+	void onCmdSettingsClick(ClickEvent event) {
 		//
 		switchButton( (Hyperlink)event.getSource() );
 	}

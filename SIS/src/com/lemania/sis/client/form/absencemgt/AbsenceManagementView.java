@@ -752,7 +752,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	
 	
 	
-	/*
+	/* 
+	 * Clicking on this buttton will load all students that have absences during the selected date range
 	 * */
 	@UiHandler("cmdFilter")
 	void onCmdFilterClick(ClickEvent event) {
@@ -764,6 +765,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	
 	
 	/*
+	 * 
 	 * */
 	void loadAbsenceByDate() {
 		//

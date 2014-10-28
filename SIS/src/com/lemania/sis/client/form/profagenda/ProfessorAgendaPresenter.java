@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.ProfessorProxy;
@@ -73,8 +72,6 @@ public class ProfessorAgendaPresenter
 	protected void onReset() {
 		//
 		super.onReset();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.profagenda) );
 		//
 		loadActiveProfs();
 	}

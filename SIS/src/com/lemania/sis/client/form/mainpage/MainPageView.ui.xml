@@ -122,6 +122,7 @@
 						<g:TreeItem text="Espace professeur" state="true">
 							<g:TreeItem text="Absences" state="true" ui:field="tiAbsencesProf">
 								<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceListProf"/>
+								<g:Hyperlink targetHistoryToken="absenceslist" text="Consulter les absences" ui:field="cmdAbsencesViewProf"/>
 							</g:TreeItem>
 							<g:TreeItem text="Notes" state="true">
 								<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInputProf"/>

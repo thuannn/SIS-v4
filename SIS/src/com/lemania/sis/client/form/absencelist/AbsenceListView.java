@@ -1,4 +1,4 @@
-package com.lemania.sis.client.form.parent.absencelist;
+package com.lemania.sis.client.form.absencelist;
 
 import java.util.List;
 
@@ -9,11 +9,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.user.client.ui.ListBox;
+import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implements AbsenceListPresenter.MyView {
     interface Binder extends UiBinder<Widget, AbsenceListView> {
@@ -21,6 +23,8 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
 
     @UiField ListBox lstStudents;
     @UiField FlexTable tblAbsences;
+    @UiField HorizontalPanel pnlAdmin;
+    @UiField ListBox lstClasses;
     
     //
     private int rowHeader = 0;
@@ -125,5 +129,36 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
 		//
 		tblAbsences.removeAllRows();
 		lstStudents.clear();
+	}
+	
+	
+	/*
+	 * */
+	@Override
+	public void showAdminPanel(Boolean show) {
+		//
+		pnlAdmin.setVisible(show);
+	}
+	
+	
+	/*
+	 * */
+	@Override
+	public void setClasseList(List<ClasseProxy> classes) {
+		//
+		lstClasses.clear();
+		lstClasses.addItem("Choisir","");
+		for (ClasseProxy clazz : classes) {
+			lstClasses.addItem( clazz.getClassName(), clazz.getId().toString());
+		}
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("lstClasses")
+	void onLstClassesChange(ChangeEvent event) {
+		if (getUiHandlers() != null)
+			getUiHandlers().onClassChange(lstClasses.getValue(lstClasses.getSelectedIndex()));
 	}
 }

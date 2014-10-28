@@ -20,7 +20,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.lemania.sis.client.AdminGateKeeper;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.PeriodItemPopupCloseEvent;
 import com.lemania.sis.client.event.PeriodItemPopupCloseEvent.PeriodItemPopupCloseHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
@@ -89,8 +88,6 @@ public class PeriodManagementPresenter
 
 	protected void onReset() {
 		super.onReset();
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.periodmgt) );
 		//
 		loadClassList();
 		//

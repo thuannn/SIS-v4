@@ -14,7 +14,6 @@ import com.lemania.sis.client.event.EvaluationStudentReportLoadEvent;
 import com.lemania.sis.client.event.EvaluationStudentReportLoadEvent.EvaluationStudentReportLoadHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.NotificationValues;
@@ -115,9 +114,7 @@ public class FrmEvaluationInputStudentPresenter
 
 	@Override
 	protected void onReset() {
-		super.onReset();		
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.evaluationinputstudent));	
+		super.onReset();
 		// Thuan
 		getView().resetForm();		
 	}

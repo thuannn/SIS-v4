@@ -10,7 +10,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.ParentAfterAddEvent;
 import com.lemania.sis.client.event.ParentAfterAddEvent.ParentAfterAddHandler;
 import com.lemania.sis.client.event.ProfessorAfterAddEvent;
@@ -100,9 +99,7 @@ public class UserManagementPresenter
 	}
 	
 	@Override
-	protected void onReset() {
-		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.usermanagement));		
+	protected void onReset() {	
 		//
 		if (this.currentUser.getUserEmail().equals("thuannn@gmail.com"))
 			getView().showAddPanel();

@@ -22,15 +22,13 @@ import com.lemania.sis.client.event.AfterUserLogOutEvent;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent;
 import com.lemania.sis.client.event.DrawSchoolInterfaceEvent.DrawSchoolInterfaceHandler;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
-import com.lemania.sis.client.event.PageAfterSelectEvent.PageAfterSelectHandler;
 import com.lemania.sis.client.place.NameTokens;
 
 public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy>
 		implements 	MainPageUiHandler, LoginAuthenticatedHandler, 
-					ActionInProgressHandler, ActionCompletedHandler, PageAfterSelectHandler,
+					ActionInProgressHandler, ActionCompletedHandler,
 					DrawSchoolInterfaceHandler {
 	/**
 	   * Child presenters can fire a RevealContentEvent with TYPE_SetMainContent to set themselves
@@ -42,11 +40,12 @@ public class MainPagePresenter extends
 	private CurrentUser currentUser;
 
 	public interface MyView extends View, HasUiHandlers<MainPageUiHandler> {
+		//
 		void showUserInfo(CurrentUser currentUser);
 		void initializeUi(CurrentUser currentUser);
 		void showProgressBar(boolean visible);
 		void enableMainPanel(Boolean disabled);
-		void showCurrentPageOnMenu( String tokenName );
+//		void showCurrentPageOnMenu( String tokenName );
 		//
 		void drawSchoolInterface(String schoolCode);
 		void setWindowEventHanlder();
@@ -294,14 +293,14 @@ public class MainPagePresenter extends
 		History.newItem(NameTokens.bulletinmanagement);
 	}
 		
-	/*
-	 * */
-	@ProxyEvent
-	@Override
-	public void onPageAfterSelect(PageAfterSelectEvent event) {
-		//
-		getView().showCurrentPageOnMenu( event.getTokenName() );
-	}
+//	/*
+//	 * */
+//	@ProxyEvent
+//	@Override
+//	public void onPageAfterSelect(PageAfterSelectEvent event) {
+//		//
+//		getView().showCurrentPageOnMenu( event.getTokenName() );
+//	}
 
 	/*
 	 * */

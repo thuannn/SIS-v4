@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.lemania.sis.client.AdminGateKeeper;
-import com.lemania.sis.client.event.PageAfterSelectEvent;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
 import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
@@ -55,15 +54,15 @@ public class ClassroomPresenter extends
 	}
 
 	protected void onBind() {
+		//
 		super.onBind();
 		//
 		getView().initializeUI();
 	}
 
 	protected void onReset() {
-		super.onReset();
 		//
-		this.getEventBus().fireEvent( new PageAfterSelectEvent(NameTokens.classroom) );
+		super.onReset();
 		//
 		loadClassroomList();
 	}
