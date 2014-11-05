@@ -77,8 +77,9 @@ public class EvaluationHeader extends DatastoreObject implements Comparable<Eval
 	@Override
 	public int compareTo(EvaluationHeader o) {
 		//
-		StringBuilder sb1 = new StringBuilder(this.fromDate.replace(".", ""));
-		StringBuilder sb2 = new StringBuilder(o.fromDate.replace(".", ""));
-		return ( sb1.reverse().toString() ).compareTo( sb2.reverse().toString() );
+		StringBuilder sb2 = new StringBuilder(this.fromDate.replace(".", ""));
+		StringBuilder sb1 = new StringBuilder(o.fromDate.replace(".", ""));
+		return ( sb2.substring(4) + sb2.substring(2, 4) + sb2.substring(0, 2) )
+				.compareTo( sb1.substring(4) + sb1.substring(2, 4) + sb1.substring(0, 2) );
 	}
 }
