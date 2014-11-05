@@ -399,8 +399,8 @@ class AttendanceListView extends ViewWithUiHandlers<AttendanceListUiHandlers>
 									//
 									// If there exists a comment linked to an item, no need to add
 									String strRemarque = "";
-									if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidgetCount() < 2 )
-										strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-1 )).getWidget(0)).getText();
+									if ( ((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-2 )).getWidgetCount() < 2 )
+										strRemarque = ((TextBox)((VerticalPanel) tblAttendance.getWidget( clickedRowIndex, tblAttendance.getCellCount(clickedRowIndex)-2 )).getWidget(0)).getText();
 									//
 									BulletinSubjectProxy bulletinSubject = providerBulletins.getList().get(clickedRowIndex - constantStudentNameRowStart );
 									PeriodProxy pp = providerPeriods.getList().get(clickedCellIndex - constantPeriodsColStart );
