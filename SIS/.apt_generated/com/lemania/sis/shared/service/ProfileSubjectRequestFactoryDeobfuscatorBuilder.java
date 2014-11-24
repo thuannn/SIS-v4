@@ -27,17 +27,17 @@ withOperation(new OperationKey("25Q7WxkRRjyKLyoFSeslgouJIgU="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());
-withOperation(new OperationKey("B0_ScOvIe5fsGZmYTLPkqUso$H0="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
-  .build());
 withOperation(new OperationKey("9yjny_sIdQooOpdnpZufcosh7MQ="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
+  .withMethodName("listAll")
+  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
+  .build());
+withOperation(new OperationKey("B0_ScOvIe5fsGZmYTLPkqUso$H0="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
   .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());
@@ -62,17 +62,17 @@ withOperation(new OperationKey("IcnkMtdZgCQ8S6KSdnuHt4TYDhI="),
   .withMethodName("listAllActive")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());
-withOperation(new OperationKey("8SLCmloTUXnDwqJAzEjz$AwsCug="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/lemania/sis/server/ProfileSubject;")
-  .withMethodName("saveAndReturn")
-  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
-  .build());
 withOperation(new OperationKey("DiLXneANl$CK767vopw82RFxJQw="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/ProfileSubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Lcom/lemania/sis/server/ProfileSubject;)Lcom/lemania/sis/server/ProfileSubject;")
+  .withMethodName("saveAndReturn")
+  .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
+  .build());
+withOperation(new OperationKey("8SLCmloTUXnDwqJAzEjz$AwsCug="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/lemania/sis/server/ProfileSubject;")
   .withMethodName("saveAndReturn")
   .withRequestContext("com.lemania.sis.shared.service.ProfileSubjectRequestFactory$ProfileSubjectRequestContext")
   .build());

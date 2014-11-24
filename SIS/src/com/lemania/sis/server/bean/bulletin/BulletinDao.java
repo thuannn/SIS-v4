@@ -261,8 +261,9 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
-	public void save(Bulletin bulletin){
-		ofy().save().entities(bulletin);
+	public void save(Bulletin bulletin) {
+		//
+		ofy().save().entities(bulletin).now();
 	}
 	
 	public Bulletin saveAndReturn(Bulletin bulletin){
@@ -366,7 +367,7 @@ public class BulletinDao extends MyDAOBase {
 			ofy().delete().entities( bulletinSubject );
 		}			
 		//
-		ofy().delete().entities(bulletin);
+		ofy().delete().entities(bulletin).now();
 		return true;
 		//		
 	}
@@ -379,7 +380,7 @@ public class BulletinDao extends MyDAOBase {
 				.filter("student", Key.create(Student.class, Long.parseLong( studentId )));
 		for (Bulletin bulletin : q){
 			bulletin.setIsActive( status );
-			ofy().save().entities( bulletin );
+			ofy().save().entities( bulletin ).now();
 		}
 	}
 	
@@ -390,7 +391,7 @@ public class BulletinDao extends MyDAOBase {
 		//
 		Bulletin bulletin = ofy().load().key( Key.create(Bulletin.class, Long.parseLong(bulletinId))).now();
 		bulletin.setRemarqueDirection(remarqueDirection);
-		ofy().save().entities(bulletin);
-		return bulletin;
+		Key<Bulletin> keyB = ofy().save().entities(bulletin).now().keySet().iterator().next();
+		return ofy().load().key( keyB ).now();
 	}
 }

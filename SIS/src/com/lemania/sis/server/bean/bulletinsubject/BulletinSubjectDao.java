@@ -100,6 +100,7 @@ public class BulletinSubjectDao extends MyDAOBase {
 				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
+		BulletinSubject curBS = null;
 		for ( BulletinSubject bulletinSubject : q ){
 			//
 			if (bulletinSubject.getProfessor() != null){
@@ -113,13 +114,15 @@ public class BulletinSubjectDao extends MyDAOBase {
 			bulletinSubject.setClassId( Long.toString( 
 					ofy().load().key( ofy().load().key( bulletinSubject.getBulletin()).now().getClasse() ).now().getId() ));
 			//
-			// Remove comment
-			bulletinSubject.setRemarqueT1("");
-			bulletinSubject.setRemarqueT2("");
-			bulletinSubject.setRemarqueT3("");
-			bulletinSubject.setRemarqueT4("");
+			curBS = calculateTotalBrancheCoef( bulletinSubject.getId().toString() );
 			//
-			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
+			// Remove comment
+			curBS.setRemarqueT1("");
+			curBS.setRemarqueT2("");
+			curBS.setRemarqueT3("");
+			curBS.setRemarqueT4("");
+			//
+			returnList.add( curBS );
 		}
 		return returnList;
 	}
@@ -216,9 +219,12 @@ public class BulletinSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * 
+	 * */
 	public void save(BulletinSubject bulletinSubject){
-		ofy().save().entities( bulletinSubject );
+		//
+		ofy().save().entities( bulletinSubject ).now();
 	}
 	
 	
@@ -257,20 +263,32 @@ public class BulletinSubjectDao extends MyDAOBase {
 					.filter("bulletinSubject", Key.create(BulletinSubject.class, ps.getId()));
 			for (BulletinBranche branche : qBranche){
 				if (branche.getBulletinBrancheName().toLowerCase().contains("examen") 
-						|| branche.getBulletinBrancheName().toLowerCase().contains("bac blanc")){
+						|| branche.getBulletinBrancheName().toLowerCase().contains("bac blanc")
+						|| branche.getBulletinBrancheName().toLowerCase().contains("devoir sur") ){
 					if (!branche.getT1().isEmpty()) {
-						examT1 = Double.parseDouble(branche.getT1());						
+						if (examT1 == -0.000001) examT1 = 0.0;
+						if (coefExam == -0.000001) coefExam = 0.0;
+						examT1 = examT1 + Double.parseDouble(branche.getT1());		
+						coefExam = coefExam + branche.getBrancheCoef();
 					}
 					if (!branche.getT2().isEmpty()) {
-						examT2 = Double.parseDouble(branche.getT2());						
+						if (examT2 == -0.000001) examT2 = 0.0;
+						if (coefExam == -0.000001) coefExam = 0.0;
+						examT2 = examT2 + Double.parseDouble(branche.getT2());		
+						coefExam = coefExam + branche.getBrancheCoef();
 					}
 					if (!branche.getT3().isEmpty()) {
-						examT3 = Double.parseDouble(branche.getT3());						
+						if (examT3 == -0.000001) examT3 = 0.0;
+						if (coefExam == -0.000001) coefExam = 0.0;
+						examT3 = examT3 + Double.parseDouble(branche.getT3());	
+						coefExam = coefExam + branche.getBrancheCoef();					
 					}
 					if (!branche.getT4().isEmpty()) {
-						examT4 = Double.parseDouble(branche.getT4());						
+						if (examT4 == -0.000001) examT4 = 0.0;
+						if (coefExam == -0.000001) coefExam = 0.0;
+						examT4 = examT4 + Double.parseDouble(branche.getT4());	
+						coefExam = coefExam + branche.getBrancheCoef();
 					}
-					coefExam = branche.getBrancheCoef();
 					//
 				} else {
 					if (!branche.getT1().isEmpty()){
@@ -496,8 +514,8 @@ public class BulletinSubjectDao extends MyDAOBase {
 				ps.setExamT4("");
 			
 			//
-			ofy().save().entities(ps);
-			return ps;
+			Key<BulletinSubject> keyBS = ofy().save().entities(ps).now().keySet().iterator().next();
+			return ofy().load().key( keyBS ).now();
 			//
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -589,8 +607,9 @@ public class BulletinSubjectDao extends MyDAOBase {
 		for ( BulletinBranche profileBranche : q ){
 			ps.setTotalBrancheCoef( ps.getTotalBrancheCoef() + profileBranche.getBrancheCoef() );
 		}
-		ofy().save().entities( ps );
-		return ps;
+		Key<BulletinSubject> keyPS = ofy().save().entities( ps ).now().keySet().iterator().next();
+		//
+		return ofy().load().key( keyPS ).now();
 	}
 	
 	
