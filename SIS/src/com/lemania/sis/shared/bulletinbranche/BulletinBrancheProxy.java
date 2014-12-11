@@ -1,9 +1,9 @@
-package com.lemania.sis.shared;
+package com.lemania.sis.shared.bulletinbranche;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
-import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.ObjectifyLocator;
+import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
 
 @ProxyFor(value=BulletinBranche.class, locator=ObjectifyLocator.class)
 public interface BulletinBrancheProxy extends EntityProxy {

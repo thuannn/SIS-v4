@@ -22,6 +22,12 @@ public interface BulletinSubjectProxy extends EntityProxy {
 	public String getProfName();
 	public void setProfName(String profName);
 	
+	public String getProf1Name();
+	public void setProf1Name(String profName);
+	
+	public String getProf2Name();
+	public void setProf2Name(String profName);
+	
 	public Boolean getIsActive();
 	public void setIsActive(Boolean isActive);
 	
@@ -69,7 +75,11 @@ public interface BulletinSubjectProxy extends EntityProxy {
 	//
 	public String getStudentName();
 	public String getStudentId();
+	//
 	public String getProfId();
+	public String getProf1Id();
+	public String getProf2Id();
+	//
 	public String getClassId();
 	public String getSubjectId();
 }

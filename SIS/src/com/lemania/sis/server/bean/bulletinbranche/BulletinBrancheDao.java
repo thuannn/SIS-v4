@@ -1,4 +1,4 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.bulletinbranche;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,12 +7,12 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Branche;
-import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
-import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class BulletinBrancheDao extends MyDAOBase {
 	/*

@@ -20,9 +20,6 @@ public class BulletinSubject extends DatastoreObject implements Comparable<Bulle
 	private Boolean isActive = true;
 	private Double subjectCoef;
 	//
-	private String subjectName;
-	private String profName;
-	//
 	private String T1 = "";
 	private String T2 = "";
 	private String T3 = "";
@@ -39,16 +36,33 @@ public class BulletinSubject extends DatastoreObject implements Comparable<Bulle
 	private String remarqueT2 = "";
 	private String remarqueT3 = "";
 	private String remarqueT4 = "";
-	
+	//
 	// This number should always be 1
 	private Double totalBrancheCoef = 0.0;
+	//
+	// 20141202 - Multiple professors for one subject
+	private Key<Professor> professor1;
+	private Key<Professor> professor2;
 	
 	//
-	@IgnoreSave private String studentName;
-	@IgnoreSave private String studentId;
-	@IgnoreSave String profId;
-	@IgnoreSave String classId;
+	//
 	@IgnoreSave String subjectId;
+	private String subjectName;
+	//
+	@IgnoreSave String profId;
+	private String profName;
+	//
+	@IgnoreSave String prof1Id;
+	@IgnoreSave private String prof1Name = "";
+	//
+	@IgnoreSave String prof2Id;
+	@IgnoreSave private String prof2Name = "";
+	//
+	@IgnoreSave private String studentId;
+	@IgnoreSave private String studentName;
+	//
+	@IgnoreSave String classId;
+	
 	
 	
 	public String getSubjectId() {
@@ -263,5 +277,53 @@ public class BulletinSubject extends DatastoreObject implements Comparable<Bulle
 
 	public void setClassId(String classId) {
 		this.classId = classId;
+	}
+
+	public Key<Professor> getProfessor1() {
+		return professor1;
+	}
+
+	public void setProfessor1(Key<Professor> professor1) {
+		this.professor1 = professor1;
+	}
+
+	public Key<Professor> getProfessor2() {
+		return professor2;
+	}
+
+	public void setProfessor2(Key<Professor> professor2) {
+		this.professor2 = professor2;
+	}
+
+	public String getProf1Id() {
+		return prof1Id;
+	}
+
+	public void setProf1Id(String prof1Id) {
+		this.prof1Id = prof1Id;
+	}
+
+	public String getProf1Name() {
+		return prof1Name;
+	}
+
+	public void setProf1Name(String prof1Name) {
+		this.prof1Name = prof1Name;
+	}
+
+	public String getProf2Id() {
+		return prof2Id;
+	}
+
+	public void setProf2Id(String prof2Id) {
+		this.prof2Id = prof2Id;
+	}
+
+	public String getProf2Name() {
+		return prof2Name;
+	}
+
+	public void setProf2Name(String prof2Name) {
+		this.prof2Name = prof2Name;
 	}
 }

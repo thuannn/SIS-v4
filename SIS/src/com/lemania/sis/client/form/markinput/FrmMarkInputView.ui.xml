@@ -54,7 +54,7 @@
 						<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlNoteInput">
 							<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_MIDDLE">
 								<g:Label text="5" styleName="step"/>
-								<g:Label text="Saisir les notes et les remarques pour :" styleName="fieldTitle"/>
+								<g:Label text="Saisir les notes et les remarques pour :" styleName="fieldTitle" width="410px"/>
 							</g:HorizontalPanel>
 							<g:Label text="-" ui:field="lblStudentName" styleName="header"/>
 							<g:Label styleName="hiddenText" text="."/>

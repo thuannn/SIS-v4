@@ -1,9 +1,9 @@
-package com.lemania.sis.shared;
+package com.lemania.sis.shared.profilesubject;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 
 @ProxyFor(value=ProfileSubject.class, locator=ObjectifyLocator.class)
 public interface ProfileSubjectProxy extends EntityProxy {
@@ -22,6 +22,12 @@ public interface ProfileSubjectProxy extends EntityProxy {
 	public String getProfName();
 	public void setProfName(String profName);
 	
+	public String getProf1Name();
+	public void setProf1Name(String profName);
+	
+	public String getProf2Name();
+	public void setProf2Name(String profName);
+
 	public Boolean getIsActive();
 	public void setIsActive(Boolean isActive);
 }

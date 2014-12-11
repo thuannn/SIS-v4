@@ -320,7 +320,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	}
 
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void setClasseList(List<ClasseProxy> classes) {
 		// First clear existing data
@@ -333,7 +334,8 @@ public class FrmBulletinCreationView extends ViewWithUiHandlers<FrmBulletinCreat
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	@UiHandler("cmdCreateBulletin")
 	void onCmdCreateBulletinClick(ClickEvent event) {
 		// Check if student is already exist in the selected class

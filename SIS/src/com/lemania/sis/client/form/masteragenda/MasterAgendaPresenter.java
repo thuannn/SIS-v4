@@ -27,7 +27,6 @@ import com.lemania.sis.client.place.NameTokens;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.classroom.ClassroomProxy;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory;
 import com.lemania.sis.shared.classroom.ClassroomRequestFactory.ClassroomRequestContext;
@@ -37,11 +36,12 @@ import com.lemania.sis.shared.masteragendaitem.MasterAgendaItemRequestFactory.Ma
 import com.lemania.sis.shared.period.PeriodProxy;
 import com.lemania.sis.shared.period.PeriodRequestFactory;
 import com.lemania.sis.shared.period.PeriodRequestFactory.PeriodRequestContext;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectProxy;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
 

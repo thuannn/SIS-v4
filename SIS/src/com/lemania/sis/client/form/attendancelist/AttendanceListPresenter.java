@@ -162,6 +162,7 @@ public class AttendanceListPresenter
 
 	
 	/*
+	 * When a professor is selected, load all the assignments of him/her
 	 * */
 	@Override
 	public void onProfessorSelected(String profId) {
@@ -187,6 +188,7 @@ public class AttendanceListPresenter
 	
 	
 	/*
+	 * When an assignment is selected, list all the student of this professor using the information contained in the assignment
 	 * */
 	@Override
 	public void onAssignmentSelected( final AssignmentProxy a, String strAbsenceDate ) {

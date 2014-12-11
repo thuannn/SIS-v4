@@ -341,7 +341,7 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 	    TextColumn<AbsenceItemProxy> colType = new TextColumn<AbsenceItemProxy>() {
 	      @Override
 	      public String getValue(AbsenceItemProxy object) {
-	        return object.getCodeAbsenceType();
+	        return AbsenceValues.getCodeFR( object.getCodeAbsenceType() );
 	      }
 	    };
 	    tblAbsences.addColumn(colType, "Type");
@@ -867,7 +867,8 @@ public class AbsenceManagementView extends ViewWithUiHandlers<AbsenceManagementU
 		int indexColJustify = 6;
 		//
 		lblBulletinStudentName.setText( lblStudentName.getText() );
-		lblBulletinClasse.setText( selectedAbsentStudent.getClassName() );
+		if ( providerAbsences.getList().size()>0 )
+			lblBulletinClasse.setText( providerAbsences.getList().get(0).getClassName() );
 		lblFromDate.setText( dateFrom.getTextBox().getText() );
 		lblToDate.setText( dateTo.getTextBox().getText() );
 		//

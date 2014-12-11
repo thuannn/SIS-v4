@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import com.lemania.sis.server.bean.parent.Parent;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
-import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.bean.user.User;
@@ -310,8 +310,14 @@ public class BulletinDao extends MyDAOBase {
 				curBulletinSubject.setSubject( profileSubject.getSubject() );
 				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
 				curBulletinSubject.setBulletin( Key.create(Bulletin.class, bulletin.getId()) );
+				//
 				curBulletinSubject.setProfessor( profileSubject.getProfessor() );
+				curBulletinSubject.setProfessor1( profileSubject.getProfessor1() );
+				curBulletinSubject.setProfessor2( profileSubject.getProfessor2() );
 				curBulletinSubject.setProfName( profileSubject.getProfName() );
+				curBulletinSubject.setProf1Name( profileSubject.getProf1Name() );
+				curBulletinSubject.setProf2Name( profileSubject.getProf2Name() );
+				//
 				curBulletinSubject.setSubjectName( profileSubject.getSubjectName() );
 				curBulletinSubject.setSubjectCoef( profileSubject.getSubjectCoef() );
 				keyListSubject.add( ofy().save().entities(curBulletinSubject).now().keySet().iterator().next() );

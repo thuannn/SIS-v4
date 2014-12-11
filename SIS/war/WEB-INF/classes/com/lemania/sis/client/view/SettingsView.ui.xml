@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="939px" spacing="2" height="">
+		<g:VerticalPanel width="939px" height="">
 			<g:Label text="GESTION DE L&apos;ACCES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:Label text="Choisir la date de blocage pour chaque trimestre de chaque programme."/>
 			<g:VerticalPanel spacing="10">

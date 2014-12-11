@@ -6,14 +6,14 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.BulletinBranche;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
-import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
+import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.service.MyDAOBase;
 
@@ -29,10 +29,20 @@ public class BulletinSubjectDao extends MyDAOBase {
 		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class).order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for (BulletinSubject bulletinSubject : q){
+			//
 			if (bulletinSubject.getProfessor() != null) {
 				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
 			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
+			}
+			//
 			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );
 			bulletinSubject.setSubjectId( Long.toString(
 					ofy().load().key( bulletinSubject.getSubject()).now().getId() ));
@@ -51,10 +61,20 @@ public class BulletinSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
-			if (bulletinSubject.getProfessor() != null){
+			//
+			if (bulletinSubject.getProfessor() != null) {
 				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
 			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
+			}
+			//
 			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );
 			bulletinSubject.setSubjectId( Long.toString(
 					ofy().load().key( bulletinSubject.getSubject()).now().getId() ));
@@ -68,16 +88,25 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public List<BulletinSubject> listAll( String bulletinId ){
+	public List<BulletinSubject> listAll( String bulletinId ) {
+		//
 		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
 				.order("subjectName");
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
 			//
-			if (bulletinSubject.getProfessor() != null){
+			if (bulletinSubject.getProfessor() != null) {
 				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
 			}
 			//
 			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
@@ -103,9 +132,17 @@ public class BulletinSubjectDao extends MyDAOBase {
 		BulletinSubject curBS = null;
 		for ( BulletinSubject bulletinSubject : q ){
 			//
-			if (bulletinSubject.getProfessor() != null){
+			if (bulletinSubject.getProfessor() != null) {
 				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
 			}
 			//
 			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
@@ -145,9 +182,17 @@ public class BulletinSubjectDao extends MyDAOBase {
 		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
 		for ( BulletinSubject bulletinSubject : q ){
 			//
-			if (bulletinSubject.getProfessor() != null){
+			if (bulletinSubject.getProfessor() != null) {
 				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
 			}
 			//
 			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
@@ -167,25 +212,41 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	
 	/*
-	 * Dans les cas qu'il y a deux us plus profs pour une matière, il faut pas filtrer les bulletin subject par prof
+	 * 
 	 * */
 	public List<BulletinSubject> listAllByAssignment(String assignmentId) {
 		// Get the assignment object
 		Assignment assignment = ofy().load().key( Key.create(Assignment.class, Long.parseLong(assignmentId))).now();
 		//
 		if (assignment != null) {
-			// Get the Bulletin list by class
+			// Get the Bulletin list by class (which contains the student and class information)
 			Query<Bulletin> qBulletin = ofy().load().type(Bulletin.class)
 					.filter("classe", assignment.getClasse())
 					.filter("isActive", true);
 			
 			// Get the Bulletin Subject list
+			List<BulletinSubject> fullBulletinSubjectList = new ArrayList<BulletinSubject>();
 			Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
 					.filter("subject", assignment.getSubject())
 					.filter("professor", assignment.getProf())
 					.order("subjectName");
+			fullBulletinSubjectList.addAll( q.list() );
+			// If found nothing with the first professor, look by the second professor
+			q = ofy().load().type(BulletinSubject.class)
+					.filter("subject", assignment.getSubject())
+					.filter("professor1", assignment.getProf())
+					.order("subjectName");
+			fullBulletinSubjectList.addAll( q.list() );
+			// If found nothing with the first professor, look by the third professor
+			q = ofy().load().type(BulletinSubject.class)
+					.filter("subject", assignment.getSubject())
+					.filter("professor2", assignment.getProf())
+					.order("subjectName");
+			fullBulletinSubjectList.addAll( q.list() );
+			//
 			List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
-			for ( BulletinSubject bulletinSubject : q ){
+			//
+			for ( BulletinSubject bulletinSubject : fullBulletinSubjectList ){
 				// Check if this Bulletin Subject belongs to Bulletin list of the class
 				for (Bulletin bulletin : qBulletin){
 					//
@@ -194,9 +255,17 @@ public class BulletinSubjectDao extends MyDAOBase {
 					//
 					if (bulletinSubject.getBulletin().getId() == bulletin.getId()) {
 						//
-						if (bulletinSubject.getProfessor() != null){
+						if (bulletinSubject.getProfessor() != null) {
 							bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
 							bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+						}
+						if (bulletinSubject.getProfessor1() != null) {
+							bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+							bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+						}
+						if (bulletinSubject.getProfessor2() != null) {
+							bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+							bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
 						}
 						//
 						bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
@@ -379,12 +448,13 @@ public class BulletinSubjectDao extends MyDAOBase {
 						ps.setAn("");
 				}
 				else {
+					//
+					// 2014-11-26
+					// For T1, the examen is calculated in the average grade just like a normal grade
+					totalT1 = totalT1 + examT1;
+					totalCoefT1 = totalCoefT1 + coefExamT1;
 					if (totalT1>=0 && examT1>=0) {
 						//
-						// 2014-11-26 
-						// totalT1 = totalT1 + (examT1 * coefExamT1);
-						totalT1 = totalT1 + (examT1 / coefExamT1);
-						totalCoefT1 = totalCoefT1 + coefExamT1;
 						ps.setT1( Double.toString( ((double)Math.round(totalT1/totalCoefT1*10))/10 ) );
 					}
 					if (totalT1>=0 && examT1<0)
@@ -412,11 +482,11 @@ public class BulletinSubjectDao extends MyDAOBase {
 					}
 					
 					if (avantExam>=0 && examT2>=0)
-						ps.setAn( Double.toString(((double)Math.round((avantExam+examT2)/2*10))/10) );
+						ps.setAn( Double.toString(((double)Math.round((avantExam+(examT2/coefExamT2))/2*10))/10) );
 					if (avantExam>=0 && examT2<0)
 						ps.setAn( Double.toString(avantExam) );
 					if (avantExam<0 && examT2>=0)
-						ps.setAn( Double.toString(((double)Math.round(examT2*10))/10 ));
+						ps.setAn( Double.toString(((double)Math.round(examT2/coefExamT2*10))/10 ));
 					if (avantExam<0 && examT2<0)
 						ps.setAn("");
 					
@@ -532,15 +602,29 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public BulletinSubject saveAndReturn(String bulletinId, String subjectId, String professorId, String subjectCoef ) {
+	public BulletinSubject saveAndReturn(String bulletinId, String subjectId, String professorId, String professor1Id, String professor2Id, String subjectCoef ) {
 		//
 		BulletinSubject ps = new BulletinSubject();
 		ps.setBulletin( Key.create( Bulletin.class, Long.parseLong(bulletinId)));
 		ps.setSubject(Key.create( Subject.class, Long.parseLong(subjectId)));
+		//
 		ps.setProfessor( Key.create(Professor.class, Long.parseLong(professorId)));
+		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName());
+		//
+		if (professor1Id.equals("")) 
+			ps.setProfessor1(null);
+		else { 
+			ps.setProfessor1( Key.create(Professor.class, Long.parseLong(professor1Id)));
+			ps.setProf1Name( ofy().load().key(ps.getProfessor1()).now().getProfName());
+		}
+		if (professor2Id.equals("")) 
+			ps.setProfessor2(null);
+		else {
+			ps.setProfessor2( Key.create(Professor.class, Long.parseLong(professor2Id)));
+			ps.setProf2Name( ofy().load().key(ps.getProfessor2()).now().getProfName());
+		}
 		
 		ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
-		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName());
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
 		
 		Key<BulletinSubject> key = ofy().save().entities( ps ).now().keySet().iterator().next();
@@ -558,10 +642,26 @@ public class BulletinSubjectDao extends MyDAOBase {
 			profile = profiles.list().get(0);
 		}
 		//
+		// Search for this course in the profile with different professors
+		List<Key<Professor>> profKeys = new ArrayList<Key<Professor>>();
+		profKeys.add( ps.getProfessor() );
+		if ( ps.getProfessor1() != null ) profKeys.add( ps.getProfessor1() );
+		if ( ps.getProfessor2() != null ) profKeys.add( ps.getProfessor2() );
+		// 
 		Query<ProfileSubject> profileSubjects = ofy().load().type(ProfileSubject.class)
-				.filter("profile", profile)
-				.filter("subject", ps.getSubject())
-				.filter("professor", ps.getProfessor());
+				.filter("profile", profile )
+				.filter("subject", ps.getSubject() )
+				.filter("professor in", profKeys );
+		if (profileSubjects.list().size() <1)
+			profileSubjects = ofy().load().type(ProfileSubject.class)
+				.filter("profile", profile )
+				.filter("subject", ps.getSubject() )
+				.filter("professor1 in", profKeys );
+		if (profileSubjects.list().size() <1)
+			profileSubjects = ofy().load().type(ProfileSubject.class)
+				.filter("profile", profile )
+				.filter("subject", ps.getSubject() )
+				.filter("professor2 in", profKeys );
 		//
 		Query<ProfileBranche> profileBranches = ofy().load().type(ProfileBranche.class)
 				.filter("profileSubject", profileSubjects.keys().list().get(0));
@@ -622,11 +722,29 @@ public class BulletinSubjectDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public BulletinSubject updateBulletinSubjectProf( BulletinSubject bs, String profId ) {
+	public BulletinSubject updateBulletinSubjectProf( BulletinSubject bs, String profId, String prof1Id, String prof2Id ) {
 		//
 		Key<Professor> kf = Key.create(Professor.class, Long.parseLong(profId));
 		bs.setProfessor( kf );
 		bs.setProfName( ofy().load().key( kf ).now().getProfName() );
+		//
+		if (prof1Id.equals("")) {
+			bs.setProfessor1(null);
+			bs.setProf1Name("");
+		}
+		else {
+			bs.setProfessor1( Key.create( Professor.class, Long.parseLong(prof1Id)) );
+			bs.setProf1Name( ofy().load().key( bs.getProfessor1() ).now().getProfName() );
+		}
+		//
+		if (prof2Id.equals("")) {
+			bs.setProfessor2(null);
+			bs.setProf2Name("");
+		}
+		else {
+			bs.setProfessor2( Key.create( Professor.class, Long.parseLong(prof2Id)) );
+			bs.setProf2Name( ofy().load().key( bs.getProfessor2() ).now().getProfName() );
+		}
 		//
 		Key<BulletinSubject> key = ofy().save().entities( bs ).now().keySet().iterator().next();
 		//

@@ -10,7 +10,7 @@
 		<g:VerticalPanel width="100%">
 			<g:Label text="GESTION DES PROGRAMMES / CLASSES" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:VerticalPanel width="100%" spacing="2">
-				<g:Grid cellPadding="3" cellSpacing="2">
+				<g:Grid cellPadding="2" cellSpacing="2">
 					<g:row>
 						<g:customCell>
 							<g:Label text="Choisir une classe :"/>
@@ -39,7 +39,7 @@
 				</g:Grid>
 				<g:HorizontalPanel width="100%" spacing="5">
 					<g:cell width="65%">
-					<g:VerticalPanel width="100%" styleName="subSection" spacing="2" ui:field="pnlSubject">
+					<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlSubject">
 								<g:Label text="Liste des matière du programme choisi" styleName="sectionTitle"/>
 								<p1:DataGrid width="" height="400px" ui:field="tblSubjects" pageSize="10"/>
 								<g:Cell horizontalAlignment="ALIGN_CENTER">
@@ -47,7 +47,7 @@
 								</g:Cell>
 								<g:VerticalPanel width="100%" spacing="2" ui:field="pnlSubjectAdd">
 								<g:Label text="Rajouter une matière" styleName="sectionTitle"/>
-								<g:Grid width="" cellPadding="5" cellSpacing="5">
+								<g:Grid width="" cellPadding="2" cellSpacing="2">
 									<g:row>
 										<g:customCell>
 											<g:Label text="Matière :"/>
@@ -64,10 +64,26 @@
 									</g:row>
 									<g:row>
 										<g:customCell>
-											<g:Label text="Professeur :"/>
+											<g:Label text="Professeur 1 :"/>
 										</g:customCell>
 										<g:customCell>
 											<g:ListBox ui:field="lstProfessors" width="" styleName="sis_textbox"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Label text="Professeur 2 :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox styleName="sis_textbox" width="" ui:field="lstProfessors1"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Label text="Professeur 3 :"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox styleName="sis_textbox" width="" ui:field="lstProfessors2"/>
 										</g:customCell>
 									</g:row>
 									<g:row>

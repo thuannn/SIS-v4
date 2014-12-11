@@ -1,8 +1,8 @@
-package com.lemania.sis.client.form.attributionmgt;
+package com.lemania.sis.client.form.profilemgt;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 import com.lemania.sis.shared.ProfileBrancheProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectProxy;
 
 public interface ProfileManagementUiHandler extends UiHandlers {
 	//
@@ -10,7 +10,7 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	//
 	void loadProfessorList( String subjectId, String classId );
 	//
-	void addSubjectToProfile( String profileId, String subjectId, String professorId, String subjectCoef );
+	void addSubjectToProfile( String profileId, String subjectId, String professorId, String professorId1, String professorId2, String subjectCoef );
 	void removeSubject( ProfileSubjectProxy ps );
 	//
 	void addBrancheToProfile( String profileSubjectId, String brancheId, String brancheCoef, Integer subjectLastPosition );
@@ -24,5 +24,5 @@ public interface ProfileManagementUiHandler extends UiHandlers {
 	//
 	void onSubjectSelected( String profileSubjectId );
 	//
-	void updateSubjectProf( ProfileSubjectProxy ps, String profId, final Integer lastPosition );
+	void updateSubjectProf( ProfileSubjectProxy ps, String profId, String profId1, String profId2, final Integer lastPosition );
 }

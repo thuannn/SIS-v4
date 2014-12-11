@@ -1,7 +1,7 @@
 package com.lemania.sis.client.form.markinput;
 
 import com.gwtplatform.mvp.client.UiHandlers;
-import com.lemania.sis.shared.BulletinBrancheProxy;
+import com.lemania.sis.shared.bulletinbranche.BulletinBrancheProxy;
 import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
 
 public interface FrmMarkInputUiHandler extends UiHandlers {

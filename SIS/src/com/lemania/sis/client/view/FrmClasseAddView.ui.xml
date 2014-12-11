@@ -7,7 +7,7 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2">
+		<g:VerticalPanel width="100%">
 			<g:Label text="AJOUTER UNE CLASSE" styleName="pageTitle" horizontalAlignment="ALIGN_CENTER"/>
 			<g:Grid cellPadding="5" cellSpacing="5" width="80%">
 				<g:row>

@@ -11,13 +11,13 @@ import com.google.inject.Inject;
 import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.UI.GridButtonCell;
 import com.lemania.sis.shared.BrancheProxy;
-import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
+import com.lemania.sis.shared.bulletinbranche.BulletinBrancheProxy;
 import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -65,6 +65,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	Integer selectedBrancheIndex = -1;
 	//
 	private PopupPanel pp;
+	private boolean isEditingProfs = false;
 	
 
 	public interface Binder extends UiBinder<Widget, FrmBulletinManagementView> {
@@ -96,6 +97,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiField VerticalPanel pnlSubjectAdd;
 	@UiField Button cmdSaveSubject;
 	@UiField VerticalPanel pnlSubject;
+	@UiField ListBox lstProfessors1;
+	@UiField ListBox lstProfessors2;
 	
 	
 	/**/
@@ -342,7 +345,9 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    TextColumn<BulletinSubjectProxy> colProfName = new TextColumn<BulletinSubjectProxy>() {
 	      @Override
 	      public String getValue(BulletinSubjectProxy object) {
-	        return object.getProfName();	        		
+	    	  return object.getProfName() 
+	    			  + ((object.getProf1Name().equals(""))? "" : " - " + object.getProf1Name()) 
+	    			  + ((object.getProf2Name().equals(""))? "" : " - " + object.getProf2Name());	        		
 	      }
 	    };	    
 	    tblSubjects.addColumn(colProfName, "Prof");
@@ -385,7 +390,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    			    }
 	    			}
 	    		};
-	    		
+	    		//
 	    		pp.addCloseHandler(new CloseHandler<PopupPanel>() {
 	    			public void onClose(CloseEvent<PopupPanel> event) {
 	    				//
@@ -394,6 +399,12 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    				cmdAddSubject.setVisible(true);
 	    				lstSubjects.setEnabled(true);
 	    				txtSubjectCoef.setEnabled(true);
+	    				//
+	    				// Reset the professor list
+	    				lstProfessors.setSelectedIndex(0);
+	    				lstProfessors1.setSelectedIndex(0);
+	    				lstProfessors2.setSelectedIndex(0);
+	    				isEditingProfs = false;
 	    			}
 	    		});
 	    		//
@@ -403,12 +414,14 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 				lstSubjects.setEnabled(false);
 				txtSubjectCoef.setEnabled(false);
 				//
+				// Show the currrently selected profs of this course
+				FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
+	    		onLstSubjectsChange( null );
+	    		isEditingProfs = true;
+				//
 				pp.setGlassEnabled( true );
 	    		pp.show();
 	    		pp.center();
-	    		//
-	    		FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
-	    		onLstSubjectsChange( null );
 	    	}
 	    });
 	    tblSubjects.setColumnWidth(colEdit, 13, Unit.PCT);
@@ -557,7 +570,9 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 			getUiHandlers().addSubject(
 					selectedBulletin.getId().toString(), 
 					lstSubjects.getValue(lstSubjects.getSelectedIndex()), 
-					lstProfessors.getValue(lstProfessors.getSelectedIndex()), 
+					lstProfessors.getValue(lstProfessors.getSelectedIndex()),
+					lstProfessors.getValue(lstProfessors1.getSelectedIndex()),
+					lstProfessors.getValue(lstProfessors2.getSelectedIndex()),
 					txtSubjectCoef.getText());
 	}
 	
@@ -634,11 +649,31 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 		//
 		lstProfessors.clear();
 		lstProfessors.addItem("-","");
-		
 		for ( ProfessorProxy prof : profs ){
 			lstProfessors.addItem( prof.getProfName(), prof.getId().toString() );
 		}
 		lstProfessors.setSelectedIndex(0);
+		//
+		lstProfessors1.clear();
+		lstProfessors1.addItem("-","");
+		for ( ProfessorProxy prof : profs ){
+			lstProfessors1.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfessors1.setSelectedIndex(0);
+		//
+		lstProfessors2.clear();
+		lstProfessors2.addItem("-","");
+		for ( ProfessorProxy prof : profs ){
+			lstProfessors2.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfessors2.setSelectedIndex(0);
+		//
+		// Show the professors of this subject
+		if ( isEditingProfs ) {
+			FieldValidation.selectItemByText( lstProfessors, selectedSubject.getProfName() );
+			FieldValidation.selectItemByText( lstProfessors1, selectedSubject.getProf1Name() );
+			FieldValidation.selectItemByText( lstProfessors2, selectedSubject.getProf2Name() );
+		}
 	}
 	
 	
@@ -647,6 +682,10 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiHandler("cmdSaveSubject")
 	void onCmdSaveSubjectClick(ClickEvent event) {
 		//
-		getUiHandlers().updateSubjectProf( selectedSubject, lstProfessors.getValue( lstProfessors.getSelectedIndex() ), selectedSubjectIndex );
+		getUiHandlers().updateSubjectProf( selectedSubject, 
+				lstProfessors.getValue( lstProfessors.getSelectedIndex() ), 
+				lstProfessors1.getValue( lstProfessors1.getSelectedIndex() ), 
+				lstProfessors2.getValue( lstProfessors2.getSelectedIndex() ), 
+				selectedSubjectIndex );
 	}
 }

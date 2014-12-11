@@ -8,7 +8,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
-import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 
 public class ProfessorDao extends MyDAOBase {
 	

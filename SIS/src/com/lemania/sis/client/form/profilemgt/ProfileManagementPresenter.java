@@ -1,4 +1,4 @@
-package com.lemania.sis.client.form.attributionmgt;
+package com.lemania.sis.client.form.profilemgt;
 
 import java.util.List;
 
@@ -32,10 +32,12 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileBrancheProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
 import com.lemania.sis.shared.assignment.AssignmentRequestFactory;
 import com.lemania.sis.shared.assignment.AssignmentRequestFactory.AssignmentRequestContext;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectProxy;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
@@ -43,8 +45,6 @@ import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileBrancheRequestFactory;
 import com.lemania.sis.shared.service.ProfileBrancheRequestFactory.ProfileBrancheRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
 import com.lemania.sis.shared.service.ProfileRequestFactory.ProfileRequestContext;
@@ -273,10 +273,10 @@ public class ProfileManagementPresenter
 	
 
 	/*
-	 * 
 	 * */
 	@Override
-	public void addSubjectToProfile(String profileId, String subjectId, String professorId,	String subjectCoef) {
+	public void addSubjectToProfile(String profileId, String subjectId, 
+			String professorId, String professorId1, String professorId2,	String subjectCoef) {
 		//
 		if (this.currentUser.isReadOnly()){
 			Window.alert(NotificationValues.readOnly);
@@ -284,6 +284,10 @@ public class ProfileManagementPresenter
 		}
 		
 		//
+		if (professorId.isEmpty()) {
+			Window.alert( NotificationValues.invalid_input + " - Professor");
+			return;
+		}
 		if (profileId.isEmpty()) {
 			Window.alert( NotificationValues.invalid_input + " - Profil");
 			return;
@@ -301,7 +305,7 @@ public class ProfileManagementPresenter
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();		
-		rc.saveAndReturn( profileId, subjectId, professorId, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
+		rc.saveAndReturn( profileId, subjectId, professorId, professorId1, professorId2, subjectCoef ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -598,7 +602,7 @@ public class ProfileManagementPresenter
 	/*
 	 * */
 	@Override
-	public void updateSubjectProf(ProfileSubjectProxy ps, String profId, final Integer lastPosition) {
+	public void updateSubjectProf(ProfileSubjectProxy ps, String profId, String profId1, String profId2, final Integer lastPosition) {
 		//
 		if (profId.equals(""))
 			return;
@@ -606,7 +610,7 @@ public class ProfileManagementPresenter
 		ProfileSubjectRequestFactory rf = GWT.create(ProfileSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		ProfileSubjectRequestContext rc = rf.profileSubjectRequest();
-		rc.updateSubjectProf( ps, profId ).fire(new Receiver<ProfileSubjectProxy>(){
+		rc.updateSubjectProf( ps, profId, profId1, profId2 ).fire(new Receiver<ProfileSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

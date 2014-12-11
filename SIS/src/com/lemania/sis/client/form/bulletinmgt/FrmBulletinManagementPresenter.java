@@ -28,7 +28,6 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.lemania.sis.client.values.NotificationValues;
 import com.lemania.sis.shared.BrancheProxy;
-import com.lemania.sis.shared.BulletinBrancheProxy;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.CoursProxy;
 import com.lemania.sis.shared.EcoleProxy;
@@ -40,21 +39,22 @@ import com.lemania.sis.shared.assignment.AssignmentRequestFactory.AssignmentRequ
 import com.lemania.sis.shared.bulletin.BulletinProxy;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory;
 import com.lemania.sis.shared.bulletin.BulletinRequestFactory.BulletinRequestContext;
+import com.lemania.sis.shared.bulletinbranche.BulletinBrancheProxy;
+import com.lemania.sis.shared.bulletinbranche.BulletinBrancheRequestFactory;
+import com.lemania.sis.shared.bulletinbranche.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.bulletinsubject.BulletinSubjectProxy;
 import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory;
 import com.lemania.sis.shared.bulletinsubject.BulletinSubjectRequestFactory.BulletinSubjectRequestContext;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.BrancheRequestFactory;
-import com.lemania.sis.shared.service.BulletinBrancheRequestFactory;
 import com.lemania.sis.shared.service.ClasseRequestFactory;
 import com.lemania.sis.shared.service.CoursRequestFactory;
 import com.lemania.sis.shared.service.EcoleRequestFactory;
 import com.lemania.sis.shared.service.EventSourceRequestTransport;
 import com.lemania.sis.shared.service.ProfileRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory;
-import com.lemania.sis.shared.service.ProfileSubjectRequestFactory.ProfileSubjectRequestContext;
 import com.lemania.sis.shared.service.SubjectRequestFactory;
 import com.lemania.sis.shared.service.BrancheRequestFactory.BrancheRequestContext;
-import com.lemania.sis.shared.service.BulletinBrancheRequestFactory.BulletinBrancheRequestContext;
 import com.lemania.sis.shared.service.ClasseRequestFactory.ClasseRequestContext;
 import com.lemania.sis.shared.service.CoursRequestFactory.CoursRequestContext;
 import com.lemania.sis.shared.service.EcoleRequestFactory.EcoleRequestContext;
@@ -421,18 +421,21 @@ public class FrmBulletinManagementPresenter
 	/*
 	 * */
 	@Override
-	public void addSubject(String bulletinId, String subjectId, String profId, String coef) {
+	public void addSubject(String bulletinId, String subjectId, String profId, String profId1, String profId2, String coef) {
 		//
 		if (this.currentUser.isReadOnly()){
 			Window.alert(NotificationValues.readOnly);
 			return;
 		}
-		
+		if (profId.equals("")) {
+			Window.alert( NotificationValues.invalid_input + " - Professeur");
+			return;
+		}
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
-		rc.saveAndReturn( bulletinId, subjectId, profId, coef ).fire(new Receiver<BulletinSubjectProxy>(){
+		rc.saveAndReturn( bulletinId, subjectId, profId, profId1, profId2, coef ).fire(new Receiver<BulletinSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());
@@ -546,13 +549,13 @@ public class FrmBulletinManagementPresenter
 	/*
 	 * */
 	@Override
-	public void updateSubjectProf(BulletinSubjectProxy subject, String profId,
+	public void updateSubjectProf(BulletinSubjectProxy subject, String profId, String prof1Id, String prof2Id,
 			final Integer lastSubjectIndex) {
 		//
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
-		rc.updateBulletinSubjectProf( subject, profId ).fire(new Receiver<BulletinSubjectProxy>(){
+		rc.updateBulletinSubjectProf( subject, profId, prof1Id, prof2Id ).fire(new Receiver<BulletinSubjectProxy>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

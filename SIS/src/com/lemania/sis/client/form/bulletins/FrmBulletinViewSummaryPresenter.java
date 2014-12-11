@@ -1,5 +1,6 @@
 package com.lemania.sis.client.form.bulletins;
 
+import java.util.Date;
 import java.util.List;
 
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -19,6 +20,7 @@ import com.lemania.sis.client.AdminGateKeeper;
 import com.lemania.sis.client.CurrentUser;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -196,8 +198,12 @@ public class FrmBulletinViewSummaryPresenter
 	public void onLoginAuthenticated(LoginAuthenticatedEvent event) {
 		//
 		this.currentUser = event.getCurrentUser();
-		getView().drawDate(this.currentUser.getCurrentDay()+ "." 
-					+ this.currentUser.getCurrentMonth() + "." 
-					+ this.currentUser.getCurrentYear());
+		//
+		getView().drawDate( DateTimeFormat.getFormat("dd.MM.yyyy").format( new Date() ));
+		
+//		getView().drawDate(
+//					this.currentUser.getCurrentDay()+ "." 
+//					+ this.currentUser.getCurrentMonth() + "." 
+//					+ this.currentUser.getCurrentYear());
 	}
 }

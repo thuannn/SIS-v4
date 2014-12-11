@@ -1,9 +1,11 @@
-package com.lemania.sis.server;
+package com.lemania.sis.server.bean.bulletinbranche;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
+import com.lemania.sis.server.Branche;
+import com.lemania.sis.server.DatastoreObject;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
 
 @Entity

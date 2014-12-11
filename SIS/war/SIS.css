@@ -360,11 +360,7 @@ Agenda
 }
 
 .subSection {
-	padding: 3px;
-	border-top: 0px solid;
-	border-right: 1px solid Silver;
-	border-bottom: 1px solid Silver;
-	border-left: 0px solid;
+	border: 0px;
 	background-color: snow;	
 }
 

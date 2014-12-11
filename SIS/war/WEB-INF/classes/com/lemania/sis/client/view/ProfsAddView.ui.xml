@@ -7,7 +7,7 @@
 	ui:generateLocales='default' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
 
 	<g:HTMLPanel width="100%">
-		<g:VerticalPanel width="100%" spacing="2">
+		<g:VerticalPanel width="100%">
 			<g:Label text="AJOUTER UN NOUVEAU PROFESSEUR" styleName="pageTitle" width="" horizontalAlignment="ALIGN_CENTER"/>
 			<g:HorizontalPanel width="800px">
 				<g:Grid width="80%" cellPadding="5" cellSpacing="5">

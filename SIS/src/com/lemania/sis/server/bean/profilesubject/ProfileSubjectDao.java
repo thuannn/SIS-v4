@@ -1,4 +1,4 @@
-package com.lemania.sis.server.service;
+package com.lemania.sis.server.bean.profilesubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
-import com.lemania.sis.server.ProfileSubject;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.service.MyDAOBase;
 
 public class ProfileSubjectDao extends MyDAOBase {
 	//
@@ -24,9 +24,16 @@ public class ProfileSubjectDao extends MyDAOBase {
 		Query<ProfileSubject> q = ofy().load().type(ProfileSubject.class).order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for (ProfileSubject profileSubject : q){
+			//
 			if (profileSubject.getProfessor() != null)
 				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			if (profileSubject.getProfessor1() != null)
+				profileSubject.setProf1Name( ofy().load().key(profileSubject.getProfessor1()).now().getProfName() );
+			if (profileSubject.getProfessor2() != null)
+				profileSubject.setProf2Name( ofy().load().key(profileSubject.getProfessor2()).now().getProfName() );
+			//
 			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
+			//
 			returnList.add(profileSubject);
 		}
 		return returnList;
@@ -40,8 +47,14 @@ public class ProfileSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
+			//
 			if (profileSubject.getProfessor() != null)
 				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			if (profileSubject.getProfessor1() != null)
+				profileSubject.setProf1Name( ofy().load().key(profileSubject.getProfessor1()).now().getProfName() );
+			if (profileSubject.getProfessor2() != null)
+				profileSubject.setProf2Name( ofy().load().key(profileSubject.getProfessor2()).now().getProfName() );
+			//
 			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
 			returnList.add( profileSubject );
 		}
@@ -56,8 +69,14 @@ public class ProfileSubjectDao extends MyDAOBase {
 				.order("subjectName");
 		List<ProfileSubject> returnList = new ArrayList<ProfileSubject>();
 		for ( ProfileSubject profileSubject : q ){
+			//
 			if (profileSubject.getProfessor() != null)
 				profileSubject.setProfName( ofy().load().key(profileSubject.getProfessor()).now().getProfName() );
+			if (profileSubject.getProfessor1() != null)
+				profileSubject.setProf1Name( ofy().load().key(profileSubject.getProfessor1()).now().getProfName() );
+			if (profileSubject.getProfessor2() != null)
+				profileSubject.setProf2Name( ofy().load().key(profileSubject.getProfessor2()).now().getProfName() );
+			//
 			profileSubject.setSubjectName( ofy().load().key( profileSubject.getSubject()).now().getSubjectName() );
 			returnList.add( profileSubject );
 		}
@@ -65,7 +84,8 @@ public class ProfileSubjectDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public void save(ProfileSubject profileSubject){
 		ofy().save().entities( profileSubject );
 	}
@@ -77,8 +97,14 @@ public class ProfileSubjectDao extends MyDAOBase {
 		Key<ProfileSubject> key = ofy().save().entities(profile).now().keySet().iterator().next();
 		try {
 			ProfileSubject ps = ofy().load().key(key).now();
+			//
 			if (ps.getProfessor() != null)
 				ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+			if (ps.getProfessor1() != null)
+				ps.setProf1Name( ofy().load().key(ps.getProfessor1()).now().getProfName() );
+			if (ps.getProfessor2() != null)
+				ps.setProf2Name( ofy().load().key(ps.getProfessor2()).now().getProfName() );
+			//
 			ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
 			return ps;
 		} catch (Exception e) {
@@ -89,14 +115,31 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public ProfileSubject updateSubjectProf( ProfileSubject profile, String profId ){
+	public ProfileSubject updateSubjectProf( ProfileSubject profile, String profId, String profId1, String profId2 ){
 		//
-		profile.setProfessor( Key.create( Professor.class, Long.parseLong(profId)));
+		profile.setProfessor( Key.create( Professor.class, Long.parseLong(profId)) );
+		//
+		if (!profId1.equals(""))
+			profile.setProfessor1( Key.create( Professor.class, Long.parseLong(profId1)) );
+		else
+			profile.setProfessor1(null);
+		//
+		if (!profId2.equals(""))
+			profile.setProfessor2( Key.create( Professor.class, Long.parseLong(profId2)) );
+		else
+			profile.setProfessor2(null);
+		//
 		Key<ProfileSubject> key = ofy().save().entities(profile).now().keySet().iterator().next();
 		try {
 			ProfileSubject ps = ofy().load().key(key).now();
+			//
 			if (ps.getProfessor() != null)
 				ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+			if (ps.getProfessor1() != null)
+				ps.setProf1Name( ofy().load().key(ps.getProfessor1()).now().getProfName() );
+			if (ps.getProfessor2() != null)
+				ps.setProf2Name( ofy().load().key(ps.getProfessor2()).now().getProfName() );
+			//
 			ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
 			return ps;
 		} catch (Exception e) {
@@ -107,17 +150,34 @@ public class ProfileSubjectDao extends MyDAOBase {
 	
 	
 	/**/
-	public ProfileSubject saveAndReturn(String profileId, String subjectId, String professorId, String subjectCoef ){
+	public ProfileSubject saveAndReturn(String profileId, String subjectId, 
+			String professorId, String professorId1, String professorId2, String subjectCoef ){
 		//
 		ProfileSubject ps = new ProfileSubject();
 		ps.setProfile( Key.create( Profile.class, Long.parseLong(profileId)));
 		ps.setSubject( Key.create( Subject.class, Long.parseLong(subjectId)));
+		//
 		ps.setProfessor( Key.create(Professor.class, Long.parseLong(professorId)));
-		
+		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName() );
+		// 
+		// if there aren't any other prof, set null
+		if (professorId1.equals(""))
+			ps.setProfessor1(null);
+		else {
+			ps.setProfessor1( Key.create(Professor.class, Long.parseLong(professorId1)) );
+			ps.setProf1Name( ofy().load().key(ps.getProfessor1()).now().getProfName() );
+		}
+		//
+		if (professorId2.equals(""))
+			ps.setProfessor2(null);
+		else {
+			ps.setProfessor2( Key.create(Professor.class, Long.parseLong(professorId2)));
+			ps.setProf2Name( ofy().load().key(ps.getProfessor2()).now().getProfName() );
+		}
+		//
 		ps.setSubjectName( ofy().load().key( ps.getSubject()).now().getSubjectName() );
-		ps.setProfName( ofy().load().key(ps.getProfessor()).now().getProfName());
 		ps.setSubjectCoef( Double.parseDouble(subjectCoef));
-		
+		//
 		Key<ProfileSubject> key = ofy().save().entities( ps ).now().keySet().iterator().next();
 		try {
 			return ofy().load().key(key).now();
@@ -173,8 +233,13 @@ public class ProfileSubjectDao extends MyDAOBase {
 		//
 		List<Professor> returnList = new ArrayList<Professor>();
 		for ( ProfileSubject profileSubject : q ){
+			//
 			if (profileSubject.getProfessor() != null)
 				returnList.add( ofy().load().key( profileSubject.getProfessor() ).now() );
+			if (profileSubject.getProfessor1() != null)
+				returnList.add( ofy().load().key( profileSubject.getProfessor1() ).now() );
+			if (profileSubject.getProfessor2() != null)
+				returnList.add( ofy().load().key( profileSubject.getProfessor2() ).now() );
 		}
 		return returnList;
 	}

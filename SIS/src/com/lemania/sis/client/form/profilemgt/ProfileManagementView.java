@@ -1,4 +1,4 @@
-package com.lemania.sis.client.form.attributionmgt;
+package com.lemania.sis.client.form.profilemgt;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
 import com.lemania.sis.shared.ProfileBrancheProxy;
 import com.lemania.sis.shared.ProfileProxy;
-import com.lemania.sis.shared.ProfileSubjectProxy;
 import com.lemania.sis.shared.SubjectProxy;
+import com.lemania.sis.shared.profilesubject.ProfileSubjectProxy;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -63,6 +63,7 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	private ProfileBrancheProxy selectedBranche;
 	//
 	private PopupPanel pp;
+	private boolean isEditingProfs = false;
 	
 	
 	public interface Binder extends UiBinder<Widget, ProfileManagementView> {
@@ -97,6 +98,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	@UiField VerticalPanel pnlSubject;
 	@UiField VerticalPanel pnlSubjectAdd;
 	@UiField Button cmdSaveSubject;
+	@UiField ListBox lstProfessors1;
+	@UiField ListBox lstProfessors2;
 	
 	/*
 	 * 
@@ -133,7 +136,11 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		lstProfiles.clear();
 		lstSubjects.clear();
+		//
 		lstProfessors.clear();
+		lstProfessors1.clear();
+		lstProfessors2.clear();
+		//
 		lstBranches.clear();
 		//
 		txtSubjectCoef.setText("");
@@ -223,6 +230,29 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 			lstProfessors.addItem( prof.getProfName(), prof.getId().toString() );
 		}
 		lstProfessors.setSelectedIndex(0);
+		//
+		lstProfessors1.clear();
+		lstProfessors1.addItem("-","");
+		
+		for ( ProfessorProxy prof : profs ){
+			lstProfessors1.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfessors1.setSelectedIndex(0);
+		//
+		lstProfessors2.clear();
+		lstProfessors2.addItem("-","");
+		
+		for ( ProfessorProxy prof : profs ){
+			lstProfessors2.addItem( prof.getProfName(), prof.getId().toString() );
+		}
+		lstProfessors2.setSelectedIndex(0);
+		//
+		// Show the professors of this subject
+		if ( isEditingProfs ) {
+			FieldValidation.selectItemByText( lstProfessors, selectedSubject.getProfName() );
+			FieldValidation.selectItemByText( lstProfessors1, selectedSubject.getProf1Name() );
+			FieldValidation.selectItemByText( lstProfessors2, selectedSubject.getProf2Name() );
+		}
 	}
 	
 	
@@ -235,6 +265,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 			getUiHandlers().addSubjectToProfile( lstProfiles.getValue( lstProfiles.getSelectedIndex()), 
 					lstSubjects.getValue(lstSubjects.getSelectedIndex()), 
 					lstProfessors.getValue(lstProfessors.getSelectedIndex()),
+					lstProfessors1.getValue(lstProfessors1.getSelectedIndex()),
+					lstProfessors2.getValue(lstProfessors2.getSelectedIndex()),
 					txtSubjectCoef.getText());
 	}
 	
@@ -326,42 +358,12 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    TextColumn<ProfileSubjectProxy> colProf = new TextColumn<ProfileSubjectProxy>() {
 	      @Override
 	      public String getValue(ProfileSubjectProxy object) {
-	        return object.getProfName();
+	        return object.getProfName()
+	        		+ ( object.getProf1Name().equals("") ? "" : " - " + object.getProf1Name() )
+	        		+ ( object.getProf2Name().equals("") ? "" : " - " + object.getProf2Name() );
 	      }
 	    };
-	    tblSubjects.addColumn(colProf, "Professeur");	    
-
-	    // -- Active
-	    CheckboxCell cellActive = new CheckboxCell();
-	    Column<ProfileSubjectProxy, Boolean> colActive = new Column<ProfileSubjectProxy, Boolean>(cellActive) {
-	    	@Override
-	    	public Boolean getValue(ProfileSubjectProxy subject){
-	    		return subject.getIsActive();
-	    	}	    	
-	    };	    	    
-	    //
-	    colActive.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, Boolean>(){
-	    	@Override
-	    	public void update(int index, ProfileSubjectProxy subject, Boolean value){	    		
-	    		//
-	    		if (getUiHandlers() != null) {
-	    			selectedSubjectIndex = index;
-	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value, selectedSubjectIndex );	    			
-	    		}	    		
-	    	}
-	    });
-	    tblSubjects.setColumnWidth(colActive, 10.0, Unit.PCT);
-	    tblSubjects.addColumn(colActive, "Active");
-	    
-	    // -- Branche coef
-	    TextColumn<ProfileSubjectProxy> colTotalBrancheCoef = new TextColumn<ProfileSubjectProxy>() {
-	      @Override
-	      public String getValue(ProfileSubjectProxy object) {
-	        return object.getTotalBrancheCoef().toString();
-	      } 
-	    };
-	    tblSubjects.setColumnWidth(colTotalBrancheCoef, 10.0, Unit.PCT);
-	    tblSubjects.addColumn( colTotalBrancheCoef, "Branche Coefs" );
+	    tblSubjects.addColumn(colProf, "Professeurs");	    
 	    
 	    
 	    // -- Edit
@@ -401,25 +403,67 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	    				cmdAddSubject.setVisible(true);
 	    				lstSubjects.setEnabled(true);
 	    				txtSubjectCoef.setEnabled(true);
+	    				lstProfessors.setSelectedIndex(0);
+	    				lstProfessors1.setSelectedIndex(0);
+	    				lstProfessors2.setSelectedIndex(0);
+	    				//
+	    				isEditingProfs = false;
 	    			}
 	    		});
-	    		//
+	    		// Prepare the UI
 	    		pp.add( pnlSubjectAdd );
 	    		cmdSaveSubject.setVisible(true);
 				cmdAddSubject.setVisible(false);
 				lstSubjects.setEnabled(false);
 				txtSubjectCoef.setEnabled(false);
-				//
+	    		//
+	    		// Load the professor list for the current selected subject, populate the list to the three drop-down menus
+	    		FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
+	    		onLstSubjectsChange( null );
+	    		//
+	    		// set the editing flag so that the professor names will show up in the lists - setProfessorListData()
+	    		isEditingProfs = true;
+	    		//
 				pp.setGlassEnabled(true);
 	    		pp.show();
 	    		pp.center();
-	    		//
-	    		FieldValidation.selectItemByText( lstSubjects, selectedSubject.getSubjectName() );
-	    		onLstSubjectsChange( null );
 	    	}
 	    });
 	    tblSubjects.setColumnWidth(colEdit, 10.0, Unit.PCT);
-	    tblSubjects.addColumn(colEdit, "");	 
+	    tblSubjects.addColumn(colEdit, "");	
+	    
+
+	    // -- Active
+	    CheckboxCell cellActive = new CheckboxCell();
+	    Column<ProfileSubjectProxy, Boolean> colActive = new Column<ProfileSubjectProxy, Boolean>(cellActive) {
+	    	@Override
+	    	public Boolean getValue(ProfileSubjectProxy subject){
+	    		return subject.getIsActive();
+	    	}	    	
+	    };	    	    
+	    //
+	    colActive.setFieldUpdater(new FieldUpdater<ProfileSubjectProxy, Boolean>(){
+	    	@Override
+	    	public void update(int index, ProfileSubjectProxy subject, Boolean value){	    		
+	    		//
+	    		if (getUiHandlers() != null) {
+	    			selectedSubjectIndex = index;
+	    			getUiHandlers().updateProfileSubject( subject, subject.getSubjectCoef().toString(), value, selectedSubjectIndex );	    			
+	    		}	    		
+	    	}
+	    });
+	    tblSubjects.setColumnWidth(colActive, 10.0, Unit.PCT);
+	    tblSubjects.addColumn(colActive, "Active");
+	    
+	    // -- Branche coef
+	    TextColumn<ProfileSubjectProxy> colTotalBrancheCoef = new TextColumn<ProfileSubjectProxy>() {
+	      @Override
+	      public String getValue(ProfileSubjectProxy object) {
+	        return object.getTotalBrancheCoef().toString();
+	      } 
+	    };
+	    tblSubjects.setColumnWidth(colTotalBrancheCoef, 10.0, Unit.PCT);
+	    tblSubjects.addColumn( colTotalBrancheCoef, "Branche Coefs" );
 	    
 	    
 	    // -- Delete
@@ -565,7 +609,8 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 		//
 		subjectDataProvider.getList().set( subjectLastIndex, ps );
 		//
-		pp.hide();
+		if (pp.isVisible())
+			pp.hide();
 	}
 	
 
@@ -674,7 +719,11 @@ public class ProfileManagementView extends ViewWithUiHandlers<ProfileManagementU
 	void onCmdSaveSubjectClick(ClickEvent event) {
 		//
 		if ( selectedSubject != null ) {
-			getUiHandlers().updateSubjectProf(selectedSubject, lstProfessors.getValue( lstProfessors.getSelectedIndex() ), selectedSubjectIndex );
+			getUiHandlers().updateSubjectProf(selectedSubject, 
+					lstProfessors.getValue( lstProfessors.getSelectedIndex() ), 
+					lstProfessors1.getValue( lstProfessors1.getSelectedIndex() ),
+					lstProfessors2.getValue( lstProfessors2.getSelectedIndex() ),
+					selectedSubjectIndex );
 		}
 	}
 }

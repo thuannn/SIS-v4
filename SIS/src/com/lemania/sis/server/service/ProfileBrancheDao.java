@@ -7,7 +7,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Branche;
 import com.lemania.sis.server.ProfileBranche;
-import com.lemania.sis.server.ProfileSubject;
+import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 
 public class ProfileBrancheDao extends MyDAOBase {
 	/*
