@@ -481,17 +481,22 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	
 
 	/*
+	 * Change school logo base on currently selected School in the settings
 	 * */
 	@Override
 	public void drawSchoolInterface(String schoolCode) {
 		//
 		if (schoolCode.equals(NotificationValues.pierreViret)) {
 			imgLogo.setUrl("images/logo-pv.png");
-			txtCopyright.setText("Copyright © Pierre Viret - IT Services -");
+			txtCopyright.setText("Copyright © Pierre Viret -");
 		}
 		if (schoolCode.equals(NotificationValues.ecoleLemania)) {
 			imgLogo.setUrl("images/logo.png");
-			txtCopyright.setText("Copyright © Ecole Lémania - IT Services -");
+			txtCopyright.setText("Copyright © Ecole Lémania -");
+		}
+		if (schoolCode.equals(NotificationValues.lemaniacollegelaussane)) {
+			imgLogo.setUrl("images/logo-lcl.png");
+			txtCopyright.setText("Copyright © Lemania College Lausanne -");
 		}
 	}
 	

@@ -202,4 +202,24 @@ public class BulletinBrancheDao extends MyDAOBase {
 		//
 		return returnList;
 	}
+	
+	
+	/*
+	 * */
+	public BulletinBranche updateBranche( String bulletinBrancheId, String brancheId, String coef ) {
+		//
+		BulletinBranche bb = ofy().load().key( Key.create(BulletinBranche.class, Long.parseLong(bulletinBrancheId))).now();
+		if (bb != null) {
+			Key<Branche> keyBranche = Key.create( Branche.class, Long.parseLong(brancheId) );
+			Branche branche = ofy().load().key( keyBranche ).now();
+			//
+			bb.setBulletinBranche( keyBranche );
+			bb.setBulletinBrancheName( branche.getBrancheName() );
+			bb.setBrancheCoef( Double.parseDouble(coef) );
+			//
+			Key<BulletinBranche> keyBulletinBranche = ofy().save().entities(bb).now().keySet().iterator().next();
+			return ofy().load().key( keyBulletinBranche ).now();
+		}
+		return null;
+	}
 }

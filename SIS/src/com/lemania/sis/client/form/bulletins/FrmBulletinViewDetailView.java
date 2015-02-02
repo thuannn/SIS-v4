@@ -144,9 +144,9 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 				tblBulletin.setText(rowCount+1, 14, "");
 			else
 				tblBulletin.setText(rowCount+1, 14, 
-					!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
-						: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
-							: subject.getRemarqueT1());
+						(!subject.getT3().equals("") || !subject.getExamT3().equals("")) ? subject.getRemarqueT3()
+								: ( (!subject.getT2().equals("") || !subject.getExamT2().equals("")) ? subject.getRemarqueT2()
+										: subject.getRemarqueT1() ) );
 			//
 			for (int i=0; i<15; i++)
 				tblBulletin.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
@@ -262,9 +262,9 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 				tblBulletin.setText(rowCount+1, 20, "");
 			else
 				tblBulletin.setText(rowCount+1, 20, 
-					!subject.getRemarqueT3().isEmpty()? subject.getRemarqueT3()
-						: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
-							: subject.getRemarqueT1());
+						(!subject.getT3().equals("") || !subject.getExamT3().equals("")) ? subject.getRemarqueT3()
+								: ( (!subject.getT2().equals("") || !subject.getExamT2().equals("")) ? subject.getRemarqueT2()
+										: subject.getRemarqueT1() ) );
 			//
 			for (int i=0; i<21; i++)
 				tblBulletin.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
@@ -358,10 +358,9 @@ public class FrmBulletinViewDetailView extends ViewWithUiHandlers<FrmBulletinVie
 				tblBulletin.setText(rowCount+1, 26, "");
 			else
 				tblBulletin.setText(rowCount+1, 26, 
-					!subject.getRemarqueT4().isEmpty() ? subject.getRemarqueT4()
-						: !subject.getRemarqueT3().isEmpty() ? subject.getRemarqueT3()
-							: !subject.getRemarqueT2().isEmpty()? subject.getRemarqueT2()
-								: subject.getRemarqueT1());
+						(!subject.getT3().equals("") || !subject.getExamT3().equals("")) ? subject.getRemarqueT3()
+								: ( (!subject.getT2().equals("") || !subject.getExamT2().equals("")) ? subject.getRemarqueT2()
+										: subject.getRemarqueT1() ) );
 			//
 			for (int i=0; i<27; i++)
 				tblBulletin.getCellFormatter().setStyleName(rowCount, i, "subjectLine");

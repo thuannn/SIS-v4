@@ -566,4 +566,39 @@ public class FrmBulletinManagementPresenter
 			}			
 		});		
 	}
+
+	
+	/*
+	 * */
+	@Override
+	public void updateBranche( String bulletinBrancheId, String brancheId, String coef) {
+		//
+		if (this.currentUser.isReadOnly()){
+			Window.alert(NotificationValues.readOnly);
+			return;
+		}
+		//
+		if (!FieldValidation.isNumeric(coef)){
+			Window.alert(NotificationValues.invalid_input + " - Coefficient");
+			return;
+		}
+		//
+		BulletinBrancheRequestFactory rf = GWT.create(BulletinBrancheRequestFactory.class);
+		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
+		BulletinBrancheRequestContext rc = rf.bulletinBrancheRequest();
+		rc.updateBranche( bulletinBrancheId, brancheId, coef ).fire(new Receiver<BulletinBrancheProxy>(){
+			@Override
+			public void onFailure(ServerFailure error){
+				Window.alert(error.getMessage());
+			}
+			@Override
+			public void onSuccess(BulletinBrancheProxy response) {
+				//
+				if ( response != null)
+					getView().showUpdatedBranche(response);
+				else
+					Window.alert( "ERREUR - La branche n'a pas été sauvegardée" );
+			}
+		});
+	}
 }

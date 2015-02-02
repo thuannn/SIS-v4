@@ -109,8 +109,10 @@
 						</g:HorizontalPanel>
 						<g:TextArea characterWidth="50" height="40px" width="95%" ui:field="txtRemarque4"/>
 					</g:VerticalPanel>
-					<g:Button text="Enregistrer" width="150px" ui:field="cmdSave"/>
 				</g:VerticalPanel>
+						<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+							<g:Button text="Enregistrer" width="150px" ui:field="cmdSave" styleName="buttonToolbar"/>
+						</g:VerticalPanel>
 					</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:VerticalPanel>

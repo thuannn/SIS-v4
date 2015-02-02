@@ -99,6 +99,10 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	@UiField VerticalPanel pnlSubject;
 	@UiField ListBox lstProfessors1;
 	@UiField ListBox lstProfessors2;
+	@UiField VerticalPanel pnlBrancheAdd;
+	@UiField Button cmdSaveBranche;
+	@UiField VerticalPanel pnlBranches;
+	@UiField Button cmdAddBranche;
 	
 	
 	/**/
@@ -252,7 +256,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	        return object.getBulletinBrancheName();
 	      }
 	    };
-	    tblBranches.setColumnWidth(colBrancheName, 60.0, Unit.PCT);
+	    tblBranches.setColumnWidth(colBrancheName, 50.0, Unit.PCT);
 	    tblBranches.addColumn(colBrancheName, "Branche");
 	    
 	    //
@@ -273,8 +277,65 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    		}	    		
 	    	}
 	    });
-	    tblBranches.setColumnWidth(colCoef, 20.0, Unit.PCT);
+	    tblBranches.setColumnWidth(colCoef, 13.0, Unit.PCT);
 	    tblBranches.addColumn( colCoef, "Coef" );
+	    
+	    // Editer
+	    Column<BulletinBrancheProxy, String> colEdit = new Column<BulletinBrancheProxy, String> (new GridButtonCell()){
+	    	@Override
+	    	public String getValue(BulletinBrancheProxy bp){
+	    		return "Editer";
+	    	}
+	    };
+	    colEdit.setFieldUpdater(new FieldUpdater<BulletinBrancheProxy, String>(){
+	    	@Override
+	    	public void update(int index, BulletinBrancheProxy bp, String value){
+	    		selectedBrancheIndex = index;
+	    		selectedBranche = bp;
+	    		//
+	    		pp = new PopupPanel(true) {
+	    			@Override
+	    			  protected void onPreviewNativeEvent(final NativePreviewEvent event) {
+	    			    super.onPreviewNativeEvent(event);
+	    			    switch (event.getTypeInt()) {
+	    			        case Event.ONKEYDOWN:
+	    			            if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+	    			            	//
+	    			                hide();
+	    			            }
+	    			            break;
+	    			    }
+	    			}
+	    		};
+	    		//
+	    		pp.addCloseHandler(new CloseHandler<PopupPanel>() {
+	    			public void onClose(CloseEvent<PopupPanel> event) {
+	    				//
+	    				pnlBranches.add( pnlBrancheAdd );
+	    				//
+	    				cmdSaveBranche.setVisible( false );
+	    				cmdAddBranche.setVisible( true );
+	    				//
+	    				lstBranches.setSelectedIndex(0);
+	    				txtBrancheCoef.setText("");
+	    			}
+	    		});
+	    		//
+	    		pp.add( pnlBrancheAdd );
+	    		//
+	    		cmdSaveBranche.setVisible( true );
+				cmdAddBranche.setVisible( false );
+				//
+				FieldValidation.selectItemByText( lstBranches, selectedBranche.getBulletinBrancheName() );
+				txtBrancheCoef.setText( selectedBranche.getBrancheCoef().toString() );
+				//
+				pp.setGlassEnabled( true );
+	    		pp.show();
+	    		pp.center();
+	    	}
+	    });
+	    tblBranches.setColumnWidth(colEdit, 22.0, Unit.PCT);
+	    tblBranches.addColumn(colEdit, "");
 	    
 	    //
 	    Column<BulletinBrancheProxy, String> colDelete = new Column<BulletinBrancheProxy, String> (new GridButtonCell()){
@@ -291,7 +352,7 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	    		getUiHandlers().removeBranche( bp );
 	    	}
 	    });
-	    tblBranches.setColumnWidth(colDelete, 20.0, Unit.PCT);
+	    tblBranches.setColumnWidth(colDelete, 15.0, Unit.PCT);
 	    tblBranches.addColumn(colDelete, "");
 	    
 	    //
@@ -527,6 +588,8 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 	public void showUpdatedBranche(BulletinBrancheProxy branche) {
 		//
 		brancheDataProvider.getList().set( selectedBrancheIndex, branche);
+		//
+		pp.hide();
 	}
 
 	@Override
@@ -687,5 +750,17 @@ public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinMan
 				lstProfessors1.getValue( lstProfessors1.getSelectedIndex() ), 
 				lstProfessors2.getValue( lstProfessors2.getSelectedIndex() ), 
 				selectedSubjectIndex );
+	}
+	
+	
+	/*
+	 * */
+	@UiHandler("cmdSaveBranche")
+	void onCmdSaveBrancheClick(ClickEvent event) {
+		//
+		getUiHandlers().updateBranche( 
+				selectedBranche.getId().toString() , 
+				lstBranches.getValue(lstBranches.getSelectedIndex()),
+				txtBrancheCoef.getText() );
 	}
 }

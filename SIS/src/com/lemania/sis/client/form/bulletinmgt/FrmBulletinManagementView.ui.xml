@@ -114,11 +114,11 @@
 									</g:VerticalPanel>
 						</g:VerticalPanel>
 						</g:cell>
-							<g:VerticalPanel width="100%" styleName="subSection">
+							<g:VerticalPanel width="100%" styleName="subSection" ui:field="pnlBranches">
 							<g:Label text="Liste des branches" styleName="sectionTitle"/>
 							<p1:DataGrid width="100%" height="250px" ui:field="tblBranches"/>
-							<g:VerticalPanel width="100%">
-										<g:Label text="Rajouter une branche" styleName="sectionTitle" width=""/>
+							<g:Label text="Rajouter une branche" styleName="sectionTitle" width=""/>
+							<g:VerticalPanel width="100%" ui:field="pnlBrancheAdd">
 										<g:Grid cellPadding="5" cellSpacing="5">
 											<g:row>
 												<g:customCell>
@@ -141,7 +141,10 @@
 													<g:Label text="." styleName="hiddenText"/>
 												</g:customCell>
 												<g:customCell>
-													<g:Button text="Ajouter la branche" ui:field="cmdAddBranche"/>
+													<g:Button text="Ajouter la branche" ui:field="cmdAddBranche" styleName="buttonToolbar"/>
+												</g:customCell>
+												<g:customCell>
+													<g:Button styleName="buttonToolbar" ui:field="cmdSaveBranche" visible="false">Valider</g:Button>
 												</g:customCell>
 												<g:customCell>
 													<g:Label text="." styleName="hiddenText"/>

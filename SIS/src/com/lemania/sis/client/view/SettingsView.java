@@ -111,6 +111,7 @@ public class SettingsView
 		lstEcoles.addItem("-", "");
 		lstEcoles.addItem("Ecole Lemania", NotificationValues.ecoleLemania);
 		lstEcoles.addItem("Pierre Viret", NotificationValues.pierreViret);
+		lstEcoles.addItem("Lemania College Lausanne", NotificationValues.lemaniacollegelaussane);
 		
 		//
 		clearDateLists();

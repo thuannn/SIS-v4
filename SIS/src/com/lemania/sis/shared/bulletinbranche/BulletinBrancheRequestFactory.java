@@ -30,6 +30,8 @@ public interface BulletinBrancheRequestFactory extends RequestFactory {
 		Request<Void> removeBulletinBranche(BulletinBrancheProxy bulletinBranche);
 		
 		Request<Void> refreshBulletinBrancheNames(String oldBrancheName, String newBrancheName);
+		
+		Request<BulletinBrancheProxy> updateBranche( String bulletinBrancheId, String brancheId, String coef );
 	}
 	
 	BulletinBrancheRequestContext bulletinBrancheRequest();
