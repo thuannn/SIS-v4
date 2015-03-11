@@ -2,7 +2,7 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
 	<application>sis-dev</application>
-	<version>3-12-10</version>
+	<version>3-20150202-1</version>
 	<threadsafe>true</threadsafe>
 
 	<!-- Configure serving/caching of GWT files -->

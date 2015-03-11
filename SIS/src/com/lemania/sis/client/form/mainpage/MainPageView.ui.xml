@@ -53,19 +53,25 @@
 							<g:Hyperlink text="Attribution personnalisée" targetHistoryToken="bulletinmanagement" ui:field="cmdAttributionPerson"/>
 						</g:TreeItem>
 					</g:TreeItem>
-					<g:TreeItem text="Notes">
-						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
-						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
-						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
-					</g:TreeItem>
+					
 					<g:TreeItem text="Absences" ui:field="tiAbsences">
 						<g:Hyperlink text="Feuille d&apos;appel" targetHistoryToken="attendancelist" ui:field="cmdAttendanceList"/>
 						<g:Hyperlink text="Gestion des absences" targetHistoryToken="absencesmgt" ui:field="cmdAbsenceMgt"/>
+					</g:TreeItem>
+					<g:TreeItem text="Cahier de texte">
+						<g:Hyperlink targetHistoryToken="studylogmgt" text="Cahier de texte" ui:field="cmdStudyLogMgt"/>
+	
 					</g:TreeItem>
 					<g:TreeItem text="Evaluation Intermediaire">
 						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
 						<g:Hyperlink targetHistoryToken="evaluationinput" text="Saisir les évaluations" ui:field="cmdEvaluationInputProf"/>
 						<g:Hyperlink targetHistoryToken="evaluationinputstudent" text="Evaluations par élève" ui:field="cmdEvaluationInputEleve"/>
+					</g:TreeItem>
+					
+					<g:TreeItem text="Notes">
+						<g:Hyperlink text="Saisir les notes" targetHistoryToken="markinput" ui:field="cmdMarkInput"/>
+						<g:Hyperlink text="Consulter les notes" targetHistoryToken="bulletindetail" ui:field="cmdMarkView"/>
+						<g:Hyperlink text="Imprimer les bulletins" targetHistoryToken="bulletin" ui:field="cmdBulletin"/>
 					</g:TreeItem>
 					<g:TreeItem text="Horaires" ui:field="tiTimetable">
 						<g:Hyperlink targetHistoryToken="masteragenda" text="Horaires cadres" ui:field="cmdMasterAgendaPage"/>

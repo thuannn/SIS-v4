@@ -2,6 +2,8 @@ package com.lemania.sis.client.place;
 
 public class NameTokens {
 
+	public static final String studylogmgt = "studylogmgt";
+
 	public static final String absenceslist = "absenceslist";
 
 	public static final String attendancelist = "attendancelist";
@@ -236,6 +238,10 @@ public class NameTokens {
 
 	public static String getAbsenceslist() {
 		return absenceslist;
+	}
+
+	public static String getStudylogmgt() {
+		return studylogmgt;
 	}
 
 }
