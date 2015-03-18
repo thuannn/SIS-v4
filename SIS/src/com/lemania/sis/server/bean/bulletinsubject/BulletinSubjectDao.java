@@ -2,6 +2,7 @@ package com.lemania.sis.server.bean.bulletinsubject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -16,6 +17,20 @@ import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
 import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.service.MyDAOBase;
+
+
+/*
+ * Use this comparator to sort subject name 
+ */
+class SubjectNameComparator implements Comparator<BulletinSubject> {
+
+	@Override
+	public int compare(BulletinSubject o1, BulletinSubject o2) {
+		//
+		return o1.getSubjectName().compareTo( o2.getSubjectName() );
+	}
+	
+}
 
 public class BulletinSubjectDao extends MyDAOBase {
 	//
@@ -117,6 +132,42 @@ public class BulletinSubjectDao extends MyDAOBase {
 			//
 			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
 		}
+		return returnList;
+	}
+	
+	/*
+	 * */
+	public List<BulletinSubject> listAllPositiveCoef( String bulletinId ) {
+		//
+		Query<BulletinSubject> q = ofy().load().type(BulletinSubject.class)
+				.filter("bulletin", Key.create(Bulletin.class, Long.parseLong( bulletinId )))
+				.filter("subjectCoef >=", 0.0);
+				
+		List<BulletinSubject> returnList = new ArrayList<BulletinSubject>();
+		for ( BulletinSubject bulletinSubject : q ){
+			//
+			if (bulletinSubject.getProfessor() != null) {
+				bulletinSubject.setProfName( ofy().load().key(bulletinSubject.getProfessor()).now().getProfName() );
+				bulletinSubject.setProfId( Long.toString( bulletinSubject.getProfessor().getId() ));
+			}
+			if (bulletinSubject.getProfessor1() != null) {
+				bulletinSubject.setProf1Name( ofy().load().key(bulletinSubject.getProfessor1()).now().getProfName() );
+				bulletinSubject.setProf1Id( Long.toString( bulletinSubject.getProfessor1().getId() ));
+			}
+			if (bulletinSubject.getProfessor2() != null) {
+				bulletinSubject.setProf2Name( ofy().load().key(bulletinSubject.getProfessor2()).now().getProfName() );
+				bulletinSubject.setProf2Id( Long.toString( bulletinSubject.getProfessor2().getId() ));
+			}
+			//
+			bulletinSubject.setSubjectName( ofy().load().key( bulletinSubject.getSubject()).now().getSubjectName() );	
+			bulletinSubject.setSubjectId( Long.toString(
+					ofy().load().key( bulletinSubject.getSubject()).now().getId() ));
+			bulletinSubject.setClassId( Long.toString( 
+					ofy().load().key( ofy().load().key( bulletinSubject.getBulletin()).now().getClasse() ).now().getId() ));
+			//
+			returnList.add( calculateTotalBrancheCoef( bulletinSubject.getId().toString() ) );
+		}
+		Collections.sort( returnList, new SubjectNameComparator() );
 		return returnList;
 	}
 	

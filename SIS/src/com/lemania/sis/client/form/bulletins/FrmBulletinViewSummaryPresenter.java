@@ -146,7 +146,7 @@ public class FrmBulletinViewSummaryPresenter
 		BulletinSubjectRequestFactory rf = GWT.create(BulletinSubjectRequestFactory.class);
 		rf.initialize(this.getEventBus(), new EventSourceRequestTransport(this.getEventBus()));
 		BulletinSubjectRequestContext rc = rf.bulletinSubjectRequest();
-		rc.listAll( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
+		rc.listAllPositiveCoef( bulletinId ).fire(new Receiver<List<BulletinSubjectProxy>>(){
 			@Override
 			public void onFailure(ServerFailure error){
 				Window.alert(error.getMessage());

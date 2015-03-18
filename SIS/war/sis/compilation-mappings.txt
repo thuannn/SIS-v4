@@ -1,0 +1,25 @@
+68F94DD27EDDC0CFD3949370DB29B5D4.cache.js
+locale fr
+user.agent ie10
+
+B63950EA40DE1FAB91DCC8116BFE0D61.cache.js
+locale default
+user.agent safari
+
+B9DFD02E92247DDFAA306EDAEE30E4EA.cache.js
+locale default
+user.agent gecko1_8
+
+C066D4FF4E0ACDE6CD3091CBFBF851F6.cache.js
+locale fr
+user.agent safari
+
+DEB17C4AFD345647EE3F96743019247F.cache.js
+locale default
+user.agent ie10
+
+F6021666D86D2E4E26DC3E47D6E4A997.cache.js
+locale fr
+user.agent gecko1_8
+
+Devmode:devmode.js
