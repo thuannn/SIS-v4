@@ -62,5 +62,13 @@ public class FieldValidation {
 				break;
 			}
 	}
+	
+	
+	//
+	public static String swissDateFormat( String date ) {
+		return date.substring(6) + "."
+				+ date.substring(4, 6) + "."
+				+ date.substring(0, 4);
+	}
 
 }

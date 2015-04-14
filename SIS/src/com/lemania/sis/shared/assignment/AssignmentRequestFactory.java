@@ -8,7 +8,9 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.bean.assignment.AssignmentDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
+import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.ProfessorProxy;
+import com.lemania.sis.shared.SubjectProxy;
 
 public interface AssignmentRequestFactory extends RequestFactory {
 	
@@ -22,6 +24,10 @@ public interface AssignmentRequestFactory extends RequestFactory {
 		
 		Request<List<ProfessorProxy>> listAllProfessorBySubject(String subjectId);
 		Request<List<ProfessorProxy>> listAllProfessorBySubject(String subjectId, String classId);
+		
+		Request<List<SubjectProxy>> listAllSubjectByProfessor(String profId);
+		
+		Request<List<ClasseProxy>> listAllClassByProfAndSubject(String profId, String subjectId);
 		
 		Request<Void> save(AssignmentProxy a);
 		Request<AssignmentProxy> saveAndReturn(AssignmentProxy a);

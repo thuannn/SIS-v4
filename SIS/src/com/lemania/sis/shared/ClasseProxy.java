@@ -2,8 +2,8 @@ package com.lemania.sis.shared;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
-import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.ObjectifyLocator;
+import com.lemania.sis.server.bean.classe.Classe;
 
 @ProxyFor(value=Classe.class, locator=ObjectifyLocator.class)
 public interface ClasseProxy extends EntityProxy {

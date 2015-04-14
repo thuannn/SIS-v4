@@ -3,7 +3,7 @@ package com.lemania.sis.shared;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.lemania.sis.server.ObjectifyLocator;
-import com.lemania.sis.server.Professor;
+import com.lemania.sis.server.professor.Professor;
 
 @ProxyFor(value=Professor.class, locator=ObjectifyLocator.class)
 public interface ProfessorProxy extends EntityProxy {

@@ -4,10 +4,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.lemania.sis.server.Branche;
-import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Cours;
 import com.lemania.sis.server.Ecole;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.SettingOption;
@@ -17,6 +15,7 @@ import com.lemania.sis.server.bean.assignment.Assignment;
 import com.lemania.sis.server.bean.bulletin.Bulletin;
 import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
+import com.lemania.sis.server.bean.classe.Classe;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.evaluations.EvaluationHeader;
 import com.lemania.sis.server.bean.evaluations.EvaluationStudentReport;
@@ -28,7 +27,9 @@ import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.bean.perioditem.PeriodItem;
 import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.lemania.sis.server.bean.student.Student;
+import com.lemania.sis.server.bean.studylog.StudyLog;
 import com.lemania.sis.server.bean.user.User;
+import com.lemania.sis.server.professor.Professor;
 
 public class MyDAOBase {
 	
@@ -193,6 +194,12 @@ public class MyDAOBase {
 		
 		try {
         	ObjectifyService.register( AbsenceItem.class );
+        } catch (Exception e) {
+        	// do nothing
+        }
+		
+		try {
+        	ObjectifyService.register( StudyLog.class );
         } catch (Exception e) {
         	// do nothing
         }	

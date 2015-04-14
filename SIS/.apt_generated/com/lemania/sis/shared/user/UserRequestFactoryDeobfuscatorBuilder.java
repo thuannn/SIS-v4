@@ -13,25 +13,11 @@ withOperation(new OperationKey("YauAvJNU5onvy1zBeQ7cBzqACG4="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
-withOperation(new OperationKey("V17C$hSQSiPyzHIpcxYB0C$KXDE="),
+withOperation(new OperationKey("DOJYc7qjW4vsc8dfeFArmqCr9RQ="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
-  .build());
-withOperation(new OperationKey("YBcX3ZKo8HlZDzwLF$DiQ4vIuro="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/Boolean;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/Boolean;)V")
-  .withMethodName("updateUserActiveStatus")
-  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
-  .build());
-withOperation(new OperationKey("VCJZhVfd7Zlw_38bJChI8YlsSRs="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Z")
-  .withMethodName("checkClassMasterRole")
+  .withDomainMethodDescriptor("()V")
+  .withMethodName("fixStudentName")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
 withOperation(new OperationKey("gvesbs1RVH_gz3DzhmDx1oMyg6o="),
@@ -41,18 +27,11 @@ withOperation(new OperationKey("gvesbs1RVH_gz3DzhmDx1oMyg6o="),
   .withMethodName("removeUser")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
-withOperation(new OperationKey("7YEUR7iDhN6MyxGyQooRB92DSfw="),
+withOperation(new OperationKey("VCJZhVfd7Zlw_38bJChI8YlsSRs="),
   new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()V")
-  .withMethodName("initialize")
-  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
-  .build());
-withOperation(new OperationKey("DOJYc7qjW4vsc8dfeFArmqCr9RQ="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()V")
-  .withMethodName("fixStudentName")
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Z")
+  .withMethodName("checkClassMasterRole")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
 withOperation(new OperationKey("YOfldPTRYTQXfTdMPbZpDEqSEG8="),
@@ -62,18 +41,11 @@ withOperation(new OperationKey("YOfldPTRYTQXfTdMPbZpDEqSEG8="),
   .withMethodName("listAllByType")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
-withOperation(new OperationKey("WCa8Z_O46c8vspZXvgRQdwdv3OU="),
+withOperation(new OperationKey("YBcX3ZKo8HlZDzwLF$DiQ4vIuro="),
   new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAllActive")
-  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
-  .build());
-withOperation(new OperationKey("edN5wj_zJy0iHIuNhlRJ$QlLTqs="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/user/UserProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/user/User;)Lcom/lemania/sis/server/bean/user/User;")
-  .withMethodName("saveAndReturn")
+  .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/Boolean;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/Boolean;)V")
+  .withMethodName("updateUserActiveStatus")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
 withOperation(new OperationKey("GThpesUpmw_QyJ3vDwgm6KUNObA="),
@@ -83,11 +55,39 @@ withOperation(new OperationKey("GThpesUpmw_QyJ3vDwgm6KUNObA="),
   .withMethodName("changePassword")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
+withOperation(new OperationKey("WCa8Z_O46c8vspZXvgRQdwdv3OU="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAllActive")
+  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
+  .build());
 withOperation(new OperationKey("faPFf0oJTg37bi6gX$DDXzDl7r0="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;Ljava/lang/String;)Lcom/lemania/sis/server/bean/user/User;")
   .withMethodName("authenticateUser")
+  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
+  .build());
+withOperation(new OperationKey("edN5wj_zJy0iHIuNhlRJ$QlLTqs="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/user/UserProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/bean/user/User;)Lcom/lemania/sis/server/bean/user/User;")
+  .withMethodName("saveAndReturn")
+  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
+  .build());
+withOperation(new OperationKey("7YEUR7iDhN6MyxGyQooRB92DSfw="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()V")
+  .withMethodName("initialize")
+  .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
+  .build());
+withOperation(new OperationKey("V17C$hSQSiPyzHIpcxYB0C$KXDE="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.user.UserRequestFactory$UserRequestContext")
   .build());
 withRawTypeToken("WpSPUqT9zMl3MPi_GuSabKUPk48=", "com.lemania.sis.shared.user.UserProxy");

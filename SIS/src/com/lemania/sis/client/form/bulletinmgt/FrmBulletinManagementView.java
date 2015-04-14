@@ -42,7 +42,6 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class FrmBulletinManagementView extends ViewWithUiHandlers<FrmBulletinManagementUiHandler> implements
 		FrmBulletinManagementPresenter.MyView {

@@ -52,7 +52,7 @@ public class StudentDao extends MyDAOBase {
 	
 	/**/
 	public void removeStudent( Student student ){
-		ofy().delete().entities(student);
+		ofy().delete().entities(student).now();
 	}
 	
 	

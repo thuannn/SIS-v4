@@ -2,21 +2,42 @@ package com.lemania.sis.server.bean.bulletin;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.lemania.sis.server.bean.parent.Parent;
 import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
+import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.bulletinbranche.BulletinBranche;
 import com.lemania.sis.server.bean.bulletinsubject.BulletinSubject;
+import com.lemania.sis.server.bean.classe.Classe;
 import com.lemania.sis.server.bean.student.Student;
 import com.lemania.sis.server.bean.user.User;
+import com.lemania.sis.server.professor.Professor;
 import com.lemania.sis.server.service.MyDAOBase;
 
+
+/*
+ * 
+ * */
+class BulletinSortByClassStudent implements Comparator<Bulletin> {
+
+	@Override
+	public int compare(Bulletin o1, Bulletin o2) {
+		//
+		return ( o1.getClasseName() + o1.getStudentName() ).compareTo( o2.getClasseName() + o2.getStudentName() );
+	}
+	
+}
+
+
+/*
+ * 
+ * */
 public class BulletinDao extends MyDAOBase {
 	//
 	public void initialize(){
@@ -29,7 +50,7 @@ public class BulletinDao extends MyDAOBase {
 				.order("studentName");
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
 		Student student;
-		for (Bulletin bulletin : q){
+		for (Bulletin bulletin : q) {
 			student = ofy().load().key( bulletin.getStudent() ).now();
 			bulletin.setStudentName( student.getFirstName() + " " + student.getLastName() );
 			bulletin.setProgrammeName( ofy().load().key(
@@ -38,6 +59,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add(bulletin);
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -58,6 +82,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add(bulletin);
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -80,6 +107,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add(bulletin);
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -105,6 +135,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add( bulletin );
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -161,7 +194,53 @@ public class BulletinDao extends MyDAOBase {
 			bulletin.setRemarqueDirection( "" );
 			returnList.add( bulletin );
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
+		return returnList;
+	}
+	
+	
+	/*
+	 * List all student by professor, subject and class
+	 * */
+	public List<Bulletin> listAllStudentByProfSubjectClass( String profId, String subjectId, String classId ) {
+		//
+		List<Bulletin> returnList = new ArrayList<Bulletin>();
+		List<BulletinSubject> listBS = new ArrayList<BulletinSubject>();
+		//
+		// Load the list of BulletinSubject using professor and subject
+		Query<BulletinSubject> bss = ofy().load().type( BulletinSubject.class )
+				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
+				.filter("professor", Key.create( Professor.class, Long.parseLong(profId)) )
+				.filter("isActive", true)
+				.order("bulletin");
+		Query<BulletinSubject> bss1 = ofy().load().type( BulletinSubject.class )
+				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
+				.filter("professor1", Key.create( Professor.class, Long.parseLong(profId)) )
+				.filter("isActive", true)
+				.order("bulletin");
+		Query<BulletinSubject> bss2 = ofy().load().type( BulletinSubject.class )
+				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
+				.filter("professor2", Key.create( Professor.class, Long.parseLong(profId)) )
+				.filter("isActive", true)
+				.order("bulletin");
+		listBS.addAll( bss.list() );
+		listBS.addAll( bss1.list() );
+		listBS.addAll( bss2.list() );
+		//
+		Key<Bulletin> keyBulletin = null;
+		for ( BulletinSubject bs : listBS ) {
+			if ( keyBulletin != bs.getBulletin() )
+				returnList.add( ofy().load().key( bs.getBulletin()).now() );
+			keyBulletin = bs.getBulletin();
+		}
+		//
+		populateStudentName( returnList );
+		//
+		Collections.sort( returnList, new BulletinSortByClassStudent() );
+		//
 		return returnList;
 	}
 	
@@ -188,6 +267,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add( bulletin );
 		}
+		//
+		populateStudentName( returnList );
+		//
 		Collections.sort(returnList);
 		return returnList;
 	}
@@ -218,6 +300,9 @@ public class BulletinDao extends MyDAOBase {
 					.getCoursNom());
 			returnList.add(bulletin);
 		}
+		//
+		populateStudentName( returnList );
+		//
 		return returnList;
 	}
 	
@@ -247,6 +332,9 @@ public class BulletinDao extends MyDAOBase {
 			bulletin.setRemarqueDirection( "" );
 			returnList.add(bulletin);
 		}
+		//
+		populateStudentName( returnList );
+		//
 		return returnList;
 	}
 	
@@ -276,7 +364,8 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public Bulletin createBulletin(String studentId, String classId, String year, String profileId){
 		//
 		Bulletin bulletin = new Bulletin();
@@ -353,7 +442,8 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public Boolean removeBulletin(Bulletin bulletin){
 		//
 		Key<Bulletin> keyBulletin = Key.create(Bulletin.class, bulletin.getId());
@@ -379,7 +469,8 @@ public class BulletinDao extends MyDAOBase {
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	public void updateBulletinStatus( String studentId, Boolean status ){
 		//
 		Query<Bulletin> q = ofy().load().type(Bulletin.class)
@@ -399,5 +490,17 @@ public class BulletinDao extends MyDAOBase {
 		bulletin.setRemarqueDirection(remarqueDirection);
 		Key<Bulletin> keyB = ofy().save().entities(bulletin).now().keySet().iterator().next();
 		return ofy().load().key( keyB ).now();
+	}
+	
+	
+	/*
+	 * */
+	public void populateStudentName( List<Bulletin> bulletins ) {
+		//
+		Student st = new Student();
+		for ( Bulletin b : bulletins ) {
+			st = ofy().load().key( b.getStudent() ).now();
+			b.setStudentName( st.getLastName() + " " + st.getFirstName());
+		}
 	}
 }

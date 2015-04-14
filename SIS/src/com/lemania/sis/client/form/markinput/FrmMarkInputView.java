@@ -190,7 +190,9 @@ public class FrmMarkInputView extends ViewWithUiHandlers<FrmMarkInputUiHandler> 
 	}
 	
 
-	/**/
+	/*
+	 * 
+	 * */
 	@Override
 	public void setAssignmentTableData(List<AssignmentProxy> assignments) {
 		// 		

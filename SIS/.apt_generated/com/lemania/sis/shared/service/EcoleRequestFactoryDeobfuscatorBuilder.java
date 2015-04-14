@@ -13,13 +13,6 @@ withOperation(new OperationKey("QctD56dq0clCoXpoz0abeac5ECM="),
   .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.EcoleRequestFactory$EcoleRequestContext")
   .build());
-withOperation(new OperationKey("50fV5XB3_10H9LwVMzQQW0OFtB8="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
-  .withRequestContext("com.lemania.sis.shared.service.EcoleRequestFactory$EcoleRequestContext")
-  .build());
 withOperation(new OperationKey("$705gamI7V3pX6oljf1fDs_16DA="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/EcoleProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
@@ -46,6 +39,13 @@ withOperation(new OperationKey("Drg88LFR04BUNSPNJOf2_FtWdqs="),
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("()V")
   .withMethodName("initialize")
+  .withRequestContext("com.lemania.sis.shared.service.EcoleRequestFactory$EcoleRequestContext")
+  .build());
+withOperation(new OperationKey("50fV5XB3_10H9LwVMzQQW0OFtB8="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.EcoleRequestFactory$EcoleRequestContext")
   .build());
 withRawTypeToken("YDw$y3tEecJwr7ZsLzBbvDxEoGQ=", "com.lemania.sis.shared.EcoleProxy");

@@ -29,6 +29,10 @@ public class NotificationValues {
 	
 	public static Integer pageSize = 820;
 	
+	// For UI layouts
+	public static Integer footerHeight = 50;
+	
+	
 	// For bulletins
 	public static Integer bulletinLineHeight = 40;
 	public static Integer bulletinPageHeight = 740;
@@ -65,4 +69,5 @@ public class NotificationValues {
 	
 	// User management
 	public static String user_created = "Code d'accès créé pour cet utilisateur.";
+	
 }

@@ -6,11 +6,11 @@ import com.google.web.bindery.requestfactory.vm.impl.OperationData;
 import com.google.web.bindery.requestfactory.vm.impl.OperationKey;
 public final class SubjectRequestFactoryDeobfuscatorBuilder extends com.google.web.bindery.requestfactory.vm.impl.Deobfuscator.Builder {
 {
-withOperation(new OperationKey("k$JK6orbDR9gy4pyPOcLB4mMzQo="),
+withOperation(new OperationKey("cl6MM5h09gODKn4k2fzgNI3zjWQ="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lcom/lemania/sis/shared/SubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Lcom/lemania/sis/server/Subject;)V")
-  .withMethodName("save")
+  .withMethodName("removeSubject")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
 withOperation(new OperationKey("h_OoDMrlyXXWx$hwdvkCWvsJfws="),
@@ -27,11 +27,11 @@ withOperation(new OperationKey("g$57UuybrUYiusU71y4MGdiWt_U="),
   .withMethodName("listAllActiveByProfile")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
-withOperation(new OperationKey("thTlG6AsRrsgV9mCPA4Zy_KcFDc="),
+withOperation(new OperationKey("k$JK6orbDR9gy4pyPOcLB4mMzQo="),
   new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
-  .withMethodName("listAll")
+  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/SubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/Subject;)V")
+  .withMethodName("save")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
 withOperation(new OperationKey("MPFmfLNlkc0etb$Pi_O8mA63K60="),
@@ -48,18 +48,18 @@ withOperation(new OperationKey("I7tXY9kiZKmIpV70FKXwhpS54p8="),
   .withMethodName("saveAndReturn")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
-withOperation(new OperationKey("cl6MM5h09gODKn4k2fzgNI3zjWQ="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Lcom/lemania/sis/shared/SubjectProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Lcom/lemania/sis/server/Subject;)V")
-  .withMethodName("removeSubject")
-  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
-  .build());
 withOperation(new OperationKey("DaOK700FEqNvkqiZLH5oytuN3Vs="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("()V")
   .withMethodName("initialize")
+  .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
+  .build());
+withOperation(new OperationKey("thTlG6AsRrsgV9mCPA4Zy_KcFDc="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAll")
   .withRequestContext("com.lemania.sis.shared.service.SubjectRequestFactory$SubjectRequestContext")
   .build());
 withRawTypeToken("abvmZrXvW20lV3odxZOEzl3XlbY=", "com.lemania.sis.shared.SubjectProxy");

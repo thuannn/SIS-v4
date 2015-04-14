@@ -4,9 +4,9 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
-import com.lemania.sis.server.Classe;
 import com.lemania.sis.server.DatastoreObject;
-import com.lemania.sis.server.Professor;
+import com.lemania.sis.server.bean.classe.Classe;
+import com.lemania.sis.server.professor.Professor;
 
 @Entity
 @Index
