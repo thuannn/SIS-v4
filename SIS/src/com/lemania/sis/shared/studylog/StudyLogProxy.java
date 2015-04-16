@@ -18,6 +18,9 @@ public interface StudyLogProxy extends EntityProxy {
 
 	public String getLogDate();
 	public void setLogDate(String logDate);
+	
+	public String getFileName();
+	public void setFileName(String fileName);
 
 	public String getSubjectName();
 	public String getStudentName();

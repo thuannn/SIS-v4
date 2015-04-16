@@ -60,7 +60,7 @@
 					</g:TreeItem>
 					<g:TreeItem text="Cahier de texte">
 						<g:Hyperlink targetHistoryToken="studylogmgt" text="Cahier de texte" ui:field="cmdStudyLogMgt"/>
-						<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte - Consultation par élève" ui:field="cmdStudyLogStudent"/>
+						<g:Hyperlink targetHistoryToken="studylogstudent" text="Liste par élève" ui:field="cmdStudyLogStudent"/>
 					</g:TreeItem>
 					<g:TreeItem text="Evaluation Intermediaire">
 						<g:Hyperlink targetHistoryToken="evaluationlist" text="Liste des rapports d&apos;évaluation" ui:field="cmdEvaluationList"/>
@@ -151,7 +151,7 @@
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="Espace élève">
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewStudent"/>
-							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte - Consultation par élève" ui:field="cmdStudyLogStudentStudent"/>
+							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte" ui:field="cmdStudyLogStudentStudent"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordStudent"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpStudent"/>
 						</g:TreeItem>
@@ -161,7 +161,7 @@
 						<g:TreeItem state="true" text="Espace parents">
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewParent"/>
 							<g:Hyperlink targetHistoryToken="absenceslist" text="Consulter les absences" ui:field="cmdAbsencesViewParent"/>
-							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte - Consultation par élève" ui:field="cmdStudyLogStudentParent"/>
+							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte" ui:field="cmdStudyLogStudentParent"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordParent"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpParent"/>
 						</g:TreeItem>

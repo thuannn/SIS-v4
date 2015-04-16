@@ -33,6 +33,7 @@ import com.lemania.sis.client.form.studentagenda.StudentAgendaPresenter;
 import com.lemania.sis.client.form.studentmgt.StudentAddPresenter;
 import com.lemania.sis.client.form.studentmgt.StudentPresenter;
 import com.lemania.sis.client.form.studylogmgt.StudyLogManagementPresenter;
+import com.lemania.sis.client.form.studylogstudent.StudyLogStudentPresenter;
 import com.lemania.sis.client.form.subjects.FrmSubjectAddPresenter;
 import com.lemania.sis.client.form.subjects.FrmSubjectListPresenter;
 import com.lemania.sis.client.form.usermgt.UserManagementPresenter;
@@ -145,4 +146,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<AbsenceListPresenter> getAbsenceListPresenter();
 	
 	AsyncProvider<StudyLogManagementPresenter> getStudyLogManagementPresenter();
+	
+	AsyncProvider<StudyLogStudentPresenter> getStudyLogStudentPresenter();
 }

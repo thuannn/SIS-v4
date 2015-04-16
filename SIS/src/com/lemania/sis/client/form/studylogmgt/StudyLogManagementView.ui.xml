@@ -18,7 +18,7 @@
 						<p2:DateBox ui:field="dateFrom" width="100px" />
 						<g:Label text=" au :"></g:Label>
 						<p2:DateBox ui:field="dateTo" width="100px" />
-						<g:Button styleName="buttonToolbar" ui:field="cmdShow">Filtrer</g:Button>
+						<g:Button styleName="buttonToolbar" ui:field="cmdFilter">Filtrer</g:Button>
 					</g:HorizontalPanel>
 				</g:cell>
 				<g:cell width="20%" horizontalAlignment="ALIGN_RIGHT" >
@@ -34,7 +34,7 @@
 									<g:Label text="Professeur :" />
 								</g:customCell>
 								<g:customCell>
-									<g:ListBox ui:field="lstProfs" width="150px" />
+									<g:ListBox ui:field="lstProfs" width="200px" />
 								</g:customCell>
 							</g:row>
 							<g:row>
@@ -42,7 +42,7 @@
 									<g:Label text="Matière :" />
 								</g:customCell>
 								<g:customCell>
-									<g:ListBox ui:field="lstAssignments"  width="150px" />
+									<g:ListBox ui:field="lstAssignments"  width="200px" />
 								</g:customCell>
 							</g:row>
 							<g:row>
@@ -50,7 +50,7 @@
 									<g:Label text="Classe :" />
 								</g:customCell>
 								<g:customCell>
-									<g:ListBox ui:field="lstClasses"  width="150px" />
+									<g:ListBox ui:field="lstClasses"  width="200px" />
 								</g:customCell>
 							</g:row>
 						</g:Grid>
@@ -58,7 +58,7 @@
 							<g:Label>Liste d'élèves :</g:Label>
 							<g:Label ui:field="lblStudentQty"></g:Label>
 						</g:HorizontalPanel>
-						<g:ScrollPanel height="400px" ui:field="pnlStudents">
+						<g:ScrollPanel width="300px" height="400px" ui:field="pnlStudents">
 							<g:FlexTable ui:field="tblStudents" width="100%" />
 						</g:ScrollPanel>
 					</g:VerticalPanel>
@@ -83,6 +83,14 @@
 								</g:row>
 								<g:row>
 									<g:customCell>
+										<g:Label>Date :</g:Label>
+									</g:customCell>
+									<g:customCell>
+										<p2:DateBox ui:field="dateEntry" />
+									</g:customCell>
+								</g:row>
+								<g:row>
+									<g:customCell>
 										<g:Label>Titre :</g:Label>
 									</g:customCell>
 									<g:customCell>
@@ -99,10 +107,26 @@
 								</g:row>
 								<g:row>
 									<g:customCell>
+										<g:Label>Fichier joint :</g:Label>
+									</g:customCell>
+									<g:customCell>
+										<g:VerticalPanel ui:field="pnlFileUpload"></g:VerticalPanel>
+									</g:customCell>
+								</g:row>
+								<g:row>
+									<g:customCell>
+										<g:Label height="20px"></g:Label>
+									</g:customCell>
+									<g:customCell>
+										<g:Label></g:Label>
+									</g:customCell>
+								</g:row>
+								<g:row>
+									<g:customCell>
 										<g:Label></g:Label>
 									</g:customCell>
 									<g:customCell>
-										<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+										<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_CENTER" ui:field="pnlLogEntryButtons">
 											<g:Button styleName="darkBlueButton" ui:field="cmdSave">Enregistrer</g:Button>
 											<g:Button styleName="redButton" ui:field="cmdClose">Fermer</g:Button>
 										</g:HorizontalPanel>

@@ -24,6 +24,7 @@ public class StudyLogStudentLoadEvent extends GwtEvent<StudyLogStudentLoadEvent.
         this.message = message;
         this.profId = profId;
         this.subjectId = subjectId;
+        this.classId = classId;
     }
 
     public static Type<StudyLogStudentLoadHandler> getType() {

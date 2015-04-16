@@ -24,6 +24,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.lemania.sis.client.CurrentUser;
 import com.lemania.sis.client.LoggedInGatekeeper;
+import com.lemania.sis.client.UI.FieldValidation;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent;
 import com.lemania.sis.client.event.LoginAuthenticatedEvent.LoginAuthenticatedHandler;
 import com.lemania.sis.client.form.mainpage.MainPagePresenter;
@@ -73,7 +74,7 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 		//
 		void removeDeletedLog( String logId );
 		//
-		void showUpdatedLog( String editLogId, String logTitle, String logContent );
+		void showUpdatedLog( String editLogId, String logTitle, String logContent, String logFileName );
     }
 	
     @ContentSlot
@@ -99,7 +100,6 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
     /*
      * */
     CurrentUser currentUser;
-    List<BulletinProxy> bsp = new ArrayList<BulletinProxy>();
     List<ClasseProxy> classes = new ArrayList<ClasseProxy>();
     
     
@@ -196,10 +196,6 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 		}
 		// Load the class list
 		getEventBus().fireEvent( new StudyLogClassLoadEvent("", profId, subjectId) );
-		// Load student list
-		getEventBus().fireEvent( new StudyLogStudentLoadEvent("", profId, subjectId, "") );
-		// Load study logs for all classes
-		getEventBus().fireEvent( new StudyLogLoadLogsEvent("", subjectId, DataValues.optionAll ));
 	}
 	
 	/*
@@ -209,21 +205,10 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 	 * selectedBsp : list of bulletins for log saving purpose
 	 * */
 	@Override
-	public void onLstClassChange( String subjectId, String classId) {
+	public void onLstClassChange( String profId, String subjectId, String classId, String dateFrom, String dateTo) {
 		//
-		if ( classId.equals( DataValues.optionAll ) )
-			getView().setStudentListData( bsp );
-		else {
-			List<BulletinProxy> bspa = new ArrayList<BulletinProxy>();
-			for ( BulletinProxy bp : bsp ) {
-				if ( bp.getClassId().toString().equals(classId) )
-					bspa.add(bp);
-			}
-			getView().setStudentListData( bspa );
-		}
-		//
-		// Load study logs for all classes
-		getEventBus().fireEvent( new StudyLogLoadLogsEvent("", subjectId, classId ));
+		getEventBus().fireEvent( new StudyLogStudentLoadEvent("", profId, subjectId, classId) );
+		getEventBus().fireEvent( new StudyLogLoadLogsEvent("", subjectId, classId, dateFrom, dateTo ));
 	}
 	
 	
@@ -232,7 +217,7 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 	 * */
 	@Override
 	public void onStudyLogAdd(String profId, String subjectId, String classeId, 
-			final String logTitle, final String logContent, final String editLogId ) {
+			final String logTitle, final String logContent, final String editLogId, final String logFileName, String logEntryDate ) {
 		//
 		if (logTitle.equals("") || logContent.equals("")) {
 			Window.alert( NotificationValues.invalid_input + " - Titre & Contenu");
@@ -247,7 +232,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 			if ( editLogId.equals("") ) {
 				rc.saveAndReturn(
 						subjectId, classeId, logTitle, logContent, 
-						DateTimeFormat.getFormat("yyyyMMdd").format( new Date() ) ).fire(new Receiver<StudyLogProxy>(){
+						logEntryDate,
+						FieldValidation.getFileName(logFileName) ).fire(new Receiver<StudyLogProxy>(){
 					@Override
 					public void onFailure(ServerFailure error){
 						Window.alert(error.getMessage());
@@ -260,15 +246,16 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 			} else {
 				rc.updateLog(
 						subjectId, classeId, logTitle, logContent, 
-						DateTimeFormat.getFormat("yyyyMMdd").format( new Date() ),
-						editLogId ).fire(new Receiver<StudyLogProxy>(){
+						logEntryDate,
+						editLogId,
+						FieldValidation.getFileName(logFileName) ).fire(new Receiver<StudyLogProxy>(){
 					@Override
 					public void onFailure(ServerFailure error){
 						Window.alert(error.getMessage());
 					}
 					@Override
 					public void onSuccess(StudyLogProxy response) {
-						getView().showUpdatedLog( editLogId, logTitle, logContent );
+						getView().showUpdatedLog( editLogId, logTitle, logContent, FieldValidation.getFileName(logFileName) );
 					}
 				});
 			}
@@ -282,7 +269,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 					subjectId, 
 					classeIdList, 
 					logTitle, logContent, 
-					DateTimeFormat.getFormat("yyyyMMdd").format( new Date() ) ).fire(new Receiver<List<StudyLogProxy>>(){
+					logEntryDate,
+					FieldValidation.getFileName(logFileName) ).fire(new Receiver<List<StudyLogProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());
@@ -374,9 +362,6 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 			public void onSuccess(List<BulletinProxy> response) {
 				//
 				getView().setStudentListData( response );
-				// Keep the list of Bulletin for log saving purposes
-				bsp.clear();
-				bsp.addAll( response );
 			}
 		});
 	}
@@ -394,7 +379,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 		StudyLogRequestContext rc = rf.studyLogRequestContext();
 		if ( !event.getClasseId().equals( DataValues.optionAll) ) {
 			//
-			rc.listAllBySubjectClass( event.getSubjectId(), event.getClasseId() ).fire(new Receiver<List<StudyLogProxy>>(){
+			rc.listAllBySubjectClass( event.getSubjectId(), event.getClasseId(), event.getDateFrom(), event.getDateTo() )
+					.fire(new Receiver<List<StudyLogProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());
@@ -406,7 +392,7 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 			});
 		} else {
 			//
-			rc.listAllBySubject( event.getSubjectId() ).fire(new Receiver<List<StudyLogProxy>>(){
+			rc.listAllBySubject( event.getSubjectId(), event.getDateFrom(), event.getDateTo() ).fire(new Receiver<List<StudyLogProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());

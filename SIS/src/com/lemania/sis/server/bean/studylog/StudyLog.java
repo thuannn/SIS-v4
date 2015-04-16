@@ -22,9 +22,10 @@ public class StudyLog extends DatastoreObject {
 	private Key<Student> keyStudent;
 	
 	// Log content
-	String logTitle;
-	String logContent;
-	String logDate;				// YYYYMMDD
+	String logTitle = "";
+	String logContent = "";
+	String logDate = "";				// YYYYMMDD
+	String fileName = "";
 	
 	//
 	@IgnoreSave
@@ -115,6 +116,14 @@ public class StudyLog extends DatastoreObject {
 
 	public void setForStudent(boolean isForStudent) {
 		this.isForStudent = isForStudent;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 }

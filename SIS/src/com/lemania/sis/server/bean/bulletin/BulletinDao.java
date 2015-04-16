@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.lemania.sis.client.values.DataValues;
 import com.lemania.sis.server.bean.parent.Parent;
 import com.lemania.sis.server.bean.profilesubject.ProfileSubject;
 import com.googlecode.objectify.Key;
@@ -207,33 +208,41 @@ public class BulletinDao extends MyDAOBase {
 	 * */
 	public List<Bulletin> listAllStudentByProfSubjectClass( String profId, String subjectId, String classId ) {
 		//
+		Bulletin bulletin = null;
 		List<Bulletin> returnList = new ArrayList<Bulletin>();
 		List<BulletinSubject> listBS = new ArrayList<BulletinSubject>();
 		//
 		// Load the list of BulletinSubject using professor and subject
-		Query<BulletinSubject> bss = ofy().load().type( BulletinSubject.class )
+		Query<BulletinSubject> bss = null, bss1 = null, bss2 = null;
+		
+		bss = ofy().load().type( BulletinSubject.class )
 				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
 				.filter("professor", Key.create( Professor.class, Long.parseLong(profId)) )
 				.filter("isActive", true)
 				.order("bulletin");
-		Query<BulletinSubject> bss1 = ofy().load().type( BulletinSubject.class )
+		bss1 = ofy().load().type( BulletinSubject.class )
 				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
 				.filter("professor1", Key.create( Professor.class, Long.parseLong(profId)) )
 				.filter("isActive", true)
 				.order("bulletin");
-		Query<BulletinSubject> bss2 = ofy().load().type( BulletinSubject.class )
+		bss2 = ofy().load().type( BulletinSubject.class )
 				.filter("subject", Key.create( Subject.class, Long.parseLong(subjectId)) )
 				.filter("professor2", Key.create( Professor.class, Long.parseLong(profId)) )
 				.filter("isActive", true)
 				.order("bulletin");
+		
 		listBS.addAll( bss.list() );
 		listBS.addAll( bss1.list() );
 		listBS.addAll( bss2.list() );
 		//
+		// Remove duplication
 		Key<Bulletin> keyBulletin = null;
 		for ( BulletinSubject bs : listBS ) {
-			if ( keyBulletin != bs.getBulletin() )
-				returnList.add( ofy().load().key( bs.getBulletin()).now() );
+			if ( keyBulletin != bs.getBulletin() ) {
+				bulletin = ofy().load().key( bs.getBulletin()).now();
+				if ( classId.equals( DataValues.optionAll ) || Long.toString(bulletin.getClasse().getId()).equals(classId) )
+					returnList.add( bulletin );
+			}
 			keyBulletin = bs.getBulletin();
 		}
 		//

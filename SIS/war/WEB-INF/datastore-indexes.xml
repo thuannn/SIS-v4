@@ -164,6 +164,26 @@
         <property name="FirstName" direction="asc"/>
     </datastore-index>
     
+    
+    <!-- Study Log -->
+    
+    <datastore-index kind="StudyLog" ancestor="false" source="auto">
+        <property name="keySubject" direction="asc"/>
+        <property name="logDate" direction="asc"/>
+    </datastore-index>
+
+    <datastore-index kind="StudyLog" ancestor="false" source="auto">
+        <property name="keyClasse" direction="asc"/>
+        <property name="keySubject" direction="asc"/>
+        <property name="logDate" direction="asc"/>
+    </datastore-index>
+
+    <datastore-index kind="StudyLog" ancestor="false" source="auto">
+        <property name="keyClasse" direction="asc"/>
+        <property name="logDate" direction="asc"/>
+    </datastore-index>
+    
+    
 	<!-- Professor -->
 
 	<datastore-index kind="Professor" ancestor="false" source="manual">
