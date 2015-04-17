@@ -1,10 +1,17 @@
 package com.lemania.sis.server.bean.studylog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.google.appengine.api.appidentity.AppIdentityService;
+import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
+import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsService;
+import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
+import com.google.appengine.tools.cloudstorage.RetryParams;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 import com.lemania.sis.server.Subject;
@@ -124,6 +131,20 @@ public class StudyLogDao extends MyDAOBase {
 	/*
 	 * */
 	public void removeStudyLog( StudyLog studyLog ){
+		//
+		// Delete file
+		AppIdentityService appIdentity = AppIdentityServiceFactory.getAppIdentityService();
+		GcsService gcsService = GcsServiceFactory
+				.createGcsService(new RetryParams.Builder()
+						.initialRetryDelayMillis(10).retryMaxAttempts(10)
+						.totalRetryPeriodMillis(15000).build());
+		try {
+			gcsService.delete( new GcsFilename( appIdentity.getDefaultGcsBucketName(), studyLog.getFileName() ) );
+		} catch (IOException e) {
+			//
+			e.printStackTrace();
+		}
+		//
 		ofy().delete().entities( studyLog ).now();
 	}
 	
