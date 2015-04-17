@@ -105,5 +105,13 @@ public class FieldValidation {
 		CalendarUtil.addDaysToDate(date, -1);
 		dateTo.setValue(date);
 	}
+	
+	
+	/*
+	 * */
+	public static String getFileNameFormat(String date, String fileName) {
+		//
+		return date + "_" + getFileName(fileName);
+	}
 
 }

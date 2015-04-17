@@ -216,7 +216,7 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 	 * If user choose the option of all classes, concatenate the class Ids to "|" string and save batch
 	 * */
 	@Override
-	public void onStudyLogAdd(String profId, String subjectId, String classeId, 
+	public void onStudyLogAdd ( String profId, String subjectId, String classeId, 
 			final String logTitle, final String logContent, final String editLogId, final String logFileName, String logEntryDate ) {
 		//
 		if (logTitle.equals("") || logContent.equals("")) {
@@ -233,7 +233,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 				rc.saveAndReturn(
 						subjectId, classeId, logTitle, logContent, 
 						logEntryDate,
-						FieldValidation.getFileName(logFileName) ).fire(new Receiver<StudyLogProxy>(){
+						FieldValidation.getFileNameFormat( logEntryDate, logFileName ) )
+					.fire(new Receiver<StudyLogProxy>(){
 					@Override
 					public void onFailure(ServerFailure error){
 						Window.alert(error.getMessage());
@@ -248,7 +249,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 						subjectId, classeId, logTitle, logContent, 
 						logEntryDate,
 						editLogId,
-						FieldValidation.getFileName(logFileName) ).fire(new Receiver<StudyLogProxy>(){
+						FieldValidation.getFileNameFormat( logEntryDate, logFileName ) )
+					.fire(new Receiver<StudyLogProxy>(){
 					@Override
 					public void onFailure(ServerFailure error){
 						Window.alert(error.getMessage());
@@ -270,7 +272,8 @@ public class StudyLogManagementPresenter extends Presenter<StudyLogManagementPre
 					classeIdList, 
 					logTitle, logContent, 
 					logEntryDate,
-					FieldValidation.getFileName(logFileName) ).fire(new Receiver<List<StudyLogProxy>>(){
+					FieldValidation.getFileNameFormat( logEntryDate, logFileName ) )
+				.fire(new Receiver<List<StudyLogProxy>>(){
 				@Override
 				public void onFailure(ServerFailure error){
 					Window.alert(error.getMessage());

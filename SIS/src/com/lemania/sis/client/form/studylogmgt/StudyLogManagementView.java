@@ -571,8 +571,11 @@ class StudyLogManagementView extends
 							+ " - Titre & Fichier");
 				} else {
 					//
-					pnlLogEntryButtons.setVisible(false);;
-					formPanel.setAction("/gcs//" + upload.getFilename()); 
+					pnlLogEntryButtons.setVisible(false);
+					formPanel.setAction("/gcs//" 
+							+ FieldValidation.getFileNameFormat( 
+									DateTimeFormat.getFormat("yyyyMMdd").format( dateEntry.getValue() ),
+									upload.getFilename() ) ); 
 					formPanel.submit();
 					status.setUrl("images/processing.gif");
 				}
