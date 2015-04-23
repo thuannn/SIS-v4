@@ -457,6 +457,9 @@ class StudyLogManagementView extends
 	@UiHandler("cmdAdd")
 	void onCmdAddClicked(ClickEvent event) {
 		//
+		if ( lstClasses.getValue(lstClasses.getSelectedIndex()).equals(""))
+			return;
+		//
 		if (pp != null) {
 			lblSubject.setText(lstAssignments.getItemText(lstAssignments
 					.getSelectedIndex()));

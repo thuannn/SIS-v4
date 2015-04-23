@@ -111,6 +111,8 @@ public class FieldValidation {
 	 * */
 	public static String getFileNameFormat(String date, String fileName) {
 		//
+		if (fileName.equals(""))
+			return "";
 		return date + "_" + getFileName(fileName);
 	}
 

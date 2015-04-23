@@ -1,5 +1,6 @@
 package com.lemania.sis.client.form.absencelist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -72,12 +73,19 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
         getView().setUiHandlers(this);
     }
     
+    
     // Thuan
  	private CurrentUser currentUser;
+ 	List<BulletinProxy> bulletins = new ArrayList<BulletinProxy>();
     
-    protected void onBind() {
+    
+ 	
+ 	/*
+ 	 * */
+ 	protected void onBind() {
         super.onBind();
     }
+ 	
     
     /*
      * */
@@ -86,11 +94,63 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
         //
         getView().resetUI();
         //
+        if (currentUser.isStudent())
+			loadStudentList();
         if (currentUser.isParent())
         	loadStudentListByParent();
         if (currentUser.isProf())
         	loadClassListByProf();
     }
+    
+    
+    /*
+	 * */
+	private void loadStudentList() {
+		//
+		getView().showAdminPanel(false);
+		//
+		BulletinRequestFactory rf = GWT.create(BulletinRequestFactory.class);
+		rf.initialize(this.getEventBus(),
+				new EventSourceRequestTransport(this.getEventBus()));
+		BulletinRequestContext rc = rf.bulletinRequest();
+		//
+		if (currentUser.isAdmin() || currentUser.isProf()) {
+			rc.listAllByEmail(currentUser.getUserEmail()).fire(
+					new Receiver<List<BulletinProxy>>() {
+						@Override
+						public void onFailure(ServerFailure error) {
+							Window.alert(error.getMessage());
+						}
+
+						@Override
+						public void onSuccess(List<BulletinProxy> response) {
+							//
+							getView().setStudentListData(response);
+							//
+							bulletins.clear();
+							bulletins.addAll(response);
+						}
+					});
+		} else {
+			rc.listAllByEmailForPublic(currentUser.getUserEmail()).fire(
+					new Receiver<List<BulletinProxy>>() {
+						@Override
+						public void onFailure(ServerFailure error) {
+							Window.alert(error.getMessage());
+						}
+
+						@Override
+						public void onSuccess(List<BulletinProxy> response) {
+							//
+							getView().setStudentListData(response);
+							//
+							bulletins.clear();
+							bulletins.addAll(response);
+						}
+					});
+		}
+	}
+    
     
     /*
 	 * */

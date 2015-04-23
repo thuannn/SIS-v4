@@ -64,6 +64,9 @@ class StudyLogStudentView extends ViewWithUiHandlers<StudyLogStudentUiHandlers> 
 		//
 		lstBulletins.clear();
 		lstClasses.clear();
+		lstSubjects.clear();
+		//
+		tblLogs.removeAllRows();
 		//
 		initializeDateFields();
 		FieldValidation.setDaysOfTheMonth(dateFrom, dateTo);
