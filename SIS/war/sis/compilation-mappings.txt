@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 68F94DD27EDDC0CFD3949370DB29B5D4.cache.js
 locale fr
 user.agent ie10
@@ -47,6 +48,32 @@ user.agent gecko1_8
 DEAA773B8A2EED5182A08A7157C0C6BD.cache.js
 locale default
 user.agent gecko1_8
+
+>>>>>>> cahier-de-texte
+=======
+15FB56539CDA09EDEDA45970C85DFD96.cache.js
+locale fr
+user.agent ie10
+
+18636C25493C04E0061B00CEC669CC65.cache.js
+locale default
+user.agent safari
+
+5FEF42C906007E542B722217A35E4C07.cache.js
+locale fr
+user.agent gecko1_8
+
+6F54EB04C2552D0A7AC774DCE66C43EB.cache.js
+locale default
+user.agent ie10
+
+725EC94885A47E84290F7621647CA89D.cache.js
+locale default
+user.agent gecko1_8
+
+CEA10E3458DDFA99A6E92ACEB2DF6E86.cache.js
+locale fr
+user.agent safari
 
 >>>>>>> cahier-de-texte
 Devmode:devmode.js

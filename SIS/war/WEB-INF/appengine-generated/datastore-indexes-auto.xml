@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- Indices written at Tue, 17 Mar 2015 15:40:55 CET -->
 
 <datastore-indexes>
@@ -50,6 +51,12 @@
 
 <datastore-indexes>
 
+=======
+<!-- Indices written at Fri, 17 Apr 2015 09:20:50 CEST -->
+
+<datastore-indexes>
+
+>>>>>>> cahier-de-texte
     <!-- Used 1 time in query history -->
     <datastore-index kind="Assignment" ancestor="false" source="auto">
         <property name="prof" direction="asc"/>
@@ -85,6 +92,9 @@
         <property name="professor2" direction="asc"/>
         <property name="subject" direction="asc"/>
         <property name="bulletin" direction="asc"/>
+<<<<<<< HEAD
+>>>>>>> cahier-de-texte
+=======
 >>>>>>> cahier-de-texte
     </datastore-index>
 

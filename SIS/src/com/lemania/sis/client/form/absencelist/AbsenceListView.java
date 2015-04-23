@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.user.client.ui.ListBox;
+import com.lemania.sis.client.values.AbsenceValues;
 import com.lemania.sis.shared.ClasseProxy;
 import com.lemania.sis.shared.absenceitem.AbsenceItemProxy;
 import com.lemania.sis.shared.bulletin.BulletinProxy;
@@ -44,6 +45,7 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
 		lstStudents.addItem("Choisir");
 		for (BulletinProxy bp : students) {
 			lstStudents.addItem( bp.getStudentName(), bp.getStudentId().toString() );
+			break;
 		}
 	}
 	
@@ -75,7 +77,7 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
 			tblAbsences.setText(rowPos, 0, date.substring(6) + "." + date.substring(4,6) + "." + date.substring(0,4) );
 			//
 			tblAbsences.setText(rowPos, 1, ab.getPeriodDesc() );
-			tblAbsences.setText(rowPos, 2, ab.getCodeAbsenceType() );
+			tblAbsences.setText(rowPos, 2, AbsenceValues.getCodeFR( ab.getCodeAbsenceType() ) );
 			tblAbsences.setText(rowPos, 3, (ab.getLateMinutes() > 0) ? Integer.toString(ab.getLateMinutes()) : "" );
 			tblAbsences.setText(rowPos, 4, ab.getProfName() );
 			tblAbsences.setText(rowPos, 5, ab.getSubjectName() );

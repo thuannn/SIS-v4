@@ -111,6 +111,11 @@ public class FieldValidation {
 	 * */
 	public static String getFileNameFormat(String date, String fileName) {
 		//
+<<<<<<< HEAD
+=======
+		if (fileName.equals(""))
+			return "";
+>>>>>>> cahier-de-texte
 		return date + "_" + getFileName(fileName);
 	}
 

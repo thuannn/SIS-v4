@@ -2,6 +2,7 @@
 <cronentries>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- 	<cron> -->
 <!-- 	<description>Lemania eProfil - Daily Backups</description> -->
 <!-- 	<url>/_ah/datastore_admin/backup.create?name=Lemania-eProfil&amp;kind=AbsenceItem&amp;kind=Assignment&amp;kind=Branche&amp;kind=Bulletin&amp;kind=BulletinBranche&amp;kind=BulletinSubject&amp;kind=Classe&amp;kind=Cours&amp;kind=Ecole&amp;kind=EvaluationHeader&amp;kind=EvaluationStudentReport&amp;kind=EvaluationSubject&amp;kind=Parent&amp;kind=Period&amp;kind=PeriodItem&amp;kind=Professor&amp;kind=Profile&amp;kind=ProfileBranche&amp;kind=ProfileSubject&amp;kind=SettingOption&amp;kind=Student&amp;kind=Subject&amp;kind=User&amp;filesystem=blobstore</url> -->
@@ -17,6 +18,14 @@
 <!--     <schedule>every day 00:00</schedule> -->
 <!--     <target>ah-builtin-python-bundle</target> -->
 <!--   </cron> -->
+=======
+  <cron>
+    <description>eProfil Lemania - Daily Backups</description>
+    <url>/_ah/datastore_admin/backup.create?name=Lemania-eProfil&amp;kind=AbsenceItem&amp;kind=Assignment&amp;kind=Branche&amp;kind=Bulletin&amp;kind=BulletinBranche&amp;kind=BulletinSubject&amp;kind=Classe&amp;kind=Cours&amp;kind=Ecole&amp;kind=EvaluationHeader&amp;kind=EvaluationStudentReport&amp;kind=EvaluationSubject&amp;kind=Parent&amp;kind=Period&amp;kind=PeriodItem&amp;kind=Professor&amp;kind=Profile&amp;kind=ProfileBranche&amp;kind=ProfileSubject&amp;kind=SettingOption&amp;kind=Student&amp;kind=Subject&amp;kind=User&amp;kind=StudyLog&amp;filesystem=blobstore</url>
+    <schedule>every day 00:00</schedule>
+    <target>ah-builtin-python-bundle</target>
+  </cron>
+>>>>>>> cahier-de-texte
   
 <!--   <cron> -->
 <!--     <description>eProfil PV - Daily Backups</description> -->
@@ -32,5 +41,8 @@
 <!--     <target>ah-builtin-python-bundle</target> -->
 <!--   </cron> -->
   
+<<<<<<< HEAD
+>>>>>>> cahier-de-texte
+=======
 >>>>>>> cahier-de-texte
 </cronentries>

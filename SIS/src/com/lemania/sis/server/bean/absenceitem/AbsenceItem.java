@@ -162,7 +162,7 @@ public class AbsenceItem extends DatastoreObject implements Comparable<AbsenceIt
 	@Override
 	public int compareTo(AbsenceItem o) {
 		// 
-		return (this.strAbsenceDate + this.periodDesc).compareTo( o.getStrAbsenceDate() + o.getPeriodDesc() );
+		return ( o.getStrAbsenceDate() + o.getPeriodDesc() ).compareTo( this.strAbsenceDate + this.periodDesc );
 	}
 	
 	public String getStudentName() {

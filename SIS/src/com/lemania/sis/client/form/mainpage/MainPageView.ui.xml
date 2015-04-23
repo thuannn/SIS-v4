@@ -134,7 +134,11 @@
 								<g:Hyperlink text="Saisir les évaluations" targetHistoryToken="evaluationinput" ui:field="cmdEvaluationInputProfProf"/>
 								<g:Hyperlink text="Evaluations par élève" targetHistoryToken="evaluationinputstudent" ui:field="cmdEvaluationInputEleveProf"/>
 							</g:TreeItem>
+<<<<<<< HEAD
 							<g:TreeItem text="Cahier de texte">
+=======
+							<g:TreeItem text="Cahier de texte" state="true">
+>>>>>>> cahier-de-texte
 								<g:Hyperlink targetHistoryToken="studylogmgt" text="Cahier de texte" ui:field="cmdStudyLogMgtProf"/>
 			
 							</g:TreeItem>
@@ -150,6 +154,7 @@
 					<g:Tree styleName="sideBar" ui:field="treeMenuEleve" width="250px">
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="Espace élève">
+							<g:Hyperlink targetHistoryToken="absenceslist" text="Consulter les absences" ui:field="cmdAbsencesViewParent"/>
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewStudent"/>
 							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte" ui:field="cmdStudyLogStudentStudent"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordStudent"/>
@@ -160,7 +165,10 @@
 						<g:Label styleName="left_header" text="." width=""/>
 						<g:TreeItem state="true" text="Espace parents">
 							<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes" ui:field="cmdMarkViewParent"/>
+<<<<<<< HEAD
 							<g:Hyperlink targetHistoryToken="absenceslist" text="Consulter les absences" ui:field="cmdAbsencesViewParent"/>
+=======
+>>>>>>> cahier-de-texte
 							<g:Hyperlink targetHistoryToken="studylogstudent" text="Cahier de texte" ui:field="cmdStudyLogStudentParent"/>
 							<g:Hyperlink targetHistoryToken="password" text="Modifier le mot de passe" ui:field="cmdPasswordParent"/>
 							<g:Hyperlink targetHistoryToken="!contact" text="Aide / Contact" ui:field="cmdHelpParent"/>
