@@ -107,7 +107,8 @@ public class FrmBulletinViewDetailPresenter
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	private void loadStudentListByParent() {
 		//
 		// Hide the class list

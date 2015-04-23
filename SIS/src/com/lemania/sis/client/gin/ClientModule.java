@@ -59,6 +59,8 @@ import com.lemania.sis.client.form.studentmgt.StudentAddPresenter;
 import com.lemania.sis.client.form.studentmgt.StudentAddView;
 import com.lemania.sis.client.form.studentmgt.StudentPresenter;
 import com.lemania.sis.client.form.studentmgt.StudentView;
+import com.lemania.sis.client.form.studylogmgt.StudyLogManagementModule;
+import com.lemania.sis.client.form.studylogstudent.StudyLogStudentModule;
 import com.lemania.sis.client.form.subjects.FrmSubjectAddPresenter;
 import com.lemania.sis.client.form.subjects.FrmSubjectAddView;
 import com.lemania.sis.client.form.subjects.FrmSubjectListPresenter;
@@ -95,6 +97,8 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new MasterAgendaModule());
 		install(new ClassroomModule());
 		install(new AbsenceListModule());
+		install(new StudyLogManagementModule());
+		install(new StudyLogStudentModule());
 		
 		// Singletons
 		install(new DefaultModule(SISPlaceManager.class));

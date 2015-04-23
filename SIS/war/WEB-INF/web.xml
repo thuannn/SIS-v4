@@ -69,6 +69,17 @@
 		<url-pattern>/remote_api</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>GcsServlet</servlet-name>
+		<servlet-class>com.lemania.sis.server.servlet.GcsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GcsServlet</servlet-name>
+		<url-pattern>/gcs/*</url-pattern>
+	</servlet-mapping>
+
+	
 	<!-- Configure HTTPS URLs  -->
 	<security-constraint>
         <web-resource-collection>

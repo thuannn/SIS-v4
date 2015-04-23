@@ -110,6 +110,10 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	@UiField Hyperlink cmdPasswordParent;
 	@UiField Hyperlink cmdHelpParent;
 	@UiField Hyperlink cmdAbsencesViewProf;
+	@UiField Hyperlink cmdStudyLogMgt;
+	@UiField Hyperlink cmdStudyLogStudent;
+	@UiField Hyperlink cmdStudyLogStudentStudent;
+	@UiField Hyperlink cmdStudyLogStudentParent;
 	
 	Hyperlink currentSelectedItem;
 	
@@ -828,6 +832,26 @@ public class MainPageView extends ViewWithUiHandlers<MainPageUiHandler> implemen
 	}
 	@UiHandler("cmdSettings")
 	void onCmdSettingsClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudyLogMgt")
+	void onCmdStudyLogMgtClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudyLogStudent")
+	void onCmdStudyLogStudentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudyLogStudentStudent")
+	void onCmdStudyLogStudentStudentClick(ClickEvent event) {
+		//
+		switchButton( (Hyperlink)event.getSource() );
+	}
+	@UiHandler("cmdStudyLogStudentParent")
+	void onCmdStudyLogStudentParentClick(ClickEvent event) {
 		//
 		switchButton( (Hyperlink)event.getSource() );
 	}

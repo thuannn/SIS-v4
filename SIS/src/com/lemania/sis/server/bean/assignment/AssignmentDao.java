@@ -6,9 +6,10 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bean.classe.ClassNameComparator;
+import com.lemania.sis.server.bean.classe.Classe;
+import com.lemania.sis.server.professor.Professor;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class AssignmentDao extends MyDAOBase {
@@ -76,7 +77,7 @@ public class AssignmentDao extends MyDAOBase {
 	
 	/*
 	 * */
-	public List<Professor> listAllProfessorBySubject(String subjectId, String classId){
+	public List<Professor> listAllProfessorBySubject(String subjectId, String classId) {
 		Query<Assignment> q = ofy().load().type(Assignment.class)
 				.filter("classe", Key.create(Classe.class, Long.parseLong(classId)))
 				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)))
@@ -90,6 +91,55 @@ public class AssignmentDao extends MyDAOBase {
 					returnList.add(prof);
 			}
 		}
+		return returnList;
+	}
+	
+	
+	/*
+	 * List all the subjects that a professor takes care of
+	 * */
+	public List<Subject> listAllSubjectByProfessor(String profId) {
+		//
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("prof", Key.create( Professor.class, Long.parseLong(profId) ))
+				.order("subject");
+		List<Subject> returnList = new ArrayList<Subject>();
+		// Goes through the list of assignments and populate the subject list
+		Subject sub = new Subject();
+		Key<Subject> subKey = null;
+		for (Assignment a : q) {
+			if (a.getActive()) {
+				 if ( (subKey == null) || (subKey.getId() != a.getSubject().getId()) ) {
+					sub = ofy().load().key( a.getSubject() ).now();
+					returnList.add( sub );
+				 }
+				subKey = a.getSubject();
+			}
+		}
+		return returnList;
+	}
+	
+	
+	/*
+	 * List all the subjects that a professor takes care of
+	 * */
+	public List<Classe> listAllClassByProfAndSubject(String profId, String subjectId) {
+		//
+		Query<Assignment> q = ofy().load().type(Assignment.class)
+				.filter("prof", Key.create( Professor.class, Long.parseLong(profId) ))
+				.filter("subject", Key.create(Subject.class, Long.parseLong(subjectId)))
+				.order("classe");
+		List<Classe> returnList = new ArrayList<Classe>();
+		// Goes through the list of assignments and populate the subject list
+		Classe cl = new Classe();
+		for (Assignment a : q){
+			if (a.getActive()) {				
+				cl = ofy().load().key( a.getClasse() ).now();
+				returnList.add( cl );
+			}
+		}
+		//
+		Collections.sort( returnList, new ClassNameComparator() );
 		return returnList;
 	}
 	

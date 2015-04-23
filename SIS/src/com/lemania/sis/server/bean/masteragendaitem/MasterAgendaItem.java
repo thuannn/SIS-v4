@@ -5,11 +5,11 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
 import com.lemania.sis.server.DatastoreObject;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.classroom.Classroom;
 import com.lemania.sis.server.bean.period.Period;
+import com.lemania.sis.server.professor.Professor;
 
 @Entity
 @Index

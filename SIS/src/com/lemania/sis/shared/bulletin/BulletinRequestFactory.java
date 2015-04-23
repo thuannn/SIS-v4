@@ -8,6 +8,7 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.lemania.sis.server.bean.bulletin.BulletinDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
+import com.lemania.sis.shared.student.StudentProxy;
 
 public interface BulletinRequestFactory extends RequestFactory {
 	//
@@ -22,6 +23,8 @@ public interface BulletinRequestFactory extends RequestFactory {
 		Request<List<BulletinProxy>> listAllActiveByClassProfile( String classId, String profileId );
 		Request<List<BulletinProxy>> listAllByEmail(String email);
 		Request<List<BulletinProxy>> listAllByEmailForPublic(String email);
+		//
+		Request<List<BulletinProxy>> listAllStudentByProfSubjectClass( String profId, String subjectId, String classId );
 		//
 		Request<BulletinProxy> getBulletin(String bulletinId);
 		//

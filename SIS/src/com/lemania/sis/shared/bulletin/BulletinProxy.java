@@ -35,4 +35,5 @@ public interface BulletinProxy extends EntityProxy {
 	public void setIsFinished(Boolean isFinished);
 	
 	public Long getStudentId();
+	public Long getClassId();
 }

@@ -5,13 +5,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jetty.server.Request;
-
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.SessionIdentifierGenerator;
 import com.lemania.sis.server.bean.student.Student;
+import com.lemania.sis.server.professor.Professor;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class UserDao extends MyDAOBase {

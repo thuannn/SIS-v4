@@ -88,11 +88,15 @@ public class ProfsAddView extends ViewWithUiHandlers<ProfessorAddUiHandler> impl
 				txtProfEmail.setText( txtProfFirstName.getText().substring(0, 1).toLowerCase() + "." + txtProfName.getText().trim().toLowerCase() + "@eprofil.ch");
 	}
 	
+	/*
+	 * */
 	@UiHandler("txtProfName")
 	void onTxtProfNameKeyUp(KeyUpEvent event) {		
 			updateEmail();
 	}
 	
+	/*
+	 * */
 	@UiHandler("txtProfFirstName")
 	void onTxtProfFirstNameKeyUp(KeyUpEvent event) {		
 			updateEmail();

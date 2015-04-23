@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Profile;
 import com.lemania.sis.server.ProfileBranche;
 import com.lemania.sis.server.Subject;
+import com.lemania.sis.server.bean.classe.Classe;
+import com.lemania.sis.server.professor.Professor;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class ProfileSubjectDao extends MyDAOBase {

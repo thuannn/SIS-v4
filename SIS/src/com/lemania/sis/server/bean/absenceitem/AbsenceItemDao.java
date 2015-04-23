@@ -9,13 +9,13 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Classe;
-import com.lemania.sis.server.Professor;
 import com.lemania.sis.server.Subject;
 import com.lemania.sis.server.bean.assignment.Assignment;
+import com.lemania.sis.server.bean.classe.Classe;
 import com.lemania.sis.server.bean.motifabsence.MotifAbsence;
 import com.lemania.sis.server.bean.period.Period;
 import com.lemania.sis.server.bean.student.Student;
+import com.lemania.sis.server.professor.Professor;
 import com.lemania.sis.server.service.MyDAOBase;
 
 public class AbsenceItemDao extends MyDAOBase {
@@ -217,7 +217,7 @@ public class AbsenceItemDao extends MyDAOBase {
 	/*
 	 * */
 	public void removeAbsenceItem(AbsenceItem ai){
-		ofy().delete().entities(ai);
+		ofy().delete().entities(ai).now();
 	}
 	
 	

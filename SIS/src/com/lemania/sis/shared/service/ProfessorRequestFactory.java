@@ -6,8 +6,8 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
+import com.lemania.sis.server.professor.ProfessorDao;
 import com.lemania.sis.server.service.DaoServiceLocator;
-import com.lemania.sis.server.service.ProfessorDao;
 import com.lemania.sis.shared.ProfessorProxy;
 
 public interface ProfessorRequestFactory extends RequestFactory {

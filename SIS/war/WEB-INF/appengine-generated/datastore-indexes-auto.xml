@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Indices written at Tue, 17 Mar 2015 15:40:55 CET -->
 
 <datastore-indexes>
@@ -44,6 +45,47 @@
     <datastore-index kind="ProfileSubject" ancestor="false" source="auto">
         <property name="profile" direction="asc"/>
         <property name="subjectName" direction="asc"/>
+=======
+<!-- Indices written at Fri, 17 Apr 2015 09:20:50 CEST -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Assignment" ancestor="false" source="auto">
+        <property name="prof" direction="asc"/>
+        <property name="subject" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
+        <property name="isActive" direction="asc"/>
+        <property name="professor" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="bulletin" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
+        <property name="isActive" direction="asc"/>
+        <property name="professor1" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="bulletin" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="StudyLog" ancestor="false" source="auto">
+        <property name="keyClasse" direction="asc"/>
+        <property name="keySubject" direction="asc"/>
+        <property name="logDate" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="BulletinSubject" ancestor="false" source="auto">
+        <property name="isActive" direction="asc"/>
+        <property name="professor2" direction="asc"/>
+        <property name="subject" direction="asc"/>
+        <property name="bulletin" direction="asc"/>
+>>>>>>> cahier-de-texte
     </datastore-index>
 
 </datastore-indexes>

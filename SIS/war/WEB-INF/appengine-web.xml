@@ -2,7 +2,11 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
 	<application>sis-dev</application>
+<<<<<<< HEAD
 	<version>3-20150317-1</version>
+=======
+	<version>4-20150416-1</version>
+>>>>>>> cahier-de-texte
 	<threadsafe>true</threadsafe>
 
 	<!-- Configure serving/caching of GWT files -->

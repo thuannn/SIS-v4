@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
-import com.lemania.sis.server.Classe;
+import com.lemania.sis.server.bean.classe.Classe;
 import com.lemania.sis.server.bean.perioditem.PeriodItem;
 import com.lemania.sis.server.service.MyDAOBase;
 
