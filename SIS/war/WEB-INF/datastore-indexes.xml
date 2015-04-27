@@ -67,14 +67,6 @@
 		<property name="year" direction="asc" />
 	</datastore-index>
 
-	<!-- Bulletin Subject -->
-
-	<datastore-index kind="BulletinSubject" ancestor="false"
-		source="auto">
-		<property name="bulletin" direction="asc" />
-		<property name="subjectCoef" direction="asc" />
-	</datastore-index>
-
 	<datastore-index kind="Bulletin" ancestor="false"
 		source="auto">
 		<property name="isFinished" direction="asc" />
@@ -90,6 +82,12 @@
 	</datastore-index>
 
 	<!-- Bulletin Subject -->
+	
+	<datastore-index kind="BulletinSubject" ancestor="false"
+		source="auto">
+		<property name="bulletin" direction="asc" />
+		<property name="subjectCoef" direction="asc" />
+	</datastore-index>
 
 	<datastore-index kind="BulletinSubject" ancestor="false"
 		source="manual">
@@ -117,8 +115,6 @@
 		<property name="bulletin" direction="asc" />
 		<property name="subjectName" direction="asc" />
 	</datastore-index>
-
-	<!-- Bulletin Branche -->
 
 	<datastore-index kind="BulletinSubject" ancestor="false"
 		source="auto">
@@ -158,7 +154,7 @@
 		<property name="ecole" direction="asc" />
 		<property name="coursNom" direction="asc" />
 	</datastore-index>
-
+	
 	<!-- Class -->
 
 	<datastore-index kind="Classe" ancestor="false" source="manual">
@@ -200,14 +196,7 @@
 		<property name="profileSubject" direction="asc" />
 		<property name="profileBranche" direction="asc" />
 	</datastore-index>
-
-	<!-- Cours -->
-
-	<datastore-index kind="Cours" ancestor="false" source="manual">
-		<property name="ecole" direction="asc" />
-		<property name="coursNom" direction="asc" />
-	</datastore-index>
-
+	
 	<!-- Class -->
 
 	<datastore-index kind="Classe" ancestor="false" source="manual">

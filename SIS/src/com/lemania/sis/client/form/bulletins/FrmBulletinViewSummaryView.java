@@ -97,11 +97,14 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	private void initializeModelList() {
 		//
 		lstModels.clear();
-		lstModels.addItem("Ecole Lémania", "lemania");
-		lstModels.addItem("Pierre Viret", "pierreviret");
+		lstModels.addItem("Logo - Ecole Lémania", "lemania");
+		lstModels.addItem("Logo - Pierre Viret", "pierreviret");
+		lstModels.addItem("Baccalauréat Français", "bacfrancais");
+		lstModels.addItem("Baccalauréat Français - Bac Blanc uniquement", "bacblanc");
 		lstModels.addItem("Prématurité - T1, T2, T3, T4", "prematurite");
 		lstModels.addItem("Prématurité - T1, T2", "prematurite12");
 		lstModels.addItem("Prématurité - T3, T4", "prematurite34");
+		lstModels.addItem("Maturité Suisse", "maturitesuisse");
 		lstModels.setSelectedIndex(0);
 	}
 
@@ -208,7 +211,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	private void initializeESTable() {
 		//
 		tblNotes.removeAllRows();
@@ -227,7 +231,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	}
 	
 	
-	/**/
+	/*
+	 * */
 	@Override
 	public void drawBulletinSubjectList(List<BulletinSubjectProxy> subjects) {
 		//
@@ -235,12 +240,16 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			if ( classes.get(lstClasses.getSelectedIndex()-1).getClassName().toLowerCase().contains("prématurité") )
 				drawPrematurite( subjects, false );
 			else
-				drawMatuBulletin( subjects );
+				drawMatuBulletin( subjects, false );
 		}
+		//
 		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("bacc"))
-			drawBacBulletin( subjects );
+			drawBacBulletin( subjects, false );
+		//
 		if (classes.get(lstClasses.getSelectedIndex()-1).getProgrammeName().toLowerCase().contains("second"))
 			drawESBulletin( subjects );
+		//
+		onLstModelsChange( null );
 	}
 	
 	
@@ -497,7 +506,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	
 
 	/**/
-	private void drawBacBulletin(List<BulletinSubjectProxy> subjects) {
+	private void drawBacBulletin(List<BulletinSubjectProxy> subjects, boolean isRedraw) {
+		//
+		if (!isRedraw) {
+			curSubjects.clear();
+			curSubjects.addAll(subjects);
+		}
 		//
 		initializeBacTable();
 		//
@@ -528,10 +542,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 9, (
 					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
 							: ( (!subjects.get(rowCount).getT2().equals("") || !subjects.get(rowCount).getExamT2().equals("")) ? subjects.get(rowCount).getRemarqueT2()
-									: subjects.get(rowCount).getRemarqueT1() ) ) );
-//					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
-//					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
-//							: subjects.get(rowCount).getRemarqueT1() ) ) );			
+									: subjects.get(rowCount).getRemarqueT1() ) ) );		
 			//
 			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
 				//
@@ -688,7 +699,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 
 	/*
 	 * */
-	public void drawMatuBulletin( List<BulletinSubjectProxy> subjects ) {
+	public void drawMatuBulletin( List<BulletinSubjectProxy> subjects, boolean isRedraw ) {
+		//
+		if ( !isRedraw ) {
+			curSubjects.clear();
+			curSubjects.addAll(subjects);
+		}
 		//
 		initializeTableMatu();
 		//
@@ -709,10 +725,6 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
 							: ( (!subjects.get(rowCount).getT2().equals("") || !subjects.get(rowCount).getExamT2().equals("")) ? subjects.get(rowCount).getRemarqueT2()
 									: subjects.get(rowCount).getRemarqueT1() ) ) );
-// 20121211 : If T2 or T3 has grades, show the comment of those quarter, even empty
-//					!subjects.get(rowCount).getRemarqueT3().equals("") ? subjects.get(rowCount).getRemarqueT3()
-//					: ( !subjects.get(rowCount).getRemarqueT2().equals("")? subjects.get(rowCount).getRemarqueT2()
-//							: subjects.get(rowCount).getRemarqueT1() ) ) 
 			//
 			if ( !subjects.get( rowCount ).getAn().isEmpty() ){
 				totalMoyenne = totalMoyenne + Double.parseDouble(subjects.get( rowCount ).getAn()) * subjects.get( rowCount ).getSubjectCoef();
@@ -933,5 +945,93 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("prematurite")){
 			drawPrematurite(curSubjects, true);
 		}
+		//
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanc")){
+			drawBacBlanc(curSubjects);
+		}
+		//
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacfrancais")){
+			drawBacBulletin(curSubjects, true);
+		}
+		//
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("maturitesuisse")){
+			drawMatuBulletin(curSubjects, true);
+		}
+	}
+
+	
+	
+	/*
+	 * Show bulletins with only bac blanc notes
+	 * */
+	private void drawBacBlanc(List<BulletinSubjectProxy> subjects) {
+		//
+		initializeBacTable();
+		//
+		Integer rowStart = 1;
+		Integer rowCount = 0;
+		Double totalCoef = 0.0;
+		//
+		Double totalMoyenneT1 = 0.0;
+		Double totalCoefT1 = 0.0;
+		//
+		Double totalMoyenneT2 = 0.0;
+		Double totalCoefT2 = 0.0;
+		//
+		Double totalMoyenneT3 = 0.0;
+		Double totalCoefT3 = 0.0;
+		// 
+		// Only show the examen notes
+		for (int i = rowStart; i< (subjects.size()+rowStart); i++) {
+			//
+			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
+			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
+			tblNotes.setText(i, 2, "" );
+			tblNotes.setText(i, 3, subjects.get( rowCount ).getExamT1().toLowerCase());
+			tblNotes.setText(i, 4, "" );
+			tblNotes.setText(i, 5, subjects.get( rowCount ).getExamT2().toString());
+			tblNotes.setText(i, 6, "" );
+			tblNotes.setText(i, 7, subjects.get( rowCount ).getExamT3().toString());
+			tblNotes.setText(i, 8, "" );
+			tblNotes.setText(i, 9, (
+					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
+							: ( (!subjects.get(rowCount).getT2().equals("") || !subjects.get(rowCount).getExamT2().equals("")) ? subjects.get(rowCount).getRemarqueT2()
+									: subjects.get(rowCount).getRemarqueT1() ) ) );		
+			//
+			totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
+			//
+			if ( !subjects.get( rowCount ).getExamT1().isEmpty() ) {
+				totalMoyenneT1 = totalMoyenneT1 + Double.parseDouble(subjects.get( rowCount ).getExamT1()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoefT1 = totalCoefT1 + subjects.get( rowCount ).getSubjectCoef();
+			}
+			if ( !subjects.get( rowCount ).getExamT2().isEmpty() ) {
+				totalMoyenneT2 = totalMoyenneT2 + Double.parseDouble(subjects.get( rowCount ).getExamT2()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoefT2 = totalCoefT2 + subjects.get( rowCount ).getSubjectCoef();
+			}
+			if ( !subjects.get( rowCount ).getExamT3().isEmpty() ) {
+				totalMoyenneT3 = totalMoyenneT3 + Double.parseDouble(subjects.get( rowCount ).getExamT3()) * subjects.get( rowCount ).getSubjectCoef();
+				totalCoefT3 = totalCoefT3 + subjects.get( rowCount ).getSubjectCoef();
+			}
+			//
+			rowCount++;
+		}
+		//
+		rowCount++;
+		tblNotes.setText(rowCount, 0, "Moyenne :");
+		tblNotes.setText(rowCount, 1, totalCoef.toString());
+		tblNotes.setText(rowCount, 2, "");
+		tblNotes.setText(rowCount, 3, (totalMoyenneT1>0)? String.valueOf((double)Math.round(totalMoyenneT1/totalCoefT1*10)/10) : "");
+		tblNotes.setText(rowCount, 4, "");
+		tblNotes.setText(rowCount, 5, (totalMoyenneT2>0)? String.valueOf((double)Math.round(totalMoyenneT2/totalCoefT2*10)/10) : "");
+		tblNotes.setText(rowCount, 6, "");
+		tblNotes.setText(rowCount, 7, (totalMoyenneT3>0)? String.valueOf((double)Math.round(totalMoyenneT3/totalCoefT3*10)/10) : "");
+		tblNotes.setText(rowCount, 8, "");
+		tblNotes.setText(rowCount, 9, "");
+		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
+			tblNotes.getCellFormatter().setStyleName(rowCount, i, "subjectLine");
+		//
+		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
+		//
+		styleBacTable();
 	}
 }
