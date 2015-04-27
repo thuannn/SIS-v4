@@ -104,7 +104,8 @@ class StudyLogStudentView extends ViewWithUiHandlers<StudyLogStudentUiHandlers> 
 		lstBulletins.clear();
 		lstBulletins.addItem("-","");
 		for (BulletinProxy bulletin : bulletins) {
-			lstBulletins.addItem( bulletin.getStudentName() + " - " + bulletin.getClasseName() + " - " + bulletin.getYear(), 
+			if ( !bulletin.getIsFinished() )
+				lstBulletins.addItem( bulletin.getStudentName() + " - " + bulletin.getClasseName() + " - " + bulletin.getYear(), 
 					bulletin.getId().toString());
 		}
 	}

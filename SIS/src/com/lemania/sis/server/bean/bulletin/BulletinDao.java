@@ -237,11 +237,15 @@ public class BulletinDao extends MyDAOBase {
 		//
 		// Remove duplication
 		Key<Bulletin> keyBulletin = null;
+		Student student = null;
 		for ( BulletinSubject bs : listBS ) {
 			if ( keyBulletin != bs.getBulletin() ) {
 				bulletin = ofy().load().key( bs.getBulletin()).now();
-				if ( classId.equals( DataValues.optionAll ) || Long.toString(bulletin.getClasse().getId()).equals(classId) )
-					returnList.add( bulletin );
+				if ( classId.equals( DataValues.optionAll ) || Long.toString(bulletin.getClasse().getId()).equals(classId) ) {
+					student = ofy().load().key(bulletin.getStudent()).now(); 
+					if ( student.getIsActive()  &&  !bulletin.getIsFinished() )
+						returnList.add( bulletin );
+				}
 			}
 			keyBulletin = bs.getBulletin();
 		}
