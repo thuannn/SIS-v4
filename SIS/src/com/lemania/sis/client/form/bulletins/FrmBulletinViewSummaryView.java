@@ -100,7 +100,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lstModels.addItem("Logo - Ecole Lémania", "lemania");
 		lstModels.addItem("Logo - Pierre Viret", "pierreviret");
 		lstModels.addItem("Baccalauréat Français", "bacfrancais");
-		lstModels.addItem("Baccalauréat Français - Bac Blanc uniquement", "bacblanc");
+//		lstModels.addItem("Baccalauréat Français - Bac Blanc uniquement", "bacblanc");
+		lstModels.addItem("Baccalauréat Français - Bac Blanc T1", "bacblanct1");
+		lstModels.addItem("Baccalauréat Français - Bac Blanc T2", "bacblanct2");
+		lstModels.addItem("Baccalauréat Français - Bac Blanc T3", "bacblanct3");
 		lstModels.addItem("Prématurité - T1, T2, T3, T4", "prematurite");
 		lstModels.addItem("Prématurité - T1, T2", "prematurite12");
 		lstModels.addItem("Prématurité - T3, T4", "prematurite34");
@@ -927,12 +930,14 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			txtAddress1.setText("Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00");
 			txtAddress2.setText("Email: info@lemania.ch - Site internet : www.lemania.ch");
 		}
+		
 		//
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("pierreviret")){
 			imgLogo.setUrl("/images/logo_pv.jpg");
 			txtAddress1.setText("Chemin des Cèdres 3, 1004 Lausanne, Suisse - Tel.: + 41 21 643 77 07 - Fax.: + 41 21 643 77 08");
 			txtAddress2.setText("Email: info@pierreviret.ch - Site internet : www.pierreviret.ch");
 		}
+		
 		//
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("prematurite12")){
 			drawPrematurite12();
@@ -945,14 +950,30 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("prematurite")){
 			drawPrematurite(curSubjects, true);
 		}
+		
 		//
-		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanc")){
-			drawBacBlanc(curSubjects);
+		// Bac Blanc
+//		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanc")){
+//			drawBacBlanc(curSubjects, 0);
+//		}
+		// T1
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanct1")){
+			drawBacBlanc(curSubjects, 1);
 		}
+		// T2
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanct2")){
+			drawBacBlanc(curSubjects, 2);
+		}
+		// T3
+		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacblanct3")){
+			drawBacBlanc(curSubjects, 3);
+		}
+		
 		//
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("bacfrancais")){
 			drawBacBulletin(curSubjects, true);
 		}
+		
 		//
 		if (lstModels.getValue(lstModels.getSelectedIndex()).equals("maturitesuisse")){
 			drawMatuBulletin(curSubjects, true);
@@ -964,7 +985,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	/*
 	 * Show bulletins with only bac blanc notes
 	 * */
-	private void drawBacBlanc(List<BulletinSubjectProxy> subjects) {
+	private void drawBacBlanc(List<BulletinSubjectProxy> subjects, int quarter) {
 		//
 		initializeBacTable();
 		//
@@ -987,11 +1008,11 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 0, subjects.get( rowCount ).getSubjectName());
 			tblNotes.setText(i, 1, subjects.get( rowCount ).getSubjectCoef().toString());
 			tblNotes.setText(i, 2, "" );
-			tblNotes.setText(i, 3, subjects.get( rowCount ).getExamT1().toLowerCase());
+			tblNotes.setText(i, 3, (quarter == 1 ) ? subjects.get( rowCount ).getExamT1().toLowerCase() : "");
 			tblNotes.setText(i, 4, "" );
-			tblNotes.setText(i, 5, subjects.get( rowCount ).getExamT2().toString());
+			tblNotes.setText(i, 5, (quarter == 2 ) ? subjects.get( rowCount ).getExamT2().toString() : "");
 			tblNotes.setText(i, 6, "" );
-			tblNotes.setText(i, 7, subjects.get( rowCount ).getExamT3().toString());
+			tblNotes.setText(i, 7, (quarter == 3 ) ? subjects.get( rowCount ).getExamT3().toString() : "");
 			tblNotes.setText(i, 8, "" );
 			tblNotes.setText(i, 9, (
 					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
@@ -1020,11 +1041,11 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		tblNotes.setText(rowCount, 0, "Moyenne :");
 		tblNotes.setText(rowCount, 1, totalCoef.toString());
 		tblNotes.setText(rowCount, 2, "");
-		tblNotes.setText(rowCount, 3, (totalMoyenneT1>0)? String.valueOf((double)Math.round(totalMoyenneT1/totalCoefT1*10)/10) : "");
+		tblNotes.setText(rowCount, 3, (quarter == 1 ) ? ((totalMoyenneT1>0)? String.valueOf((double)Math.round(totalMoyenneT1/totalCoefT1*10)/10) : "") : "");
 		tblNotes.setText(rowCount, 4, "");
-		tblNotes.setText(rowCount, 5, (totalMoyenneT2>0)? String.valueOf((double)Math.round(totalMoyenneT2/totalCoefT2*10)/10) : "");
+		tblNotes.setText(rowCount, 5, (quarter == 2 ) ? ((totalMoyenneT2>0)? String.valueOf((double)Math.round(totalMoyenneT2/totalCoefT2*10)/10) : "") : "");
 		tblNotes.setText(rowCount, 6, "");
-		tblNotes.setText(rowCount, 7, (totalMoyenneT3>0)? String.valueOf((double)Math.round(totalMoyenneT3/totalCoefT3*10)/10) : "");
+		tblNotes.setText(rowCount, 7, (quarter == 3 ) ? ((totalMoyenneT3>0)? String.valueOf((double)Math.round(totalMoyenneT3/totalCoefT3*10)/10) : "") : "");
 		tblNotes.setText(rowCount, 8, "");
 		tblNotes.setText(rowCount, 9, "");
 		for (int i=0; i<tblNotes.getCellCount(rowCount); i++)
@@ -1033,5 +1054,30 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		txtDirectionRemarque.setText( bulletins.get(lstBulletins.getSelectedIndex()-1).getRemarqueDirection() );
 		//
 		styleBacTable();
+		
+		// Hide columns base on the selected quarter
+		for (int row = 0; row < tblNotes.getRowCount(); row++ ) {
+			if (quarter == 3) {
+				tblNotes.getFlexCellFormatter().setVisible(row, 2, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 3, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 4, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 5, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 6, false);
+			}
+			if (quarter == 2) {
+				tblNotes.getFlexCellFormatter().setVisible(row, 2, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 3, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 4, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 6, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 7, false);
+			}
+			if (quarter == 1) {
+				tblNotes.getFlexCellFormatter().setVisible(row, 2, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 4, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 5, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 6, false);
+				tblNotes.getFlexCellFormatter().setVisible(row, 7, false);
+			}
+		}
 	}
 }
