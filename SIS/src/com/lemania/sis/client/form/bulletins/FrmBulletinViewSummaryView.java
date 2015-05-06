@@ -1014,10 +1014,11 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			tblNotes.setText(i, 6, "" );
 			tblNotes.setText(i, 7, (quarter == 3 ) ? subjects.get( rowCount ).getExamT3().toString() : "");
 			tblNotes.setText(i, 8, "" );
-			tblNotes.setText(i, 9, (
-					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
-							: ( (!subjects.get(rowCount).getT2().equals("") || !subjects.get(rowCount).getExamT2().equals("")) ? subjects.get(rowCount).getRemarqueT2()
-									: subjects.get(rowCount).getRemarqueT1() ) ) );		
+			tblNotes.setText(i, 9, ( "" )) ;
+/* No comment for bac blanc report */
+//					(!subjects.get(rowCount).getT3().equals("") || !subjects.get(rowCount).getExamT3().equals("")) ? subjects.get(rowCount).getRemarqueT3()
+//							: ( (!subjects.get(rowCount).getT2().equals("") || !subjects.get(rowCount).getExamT2().equals("")) ? subjects.get(rowCount).getRemarqueT2()
+//									: subjects.get(rowCount).getRemarqueT1() ) ) );		
 			//
 			totalCoef = totalCoef + subjects.get( rowCount ).getSubjectCoef();
 			//
@@ -1039,7 +1040,10 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		rowCount++;
 		tblNotes.setText(rowCount, 0, "Moyenne :");
-		tblNotes.setText(rowCount, 1, totalCoef.toString());
+		tblNotes.setText(rowCount, 1, (quarter == 1 ) ? totalCoefT1.toString() : 
+			(quarter == 2 ) ? totalCoefT2.toString() :
+				(quarter == 3 ) ? totalCoefT3.toString() : "" );
+		//
 		tblNotes.setText(rowCount, 2, "");
 		tblNotes.setText(rowCount, 3, (quarter == 1 ) ? ((totalMoyenneT1>0)? String.valueOf((double)Math.round(totalMoyenneT1/totalCoefT1*10)/10) : "") : "");
 		tblNotes.setText(rowCount, 4, "");
