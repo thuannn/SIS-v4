@@ -60,6 +60,7 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField ListBox lstBulletins;
 	@UiField FlexTable tblNotes;
 	@UiField Label lblStudentName;
+	@UiField Label lblBulletinTitle;
 	@UiField Label lblClassName;
 	@UiField VerticalPanel pnlBulletin;
 	@UiField Button cmdPrint;
@@ -187,6 +188,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(true);
 		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(false);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 	
@@ -211,6 +214,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(false);
 		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(true);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 	
@@ -231,6 +236,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(false);
 		lblConditionES.setVisible(true);
 		lblConditionBac.setVisible(false);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 	
@@ -461,6 +468,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(true);
 		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(false);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 	
@@ -483,6 +492,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(true);
 		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(false);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 	
@@ -505,6 +516,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		lblConditionMatu.setVisible(true);
 		lblConditionES.setVisible(false);
 		lblConditionBac.setVisible(false);
+		//
+		lblBulletinTitle.setText("BULLETIN DE NOTES");
 	}
 	
 
@@ -988,6 +1001,8 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	private void drawBacBlanc(List<BulletinSubjectProxy> subjects, int quarter) {
 		//
 		initializeBacTable();
+		//
+		lblBulletinTitle.setText("BACCALAUREAT BLANC");
 		//
 		Integer rowStart = 1;
 		Integer rowCount = 0;
