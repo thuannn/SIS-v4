@@ -51,6 +51,7 @@
 						<g:Label text="B = Bien"/>
 						<g:Label text="AB = Assez Bien"/>
 						<g:Label text="S = Suffisant"/>
+						<g:Label text="PA = Partiellement atteint"/>
 						<g:Label text="NA = Non atteint"/>
 					</g:VerticalPanel>					
 				</g:HorizontalPanel>

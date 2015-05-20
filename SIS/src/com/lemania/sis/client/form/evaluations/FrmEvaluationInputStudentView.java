@@ -159,15 +159,15 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	    tblEvaluations.setColumnWidth(colObjective5, 10, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective5, EvaluationValues.Objective5); 	   
  	    
- 	    // 	    
- 	    TextColumn<EvaluationSubjectProxy> colObjective6 = new TextColumn<EvaluationSubjectProxy>() {
- 	      @Override
- 	      public String getValue(EvaluationSubjectProxy object) {
- 	        return object.getObjective6();
- 	      }
- 	    };
- 	    tblEvaluations.setColumnWidth(colObjective6, 10, Unit.PCT);
- 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6); 	
+// 	    // 20150519 : not in use anymore 	    
+// 	    TextColumn<EvaluationSubjectProxy> colObjective6 = new TextColumn<EvaluationSubjectProxy>() {
+// 	      @Override
+// 	      public String getValue(EvaluationSubjectProxy object) {
+// 	        return object.getObjective6();
+// 	      }
+// 	    };
+// 	    tblEvaluations.setColumnWidth(colObjective6, 10, Unit.PCT);
+// 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6); 	
  	    
  	    //
 	    Column<EvaluationSubjectProxy, String> colDelete = new Column<EvaluationSubjectProxy, String> (new ButtonCell()){

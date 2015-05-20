@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.values.EvaluationValues;
@@ -76,6 +75,7 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
 		categoriesName.add( EvaluationValues.B );
 		categoriesName.add( EvaluationValues.AB );
 		categoriesName.add( EvaluationValues.S );
+		categoriesName.add( EvaluationValues.PA );
 		categoriesName.add( EvaluationValues.NA );
 	}
 
@@ -288,26 +288,26 @@ public class FrmEvaluationInputView extends ViewWithUiHandlers<FrmEvaluationInpu
  	      }
  	    });
  	    
- 	    //
- 	    List<String> categoriesName6 = new ArrayList<String>(categoriesName);
- 	    SelectionCell categorieCell6 = new SelectionCell( categoriesName6 );
-		Column<EvaluationSubjectProxy, String> colObjective6 = new Column<EvaluationSubjectProxy, String>(categorieCell6) {
- 	      @Override
- 	      public String getValue(EvaluationSubjectProxy object) {
- 	        return object.getObjective6();
- 	      }
- 	    };
- 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6);
- 	    colObjective6.setFieldUpdater(new FieldUpdater<EvaluationSubjectProxy, String>() {
- 	      @Override
- 	      public void update(int index, EvaluationSubjectProxy object, String value) {
- 	    	  //
- 	    	  selectedEvaluationSubjectIndex = index;
- 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
- 	    	  //
- 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 6);
- 	      }
- 	    });
+// 	    // 20150519: not in use anymore
+// 	    List<String> categoriesName6 = new ArrayList<String>(categoriesName);
+// 	    SelectionCell categorieCell6 = new SelectionCell( categoriesName6 );
+//		Column<EvaluationSubjectProxy, String> colObjective6 = new Column<EvaluationSubjectProxy, String>(categorieCell6) {
+// 	      @Override
+// 	      public String getValue(EvaluationSubjectProxy object) {
+// 	        return object.getObjective6();
+// 	      }
+// 	    };
+// 	    tblEvaluations.addColumn(colObjective6, EvaluationValues.Objective6);
+// 	    colObjective6.setFieldUpdater(new FieldUpdater<EvaluationSubjectProxy, String>() {
+// 	      @Override
+// 	      public void update(int index, EvaluationSubjectProxy object, String value) {
+// 	    	  //
+// 	    	  selectedEvaluationSubjectIndex = index;
+// 	    	  selectedEvaluationSubject = providerEvaluationSubject.getList().get(selectedEvaluationSubjectIndex);
+// 	    	  //
+// 	    	  getUiHandlers().updateEvaluation(selectedEvaluationSubject, value, 6);
+// 	      }
+// 	    });
  	    
  	    //
  	    providerEvaluationSubject.addDataDisplay(tblEvaluations); 

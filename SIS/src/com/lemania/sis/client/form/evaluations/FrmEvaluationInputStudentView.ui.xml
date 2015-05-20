@@ -143,6 +143,7 @@
 			<g:Label text="B = Bien" styleName="evaluationNote"/>
 			<g:Label text="AB = Assez Bien" styleName="evaluationNote"/>
 			<g:Label text="S = Suffisant" styleName="evaluationNote"/>
+			<g:Label text="PA = Partiellement Atteint" styleName="evaluationNote"/>
 			<g:Label text="NA = Non atteint" styleName="evaluationNote"/>
 		</g:VerticalPanel>
 				</g:HorizontalPanel>
