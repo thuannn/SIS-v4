@@ -42,7 +42,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 	//
     interface MyView extends View , HasUiHandlers<AbsenceListUiHandlers> {
     	//
-    	void setStudentListData( List<BulletinProxy> students );
+    	void setStudentListData( List<BulletinProxy> students, boolean isUnique );
     	//
     	void setStudentAbsenceListData( List<AbsenceItemProxy> absences );
     	//
@@ -125,7 +125,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 						@Override
 						public void onSuccess(List<BulletinProxy> response) {
 							//
-							getView().setStudentListData(response);
+							getView().setStudentListData(response, true);
 							//
 							bulletins.clear();
 							bulletins.addAll(response);
@@ -142,7 +142,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 						@Override
 						public void onSuccess(List<BulletinProxy> response) {
 							//
-							getView().setStudentListData(response);
+							getView().setStudentListData(response, true);
 							//
 							bulletins.clear();
 							bulletins.addAll(response);
@@ -194,7 +194,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 			}
 			@Override
 			public void onSuccess(List<BulletinProxy> response) {
-				getView().setStudentListData(response);
+				getView().setStudentListData(response, false);
 			}
 		});
 	}
@@ -248,7 +248,7 @@ public class AbsenceListPresenter extends Presenter<AbsenceListPresenter.MyView,
 			}
 			@Override
 			public void onSuccess(List<BulletinProxy> response) {
-				getView().setStudentListData(response);
+				getView().setStudentListData(response, false);
 			}
 		});
 	}

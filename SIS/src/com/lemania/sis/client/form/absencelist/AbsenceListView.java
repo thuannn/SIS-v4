@@ -39,13 +39,14 @@ class AbsenceListView extends ViewWithUiHandlers<AbsenceListUiHandlers> implemen
     /*
      * */
 	@Override
-	public void setStudentListData(List<BulletinProxy> students) {
+	public void setStudentListData(List<BulletinProxy> students, boolean isUnique) {
 		//
 		lstStudents.clear();
 		lstStudents.addItem("Choisir");
 		for (BulletinProxy bp : students) {
 			lstStudents.addItem( bp.getStudentName(), bp.getStudentId().toString() );
-			break;
+			if ( isUnique)
+				break;
 		}
 	}
 	

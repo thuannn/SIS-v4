@@ -35,7 +35,7 @@ public class NotificationValues {
 	
 	// For bulletins
 	public static Integer bulletinLineHeight = 40;
-	public static Integer bulletinPageHeight = 740;
+	public static Integer bulletinPageHeight = 670;
 	public static Integer bulletinPageHeightChrome = 1150;
 	public static Integer bulletinDirectionRemarque = 100;
 	

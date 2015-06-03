@@ -115,7 +115,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective1();
  	      }
  	    };
- 	   tblEvaluations.setColumnWidth(colObjective1, 10, Unit.PCT);
+ 	   tblEvaluations.setColumnWidth(colObjective1, 12, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective1, EvaluationValues.Objective1); 	    
  	     	    
  	    // 	     	    
@@ -125,7 +125,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective2();
  	      }
  	    };
- 	    tblEvaluations.setColumnWidth(colObjective2, 10, Unit.PCT);
+ 	    tblEvaluations.setColumnWidth(colObjective2, 12, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective2, EvaluationValues.Objective2);
  	    
  	    
@@ -136,7 +136,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective3();
  	      }
  	    };
- 	    tblEvaluations.setColumnWidth(colObjective3, 10, Unit.PCT);
+ 	    tblEvaluations.setColumnWidth(colObjective3, 12, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective3, EvaluationValues.Objective3);
  	  
     	// 	    
@@ -146,7 +146,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective4();
  	      }
  	    };
- 	    tblEvaluations.setColumnWidth(colObjective4, 10, Unit.PCT);
+ 	    tblEvaluations.setColumnWidth(colObjective4, 12, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective4, EvaluationValues.Objective4); 	    
  	    
  	    // 	   
@@ -156,7 +156,7 @@ public class FrmEvaluationInputStudentView extends ViewWithUiHandlers<FrmEvaluat
  	        return object.getObjective5();
  	      }
  	    };
- 	    tblEvaluations.setColumnWidth(colObjective5, 10, Unit.PCT);
+ 	    tblEvaluations.setColumnWidth(colObjective5, 12, Unit.PCT);
  	    tblEvaluations.addColumn(colObjective5, EvaluationValues.Objective5); 	   
  	    
 // 	    // 20150519 : not in use anymore 	    
