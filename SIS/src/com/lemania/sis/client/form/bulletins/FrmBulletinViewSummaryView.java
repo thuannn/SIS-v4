@@ -65,7 +65,6 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField VerticalPanel pnlBulletin;
 	@UiField Button cmdPrint;
 	@UiField VerticalPanel pnlMain;
-	@UiField Label lblSpace;
 	@UiField VerticalPanel pnlMainBulletin;
 	@UiField TextArea txtDirectionRemarque;
 	@UiField Button cmdSaveRemarques;
@@ -869,7 +868,6 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 			public void onClose(CloseEvent<PopupPanel> event) {
 				pnlMainBulletin.add(pnlBulletin);
 				pnlBulletinNotes.setHeight("100%");
-				lblSpace.setHeight("1px");
 				//
 				pnlWhiteBackground.setVisible(false);
 			}
@@ -885,7 +883,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 		//
 		pnlBulletinNotes.setHeight(NotificationValues.bulletinPageHeight.toString() + "px");
 		int margin = NotificationValues.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationValues.bulletinDirectionRemarque;
-		int lineMargin = Math.round( margin / (tblNotes.getRowCount()-2) / 2 );
+		int lineMargin = (tblNotes.getRowCount()-2) > 10 ? 
+				Math.round( margin / (tblNotes.getRowCount()-2) / 2 ) :
+				Math.round( margin / (tblNotes.getRowCount()-2) / 2 ) - (tblNotes.getRowCount() - 10);
 		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
 		for (int i=0; i<tblNotes.getCellCount(0); i++)
 			for (int j=1; j<tblNotes.getRowCount()-1; j++) {

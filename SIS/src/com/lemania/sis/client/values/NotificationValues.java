@@ -35,9 +35,9 @@ public class NotificationValues {
 	
 	// For bulletins
 	public static Integer bulletinLineHeight = 40;
-	public static Integer bulletinPageHeight = 670;
+	public static Integer bulletinPageHeight = 640;
 	public static Integer bulletinPageHeightChrome = 1150;
-	public static Integer bulletinDirectionRemarque = 100;
+	public static Integer bulletinDirectionRemarque = 120;
 	
 	// For UI of each school
 	public static String ecoleLemania = "LM";

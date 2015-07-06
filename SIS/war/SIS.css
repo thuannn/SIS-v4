@@ -232,8 +232,8 @@ th {
 @media print {
     .page {
         width: 21cm;
-	    min-height: 29.7cm;
-	    padding: 0.3cm 0.5cm 0cm 0.5cm;
+	    min-height: 29.5cm;
+	    padding: 0.3cm 0.5cm 0.3cm 0.5cm;
 	    margin: 0cm auto;
 	    border: 0px #D3D3D3 solid;
 	    border-radius: 0px;

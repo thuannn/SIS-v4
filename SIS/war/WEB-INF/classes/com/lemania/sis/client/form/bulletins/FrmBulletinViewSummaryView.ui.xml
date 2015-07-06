@@ -65,10 +65,9 @@ La note moyenne indiquée est calculée en fonction des critères de réussite d
 						</g:VerticalPanel>
 					<g:VerticalPanel width="100%" spacing="2">
 						<g:Label text="Remarque :" width="" styleName="fieldTitle"/>
-						<g:TextArea width="" characterWidth="90" ui:field="txtDirectionRemarque" styleName="sis-TextArea" height="" visibleLines="8"/>
+						<g:TextArea width="" characterWidth="90" ui:field="txtDirectionRemarque" styleName="sis-TextArea" height="" visibleLines="6"/>
 					</g:VerticalPanel>
 				</g:HorizontalPanel>
-					<g:Label ui:field="lblSpace" stylePrimaryName="hiddenText"/>
 				</g:VerticalPanel>
 				<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="2">
 					<g:Label text="Chemin de Préville 3 - CP 550, 1003 Lausanne, Suisse - Tel.: +41 21 320 15 01 - Fax.: +41 312 67 00 " styleName="bulletinFooter" ui:field="txtAddress1"/>
