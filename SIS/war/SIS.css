@@ -178,8 +178,6 @@ th {
 
 
 /*
-<<<<<<< HEAD
-<<<<<<< HEAD
 	Text
 */
 
@@ -189,9 +187,8 @@ th {
 	min-width: 30px;
 }
 
-=======
-=======
->>>>>>> cahier-de-texte
+
+/*
 	Page layout
 */
 
@@ -200,10 +197,7 @@ th {
 }
 
 
-<<<<<<< HEAD
->>>>>>> cahier-de-texte
-=======
->>>>>>> cahier-de-texte
+
 /*
 	Printing
 */
@@ -232,7 +226,7 @@ th {
 @media print {
     .page {
         width: 21cm;
-	    min-height: 29.5cm;
+	    min-height: 29.7cm;
 	    padding: 0.3cm 0.5cm 0.3cm 0.5cm;
 	    margin: 0cm auto;
 	    border: 0px #D3D3D3 solid;
@@ -526,7 +520,7 @@ Agenda
 }
 
 .header {
-	color: orangered;
+	color: #FEC20F;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size: 16px !important;

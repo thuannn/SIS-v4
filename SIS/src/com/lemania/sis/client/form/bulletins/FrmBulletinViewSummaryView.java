@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.lemania.sis.client.values.NotificationValues;
@@ -26,6 +27,8 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Image;
@@ -79,6 +82,9 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	@UiField HTML lblConditionBac;
 	@UiField ListBox lstModels;
 	@UiField AbsolutePanel pnlWhiteBackground;
+	@UiField HorizontalPanel pnlLogo;
+	@UiField Grid pnlDescription;
+	@UiField VerticalPanel pnlRemarque;
 	
 	
 	/*
@@ -881,18 +887,12 @@ public class FrmBulletinViewSummaryView extends ViewWithUiHandlers<FrmBulletinVi
 	 * */
 	private void distributeLineHeight() {
 		//
-		pnlBulletinNotes.setHeight(NotificationValues.bulletinPageHeight.toString() + "px");
-		int margin = NotificationValues.bulletinPageHeight - tblNotes.getOffsetHeight() - NotificationValues.bulletinDirectionRemarque;
-		int lineMargin = (tblNotes.getRowCount()-2) > 10 ? 
-				Math.round( margin / (tblNotes.getRowCount()-2) / 2 ) :
-				Math.round( margin / (tblNotes.getRowCount()-2) / 2 ) - (tblNotes.getRowCount() - 10);
-		StyleInjector.inject(".bulletinCellMargin { padding:"+ lineMargin +"px 0px "+ lineMargin +"px 0px; font-size: 11px; border-top: 1px solid silver; border-right: 1px solid silver; }", true);
-		for (int i=0; i<tblNotes.getCellCount(0); i++)
-			for (int j=1; j<tblNotes.getRowCount()-1; j++) {
-				if (tblNotes.isCellPresent(j, i)) {
-					tblNotes.getCellFormatter().setStyleName(j, i, "bulletinCellMargin");
-				}
-			}
+		int margin = 
+				NotificationValues.bulletinPageHeight 
+				- pnlRemarque.getOffsetHeight()
+				- pnlLogo.getOffsetHeight()
+				- pnlDescription.getOffsetHeight();
+		tblNotes.setHeight( margin + "px" );
 	}
 	
 	

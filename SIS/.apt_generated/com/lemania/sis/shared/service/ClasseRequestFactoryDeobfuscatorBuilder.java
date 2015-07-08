@@ -27,17 +27,17 @@ withOperation(new OperationKey("vHBcv5gY055t0gmfj1gmHVdPvrY="),
   .withMethodName("removeClasse")
   .withRequestContext("com.lemania.sis.shared.service.ClasseRequestFactory$ClasseRequestContext")
   .build());
-withOperation(new OperationKey("uOH97$bebic2rF8Bya5wQepOGUc="),
-  new OperationData.Builder()
-  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
-  .withMethodName("listAllActive")
-  .withRequestContext("com.lemania.sis.shared.service.ClasseRequestFactory$ClasseRequestContext")
-  .build());
 withOperation(new OperationKey("_j4hQiT$m5mYgf8ecu3o3CdgfgA="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("listAllActive")
+  .withRequestContext("com.lemania.sis.shared.service.ClasseRequestFactory$ClasseRequestContext")
+  .build());
+withOperation(new OperationKey("uOH97$bebic2rF8Bya5wQepOGUc="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/String;)Ljava/util/List;")
   .withMethodName("listAllActive")
   .withRequestContext("com.lemania.sis.shared.service.ClasseRequestFactory$ClasseRequestContext")
   .build());

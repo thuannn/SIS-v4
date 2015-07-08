@@ -12,6 +12,9 @@
 				<g:at left="0" top="0">
 					<g:Image url="" width="" ui:field="imgLogo" />
 				</g:at>
+				<g:at left="170" top="30">
+					<g:Label styleName="header">eProfil</g:Label>
+				</g:at>
 				<g:at left="552" top="0">
 					<g:Grid height="24px" width="60%" borderWidth="0">
 						<g:row>
@@ -220,8 +223,9 @@
 					<g:TreeItem state="true" text="Espace parents">
 						<g:Hyperlink targetHistoryToken="bulletindetail" text="Consulter les notes"
 							ui:field="cmdMarkViewParent" />
-<!-- 						<g:Hyperlink targetHistoryToken="absenceslist" -->
-<!-- 							text="Consulter les absences" ui:field="cmdAbsencesViewParent" /> -->
+						<!-- <g:Hyperlink targetHistoryToken="absenceslist" -->
+						<!-- text="Consulter les absences" ui:field="cmdAbsencesViewParent" 
+							/> -->
 						<g:Hyperlink targetHistoryToken="studylogstudent"
 							text="Cahier de texte" ui:field="cmdStudyLogStudentParent" />
 						<g:Hyperlink targetHistoryToken="password"

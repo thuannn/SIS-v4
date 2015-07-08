@@ -1,7 +1,25 @@
+<<<<<<< HEAD
 29F47AE43D97218F1AF626013ED9FB8B.cache.js
 locale fr
+=======
+62FED2DEAAC533FF788E45D556F6B301.cache.js
+locale fr
+user.agent safari
+
+86E36584D48B854510D9C414B07C44F9.cache.js
+locale default
+user.agent gecko1_8
+
+A7C80D764047784084B16FC74A11071F.cache.js
+locale default
+user.agent safari
+
+C7A60AE33F90D90586190BC5A70F90CA.cache.js
+locale default
+>>>>>>> refs/heads/new-logo
 user.agent ie10
 
+<<<<<<< HEAD
 4F5FB79A91505E44ACFE9563F6D6D9BD.cache.js
 locale fr
 user.agent safari
@@ -15,11 +33,20 @@ locale default
 user.agent gecko1_8
 
 7D5B0747949EB6D8BA5057F3ACC0F5A1.cache.js
+=======
+D321BF86C705CD0F772D6D777B20FA32.cache.js
+>>>>>>> refs/heads/new-logo
 locale fr
 user.agent gecko1_8
 
+<<<<<<< HEAD
 DE76B76213382BCAB6E2D05E7671077E.cache.js
 locale default
 user.agent safari
+=======
+DBBDA3F631A5F64C254E1781C65F1A41.cache.js
+locale fr
+user.agent ie10
+>>>>>>> refs/heads/new-logo
 
 Devmode:devmode.js
